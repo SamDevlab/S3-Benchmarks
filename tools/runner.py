@@ -362,11 +362,11 @@ def main():
             except Exception as ex:
                 print(f"Notice building S3 ELF binary for {fix_file.name}: {ex}")
 
-        # Native Correctness Smoke Gate (program returned stdout parsing)
+        # Native Correctness Smoke Gate before timing
         if s3_bin_o0 and s3_bin_o1 and "C-GCC-O2" in c_bins:
-            _, ok_c, c_res = run_native_executable_sample(c_bins["C-GCC-O2"], 1)
-            _, ok_o0, s3_o0_res = run_native_executable_sample(s3_bin_o0, 1)
-            _, ok_o1, s3_o1_res = run_native_executable_sample(s3_bin_o1, 1)
+            _, ok_c, c_res = run_native_executable_sample(c_bins["C-GCC-O2"], loop_parses)
+            _, ok_o0, s3_o0_res = run_native_executable_sample(s3_bin_o0, loop_parses)
+            _, ok_o1, s3_o1_res = run_native_executable_sample(s3_bin_o1, loop_parses)
             if not (ok_c and ok_o0 and ok_o1) or (c_res != s3_o0_res or c_res != s3_o1_res):
                 print(f"Notice: Blocking benchmark row for {fix_file.name} due to native correctness smoke divergence (c={c_res}, s3_o0={s3_o0_res}, s3_o1={s3_o1_res})")
                 blocked_fixtures.append(fix_file.name)
