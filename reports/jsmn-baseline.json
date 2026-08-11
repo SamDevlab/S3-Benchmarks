@@ -1,0 +1,61 @@
+{
+  "benchmark": "jsmn",
+  "environment": {
+    "os": "Windows",
+    "os_release": "10",
+    "os_version": "10.0.26200",
+    "architecture": "AMD64",
+    "processor": "AMD64 Family 23 Model 24 Stepping 1, AuthenticAMD",
+    "logical_cpus": 8,
+    "python_version": "3.11.9",
+    "gcc_version": "UNAVAILABLE",
+    "clang_version": "UNAVAILABLE",
+    "as_version": "UNAVAILABLE",
+    "ld_version": "UNAVAILABLE",
+    "benchmark_repo_commit": "UNKNOWN",
+    "jsmn_upstream_commit": "25647e692c7906b96ffd2b05ca54c097948e879c",
+    "s3_compiler_commit": "85541b782571c80d4857d013d1fb25b4997c1eb9"
+  },
+  "correctness": {
+    "status": "PASS",
+    "test_cases_count": 16
+  },
+  "limits": {
+    "JSMN_S3_DROP_IN_API": "NO",
+    "JSMN_S3_INCREMENTAL_PARSER": "NO",
+    "JSMN_S3_RUNTIME_TOKEN_CAPACITY": "NO",
+    "JSMN_S3_LARGE_INPUT": "NO",
+    "JSMN_S3_C_ABI": "NO",
+    "JSMN_S3_NATIVE_KERNEL": "YES",
+    "JSMN_S3_O0_NATIVE": "YES",
+    "JSMN_S3_O1_NATIVE": "YES",
+    "RA_SEPARATE_SWITCH": "UNAVAILABLE"
+  },
+  "assembly_analysis": {
+    "S3-O0": {
+      "variant": "S3-O0",
+      "line_count": 71176,
+      "instruction_count": 50478,
+      "call_count": 40,
+      "load_store_count": 23996,
+      "stack_ops_count": 9341,
+      "branch_count": 13060,
+      "cond_branch_count": 7082,
+      "binary_size_bytes": 0,
+      "text_section_bytes": 0
+    },
+    "S3-O1": {
+      "variant": "S3-O1",
+      "line_count": 70390,
+      "instruction_count": 49931,
+      "call_count": 40,
+      "load_store_count": 23793,
+      "stack_ops_count": 9283,
+      "branch_count": 12884,
+      "cond_branch_count": 7009,
+      "binary_size_bytes": 0,
+      "text_section_bytes": 0
+    }
+  },
+  "results": []
+}
