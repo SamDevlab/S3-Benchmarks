@@ -4,6 +4,7 @@
  * Supports:
  *  - Correctness verification mode (--correctness)
  *  - Internal parse loop mode (--loop <N>) with bounded observable status accumulator
+ *  - Output protocol: prints "program returned: <accum>\n" and returns 0 exit status.
  */
 
 #include <stdio.h>
@@ -98,7 +99,7 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // Bounded internal parse loop matching S3 tryte domain anti-DCE accumulator
+    // Bounded internal parse loop matching S3 output protocol
     int accum = 0;
     for (long i = 0; i < iterations; i++) {
         jsmn_init(&parser);
@@ -110,5 +111,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    return accum;
+    printf("program returned: %d\n", accum);
+    return 0;
 }

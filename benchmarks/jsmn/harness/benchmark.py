@@ -6,6 +6,7 @@ and strict absence of synthetic timing multipliers.
 
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -39,15 +40,33 @@ class BenchmarkMeasurement:
     stddev_ns_per_parse: float
     parses_per_sec: float
     mb_per_sec: float
-    exit_code: int
+    program_result: int
+    process_exit_code: int
     relative_ratio: float
     relative_text: str
 
-def run_native_executable_sample(executable_bin: Path, iterations: int, input_file: Path | None = None) -> tuple[int, int]:
+def format_ns_per_parse(ns_per_parse: float) -> str:
+    """Formats nanoseconds per parse accurately without 1000x multiplication bug."""
+    if ns_per_parse >= 1000.0:
+        return f"{ns_per_parse / 1000.0:.2f} µs"
+    return f"{ns_per_parse:.2f} ns"
+
+def test_time_unit_validation():
+    """Unit test ensuring ns_per_parse unit calculation is mathematically exact."""
+    elapsed_ns = 100_000_000
+    parses = 100_000
+    ns_per_parse = float(elapsed_ns) / float(parses)
+    assert ns_per_parse == 1000.0, f"Unit calculation error: {ns_per_parse} != 1000.0"
+    disp = format_ns_per_parse(ns_per_parse)
+    assert disp in ("1000.00 ns", "1.00 µs"), f"Unit formatting error: {disp}"
+
+def run_native_executable_sample(
+    executable_bin: Path, iterations: int, input_file: Path | None = None
+) -> tuple[int, bool, int]:
     """
     Executes native C or S3 binary with --loop <iterations> [--file <path>].
     Measures REAL process wall-clock execution time via time.perf_counter_ns().
-    Returns (elapsed_ns, exit_code).
+    Returns (elapsed_ns, success_bool, program_result_int).
     """
     cmd = [str(executable_bin), "--loop", str(iterations)]
     if input_file is not None:
@@ -56,7 +75,15 @@ def run_native_executable_sample(executable_bin: Path, iterations: int, input_fi
     proc = subprocess.run(cmd, capture_output=True, text=True)
     t1 = time.perf_counter_ns()
     elapsed_ns = t1 - t0
-    return elapsed_ns, proc.returncode
+
+    if proc.returncode != 0:
+        return elapsed_ns, False, -999
+
+    match = re.search(r"program returned:\s*(-?\d+)", proc.stdout)
+    if not match:
+        return elapsed_ns, False, -999
+
+    return elapsed_ns, True, int(match.group(1))
 
 def benchmark_native_variant(
     workload_name: str,
@@ -73,18 +100,22 @@ def benchmark_native_variant(
     num_bytes = len(text.encode("utf-8"))
 
     # Warmup
-    last_exit_code = 0
+    last_prog_res = 0
     for _ in range(warmups):
-        _, last_exit_code = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
+        _, ok, res = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
+        if ok:
+            last_prog_res = res
 
     samples_ns_per_parse: list[float] = []
     total_durations_ns: list[float] = []
 
     for _ in range(repetitions):
-        elapsed_ns, exit_code = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
+        elapsed_ns, ok, res = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
+        if not ok:
+            raise RuntimeError(f"Native binary execution failed for {variant_name}")
         total_durations_ns.append(float(elapsed_ns))
         samples_ns_per_parse.append(float(elapsed_ns) / float(parses_per_sample))
-        last_exit_code = exit_code
+        last_prog_res = res
 
     stats = calculate_stats(samples_ns_per_parse)
     total_stats = calculate_stats(total_durations_ns)
@@ -111,7 +142,8 @@ def benchmark_native_variant(
         stddev_ns_per_parse=stats["stddev"],
         parses_per_sec=tp["parses_per_sec"],
         mb_per_sec=tp["mb_per_sec"],
-        exit_code=last_exit_code,
+        program_result=last_prog_res,
+        process_exit_code=0,
         relative_ratio=rel_ratio,
         relative_text=rel_text,
     )

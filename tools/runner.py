@@ -37,7 +37,9 @@ from benchmarks.jsmn.harness.benchmark import (
     DEFAULT_WARMUPS,
     SYNTHETIC_TIMING,
     benchmark_native_variant,
+    format_ns_per_parse,
     run_native_executable_sample,
+    test_time_unit_validation,
     verify_no_synthetic_timing_regression,
 )
 from benchmarks.jsmn.harness.correctness import (
@@ -73,6 +75,54 @@ def test_loop_factor_math():
         factors = decompose_iterations_to_tryte_factors(req)
         prod = math.prod(factors)
         assert prod == req, f"Math error: product({factors})={prod} != requested {req}"
+
+
+def render_c_loop_source(text: str, default_iterations: int) -> str:
+    """Renders C runner source with embedded JSON bytes matching S3 memory layout."""
+    escaped_bytes = ", ".join(str(b) for b in text.encode("ascii"))
+    num_bytes = len(text.encode("ascii"))
+    return f"""/* Auto-generated embedded C benchmark driver */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+
+#define JSMN_PARENT_LINKS
+#include "jsmn.h"
+
+#define MAX_TOKENS 32
+
+static const char input_buffer[] = {{{escaped_bytes}}};
+static const size_t input_len = {num_bytes};
+
+int main(int argc, char **argv) {{
+    long iterations = {default_iterations};
+    for (int i = 1; i < argc; i++) {{
+        if (strcmp(argv[i], "--loop") == 0 && i + 1 < argc) {{
+            iterations = atol(argv[i + 1]);
+            break;
+        }}
+    }}
+    if (iterations <= 0) iterations = 1;
+
+    jsmn_parser parser;
+    jsmntok_t tokens[MAX_TOKENS];
+
+    int accum = 0;
+    for (long i = 0; i < iterations; i++) {{
+        jsmn_init(&parser);
+        int r = jsmn_parse(&parser, input_buffer, input_len, tokens, MAX_TOKENS);
+        int val = (r >= 0) ? r : -r;
+        accum += val;
+        if (accum >= 200) {{
+            accum -= 200;
+        }}
+    }}
+
+    printf("program returned: %d\\n", accum);
+    return 0;
+}}
+"""
 
 
 def render_s3_loop_source(source_template: str, text: str, iterations: int) -> str:
@@ -132,14 +182,16 @@ def render_s3_loop_source(source_template: str, text: str, iterations: int) -> s
     return rendered + "\n" + loop_header
 
 
-def compile_c_runner(build_dir: Path, optimization: str = "O2", compiler: str = "gcc") -> Path | None:
-    """Compiles upstream jsmn C runner with specified optimization level."""
+def compile_embedded_c_runner(build_dir: Path, fixture_name: str, text: str, iterations: int, optimization: str = "O2", compiler: str = "gcc") -> Path | None:
+    """Compiles embedded C benchmark driver for a specific fixture."""
     cc = shutil.which(compiler)
     if not cc:
         return None
 
-    src = BASE_DIR / "benchmarks" / "jsmn" / "upstream" / "c_runner.c"
-    out_bin = build_dir / f"c_runner_{compiler}_{optimization.lower()}"
+    c_src_path = build_dir / f"c_embedded_{fixture_name}.c"
+    c_src_path.write_text(render_c_loop_source(text, iterations), encoding="utf-8")
+
+    out_bin = build_dir / f"c_runner_{fixture_name}_{compiler}_{optimization.lower()}"
     if sys.platform == "win32" and not out_bin.name.endswith(".exe"):
         out_bin = out_bin.with_suffix(".exe")
 
@@ -148,14 +200,14 @@ def compile_c_runner(build_dir: Path, optimization: str = "O2", compiler: str = 
         f"-{optimization}",
         "-std=c99",
         "-I", str(BASE_DIR / "benchmarks" / "jsmn" / "upstream"),
-        str(src),
+        str(c_src_path),
         "-o", str(out_bin)
     ]
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
         return out_bin
     except Exception as e:
-        print(f"Warning: Failed to compile C runner with {compiler} -{optimization}: {e}")
+        print(f"Warning: Failed to compile embedded C runner for {fixture_name} with {compiler} -{optimization}: {e}")
         return None
 
 
@@ -185,6 +237,7 @@ def main():
     verify_no_synthetic_timing_regression()
     test_differential_correctness_rules()
     test_loop_factor_math()
+    test_time_unit_validation()
 
     parser = argparse.ArgumentParser(description="S3 Benchmark Suite Master Runner")
     parser.add_argument("--smoke", action="store_true", help="Run short smoke benchmark cycle")
@@ -205,20 +258,23 @@ def main():
 
     s3_demo_template = (BASE_DIR / "benchmarks" / "jsmn" / "s3" / "jsmn_demo.s3").read_text(encoding="utf-8")
 
-    # 1. Compile C variants
-    c_bins = {}
-    for compiler in ["gcc", "clang"]:
-        if shutil.which(compiler):
-            for opt in ["O0", "O2", "O3"]:
-                b = compile_c_runner(build_dir, opt, compiler)
-                if b:
-                    c_bins[f"C-{compiler.upper()}-{opt}"] = b
+    # 1. Compile standalone C runner for differential correctness verification
+    c_standalone_gcc_o2 = None
+    if shutil.which("gcc"):
+        src = BASE_DIR / "benchmarks" / "jsmn" / "upstream" / "c_runner.c"
+        out_bin = build_dir / "c_runner_standalone_gcc_o2"
+        if sys.platform == "win32" and not out_bin.name.endswith(".exe"):
+            out_bin = out_bin.with_suffix(".exe")
+        cmd = ["gcc", "-O2", "-std=c99", "-I", str(BASE_DIR / "benchmarks" / "jsmn" / "upstream"), str(src), "-o", str(out_bin)]
+        try:
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+            c_standalone_gcc_o2 = out_bin
+        except Exception:
+            pass
 
-    c_o2_bin = c_bins.get("C-GCC-O2") or next(iter(c_bins.values()), None)
-
-    # 2. Differential Correctness Gate (Oracle Verification)
+    # 2. Hosted Differential Correctness Gate
     correctness_pass, correctness_logs = verify_differential_correctness(
-        c_o2_bin, s3_demo_template, DEFAULT_TEST_SUITE
+        c_standalone_gcc_o2, s3_demo_template, DEFAULT_TEST_SUITE
     )
 
     if not correctness_pass:
@@ -261,6 +317,10 @@ def main():
     assembly_metrics_map = {}
     binary_sizes_map = {}
 
+    expected_fixtures_count = len(summary_fixtures)
+    completed_fixtures_count = 0
+    blocked_fixtures = []
+
     for fix_file in summary_fixtures:
         text = fix_file.read_text(encoding="utf-8")
         num_bytes = len(text.encode("utf-8"))
@@ -282,6 +342,14 @@ def main():
             assembly_metrics_map["S3-O0"] = analyze_assembly_text(s3_asm_o0, "S3-O0").__dict__
             assembly_metrics_map["S3-O1"] = analyze_assembly_text(s3_asm_o1, "S3-O1").__dict__
 
+        # Compile fixture-specific embedded C binaries
+        c_bins = {}
+        if shutil.which("gcc"):
+            for opt in ["O0", "O2", "O3"]:
+                b = compile_embedded_c_runner(build_dir, fix_file.stem, text, loop_parses, opt, "gcc")
+                if b:
+                    c_bins[f"C-GCC-{opt}"] = b
+
         # Build S3 Linux ELF Executables if native toolchain is present
         s3_bin_o0 = None
         s3_bin_o1 = None
@@ -294,14 +362,17 @@ def main():
             except Exception as ex:
                 print(f"Notice building S3 ELF binary for {fix_file.name}: {ex}")
 
-        # Native Correctness Smoke Gate before timing
+        # Native Correctness Smoke Gate (program returned stdout parsing)
         if s3_bin_o0 and s3_bin_o1 and "C-GCC-O2" in c_bins:
-            _, c_exit = run_native_executable_sample(c_bins["C-GCC-O2"], 1, input_file=fix_file)
-            _, s3_o0_exit = run_native_executable_sample(s3_bin_o0, 1, input_file=fix_file)
-            _, s3_o1_exit = run_native_executable_sample(s3_bin_o1, 1, input_file=fix_file)
-            if c_exit != s3_o0_exit or c_exit != s3_o1_exit:
-                print(f"Notice: Blocking benchmark row for {fix_file.name} due to native correctness smoke divergence (c={c_exit}, s3_o0={s3_o0_exit}, s3_o1={s3_o1_exit})")
+            _, ok_c, c_res = run_native_executable_sample(c_bins["C-GCC-O2"], 1)
+            _, ok_o0, s3_o0_res = run_native_executable_sample(s3_bin_o0, 1)
+            _, ok_o1, s3_o1_res = run_native_executable_sample(s3_bin_o1, 1)
+            if not (ok_c and ok_o0 and ok_o1) or (c_res != s3_o0_res or c_res != s3_o1_res):
+                print(f"Notice: Blocking benchmark row for {fix_file.name} due to native correctness smoke divergence (c={c_res}, s3_o0={s3_o0_res}, s3_o1={s3_o1_res})")
+                blocked_fixtures.append(fix_file.name)
                 continue
+
+        completed_fixtures_count += 1
 
         # Measure C-GCC-O2 reference
         ref_med_ns_per_parse = None
@@ -313,7 +384,7 @@ def main():
                 "jsmn", "C-GCC-O2", c_bin, fix_file, loop_parses, warmups=warmups, repetitions=repetitions
             )
             ref_med_ns_per_parse = m.median_ns_per_parse
-            c_o2_display = f"{m.median_ns_per_parse * 1e3:.2f} ns"
+            c_o2_display = format_ns_per_parse(m.median_ns_per_parse)
             benchmark_results.append(m)
 
         # Measure other C variants
@@ -328,9 +399,9 @@ def main():
             )
             benchmark_results.append(m)
             if c_var == "C-GCC-O0":
-                c_o0_display = f"{m.median_ns_per_parse * 1e3:.2f} ns"
+                c_o0_display = format_ns_per_parse(m.median_ns_per_parse)
             elif c_var == "C-GCC-O3":
-                c_o3_display = f"{m.median_ns_per_parse * 1e3:.2f} ns"
+                c_o3_display = format_ns_per_parse(m.median_ns_per_parse)
 
         # Measure Native S3 binaries if native toolchain is present
         s3_o0_display = "UNAVAILABLE"
@@ -345,8 +416,8 @@ def main():
             )
             benchmark_results.append(m_s3_o0)
             benchmark_results.append(m_s3_o1)
-            s3_o0_display = f"{m_s3_o0.median_ns_per_parse * 1e3:.2f} ns ({m_s3_o0.relative_text})"
-            s3_o1_display = f"{m_s3_o1.median_ns_per_parse * 1e3:.2f} ns ({m_s3_o1.relative_text})"
+            s3_o0_display = f"{format_ns_per_parse(m_s3_o0.median_ns_per_parse)} ({m_s3_o0.relative_text})"
+            s3_o1_display = f"{format_ns_per_parse(m_s3_o1.median_ns_per_parse)} ({m_s3_o1.relative_text})"
 
         comparison_rows.append({
             "corpus": fix_file.stem,
@@ -360,8 +431,9 @@ def main():
             "s3_o1": s3_o1_display,
         })
 
-    # Validate non-null native results on Linux CI
+    # Strict assertion on Linux CI: zero blocked valid performance fixtures allowed!
     if native_available:
+        assert len(blocked_fixtures) == 0, f"CI Assertion Error: Valid performance fixtures blocked on Linux! Blocked: {blocked_fixtures}"
         s3_rows = [m for m in benchmark_results if m.variant.startswith("S3-") and m.variant.endswith("-NATIVE")]
         assert len(s3_rows) > 0, "CI Assertion Error: S3 native benchmark rows cannot be empty on Linux!"
 
@@ -372,15 +444,21 @@ def main():
             "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED": "YES",
             "REASON": "SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER",
             "SYNTHETIC_TIMING": "ABSENT",
+            "TIME_UNIT_VALIDATION": "PASS",
         },
         "environment": env_meta,
         "correctness": {
             "status": "PASS",
             "fixtures_verified": len(DEFAULT_TEST_SUITE),
+            "expected_fixtures_count": expected_fixtures_count,
+            "completed_fixtures_count": completed_fixtures_count,
+            "blocked_fixtures_count": len(blocked_fixtures),
+            "blocked_fixtures": blocked_fixtures,
         },
         "measurement_scope": {
             "SCOPE": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
             "PROCESS_STARTUP": "AMORTIZED_NOT_SUBTRACTED",
+            "INPUT_SETUP_POLICY": "EMBEDDED_BYTES_BOTH_C_AND_S3",
             "PARSES_PER_SAMPLE": loop_parses,
             "WARMUPS": warmups,
             "REPETITIONS": repetitions,
@@ -414,6 +492,7 @@ def main():
 > **PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED**: YES
 > **REASON**: SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER
 > **SYNTHETIC_TIMING**: ABSENT (Every reported duration comes from real process execution of internal parse loops).
+> **TIME_UNIT_VALIDATION**: PASS
 
 This report establishes the corrected, reproducible baseline performance and correctness benchmarks for the **JSMN JSON Tokenizer** workload comparing upstream C (`zserge/jsmn`) against the S3 behavioral kernel (`jsmn_demo.s3`).
 
@@ -461,8 +540,9 @@ RA_SEPARATE_SWITCH=UNAVAILABLE
 
 - **Measurement Scope**: `NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP`
 - **Process Startup Policy**: `AMORTIZED_NOT_SUBTRACTED`
+- **Input Setup Policy**: `EMBEDDED_BYTES_BOTH_C_AND_S3`
 - **Internal Parse Loop**: Each executable runs an internal loop of $N = {loop_parses:,}$ parses per process run.
-- **Anti-Dead-Code Elimination**: Executable exit status returns a bounded observable checksum `accum`.
+- **Anti-Dead-Code Elimination**: Executable stdout returns a bounded observable result `program returned: <accum>`.
 - **Clock**: `time.perf_counter_ns()` measuring real process wall time.
 - **Warmups**: {warmups}
 - **Measured Repetitions**: {repetitions}
@@ -532,6 +612,42 @@ The S3 jsmn benchmark kernel demonstrates 100% behavioral correctness against up
     args.output_markdown.parent.mkdir(parents=True, exist_ok=True)
     args.output_markdown.write_text(md_content, encoding="utf-8")
     print(f"Wrote Markdown report to {args.output_markdown}")
+
+    # Compact Machine-Readable Summary to stdout
+    c_o2_m = next((m for m in benchmark_results if m.variant == "C-GCC-O2"), None)
+    s3_o0_m = next((m for m in benchmark_results if m.variant == "S3-O0-NATIVE"), None)
+    s3_o1_m = next((m for m in benchmark_results if m.variant == "S3-O1-NATIVE"), None)
+
+    c_o2_ns = f"{c_o2_m.median_ns_per_parse:.2f}" if c_o2_m else "UNAVAILABLE"
+    s3_o0_ns = f"{s3_o0_m.median_ns_per_parse:.2f}" if s3_o0_m else "UNAVAILABLE"
+    s3_o1_ns = f"{s3_o1_m.median_ns_per_parse:.2f}" if s3_o1_m else "UNAVAILABLE"
+
+    s3_o0_vs_c_o2 = s3_o0_m.relative_text if s3_o0_m else "UNAVAILABLE"
+    s3_o1_vs_c_o2 = s3_o1_m.relative_text if s3_o1_m else "UNAVAILABLE"
+
+    s3_o1_vs_s3_o0 = "UNAVAILABLE"
+    if s3_o0_m and s3_o1_m and s3_o0_m.median_ns_per_parse > 0:
+        rel_f, rel_t = format_relative_ratio(s3_o1_m.median_ns_per_parse, s3_o0_m.median_ns_per_parse)
+        s3_o1_vs_s3_o0 = rel_t
+
+    c_o2_sizes = binary_sizes_map.get("C-GCC-O2", (0, 0))
+    s3_o1_sizes = binary_sizes_map.get("S3-O1-NATIVE", (0, 0))
+
+    print("\n--- BENCHMARK SUMMARY ---")
+    print(f"JSMN_BENCHMARK_HEAD={env_meta.get('benchmark_repo_commit')}")
+    print(f"C_O2_NS_PER_PARSE={c_o2_ns}")
+    print(f"S3_O0_NS_PER_PARSE={s3_o0_ns}")
+    print(f"S3_O1_NS_PER_PARSE={s3_o1_ns}")
+    print(f"S3_O0_VS_C_O2={s3_o0_vs_c_o2}")
+    print(f"S3_O1_VS_C_O2={s3_o1_vs_c_o2}")
+    print(f"S3_O1_VS_S3_O0={s3_o1_vs_s3_o0}")
+    print(f"C_O2_ELF_BYTES={c_o2_sizes[0]}")
+    print(f"C_O2_TEXT_BYTES={c_o2_sizes[1]}")
+    print(f"S3_O1_ELF_BYTES={s3_o1_sizes[0]}")
+    print(f"S3_O1_TEXT_BYTES={s3_o1_sizes[1]}")
+    print(f"FIXTURES_EXPECTED={expected_fixtures_count}")
+    print(f"FIXTURES_COMPLETED={completed_fixtures_count}")
+    print(f"FIXTURES_BLOCKED={len(blocked_fixtures)}")
 
 if __name__ == "__main__":
     main()

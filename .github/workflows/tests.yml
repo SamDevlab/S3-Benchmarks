@@ -63,3 +63,11 @@ jobs:
           grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
           grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
           python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"
+
+      - name: Upload Native Baseline Report Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: jsmn-native-baseline-${{ github.sha }}
+          path: |
+            reports/jsmn-baseline.json
+            reports/jsmn-baseline.md
