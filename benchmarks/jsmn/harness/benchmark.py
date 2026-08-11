@@ -11,7 +11,7 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from .statistics import calculate_stats, calculate_throughput, format_relative_ratio
 
@@ -43,13 +43,15 @@ class BenchmarkMeasurement:
     relative_ratio: float
     relative_text: str
 
-def run_native_executable_sample(executable_bin: Path, iterations: int) -> tuple[int, int]:
+def run_native_executable_sample(executable_bin: Path, iterations: int, input_file: Path | None = None) -> tuple[int, int]:
     """
-    Executes native C or S3 binary with --loop <iterations>.
+    Executes native C or S3 binary with --loop <iterations> [--file <path>].
     Measures REAL process wall-clock execution time via time.perf_counter_ns().
     Returns (elapsed_ns, exit_code).
     """
     cmd = [str(executable_bin), "--loop", str(iterations)]
+    if input_file is not None:
+        cmd.extend(["--file", str(input_file)])
     t0 = time.perf_counter_ns()
     proc = subprocess.run(cmd, capture_output=True, text=True)
     t1 = time.perf_counter_ns()
@@ -73,13 +75,13 @@ def benchmark_native_variant(
     # Warmup
     last_exit_code = 0
     for _ in range(warmups):
-        _, last_exit_code = run_native_executable_sample(executable_bin, parses_per_sample)
+        _, last_exit_code = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
 
     samples_ns_per_parse: list[float] = []
     total_durations_ns: list[float] = []
 
     for _ in range(repetitions):
-        elapsed_ns, exit_code = run_native_executable_sample(executable_bin, parses_per_sample)
+        elapsed_ns, exit_code = run_native_executable_sample(executable_bin, parses_per_sample, input_file=input_file)
         total_durations_ns.append(float(elapsed_ns))
         samples_ns_per_parse.append(float(elapsed_ns) / float(parses_per_sample))
         last_exit_code = exit_code

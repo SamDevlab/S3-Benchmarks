@@ -296,9 +296,9 @@ def main():
 
         # Native Correctness Smoke Gate before timing
         if s3_bin_o0 and s3_bin_o1 and "C-GCC-O2" in c_bins:
-            _, c_exit = run_native_executable_sample(c_bins["C-GCC-O2"], 1)
-            _, s3_o0_exit = run_native_executable_sample(s3_bin_o0, 1)
-            _, s3_o1_exit = run_native_executable_sample(s3_bin_o1, 1)
+            _, c_exit = run_native_executable_sample(c_bins["C-GCC-O2"], 1, input_file=fix_file)
+            _, s3_o0_exit = run_native_executable_sample(s3_bin_o0, 1, input_file=fix_file)
+            _, s3_o1_exit = run_native_executable_sample(s3_bin_o1, 1, input_file=fix_file)
             assert c_exit == s3_o0_exit == s3_o1_exit, f"Native correctness smoke divergence on {fix_file.name}: c={c_exit}, s3_o0={s3_o0_exit}, s3_o1={s3_o1_exit}"
 
         # Measure C-GCC-O2 reference
