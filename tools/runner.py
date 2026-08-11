@@ -40,7 +40,13 @@ from benchmarks.jsmn.harness.benchmark import (
     run_native_executable_sample,
     verify_no_synthetic_timing_regression,
 )
-from benchmarks.jsmn.harness.correctness import DEFAULT_TEST_SUITE, run_s3_jsmn, verify_differential_correctness
+from benchmarks.jsmn.harness.correctness import (
+    DEFAULT_TEST_SUITE,
+    reference_jsmn_oracle,
+    run_s3_jsmn,
+    test_differential_correctness_rules,
+    verify_differential_correctness,
+)
 from benchmarks.jsmn.harness.statistics import calculate_stats, calculate_throughput, format_relative_ratio
 from tools.assembly_analyzer import analyze_assembly_text
 from tools.environment import collect_environment_metadata
@@ -61,8 +67,16 @@ def decompose_iterations_to_tryte_factors(n: int) -> list[int]:
     return factors
 
 
+def test_loop_factor_math():
+    """Unit tests for exact loop factor product mathematical equality."""
+    for req in [100, 1_000, 10_000, 100_000]:
+        factors = decompose_iterations_to_tryte_factors(req)
+        prod = math.prod(factors)
+        assert prod == req, f"Math error: product({factors})={prod} != requested {req}"
+
+
 def render_s3_loop_source(source_template: str, text: str, iterations: int) -> str:
-    """Renders S3 source code with embedded JSON bytes, length, and nested loop tryte factors."""
+    """Renders S3 source code with embedded JSON bytes, length, tryte loop factors, and bounded anti-DCE."""
     data = text.encode("ascii")
     assert len(data) <= 96, f"Input size {len(data)} exceeds S3 capacity 96"
     values = list(data) + [0] * (96 - len(data))
@@ -99,6 +113,15 @@ def render_s3_loop_source(source_template: str, text: str, iterations: int) -> s
     loop_header += f"{indent}        accum = accum + r\n"
     loop_header += f"{indent}    1:\n"
     loop_header += f"{indent}        accum = accum + r\n"
+
+    # Bounded anti-DCE to prevent S3 tryte scalar overflow [-364, 364]
+    loop_header += f"{indent}match accum <=> 200:\n"
+    loop_header += f"{indent}    -1:\n"
+    loop_header += f"{indent}        accum = accum\n"
+    loop_header += f"{indent}    0:\n"
+    loop_header += f"{indent}        accum = accum - 200\n"
+    loop_header += f"{indent}    1:\n"
+    loop_header += f"{indent}        accum = accum - 200\n"
 
     for idx in reversed(range(len(factors))):
         indent_str = "    " * (idx + 1)
@@ -160,6 +183,8 @@ def get_binary_size_info(binary_path: Path) -> tuple[int, int]:
 
 def main():
     verify_no_synthetic_timing_regression()
+    test_differential_correctness_rules()
+    test_loop_factor_math()
 
     parser = argparse.ArgumentParser(description="S3 Benchmark Suite Master Runner")
     parser.add_argument("--smoke", action="store_true", help="Run short smoke benchmark cycle")
@@ -191,7 +216,7 @@ def main():
 
     c_o2_bin = c_bins.get("C-GCC-O2") or next(iter(c_bins.values()), None)
 
-    # 2. Differential Correctness Gate (Hosted Oracle Verification)
+    # 2. Differential Correctness Gate (Oracle Verification)
     correctness_pass, correctness_logs = verify_differential_correctness(
         c_o2_bin, s3_demo_template, DEFAULT_TEST_SUITE
     )
@@ -217,15 +242,15 @@ def main():
     except NativePlatformError as e:
         print(f"Native toolchain notice: {e}. (Native S3 execution will run on Linux x86-64 CI).")
 
-    summary_fixtures = [
-        f for f in corpus_files
-        if f.name in {
-            "tiny_01_empty_obj.json", "tiny_03_pair.json", "tiny_04_arr.json",
-            "small_01_flat.json", "small_02_nested.json", "gen_05_mixed.json"
-        }
-    ]
-    if not summary_fixtures:
-        summary_fixtures = corpus_files[:5]
+    # Filter corpus for valid performance baseline fixtures (successful parse only)
+    valid_fixtures = []
+    for fix_file in corpus_files:
+        text = fix_file.read_text(encoding="utf-8")
+        ref_st, _ = reference_jsmn_oracle(text.encode("ascii"))
+        if ref_st >= 0 and len(text.encode("ascii")) <= 96:
+            valid_fixtures.append(fix_file)
+
+    summary_fixtures = valid_fixtures[:6] if valid_fixtures else corpus_files[:5]
 
     warmups = 1 if args.smoke else DEFAULT_WARMUPS
     repetitions = 5 if args.smoke else DEFAULT_REPETITIONS
@@ -268,6 +293,13 @@ def main():
                 binary_sizes_map["S3-O1-NATIVE"] = get_binary_size_info(s3_bin_o1)
             except Exception as ex:
                 print(f"Notice building S3 ELF binary for {fix_file.name}: {ex}")
+
+        # Native Correctness Smoke Gate before timing
+        if s3_bin_o0 and s3_bin_o1 and "C-GCC-O2" in c_bins:
+            _, c_exit = run_native_executable_sample(c_bins["C-GCC-O2"], 1)
+            _, s3_o0_exit = run_native_executable_sample(s3_bin_o0, 1)
+            _, s3_o1_exit = run_native_executable_sample(s3_bin_o1, 1)
+            assert c_exit == s3_o0_exit == s3_o1_exit, f"Native correctness smoke divergence on {fix_file.name}: c={c_exit}, s3_o0={s3_o0_exit}, s3_o1={s3_o1_exit}"
 
         # Measure C-GCC-O2 reference
         ref_med_ns_per_parse = None
@@ -428,7 +460,7 @@ RA_SEPARATE_SWITCH=UNAVAILABLE
 - **Measurement Scope**: `NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP`
 - **Process Startup Policy**: `AMORTIZED_NOT_SUBTRACTED`
 - **Internal Parse Loop**: Each executable runs an internal loop of $N = {loop_parses:,}$ parses per process run.
-- **Anti-Dead-Code Elimination**: Executable exit status returns an observable modulo checksum `accum % 251`.
+- **Anti-Dead-Code Elimination**: Executable exit status returns a bounded observable checksum `accum`.
 - **Clock**: `time.perf_counter_ns()` measuring real process wall time.
 - **Warmups**: {warmups}
 - **Measured Repetitions**: {repetitions}

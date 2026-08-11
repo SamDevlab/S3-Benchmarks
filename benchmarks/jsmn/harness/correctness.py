@@ -204,6 +204,20 @@ def run_c_jsmn(c_runner_bin: Path, text: str) -> ExecutionResult:
         raw_output=proc.stdout,
     )
 
+def compare_results(ref_status: int, ref_tokens: list[Token], target: ExecutionResult) -> bool:
+    """
+    Applies strict differential comparison rules:
+    - If ref_status >= 0: target.status == ref_status AND checksum / tokens match ref.
+    - If ref_status < 0: target.status == ref_status (same error code = pass).
+    """
+    if ref_status >= 0:
+        if target.status != ref_status:
+            return False
+        ref_chk = compute_checksum_from_tokens(ref_status, ref_tokens)
+        return target.checksum == ref_chk
+    else:
+        return target.status == ref_status
+
 def verify_differential_correctness(
     c_runner_bin: Path | None,
     s3_demo_template: str,
@@ -215,28 +229,66 @@ def verify_differential_correctness(
 
     for text in test_cases:
         ref_status, ref_tokens = reference_jsmn_oracle(text.encode("ascii"))
-        ref_chk = compute_checksum_from_tokens(ref_status, ref_tokens)
 
         # S3 O0
         s3_o0_res = run_s3_jsmn(s3_demo_template, text, "O0")
-        if s3_o0_res.status != ref_status or s3_o0_res.checksum != ref_chk:
+        if not compare_results(ref_status, ref_tokens, s3_o0_res):
             logs.append(f"FAIL S3-O0: '{text}' status ref={ref_status} s3={s3_o0_res.status}")
             all_passed = False
 
         # S3 O1
         s3_o1_res = run_s3_jsmn(s3_demo_template, text, "O1")
-        if s3_o1_res.status != ref_status or s3_o1_res.checksum != ref_chk:
+        if not compare_results(ref_status, ref_tokens, s3_o1_res):
             logs.append(f"FAIL S3-O1: '{text}' status ref={ref_status} s3={s3_o1_res.status}")
             all_passed = False
 
         # C runner (if binary compiled)
         if c_runner_bin and c_runner_bin.exists():
             c_res = run_c_jsmn(c_runner_bin, text)
-            if c_res.status != ref_status or c_res.checksum != ref_chk:
+            if not compare_results(ref_status, ref_tokens, c_res):
                 logs.append(f"FAIL C: '{text}' status ref={ref_status} c={c_res.status}")
                 all_passed = False
 
     return all_passed, logs
+
+def test_differential_correctness_rules():
+    """Unit tests for differential error-comparison semantics and regression rules."""
+    # 1. Success case comparing complete token output
+    ref_st, ref_toks = reference_jsmn_oracle(b'{"a":1}')
+    assert ref_st == 3
+    valid_res = ExecutionResult(status=3, token_count=3, checksum=compute_checksum_from_tokens(3, ref_toks), tokens=ref_toks)
+    assert compare_results(ref_st, ref_toks, valid_res) is True
+
+    bad_checksum_res = ExecutionResult(status=3, token_count=3, checksum=9999, tokens=[])
+    assert compare_results(ref_st, ref_toks, bad_checksum_res) is False
+
+    # 2. Invalid delimiter: {"a":1] -> ref=-2, target=-2 -> PASS
+    ref_st, ref_toks = reference_jsmn_oracle(b'{"a":1]')
+    assert ref_st == JSMN_ERROR_INVAL
+    inval_res = ExecutionResult(status=JSMN_ERROR_INVAL, token_count=0, checksum=JSMN_ERROR_INVAL, tokens=[])
+    assert compare_results(ref_st, ref_toks, inval_res) is True
+
+    # 3. Partial: {"a": -> ref=-3, target=-3 -> PASS
+    ref_st, ref_toks = reference_jsmn_oracle(b'{"a":')
+    assert ref_st == JSMN_ERROR_PART
+    part_res = ExecutionResult(status=JSMN_ERROR_PART, token_count=0, checksum=JSMN_ERROR_PART, tokens=[])
+    assert compare_results(ref_st, ref_toks, part_res) is True
+
+    # 4. Invalid escape: "bad\q" -> ref=-2, target=-2 -> PASS
+    ref_st, ref_toks = reference_jsmn_oracle(b'"bad\\q"')
+    assert ref_st == JSMN_ERROR_INVAL
+    assert compare_results(ref_st, ref_toks, inval_res) is True
+
+    # 5. NOMEM -> ref=-1, target=-1 -> PASS
+    nomem_input = ("[" + ",".join("0" for _ in range(40)) + "]").encode("ascii")
+    ref_st, ref_toks = reference_jsmn_oracle(nomem_input)
+    assert ref_st == JSMN_ERROR_NOMEM
+    nomem_res = ExecutionResult(status=JSMN_ERROR_NOMEM, token_count=0, checksum=JSMN_ERROR_NOMEM, tokens=[])
+    assert compare_results(ref_st, ref_toks, nomem_res) is True
+
+    # 6. Negative Regression: ref=-2, target=-3 -> FAIL
+    mismatch_error_res = ExecutionResult(status=JSMN_ERROR_PART, token_count=0, checksum=JSMN_ERROR_PART, tokens=[])
+    assert compare_results(JSMN_ERROR_INVAL, ref_toks, mismatch_error_res) is False
 
 DEFAULT_TEST_SUITE = [
     "{}",
