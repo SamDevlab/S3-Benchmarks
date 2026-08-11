@@ -22,10 +22,10 @@ from typing import Any
 BASE_DIR = Path(__file__).resolve().parent.parent
 S3_REPO_DIR = Path(os.environ.get("S3_REPO", r"C:\Users\samue\Downloads\S3\S3-language")).resolve()
 
-if str(BASE_DIR) not in sys.path:
-    sys.path.insert(0, str(BASE_DIR))
-if str(S3_REPO_DIR) not in sys.path and S3_REPO_DIR.exists():
-    sys.path.insert(0, str(S3_REPO_DIR))
+sys.path.insert(0, str(BASE_DIR))
+if S3_REPO_DIR.exists() and str(S3_REPO_DIR) not in sys.path:
+    sys.path.append(str(S3_REPO_DIR))
+
 
 from bootstrap.s3.backends.x86_64 import NativeBackendError, NativeToolchain, generate_native_assembly
 from bootstrap.s3.backends.x86_64.diagnostics import NativePlatformError
@@ -173,8 +173,10 @@ def render_s3_loop_source(source_template: str, text: str, iterations: int) -> s
     loop_header += f"{indent}    1:\n"
     loop_header += f"{indent}        accum = accum - 200\n"
 
-    for idx in reversed(range(len(factors))):
-        indent_str = "    " * (idx + 1)
+    loop_header += f"{indent}l{len(factors)} = l{len(factors)} - 1\n"
+
+    for idx in reversed(range(len(factors) - 1)):
+        indent_str = "    " * (idx + 2)
         loop_header += f"{indent_str}l{idx+1} = l{idx+1} - 1\n"
 
     loop_header += "    return accum\n"
@@ -381,19 +383,22 @@ def main():
         # Measure C-GCC-O2 reference
         ref_med_ns_per_parse = None
         c_o2_display = "UNAVAILABLE"
+        m_c_o2 = None
         if "C-GCC-O2" in c_bins:
             c_bin = c_bins["C-GCC-O2"]
             binary_sizes_map["C-GCC-O2"] = get_binary_size_info(c_bin)
-            m = benchmark_native_variant(
+            m_c_o2 = benchmark_native_variant(
                 "jsmn", "C-GCC-O2", c_bin, fix_file, loop_parses, warmups=warmups, repetitions=repetitions
             )
-            ref_med_ns_per_parse = m.median_ns_per_parse
-            c_o2_display = format_ns_per_parse(m.median_ns_per_parse)
-            benchmark_results.append(m)
+            ref_med_ns_per_parse = m_c_o2.median_ns_per_parse
+            c_o2_display = format_ns_per_parse(m_c_o2.median_ns_per_parse)
+            benchmark_results.append(m_c_o2)
 
         # Measure other C variants
         c_o0_display = "UNAVAILABLE"
         c_o3_display = "UNAVAILABLE"
+        m_c_o0 = None
+        m_c_o3 = None
         for c_var, c_bin in c_bins.items():
             binary_sizes_map[c_var] = get_binary_size_info(c_bin)
             if c_var == "C-GCC-O2":
@@ -403,13 +408,17 @@ def main():
             )
             benchmark_results.append(m)
             if c_var == "C-GCC-O0":
+                m_c_o0 = m
                 c_o0_display = format_ns_per_parse(m.median_ns_per_parse)
             elif c_var == "C-GCC-O3":
+                m_c_o3 = m
                 c_o3_display = format_ns_per_parse(m.median_ns_per_parse)
 
         # Measure Native S3 binaries if native toolchain is present
         s3_o0_display = "UNAVAILABLE"
         s3_o1_display = "UNAVAILABLE"
+        m_s3_o0 = None
+        m_s3_o1 = None
 
         if s3_bin_o0 and s3_bin_o1:
             m_s3_o0 = benchmark_native_variant(
@@ -423,9 +432,12 @@ def main():
             s3_o0_display = f"{format_ns_per_parse(m_s3_o0.median_ns_per_parse)} ({m_s3_o0.relative_text})"
             s3_o1_display = f"{format_ns_per_parse(m_s3_o1.median_ns_per_parse)} ({m_s3_o1.relative_text})"
 
-        comparison_rows.append({
+        ref_tokens, _ = reference_jsmn_oracle(text.encode("ascii"))
+
+        row_dict = {
             "corpus": fix_file.stem,
             "bytes": num_bytes,
+            "tokens": ref_tokens,
             "sha256": sha256[:12],
             "loop_parses": loop_parses,
             "c_gcc_o0": c_o0_display,
@@ -433,13 +445,38 @@ def main():
             "c_gcc_o3": c_o3_display,
             "s3_o0": s3_o0_display,
             "s3_o1": s3_o1_display,
-        })
+            "c_gcc_o0_ns": m_c_o0.median_ns_per_parse if m_c_o0 else None,
+            "c_gcc_o2_ns": m_c_o2.median_ns_per_parse if m_c_o2 else None,
+            "c_gcc_o3_ns": m_c_o3.median_ns_per_parse if m_c_o3 else None,
+            "s3_o0_ns": m_s3_o0.median_ns_per_parse if m_s3_o0 else None,
+            "s3_o1_ns": m_s3_o1.median_ns_per_parse if m_s3_o1 else None,
+            "s3_o0_vs_c_o2_ratio": (m_s3_o0.median_ns_per_parse / m_c_o2.median_ns_per_parse) if (m_s3_o0 and m_c_o2 and m_c_o2.median_ns_per_parse > 0) else None,
+            "s3_o1_vs_c_o2_ratio": (m_s3_o1.median_ns_per_parse / m_c_o2.median_ns_per_parse) if (m_s3_o1 and m_c_o2 and m_c_o2.median_ns_per_parse > 0) else None,
+            "s3_o1_vs_s3_o0_ratio": (m_s3_o1.median_ns_per_parse / m_s3_o0.median_ns_per_parse) if (m_s3_o1 and m_s3_o0 and m_s3_o0.median_ns_per_parse > 0) else None,
+            "s3_o0_vs_c_o2_text": format_relative_ratio(m_s3_o0.median_ns_per_parse, m_c_o2.median_ns_per_parse)[1] if (m_s3_o0 and m_c_o2) else "UNAVAILABLE",
+            "s3_o1_vs_c_o2_text": format_relative_ratio(m_s3_o1.median_ns_per_parse, m_c_o2.median_ns_per_parse)[1] if (m_s3_o1 and m_c_o2) else "UNAVAILABLE",
+            "s3_o1_vs_s3_o0_text": format_relative_ratio(m_s3_o1.median_ns_per_parse, m_s3_o0.median_ns_per_parse)[1] if (m_s3_o1 and m_s3_o0) else "UNAVAILABLE",
+            "c_o2_parses_sec": m_c_o2.parses_per_sec if m_c_o2 else 0,
+            "s3_o1_parses_sec": m_s3_o1.parses_per_sec if m_s3_o1 else 0,
+            "c_o2_mb_sec": m_c_o2.mb_per_sec if m_c_o2 else 0,
+            "s3_o1_mb_sec": m_s3_o1.mb_per_sec if m_s3_o1 else 0,
+        }
+        comparison_rows.append(row_dict)
 
     # Strict assertion on Linux CI: zero blocked valid performance fixtures allowed!
     if native_available:
         assert len(blocked_fixtures) == 0, f"CI Assertion Error: Valid performance fixtures blocked on Linux! Blocked: {blocked_fixtures}"
         s3_rows = [m for m in benchmark_results if m.variant.startswith("S3-") and m.variant.endswith("-NATIVE")]
         assert len(s3_rows) > 0, "CI Assertion Error: S3 native benchmark rows cannot be empty on Linux!"
+
+    # Calculate Geometric Means across fixtures
+    s3_o0_c_o2_ratios = [r["s3_o0_vs_c_o2_ratio"] for r in comparison_rows if r["s3_o0_vs_c_o2_ratio"] is not None]
+    s3_o1_c_o2_ratios = [r["s3_o1_vs_c_o2_ratio"] for r in comparison_rows if r["s3_o1_vs_c_o2_ratio"] is not None]
+    s3_o1_s3_o0_ratios = [r["s3_o1_vs_s3_o0_ratio"] for r in comparison_rows if r["s3_o1_vs_s3_o0_ratio"] is not None]
+
+    geomean_s3_o0_vs_c_o2 = math.exp(sum(math.log(r) for r in s3_o0_c_o2_ratios) / len(s3_o0_c_o2_ratios)) if s3_o0_c_o2_ratios else None
+    geomean_s3_o1_vs_c_o2 = math.exp(sum(math.log(r) for r in s3_o1_c_o2_ratios) / len(s3_o1_c_o2_ratios)) if s3_o1_c_o2_ratios else None
+    geomean_s3_o1_vs_s3_o0 = math.exp(sum(math.log(r) for r in s3_o1_s3_o0_ratios) / len(s3_o1_s3_o0_ratios)) if s3_o1_s3_o0_ratios else None
 
     # 4. Generate JSON Report
     report_dict = {
@@ -466,6 +503,11 @@ def main():
             "PARSES_PER_SAMPLE": loop_parses,
             "WARMUPS": warmups,
             "REPETITIONS": repetitions,
+        },
+        "summary_ratios": {
+            "GEOMEAN_S3_O0_VS_C_O2": geomean_s3_o0_vs_c_o2,
+            "GEOMEAN_S3_O1_VS_C_O2": geomean_s3_o1_vs_c_o2,
+            "GEOMEAN_S3_O1_VS_S3_O0": geomean_s3_o1_vs_s3_o0,
         },
         "limits": {
             "JSMN_S3_DROP_IN_API": "NO",
@@ -642,6 +684,9 @@ The S3 jsmn benchmark kernel demonstrates 100% behavioral correctness against up
     print(f"C_O2_NS_PER_PARSE={c_o2_ns}")
     print(f"S3_O0_NS_PER_PARSE={s3_o0_ns}")
     print(f"S3_O1_NS_PER_PARSE={s3_o1_ns}")
+    print(f"GEOMEAN_S3_O0_VS_C_O2={f'{geomean_s3_o0_vs_c_o2:.2f}x' if geomean_s3_o0_vs_c_o2 else 'UNAVAILABLE'}")
+    print(f"GEOMEAN_S3_O1_VS_C_O2={f'{geomean_s3_o1_vs_c_o2:.2f}x' if geomean_s3_o1_vs_c_o2 else 'UNAVAILABLE'}")
+    print(f"GEOMEAN_S3_O1_VS_S3_O0={f'{geomean_s3_o1_vs_s3_o0:.2f}x' if geomean_s3_o1_vs_s3_o0 else 'UNAVAILABLE'}")
     print(f"S3_O0_VS_C_O2={s3_o0_vs_c_o2}")
     print(f"S3_O1_VS_C_O2={s3_o1_vs_c_o2}")
     print(f"S3_O1_VS_S3_O0={s3_o1_vs_s3_o0}")
