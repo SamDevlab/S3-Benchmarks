@@ -344,7 +344,7 @@ def main():
         (build_dir / f"jsmn_o0_{fix_file.stem}.s").write_text(s3_asm_o0, encoding="utf-8")
         (build_dir / f"jsmn_o1_{fix_file.stem}.s").write_text(s3_asm_o1, encoding="utf-8")
 
-        if fix_file.name == "small_01_flat.json":
+        if not assembly_metrics_map:
             assembly_metrics_map["S3-O0"] = analyze_assembly_text(s3_asm_o0, "S3-O0").__dict__
             assembly_metrics_map["S3-O1"] = analyze_assembly_text(s3_asm_o1, "S3-O1").__dict__
 
