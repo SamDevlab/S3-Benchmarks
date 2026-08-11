@@ -310,7 +310,7 @@ def main():
 
     warmups = 1 if args.smoke else DEFAULT_WARMUPS
     repetitions = 5 if args.smoke else DEFAULT_REPETITIONS
-    loop_parses = 1000 if args.smoke else 100000
+    loop_parses = 100 if args.smoke else 10000
 
     benchmark_results = []
     comparison_rows = []
@@ -331,12 +331,12 @@ def main():
         s3_src_path = build_dir / f"jsmn_loop_{fix_file.stem}.s3"
         s3_src_path.write_text(s3_loop_src, encoding="utf-8")
 
-        # Compile S3 assembly for O0 and O1 with high instruction limit for 100k parse benchmark loop
+        # Compile S3 assembly for O0 and O1 with effectively unlimited instruction limit for benchmark loop
         s3_asm_o0 = generate_native_assembly(
-            compile_source(s3_loop_src, "O0").assembly, max_instructions=1_000_000_000
+            compile_source(s3_loop_src, "O0").assembly, max_instructions=(1 << 62)
         )
         s3_asm_o1 = generate_native_assembly(
-            compile_source(s3_loop_src, "O1").assembly, max_instructions=1_000_000_000
+            compile_source(s3_loop_src, "O1").assembly, max_instructions=(1 << 62)
         )
 
         (build_dir / f"jsmn_o0_{fix_file.stem}.s").write_text(s3_asm_o0, encoding="utf-8")
