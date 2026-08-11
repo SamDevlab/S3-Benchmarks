@@ -77,10 +77,12 @@ def run_native_executable_sample(
     elapsed_ns = t1 - t0
 
     if proc.returncode != 0:
+        print(f"[DEBUG run_sample] {executable_bin.name} failed retcode={proc.returncode} stdout={proc.stdout!r} stderr={proc.stderr!r}")
         return elapsed_ns, False, -999
 
     match = re.search(r"program returned:\s*(-?\d+)", proc.stdout)
     if not match:
+        print(f"[DEBUG run_sample] {executable_bin.name} no match stdout={proc.stdout!r} stderr={proc.stderr!r}")
         return elapsed_ns, False, -999
 
     return elapsed_ns, True, int(match.group(1))
