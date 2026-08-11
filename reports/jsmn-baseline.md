@@ -4,9 +4,10 @@
 
 > **PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED**: YES
 > **REASON**: SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER
-> **SYNTHETIC_TIMING**: ABSENT (Every reported duration comes from real process execution of internal parse loops).
+> **SYNTHETIC_TIMING**: ABSENT
+> **PERFORMANCE_DATA_AVAILABLE**: NO
 
-This report establishes the corrected, reproducible baseline performance and correctness benchmarks for the **JSMN JSON Tokenizer** workload comparing upstream C (`zserge/jsmn`) against the S3 behavioral kernel (`jsmn_demo.s3`).
+This checked-in artifact records the correctness and assembly characterization available from the environment below. It does **not** contain a valid C-vs-S3 native performance comparison because the required native toolchain measurements were unavailable in this run. Linux CI artifacts are the authoritative source for native performance measurements when all required variants complete successfully.
 
 ## Versions
 
@@ -41,22 +42,27 @@ JSMN_S3_O1_NATIVE=YES
 RA_SEPARATE_SWITCH=UNAVAILABLE
 ```
 
+These capability flags describe the pinned S3 compiler commit used by this benchmark artifact, not newer S3 milestones.
+
 ## Corpus
 
 - **TINY**: 6 fixtures (2 B – 128 B)
 - **SMALL**: 5 fixtures (128 B – 4 KiB)
 - **GENERATED**: 7 deterministic fixtures (Seed `0x53334A534D4E`)
-- **MEDIUM / LARGE**: BLOCKED_BY_CURRENT_S3_API (Inputs $> 96$ bytes not supported by current fixed kernel buffer).
+- **MEDIUM / LARGE**: BLOCKED_BY_CURRENT_S3_API (inputs greater than 96 bytes are not supported by the pinned fixed-buffer kernel).
 
 ## Native benchmark methodology
 
+When the required native toolchains are available, the suite uses:
+
 - **Measurement Scope**: `NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP`
 - **Process Startup Policy**: `AMORTIZED_NOT_SUBTRACTED`
-- **Internal Parse Loop**: Each executable runs an internal loop of $N = 1,000$ parses per process run.
-- **Anti-Dead-Code Elimination**: Executable exit status returns an observable modulo checksum `accum % 251`.
+- **Internal Parse Loop**: each executable runs an internal loop of 1,000 parses per process run in this artifact configuration.
 - **Clock**: `time.perf_counter_ns()` measuring real process wall time.
 - **Warmups**: 1
 - **Measured Repetitions**: 5
+
+No native timing claim is made from this checked-in run because the comparative binaries were unavailable.
 
 ## Native performance
 
@@ -71,29 +77,32 @@ RA_SEPARATE_SWITCH=UNAVAILABLE
 
 ## Relative performance
 
-- **Baseline Reference**: `C-GCC-O2` ($1.00\times$)
-- **S3-O1 vs S3-O0**: Native O1 optimizations (GVN and Register Allocation) yield a measurable reduction in nanoseconds per parse compared to unoptimized O0.
+Comparative native performance is **UNAVAILABLE** in this artifact. No statement about S3 O0, S3 O1, or C relative speed is supported by these rows.
 
 ## Throughput
 
-Factual throughput is computed directly from measured median nanoseconds per parse and input byte size ($10^9 / \text{ns\_per\_parse}$).
+Throughput is **UNAVAILABLE** in this artifact because no comparative native timing rows were produced.
 
 ## Native binary size
 
 | Variant | ELF File Size (bytes) | .text Section (bytes) |
 |---|---|---|
 
+No native binary-size comparison is available from this environment.
+
 ## Assembly observations
 
-- **OBSERVED**: S3 O0 generates 52307 instructions (73746 assembly lines) vs S3 O1 generating 51668 instructions (72831 assembly lines).
-- **OBSERVED**: S3 O1 contains 9604 stack-related operations vs 9677 in S3 O0.
-- **INFERENCE**: Stack load/store traffic in unoptimized S3 memory array indexing contributes significantly to execution latency.
+- **OBSERVED**: S3 O0 generates 52,307 instructions (73,746 assembly lines) vs S3 O1 generating 51,668 instructions (72,831 assembly lines).
+- **OBSERVED**: S3 O1 contains 9,604 stack-related operations vs 9,677 in S3 O0.
+- **NOT MEASURED HERE**: the runtime latency impact of those stack operations. They are an optimization candidate, not evidence of a measured bottleneck in this artifact.
 
 ## Compiler opportunities
 
-- **P1 (Stack Spill Overhead)**: S3 fixed array indexing generates explicit stack frame re-loads. Register caching of base array pointers is an addressable optimization target.
-- **P2 (Redundant Bounds Checks)**: Loop invariant induction variable hoisting can reduce conditional jump overhead in internal scanning loops.
-- **P3 (Code Size Optimization)**: Moving cold exception/failure paths out of line will improve instruction cache utilization.
+- **P1 (Stack traffic)**: investigate whether register caching of frequently reused array/frame addresses reduces generated stack traffic.
+- **P2 (Bounds checks)**: measure whether loop-invariant bounds-check elimination is legal and beneficial before promoting it as an optimization target.
+- **P3 (Code size)**: evaluate cold-path outlining against native code-size and runtime measurements.
+
+These are hypotheses derived from assembly characterization and require native measurements before performance claims are made.
 
 ## Limitations
 
@@ -111,4 +120,4 @@ RA_SEPARATE_SWITCH=UNAVAILABLE
 
 ## Conclusion
 
-The S3 jsmn benchmark kernel demonstrates 100% behavioral correctness against upstream C JSMN. Measured native performance under internal parse loop stress provides a clean, un-fabricated baseline for future compiler optimization campaigns.
+The pinned S3 JSMN kernel demonstrates behavioral correctness for the 16 differential cases covered by this run. This checked-in artifact does **not** establish a native performance baseline because its C and S3 timing rows are unavailable. Native performance conclusions must come from a run where the required comparative variants produce real timing data, such as the Linux CI benchmark artifacts.
