@@ -41,7 +41,7 @@ PowerShell:
 $env:S3_REPO = "C:\path\to\S3"
 ```
 
-The GitHub Actions workflow performs its own pinned S3 checkout and passes `S3_REPO` explicitly, so CI never depends on a developer workstation path.
+The GitHub Actions workflow performs a pinned S3 checkout under `./s3-compiler` and also passes that same location through `S3_REPO`, so CI never depends on a developer workstation path.
 
 ## Execution
 
