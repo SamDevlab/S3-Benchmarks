@@ -3,7 +3,7 @@
  * 
  * Supports:
  *  - Correctness verification mode (--correctness)
- *  - Internal parse loop mode (--loop <N>) with observable modulo accumulator exit status
+ *  - Internal parse loop mode (--loop <N>) with bounded observable status accumulator
  */
 
 #include <stdio.h>
@@ -19,7 +19,7 @@
 
 static int64_t compute_checksum(int status, jsmntok_t *tokens, int count) {
     if (status < 0) {
-        return (int64_t)(status < 0 ? -status : status);
+        return (int64_t)status;
     }
     int64_t sum = status;
     for (int i = 0; i < count; i++) {
@@ -98,16 +98,17 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // Native internal parse loop with anti-DCE observable exit status
-    int64_t accum = 0;
+    // Bounded internal parse loop matching S3 tryte domain anti-DCE accumulator
+    int accum = 0;
     for (long i = 0; i < iterations; i++) {
         jsmn_init(&parser);
         int r = jsmn_parse(&parser, buffer, len, tokens, MAX_TOKENS);
-        int token_count = (r >= 0) ? r : 0;
-        int64_t chk = compute_checksum(r, tokens, token_count);
-        accum = (accum + chk) % 251;
+        int val = (r >= 0) ? r : -r;
+        accum += val;
+        if (accum >= 200) {
+            accum -= 200;
+        }
     }
 
-    // Return observable anti-DCE modulo checksum as process exit status
-    return (int)(accum & 0xFF);
+    return accum;
 }
