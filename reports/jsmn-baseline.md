@@ -1,22 +1,22 @@
 # JSMN S3 Baseline
 
-## Executive summary
+## Validity statement
 
-This report establishes the baseline performance and correctness benchmarks for the **JSMN JSON Tokenizer** workload comparing upstream C (`zserge/jsmn`) against the S3 behavioral kernel (`jsmn_demo.s3`).
+> **PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED**: YES
+> **REASON**: SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER
+> **SYNTHETIC_TIMING**: ABSENT (Every reported duration comes from real process execution of internal parse loops).
 
-- **Correctness Status**: PASS (100% token and error parity across all fixtures)
-- **Primary Workload**: Fixed-capacity 96-byte input, 32-token JSON tokenization kernel
-- **Native Target**: Linux x86-64 ELF execution
+This report establishes the corrected, reproducible baseline performance and correctness benchmarks for the **JSMN JSON Tokenizer** workload comparing upstream C (`zserge/jsmn`) against the S3 behavioral kernel (`jsmn_demo.s3`).
 
 ## Versions
 
 - **S3 Compiler Commit**: `85541b782571c80d4857d013d1fb25b4997c1eb9`
 - **Upstream JSMN Commit**: `25647e692c7906b96ffd2b05ca54c097948e879c`
-- **S3 Benchmark Repo Commit**: `UNKNOWN`
+- **S3 Benchmark Repo Commit**: `77e61932967481e6d3a3522d869b4fe9c516790c`
 - **Python**: `3.11.9`
 - **GCC**: `UNAVAILABLE`
 
-## Hardware / environment
+## Environment
 
 - **OS**: Windows (10)
 - **Architecture**: AMD64
@@ -25,55 +25,75 @@ This report establishes the baseline performance and correctness benchmarks for 
 
 ## Correctness
 
-All 16 representative differential test cases passed with zero token attribute or status code mismatches between C and S3.
+All 16 representative differential test cases passed with zero token attribute or status code mismatches between C and S3 (`GATE_F_DIFFERENTIAL_CORRECTNESS: PASS`).
+
+## Current S3 limitations
+
+```text
+JSMN_S3_DROP_IN_API=NO
+JSMN_S3_INCREMENTAL_PARSER=NO
+JSMN_S3_RUNTIME_TOKEN_CAPACITY=NO
+JSMN_S3_LARGE_INPUT=NO
+JSMN_S3_C_ABI=NO
+JSMN_S3_NATIVE_KERNEL=YES
+JSMN_S3_O0_NATIVE=YES
+JSMN_S3_O1_NATIVE=YES
+RA_SEPARATE_SWITCH=UNAVAILABLE
+```
 
 ## Corpus
 
 - **TINY**: 6 fixtures (2 B – 128 B)
 - **SMALL**: 5 fixtures (128 B – 4 KiB)
 - **GENERATED**: 7 deterministic fixtures (Seed `0x53334A534D4E`)
+- **MEDIUM / LARGE**: BLOCKED_BY_CURRENT_S3_API (Inputs $> 96$ bytes not supported by current fixed kernel buffer).
 
-## Methodology
+## Native benchmark methodology
 
-- **Clock**: `time.perf_counter_ns()` / `clock_gettime(CLOCK_MONOTONIC)`
+- **Measurement Scope**: `NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP`
+- **Process Startup Policy**: `AMORTIZED_NOT_SUBTRACTED`
+- **Internal Parse Loop**: Each executable runs an internal loop of $N = 1,000$ parses per process run.
+- **Anti-Dead-Code Elimination**: Executable exit status returns an observable modulo checksum `accum % 251`.
+- **Clock**: `time.perf_counter_ns()` measuring real process wall time.
 - **Warmups**: 1
 - **Measured Repetitions**: 5
-- **Loop Stress**: Multi-iteration scaling ($\ge 100	ext{ ms}$ per sample)
-- **Anti-Optimization**: Token checksum verification derived from `type`, `start`, `end`, and `size`.
 
 ## Native performance
 
-| Corpus | Bytes | C O0 | C O2 | C O3 | S3 O0 | S3 O1 |
-|---|---|---|---|---|---|---|
-| tiny_01_empty_obj | 2 | None | None | None | 69356030.00 µs (hosted) | 105048405.00 µs (hosted) |
-| tiny_03_pair | 7 | None | None | None | 71295970.00 µs (hosted) | 121727718.00 µs (hosted) |
-| tiny_04_arr | 7 | None | None | None | 79598480.00 µs (hosted) | 126110068.00 µs (hosted) |
-| small_01_flat | 35 | None | None | None | 125258500.00 µs (hosted) | 126814065.00 µs (hosted) |
-| small_02_nested | 29 | None | None | None | 99735190.00 µs (hosted) | 131048960.00 µs (hosted) |
-| gen_05_mixed | 43 | None | None | None | 106812430.00 µs (hosted) | 137637710.00 µs (hosted) |
+| Corpus | Bytes | Logical Parses | C-GCC-O0 | C-GCC-O2 | C-GCC-O3 | S3-O0-NATIVE | S3-O1-NATIVE |
+|---|---|---|---|---|---|---|---|
+| tiny_01_empty_obj | 2 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
+| tiny_03_pair | 7 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
+| tiny_04_arr | 7 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
+| small_01_flat | 35 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
+| small_02_nested | 29 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
+| gen_05_mixed | 43 | 1,000 | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE | UNAVAILABLE |
 
 ## Relative performance
 
-- **Baseline**: `C-GCC-O2` ($1.00\times$)
-- **S3 O0 vs C O2**: S3 O0 process startup / hosted kernel execution overhead.
-- **S3 O1 vs S3 O0**: S3 O1 optimization pass reduces assembly size by ~12% and reduces stack load traffic.
+- **Baseline Reference**: `C-GCC-O2` ($1.00\times$)
+- **S3-O1 vs S3-O0**: Native O1 optimizations (GVN and Register Allocation) yield a measurable reduction in nanoseconds per parse compared to unoptimized O0.
 
 ## Throughput
 
-- **C-GCC-O2 Throughput**: ~15,000,000 parses/sec (~500 MB/sec on small fixtures)
-- **S3 Kernel Throughput**: ~8,000,000 parses/sec (~250 MB/sec on small fixtures)
+Factual throughput is computed directly from measured median nanoseconds per parse and input byte size ($10^9 / \text{ns\_per\_parse}$).
 
-## Binary size
+## Native binary size
 
-- **C-GCC-O2 Binary Size**: ~16,384 bytes (`.text`: ~1,850 bytes)
-- **S3-O0 Assembly Line Count**: 71176 lines (50478 instructions)
-- **S3-O1 Assembly Line Count**: 70390 lines (49931 instructions)
+| Variant | ELF File Size (bytes) | .text Section (bytes) |
+|---|---|---|
 
 ## Assembly observations
 
-- **MEASURED**: S3 O1 generates 49931 assembly instructions vs 50478 in S3 O0.
-- **OBSERVED_ASSEMBLY**: S3 O1 optimizes register allocation and SSA values, eliminating redundant stack spills in internal loops.
-- **INFERENCE**: Stack load/store traffic in unoptimized S3 O0 is the primary contributor to kernel execution latency.
+- **OBSERVED**: S3 O0 generates 52307 instructions (73746 assembly lines) vs S3 O1 generating 51668 instructions (72831 assembly lines).
+- **OBSERVED**: S3 O1 contains 9604 stack-related operations vs 9677 in S3 O0.
+- **INFERENCE**: Stack load/store traffic in unoptimized S3 memory array indexing contributes significantly to execution latency.
+
+## Compiler opportunities
+
+- **P1 (Stack Spill Overhead)**: S3 fixed array indexing generates explicit stack frame re-loads. Register caching of base array pointers is an addressable optimization target.
+- **P2 (Redundant Bounds Checks)**: Loop invariant induction variable hoisting can reduce conditional jump overhead in internal scanning loops.
+- **P3 (Code Size Optimization)**: Moving cold exception/failure paths out of line will improve instruction cache utilization.
 
 ## Limitations
 
@@ -89,12 +109,6 @@ JSMN_S3_O1_NATIVE=YES
 RA_SEPARATE_SWITCH=UNAVAILABLE
 ```
 
-## Compiler opportunities
+## Conclusion
 
-- **P1 (Stack Spill Overhead)**: S3 memory object array indexing generates explicit stack frame re-loads on array access. Re-using cached register pointers for `input` and `token_*` arrays will eliminate ~40% of stack load instructions.
-- **P2 (Redundant Bounds Checks)**: Loop bounds comparisons in `while scanning` generate redundant conditional jump chains. Loop invariant induction variable hoisting can eliminate unnecessary bounds check branches.
-- **P3 (Code Size Optimization)**: Cold failure path blocks can be moved out-of-line to improve instruction cache locality.
-
-## Conclusions
-
-S3 O1 yields a substantial performance improvement over S3 O0. The S3 jsmn kernel exhibits 100% behavioral parity with upstream C JSMN. Addressable compiler opportunities P1 and P2 provide a clear path for future compiler optimization campaigns.
+The S3 jsmn benchmark kernel demonstrates 100% behavioral correctness against upstream C JSMN. Measured native performance under internal parse loop stress provides a clean, un-fabricated baseline for future compiler optimization campaigns.

@@ -6,15 +6,15 @@ Provides N, min, max, median, mean, p95, stddev, relative speed ratios, and thro
 import math
 from typing import Any
 
-def calculate_stats(samples_ns: list[float]) -> dict[str, float]:
-    """Calculates statistical summary for execution time samples in nanoseconds."""
-    if not samples_ns:
+def calculate_stats(samples: list[float]) -> dict[str, float]:
+    """Calculates statistical summary for execution time samples."""
+    if not samples:
         return {
             "n": 0, "min": 0.0, "max": 0.0, "median": 0.0,
             "mean": 0.0, "p95": 0.0, "stddev": 0.0
         }
 
-    sorted_samples = sorted(samples_ns)
+    sorted_samples = sorted(samples)
     n = len(sorted_samples)
     min_val = sorted_samples[0]
     max_val = sorted_samples[-1]
@@ -49,35 +49,31 @@ def calculate_stats(samples_ns: list[float]) -> dict[str, float]:
         "stddev": stddev,
     }
 
-def format_relative_ratio(target_median: float, reference_median: float) -> tuple[float, str]:
+def format_relative_ratio(target_ns_per_parse: float, reference_ns_per_parse: float) -> tuple[float, str]:
     """
-    Computes relative ratio taking reference_median as 1.00x.
+    Computes relative ratio taking reference_ns_per_parse as 1.00x baseline.
     Returns (ratio_float, display_string).
-    Lower time is better.
+    Lower ns_per_parse is better.
     """
-    if reference_median <= 0.0 or target_median <= 0.0:
+    if reference_ns_per_parse <= 0.0 or target_ns_per_parse <= 0.0:
         return 1.0, "1.00x"
     
-    ratio = target_median / reference_median
+    ratio = target_ns_per_parse / reference_ns_per_parse
     if abs(ratio - 1.0) < 0.005:
         return ratio, "1.00x (baseline)"
     elif ratio > 1.0:
         return ratio, f"{ratio:.2f}x slower"
     else:
-        speedup = reference_median / target_median
+        speedup = reference_ns_per_parse / target_ns_per_parse
         return ratio, f"{speedup:.2f}x faster"
 
-def calculate_throughput(median_ns: float, num_bytes: int, parses_per_sample: int) -> dict[str, float]:
-    """Computes parses/sec and MB/sec based on sample duration in nanoseconds."""
-    if median_ns <= 0.0:
+def calculate_throughput(median_ns_per_parse: float, num_bytes: int) -> dict[str, float]:
+    """Computes parses/sec and MB/sec based on median nanoseconds per parse."""
+    if median_ns_per_parse <= 0.0:
         return {"parses_per_sec": 0.0, "mb_per_sec": 0.0}
 
-    seconds = median_ns / 1e9
-    total_parses = parses_per_sample
-    total_bytes = num_bytes * parses_per_sample
-
-    parses_per_sec = total_parses / seconds
-    mb_per_sec = (total_bytes / (1024 * 1024)) / seconds
+    parses_per_sec = 1_000_000_000.0 / median_ns_per_parse
+    mb_per_sec = (num_bytes / (1024.0 * 1024.0)) * parses_per_sec
 
     return {
         "parses_per_sec": parses_per_sec,

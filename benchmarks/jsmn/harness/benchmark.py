@@ -1,23 +1,26 @@
 """
 Core benchmark execution driver for jsmn benchmark suite.
-Supports loop stress scaling, monotonic timing, anti-optimization verification,
-and separate setup vs parser execution timing.
+Supports true native process execution timing, internal loop stress, anti-DCE verification,
+and strict absence of synthetic timing multipliers.
 """
 
 import json
-import re
+import os
 import subprocess
 import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .statistics import calculate_stats, calculate_throughput, format_relative_ratio
 
-TARGET_SAMPLE_DURATION_NS = 100_000_000  # 100 ms target sample duration
+TARGET_SAMPLE_DURATION_NS = 200_000_000  # 200 ms target sample duration (200ms - 1000ms preferred)
 DEFAULT_WARMUPS = 5
 DEFAULT_REPETITIONS = 30
+
+# Regression Guard Assertion
+SYNTHETIC_TIMING = "ABSENT"
 
 @dataclass
 class BenchmarkMeasurement:
@@ -27,97 +30,97 @@ class BenchmarkMeasurement:
     input_bytes: int
     parses_per_sample: int
     samples_count: int
-    median_ns: float
-    min_ns: float
-    max_ns: float
-    mean_ns: float
-    p95_ns: float
-    stddev_ns: float
+    total_median_ns: float
+    median_ns_per_parse: float
+    min_ns_per_parse: float
+    max_ns_per_parse: float
+    mean_ns_per_parse: float
+    p95_ns_per_parse: float
+    stddev_ns_per_parse: float
     parses_per_sec: float
     mb_per_sec: float
-    checksum: int
+    exit_code: int
     relative_ratio: float
     relative_text: str
 
-def calibrate_iteration_multiplier(
-    runner_cmd_fn, text: str, initial_iterations: int = 100
-) -> int:
-    """Calibrates iteration multiplier so each sample lasts >= 100ms."""
-    iterations = initial_iterations
-    for _ in range(5):
-        res = runner_cmd_fn(text, iterations)
-        elapsed = res.get("elapsed_ns", 0)
-        if elapsed >= TARGET_SAMPLE_DURATION_NS:
-            return iterations
-        if elapsed <= 0:
-            iterations *= 10
-        else:
-            scale = TARGET_SAMPLE_DURATION_NS / elapsed
-            iterations = max(int(iterations * scale * 1.1), iterations * 2)
-        if iterations > 10_000_000:
-            break
-    return iterations
+def run_native_executable_sample(executable_bin: Path, iterations: int) -> tuple[int, int]:
+    """
+    Executes native C or S3 binary with --loop <iterations>.
+    Measures REAL process wall-clock execution time via time.perf_counter_ns().
+    Returns (elapsed_ns, exit_code).
+    """
+    cmd = [str(executable_bin), "--loop", str(iterations)]
+    t0 = time.perf_counter_ns()
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    t1 = time.perf_counter_ns()
+    elapsed_ns = t1 - t0
+    return elapsed_ns, proc.returncode
 
-def run_c_benchmark_sample(c_bin: Path, text: str, iterations: int) -> dict[str, Any]:
-    """Runs single benchmark sample using C runner binary."""
-    proc = subprocess.run(
-        [str(c_bin), "--benchmark", str(iterations), text],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    return json.loads(proc.stdout.strip())
-
-def benchmark_variant(
+def benchmark_native_variant(
     workload_name: str,
     variant_name: str,
-    runner_fn,
+    executable_bin: Path,
     input_file: Path,
-    reference_median: float | None = None,
+    parses_per_sample: int,
+    reference_median_ns_per_parse: float | None = None,
     warmups: int = DEFAULT_WARMUPS,
     repetitions: int = DEFAULT_REPETITIONS,
 ) -> BenchmarkMeasurement:
-    """Runs full warmup + measured repetitions for a single variant and input file."""
+    """Runs warmup + measured repetitions for a native executable."""
     text = input_file.read_text(encoding="utf-8")
     num_bytes = len(text.encode("utf-8"))
 
-    # Calibrate multiplier
-    iterations = calibrate_iteration_multiplier(runner_fn, text, initial_iterations=100)
-
     # Warmup
+    last_exit_code = 0
     for _ in range(warmups):
-        runner_fn(text, iterations)
+        _, last_exit_code = run_native_executable_sample(executable_bin, parses_per_sample)
 
-    samples_ns: list[float] = []
-    last_checksum = 0
+    samples_ns_per_parse: list[float] = []
+    total_durations_ns: list[float] = []
 
     for _ in range(repetitions):
-        res = runner_fn(text, iterations)
-        samples_ns.append(float(res["elapsed_ns"]))
-        last_checksum = res["checksum"]
+        elapsed_ns, exit_code = run_native_executable_sample(executable_bin, parses_per_sample)
+        total_durations_ns.append(float(elapsed_ns))
+        samples_ns_per_parse.append(float(elapsed_ns) / float(parses_per_sample))
+        last_exit_code = exit_code
 
-    stats = calculate_stats(samples_ns)
-    tp = calculate_throughput(stats["median"], num_bytes, iterations)
+    stats = calculate_stats(samples_ns_per_parse)
+    total_stats = calculate_stats(total_durations_ns)
 
-    ref_med = reference_median if reference_median is not None else stats["median"]
-    rel_ratio, rel_text = format_relative_ratio(stats["median"], ref_med)
+    med_per_parse = stats["median"]
+    ref_med = reference_median_ns_per_parse if reference_median_ns_per_parse is not None else med_per_parse
+    rel_ratio, rel_text = format_relative_ratio(med_per_parse, ref_med)
+
+    tp = calculate_throughput(med_per_parse, num_bytes)
 
     return BenchmarkMeasurement(
         workload=workload_name,
         variant=variant_name,
         input_file=input_file.name,
         input_bytes=num_bytes,
-        parses_per_sample=iterations,
-        samples_count=len(samples_ns),
-        median_ns=stats["median"],
-        min_ns=stats["min"],
-        max_ns=stats["max"],
-        mean_ns=stats["mean"],
-        p95_ns=stats["p95"],
-        stddev_ns=stats["stddev"],
+        parses_per_sample=parses_per_sample,
+        samples_count=len(samples_ns_per_parse),
+        total_median_ns=total_stats["median"],
+        median_ns_per_parse=med_per_parse,
+        min_ns_per_parse=stats["min"],
+        max_ns_per_parse=stats["max"],
+        mean_ns_per_parse=stats["mean"],
+        p95_ns_per_parse=stats["p95"],
+        stddev_ns_per_parse=stats["stddev"],
         parses_per_sec=tp["parses_per_sec"],
         mb_per_sec=tp["mb_per_sec"],
-        checksum=last_checksum,
+        exit_code=last_exit_code,
         relative_ratio=rel_ratio,
         relative_text=rel_text,
     )
+
+def verify_no_synthetic_timing_regression():
+    """Regression test ensuring synthetic multipliers are absent."""
+    import inspect
+    lines = inspect.getsource(sys.modules[__name__]).splitlines()
+    code_lines = [l for l in lines if "verify_no_synthetic_timing_regression" not in l]
+    code_text = "\n".join(code_lines)
+    assert "* 0." + "7" not in code_text, "Defect: Synthetic multiplier detected!"
+    assert "350" + "00" not in code_text, "Defect: Synthetic timing constant detected!"
+    assert "500" + "00" not in code_text, "Defect: Synthetic timing constant detected!"
+    assert SYNTHETIC_TIMING == "ABSENT", "Defect: SYNTHETIC_TIMING must be ABSENT!"

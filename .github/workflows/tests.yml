@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  benchmark-verification:
+  native-benchmark-verification:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,12 +30,13 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -e "./s3-compiler[dev]"
 
-      - name: Validate Native Toolchain Tools
+      - name: Validate Native Linux Toolchain
         run: |
           uname -m
           gcc --version
           as --version
           ld --version
+          size --version
 
       - name: Validate Corpus Determinism
         run: |
@@ -48,14 +49,17 @@ jobs:
         run: |
           python tools/runner.py --verify-only
 
-      - name: Run Native S3 Benchmark Smoke Test
+      - name: Run Native S3 & C Full Benchmark Suite
         env:
           S3_REPO: ${{ github.workspace }}/s3-compiler
           PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-compiler
         run: |
-          python tools/runner.py --smoke --output-json reports/jsmn-baseline.json --output-markdown reports/jsmn-baseline.md
+          python tools/runner.py --full --output-json reports/jsmn-baseline.json --output-markdown reports/jsmn-baseline.md
 
-      - name: Validate Generated Reports Exist
+      - name: Validate Generated Reports and Assert Invariants
         run: |
           test -f reports/jsmn-baseline.json
           test -f reports/jsmn-baseline.md
+          grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
+          grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
+          python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"

@@ -1,5 +1,10 @@
 {
   "benchmark": "jsmn",
+  "validity_statement": {
+    "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED": "YES",
+    "REASON": "SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER",
+    "SYNTHETIC_TIMING": "ABSENT"
+  },
   "environment": {
     "os": "Windows",
     "os_release": "10",
@@ -12,13 +17,20 @@
     "clang_version": "UNAVAILABLE",
     "as_version": "UNAVAILABLE",
     "ld_version": "UNAVAILABLE",
-    "benchmark_repo_commit": "UNKNOWN",
+    "benchmark_repo_commit": "77e61932967481e6d3a3522d869b4fe9c516790c",
     "jsmn_upstream_commit": "25647e692c7906b96ffd2b05ca54c097948e879c",
     "s3_compiler_commit": "85541b782571c80d4857d013d1fb25b4997c1eb9"
   },
   "correctness": {
     "status": "PASS",
-    "test_cases_count": 16
+    "fixtures_verified": 16
+  },
+  "measurement_scope": {
+    "SCOPE": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
+    "PROCESS_STARTUP": "AMORTIZED_NOT_SUBTRACTED",
+    "PARSES_PER_SAMPLE": 1000,
+    "WARMUPS": 1,
+    "REPETITIONS": 5
   },
   "limits": {
     "JSMN_S3_DROP_IN_API": "NO",
@@ -31,31 +43,100 @@
     "JSMN_S3_O1_NATIVE": "YES",
     "RA_SEPARATE_SWITCH": "UNAVAILABLE"
   },
+  "binary_sizes_bytes": {},
   "assembly_analysis": {
     "S3-O0": {
       "variant": "S3-O0",
-      "line_count": 71176,
-      "instruction_count": 50478,
-      "call_count": 40,
-      "load_store_count": 23996,
-      "stack_ops_count": 9341,
-      "branch_count": 13060,
-      "cond_branch_count": 7082,
+      "line_count": 73746,
+      "instruction_count": 52307,
+      "call_count": 41,
+      "load_store_count": 24847,
+      "stack_ops_count": 9677,
+      "branch_count": 13542,
+      "cond_branch_count": 7332,
       "binary_size_bytes": 0,
       "text_section_bytes": 0
     },
     "S3-O1": {
       "variant": "S3-O1",
-      "line_count": 70390,
-      "instruction_count": 49931,
-      "call_count": 40,
-      "load_store_count": 23793,
-      "stack_ops_count": 9283,
-      "branch_count": 12884,
-      "cond_branch_count": 7009,
+      "line_count": 72831,
+      "instruction_count": 51668,
+      "call_count": 41,
+      "load_store_count": 24603,
+      "stack_ops_count": 9604,
+      "branch_count": 13339,
+      "cond_branch_count": 7246,
       "binary_size_bytes": 0,
       "text_section_bytes": 0
     }
   },
-  "results": []
+  "results": [],
+  "comparison_table": [
+    {
+      "corpus": "tiny_01_empty_obj",
+      "bytes": 2,
+      "sha256": "44136fa355b3",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    },
+    {
+      "corpus": "tiny_03_pair",
+      "bytes": 7,
+      "sha256": "015abd7f5cc5",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    },
+    {
+      "corpus": "tiny_04_arr",
+      "bytes": 7,
+      "sha256": "a615eeaee21d",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    },
+    {
+      "corpus": "small_01_flat",
+      "bytes": 35,
+      "sha256": "5b9988d08bc1",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    },
+    {
+      "corpus": "small_02_nested",
+      "bytes": 29,
+      "sha256": "1401cd641f7d",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    },
+    {
+      "corpus": "gen_05_mixed",
+      "bytes": 43,
+      "sha256": "2c7f54870cdd",
+      "loop_parses": 1000,
+      "c_gcc_o0": "UNAVAILABLE",
+      "c_gcc_o2": "UNAVAILABLE",
+      "c_gcc_o3": "UNAVAILABLE",
+      "s3_o0": "UNAVAILABLE",
+      "s3_o1": "UNAVAILABLE"
+    }
+  ]
 }

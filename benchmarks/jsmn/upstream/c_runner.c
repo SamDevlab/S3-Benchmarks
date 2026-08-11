@@ -3,14 +3,12 @@
  * 
  * Supports:
  *  - Correctness verification mode (--correctness)
- *  - Multi-iteration benchmark loop stress mode (--benchmark)
- *  - Anti-optimization token checksum computation
+ *  - Internal parse loop mode (--loop <N>) with observable modulo accumulator exit status
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 #include <stdint.h>
 
 #define JSMN_PARENT_LINKS
@@ -19,19 +17,9 @@
 #define MAX_TOKENS 32
 #define MAX_INPUT_LEN 4096
 
-static uint64_t get_time_ns(void) {
-#if defined(CLOCK_MONOTONIC)
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return (uint64_t)ts.tv_sec * 1000000000ULL + (uint64_t)ts.tv_nsec;
-#else
-    return (uint64_t)clock() * (1000000000ULL / CLOCKS_PER_SEC);
-#endif
-}
-
 static int64_t compute_checksum(int status, jsmntok_t *tokens, int count) {
     if (status < 0) {
-        return (int64_t)status;
+        return (int64_t)(status < 0 ? -status : status);
     }
     int64_t sum = status;
     for (int i = 0; i < count; i++) {
@@ -45,20 +33,18 @@ static int64_t compute_checksum(int status, jsmntok_t *tokens, int count) {
 
 int main(int argc, char **argv) {
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s [--correctness | --benchmark <iterations>] [json_string | --file <path>]\n", argv[0]);
+        fprintf(stderr, "Usage: %s [--correctness | --loop <iterations>] [json_string | --file <path>]\n", argv[0]);
         return 1;
     }
 
     int mode_correctness = 0;
-    int mode_benchmark = 0;
     long iterations = 1;
     int arg_idx = 1;
 
     if (strcmp(argv[arg_idx], "--correctness") == 0) {
         mode_correctness = 1;
         arg_idx++;
-    } else if (strcmp(argv[arg_idx], "--benchmark") == 0) {
-        mode_benchmark = 1;
+    } else if (strcmp(argv[arg_idx], "--loop") == 0) {
         arg_idx++;
         if (arg_idx < argc) {
             iterations = atol(argv[arg_idx]);
@@ -112,30 +98,16 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    // Benchmark mode
-    // Warmup
-    for (int w = 0; w < 5; w++) {
-        jsmn_init(&parser);
-        jsmn_parse(&parser, buffer, len, tokens, MAX_TOKENS);
-    }
-
-    uint64_t start_ns = get_time_ns();
-    int64_t total_checksum = 0;
-    int last_status = 0;
-
+    // Native internal parse loop with anti-DCE observable exit status
+    int64_t accum = 0;
     for (long i = 0; i < iterations; i++) {
         jsmn_init(&parser);
         int r = jsmn_parse(&parser, buffer, len, tokens, MAX_TOKENS);
         int token_count = (r >= 0) ? r : 0;
-        total_checksum += compute_checksum(r, tokens, token_count);
-        last_status = r;
+        int64_t chk = compute_checksum(r, tokens, token_count);
+        accum = (accum + chk) % 251;
     }
 
-    uint64_t end_ns = get_time_ns();
-    uint64_t elapsed_ns = end_ns - start_ns;
-
-    printf("{\"status\":%d,\"iterations\":%ld,\"elapsed_ns\":%llu,\"checksum\":%lld,\"input_bytes\":%zu}\n",
-           last_status, iterations, (unsigned long long)elapsed_ns, (long long)total_checksum, len);
-
-    return 0;
+    // Return observable anti-DCE modulo checksum as process exit status
+    return (int)(accum & 0xFF);
 }
