@@ -18,12 +18,39 @@ import time
 from pathlib import Path
 from typing import Any
 
-# Ensure project and S3 compiler are in PYTHONPATH
+# Resolve the S3 compiler checkout reproducibly. CI checks it out at ./s3-compiler;
+# local runs may override that location explicitly with S3_REPO.
 BASE_DIR = Path(__file__).resolve().parent.parent
-S3_REPO_DIR = Path(os.environ.get("S3_REPO", r"C:\Users\samue\Downloads\S3\S3-language")).resolve()
+DEFAULT_S3_CHECKOUT = BASE_DIR / "s3-compiler"
+
+
+def resolve_s3_repo() -> Path:
+    configured = os.environ.get("S3_REPO")
+    candidate = Path(configured).expanduser() if configured else DEFAULT_S3_CHECKOUT
+    candidate = candidate.resolve()
+
+    if not candidate.is_dir():
+        source = "S3_REPO" if configured else "default ./s3-compiler checkout"
+        raise SystemExit(
+            f"S3 compiler checkout not found at {candidate} ({source}). "
+            "Set S3_REPO to the root of a SamDevlab/S3 checkout or clone the "
+            "compiler into ./s3-compiler."
+        )
+
+    expected_package = candidate / "bootstrap" / "s3"
+    if not expected_package.is_dir():
+        raise SystemExit(
+            f"Invalid S3 checkout at {candidate}: expected {expected_package}. "
+            "S3_REPO must point to the S3 repository root."
+        )
+
+    return candidate
+
+
+S3_REPO_DIR = resolve_s3_repo()
 
 sys.path.insert(0, str(BASE_DIR))
-if S3_REPO_DIR.exists() and str(S3_REPO_DIR) not in sys.path:
+if str(S3_REPO_DIR) not in sys.path:
     sys.path.append(str(S3_REPO_DIR))
 
 
