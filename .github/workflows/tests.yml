@@ -13,6 +13,9 @@ jobs:
       - name: Check out benchmark repository
         uses: actions/checkout@v4
 
+      - name: Check checked-in report integrity
+        run: python tools/check_report_integrity.py
+
       - name: Check out S3 compiler repository
         uses: actions/checkout@v4
         with:
@@ -63,6 +66,7 @@ jobs:
           grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
           grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
           python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"
+          python tools/check_report_integrity.py
 
       - name: Upload Native Baseline Report Artifacts
         uses: actions/upload-artifact@v4
