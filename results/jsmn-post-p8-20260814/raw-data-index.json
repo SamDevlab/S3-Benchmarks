@@ -1,0 +1,24 @@
+{
+  "post_p8": {
+    "full_report": "post-p8/full.json",
+    "verify_log": "post-p8/verify.log",
+    "smoke_report": "post-p8/smoke.json",
+    "full_log": "post-p8/full.log",
+    "structural_probe": "post-p8/structural.json"
+  },
+  "pre_p8": {
+    "full_report": "pre-p8/full.json",
+    "verify_log": "pre-p8/verify.log",
+    "smoke_report": "pre-p8/smoke.json",
+    "full_log": "pre-p8/full.log",
+    "structural_probe": "pre-p8/structural.json"
+  },
+  "historical": {
+    "full_report": "historical/full.json",
+    "verify_log": "historical/verify.log",
+    "smoke_report": "historical/smoke.json",
+    "full_log": "historical/full.log"
+  },
+  "raw_sample_note": "The frozen harness persists machine-readable per-variant aggregate sample statistics (including min, median, max, mean, p95, stddev and sample count) in each full.json. It does not persist every individual timing observation; no individual samples are fabricated here.",
+  "source_of_truth": "full.json files plus exact command logs"
+}

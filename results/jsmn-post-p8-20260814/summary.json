@@ -1,0 +1,70 @@
+{
+  "campaign": "POST_P8_EXTERNAL_BENCHMARK_REBASE_V1",
+  "benchmark_repo_head_at_measurement": "34bb2c7fe743176fed47116d8ce09d0785d2170e",
+  "s3_historical_sha": "85541b782571c80d4857d013d1fb25b4997c1eb9",
+  "s3_pre_p8_sha": "631b51e70562a33183ac14d0be5bbe2ddd140779",
+  "s3_post_p8_sha": "5dd6844607ba3a2d5830ed836fb9026eed86d0fb",
+  "upstream_jsmn_sha": "25647e692c7906b96ffd2b05ca54c097948e879c",
+  "correctness": {
+    "post_p8": "PASS",
+    "pre_p8": "PASS",
+    "historical": "PASS",
+    "fixtures": 6,
+    "token_contract": "status, token count, token attributes, deterministic checksum"
+  },
+  "full_geomean_ns_per_parse": {
+    "historical_s3_o1": 6357.408582723511,
+    "pre_p8_s3_o1": 7091.481346091949,
+    "post_p8_s3_o1": 6842.710068361231,
+    "pre_to_post_delta_percent": -3.5080297837603913
+  },
+  "s3_o1_vs_c_o2_geomean": {
+    "historical": 48.8202610254654,
+    "pre_p8": 41.54478809000731,
+    "post_p8": 39.87592662223254,
+    "pre_to_post_ratio_change_percent": -4.017017644088494
+  },
+  "external_c_gap": {
+    "post_p8_best_fixture_ratio": 26.308777739740258,
+    "post_p8_worst_fixture_ratio": 66.75012577367399,
+    "classification": "LARGE_EXTERNAL_GAP_WITH_MODEST_IMPROVEMENT"
+  },
+  "p8_external_effect": {
+    "classification": "IMPROVED",
+    "per_fixture_all_s3_o1_deltas_negative": true,
+    "geomean_runtime_delta_percent": -3.5080297837603913,
+    "geomean_ratio_delta_percent": -4.017017644088494
+  },
+  "structural_probe_scope": "six full-benchmark fixtures, O0 and O1 assembly, no timing",
+  "structural_pre_p8": {
+    "register_init_check_pattern_count": 23172,
+    "static_instructions": 587952,
+    "branches": 151992,
+    "loads_stores": 295500,
+    "stack_ops": 88794
+  },
+  "structural_post_p8": {
+    "register_init_check_pattern_count": 22812,
+    "static_instructions": 586152,
+    "branches": 151272,
+    "loads_stores": 294780,
+    "stack_ops": 88434
+  },
+  "structural_delta": {
+    "register_init_check_pattern_count": -360,
+    "static_instructions": -1800,
+    "branches": -720,
+    "loads_stores": -720,
+    "stack_ops": -360
+  },
+  "native_binary_sizes": {
+    "s3_pre_p8_o1": {"file_bytes": 1141256, "text_bytes": 1133647},
+    "s3_post_p8_o1": {"file_bytes": 1137144, "text_bytes": 1128655},
+    "delta": {"file_bytes": -4112, "text_bytes": -4992},
+    "c_o2": {"file_bytes": 16224, "text_bytes": 3521}
+  },
+  "p9_external_input_ready": true,
+  "p9_selection": "NOT_SET",
+  "github_actions_enabled": false,
+  "compiler_production_changed": false
+}
