@@ -1,0 +1,73 @@
+{
+  "benchmark": "jsmn",
+  "campaign": "POST_P8_EXTERNAL_BENCHMARK_REBASE_V1",
+  "status": "COMPLETE_LOCAL_VALIDATION",
+  "benchmark_harness_head": "34bb2c7fe743176fed47116d8ce09d0785d2170e",
+  "s3_historical_sha": "85541b782571c80d4857d013d1fb25b4997c1eb9",
+  "s3_pre_p8_sha": "631b51e70562a33183ac14d0be5bbe2ddd140779",
+  "s3_post_p8_sha": "5dd6844607ba3a2d5830ed836fb9026eed86d0fb",
+  "upstream_jsmn_sha": "25647e692c7906b96ffd2b05ca54c097948e879c",
+  "benchmark_correctness": "PASS",
+  "post_p8_differential_correctness": "PASS",
+  "pre_p8_differential_correctness": "PASS",
+  "historical_differential_correctness": "PASS",
+  "fixtures_total": 6,
+  "environment": {
+    "host": "s3-vm",
+    "os": "Linux x86_64",
+    "python": "3.14.4",
+    "gcc": "gcc 15.2.0",
+    "logical_cpus": 3,
+    "clock": "time.perf_counter_ns"
+  },
+  "methodology": {
+    "scope": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
+    "process_start_included": true,
+    "startup_subtracted": false,
+    "loop_parses": 10000,
+    "warmups": 5,
+    "repetitions": 30,
+    "same_harness_for_all_compilers": true,
+    "same_host_for_all_compilers": true
+  },
+  "performance": {
+    "historical_s3_o1_ns_per_parse_geomean": 6357.408582723511,
+    "pre_p8_s3_o1_ns_per_parse_geomean": 7091.481346091949,
+    "post_p8_s3_o1_ns_per_parse_geomean": 6842.710068361231,
+    "pre_p8_o1_vs_c_o2_geomean": 41.54478809000731,
+    "post_p8_o1_vs_c_o2_geomean": 39.87592662223254,
+    "p8_external_runtime_delta_percent": -3.5080297837603913,
+    "p8_external_ratio_delta_percent": -4.017017644088494,
+    "p8_external_runtime_result": "IMPROVED_MODEST",
+    "current_external_gap_class": "LARGE_EXTERNAL_GAP_WITH_MODEST_IMPROVEMENT"
+  },
+  "structural": {
+    "pre_p8_init_checks": 23172,
+    "post_p8_init_checks": 22812,
+    "pre_p8_static_instructions": 587952,
+    "post_p8_static_instructions": 586152,
+    "pre_p8_branches": 151992,
+    "post_p8_branches": 151272,
+    "pre_p8_loads_stores": 295500,
+    "post_p8_loads_stores": 294780,
+    "pre_p8_stack_ops": 88794,
+    "post_p8_stack_ops": 88434
+  },
+  "p9_input": {
+    "ready": true,
+    "selection": "NOT_SET",
+    "candidate_1": "broader initialization-state and memory-state materialization reduction",
+    "candidate_2": "S3 fixed-array/frame traffic and representation expansion",
+    "candidate_3": "per-parse fixed-cost expansion where O1 remains near O0",
+    "confidence_note": "Candidates 2 and 3 are hypotheses, not root-cause claims; dynamic causal attribution is not measured here."
+  },
+  "actions": {
+    "s3_enabled": false,
+    "benchmark_enabled": false,
+    "remote_ci_claimed": false,
+    "execution": "LOCAL_ONLY"
+  },
+  "compiler_production_changed": false,
+  "p9_started": false,
+  "shutdown": "OUT_OF_PROJECT_SCOPE"
+}

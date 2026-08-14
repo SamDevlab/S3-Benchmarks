@@ -1,0 +1,24 @@
+/home/vboxuser/s3-benchmarks-p8/tools/runner.py:618: SyntaxWarning: "\_" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\_"? A raw string is also an option.
+  """
+GATE_F_DIFFERENTIAL_CORRECTNESS: PASS (100% token and error parity verified)
+Wrote JSON report to /home/vboxuser/post_p8_full.json
+Wrote Markdown report to /home/vboxuser/post_p8_full.md
+
+--- BENCHMARK SUMMARY ---
+JSMN_BENCHMARK_HEAD=34bb2c7fe743176fed47116d8ce09d0785d2170e
+C_O2_NS_PER_PARSE=180.94
+S3_O0_NS_PER_PARSE=10318.26
+S3_O1_NS_PER_PARSE=10316.13
+GEOMEAN_S3_O0_VS_C_O2=40.32x
+GEOMEAN_S3_O1_VS_C_O2=39.88x
+GEOMEAN_S3_O1_VS_S3_O0=0.99x
+S3_O0_VS_C_O2=57.03x slower
+S3_O1_VS_C_O2=57.02x slower
+S3_O1_VS_S3_O0=1.00x (baseline)
+C_O2_ELF_BYTES=16224
+C_O2_TEXT_BYTES=3521
+S3_O1_ELF_BYTES=1137144
+S3_O1_TEXT_BYTES=1128655
+FIXTURES_EXPECTED=6
+FIXTURES_COMPLETED=6
+FIXTURES_BLOCKED=0

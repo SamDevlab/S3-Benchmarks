@@ -1,0 +1,219 @@
+{
+  "compiler": "/home/vboxuser/s3-compiler-p8",
+  "fixtures": [
+    "tiny_04_arr",
+    "tiny_03_pair",
+    "tiny_02_empty_arr",
+    "tiny_05_string",
+    "tiny_06_bool_null",
+    "tiny_01_empty_obj"
+  ],
+  "loop_parses": 10000,
+  "pattern": "cmp byte ptr [rbp...], 0",
+  "rows": [
+    {
+      "fixture": "tiny_04_arr",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_04_arr-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_04_arr",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_04_arr-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_03_pair",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_03_pair-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_03_pair",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_03_pair-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_02_empty_arr",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_02_empty_arr-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_02_empty_arr",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_02_empty_arr-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_05_string",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_05_string-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_05_string",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_05_string-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_06_bool_null",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_06_bool_null-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_06_bool_null",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_06_bool_null-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_01_empty_obj",
+      "optimization": "O0",
+      "register_init_check_pattern_count": 1909,
+      "assembly_metrics": {
+        "variant": "tiny_01_empty_obj-O0",
+        "line_count": 70467,
+        "instruction_count": 49188,
+        "call_count": 41,
+        "load_store_count": 24698,
+        "stack_ops_count": 7394,
+        "branch_count": 12714,
+        "cond_branch_count": 6538,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    },
+    {
+      "fixture": "tiny_01_empty_obj",
+      "optimization": "O1",
+      "register_init_check_pattern_count": 1893,
+      "assembly_metrics": {
+        "variant": "tiny_01_empty_obj-O1",
+        "line_count": 69489,
+        "instruction_count": 48504,
+        "call_count": 41,
+        "load_store_count": 24432,
+        "stack_ops_count": 7345,
+        "branch_count": 12498,
+        "cond_branch_count": 6445,
+        "binary_size_bytes": 0,
+        "text_section_bytes": 0
+      }
+    }
+  ]
+}

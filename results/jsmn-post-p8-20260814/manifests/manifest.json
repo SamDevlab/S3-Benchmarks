@@ -1,0 +1,48 @@
+{
+  "benchmark_repo_start": "34bb2c7fe743176fed47116d8ce09d0785d2170e",
+  "benchmark_harness_head": "34bb2c7fe743176fed47116d8ce09d0785d2170e",
+  "s3_historical_sha": "85541b782571c80d4857d013d1fb25b4997c1eb9",
+  "s3_pre_p8_sha": "631b51e70562a33183ac14d0be5bbe2ddd140779",
+  "s3_post_p8_sha": "5dd6844607ba3a2d5830ed836fb9026eed86d0fb",
+  "upstream_jsmn_sha": "25647e692c7906b96ffd2b05ca54c097948e879c",
+  "environment": {
+    "host": "s3-vm",
+    "os": "Linux x86_64",
+    "python": "3.14.4",
+    "gcc": "gcc 15.2.0",
+    "logical_cpus": 3
+  },
+  "commands": {
+    "verify": "S3_REPO=<compiler-sha> PYTHONPATH=<benchmark>:<compiler> python tools/runner.py --verify-only",
+    "smoke": "S3_REPO=<compiler-sha> PYTHONPATH=<benchmark>:<compiler> python tools/runner.py --smoke",
+    "full": "S3_REPO=<compiler-sha> PYTHONPATH=<benchmark>:<compiler> python tools/runner.py --full --output-json <result>.json --output-markdown <result>.md"
+  },
+  "timing": {
+    "scope": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
+    "process_start_included": true,
+    "startup_subtracted": false,
+    "loop_parses": 10000,
+    "warmups": 5,
+    "repetitions": 30,
+    "clock": "time.perf_counter_ns",
+    "sample_count_per_variant_fixture": 30
+  },
+  "corpus": {
+    "fixtures": [
+      "tiny_04_arr",
+      "tiny_03_pair",
+      "tiny_02_empty_arr",
+      "tiny_05_string",
+      "tiny_06_bool_null",
+      "tiny_01_empty_obj"
+    ],
+    "source": "benchmarks/jsmn/corpus",
+    "corpus_hashes_are_in_full_json_reports": true
+  },
+  "actions": {
+    "s3_enabled": false,
+    "benchmark_enabled": false,
+    "remote_ci_claimed": false
+  },
+  "compiler_production_changed": false
+}
