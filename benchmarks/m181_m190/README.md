@@ -27,6 +27,7 @@ Tokio, rustls, Cargo, or uv executable reference is vendored or assumed.
 |---|---|---|
 | async task | value, poll count, suspension/completion states | eligible for local characterization |
 | await chain | final value and compiled async function count | eligible for local characterization |
+| channels | FIFO order, count, checksum, and close state at capacities 1/8/64 | eligible for local characterization |
 | executor | sorted values, one poll/task, empty task set | eligible for local characterization |
 | process I/O | stdout, stderr, exit code | eligible for local characterization |
 | HTTP loopback | status, body, body digest | eligible for local characterization |
@@ -39,4 +40,3 @@ Tokio, rustls, Cargo, or uv executable reference is vendored or assumed.
 No result is comparative performance evidence until a matching reference
 toolchain and an equivalent workload are pinned. Public network services are
 never correctness fixtures.
-

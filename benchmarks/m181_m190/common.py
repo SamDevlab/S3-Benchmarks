@@ -25,6 +25,7 @@ CAMPAIGN = "m181-m190"
 EXECUTABLE_CHECKS = (
     "async_task",
     "await_chain",
+    "channels",
     "executor",
     "process_io",
     "http_loopback",
@@ -129,6 +130,63 @@ def _executor() -> tuple[object, object]:
     finally:
         executor.close()
     expected = {"values": [2, 4, 6], "polls": 3, "tasks_after": 0}
+    return observed, expected
+
+
+def _channels() -> tuple[object, object]:
+    s3_root()
+    from bootstrap.s3.async_channels import AsyncChannel, ChannelErrorCode, OwnedMessage
+
+    observed = []
+    for capacity in (1, 8, 64):
+        channel = AsyncChannel[int](capacity=capacity)
+        sender, receiver = channel.split()
+        total = capacity * 2 + 3
+        received: list[int] = []
+        next_value = 0
+        while next_value < total:
+            message = OwnedMessage(next_value)
+            result = sender.send(message)
+            if result.is_ok:
+                next_value += 1
+                continue
+            error = result.error_or(None)
+            if error is None or error.code is not ChannelErrorCode.FULL:
+                raise RuntimeError("channel admission failed")
+            item = receiver.recv()
+            if item.is_err:
+                raise RuntimeError("channel drain failed")
+            received.append(item.value_or(None).move().value_or(None))
+        sender.close()
+        while True:
+            item = receiver.recv()
+            if item.is_ok:
+                received.append(item.value_or(None).move().value_or(None))
+                continue
+            error = item.error_or(None)
+            if error is None or error.code is not ChannelErrorCode.CLOSED:
+                raise RuntimeError("channel close contract failed")
+            break
+        receiver.close()
+        observed.append({
+            "capacity": capacity,
+            "count": len(received),
+            "first": received[0],
+            "last": received[-1],
+            "checksum": hashlib.sha256(",".join(map(str, received)).encode("ascii")).hexdigest(),
+            "closed": channel.closed,
+        })
+    expected = []
+    for capacity in (1, 8, 64):
+        values = list(range(capacity * 2 + 3))
+        expected.append({
+            "capacity": capacity,
+            "count": len(values),
+            "first": values[0],
+            "last": values[-1],
+            "checksum": hashlib.sha256(",".join(map(str, values)).encode("ascii")).hexdigest(),
+            "closed": True,
+        })
     return observed, expected
 
 
@@ -287,6 +345,7 @@ def run_check(name: str) -> Check:
     functions: dict[str, Callable[[], tuple[object, object]]] = {
         "async_task": _async_task,
         "await_chain": _await_chain,
+        "channels": _channels,
         "executor": _executor,
         "process_io": _process_io,
         "http_loopback": _http_loopback,
