@@ -14,6 +14,7 @@ This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible,
 - [`benchmarks/network_loopback`](benchmarks/network_loopback/README.md): M1.73/M1.74 reactor + deterministic local network correctness preflight. No public internet and no network performance claims yet.
 - [`benchmarks/tls_local`](benchmarks/tls_local/README.md): M1.75 local TLS state-machine correctness preflight with certificate/hostname validation locked on. No public internet and no TLS performance claims yet.
 - [`benchmarks/aarch64`](benchmarks/aarch64/README.md): M1.77/M1.78 Linux AArch64 + macOS ARM64 structural conformance preflight. LLVM is pinned as an architecture/codegen reference, but comparative code quality and execution timing remain explicitly invalid/deferred.
+- [`benchmarks/package_repro`](benchmarks/package_repro/README.md): M1.56/M1.79/M1.80 package resolver, content-addressed cache, archive-safety, and reproducible toolchain-bundle correctness preflight. Cargo and uv are pinned references only; resolver performance remains deferred.
 
 ## Candidate Benchmark Corpus
 
@@ -43,6 +44,9 @@ S3_CURRENT_REPO=/path/to/S3 python tools/tls_local_runner.py --verify-only
 # M1.77/M1.78 ARM64 structural conformance
 S3_CURRENT_REPO=/path/to/S3 python tools/aarch64_runner.py --verify-only
 
+# M1.56/M1.79/M1.80 package/cache/reproducibility correctness
+S3_CURRENT_REPO=/path/to/S3 python tools/package_repro_runner.py --verify-only
+
 # JSMN benchmark smoke test
 python tools/runner.py --smoke
 
@@ -50,7 +54,7 @@ python tools/runner.py --smoke
 python tools/runner.py --full
 ```
 
-The M1.71-M1.80 async/network/TLS/ARM64 workloads currently emit **correctness or structural evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. The ARM64 runner also verifies the pinned LLVM reference SHA without claiming that LLVM was built or executed.
+The M1.71-M1.80 async/network/TLS/ARM64/package workloads currently emit **correctness or structural evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. The ARM64 runner also verifies the pinned LLVM reference SHA without claiming that LLVM was built or executed. The package preflight uses deterministic local fixtures only; no public registry is needed.
 
 ## CI Integration
 
