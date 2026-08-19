@@ -80,6 +80,14 @@ jobs:
           python tools/tls_local_runner.py --verify-only --output-json reports/tls-local-correctness.json
           python -c "import json; data=json.load(open('reports/tls-local-correctness.json')); assert data['passed'] is True; assert data['performance_results_valid'] is False; assert data['baseline_pin_match'] is True; assert data['certificate_verification_required'] is True; assert data['hostname_verification_required'] is True"
 
+      - name: Run AArch64 Structural Correctness Gate
+        env:
+          S3_CURRENT_REPO: ${{ github.workspace }}/s3-current
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
+        run: |
+          python tools/aarch64_runner.py --verify-only --output-json reports/aarch64-structural.json
+          python -c "import json; data=json.load(open('reports/aarch64-structural.json')); assert data['passed'] is True; assert data['s3_baseline_pin_match'] is True; assert data['llvm_reference_pin_match'] is True; assert data['performance_results_valid'] is False; assert data['comparative_code_quality_valid'] is False; assert data['execution_benchmark_valid'] is False"
+
       - name: Run Native S3 & C Full Benchmark Suite
         env:
           S3_REPO: ${{ github.workspace }}/s3-compiler
@@ -94,6 +102,7 @@ jobs:
           test -f reports/async-runtime-correctness.json
           test -f reports/network-loopback-correctness.json
           test -f reports/tls-local-correctness.json
+          test -f reports/aarch64-structural.json
           grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
           grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
           python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"
@@ -108,3 +117,4 @@ jobs:
             reports/async-runtime-correctness.json
             reports/network-loopback-correctness.json
             reports/tls-local-correctness.json
+            reports/aarch64-structural.json
