@@ -54,14 +54,14 @@ Required S3 baseline:
 
 `SamDevlab/S3@cd6804f72757d6936ca1ec6c20d5badf55d1aac4`
 
-The runner refuses a different S3 HEAD.
-
-Pinned external references are recorded in `references/upstreams-m171-m180.json`:
+Pinned external references:
 
 - `rust-lang/cargo@514c56dd7321eecbfdcf9b6479519cf4edfab906`
 - `astral-sh/uv@5c170b8022c5565a1d4ada3406077d8fdf7f9088`
 
-They are references only in this gate.
+The runner refuses a different S3 HEAD and also fails if either pinned Cargo/uv reference in `references/upstreams-m171-m180.json` drifts from these SHAs.
+
+Cargo and uv remain metadata/reference inputs only in this gate; they are not cloned, built, or executed.
 
 ## Run
 
