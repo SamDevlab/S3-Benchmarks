@@ -10,7 +10,9 @@ This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible,
 ## Executable Workloads
 
 - [`benchmarks/jsmn`](benchmarks/jsmn/README.md): Upstream C `zserge/jsmn` vs S3 behavioral port kernel. Differential correctness + native performance campaign.
-- [`benchmarks/async_runtime`](benchmarks/async_runtime/README.md): M1.71-M1.76 async-runtime behavioral correctness preflight. **Performance is intentionally deferred** until an equivalent native S3 workload exists.
+- [`benchmarks/async_runtime`](benchmarks/async_runtime/README.md): M1.71-M1.76 async-runtime behavioral correctness preflight. Performance intentionally deferred.
+- [`benchmarks/network_loopback`](benchmarks/network_loopback/README.md): M1.73/M1.74 reactor + deterministic local network correctness preflight. No public internet and no network performance claims yet.
+- [`benchmarks/tls_local`](benchmarks/tls_local/README.md): M1.75 local TLS state-machine correctness preflight with certificate/hostname validation locked on. No public internet and no TLS performance claims yet.
 
 ## Candidate Benchmark Corpus
 
@@ -28,8 +30,14 @@ The current references are Rust, Tokio, Mio, rustls, libuv, LLVM, Cargo, and uv.
 # JSMN differential correctness check
 python tools/runner.py --verify-only
 
-# Async-runtime correctness preflight (requires current S3 checkout)
+# M1.71-M1.76 async-runtime correctness
 S3_CURRENT_REPO=/path/to/S3 python tools/async_runtime_runner.py --verify-only
+
+# M1.73/M1.74 reactor + local network correctness
+S3_CURRENT_REPO=/path/to/S3 python tools/network_loopback_runner.py --verify-only
+
+# M1.75 local TLS correctness
+S3_CURRENT_REPO=/path/to/S3 python tools/tls_local_runner.py --verify-only
 
 # JSMN benchmark smoke test
 python tools/runner.py --smoke
@@ -38,8 +46,8 @@ python tools/runner.py --smoke
 python tools/runner.py --full
 ```
 
-The async-runtime workload currently emits correctness evidence only. It must not be presented as an async performance benchmark until the native-equivalence gate described in its README is satisfied.
+The three M1.71-M1.80 runtime/network/TLS workloads currently emit **correctness evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. They must not be presented as performance benchmarks until equivalent native paths and reference implementations are available.
 
 ## CI Integration
 
-GitHub Actions workflow `.github/workflows/tests.yml` keeps the historical JSMN S3 pin separate from the current async-runtime S3 pin. This prevents a new compiler baseline from silently rewriting historical benchmark provenance while still verifying the new correctness workload on every push and PR.
+GitHub Actions workflow `.github/workflows/tests.yml` keeps the historical JSMN S3 pin separate from the M1.71-M1.80 correctness baseline. This prevents a newer compiler from silently rewriting historical benchmark provenance while still allowing the new correctness workloads to be verified independently.
