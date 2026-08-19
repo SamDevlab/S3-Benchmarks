@@ -66,6 +66,42 @@ Do **not** port the full application. Extract a compact workload that exercises 
 
 This candidate is valuable as an integration benchmark after the lower-level async/network/TLS campaigns are stable.
 
+## Candidate E — AArch64 backend structure and code quality
+
+Primary reference: `llvm/llvm-project`.
+
+This is not a claim that S3 and LLVM have equivalent optimizer scope. The comparison must use bounded kernels with equivalent semantics.
+
+Candidate checks:
+
+- AArch64 function-call ABI fixtures;
+- integer and floating argument/return placement;
+- aggregate/sret layout;
+- stack alignment;
+- ELF structural validity for Linux AArch64;
+- Mach-O structural validity for macOS ARM64;
+- instruction count and code size for tiny arithmetic/control-flow kernels.
+
+Execution timing is valid only on a real matching target environment. Structural checks must be reported separately from execution certification.
+
+## Candidate F — package resolver, cache and reproducibility
+
+Primary references: `rust-lang/cargo`, `astral-sh/uv`.
+
+Candidate workloads:
+
+- resolve a deterministic local dependency graph;
+- identical multi-parent dependency identity;
+- conflicting identity rejection;
+- lockfile regeneration determinism;
+- warm-cache vs cold-cache local fixture resolution;
+- offline cache hit;
+- checksum mismatch rejection;
+- bounded archive extraction/path traversal rejection;
+- repeat toolchain/package bundle hash comparison.
+
+Do not use live public registries for correctness. Use a local fixture registry/content store.
+
 ## Promotion order
 
 Recommended order:
@@ -73,6 +109,8 @@ Recommended order:
 1. async executor/channels;
 2. reactor/loopback networking;
 3. TLS local handshake;
-4. real-world provider pipeline.
+4. AArch64 structural/code-quality campaign;
+5. package resolver/cache/reproducibility;
+6. real-world provider pipeline.
 
-Do not promote all four at once. Each candidate becomes executable only after its differential correctness contract is complete.
+Do not promote all candidates at once. Each candidate becomes executable only after its differential correctness or structural-equivalence contract is complete.
