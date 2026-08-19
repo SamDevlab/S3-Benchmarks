@@ -25,8 +25,9 @@ The current pinned research set is intentionally scoped to the capabilities now 
 - `llvm/llvm-project` — AArch64 ABI, ELF/Mach-O and native backend structural reference.
 - `rust-lang/cargo` — package identity, registry, lockfile, checksum and offline-cache reference.
 - `astral-sh/uv` — modern resolver, cache and reproducible package/distribution workflow reference.
+- `harry0703/MoneyPrinterTurbo` — real-world application workload-shape reference for provider registry, config/service layering, local network/TLS integration and deterministic output flow.
 
-`harry0703/MoneyPrinterTurbo` is tracked separately as a future **real-world application workload**. It is not a compiler oracle and should not be ported wholesale. A later S3 benchmark should extract a bounded provider/config/network pipeline that can be implemented equivalently in both the reference language and S3.
+MoneyPrinterTurbo is **not** a compiler oracle and is not ported wholesale. The bounded integration candidate has been promoted to [`benchmarks/provider_pipeline`](../benchmarks/provider_pipeline/README.md). That gate uses local fixtures only, does not execute MoneyPrinterTurbo itself, does not call real AI providers, and explicitly marks Python-harness JSON parsing as outside the current S3 runtime feature set.
 
 ## Promotion into an executable benchmark
 
@@ -39,3 +40,5 @@ A candidate should move into `benchmarks/` only when all of these exist:
 5. differential correctness checks;
 6. a timing methodology that does not use synthetic timing;
 7. machine-readable and Markdown reports.
+
+For correctness-only or structural preflights where performance is intentionally deferred, item 6 is satisfied by explicitly reporting that timing is invalid/deferred rather than fabricating comparative numbers.
