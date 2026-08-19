@@ -74,11 +74,11 @@
     {
       "repository": "harry0703/MoneyPrinterTurbo",
       "commit": "d4c0e45da4ac0889af77f7307f52f9d5d4f74942",
-      "role": "future-real-world-application-workload",
+      "role": "real-world-application-workload-reference",
       "priority": "P2",
       "milestones": ["post-M1.80"],
       "study": ["provider registry", "CLI/API/service layering", "async HTTP/TLS workload shape", "configuration and file/process workflows"],
-      "note": "Reference workload only. Do not vendor or benchmark the full application until an S3 behavioral kernel exists."
+      "note": "Architecture/workload-shape reference only. A bounded local provider/config/network/TLS integration preflight exists in benchmarks/provider_pipeline; the full application is not vendored or executed."
     }
   ]
 }
