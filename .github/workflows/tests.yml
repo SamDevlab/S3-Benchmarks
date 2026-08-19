@@ -20,7 +20,7 @@ jobs:
           ref: 85541b782571c80d4857d013d1fb25b4997c1eb9
           path: s3-compiler
 
-      - name: Check out current S3 async benchmark baseline
+      - name: Check out current S3 M1.71-M1.80 benchmark baseline
         uses: actions/checkout@v4
         with:
           repository: SamDevlab/S3
@@ -49,7 +49,7 @@ jobs:
         run: |
           python benchmarks/jsmn/corpus/generator.py
 
-      - name: Run Differential Correctness Gate
+      - name: Run JSMN Differential Correctness Gate
         env:
           S3_REPO: ${{ github.workspace }}/s3-compiler
           PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-compiler
@@ -62,7 +62,23 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
         run: |
           python tools/async_runtime_runner.py --verify-only --output-json reports/async-runtime-correctness.json
-          python -c "import json; data=json.load(open('reports/async-runtime-correctness.json')); assert data['passed'] is True; assert data['performance_results_valid'] is False"
+          python -c "import json; data=json.load(open('reports/async-runtime-correctness.json')); assert data['passed'] is True; assert data['performance_results_valid'] is False; assert data['baseline_pin_match'] is True"
+
+      - name: Run Reactor and Local Network Correctness Gate
+        env:
+          S3_CURRENT_REPO: ${{ github.workspace }}/s3-current
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
+        run: |
+          python tools/network_loopback_runner.py --verify-only --output-json reports/network-loopback-correctness.json
+          python -c "import json; data=json.load(open('reports/network-loopback-correctness.json')); assert data['passed'] is True; assert data['performance_results_valid'] is False; assert data['baseline_pin_match'] is True"
+
+      - name: Run Local TLS Correctness Gate
+        env:
+          S3_CURRENT_REPO: ${{ github.workspace }}/s3-current
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
+        run: |
+          python tools/tls_local_runner.py --verify-only --output-json reports/tls-local-correctness.json
+          python -c "import json; data=json.load(open('reports/tls-local-correctness.json')); assert data['passed'] is True; assert data['performance_results_valid'] is False; assert data['baseline_pin_match'] is True; assert data['certificate_verification_required'] is True; assert data['hostname_verification_required'] is True"
 
       - name: Run Native S3 & C Full Benchmark Suite
         env:
@@ -76,6 +92,8 @@ jobs:
           test -f reports/jsmn-baseline.json
           test -f reports/jsmn-baseline.md
           test -f reports/async-runtime-correctness.json
+          test -f reports/network-loopback-correctness.json
+          test -f reports/tls-local-correctness.json
           grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
           grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
           python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"
@@ -88,3 +106,5 @@ jobs:
             reports/jsmn-baseline.json
             reports/jsmn-baseline.md
             reports/async-runtime-correctness.json
+            reports/network-loopback-correctness.json
+            reports/tls-local-correctness.json
