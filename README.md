@@ -15,6 +15,7 @@ This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible,
 - [`benchmarks/tls_local`](benchmarks/tls_local/README.md): M1.75 local TLS state-machine correctness preflight with certificate/hostname validation locked on. No public internet and no TLS performance claims yet.
 - [`benchmarks/aarch64`](benchmarks/aarch64/README.md): M1.77/M1.78 Linux AArch64 + macOS ARM64 structural conformance preflight. LLVM is pinned as an architecture/codegen reference, but comparative code quality and execution timing remain explicitly invalid/deferred.
 - [`benchmarks/package_repro`](benchmarks/package_repro/README.md): M1.56/M1.79/M1.80 package resolver, content-addressed cache, archive-safety, and reproducible toolchain-bundle correctness preflight. Cargo and uv are pinned references only; resolver performance remains deferred.
+- [`benchmarks/provider_pipeline`](benchmarks/provider_pipeline/README.md): MoneyPrinterTurbo-inspired application integration preflight using S3 OS services + async network + async TLS against deterministic local fixtures. No real providers, secrets, public internet, or performance claims.
 
 ## Candidate Benchmark Corpus
 
@@ -24,7 +25,7 @@ The repository tracks a pinned external reference corpus for the post-M1.80 benc
 - [`references/README.md`](references/README.md): policy for promoting external projects into reproducible S3 benchmark campaigns.
 - [`candidates/m171-m180`](candidates/m171-m180/README.md): bounded candidate campaigns and promotion state.
 
-The current references are Rust, Tokio, Mio, rustls, libuv, LLVM, Cargo, and uv. MoneyPrinterTurbo is tracked only as a future real-world workload shape; it is not treated as a compiler oracle and is not vendored into this repository.
+The current references are Rust, Tokio, Mio, rustls, libuv, LLVM, Cargo, uv, and MoneyPrinterTurbo. MoneyPrinterTurbo is used only as an application-architecture/workload-shape reference; its code is not vendored and its external provider integrations are not executed.
 
 ## Execution
 
@@ -47,6 +48,9 @@ S3_CURRENT_REPO=/path/to/S3 python tools/aarch64_runner.py --verify-only
 # M1.56/M1.79/M1.80 package/cache/reproducibility correctness
 S3_CURRENT_REPO=/path/to/S3 python tools/package_repro_runner.py --verify-only
 
+# MoneyPrinterTurbo-inspired local provider pipeline integration correctness
+S3_CURRENT_REPO=/path/to/S3 python tools/provider_pipeline_runner.py --verify-only
+
 # JSMN benchmark smoke test
 python tools/runner.py --smoke
 
@@ -54,7 +58,9 @@ python tools/runner.py --smoke
 python tools/runner.py --full
 ```
 
-The M1.71-M1.80 async/network/TLS/ARM64/package workloads currently emit **correctness or structural evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. The ARM64 runner also verifies the pinned LLVM reference SHA without claiming that LLVM was built or executed. The package preflight uses deterministic local fixtures only; no public registry is needed.
+The M1.71-M1.80 async/network/TLS/ARM64/package/provider-pipeline workloads currently emit **correctness, structural, or integration evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`.
+
+The provider-pipeline gate also verifies the MoneyPrinterTurbo reference pin `d4c0e45da4ac0889af77f7307f52f9d5d4f74942`. Its first version uses Python JSON parsing inside the benchmark harness and reports that limitation explicitly; it must not be treated as evidence of a production S3 JSON runtime.
 
 ## CI Integration
 
