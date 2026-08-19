@@ -96,6 +96,14 @@ jobs:
           python tools/package_repro_runner.py --verify-only --output-json reports/package-repro-correctness.json
           python -c "import json; data=json.load(open('reports/package-repro-correctness.json')); assert data['passed'] is True; assert data['baseline_pin_match'] is True; assert data['cargo_reference_pin_match'] is True; assert data['uv_reference_pin_match'] is True; assert data['performance_results_valid'] is False; assert data['public_registry_required'] is False; assert data['registry_publishing_supported'] is False; assert data['remote_release_supported'] is False"
 
+      - name: Run Provider Pipeline Integration Correctness Gate
+        env:
+          S3_CURRENT_REPO: ${{ github.workspace }}/s3-current
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
+        run: |
+          python tools/provider_pipeline_runner.py --verify-only --output-json reports/provider-pipeline-correctness.json
+          python -c "import json; data=json.load(open('reports/provider-pipeline-correctness.json')); assert data['passed'] is True; assert data['s3_baseline_pin_match'] is True; assert data['reference_pin_match'] is True; assert data['performance_results_valid'] is False; assert data['public_internet_required'] is False; assert data['external_provider_calls'] is False; assert data['secrets_required'] is False; assert data['certificate_verification_required'] is True; assert data['hostname_verification_required'] is True; assert data['json_parser_scope'] == 'python_benchmark_harness_not_s3_runtime_feature'"
+
       - name: Run Native S3 & C Full Benchmark Suite
         env:
           S3_REPO: ${{ github.workspace }}/s3-compiler
@@ -112,6 +120,7 @@ jobs:
           test -f reports/tls-local-correctness.json
           test -f reports/aarch64-structural.json
           test -f reports/package-repro-correctness.json
+          test -f reports/provider-pipeline-correctness.json
           grep "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED" reports/jsmn-baseline.md
           grep "SYNTHETIC_TIMING" reports/jsmn-baseline.md
           python -c "import json; data=json.load(open('reports/jsmn-baseline.json')); assert any(r['variant'] == 'S3-O1-NATIVE' for r in data['results']), 'CI assertion error: S3-O1-NATIVE results missing!'"
@@ -128,3 +137,4 @@ jobs:
             reports/tls-local-correctness.json
             reports/aarch64-structural.json
             reports/package-repro-correctness.json
+            reports/provider-pipeline-correctness.json
