@@ -28,7 +28,7 @@ The promoted preflight validates the provider-neutral TLS state machine and secu
 
 ## Candidate D — real-world provider pipeline
 
-**Status: PLANNED**
+**Status: NEXT APPLICATION CANDIDATE**
 
 Application reference: `harry0703/MoneyPrinterTurbo`.
 
@@ -41,7 +41,7 @@ Do **not** port the full application. Extract a compact workload that exercises 
 5. write a deterministic result file;
 6. optionally invoke one bounded local process where S3 process APIs support it.
 
-This candidate should follow the lower-level runtime/network/TLS gates.
+This candidate should reuse the already-promoted async/network/TLS/package correctness gates rather than duplicating them.
 
 ## Candidate E — AArch64 backend structure and code quality
 
@@ -74,29 +74,35 @@ Therefore LLVM remains a pinned architecture/codegen reference only. Comparative
 
 ## Candidate F — package resolver, cache and reproducibility
 
-**Status: NEXT CANDIDATE**
+**Correctness preflight: PROMOTED** → [`benchmarks/package_repro`](../../benchmarks/package_repro/README.md)
 
 Primary references: `rust-lang/cargo`, `astral-sh/uv`.
 
-Candidate workloads:
+The promoted gate uses local deterministic fixtures and verifies:
 
-- resolve a deterministic local dependency graph;
+- package lock mapping-order determinism;
 - identical multi-parent dependency identity;
-- conflicting identity rejection;
-- lockfile regeneration determinism;
-- warm-cache vs cold-cache local fixture resolution;
-- offline cache hit;
-- checksum mismatch rejection;
-- bounded archive extraction/path traversal rejection;
-- repeat toolchain/package bundle hash comparison.
+- reachable identity conflict rejection;
+- unreachable conflict isolation;
+- stable lock SHA-256;
+- exact content-addressed registry locks;
+- offline cache reuse after registry-object removal;
+- checksum verification on cache hits;
+- deterministic install paths;
+- archive traversal and duplicate canonical path rejection;
+- bounded member extraction;
+- byte-identical toolchain bundles across input order;
+- deterministic manifest/ZIP metadata;
+- corruption and machine-path rejection;
+- registry publishing and remote release remain unavailable.
 
-Do not use live public registries for correctness. Use a local fixture registry/content store.
+Cargo and uv remain pinned design/reference projects only. This preflight does not execute public registries or claim resolver performance equivalence.
 
 ## Promotion order from here
 
-1. validate the four promoted M1.71-M1.78 correctness/structural preflights;
-2. package resolver/cache/reproducibility;
-3. real-world provider pipeline;
-4. native performance/code-quality only where an equivalent S3 native path exists.
+1. validate the five promoted M1.71-M1.80 correctness/structural preflights;
+2. real-world provider pipeline inspired by MoneyPrinterTurbo;
+3. native performance/code-quality only where an equivalent S3 native path exists;
+4. add a separate immutable M1.81-M1.90 benchmark pin only after that roadmap is merged and reviewed.
 
 No hosted Python timing or structural-only output should be presented as native S3 performance.
