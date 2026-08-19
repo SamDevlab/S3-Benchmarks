@@ -48,6 +48,30 @@
       "study": ["portable event loop", "TCP/UDP/DNS", "resource cleanup", "Windows/Linux/macOS behavior"]
     },
     {
+      "repository": "llvm/llvm-project",
+      "commit": "b562ef546e46face7172d174e1a5f5454c470eee",
+      "role": "native-backend-abi-reference",
+      "priority": "P0",
+      "milestones": ["M1.77", "M1.78"],
+      "study": ["AArch64 code generation", "AAPCS64", "ELF", "Mach-O", "Darwin ARM64 ABI", "object and relocation structure"]
+    },
+    {
+      "repository": "rust-lang/cargo",
+      "commit": "514c56dd7321eecbfdcf9b6479519cf4edfab906",
+      "role": "package-registry-reference",
+      "priority": "P0",
+      "milestones": ["M1.79", "M1.80"],
+      "study": ["package identity", "registry and lockfile behavior", "checksums", "offline cache", "reproducible package resolution"]
+    },
+    {
+      "repository": "astral-sh/uv",
+      "commit": "5c170b8022c5565a1d4ada3406077d8fdf7f9088",
+      "role": "modern-resolver-cache-reference",
+      "priority": "P1",
+      "milestones": ["M1.79", "M1.80"],
+      "study": ["content-addressed cache", "lock resolution", "offline behavior", "deterministic distribution workflows"]
+    },
+    {
       "repository": "harry0703/MoneyPrinterTurbo",
       "commit": "d4c0e45da4ac0889af77f7307f52f9d5d4f74942",
       "role": "future-real-world-application-workload",
