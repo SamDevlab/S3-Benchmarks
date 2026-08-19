@@ -94,7 +94,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/s3-current
         run: |
           python tools/package_repro_runner.py --verify-only --output-json reports/package-repro-correctness.json
-          python -c "import json; data=json.load(open('reports/package-repro-correctness.json')); assert data['passed'] is True; assert data['baseline_pin_match'] is True; assert data['performance_results_valid'] is False; assert data['public_registry_required'] is False; assert data['registry_publishing_supported'] is False; assert data['remote_release_supported'] is False"
+          python -c "import json; data=json.load(open('reports/package-repro-correctness.json')); assert data['passed'] is True; assert data['baseline_pin_match'] is True; assert data['cargo_reference_pin_match'] is True; assert data['uv_reference_pin_match'] is True; assert data['performance_results_valid'] is False; assert data['public_registry_required'] is False; assert data['registry_publishing_supported'] is False; assert data['remote_release_supported'] is False"
 
       - name: Run Native S3 & C Full Benchmark Suite
         env:
