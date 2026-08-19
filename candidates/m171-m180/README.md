@@ -10,13 +10,6 @@ Primary references: `rust-lang/rust`, `tokio-rs/tokio`.
 
 Performance remains deferred until a native S3 workload with equivalent observable semantics exists.
 
-Future timing kernels:
-
-- create and complete N cooperative tasks;
-- bounded channel ping-pong with capacities 1, 8, and 64;
-- chained await depth;
-- generated code size where native comparison is meaningful.
-
 ## Candidate B — reactor and loopback networking
 
 **Correctness preflight: PROMOTED** → [`benchmarks/network_loopback`](../../benchmarks/network_loopback/README.md)
@@ -25,14 +18,6 @@ Primary references: `tokio-rs/mio`, `libuv/libuv`.
 
 The promoted preflight verifies deterministic reactor and provider-neutral local-network semantics without public internet. Native socket/reactor performance remains deferred.
 
-Future native kernels:
-
-- localhost TCP connect/accept/read/write;
-- UDP loopback send/receive;
-- readiness re-arm after WouldBlock;
-- fixed-size payload throughput;
-- resource cleanup after cancellation/peer close.
-
 ## Candidate C — TLS local handshake
 
 **Correctness preflight: PROMOTED** → [`benchmarks/tls_local`](../../benchmarks/tls_local/README.md)
@@ -40,16 +25,6 @@ Future native kernels:
 Primary reference: `rustls/rustls`.
 
 The promoted preflight validates the provider-neutral TLS state machine and secure defaults. It does not claim native TLS, trust-store, or external-chain execution certification.
-
-Future native kernels:
-
-- local trusted certificate handshake;
-- repeated handshake/session setup;
-- fixed-size encrypted echo;
-- hostname mismatch and untrusted-certificate rejection gates;
-- cancellation during handshake and cleanup.
-
-Certificate and hostname verification must remain enabled.
 
 ## Candidate D — real-world provider pipeline
 
@@ -70,27 +45,36 @@ This candidate should follow the lower-level runtime/network/TLS gates.
 
 ## Candidate E — AArch64 backend structure and code quality
 
-**Status: NEXT STRUCTURAL CANDIDATE**
+**Structural correctness preflight: PROMOTED** → [`benchmarks/aarch64`](../../benchmarks/aarch64/README.md)
 
-Primary reference: `llvm/llvm-project`.
+Primary reference: `llvm/llvm-project` pinned at `b562ef546e46face7172d174e1a5f5454c470eee`.
 
-This is not a claim that S3 and LLVM have equivalent optimizer scope. The comparison must use bounded kernels with equivalent semantics.
+The promoted gate currently validates only the contracts actually modeled by S3 M1.77/M1.78:
 
-Candidate checks:
+- target registration;
+- AAPCS64 scalar integer argument locations;
+- scalar return in `x0`;
+- deterministic structural return assembly;
+- ELF64 AArch64 identity;
+- Mach-O ARM64 executable-header identity;
+- execution-certification deferment;
+- fail-closed invalid inputs.
 
-- AArch64 function-call ABI fixtures;
-- integer and floating argument/return placement;
-- aggregate/sret layout;
-- stack alignment;
-- ELF structural validity for Linux AArch64;
-- Mach-O structural validity for macOS ARM64;
-- instruction count and code size for tiny arithmetic/control-flow kernels.
+The gate explicitly records the following as unmodeled rather than inferring support:
 
-Execution timing is valid only on a real matching target environment. Structural checks must be reported separately from execution certification.
+- floating-point ABI classification;
+- explicit 16-byte stack-alignment proof;
+- aggregate argument/return and `sret`;
+- ELF sections/relocations;
+- Mach-O load commands/sections/relocations;
+- machine-code encoding;
+- native link/execution.
+
+Therefore LLVM remains a pinned architecture/codegen reference only. Comparative instruction-count/code-size claims and execution timing are invalid until S3 has equivalent native object generation and execution paths.
 
 ## Candidate F — package resolver, cache and reproducibility
 
-**Status: PLANNED**
+**Status: NEXT CANDIDATE**
 
 Primary references: `rust-lang/cargo`, `astral-sh/uv`.
 
@@ -110,10 +94,9 @@ Do not use live public registries for correctness. Use a local fixture registry/
 
 ## Promotion order from here
 
-1. validate the three promoted correctness preflights;
-2. AArch64 structural/code-quality campaign;
-3. package resolver/cache/reproducibility;
-4. real-world provider pipeline;
-5. native performance only where an equivalent S3 execution path exists.
+1. validate the four promoted M1.71-M1.78 correctness/structural preflights;
+2. package resolver/cache/reproducibility;
+3. real-world provider pipeline;
+4. native performance/code-quality only where an equivalent S3 native path exists.
 
-No hosted Python timing should be presented as native S3 performance.
+No hosted Python timing or structural-only output should be presented as native S3 performance.
