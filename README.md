@@ -13,6 +13,7 @@ This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible,
 - [`benchmarks/async_runtime`](benchmarks/async_runtime/README.md): M1.71-M1.76 async-runtime behavioral correctness preflight. Performance intentionally deferred.
 - [`benchmarks/network_loopback`](benchmarks/network_loopback/README.md): M1.73/M1.74 reactor + deterministic local network correctness preflight. No public internet and no network performance claims yet.
 - [`benchmarks/tls_local`](benchmarks/tls_local/README.md): M1.75 local TLS state-machine correctness preflight with certificate/hostname validation locked on. No public internet and no TLS performance claims yet.
+- [`benchmarks/aarch64`](benchmarks/aarch64/README.md): M1.77/M1.78 Linux AArch64 + macOS ARM64 structural conformance preflight. LLVM is pinned as an architecture/codegen reference, but comparative code quality and execution timing remain explicitly invalid/deferred.
 
 ## Candidate Benchmark Corpus
 
@@ -20,7 +21,7 @@ The repository tracks a pinned external reference corpus for the post-M1.80 benc
 
 - [`references/upstreams-m171-m180.json`](references/upstreams-m171-m180.json): immutable upstream pins and milestone mapping.
 - [`references/README.md`](references/README.md): policy for promoting external projects into reproducible S3 benchmark campaigns.
-- [`candidates/m171-m180`](candidates/m171-m180/README.md): bounded candidate campaigns for async/runtime, reactor/networking, TLS, AArch64, package resolution/reproducibility, and a real-world provider pipeline.
+- [`candidates/m171-m180`](candidates/m171-m180/README.md): bounded candidate campaigns and promotion state.
 
 The current references are Rust, Tokio, Mio, rustls, libuv, LLVM, Cargo, and uv. MoneyPrinterTurbo is tracked only as a future real-world workload shape; it is not treated as a compiler oracle and is not vendored into this repository.
 
@@ -39,6 +40,9 @@ S3_CURRENT_REPO=/path/to/S3 python tools/network_loopback_runner.py --verify-onl
 # M1.75 local TLS correctness
 S3_CURRENT_REPO=/path/to/S3 python tools/tls_local_runner.py --verify-only
 
+# M1.77/M1.78 ARM64 structural conformance
+S3_CURRENT_REPO=/path/to/S3 python tools/aarch64_runner.py --verify-only
+
 # JSMN benchmark smoke test
 python tools/runner.py --smoke
 
@@ -46,8 +50,8 @@ python tools/runner.py --smoke
 python tools/runner.py --full
 ```
 
-The three M1.71-M1.80 runtime/network/TLS workloads currently emit **correctness evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. They must not be presented as performance benchmarks until equivalent native paths and reference implementations are available.
+The M1.71-M1.80 async/network/TLS/ARM64 workloads currently emit **correctness or structural evidence only**. Their runners enforce the pinned S3 baseline `cd6804f72757d6936ca1ec6c20d5badf55d1aac4`. The ARM64 runner also verifies the pinned LLVM reference SHA without claiming that LLVM was built or executed.
 
 ## CI Integration
 
-GitHub Actions workflow `.github/workflows/tests.yml` keeps the historical JSMN S3 pin separate from the M1.71-M1.80 correctness baseline. This prevents a newer compiler from silently rewriting historical benchmark provenance while still allowing the new correctness workloads to be verified independently.
+GitHub Actions workflow `.github/workflows/tests.yml` keeps the historical JSMN S3 pin separate from the M1.71-M1.80 correctness baseline. This prevents a newer compiler from silently rewriting historical benchmark provenance while allowing the newer gates to be verified independently.
