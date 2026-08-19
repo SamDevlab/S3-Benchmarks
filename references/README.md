@@ -1,0 +1,38 @@
+# External Reference Corpus
+
+This directory records external projects used to design and review future S3 benchmark campaigns.
+
+## Policy
+
+- **CORRECTNESS BEFORE PERFORMANCE** remains the repository-wide rule.
+- Every external reference used by a campaign must be pinned to an immutable commit SHA.
+- Reference repositories are **not** benchmark results and are **not** automatically copied or vendored into this repository.
+- A performance comparison is valid only after S3 and the chosen oracle/reference implementation have an explicitly defined equivalent workload and pass the differential correctness gate.
+- Network/TLS benchmarks must use local fixtures or loopback services by default; public internet access must not be required for correctness.
+- Large projects may be used as architecture or workload references without attempting a full-language port.
+
+## Current M1.71-M1.80 corpus
+
+See [`upstreams-m171-m180.json`](upstreams-m171-m180.json).
+
+The active research set is intentionally small:
+
+- `rust-lang/rust` — async lowering, ownership across suspension, future/drop semantics.
+- `tokio-rs/tokio` — task lifecycle, executor behavior, timers, channels, async networking.
+- `tokio-rs/mio` — readiness/reactor and nonblocking I/O behavior.
+- `rustls/rustls` — nonblocking TLS state machine and secure validation behavior.
+- `libuv/libuv` — cross-platform event-loop and resource-lifecycle reference.
+
+`harry0703/MoneyPrinterTurbo` is tracked separately as a future **real-world application workload**. It is not a compiler oracle and should not be ported wholesale. A later S3 benchmark should extract a bounded provider/config/network pipeline that can be implemented equivalently in both the reference language and S3.
+
+## Promotion into an executable benchmark
+
+A candidate should move into `benchmarks/` only when all of these exist:
+
+1. a bounded workload definition;
+2. immutable upstream and S3 commit pins;
+3. deterministic fixtures;
+4. an oracle or equivalence contract;
+5. differential correctness checks;
+6. a timing methodology that does not use synthetic timing;
+7. machine-readable and Markdown reports.
