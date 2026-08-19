@@ -15,13 +15,16 @@ This directory records external projects used to design and review future S3 ben
 
 See [`upstreams-m171-m180.json`](upstreams-m171-m180.json).
 
-The active research set is intentionally small:
+The current pinned research set is intentionally scoped to the capabilities now present in S3:
 
 - `rust-lang/rust` — async lowering, ownership across suspension, future/drop semantics.
 - `tokio-rs/tokio` — task lifecycle, executor behavior, timers, channels, async networking.
 - `tokio-rs/mio` — readiness/reactor and nonblocking I/O behavior.
 - `rustls/rustls` — nonblocking TLS state machine and secure validation behavior.
 - `libuv/libuv` — cross-platform event-loop and resource-lifecycle reference.
+- `llvm/llvm-project` — AArch64 ABI, ELF/Mach-O and native backend structural reference.
+- `rust-lang/cargo` — package identity, registry, lockfile, checksum and offline-cache reference.
+- `astral-sh/uv` — modern resolver, cache and reproducible package/distribution workflow reference.
 
 `harry0703/MoneyPrinterTurbo` is tracked separately as a future **real-world application workload**. It is not a compiler oracle and should not be ported wholesale. A later S3 benchmark should extract a bounded provider/config/network pipeline that can be implemented equivalently in both the reference language and S3.
 
