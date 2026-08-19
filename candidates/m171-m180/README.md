@@ -28,20 +28,34 @@ The promoted preflight validates the provider-neutral TLS state machine and secu
 
 ## Candidate D — real-world provider pipeline
 
-**Status: NEXT APPLICATION CANDIDATE**
+**Integration correctness preflight: PROMOTED** → [`benchmarks/provider_pipeline`](../../benchmarks/provider_pipeline/README.md)
 
-Application reference: `harry0703/MoneyPrinterTurbo`.
+Application reference: `harry0703/MoneyPrinterTurbo` pinned at `d4c0e45da4ac0889af77f7307f52f9d5d4f74942`.
 
-Do **not** port the full application. Extract a compact workload that exercises the same engineering shape:
+The promoted V1 workload extracts only the useful application shape rather than porting the full project:
 
-1. parse deterministic configuration;
-2. select a provider from a declarative registry;
-3. issue a local HTTP/TLS request to a fixture server;
-4. parse the response;
-5. write a deterministic result file;
-6. optionally invoke one bounded local process where S3 process APIs support it.
+1. deterministic config file read through S3 OS services;
+2. stable provider-ID lookup in a benchmark-local declarative registry;
+3. default/explicit model resolution;
+4. deterministic local DNS and async network connect;
+5. async TLS handshake/read/write with certificate and hostname validation required;
+6. deterministic HTTP-like request envelope;
+7. local fixture provider response;
+8. response parse;
+9. deterministic result-file write/readback through S3 OS services;
+10. cleanup after success and after a late output-path failure.
 
-This candidate should reuse the already-promoted async/network/TLS/package correctness gates rather than duplicating them.
+The gate additionally proves that an unknown provider fails before network activity starts and that `../` output escape is rejected.
+
+### Explicit V1 limitation
+
+JSON parsing/serialization is provided by the Python benchmark harness because the pinned M1.71-M1.80 S3 baseline does not expose a general JSON runtime for this workload. The report labels this as:
+
+`python_benchmark_harness_not_s3_runtime_feature`
+
+Therefore this candidate is an integration/workload-shape gate, not evidence that S3 already has a production JSON library.
+
+No real AI provider, API key, public internet, or MoneyPrinterTurbo runtime is used.
 
 ## Candidate E — AArch64 backend structure and code quality
 
@@ -98,11 +112,17 @@ The promoted gate uses local deterministic fixtures and verifies:
 
 Cargo and uv remain pinned design/reference projects only. This preflight does not execute public registries or claim resolver performance equivalence.
 
-## Promotion order from here
+## Promotion state
 
-1. validate the five promoted M1.71-M1.80 correctness/structural preflights;
-2. real-world provider pipeline inspired by MoneyPrinterTurbo;
-3. native performance/code-quality only where an equivalent S3 native path exists;
-4. add a separate immutable M1.81-M1.90 benchmark pin only after that roadmap is merged and reviewed.
+All six M1.71-M1.80 candidates are now represented by bounded executable correctness/structural/integration preflights:
 
-No hosted Python timing or structural-only output should be presented as native S3 performance.
+1. async runtime;
+2. reactor/network;
+3. TLS;
+4. provider application pipeline;
+5. AArch64 structure;
+6. package/cache/reproducibility.
+
+The next benchmark-program step should **not** silently repin these workloads to code under active M1.81-M1.90 development. Add a separate immutable M1.81-M1.90 reference/baseline only after that roadmap is merged and reviewed.
+
+Native performance/code-quality comparisons remain allowed only where an equivalent native S3 execution path and an explicit correctness/equivalence contract exist. No hosted Python timing or structural-only output should be presented as native S3 performance.
