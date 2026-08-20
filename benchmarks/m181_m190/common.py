@@ -13,7 +13,9 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import socket
+import subprocess
 import sys
 import tempfile
 import threading
@@ -22,6 +24,7 @@ from typing import Callable
 
 
 CAMPAIGN = "m181-m190"
+_COMMIT_RE = re.compile(r"[0-9a-f]{40}")
 EXECUTABLE_CHECKS = (
     "async_task",
     "await_chain",
@@ -57,6 +60,20 @@ def s3_root() -> Path:
     text = str(root)
     if text not in sys.path:
         sys.path.insert(0, text)
+    expected = os.environ.get("S3_COMMIT", "")
+    if _COMMIT_RE.fullmatch(expected) is None:
+        raise RuntimeError("S3_COMMIT must be a full commit SHA")
+    try:
+        actual = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "--verify", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise RuntimeError("unable to resolve the S3 checkout Git HEAD") from error
+    if actual != expected:
+        raise RuntimeError(f"S3 checkout HEAD mismatch: expected {expected}, got {actual}")
     return root
 
 
@@ -368,10 +385,17 @@ def run_all() -> list[Check]:
 
 def render(checks: list[Check]) -> dict[str, object]:
     statuses = [item.status for item in checks]
+    root = s3_root()
+    actual_commit = subprocess.run(
+        ["git", "-C", str(root), "rev-parse", "--verify", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     return {
         "schema": "s3.m181-m190.correctness.v1",
         "campaign": CAMPAIGN,
-        "s3_commit": os.environ.get("S3_COMMIT", "UNSPECIFIED"),
+        "s3_commit": actual_commit,
         "status": "FAIL" if "FAIL" in statuses else "PASS_WITH_DEFERRED" if "DEFERRED" in statuses else "PASS",
         "checks": [item.as_json() for item in checks],
         "deferred": statuses.count("DEFERRED"),
