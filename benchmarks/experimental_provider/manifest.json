@@ -1,0 +1,44 @@
+{
+  "manifest_version": "0.1.0",
+  "campaign": "experimental-provider-v0",
+  "normative": false,
+  "description": "Non-normative external-provider bridge for reproducible experimental workloads.",
+  "workloads": [
+    {
+      "benchmark_id": "experimental.provider.roundtrip.v1",
+      "enabled_by_default": true,
+      "category": "provider-protocol",
+      "objective": "Measure the external-provider invocation path with a deterministic protocol fixture.",
+      "input": {
+        "id": "protocol-v1",
+        "work_units_per_loop": 1
+      },
+      "expected_checksum": "42",
+      "default_loops": 10000
+    },
+    {
+      "benchmark_id": "experimental.crypto.sha256.known-vector.v1",
+      "enabled_by_default": true,
+      "category": "crypto-provider",
+      "objective": "Validate an external crypto provider against the public SHA-256 'abc' known vector.",
+      "input": {
+        "id": "sha256-abc",
+        "work_units_per_loop": 1
+      },
+      "expected_checksum": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "default_loops": 1000
+    },
+    {
+      "benchmark_id": "experimental.crypto.secp256k1.public-vector.v1",
+      "enabled_by_default": false,
+      "category": "crypto-provider",
+      "objective": "Reserve the provider contract for public secp256k1 known-vector integration without enabling wallet search.",
+      "input": {
+        "id": "secp256k1-generator-compressed",
+        "work_units_per_loop": 1
+      },
+      "expected_checksum": "0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798",
+      "default_loops": 1000
+    }
+  ]
+}

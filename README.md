@@ -10,6 +10,7 @@ This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible,
 ## Workloads
 
 - [`benchmarks/jsmn`](benchmarks/jsmn/README.md): Upstream C `zserge/jsmn` vs S3 behavioral port kernel.
+- [`benchmarks/experimental_provider`](benchmarks/experimental_provider/README.md): non-normative external-provider bridge for deterministic CPU/GPU/FFI experiments. It is isolated from official baselines and CI performance gates.
 
 ## Execution
 
@@ -24,6 +25,15 @@ python tools/runner.py --smoke
 python tools/runner.py --full
 ```
 
+Experimental provider bridge:
+
+```bash
+python tools/experimental_provider_runner.py --list
+python tools/experimental_provider_runner.py --verify-only
+```
+
 ## CI Integration
 
 GitHub Actions workflow `.github/workflows/tests.yml` enforces automated verification on every push and PR.
+
+The experimental external-provider bridge is intentionally **not** part of the normative CI performance gate. Its bundled provider is only a protocol fixture.
