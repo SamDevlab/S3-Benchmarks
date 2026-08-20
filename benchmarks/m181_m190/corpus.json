@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "campaign": "M1.81-M1.90",
+  "canonical_s3_baseline": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+  "historical_tested_pr_head": "8742010f7c7a7956733dd35fabb6a6ef731d0b0b",
+  "historical_benchmark_commit": "fbf53a0eb8cf39ed0245438b6b47dfde63658b20",
+  "corpus_policy": {
+    "correctness_before_performance": true,
+    "public_internet_required": false,
+    "secrets_required": false,
+    "comparative_performance_valid_by_default": false,
+    "historical_characterization_must_be_rerun_on_canonical_merge": true,
+    "native_platform_evidence_must_not_be_inferred_from_structural_checks": true
+  },
+  "workloads": [
+    {
+      "id": "m181-async-task-resume",
+      "milestones": ["M1.81"],
+      "current_harness_check": "async_task",
+      "status": "EXISTING_HARNESS_REPIN_AND_RERUN_REQUIRED",
+      "observable_contract": ["result value", "poll count", "suspended state", "completed state"],
+      "reference_roles": ["async-language-and-lowering-reference"],
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m181-m182-await-chain",
+      "milestones": ["M1.81", "M1.82"],
+      "current_harness_check": "await_chain",
+      "status": "EXISTING_HARNESS_REPIN_AND_RERUN_REQUIRED",
+      "observable_contract": ["final value", "compiled async function count", "deterministic specialization identity"],
+      "reference_roles": ["async-language-and-lowering-reference"],
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m183-bounded-channels",
+      "milestones": ["M1.83"],
+      "current_harness_check": "channels",
+      "status": "EXISTING_HARNESS_REPIN_AND_RERUN_REQUIRED",
+      "parameters": {"capacities": [1, 8, 64]},
+      "observable_contract": ["FIFO order", "message count", "checksum", "closed state"],
+      "reference_roles": ["multithread-async-runtime-and-io-reference"],
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m183-multithread-executor",
+      "milestones": ["M1.83"],
+      "current_harness_check": "executor",
+      "status": "EXISTING_HARNESS_REPIN_AND_RERUN_REQUIRED",
+      "observable_contract": ["atomic bounded admission", "one terminal poll per task", "sorted values", "zero remaining tasks", "serialized cancellation and deferred wake controls"],
+      "reference_roles": ["multithread-async-runtime-and-io-reference"],
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m184-process-io",
+      "milestones": ["M1.84"],
+      "current_harness_check": "process_io",
+      "status": "EXISTING_HARNESS_EXPANSION_REQUIRED",
+      "observable_contract": ["stdout bytes", "stderr bytes", "exit code", "timeout kill/reap", "stdout/stderr overflow kill/reap", "bounded filesystem reads/writes"],
+      "reference_roles": ["multithread-async-runtime-and-io-reference", "portable-process-and-event-loop-reference"],
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m185-http1-loopback",
+      "milestones": ["M1.85"],
+      "current_harness_check": "http_loopback",
+      "status": "EXISTING_HARNESS_EXPANSION_REQUIRED",
+      "observable_contract": ["HTTP status", "response body", "body digest", "ASCII request boundary", "global monotonic deadline", "connection cleanup"],
+      "reference_roles": ["http1-client-reference", "nonblocking-reactor-reference"],
+      "fixture_policy": "loopback_only",
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m185-https-local",
+      "milestones": ["M1.85"],
+      "current_harness_check": "tls_policy",
+      "status": "LOCAL_CERTIFICATE_FIXTURE_REQUIRED",
+      "observable_contract": ["certificate verification required", "hostname verification required", "successful trusted local handshake", "hostname mismatch rejection", "untrusted certificate rejection", "deadline and cleanup"],
+      "reference_roles": ["tls-client-state-machine-reference", "http1-client-reference"],
+      "fixture_policy": "local_ca_and_loopback_only",
+      "timing_state": "NOT_VALID_UNTIL_REAL_LOCAL_HANDSHAKE_CORRECTNESS_PASSES"
+    },
+    {
+      "id": "m186-https-registry-cache",
+      "milestones": ["M1.86"],
+      "current_harness_check": "registry_cache",
+      "status": "EXISTING_HARNESS_EXPANSION_REQUIRED",
+      "observable_contract": ["HTTPS-only origin", "canonical lowercase origin identity", "digest-before-cache", "verified cache hit", "corruption rejection", "malformed alias rejection"],
+      "reference_roles": ["https-registry-and-package-integrity-reference", "reproducible-cache-and-distribution-reference", "tls-client-state-machine-reference"],
+      "fixture_policy": "local_https_registry_only",
+      "timing_state": "CHARACTERIZATION_ONLY_UNTIL_EQUIVALENT_REFERENCE_EXECUTES"
+    },
+    {
+      "id": "m187-ed25519-package-signature",
+      "milestones": ["M1.87"],
+      "current_harness_check": "signature",
+      "status": "PROVIDER_DEPENDENT",
+      "observable_contract": ["valid signature accepted", "tampered payload rejected", "wrong public key rejected", "malformed signature rejected", "no custom crypto fallback"],
+      "reference_roles": ["ed25519-provider-reference", "https-registry-and-package-integrity-reference"],
+      "environment_requirement": "pyca-cryptography provider",
+      "timing_state": "NO_PERFORMANCE_CLAIM"
+    },
+    {
+      "id": "m188-linux-aarch64",
+      "milestones": ["M1.88"],
+      "current_harness_check": "aarch64_structure",
+      "status": "STRUCTURAL_EXISTING_NATIVE_ENVIRONMENT_OPTIONAL",
+      "observable_contract": ["linux-aarch64 target identity", "typed AAPCS64 integer/f64/mixed signatures", "structural artifact hash", "object/link-plan validation", "native result binding when environment exists"],
+      "reference_roles": ["aarch64-abi-object-and-link-reference"],
+      "timing_state": "INVALID_WITHOUT_REAL_LINUX_AARCH64_EXECUTION"
+    },
+    {
+      "id": "m189-macos-arm64",
+      "milestones": ["M1.89"],
+      "current_harness_check": null,
+      "status": "NEW_STRUCTURAL_CHECK_REQUIRED",
+      "observable_contract": ["macos-arm64 target identity", "typed AAPCS64/Darwin ABI contracts", "Mach-O object/link-plan validation", "structural artifact hash", "native result binding when environment exists"],
+      "reference_roles": ["aarch64-abi-object-and-link-reference"],
+      "timing_state": "INVALID_WITHOUT_REAL_MACOS_ARM64_EXECUTION"
+    },
+    {
+      "id": "m190-release-candidate-reproducibility",
+      "milestones": ["M1.90"],
+      "current_harness_check": "reproducibility",
+      "status": "EXISTING_DETERMINISM_CHECK_MUST_BE_UPGRADED_TO_M190_RC_MATRIX",
+      "observable_contract": ["byte-identical repeated bundle", "exact manifest membership", "canonical paths", "duplicate rejection", "bounded file count", "bounded uncompressed bytes", "strict manifest schema", "Apache-2.0 license binding", "checksum and size validation", "fail-closed corruption", "certification matrix provenance"],
+      "reference_roles": ["https-registry-and-package-integrity-reference", "reproducible-cache-and-distribution-reference"],
+      "timing_state": "REPRODUCIBILITY_EVIDENCE_ONLY_NOT_PERFORMANCE"
+    }
+  ]
+}
