@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-20",
+  "campaign": "M1.81-M1.90",
+  "s3_provenance": {
+    "repository": "SamDevlab/S3",
+    "previous_canonical_main": "cd6804f72757d6936ca1ec6c20d5badf55d1aac4",
+    "reviewed_and_locally_tested_pr_head": "8742010f7c7a7956733dd35fabb6a6ef731d0b0b",
+    "canonical_merged_main": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+    "pull_request": 183,
+    "merge_time_utc": "2026-08-20T01:18:23Z",
+    "semantic_rule": "The reviewed/tested PR head and the canonical merge commit are distinct provenance facts. Do not relabel the merge commit as the historical tested SHA."
+  },
+  "historical_benchmark_evidence": {
+    "repository": "SamDevlab/S3-Benchmarks",
+    "campaign_commit": "fbf53a0eb8cf39ed0245438b6b47dfde63658b20",
+    "status_recorded_in_s3_pr": "PASS_WITH_DEFERRED",
+    "recorded_counts": {
+      "pass": 10,
+      "deferred": 1,
+      "failed": 0
+    },
+    "qualification": "HISTORICAL_EVIDENCE_ONLY_REQUIRES_RERUN_FOR_CANONICAL_MERGED_BASELINE",
+    "reason": "The merged S3 BENCHMARK_APPLICABILITY report states that post-review source hardening requires focused correctness/smoke reruns before characterization can be attributed to the newer source head. This corpus therefore preserves the earlier run without treating it as certification of the canonical merge commit."
+  },
+  "references": [
+    {
+      "repository": "rust-lang/rust",
+      "commit": "f7d782a3be46d6bb4b9792fe69a61db389ba1769",
+      "role": "async-language-and-lowering-reference",
+      "priority": "P0",
+      "milestones": ["M1.81", "M1.82"],
+      "study": ["resumable async lowering", "Future ownership", "suspension state machines", "generic async specialization", "drop/cancellation semantics"]
+    },
+    {
+      "repository": "tokio-rs/tokio",
+      "commit": "625954f365727668cb02d04172b34f1149637728",
+      "role": "multithread-async-runtime-and-io-reference",
+      "priority": "P0",
+      "milestones": ["M1.83", "M1.84", "M1.85"],
+      "study": ["bounded task admission", "wake/poll synchronization", "filesystem/process I/O", "timeouts", "TCP runtime integration"]
+    },
+    {
+      "repository": "tokio-rs/mio",
+      "commit": "1e79434244eed630a1ee7f227117960c6296e7f3",
+      "role": "nonblocking-reactor-reference",
+      "priority": "P1",
+      "milestones": ["M1.84", "M1.85"],
+      "study": ["readiness registration", "nonblocking sockets", "wake/re-arm behavior", "resource lifecycle"]
+    },
+    {
+      "repository": "libuv/libuv",
+      "commit": "e43e3d8a464ddb5ce2ac24f4db780db747691a7b",
+      "role": "portable-process-and-event-loop-reference",
+      "priority": "P1",
+      "milestones": ["M1.84", "M1.85"],
+      "study": ["process lifecycle", "streamed stdout/stderr", "kill/reap", "portable socket/event-loop behavior"]
+    },
+    {
+      "repository": "hyperium/hyper",
+      "commit": "8fcaf1a62787b824fdd7b95a3e7c9ea81acd3449",
+      "role": "http1-client-reference",
+      "priority": "P0",
+      "milestones": ["M1.85"],
+      "study": ["HTTP/1.1 framing", "connection lifecycle", "request/response bounds", "cancellation behavior", "client correctness"]
+    },
+    {
+      "repository": "rustls/rustls",
+      "commit": "6868ee84dd62b4292b760cb7ba487cb37f86a95f",
+      "role": "tls-client-state-machine-reference",
+      "priority": "P0",
+      "milestones": ["M1.85", "M1.86"],
+      "study": ["secure TLS defaults", "certificate validation", "hostname validation", "nonblocking TLS I/O", "connection cleanup"]
+    },
+    {
+      "repository": "rust-lang/cargo",
+      "commit": "514c56dd7321eecbfdcf9b6479519cf4edfab906",
+      "role": "https-registry-and-package-integrity-reference",
+      "priority": "P0",
+      "milestones": ["M1.86", "M1.87", "M1.90"],
+      "study": ["content-addressed package identity", "registry transport", "digest verification", "cache integrity", "release/package provenance"]
+    },
+    {
+      "repository": "pyca/cryptography",
+      "commit": "d789b2f4e2e23a9d051879afa9421e70a766e21b",
+      "role": "ed25519-provider-reference",
+      "priority": "P0",
+      "milestones": ["M1.87"],
+      "study": ["Ed25519 verification API", "public-key encoding", "signature failure behavior", "provider-backed crypto boundaries"]
+    },
+    {
+      "repository": "llvm/llvm-project",
+      "commit": "b562ef546e46face7172d174e1a5f5454c470eee",
+      "role": "aarch64-abi-object-and-link-reference",
+      "priority": "P0",
+      "milestones": ["M1.88", "M1.89"],
+      "study": ["typed AAPCS64 lowering", "integer/floating argument classes", "ELF AArch64", "Mach-O ARM64", "object/link structure", "native evidence boundaries"]
+    },
+    {
+      "repository": "astral-sh/uv",
+      "commit": "5c170b8022c5565a1d4ada3406077d8fdf7f9088",
+      "role": "reproducible-cache-and-distribution-reference",
+      "priority": "P1",
+      "milestones": ["M1.86", "M1.90"],
+      "study": ["content-addressed cache", "offline integrity", "deterministic artifact workflows", "reproducible distribution metadata"]
+    }
+  ]
+}
