@@ -7,10 +7,15 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import statistics
+import subprocess
 import sys
 import time
 import textwrap
+
+
+_COMMIT_RE = re.compile(r"[0-9a-f]{40}")
 
 
 def _s3_root() -> Path:
@@ -23,6 +28,31 @@ def _s3_root() -> Path:
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
     return root
+
+
+def _git_head(root: Path, label: str) -> str:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "--verify", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise SystemExit(f"unable to resolve {label} Git HEAD") from error
+    head = result.stdout.strip()
+    if _COMMIT_RE.fullmatch(head) is None:
+        raise SystemExit(f"{label} Git HEAD is not a full commit SHA")
+    return head
+
+
+def _require_pinned_head(root: Path, label: str, expected: str) -> str:
+    if _COMMIT_RE.fullmatch(expected) is None:
+        raise SystemExit(f"{label} evidence SHA must be a full commit SHA")
+    actual = _git_head(root, label)
+    if actual != expected:
+        raise SystemExit(f"{label} HEAD mismatch: expected {expected}, got {actual}")
+    return actual
 
 
 def _fixture(*, include_self_moves: bool):
@@ -119,11 +149,14 @@ def _time_variant(program, *, warmups: int, repetitions: int, loops: int) -> lis
 
 
 def main() -> int:
-    _s3_root()
+    s3_root = _s3_root()
+    benchmark_root = Path(__file__).resolve().parents[2]
     source_sha = os.environ.get("S3_COMMIT")
     benchmark_sha = os.environ.get("BENCHMARK_REPO_COMMIT")
     if not source_sha or not benchmark_sha:
         raise SystemExit("S3_COMMIT and BENCHMARK_REPO_COMMIT are required evidence inputs")
+    resolved_source_sha = _require_pinned_head(s3_root, "S3_REPO", source_sha)
+    resolved_benchmark_sha = _require_pinned_head(benchmark_root, "benchmark repository", benchmark_sha)
     warmups = 2
     repetitions = 7
     loops = 25
@@ -179,8 +212,9 @@ def main() -> int:
     payload = {
         "schema": "s3.m199.self-move.v1",
         "status": "PASS_CHARACTERIZATION_ONLY",
-        "s3_commit": source_sha,
-        "benchmark_repo_commit": benchmark_sha,
+        "s3_commit": resolved_source_sha,
+        "benchmark_repo_commit": resolved_benchmark_sha,
+        "provenance_check": "PASS",
         "environment": {
             "os": platform.platform(),
             "architecture": platform.machine(),
@@ -193,7 +227,7 @@ def main() -> int:
             "repetitions": repetitions,
             "loops_per_sample": loops,
             "timed_scope": "hosted Assembly emulator execution",
-            "control": "same AssemblyProgram and x86-64 emitter with register allocation disabled; only eliminate_redundant_noop_moves toggled",
+            "control": "same parsed AssemblyProgram/workload; OFF = original AssemblyProgram; ON = eliminate_redundant_noop_moves(original); timing = hosted Emulator; native x86 generation = supplementary structural probe only; no native speedup claim",
         },
         "correctness": {
             "status": "PASS",
