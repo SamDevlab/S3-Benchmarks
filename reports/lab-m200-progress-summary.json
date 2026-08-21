@@ -1,0 +1,203 @@
+{
+  "schema": "s3.lab.m200.progress.v1",
+  "milestone": "M2.00",
+  "name": "s3-progress-snapshot",
+  "provenance": {
+    "baseline_s3_sha": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+    "candidate_s3_sha": "a651e9b3551f218af1c27bb908e0692880afc4da",
+    "benchmark_sha": "c13f159bb19f13cac9e83e523b6e392baae71738",
+    "result_branch": "benchmark/m200-progress-snapshot-20260821"
+  },
+  "environment": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "architecture": "AMD64",
+    "cpu": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "logical_cpus": 8,
+    "ram_gb": 15.95,
+    "python": "3.11.9",
+    "git": "2.55.0.windows.2",
+    "gcc": "UNAVAILABLE",
+    "clang": "UNAVAILABLE",
+    "cc": "UNAVAILABLE",
+    "native_execution_available": false,
+    "native_comparative": "DEFERRED_BY_ENVIRONMENT"
+  },
+  "gates": {
+    "jsmn_correctness_baseline": {
+      "status": "PASS",
+      "exit": 0,
+      "evidence": "tools/runner.py --verify-only; differential correctness passed"
+    },
+    "jsmn_correctness_candidate": {
+      "status": "PASS",
+      "exit": 0,
+      "evidence": "tools/runner.py --verify-only; differential correctness passed"
+    },
+    "jsmn_native_comparative": {
+      "status": "DEFERRED_BY_ENVIRONMENT",
+      "exit": null,
+      "evidence": "Windows AMD64 host has no gcc, clang, or cc; Linux x86-64 native execution is unavailable"
+    },
+    "m181_m190_correctness": {
+      "status": "PASS_WITH_DEFERRED",
+      "exit": 0,
+      "passed": 10,
+      "failed": 0,
+      "deferred": 1,
+      "deferred_checks": ["signature"]
+    },
+    "m181_m190_characterization": {
+      "status": "PASS_CHARACTERIZATION_ONLY",
+      "exit": 0,
+      "warmups": 1,
+      "repetitions": 3,
+      "reference_toolchain": "UNAVAILABLE; no comparative timing claimed"
+    },
+    "m199_correctness": {
+      "status": "PASS",
+      "exit": 0,
+      "provenance_check": "PASS",
+      "native_execution_available": false
+    },
+    "m199_characterization": {
+      "status": "PASS_CHARACTERIZATION_ONLY",
+      "exit": 0,
+      "timing_class": "CHARACTERIZATION_ONLY",
+      "native_speedup_claim": "NO",
+      "control": {
+        "same_parsed_assembly_program": true,
+        "off": "original AssemblyProgram",
+        "on": "eliminate_redundant_noop_moves(original)",
+        "timing": "hosted Emulator",
+        "native_x86_generation": "supplementary structural probe only",
+        "native_speedup_claim": "none"
+      }
+    }
+  },
+  "dimensions": {
+    "CORRECTNESS": {
+      "score": null,
+      "coverage": "JSMN baseline/candidate differential gates, M1.81-M1.90 correctness, and M1.99 controls",
+      "confidence": "HIGH",
+      "status": "PASS_WITH_DEFERRED",
+      "evidence": [
+        "JSMN baseline and candidate: differential correctness PASS",
+        "M1.81-M1.90: 10 PASS, 0 FAIL, 1 DEFERRED",
+        "M1.99: 3 correctness cases PASS"
+      ]
+    },
+    "NATIVE_CODEGEN": {
+      "score": null,
+      "coverage": "M1.99 structural native x86 probe only",
+      "confidence": "MEDIUM",
+      "status": "PASS_STRUCTURAL_ONLY",
+      "evidence": [
+        "M1.99 native probe generated 33733 bytes",
+        "logical instruction sites: 3",
+        "physical self-copy elided: true",
+        "native execution and comparative ELF measurement deferred by environment"
+      ]
+    },
+    "PERFORMANCE": {
+      "score": null,
+      "coverage": "Hosted M1.81-M1.90 smoke and M1.99 hosted Emulator characterization",
+      "confidence": "HIGH",
+      "status": "DEFERRED_BY_ENVIRONMENT",
+      "evidence": [
+        "No Linux x86-64 native toolchain is available on this Windows host",
+        "Hosted timing is characterization-only and is not a native comparative result",
+        "No IMPROVED or REGRESSED classification is assigned"
+      ]
+    },
+    "RUNTIME_ASYNC": {
+      "score": null,
+      "coverage": "M1.81-M1.90 async task, await chain, channels, executor, and process I/O contracts",
+      "confidence": "HIGH",
+      "status": "PASS",
+      "evidence": ["All applicable runtime checks passed"]
+    },
+    "NETWORK_TLS": {
+      "score": null,
+      "coverage": "HTTP loopback and TLS policy contracts",
+      "confidence": "MEDIUM",
+      "status": "STRUCTURAL_ONLY",
+      "evidence": [
+        "HTTP loopback correctness passed",
+        "TLS policy passed structurally",
+        "No local certificate handshake timing fixture"
+      ]
+    },
+    "PACKAGES_SECURITY": {
+      "score": null,
+      "coverage": "Registry/cache correctness contract",
+      "confidence": "MEDIUM",
+      "status": "PARTIAL",
+      "evidence": ["Registry/cache correctness passed; no broader package or security audit was run"]
+    },
+    "PORTABILITY": {
+      "score": null,
+      "coverage": "AArch64 structural target contract",
+      "confidence": "MEDIUM",
+      "status": "STRUCTURAL_ONLY",
+      "evidence": [
+        "AArch64 structural check passed",
+        "Linux AArch64 native execution deferred on Windows"
+      ]
+    },
+    "REPRODUCIBILITY": {
+      "score": null,
+      "coverage": "M1.81-M1.90 reproducibility contract and pinned Git provenance",
+      "confidence": "HIGH",
+      "status": "PASS",
+      "evidence": [
+        "Reproducibility contract passed",
+        "M1.99 S3 and benchmark repository HEAD pins matched exactly"
+      ]
+    },
+    "REAL_WORLD": {
+      "score": null,
+      "coverage": "No promoted real-world comparative workload",
+      "confidence": "HIGH",
+      "status": "UNMEASURED",
+      "evidence": ["Candidate campaign references are not treated as benchmark results without dedicated equivalence harnesses"]
+    },
+    "TEST_HARNESS_COST": {
+      "score": null,
+      "coverage": "No T4 or full-suite run in this snapshot",
+      "confidence": "HIGH",
+      "status": "UNMEASURED",
+      "evidence": ["The snapshot intentionally did not execute T4 or alter slow-test methodology"]
+    }
+  },
+  "performance_delta": {
+    "baseline_s3_o0_ns_per_parse": null,
+    "baseline_s3_o1_ns_per_parse": null,
+    "candidate_s3_o0_ns_per_parse": null,
+    "candidate_s3_o1_ns_per_parse": null,
+    "baseline_s3_o1_vs_c_o2": "UNMEASURED",
+    "candidate_s3_o1_vs_c_o2": "UNMEASURED",
+    "s3_o1_delta_percent": null,
+    "elf_size_delta": "UNMEASURED",
+    "text_size_delta": "UNMEASURED",
+    "classifications": {
+      "all_native_comparative_metrics": "DEFERRED_BY_ENVIRONMENT",
+      "hosted_characterization": "CHARACTERIZATION_ONLY"
+    }
+  },
+  "direction": {
+    "performance_direction": "DEFERRED_BY_ENVIRONMENT",
+    "capability_direction": "PASS_WITH_DEFERRED"
+  },
+  "policy": {
+    "s3_change": "NO",
+    "t4_runs": 0,
+    "merge": "NO",
+    "m2_01_started": "NO",
+    "native_speedup_claim": "NO"
+  },
+  "result": {
+    "report_json": "reports/lab-m200-progress-summary.json",
+    "report_md": "reports/lab-m200-progress-summary.md",
+    "status": "COMPLETE_WITH_ENVIRONMENT_DEFERMENTS"
+  }
+}
