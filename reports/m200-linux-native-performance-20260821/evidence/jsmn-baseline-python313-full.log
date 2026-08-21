@@ -1,0 +1,24 @@
+/home/vboxuser/s3-m200-linux-native-performance-20260821-retry1/s3-benchmarks-harness/tools/runner.py:618: SyntaxWarning: invalid escape sequence '\_'
+  """
+GATE_F_DIFFERENTIAL_CORRECTNESS: PASS (100% token and error parity verified)
+Wrote JSON report to reports/lab-m200-linux-jsmn-baseline.json
+Wrote Markdown report to reports/lab-m200-linux-jsmn-baseline.md
+
+--- BENCHMARK SUMMARY ---
+JSMN_BENCHMARK_HEAD=c13f159bb19f13cac9e83e523b6e392baae71738
+C_O2_NS_PER_PARSE=133.48
+S3_O0_NS_PER_PARSE=9355.24
+S3_O1_NS_PER_PARSE=9173.98
+GEOMEAN_S3_O0_VS_C_O2=48.17x
+GEOMEAN_S3_O1_VS_C_O2=47.18x
+GEOMEAN_S3_O1_VS_S3_O0=0.98x
+S3_O0_VS_C_O2=70.09x slower
+S3_O1_VS_C_O2=68.73x slower
+S3_O1_VS_S3_O0=1.02x faster
+C_O2_ELF_BYTES=16224
+C_O2_TEXT_BYTES=3521
+S3_O1_ELF_BYTES=1146240
+S3_O1_TEXT_BYTES=1131729
+FIXTURES_EXPECTED=6
+FIXTURES_COMPLETED=6
+FIXTURES_BLOCKED=0

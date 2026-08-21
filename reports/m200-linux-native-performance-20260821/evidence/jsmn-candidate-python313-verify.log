@@ -1,0 +1,4 @@
+/home/vboxuser/s3-m200-linux-native-performance-20260821-retry1/s3-benchmarks-harness/tools/runner.py:618: SyntaxWarning: invalid escape sequence '\_'
+  """
+GATE_F_DIFFERENTIAL_CORRECTNESS: PASS (100% token and error parity verified)
+Verify-only requested. Exiting cleanly.

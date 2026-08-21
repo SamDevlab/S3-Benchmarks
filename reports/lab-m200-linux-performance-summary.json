@@ -1,0 +1,156 @@
+{
+  "benchmark": "jsmn",
+  "campaign": "S3-M200-LINUX-PERFORMANCE-PUBLISH-AND-LOCALIZE-20260821",
+  "provenance": {
+    "baseline_s3": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+    "candidate_s3": "a651e9b3551f218af1c27bb908e0692880afc4da",
+    "benchmark_harness": "c13f159bb19f13cac9e83e523b6e392baae71738",
+    "environment_class": "VIRTUALBOX_VM",
+    "architecture": "x86_64"
+  },
+  "environment": {
+    "os": "Linux",
+    "kernel": "7.0.0-29-generic",
+    "logical_cpus": 3,
+    "python": "3.13.15",
+    "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1)",
+    "binutils": "GNU Binutils for Ubuntu 2.46",
+    "python_3_13": "PASS",
+    "python_3_14": "COMPATIBILITY_OR_ENVIRONMENT_ISSUE"
+  },
+  "correctness": {
+    "baseline": "PASS",
+    "candidate": "PASS",
+    "fixtures_expected": 6,
+    "fixtures_completed": 6,
+    "fixtures_blocked": 0,
+    "verify_only_exit": 0,
+    "full_run_exit": 0
+  },
+  "methodology": {
+    "scope": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
+    "warmups": 5,
+    "repetitions": 30,
+    "parses_per_sample": 10000,
+    "process_startup": "AMORTIZED_NOT_SUBTRACTED",
+    "same_vm": true,
+    "same_cpu": true,
+    "same_vcpu_count": true,
+    "same_gcc_version": true,
+    "same_python_version": true,
+    "same_benchmark_sha": true,
+    "same_benchmark_protocol": true,
+    "native_comparative_valid": true
+  },
+  "performance": {
+    "direction": "REGRESSED",
+    "regression_confidence": "LIKELY_REGRESSION",
+    "regression_scope": "SHARED_PATH",
+    "causal_attribution": "INCONCLUSIVE_DUE_TO_C_CONTROL_DRIFT",
+    "raw_wall_time_delta_is_not_attributed_entirely_to_s3": true,
+    "aggregate_geomean_of_fixture_medians_ns_per_parse": {
+      "baseline": {
+        "C-GCC-O0": 188.33871886642373,
+        "C-GCC-O2": 128.36043383937997,
+        "C-GCC-O3": 121.80994004035024,
+        "S3-O0-NATIVE": 6183.138580940165,
+        "S3-O1-NATIVE": 6055.660583991111
+      },
+      "candidate": {
+        "C-GCC-O0": 267.604213745287,
+        "C-GCC-O2": 192.1206570510366,
+        "C-GCC-O3": 180.1758250446153,
+        "S3-O0-NATIVE": 7540.585243263848,
+        "S3-O1-NATIVE": 7288.678662569169
+      }
+    },
+    "raw_delta_percent": {
+      "C-GCC-O0": 42.08666988707779,
+      "C-GCC-O2": 49.672801271021804,
+      "C-GCC-O3": 47.915535452140446,
+      "S3-O0-NATIVE": 21.954006764591693,
+      "S3-O1-NATIVE": 20.361413283923046
+    },
+    "normalized_vs_c_o2": {
+      "baseline": {
+        "S3-O0-NATIVE": 48.17012841104336,
+        "S3-O1-NATIVE": 47.177003090911064
+      },
+      "candidate": {
+        "S3-O0-NATIVE": 39.24921639873792,
+        "S3-O1-NATIVE": 37.938026938107676
+      },
+      "delta_percent": {
+        "S3-O0-NATIVE": -18.51959358750692,
+        "S3-O1-NATIVE": -19.58364361339293
+      }
+    }
+  },
+  "distribution_stats_over_six_fixture_medians": {
+    "baseline": {
+      "C-GCC-O0": {"count": 6, "median": 186.2684, "min": 132.5015, "max": 292.3992, "q1": 141.3479, "q3": 241.835, "iqr": 100.4871},
+      "C-GCC-O2": {"count": 6, "median": 126.2602, "min": 111.35705, "max": 162.11185, "q1": 117.9255625, "q3": 132.7456, "iqr": 14.8200375},
+      "C-GCC-O3": {"count": 6, "median": 120.0936, "min": 106.05165, "max": 149.0603, "q1": 112.280875, "q3": 127.9865, "iqr": 15.705625},
+      "S3-O0-NATIVE": {"count": 6, "median": 5533.245675, "min": 4052.30755, "max": 12507.79395, "q1": 4117.278125, "q3": 8748.3518125, "iqr": 4631.0736875},
+      "S3-O1-NATIVE": {"count": 6, "median": 5433.342025, "min": 3950.2088, "max": 12432.86655, "q1": 3984.4925, "q3": 8576.5849125, "iqr": 4592.0924125}
+    },
+    "candidate": {
+      "C-GCC-O0": {"count": 6, "median": 276.748825, "min": 174.30675, "max": 398.21885, "q1": 218.9570125, "q3": 326.69125, "iqr": 107.7342375},
+      "C-GCC-O2": {"count": 6, "median": 195.8642, "min": 154.1671, "max": 228.9795, "q1": 178.3867875, "q3": 210.1524625, "iqr": 31.765675},
+      "C-GCC-O3": {"count": 6, "median": 180.8855, "min": 154.4048, "max": 201.994, "q1": 175.9561375, "q3": 189.433725, "iqr": 13.4775875},
+      "S3-O0-NATIVE": {"count": 6, "median": 6953.329775, "min": 4715.684, "max": 14829.0359, "q1": 5165.8884, "q3": 10631.0695375, "iqr": 5465.1811375},
+      "S3-O1-NATIVE": {"count": 6, "median": 6637.4907, "min": 4725.8368, "max": 14175.56295, "q1": 4901.5608375, "q3": 10402.725675, "iqr": 5501.1648375}
+    }
+  },
+  "per_fixture_delta_percent": [
+    {"fixture": "tiny_01_empty_obj.json", "C-GCC-O2": 32.25133459093274, "S3-O0-NATIVE": 13.938319262139531, "S3-O1-NATIVE": 19.63511397169688},
+    {"fixture": "tiny_02_empty_arr.json", "C-GCC-O2": 105.62640623112767, "S3-O0-NATIVE": 27.934177898219993, "S3-O1-NATIVE": 23.234432665949466},
+    {"fixture": "tiny_03_pair.json", "C-GCC-O2": 44.632640029785776, "S3-O0-NATIVE": 25.905992492068552, "S3-O1-NATIVE": 22.030325441333986},
+    {"fixture": "tiny_04_arr.json", "C-GCC-O2": 52.03116940714372, "S3-O0-NATIVE": 20.438402326191518, "S3-O1-NATIVE": 21.110204083145344},
+    {"fixture": "tiny_05_string.json", "C-GCC-O2": 43.38943022018085, "S3-O0-NATIVE": 25.538363973990673, "S3-O1-NATIVE": 22.381391112036365},
+    {"fixture": "tiny_06_bool_null.json", "C-GCC-O2": 31.11799044918677, "S3-O0-NATIVE": 18.55836416301053, "S3-O1-NATIVE": 14.016851166153632}
+  ],
+  "per_fixture_classification": {
+    "direction": "UNIFORM",
+    "magnitude": "INPUT_DEPENDENT",
+    "outlier_driven": false,
+    "best_s3_o0": "tiny_01_empty_obj.json (+13.938319%)",
+    "worst_s3_o0": "tiny_02_empty_arr.json (+27.934178%)",
+    "best_s3_o1": "tiny_06_bool_null.json (+14.016851%)",
+    "worst_s3_o1": "tiny_02_empty_arr.json (+23.234433%)"
+  },
+  "structural_comparison": {
+    "S3-O0": {"instruction_count": {"baseline": 50092, "candidate": 50092, "delta": 0}, "stack_ops": {"baseline": 7491, "candidate": 7491, "delta": 0}, "assembly_lines": {"baseline": 71676, "candidate": 71676, "delta": 0}, "branches": {"baseline": 12914, "candidate": 12914, "delta": 0}, "load_store": {"baseline": 24997, "candidate": 24997, "delta": 0}, "elf_bytes": {"baseline": 1162800, "candidate": 1162800, "delta": 0}, "text_bytes": {"baseline": 1147822, "candidate": 1147822, "delta": 0}},
+    "S3-O1": {"instruction_count": {"baseline": 49414, "candidate": 49414, "delta": 0}, "stack_ops": {"baseline": 7560, "candidate": 7560, "delta": 0}, "assembly_lines": {"baseline": 70698, "candidate": 70698, "delta": 0}, "branches": {"baseline": 12694, "candidate": 12694, "delta": 0}, "load_store": {"baseline": 24745, "candidate": 24745, "delta": 0}, "elf_bytes": {"baseline": 1146240, "candidate": 1146240, "delta": 0}, "text_bytes": {"baseline": 1131729, "candidate": 1131729, "delta": 0}}
+  },
+  "source_delta_localization": [
+    {"change": "M1.99 redundant native self-move analysis", "first_commit": "a06baa8", "possible_perf_effect": "native codegen candidate accounting; later candidate path no longer rewrites Assembly", "evidence": "candidate/base instruction, stack, branch, ELF and text counters are identical", "confidence": "LOW"},
+    {"change": "logical self-move preservation and x86 initialization guard", "first_commit": "7b99ebb", "possible_perf_effect": "additional initialized-register check on logical TMOV may add shared native-path work", "evidence": "touches x86 emitter; O0 and O1 both regress, but structural counters are unchanged", "confidence": "LOW"},
+    {"change": "preserve captured frame stores", "first_commit": "b59de94", "possible_perf_effect": "less dead-store elimination can preserve frame store/reload traffic", "evidence": "optimizer explicitly disables global DSE for memory-observable paths; no benchmark counter expansion", "confidence": "LOW"},
+    {"change": "loopback HTTP body backpressure", "first_commit": "4be50ff", "possible_perf_effect": "none expected for JSMN native workload", "evidence": "HTTP-only code and tests; JSMN reports show no linkage", "confidence": "HIGH_NO_EFFECT"},
+    {"change": "release stability gate", "first_commit": "aa14b36", "possible_perf_effect": "none expected in JSMN hot path", "evidence": "release validation and packaging code only", "confidence": "HIGH_NO_EFFECT"}
+  ],
+  "optimization_backlog": [
+    {"observed": "logical TMOV handling moved from Assembly rewriting to x86 emitter validation", "likely_layer": "x86-64 emitter", "expected_effect": "measure and reduce redundant initialized-register checks while preserving safety", "evidence_strength": "LOW", "requires_production_change": true},
+    {"observed": "memory-observability mode disables global DSE for captured-frame paths", "likely_layer": "optimizer and frame lowering", "expected_effect": "recover safe store/reload elimination without violating captured-memory semantics", "evidence_strength": "LOW", "requires_production_change": true},
+    {"observed": "raw S3 and C timings both drifted, while normalized S3/C-O2 ratios improved", "likely_layer": "native measurement boundary", "expected_effect": "paired or interleaved controls before attributing future changes to compiler code", "evidence_strength": "HIGH", "requires_production_change": true}
+  ],
+  "evidence": {
+    "raw_evidence_manifest": "reports/m200-linux-native-performance-20260821/evidence/raw-evidence-sha256.txt",
+    "raw_inventory": "reports/m200-linux-native-performance-20260821/evidence/evidence-inventory.txt",
+    "raw_reports": [
+      "reports/m200-linux-native-performance-20260821/evidence/lab-m200-linux-jsmn-baseline.json",
+      "reports/m200-linux-native-performance-20260821/evidence/lab-m200-linux-jsmn-baseline.md",
+      "reports/m200-linux-native-performance-20260821/evidence/lab-m200-linux-jsmn-candidate.json",
+      "reports/m200-linux-native-performance-20260821/evidence/lab-m200-linux-jsmn-candidate.md"
+    ]
+  },
+  "status": {
+    "test_harness_cost_separate_from_compiler_native_performance": true,
+    "s3_change": "NO",
+    "benchmark_change": "NO",
+    "t4_runs": 0,
+    "merge": "NO",
+    "m2_01_started": "NO"
+  }
+}

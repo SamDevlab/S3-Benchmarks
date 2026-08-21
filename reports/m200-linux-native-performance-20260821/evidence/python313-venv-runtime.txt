@@ -1,0 +1,10 @@
+Python 3.13.15
+pip 26.2.1 from /home/vboxuser/.venvs/s3-m200-native/lib/python3.13/site-packages/pip (python 3.13)
+execnet==2.1.2
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+Pygments==2.21.0
+pytest==9.1.1
+pytest-xdist==3.8.0
+-e git+file:///home/vboxuser/s3-source-m200-20260821.bundle@a9e430551f2ee77aa2ef229daf9e967333e83e2c#egg=s3_bootstrap&subdirectory=../../../s3-baseline
