@@ -26,6 +26,12 @@ sys.path.insert(0, str(BASE_DIR))
 if S3_REPO_DIR.exists() and str(S3_REPO_DIR) not in sys.path:
     sys.path.append(str(S3_REPO_DIR))
 
+from tools.artifacts import (
+    ArtifactError,
+    RunIdentity,
+    file_record,
+    require_provenance,
+)
 
 from bootstrap.s3.backends.x86_64 import NativeBackendError, NativeToolchain, generate_native_assembly
 from bootstrap.s3.backends.x86_64.diagnostics import NativePlatformError
@@ -235,39 +241,182 @@ def get_binary_size_info(binary_path: Path) -> tuple[int, int]:
     return file_bytes, text_bytes
 
 
+def build_native_artifact(
+    assembly_path: Path,
+    executable_path: Path,
+    compiler: str,
+    *,
+    timeout: float = 30.0,
+) -> tuple[Path, list[list[str]]]:
+    """Build one native artifact entirely inside its current run directory."""
+
+    object_path = executable_path.with_suffix(".o")
+    compile_command = [
+        compiler,
+        "-x",
+        "assembler",
+        "-c",
+        str(assembly_path.resolve()),
+        "-o",
+        str(object_path.resolve()),
+    ]
+    link_command = [
+        compiler,
+        "-nostdlib",
+        "-no-pie",
+        "-Wl,--build-id=none",
+        str(object_path.resolve()),
+        "-o",
+        str(executable_path.resolve()),
+    ]
+    for command in (compile_command, link_command):
+        subprocess.run(
+            command,
+            cwd=str(assembly_path.parent.resolve()),
+            check=True,
+            capture_output=True,
+            text=True,
+            shell=False,
+            timeout=timeout,
+        )
+    if not executable_path.is_file() or not object_path.is_file():
+        raise RuntimeError("native toolchain reported success without artifacts")
+    executable_path.chmod(executable_path.stat().st_mode | 0o111)
+    return object_path, [compile_command, link_command]
+
+
+def make_artifact_record(
+    run: RunIdentity,
+    *,
+    fixture_id: str,
+    implementation: str,
+    optimization: str,
+    input_path: Path,
+    generated_source_path: Path,
+    assembly_path: Path | None,
+    object_path: Path | None,
+    executable_path: Path | None,
+    commands: list[list[str]],
+    metrics: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    record = {
+        "fixture_id": fixture_id,
+        "implementation": implementation,
+        "optimization": optimization,
+        "run_id": run.run_id,
+        "input_source": file_record(run, input_path),
+        "generated_source": file_record(run, generated_source_path),
+        "assembly": file_record(run, assembly_path),
+        "object": file_record(run, object_path),
+        "executable": file_record(run, executable_path),
+        "commands": commands,
+    }
+    if metrics is not None:
+        record["metrics"] = metrics
+    return record
+
+
+def write_run_manifest(
+    run: RunIdentity,
+    *,
+    provenance: dict[str, str],
+    environment: dict[str, Any],
+    argv: list[str],
+    records: list[dict[str, Any]],
+) -> None:
+    manifest = {
+        "schema": "s3.native-artifact-manifest.v1",
+        "run_id": run.run_id,
+        "provenance": provenance,
+        "environment": environment,
+        "artifacts": records,
+    }
+    run.write_json_once("artifact-manifest.json", manifest)
+    run.write_json_once(
+        "metadata.json",
+        {
+            "schema": "s3.native-run-metadata.v1",
+            "run_id": run.run_id,
+            "provenance": provenance,
+            "environment": environment,
+            "command": argv,
+            "artifact_manifest": "artifact-manifest.json",
+        },
+    )
+
+
 def main():
+    parser = argparse.ArgumentParser(description="S3 Benchmark Suite Master Runner")
+    parser.add_argument("--smoke", action="store_true", help="Run short smoke benchmark cycle")
+    parser.add_argument("--full", action="store_true", help="Run full statistical benchmark suite")
+    parser.add_argument("--verify-only", action="store_true", help="Run differential correctness gate only")
+    parser.add_argument("--run-id", help="Unique run identity; an unused identity is generated when omitted")
+    parser.add_argument(
+        "--artifact-root",
+        type=Path,
+        default=BASE_DIR / ".artifacts",
+        help="Parent directory for isolated run artifacts",
+    )
+    parser.add_argument("--s3-sha", default=os.environ.get("S3_COMMIT"))
+    parser.add_argument(
+        "--benchmark-sha",
+        default=os.environ.get("BENCHMARK_REPO_COMMIT"),
+    )
+    parser.add_argument("--output-json", type=Path)
+    parser.add_argument("--output-markdown", type=Path)
+    args = parser.parse_args()
+
+    try:
+        if not args.s3_sha or not args.benchmark_sha:
+            raise ArtifactError(
+                "S3_COMMIT and BENCHMARK_REPO_COMMIT (or --s3-sha/--benchmark-sha) "
+                "are required for fail-closed provenance"
+            )
+        provenance = require_provenance(
+            s3_repo=S3_REPO_DIR,
+            requested_s3_sha=args.s3_sha,
+            benchmark_repo=BASE_DIR,
+            requested_benchmark_sha=args.benchmark_sha,
+        )
+        run = RunIdentity.create(args.artifact_root, args.run_id)
+    except ArtifactError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2) from error
+
     verify_no_synthetic_timing_regression()
     test_differential_correctness_rules()
     test_loop_factor_math()
     test_time_unit_validation()
 
-    parser = argparse.ArgumentParser(description="S3 Benchmark Suite Master Runner")
-    parser.add_argument("--smoke", action="store_true", help="Run short smoke benchmark cycle")
-    parser.add_argument("--full", action="store_true", help="Run full statistical benchmark suite")
-    parser.add_argument("--verify-only", action="store_true", help="Run differential correctness gate only")
-    parser.add_argument("--output-json", type=Path, default=BASE_DIR / "reports" / "jsmn-baseline.json")
-    parser.add_argument("--output-markdown", type=Path, default=BASE_DIR / "reports" / "jsmn-baseline.md")
-    args = parser.parse_args()
-
-    build_dir = BASE_DIR / "build"
-    build_dir.mkdir(exist_ok=True)
-
     env_meta = collect_environment_metadata(S3_REPO_DIR)
+    env_meta.update(provenance)
+    env_meta["run_id"] = run.run_id
 
-    # Ensure corpus generator runs
-    corpus_dir = BASE_DIR / "benchmarks" / "jsmn" / "corpus"
+    if args.output_json is None:
+        args.output_json = run.path("report.json")
+    if args.output_markdown is None:
+        args.output_markdown = run.path("report.md")
+    run.relative(args.output_json)
+    run.relative(args.output_markdown)
+
+    # Generate the corpus only inside this run; tracked/static fixtures are read-only.
+    corpus_dir = run.path("corpus")
+    corpus_dir.mkdir()
     corpus_files = generate_corpus(corpus_dir)
 
     s3_demo_template = (BASE_DIR / "benchmarks" / "jsmn" / "s3" / "jsmn_demo.s3").read_text(encoding="utf-8")
 
     # 1. Compile standalone C runner for differential correctness verification
     c_standalone_gcc_o2 = None
+    correctness_dir = run.path("correctness")
+    correctness_dir.mkdir()
     if shutil.which("gcc"):
         src = BASE_DIR / "benchmarks" / "jsmn" / "upstream" / "c_runner.c"
-        out_bin = build_dir / "c_runner_standalone_gcc_o2"
+        out_bin = correctness_dir / "c_runner_standalone_gcc_o2"
         if sys.platform == "win32" and not out_bin.name.endswith(".exe"):
             out_bin = out_bin.with_suffix(".exe")
-        cmd = ["gcc", "-O2", "-std=c99", "-I", str(BASE_DIR / "benchmarks" / "jsmn" / "upstream"), str(src), "-o", str(out_bin)]
+        compiler = shutil.which("gcc")
+        cmd = [compiler, "-O2", "-std=c99", "-I", str(BASE_DIR / "benchmarks" / "jsmn" / "upstream"), str(src), "-o", str(out_bin)]
         try:
             subprocess.run(cmd, check=True, capture_output=True, text=True)
             c_standalone_gcc_o2 = out_bin
@@ -276,18 +425,38 @@ def main():
 
     # 2. Hosted Differential Correctness Gate
     correctness_pass, correctness_logs = verify_differential_correctness(
-        c_standalone_gcc_o2, s3_demo_template, DEFAULT_TEST_SUITE
+        c_standalone_gcc_o2,
+        s3_demo_template,
+        DEFAULT_TEST_SUITE,
+        diagnostic_context={
+            "s3_sha": provenance["s3_commit"],
+            "run_id": run.run_id,
+        },
     )
 
     if not correctness_pass:
         print("ERROR: Differential correctness verification failed!")
         for log in correctness_logs:
             print("  ", log)
+        write_run_manifest(
+            run,
+            provenance=provenance,
+            environment=env_meta,
+            argv=sys.argv,
+            records=[],
+        )
         sys.exit(1)
 
     print("GATE_F_DIFFERENTIAL_CORRECTNESS: PASS (100% token and error parity verified)")
 
     if args.verify_only:
+        write_run_manifest(
+            run,
+            provenance=provenance,
+            environment=env_meta,
+            argv=sys.argv,
+            records=[],
+        )
         print("Verify-only requested. Exiting cleanly.")
         return
 
@@ -318,6 +487,7 @@ def main():
     comparison_rows = []
     assembly_metrics_map = {}
     binary_sizes_map = {}
+    artifact_records: list[dict[str, Any]] = []
 
     expected_fixtures_count = len(summary_fixtures)
     completed_fixtures_count = 0
@@ -327,11 +497,19 @@ def main():
         text = fix_file.read_text(encoding="utf-8")
         num_bytes = len(text.encode("utf-8"))
         sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        fixture_id = fix_file.stem
+        fixture_dir = run.fixture_root(fixture_id)
+        input_path = fixture_dir / "input.json"
+        input_path.write_bytes(text.encode("utf-8"))
 
-        # Render fixture-specific S3 loop source in build/
+        # Render fixture-specific S3 loop source in this run's isolated fixture tree.
         s3_loop_src = render_s3_loop_source(s3_demo_template, text, loop_parses)
-        s3_src_path = build_dir / f"jsmn_loop_{fix_file.stem}.s3"
-        s3_src_path.write_text(s3_loop_src, encoding="utf-8")
+        s3_o0_dir = run.variant_root(fixture_id, "s3-o0")
+        s3_o1_dir = run.variant_root(fixture_id, "s3-o1")
+        s3_o0_src_path = s3_o0_dir / "source.s3"
+        s3_o1_src_path = s3_o1_dir / "source.s3"
+        s3_o0_src_path.write_text(s3_loop_src, encoding="utf-8", newline="\n")
+        s3_o1_src_path.write_text(s3_loop_src, encoding="utf-8", newline="\n")
 
         # Compile S3 assembly for O0 and O1 with effectively unlimited instruction limit for benchmark loop
         s3_asm_o0 = generate_native_assembly(
@@ -341,32 +519,125 @@ def main():
             compile_source(s3_loop_src, "O1").assembly, max_instructions=(1 << 62)
         )
 
-        (build_dir / f"jsmn_o0_{fix_file.stem}.s").write_text(s3_asm_o0, encoding="utf-8")
-        (build_dir / f"jsmn_o1_{fix_file.stem}.s").write_text(s3_asm_o1, encoding="utf-8")
+        s3_o0_asm_path = s3_o0_dir / "program.s"
+        s3_o1_asm_path = s3_o1_dir / "program.s"
+        s3_o0_asm_path.write_text(s3_asm_o0, encoding="utf-8", newline="\n")
+        s3_o1_asm_path.write_text(s3_asm_o1, encoding="utf-8", newline="\n")
 
         if not assembly_metrics_map:
             assembly_metrics_map["S3-O0"] = analyze_assembly_text(s3_asm_o0, "S3-O0").__dict__
             assembly_metrics_map["S3-O1"] = analyze_assembly_text(s3_asm_o1, "S3-O1").__dict__
 
-        # Compile fixture-specific embedded C binaries
+        # Compile fixture-specific embedded C binaries in this run's c/ directory.
+        c_dir = run.variant_root(fixture_id, "c")
         c_bins = {}
+        c_commands: dict[str, list[list[str]]] = {}
         if shutil.which("gcc"):
             for opt in ["O0", "O2", "O3"]:
-                b = compile_embedded_c_runner(build_dir, fix_file.stem, text, loop_parses, opt, "gcc")
+                b = compile_embedded_c_runner(c_dir, fixture_id, text, loop_parses, opt, "gcc")
                 if b:
                     c_bins[f"C-GCC-{opt}"] = b
+                    compiler = shutil.which("gcc")
+                    assert compiler is not None
+                    c_commands[f"C-GCC-{opt}"] = [[
+                        compiler,
+                        f"-{opt}",
+                        "-std=c99",
+                        "-I",
+                        str(BASE_DIR / "benchmarks" / "jsmn" / "upstream"),
+                        str((c_dir / f"c_embedded_{fixture_id}.c").resolve()),
+                        "-o",
+                        str(b.resolve()),
+                    ]]
 
         # Build S3 Linux ELF Executables if native toolchain is present
         s3_bin_o0 = None
         s3_bin_o1 = None
+        s3_objects: dict[str, Path | None] = {"S3-O0-NATIVE": None, "S3-O1-NATIVE": None}
+        s3_commands: dict[str, list[list[str]]] = {}
         if native_available and native_tc:
             try:
-                s3_bin_o0 = native_tc.build(s3_asm_o0, build_dir / f"s3_o0_{fix_file.stem}")
-                s3_bin_o1 = native_tc.build(s3_asm_o1, build_dir / f"s3_o1_{fix_file.stem}")
+                o0_output = s3_o0_dir / "program"
+                o1_output = s3_o1_dir / "program"
+                o0_object, s3_commands["S3-O0-NATIVE"] = build_native_artifact(
+                    s3_o0_asm_path,
+                    o0_output,
+                    native_tc.compiler,
+                )
+                o1_object, s3_commands["S3-O1-NATIVE"] = build_native_artifact(
+                    s3_o1_asm_path,
+                    o1_output,
+                    native_tc.compiler,
+                )
+                s3_bin_o0 = o0_output
+                s3_bin_o1 = o1_output
+                s3_objects["S3-O0-NATIVE"] = o0_object
+                s3_objects["S3-O1-NATIVE"] = o1_object
                 binary_sizes_map["S3-O0-NATIVE"] = get_binary_size_info(s3_bin_o0)
                 binary_sizes_map["S3-O1-NATIVE"] = get_binary_size_info(s3_bin_o1)
             except Exception as ex:
+                s3_bin_o0 = None
+                s3_bin_o1 = None
                 print(f"Notice building S3 ELF binary for {fix_file.name}: {ex}")
+
+        s3_o0_metrics = analyze_assembly_text(s3_asm_o0, "S3-O0", s3_bin_o0).__dict__
+        s3_o1_metrics = analyze_assembly_text(s3_asm_o1, "S3-O1", s3_bin_o1).__dict__
+        for metrics, binary in ((s3_o0_metrics, s3_bin_o0), (s3_o1_metrics, s3_bin_o1)):
+            if binary is not None:
+                elf_bytes, text_bytes = get_binary_size_info(binary)
+            else:
+                elf_bytes, text_bytes = None, None
+            metrics["elf_file_bytes"] = elf_bytes
+            metrics["text_bytes"] = text_bytes
+        artifact_records.extend(
+            [
+                make_artifact_record(
+                    run,
+                    fixture_id=fixture_id,
+                    implementation="s3",
+                    optimization="O0",
+                    input_path=input_path,
+                    generated_source_path=s3_o0_src_path,
+                    assembly_path=s3_o0_asm_path,
+                    object_path=s3_objects["S3-O0-NATIVE"],
+                    executable_path=s3_bin_o0,
+                    commands=s3_commands.get("S3-O0-NATIVE", []),
+                    metrics=s3_o0_metrics,
+                ),
+                make_artifact_record(
+                    run,
+                    fixture_id=fixture_id,
+                    implementation="s3",
+                    optimization="O1",
+                    input_path=input_path,
+                    generated_source_path=s3_o1_src_path,
+                    assembly_path=s3_o1_asm_path,
+                    object_path=s3_objects["S3-O1-NATIVE"],
+                    executable_path=s3_bin_o1,
+                    commands=s3_commands.get("S3-O1-NATIVE", []),
+                    metrics=s3_o1_metrics,
+                ),
+            ]
+        )
+        for variant, c_bin in c_bins.items():
+            artifact_records.append(
+                make_artifact_record(
+                    run,
+                    fixture_id=fixture_id,
+                    implementation="c",
+                    optimization=variant.removeprefix("C-GCC-"),
+                    input_path=input_path,
+                    generated_source_path=c_dir / f"c_embedded_{fixture_id}.c",
+                    assembly_path=None,
+                    object_path=None,
+                    executable_path=c_bin,
+                    commands=c_commands[variant],
+                    metrics={
+                        "elf_file_bytes": get_binary_size_info(c_bin)[0],
+                        "text_bytes": get_binary_size_info(c_bin)[1],
+                    },
+                )
+            )
 
         # Native Correctness Smoke Gate before timing
         if s3_bin_o0 and s3_bin_o1 and "C-GCC-O2" in c_bins:
@@ -478,9 +749,19 @@ def main():
     geomean_s3_o1_vs_c_o2 = math.exp(sum(math.log(r) for r in s3_o1_c_o2_ratios) / len(s3_o1_c_o2_ratios)) if s3_o1_c_o2_ratios else None
     geomean_s3_o1_vs_s3_o0 = math.exp(sum(math.log(r) for r in s3_o1_s3_o0_ratios) / len(s3_o1_s3_o0_ratios)) if s3_o1_s3_o0_ratios else None
 
+    write_run_manifest(
+        run,
+        provenance=provenance,
+        environment=env_meta,
+        argv=sys.argv,
+        records=artifact_records,
+    )
+
     # 4. Generate JSON Report
     report_dict = {
         "benchmark": "jsmn",
+        "run_id": run.run_id,
+        "artifact_manifest": "artifact-manifest.json",
         "validity_statement": {
             "PREVIOUS_PERFORMANCE_RESULTS_INVALIDATED": "YES",
             "REASON": "SYNTHETIC_HOSTED_TIMING_AND_MISSING_NATIVE_S3_RUNNER",

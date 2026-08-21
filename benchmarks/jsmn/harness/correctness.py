@@ -4,6 +4,8 @@ Enforces the fundamental rule: CORRECTNESS BEFORE PERFORMANCE.
 """
 
 import json
+import hashlib
+import os
 import re
 import subprocess
 from dataclasses import dataclass
@@ -37,6 +39,14 @@ class ExecutionResult:
     checksum: int
     tokens: list[Token]
     raw_output: str = ""
+
+
+class CapturedMemoryError(RuntimeError):
+    """Raised when correctness output contains an uninitialized token cell."""
+
+    def __init__(self, details: dict[str, object]):
+        self.details = details
+        super().__init__(json.dumps(details, sort_keys=True))
 
 def reference_jsmn_oracle(data: bytes) -> tuple[int, list[Token]]:
     """Python-based behavioral reference oracle for upstream jsmn token contract."""
@@ -147,7 +157,27 @@ def compute_checksum_from_tokens(status: int, tokens: list[Token]) -> int:
         chk += t.type + t.start + t.end + t.size
     return chk
 
-def run_s3_jsmn(source_template: str, text: str, optimization: str = "O0") -> ExecutionResult:
+def _diagnostic_assembly_sha256(source: str, optimization: str) -> str:
+    try:
+        from bootstrap.s3.backends.x86_64 import generate_native_assembly
+        from bootstrap.s3.pipeline import compile_source
+
+        assembly = generate_native_assembly(
+            compile_source(source, optimization).assembly,
+            max_instructions=(1 << 62),
+        )
+        return hashlib.sha256(assembly.encode("utf-8")).hexdigest()
+    except Exception:
+        return "UNAVAILABLE"
+
+
+def run_s3_jsmn(
+    source_template: str,
+    text: str,
+    optimization: str = "O0",
+    *,
+    diagnostic_context: dict[str, object] | None = None,
+) -> ExecutionResult:
     """Executes S3 jsmn kernel via compiler pipeline and memory buffer capture."""
     data = text.encode("ascii")
     assert len(data) <= INPUT_CAPACITY, f"Input size {len(data)} exceeds {INPUT_CAPACITY}"
@@ -175,10 +205,55 @@ def run_s3_jsmn(source_template: str, text: str, optimization: str = "O0") -> Ex
             frame for frame in reversed(captures)
             if sum(1 for m in frame.values() if len(m) == TOKEN_CAPACITY) == 5
         )
-        token_memories = [m for m in main_capture.values() if len(m) == TOKEN_CAPACITY]
-        types, starts, ends, sizes, _ = token_memories
+        token_memories = [
+            (memory_index, memory)
+            for memory_index, memory in main_capture.items()
+            if len(memory) == TOKEN_CAPACITY
+        ]
+        _, types = token_memories[0]
+        _, starts = token_memories[1]
+        ends_memory_index, ends = token_memories[2]
+        _, sizes = token_memories[3]
         for i in range(status):
-            tokens.append(Token(int(types[i]), int(starts[i]), int(ends[i]), int(sizes[i])))
+            fields = (
+                ("type", types[i], token_memories[0][0]),
+                ("start", starts[i], token_memories[1][0]),
+                ("end", ends[i], ends_memory_index),
+                ("size", sizes[i], token_memories[3][0]),
+            )
+            for field, value, memory_index in fields:
+                if value is None:
+                    context = dict(diagnostic_context or {})
+                    context.update(
+                        {
+                            "fixture": context.get("fixture", "UNSPECIFIED"),
+                            "variant": f"S3-{optimization}",
+                            "token_index": i,
+                            "memory_index": memory_index,
+                            "field": field,
+                            "s3_sha": context.get(
+                                "s3_sha", os.environ.get("S3_COMMIT", "UNSPECIFIED")
+                            ),
+                            "run_id": context.get(
+                                "run_id",
+                                os.environ.get("S3_BENCHMARK_RUN_ID", "UNSPECIFIED"),
+                            ),
+                            "assembly_sha256": context.get(
+                                "assembly_sha256",
+                                _diagnostic_assembly_sha256(rendered_source, optimization),
+                            ),
+                        }
+                    )
+                    raise CapturedMemoryError(context)
+                if field == "type":
+                    token_type = int(value)
+                elif field == "start":
+                    token_start = int(value)
+                elif field == "end":
+                    token_end = int(value)
+                else:
+                    token_size = int(value)
+            tokens.append(Token(token_type, token_start, token_end, token_size))
 
     chk = compute_checksum_from_tokens(status, tokens)
     return ExecutionResult(status=status, token_count=len(tokens), checksum=chk, tokens=tokens)
@@ -222,22 +297,28 @@ def verify_differential_correctness(
     c_runner_bin: Path | None,
     s3_demo_template: str,
     test_cases: list[str],
+    *,
+    diagnostic_context: dict[str, object] | None = None,
 ) -> tuple[bool, list[str]]:
     """Runs differential verification across test cases."""
     logs = []
     all_passed = True
 
-    for text in test_cases:
+    for index, text in enumerate(test_cases):
         ref_status, ref_tokens = reference_jsmn_oracle(text.encode("ascii"))
+        context = dict(diagnostic_context or {})
+        context["fixture"] = context.get("fixture", f"correctness-case-{index:02d}")
 
         # S3 O0
-        s3_o0_res = run_s3_jsmn(s3_demo_template, text, "O0")
+        context["variant"] = "S3-O0"
+        s3_o0_res = run_s3_jsmn(s3_demo_template, text, "O0", diagnostic_context=context)
         if not compare_results(ref_status, ref_tokens, s3_o0_res):
             logs.append(f"FAIL S3-O0: '{text}' status ref={ref_status} s3={s3_o0_res.status}")
             all_passed = False
 
         # S3 O1
-        s3_o1_res = run_s3_jsmn(s3_demo_template, text, "O1")
+        context["variant"] = "S3-O1"
+        s3_o1_res = run_s3_jsmn(s3_demo_template, text, "O1", diagnostic_context=context)
         if not compare_results(ref_status, ref_tokens, s3_o1_res):
             logs.append(f"FAIL S3-O1: '{text}' status ref={ref_status} s3={s3_o1_res.status}")
             all_passed = False
