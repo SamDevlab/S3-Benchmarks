@@ -99,7 +99,16 @@ def main() -> int:
     template_path = BASE_DIR / "benchmarks" / "jsmn" / "s3" / "jsmn_demo.s3"
     template = template_path.read_text(encoding="utf-8")
     ref_status, ref_tokens = reference_jsmn_oracle(text.encode("ascii"))
-    hosted = run_s3_jsmn(template, text, "O1")
+    hosted = run_s3_jsmn(
+        template,
+        text,
+        "O1",
+        diagnostic_context={
+            "fixture": fixture_id,
+            "s3_sha": provenance["s3_commit"],
+            "run_id": run.run_id,
+        },
+    )
     if not compare_results(ref_status, ref_tokens, hosted):
         raise ArtifactError(
             f"hosted correctness failed for {fixture_id}: "
