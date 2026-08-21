@@ -1,0 +1,75 @@
+{
+  "schema": "s3.benchmarks.references.realworld.v1",
+  "snapshot_date": "2026-08-21",
+  "policy": {
+    "correctness_before_performance": true,
+    "vendored": false,
+    "public_network_required_for_correctness": false,
+    "native_speedup_claim_without_equivalence": false
+  },
+  "references": [
+    {
+      "id": "llama-cpp",
+      "repository": "ggml-org/llama.cpp",
+      "branch": "master",
+      "commit": "749f688fcaa4c472ec034b08cb8a907c45cfaa02",
+      "role": "llm_inference_reference",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded CPU-only deterministic local inference",
+      "comparative_performance": "DEFERRED",
+      "note": "A model is not pinned by this file. Any executable LLM campaign must separately pin a small GGUF artifact by immutable digest and prove token-level equivalence before timing."
+    },
+    {
+      "id": "simdjson",
+      "repository": "simdjson/simdjson",
+      "branch": "master",
+      "commit": "f807de973580fb22cc0db6b3b896716684b0266c",
+      "role": "json_parser_reference",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded deterministic JSON documents and parser error corpus",
+      "comparative_performance": "DEFERRED"
+    },
+    {
+      "id": "zstd",
+      "repository": "facebook/zstd",
+      "branch": "dev",
+      "commit": "82d322c4973d9e2968d94047a40892bc6d9a9bdf",
+      "role": "compression_reference",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded local compression/decompression with checksum and streaming controls",
+      "comparative_performance": "DEFERRED"
+    },
+    {
+      "id": "sqlite-github-mirror",
+      "repository": "sqlite/sqlite",
+      "branch": "master",
+      "commit": "a7969a001d790c738971d9c9d79cad5438fb731f",
+      "role": "database_workload_reference",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded local database create/insert/select/transaction fixture",
+      "comparative_performance": "DEFERRED",
+      "note": "GitHub mirror used for candidate design only. Before executable comparative promotion, bind provenance to an explicit SQLite release or Fossil source identity."
+    },
+    {
+      "id": "llhttp",
+      "repository": "nodejs/llhttp",
+      "branch": "main",
+      "commit": "ee51043701d8b90ef647cf04790cbb1c55889825",
+      "role": "http_parser_reference",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded HTTP/1.1 request/response framing and malformed-input corpus",
+      "comparative_performance": "DEFERRED"
+    },
+    {
+      "id": "moneyprinterturbo",
+      "repository": "harry0703/MoneyPrinterTurbo",
+      "branch": "main",
+      "commit": "f43721e82d4d1a65671b24836c6f5778d3099c9e",
+      "role": "real_world_application_shape",
+      "initial_stage": "REFERENCE_ONLY",
+      "target_workload": "bounded provider/config/local-network/output pipeline",
+      "comparative_performance": "NOT_AN_ORACLE",
+      "note": "Do not port the full application or use external paid/public provider calls as correctness fixtures."
+    }
+  ]
+}
