@@ -28,6 +28,20 @@ Every scored metric should expose three independent dimensions:
 
 `DEFERRED_BY_ENVIRONMENT` should lower coverage/confidence where appropriate, but it is not automatically a zero quality score.
 
+## Testing and benchmark policy
+
+[`testing-policy-v1.md`](testing-policy-v1.md) and [`testing-policy-v1.json`](testing-policy-v1.json) define the laboratory's anti-cycle and staged-testing contract.
+
+The policy explicitly separates:
+
+- correctness/certification;
+- performance benchmarking;
+- test/harness execution cost.
+
+A stable test that passes but takes a long time is not automatically a correctness regression. A watchdog timeout remains a truthful timeout result, but if bounded evidence shows the healthy workload normally exceeds that watchdog, the laboratory records a budget mismatch or stable-expensive-test classification instead of forcing production changes solely to make the test fit an arbitrary wall-clock margin.
+
+Future implementation campaigns should proceed in stages: focused correctness, subsystem integration, targeted benchmark delta, cross-subsystem validation, and only then periodic full campaigns at explicit milestone/release checkpoints. Expensive full suites should not be reflexively rerun after every diagnostic or documentation-only change.
+
 ## Rubric
 
 [`rubric-v1.json`](rubric-v1.json) defines the initial weighted axes:
@@ -59,6 +73,8 @@ Each evidence reference should bind, when available:
 
 A benchmark classified as `CHARACTERIZATION_ONLY` may contribute capability/coverage evidence but must not be converted into a native performance win.
 
+Test/harness cost should be recorded separately from implementation quality. For example, `STABLE_EXPENSIVE_TEST` may become performance/test-cost debt while correctness remains supported by passing semantic assertions. A real correctness failure, however, can never be hidden by good timing numbers.
+
 ## Historical trend
 
 The laboratory may store one scorecard per certified campaign/milestone, for example M1.80, M1.90, M2.00 and M2.10. Trend analysis should compare score, coverage and confidence separately.
@@ -69,6 +85,8 @@ This makes it possible to answer both:
 - "Did we simply test more of it?"
 
 without confusing broader coverage with better implementation quality.
+
+For performance-relevant milestones, the laboratory should also preserve an immutable pre-change baseline and candidate SHA and compare only workloads materially affected by the implementation before deciding whether a broader benchmark rerun is justified.
 
 ## LLM readiness
 
@@ -93,4 +111,6 @@ A laboratory consumer must not:
 - convert `CHARACTERIZATION_ONLY` to native comparative evidence;
 - infer scores from missing benchmarks;
 - drop failed correctness gates from the denominator silently;
+- treat a stable expensive test as a compiler regression without production evidence;
+- repeatedly rerun full certification solely to chase execution-time budgets;
 - rewrite historical scorecards when the rubric changes.
