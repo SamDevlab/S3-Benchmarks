@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "s3.lab.scorecard.v1",
+  "title": "S3 Laboratory scorecard v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "rubric_version",
+    "s3_commit",
+    "benchmark_commit",
+    "campaign",
+    "overall",
+    "axes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "s3.lab.scorecard.v1"
+    },
+    "rubric_version": {
+      "const": "v1"
+    },
+    "s3_commit": {
+      "$ref": "#/$defs/commit"
+    },
+    "benchmark_commit": {
+      "$ref": "#/$defs/commit"
+    },
+    "campaign": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "overall": {
+      "$ref": "#/$defs/measurement"
+    },
+    "axes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "score", "coverage", "confidence", "evidence"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "correctness",
+              "native_codegen",
+              "performance",
+              "runtime_async",
+              "network_tls",
+              "packages_security",
+              "portability",
+              "reproducibility",
+              "real_world"
+            ]
+          },
+          "status": {
+            "$ref": "#/$defs/status"
+          },
+          "score": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "maximum": 100
+          },
+          "coverage": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "confidence": {
+            "$ref": "#/$defs/confidence"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 2048
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PASS_WITH_DEFERRED",
+        "FAIL",
+        "DEFERRED_BY_ENVIRONMENT",
+        "CHARACTERIZATION_ONLY",
+        "NOT_MEASURED"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW", "UNRATED"]
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "coverage", "confidence"],
+      "properties": {
+        "score": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "commit", "workload", "classification"],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "commit": {
+          "$ref": "#/$defs/commit"
+        },
+        "workload": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "CORRECTNESS",
+            "INTEGRATION",
+            "CHARACTERIZATION_ONLY",
+            "NATIVE_COMPARATIVE",
+            "DEFERRED"
+          ]
+        },
+        "upstream_commit": {
+          "$ref": "#/$defs/commit"
+        },
+        "artifact_digest": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9._:+-]{8,256}$"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 2048
+        }
+      }
+    }
+  }
+}

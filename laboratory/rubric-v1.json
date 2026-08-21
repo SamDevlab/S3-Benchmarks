@@ -1,0 +1,68 @@
+{
+  "schema": "s3.lab.rubric.v1",
+  "version": "v1",
+  "total_weight": 1.0,
+  "axes": [
+    {
+      "id": "correctness",
+      "label": "Correctness",
+      "weight": 0.25,
+      "evidence_examples": ["differential correctness", "T0-T4", "semantic equivalence"]
+    },
+    {
+      "id": "native_codegen",
+      "label": "Native/Codegen",
+      "weight": 0.15,
+      "evidence_examples": ["x86-64 native", "AArch64 ABI", "native differential execution"]
+    },
+    {
+      "id": "performance",
+      "label": "Performance",
+      "weight": 0.15,
+      "evidence_examples": ["JSMN", "future JSON/compression/database/LLM native comparative workloads"]
+    },
+    {
+      "id": "runtime_async",
+      "label": "Runtime/Async",
+      "weight": 0.1,
+      "evidence_examples": ["executor", "channels", "cancellation", "backpressure"]
+    },
+    {
+      "id": "network_tls",
+      "label": "Network/TLS",
+      "weight": 0.1,
+      "evidence_examples": ["HTTP", "TLS", "streaming", "timeouts", "local loopback"]
+    },
+    {
+      "id": "packages_security",
+      "label": "Packages/Security",
+      "weight": 0.1,
+      "evidence_examples": ["registry", "resolver", "Ed25519", "trust policy", "signed indexes"]
+    },
+    {
+      "id": "portability",
+      "label": "Portability",
+      "weight": 0.05,
+      "evidence_examples": ["Windows", "Linux", "macOS", "x86-64", "AArch64"]
+    },
+    {
+      "id": "reproducibility",
+      "label": "Reproducibility",
+      "weight": 0.05,
+      "evidence_examples": ["exact Git pins", "deterministic bundles", "pinned dependencies", "result digests"]
+    },
+    {
+      "id": "real_world",
+      "label": "Real-world workloads",
+      "weight": 0.05,
+      "evidence_examples": ["JSON", "compression", "HTTP parser", "database", "LLM client", "LLM inference"]
+    }
+  ],
+  "rules": {
+    "missing_score": null,
+    "deferred_is_zero": false,
+    "characterization_is_native_performance": false,
+    "historical_scorecards_are_immutable": true,
+    "score_requires_evidence": true
+  }
+}

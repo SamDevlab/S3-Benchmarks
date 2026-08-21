@@ -1,0 +1,73 @@
+{
+  "schema": "s3.lab.progress-snapshot.v1",
+  "campaign": "m200-progress-snapshot-v1",
+  "baseline_s3_sha": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+  "candidate_s3_sha": "a651e9b3551f218af1c27bb908e0692880afc4da",
+  "executable_benchmark_sha": "c13f159bb19f13cac9e83e523b6e392baae71738",
+  "purpose": [
+    "verify current compatibility/correctness",
+    "compare JSMN native performance against M1.90 baseline",
+    "refresh current M1.99 characterization without relabeling it",
+    "produce laboratory score/coverage/confidence deltas"
+  ],
+  "execution": {
+    "same_host_required_for_direct_performance_comparison": true,
+    "serial_baseline_candidate_runs": true,
+    "clean_detached_s3_worktrees": true,
+    "correctness_before_performance": true,
+    "t4_timeout_results_are_not_benchmark_failures": true
+  },
+  "phases": [
+    {
+      "id": "jsmn_baseline",
+      "s3_sha": "a9e430551f2ee77aa2ef229daf9e967333e83e2c",
+      "commands": [
+        "python tools/runner.py --verify-only",
+        "python tools/runner.py --full --output-json reports/lab-m200-jsmn-baseline.json --output-markdown reports/lab-m200-jsmn-baseline.md"
+      ],
+      "classification": "NATIVE_COMPARATIVE_IF_CORRECTNESS_AND_ENVIRONMENT_VALID"
+    },
+    {
+      "id": "jsmn_candidate",
+      "s3_sha": "a651e9b3551f218af1c27bb908e0692880afc4da",
+      "commands": [
+        "python tools/runner.py --verify-only",
+        "python tools/runner.py --full --output-json reports/lab-m200-jsmn-candidate.json --output-markdown reports/lab-m200-jsmn-candidate.md"
+      ],
+      "classification": "NATIVE_COMPARATIVE_IF_CORRECTNESS_AND_ENVIRONMENT_VALID"
+    },
+    {
+      "id": "m181_m190_candidate_compatibility",
+      "s3_sha": "a651e9b3551f218af1c27bb908e0692880afc4da",
+      "commands": [
+        "python -m benchmarks.m181_m190.correctness --json",
+        "python -m benchmarks.m181_m190.benchmark --smoke"
+      ],
+      "classification": "CORRECTNESS_PLUS_CHARACTERIZATION_ONLY"
+    },
+    {
+      "id": "m199_candidate",
+      "s3_sha": "a651e9b3551f218af1c27bb908e0692880afc4da",
+      "classification": "CHARACTERIZATION_ONLY_UNLESS_NATIVE_COMPARATIVE_VALID"
+    }
+  ],
+  "laboratory_dimensions": [
+    "correctness",
+    "native_codegen",
+    "performance",
+    "runtime_async",
+    "network_tls",
+    "packages_security",
+    "portability",
+    "reproducibility",
+    "real_world",
+    "test_harness_cost"
+  ],
+  "future_cadence": [
+    "focused_correctness",
+    "affected_subsystem",
+    "targeted_benchmark_delta",
+    "cross_subsystem_validation",
+    "periodic_broad_snapshot"
+  ]
+}
