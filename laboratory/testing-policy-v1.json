@@ -1,0 +1,77 @@
+{
+  "schema": "s3.lab.testing-policy.v1",
+  "version": "v1",
+  "principles": {
+    "correctness_before_performance": true,
+    "slow_test_is_not_automatic_correctness_failure": true,
+    "do_not_force_healthy_tests_into_arbitrary_watchdog": true,
+    "timeouts_remain_truthful_results": true,
+    "diagnostics_do_not_rewrite_historical_gate_results": true,
+    "production_change_requires_production_evidence": true
+  },
+  "evidence_planes": [
+    "correctness_certification",
+    "performance_benchmarking",
+    "test_harness_cost"
+  ],
+  "timeout_classifications": [
+    "UNEXPECTED_TIMEOUT",
+    "HOST_SCHEDULING_VARIANCE",
+    "STABLE_EXPENSIVE_TEST",
+    "AGGREGATE_GATE_BUDGET_TOO_SMALL",
+    "POSSIBLE_HANG",
+    "FUNCTIONAL_REGRESSION"
+  ],
+  "stable_expensive_test": {
+    "may_reduce_correctness_score": false,
+    "may_be_recorded_as_test_cost_debt": true,
+    "may_justify_arbitrary_production_optimization": false,
+    "requires_raw_timeout_preservation": true
+  },
+  "full_campaign_policy": {
+    "run_after_every_diagnostic": false,
+    "run_after_documentation_only_change": false,
+    "run_at_explicit_milestone_or_release_checkpoint": true,
+    "new_run_after_meaningful_policy_or_source_change": true,
+    "human_authorization_may_trigger_new_run": true
+  },
+  "stages": [
+    {
+      "id": "A",
+      "name": "local_correctness",
+      "purpose": "small deterministic tests directly covering changed code"
+    },
+    {
+      "id": "B",
+      "name": "subsystem_integration",
+      "purpose": "relevant T1/T2-style and adjacent contracts"
+    },
+    {
+      "id": "C",
+      "name": "targeted_benchmark_delta",
+      "purpose": "measure only benchmark paths materially affected by the change"
+    },
+    {
+      "id": "D",
+      "name": "cross_subsystem_validation",
+      "purpose": "relevant T3-style validation after implementation stabilizes"
+    },
+    {
+      "id": "E",
+      "name": "periodic_full_campaign",
+      "purpose": "broad certification and benchmark snapshot at explicit checkpoints"
+    }
+  ],
+  "benchmark_provenance_required": [
+    "baseline_s3_sha",
+    "candidate_s3_sha",
+    "benchmark_sha",
+    "workload_schema"
+  ],
+  "scorecard_dimensions": [
+    "score",
+    "coverage",
+    "confidence",
+    "test_harness_cost"
+  ]
+}
