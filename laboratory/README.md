@@ -42,6 +42,31 @@ A stable test that passes but takes a long time is not automatically a correctne
 
 Future implementation campaigns should proceed in stages: focused correctness, subsystem integration, targeted benchmark delta, cross-subsystem validation, and only then periodic full campaigns at explicit milestone/release checkpoints. Expensive full suites should not be reflexively rerun after every diagnostic or documentation-only change.
 
+### Milestone cadence
+
+For future milestones, the default laboratory cadence is:
+
+```text
+BEFORE IMPLEMENTATION
+  -> preserve immutable baseline evidence
+
+DURING IMPLEMENTATION
+  -> focused correctness
+  -> affected subsystem tests
+  -> targeted benchmark only for paths that changed
+
+AFTER A LOGICAL MILESTONE BLOCK
+  -> compare candidate vs preserved baseline
+  -> analyze regressions/improvements
+  -> record score/coverage/confidence delta
+
+AT EXPLICIT RELEASE/CERTIFICATION CHECKPOINTS
+  -> broad/full certification
+  -> broad benchmark snapshot when justified
+```
+
+The goal is to learn from benchmark deltas in steps, not to repeatedly force every historical expensive workload into the same time budget after each small implementation change.
+
 ## Rubric
 
 [`rubric-v1.json`](rubric-v1.json) defines the initial weighted axes:
