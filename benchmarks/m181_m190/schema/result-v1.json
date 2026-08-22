@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "S3 M1.81-M1.90 benchmark result",
+  "type": "object",
+  "required": ["schema", "campaign", "status", "checks"],
+  "properties": {
+    "schema": {"const": "s3.m181-m190.correctness.v1"},
+    "campaign": {"const": "m181-m190"},
+    "status": {"enum": ["PASS", "PASS_WITH_DEFERRED", "FAIL"]},
+    "checks": {"type": "array"},
+    "passed": {"type": "integer", "minimum": 0},
+    "failed": {"type": "integer", "minimum": 0},
+    "deferred": {"type": "integer", "minimum": 0}
+  }
+}

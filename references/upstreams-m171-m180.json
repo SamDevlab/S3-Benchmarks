@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-08-19",
+  "s3_baseline": {
+    "repository": "SamDevlab/S3",
+    "commit": "cd6804f72757d6936ca1ec6c20d5badf55d1aac4",
+    "note": "Canonical main after PR #182 integrating M1.71 through M1.80."
+  },
+  "references": [
+    {
+      "repository": "rust-lang/rust",
+      "commit": "f7d782a3be46d6bb4b9792fe69a61db389ba1769",
+      "role": "language-semantics-reference",
+      "priority": "P0",
+      "milestones": ["M1.71", "M1.72"],
+      "study": ["async-fn lowering", "future/state-machine lifecycle", "ownership across suspension", "drop/cancellation semantics"]
+    },
+    {
+      "repository": "tokio-rs/tokio",
+      "commit": "625954f365727668cb02d04172b34f1149637728",
+      "role": "async-runtime-reference",
+      "priority": "P0",
+      "milestones": ["M1.72", "M1.73", "M1.74", "M1.76"],
+      "study": ["task lifecycle", "wake/poll behavior", "timers", "bounded channels", "async networking"]
+    },
+    {
+      "repository": "tokio-rs/mio",
+      "commit": "1e79434244eed630a1ee7f227117960c6296e7f3",
+      "role": "reactor-io-reference",
+      "priority": "P0",
+      "milestones": ["M1.73", "M1.74"],
+      "study": ["readiness registration", "poll/reactor behavior", "nonblocking sockets", "re-arming after WouldBlock"]
+    },
+    {
+      "repository": "rustls/rustls",
+      "commit": "6868ee84dd62b4292b760cb7ba487cb37f86a95f",
+      "role": "tls-state-machine-reference",
+      "priority": "P0",
+      "milestones": ["M1.75"],
+      "study": ["nonblocking TLS state machine", "certificate/hostname validation", "read/write readiness integration", "cleanup on failure"]
+    },
+    {
+      "repository": "libuv/libuv",
+      "commit": "e43e3d8a464ddb5ce2ac24f4db780db747691a7b",
+      "role": "cross-platform-event-loop-reference",
+      "priority": "P1",
+      "milestones": ["M1.73", "M1.74"],
+      "study": ["portable event loop", "TCP/UDP/DNS", "resource cleanup", "Windows/Linux/macOS behavior"]
+    },
+    {
+      "repository": "llvm/llvm-project",
+      "commit": "b562ef546e46face7172d174e1a5f5454c470eee",
+      "role": "native-backend-abi-reference",
+      "priority": "P0",
+      "milestones": ["M1.77", "M1.78"],
+      "study": ["AArch64 code generation", "AAPCS64", "ELF", "Mach-O", "Darwin ARM64 ABI", "object and relocation structure"]
+    },
+    {
+      "repository": "rust-lang/cargo",
+      "commit": "514c56dd7321eecbfdcf9b6479519cf4edfab906",
+      "role": "package-registry-reference",
+      "priority": "P0",
+      "milestones": ["M1.79", "M1.80"],
+      "study": ["package identity", "registry and lockfile behavior", "checksums", "offline cache", "reproducible package resolution"]
+    },
+    {
+      "repository": "astral-sh/uv",
+      "commit": "5c170b8022c5565a1d4ada3406077d8fdf7f9088",
+      "role": "modern-resolver-cache-reference",
+      "priority": "P1",
+      "milestones": ["M1.79", "M1.80"],
+      "study": ["content-addressed cache", "lock resolution", "offline behavior", "deterministic distribution workflows"]
+    },
+    {
+      "repository": "harry0703/MoneyPrinterTurbo",
+      "commit": "d4c0e45da4ac0889af77f7307f52f9d5d4f74942",
+      "role": "future-real-world-application-workload",
+      "priority": "P2",
+      "milestones": ["post-M1.80"],
+      "study": ["provider registry", "CLI/API/service layering", "async HTTP/TLS workload shape", "configuration and file/process workflows"],
+      "note": "Reference workload only. Do not vendor or benchmark the full application until an S3 behavioral kernel exists."
+    }
+  ]
+}
