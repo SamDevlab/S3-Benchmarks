@@ -1,0 +1,314 @@
+{
+  "compiler": "/usr/bin/gcc",
+  "compiler_version": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "fixtures": [
+    {
+      "fixture": "tiny_04_arr",
+      "input_sha256": "a615eeaee21de5179de080de8c3052c8da901138406ba71c38c032845f7d54f4",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O0",
+          "binary_sha256": "b481fe343462e0b4ae768a44fe57eb17e4607503bf4371b133bfbdc51fb5496e",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O0"
+          ],
+          "source_sha256": "5743be28b6ca94deffaa82565aac4d8d6e69a4c5366a89bc883ff5367c635434"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O2",
+          "binary_sha256": "f59b848e25f19b0fa50d7a8af04a27ae33fdf0c954c0086a43635cd8c1c8bf7d",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O2"
+          ],
+          "source_sha256": "5743be28b6ca94deffaa82565aac4d8d6e69a4c5366a89bc883ff5367c635434"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O3",
+          "binary_sha256": "083084b7e8da384fef70739b4eb3a93c9534c8bfd75a6436961e4ef8ac8431ff",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_04_arr/control-O3"
+          ],
+          "source_sha256": "5743be28b6ca94deffaa82565aac4d8d6e69a4c5366a89bc883ff5367c635434"
+        }
+      }
+    },
+    {
+      "fixture": "tiny_03_pair",
+      "input_sha256": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O0",
+          "binary_sha256": "d05076ef99bb819cec7fa0a0f5a4a89e5005c1ee23f23285ef1917f202e4ec38",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O0"
+          ],
+          "source_sha256": "aa0bd13456bb6623c79d3f780245194d0c73164460841b0dec11a90e9787b45f"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O2",
+          "binary_sha256": "58a7287c8518965bb8496da86577351312c2e8558baadc845cd3bb59523ef229",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O2"
+          ],
+          "source_sha256": "aa0bd13456bb6623c79d3f780245194d0c73164460841b0dec11a90e9787b45f"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O3",
+          "binary_sha256": "dda60daca24ea47c692957f898bfc91a887dbbd57915854e9887e07a5f149282",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_03_pair/control-O3"
+          ],
+          "source_sha256": "aa0bd13456bb6623c79d3f780245194d0c73164460841b0dec11a90e9787b45f"
+        }
+      }
+    },
+    {
+      "fixture": "tiny_02_empty_arr",
+      "input_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O0",
+          "binary_sha256": "4b1042037c57055894a39193f90f02027638c55d9d0752fbfd483208996271e4",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O0"
+          ],
+          "source_sha256": "36caf1a681d5d695aa7a8efc33c0b08205de72058fb8cbb81375596483fd590a"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O2",
+          "binary_sha256": "bf220dd9d4539a1717142f6516f2b1f0ecc32bad07b685753279205b3c09689d",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O2"
+          ],
+          "source_sha256": "36caf1a681d5d695aa7a8efc33c0b08205de72058fb8cbb81375596483fd590a"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O3",
+          "binary_sha256": "d5dfe72066f7e0dc3aad800fa24d696f8e0bee602994b94deef3aebdfd3a3a3e",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_02_empty_arr/control-O3"
+          ],
+          "source_sha256": "36caf1a681d5d695aa7a8efc33c0b08205de72058fb8cbb81375596483fd590a"
+        }
+      }
+    },
+    {
+      "fixture": "tiny_05_string",
+      "input_sha256": "5aa762ae383fbb727af3c7a36d4940a5b8c40a989452d2304fc958ff3f354e7a",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O0",
+          "binary_sha256": "b9508f916a101cecbeffcc82f28c40d1f97c89e5abc82ac87eadf97806802d48",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O0"
+          ],
+          "source_sha256": "07f760ca87f194dddfe6990f8e184af5c6a185452c950254549956b22158f2f5"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O2",
+          "binary_sha256": "2522fa1135e96006985d64c94d71c2442661bbcf0a3aecf66e61c392cfb43cf9",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O2"
+          ],
+          "source_sha256": "07f760ca87f194dddfe6990f8e184af5c6a185452c950254549956b22158f2f5"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O3",
+          "binary_sha256": "7af8f9b1d27c526a95489b93c2581123cc0053245d1c8c33f9c9001cce04aa94",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_05_string/control-O3"
+          ],
+          "source_sha256": "07f760ca87f194dddfe6990f8e184af5c6a185452c950254549956b22158f2f5"
+        }
+      }
+    },
+    {
+      "fixture": "tiny_06_bool_null",
+      "input_sha256": "4d0f18de2133118249c26acc481838d4f6bb6bc1de882d99abbd19ae9397e8df",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O0",
+          "binary_sha256": "db67d261cf34fa77d58c6fae4c198f125533e98d3b1c0bb3226007a8bfcfb865",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O0"
+          ],
+          "source_sha256": "f2fb40afed006744d210328bf9141a9b95554a9faa7011b445c51fd33f55a8ea"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O2",
+          "binary_sha256": "9b7ba53f0a52cbde18f7fbed3c705e24b6bf7cf923492fc32c40ad8bd40521c8",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O2"
+          ],
+          "source_sha256": "f2fb40afed006744d210328bf9141a9b95554a9faa7011b445c51fd33f55a8ea"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O3",
+          "binary_sha256": "d1f4b51d946ced3bf56f8cddc56c5529b827bf2f2a58d774654a15b7a3979cc1",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_06_bool_null/control-O3"
+          ],
+          "source_sha256": "f2fb40afed006744d210328bf9141a9b95554a9faa7011b445c51fd33f55a8ea"
+        }
+      }
+    },
+    {
+      "fixture": "tiny_01_empty_obj",
+      "input_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "variants": {
+        "O0": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O0",
+          "binary_sha256": "b92ef829abdc75b5b727b3cc7bd125ef80641631eb38de825529789fd5a7c4c8",
+          "command": [
+            "/usr/bin/gcc",
+            "-O0",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O0"
+          ],
+          "source_sha256": "58daafa0ca69b9e6ba7f193c0c4e1155c1bc1aac8c4e8d0954be15f0416c17a0"
+        },
+        "O2": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O2",
+          "binary_sha256": "25f5f733941852ade5b07c78d9d0b8b0ceed55380ed74163c853b022adbfc21c",
+          "command": [
+            "/usr/bin/gcc",
+            "-O2",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O2"
+          ],
+          "source_sha256": "58daafa0ca69b9e6ba7f193c0c4e1155c1bc1aac8c4e8d0954be15f0416c17a0"
+        },
+        "O3": {
+          "binary": "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O3",
+          "binary_sha256": "a621055ae2362c28b7db5eeeb6dd5baa3b67c0b72f307bb1397fc668ff89ab1d",
+          "command": [
+            "/usr/bin/gcc",
+            "-O3",
+            "-std=c99",
+            "-I",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/benchmarks/jsmn/upstream",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control.c",
+            "-o",
+            "/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/shared-control-v2-3716b0b/tiny_01_empty_obj/control-O3"
+          ],
+          "source_sha256": "58daafa0ca69b9e6ba7f193c0c4e1155c1bc1aac8c4e8d0954be15f0416c17a0"
+        }
+      }
+    }
+  ],
+  "parses_per_sample": 10000,
+  "schema": "s3.rc1.shared-c-control.v1"
+}
