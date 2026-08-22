@@ -2,7 +2,7 @@
   "campaign": "rc1-longitudinal-native-20260822",
   "contract_probe": "PASS",
   "provenance": {
-    "benchmark_commit": "4ef8b605489e21f6affa2eb9fc244e54ae31004d",
+    "benchmark_commit": "55123c97af94049a9cb2b69d4cce6ef1d6ae1f65",
     "s3_commit": "9b39c7070d7bfa23d709c2128eb0b0bbef164177"
   },
   "schema": "s3.rc1.workload-status.v1",

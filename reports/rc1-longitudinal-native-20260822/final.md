@@ -1,7 +1,7 @@
 # S3 RC1 longitudinal native benchmark
 
 - RC1 source: `9b39c7070d7bfa23d709c2128eb0b0bbef164177`
-- Benchmark analysis HEAD: `4ef8b605489e21f6affa2eb9fc244e54ae31004d`
+- Benchmark analysis HEAD: `55123c97af94049a9cb2b69d4cce6ef1d6ae1f65`
 - P1 correctness: **PASS**
 - P1 longitudinal classification: **INCONCLUSIVE**
 - C-O2 gap: **43.89x geomean**

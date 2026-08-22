@@ -1,6 +1,6 @@
 {
   "benchmark_coverage_direction": "EXPANDED_CONTRACTS_NOT_PROMOTED",
-  "benchmark_final_sha": "4ef8b605489e21f6affa2eb9fc244e54ae31004d",
+  "benchmark_final_sha": "55123c97af94049a9cb2b69d4cce6ef1d6ae1f65",
   "benchmark_merge": false,
   "benchmark_quality": {
     "artifact_isolation": "PASS",
@@ -19,7 +19,7 @@
   "current_c_gap": "43.89x geomean",
   "first_regressing_region": "NOT_ESTABLISHED",
   "full_suite_runs": 0,
-  "generated_at_utc": "2026-08-22T15:30:03.401565+00:00",
+  "generated_at_utc": "2026-08-22T15:33:12.679872+00:00",
   "host_ready_for_benchmark": true,
   "inconclusive": [
     "P1 H4-H5 timing due control drift and aggregate-only raw reports"
