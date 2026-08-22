@@ -1,0 +1,10 @@
+{
+  "s3_source_head": "6604b9d07c607579df9c5c0759d8f2a708ba72d1",
+  "benchmark_head": "fd5f5b48f36a1c4805bfbc69590f220e70d65951",
+  "correctness": "PASS",
+  "timing_class": "CHARACTERIZATION_ONLY",
+  "native_speedup_claim": "NO",
+  "raw_transcript_sha256": "b93ddf26b0d3f42fd352025835ddf73f24550672b581f1bbc870437395813c8a",
+  "P1-P18": "NOT_AVAILABLE_IN_CURRENT_HARNESS",
+  "status": "PASS_CHARACTERIZATION_ONLY"
+}
