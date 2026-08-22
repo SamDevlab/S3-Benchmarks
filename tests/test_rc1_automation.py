@@ -7,6 +7,7 @@ from benchmarks.rc1.automation import (
     _write_once,
     build_parser,
     classify_control_blocks,
+    classify_correctness_aggregate,
     classify_regression,
     performance_allowed,
     SSHTransport,
@@ -34,6 +35,17 @@ def test_performance_requires_correctness_and_preflight():
     assert not performance_allowed(correctness_status="FAIL", preflight=stable)
     assert not performance_allowed(correctness_status="PASS", preflight=unstable)
     assert not performance_allowed(correctness_status="PASS", preflight=None)
+
+
+def test_platform_deferment_is_not_a_correctness_failure_or_regression():
+    assert classify_correctness_aggregate("NOT_RUN_PLATFORM") == "CORRECTNESS_PARTIAL_BY_PLATFORM"
+    assert classify_regression(
+        baseline_median=None,
+        candidate_median=None,
+        ci95=None,
+        environment_status="NOT_RUN",
+        correctness_status="NOT_RUN_PLATFORM",
+    )["status"] == "NOT_RUN_ENVIRONMENT"
 
 
 def test_regression_policy_is_fail_closed_without_comparable_samples():

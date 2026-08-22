@@ -23,6 +23,12 @@ or an obvious monotonic host trend is `UNSTABLE`. Only `STABLE` and `MARGINAL`
 allow timing. An unstable environment is an infrastructure measurement result,
 not a compiler regression.
 
+On a host without the native C toolchain, P7/P8/P9 are reported as
+`NOT_RUN_PLATFORM` and the aggregate correctness state is
+`CORRECTNESS_PARTIAL_BY_PLATFORM`. This is not `FAIL`, not a regression, and
+does not use the infrastructure-failure exit code; a Linux executor is needed
+to complete those native correctness gates.
+
 The current RC1 is pinned to:
 
 ```text

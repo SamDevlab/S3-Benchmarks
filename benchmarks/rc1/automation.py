@@ -475,6 +475,18 @@ def performance_allowed(*, correctness_status: str, preflight: dict[str, Any] | 
     return correctness_status == "PASS" and bool(preflight and preflight.get("performance_eligible", False))
 
 
+def classify_correctness_aggregate(status: str) -> str:
+    """Keep platform capability deferment distinct from correctness failure."""
+
+    if status == "PASS":
+        return "PASS"
+    if status == "NOT_RUN_PLATFORM":
+        return "CORRECTNESS_PARTIAL_BY_PLATFORM"
+    if status == "NOT_RUN":
+        return "NOT_RUN"
+    return "FAIL"
+
+
 def classify_regression(*, baseline_median: float | None, candidate_median: float | None, ci95: tuple[float, float] | None, environment_status: str, correctness_status: str) -> dict[str, Any]:
     """Apply the declared effect and CI policy without inventing missing data."""
 
@@ -545,7 +557,7 @@ def _run_remote_automation(args: argparse.Namespace) -> tuple[int, dict[str, Any
     ]
     for value in args.remote_s3_root:
         remote_args.extend(["--s3-root", value])
-    remote = _run(transport.command(remote_args, cwd=args.remote_benchmark_root))
+    remote = _run(transport.command(remote_args, cwd=args.remote_benchmark_root), timeout=args.ssh_timeout)
     print(remote.stdout, end="")
     if remote.stderr:
         print(remote.stderr, file=sys.stderr, end="")
@@ -565,6 +577,7 @@ def _machine_status(context: RunContext, mode: str, correctness: dict[str, Any],
         "run_id": context.run_id,
         "mode": mode,
         "correctness_status": correctness.get("status", "NOT_RUN"),
+        "correctness_aggregate_status": classify_correctness_aggregate(correctness.get("status", "NOT_RUN")),
         "environment_status": environment_status,
         "performance_eligible": (preflight or {}).get("performance_eligible", False),
         "performance_executed": (timing or {}).get("executed", False),
@@ -608,6 +621,7 @@ def run_automation(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     timing: dict[str, Any] | None = None
     if mode != "preflight-only":
         correctness = _correctness_gate(context, args, roots)
+        correctness["aggregate_status"] = classify_correctness_aggregate(correctness.get("status", "NOT_RUN"))
         _write_once(run_root / "correctness.json", correctness)
     if mode in {"preflight-only", "nightly", "weekly", "performance"}:
         preflight = _control_preflight_run(run_root / "preflight", run_id=run_id, blocks=args.preflight_blocks, samples_per_block=args.preflight_samples, iterations=args.preflight_iterations, warmups=args.preflight_warmups, affinity=args.cpu_affinity)
@@ -632,7 +646,7 @@ def run_automation(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     if correctness.get("status") == "FAIL":
         status_code = EXIT_CORRECTNESS
     elif correctness.get("status") == "NOT_RUN_PLATFORM":
-        status_code = EXIT_INFRASTRUCTURE
+        status_code = EXIT_OK
     elif regression.get("status") == "CONFIRMED":
         status_code = EXIT_REGRESSION
     elif preflight is not None and not preflight.get("performance_eligible", False) and mode in {"preflight-only", "nightly", "weekly", "performance"}:
@@ -663,6 +677,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--remote-s3-repo", default=None)
     parser.add_argument("--remote-s3-root", action="append", default=[], metavar="CHECKPOINT=PATH")
     parser.add_argument("--remote-output-dir", default=None)
+    parser.add_argument("--ssh-timeout", type=float, default=900.0)
     parser.add_argument("--cpu-affinity", default="")
     parser.add_argument("--preflight-blocks", type=int, default=5)
     parser.add_argument("--preflight-samples", type=int, default=10)
