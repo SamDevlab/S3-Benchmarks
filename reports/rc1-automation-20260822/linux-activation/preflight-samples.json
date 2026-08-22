@@ -1,0 +1,5 @@
+{
+  "schema": "s3.rc1.automation.preflight-samples.v1",
+  "status": "NOT_RUN_REMOTE_CHECKOUT_INVALID",
+  "samples": []
+}

@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_VS_C",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "68b0d0584f11ee4fadcce2b833763ca56c8a0bf2b034ad3e607f7c9aefc33f95",
+  "inputs_pinned": true,
+  "name": "call stack and ABI",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "ABI corpus requires a separately reviewed source contract",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P8"
+}

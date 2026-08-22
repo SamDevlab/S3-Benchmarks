@@ -1,0 +1,81 @@
+{
+  "schema": "s3.rc1.longitudinal.final.v2",
+  "benchmark_start_sha": "871e2015a2e2d15e202eb023f11a833304ba44e4",
+  "benchmark_final_sha": "6ae9e1f8bcff79557c02eb20c786e70d42eeda1d",
+  "s3_rc1_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "s3_m230_sha": "e23b092bec100cedc520841a7dd0f4488090b6a1",
+  "campaign_v1": {
+    "classification": "INCONCLUSIVE_CONTROL_DRIFT_HIGH",
+    "sample_level_data_available": "NO",
+    "native_speedup_claim": "NO",
+    "historical_report_preserved": true
+  },
+  "campaign_v2": {
+    "classification": "INCONCLUSIVE_ENVIRONMENT",
+    "host": "VIRTUALBOX_LINUX_X86_64",
+    "host_ready": true,
+    "cpu_affinity": "taskset -c 0",
+    "sample_level_data_available": "YES",
+    "correctness_before_timing": "PASS",
+    "primary_h4_h5_valid": "NO",
+    "measurement_benchmark_sha": "3716b0bea81776614b2f729f3079f32595186498",
+    "final_candidate_head": "6ae9e1f8bcff79557c02eb20c786e70d42eeda1d",
+    "workload_only_source_changed_after_p1_measurement": true,
+    "attempts": [
+      {"id": "p1-v2-primary-3716b0b", "control_drift_percent": 72.1146236829726, "classification": "HIGH"},
+      {"id": "p1-v2-primary-3716b0b-retry", "control_drift_percent": 13.09528087038916, "classification": "HIGH"}
+    ],
+    "m230_o1_ns_per_parse": null,
+    "rc1_o1_ns_per_parse": 6360.345510836732,
+    "raw_delta_percent": 0.3702949541476874,
+    "paired_delta_percent": -0.055042672978888874,
+    "ci95_percent": [-0.4553043346733889, 0.6190826627677781],
+    "classification_h4_h5": "INCONCLUSIVE",
+    "rc1_c_o2_ratio": 48.198390102914445,
+    "rc1_c_o3_ratio": null,
+    "c_o3_measurement": "NOT_MEASURED_IN_P1_V2; V1 C-O3 IS NOT COMPARABLE",
+    "control_binary_manifest": "p1-v2/control-manifest.json",
+    "raw_samples": "p1-v2/raw/samples.json",
+    "raw_samples_csv": "p1-v2/raw/samples.csv"
+  },
+  "p7_p9": {
+    "campaign": "p7-p9-v2-6ae9e1f",
+    "control_stable": false,
+    "correctness": "PASS",
+    "sample_level_data_available": "YES",
+    "status": "EXPERIMENTAL",
+    "P7": {"status": "EXPERIMENTAL", "control_drift_percent": 361.36850553517775, "correctness": "PASS", "rc1_s3_o1_median_ns_per_operation": 841.0599365234375, "m230_s3_o1_median_ns_per_operation": 686.526123046875, "c_o2_median_ns_per_operation": 698.5994873046875, "instruction_ratio_rc1_vs_c_o2": 80.07894736842105, "branch_ratio_rc1_vs_c_o2": 70.7, "load_store_ratio": null, "stack_ratio": null},
+    "P8": {"status": "EXPERIMENTAL", "control_drift_percent": 640.6806524882693, "correctness": "PASS", "rc1_s3_o1_median_ns_per_operation": 6721.1357421875, "m230_s3_o1_median_ns_per_operation": 6555.2685546875, "c_o2_median_ns_per_operation": 8288.69140625, "instruction_ratio_rc1_vs_c_o2": 143.5, "branch_ratio_rc1_vs_c_o2": 590.0, "load_store_ratio": null, "stack_ratio": null, "call_count_rc1": 41, "call_count_c_o2": 1},
+    "P9": {"status": "EXPERIMENTAL", "control_drift_percent": 77.30825432886644, "correctness": "PASS", "rc1_s3_o1_median_ns_per_operation": 3582.20361328125, "m230_s3_o1_median_ns_per_operation": 3506.98681640625, "c_o2_median_ns_per_operation": 4241.2294921875, "instruction_ratio_rc1_vs_c_o2": 81.75, "branch_ratio_rc1_vs_c_o2": 242.0, "load_store_ratio": null, "stack_ratio": null, "struct_subkernel": "NOT_MEASURED"}
+  },
+  "gap_attribution": {
+    "p1_gap": "NOT_PROMOTED_BY_POLICY; V1 observed 43.89105442491642x but V2 external C-O3 was not measured",
+    "primary_bottleneck": "MEASUREMENT_ENVIRONMENT_CONTROL_VARIANCE",
+    "secondary_bottleneck": "S3_NATIVE_CODE_EXPANSION_AND_MEMORY_STATE_MATERIALIZATION",
+    "confidence": "HIGH_FOR_MEASUREMENT_BLOCKER; MEDIUM_FOR_STRUCTURAL_HYPOTHESIS",
+    "evidence": "P7-P9 correctness passed, S3 structural counts greatly exceed C-O2, while C-O2 block drift remained 77.31%-640.68%",
+    "rc2_performance_fix_justified": "NO"
+  },
+  "p2_p18": {"contract_probe": "PASS", "executable_count": 0, "performance_promoted": 0},
+  "m199": {"status": "PASS_CHARACTERIZATION_ONLY", "native_speedup_claim": "NO", "rerun": "NO"},
+  "benchmark_quality": {
+    "artifact_isolation": "PASS",
+    "compileall": "PASS",
+    "focused_tests": "PASS",
+    "correctness_before_timing": "PASS",
+    "raw_sample_persistence": "PASS",
+    "sha_provenance": "PASS",
+    "statistical_validation": "PASS_FOR_INCONCLUSIVE_CLASSIFICATION",
+    "control_drift_policy": "PASS_FAIL_CLOSED",
+    "full_suite_runs": 0,
+    "t4_runs": 0
+  },
+  "s3_mutated": false,
+  "s3_production_change": false,
+  "benchmark_merge": false,
+  "force_push": false,
+  "tag_change": false,
+  "release_change": false,
+  "shutdown": false,
+  "status": "MIXED_BY_WORKLOAD"
+}

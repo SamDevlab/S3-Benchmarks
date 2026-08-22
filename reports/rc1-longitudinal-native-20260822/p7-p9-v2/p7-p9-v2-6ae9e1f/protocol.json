@@ -1,0 +1,10 @@
+{
+  "correctness_before_timing": true,
+  "native_speedup_claim": "NO",
+  "sample_level_data_available": "YES",
+  "workloads": [
+    "P7",
+    "P8",
+    "P9"
+  ]
+}

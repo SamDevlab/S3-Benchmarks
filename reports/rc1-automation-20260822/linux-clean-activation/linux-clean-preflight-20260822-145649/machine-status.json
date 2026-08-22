@@ -1,0 +1,17 @@
+{
+  "correctness_aggregate_status": "NOT_RUN",
+  "correctness_status": "NOT_RUN",
+  "environment_status": "UNSTABLE",
+  "exit": 24,
+  "improvement_status": "NOT_RUN",
+  "mode": "preflight-only",
+  "p1": "NOT_RUN",
+  "p7": "NOT_RUN",
+  "p8": "NOT_RUN",
+  "p9": "NOT_RUN",
+  "performance_eligible": false,
+  "performance_executed": false,
+  "regression_status": "NONE",
+  "report_dir": "/home/vboxuser/s3-bench-runs/rc1-automation-linux-clean-preflight-20260822-145649/linux-clean-preflight-20260822-145649",
+  "run_id": "linux-clean-preflight-20260822-145649"
+}

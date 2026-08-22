@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "dcc665ebc5a6cd6f4dc804ffa47d4b7e9b840d5b6c38083c462495a7162e413f",
+  "inputs_pinned": true,
+  "name": "incremental no-change build",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "incremental query/cache API is not exposed by the current RC1 harness",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P3"
+}

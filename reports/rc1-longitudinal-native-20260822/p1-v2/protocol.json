@@ -1,0 +1,7 @@
+{
+  "parses_per_sample": 10000,
+  "process_startup": "AMORTIZED_NOT_SUBTRACTED",
+  "repetitions": 30,
+  "schedule": "interleaved rotating blocks; C H4 H5 H5 H4 C or rotating C H0 H3 H5 H2 H4 H1 C",
+  "warmups": 5
+}

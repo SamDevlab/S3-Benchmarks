@@ -1,0 +1,36 @@
+{
+  "schema": "s3.rc1.optimization-candidates.v2",
+  "rc2_justified": false,
+  "candidates": [
+    {
+      "id": "MEASUREMENT-01",
+      "bottleneck": "control and host variance",
+      "evidence": "P1 retry control drift 13.0953%; P7-P9 control drift 77.3083%-640.6807%",
+      "likely_layer": "benchmark environment and process scheduling",
+      "expected_impact": "restore valid paired timing classification",
+      "correctness_risk": "none to S3; protocol-only",
+      "proposed_experiment": "controlled Linux host with deterministic scheduling and longer amortized regions",
+      "rc2_justified": false
+    },
+    {
+      "id": "CODEGEN-01",
+      "bottleneck": "native code expansion and memory-state materialization",
+      "evidence": "P7/P8/P9 RC1 O1 instruction counts 3043/2583/3270 versus C-O2 38/18/40",
+      "likely_layer": "S3 native lowering and representation staging",
+      "expected_impact": "reduce instructions and memory traffic if independently reproduced",
+      "correctness_risk": "semantic and ABI regressions",
+      "proposed_experiment": "separate structural-only compiler experiment after a valid native timing baseline",
+      "rc2_justified": false
+    },
+    {
+      "id": "MEMORY-01",
+      "bottleneck": "array and memory representation",
+      "evidence": "P9 is correctness-clean but its structural counts remain much larger than C; C load/store attribution is unavailable",
+      "likely_layer": "S3 array lowering and memory traffic",
+      "expected_impact": "unknown until analyzer parity is improved",
+      "correctness_risk": "bounds and aliasing behavior",
+      "proposed_experiment": "add comparable memory operand accounting and a separately certified struct subkernel",
+      "rc2_justified": false
+    }
+  ]
+}
