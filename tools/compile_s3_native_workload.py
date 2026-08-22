@@ -29,8 +29,10 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
-    sys.path.insert(0, str(BASE_DIR))
+    # Keep benchmark packages ahead of the S3 checkout; both repositories have
+    # a top-level ``benchmarks`` namespace, while bootstrap must come from S3.
     sys.path.insert(0, str(args.s3_root.resolve()))
+    sys.path.insert(0, str(BASE_DIR))
     from benchmarks.rc1.native_workloads import NATIVE_WORKLOADS
     from tools.artifacts import require_provenance
     from tools.assembly_analyzer import analyze_assembly_text
