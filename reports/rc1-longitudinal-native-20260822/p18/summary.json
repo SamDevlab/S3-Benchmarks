@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "ccb70c859ef1d5a5018640d341cba800efba62d91d9629ba59509cfa894b61f9",
+  "inputs_pinned": true,
+  "name": "real-world multi-module project",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "no realistic corpus has passed promotion gates in this campaign",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P18"
+}

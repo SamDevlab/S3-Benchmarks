@@ -1,0 +1,26 @@
+RUN_START=H4 SHA=e23b092bec100cedc520841a7dd0f4488090b6a1 UTC=2026-08-22T15:13:42Z
+/home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/benchmark/tools/runner.py:899: SyntaxWarning: "\_" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\_"? A raw string is also an option.
+  """
+GATE_F_DIFFERENTIAL_CORRECTNESS: PASS (100% token and error parity verified)
+Wrote JSON report to /home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/p1-H4-full/report.json
+Wrote Markdown report to /home/vboxuser/s3-rc1-longitudinal-native-v2-20260822/p1-artifacts/p1-H4-full/report.md
+
+--- BENCHMARK SUMMARY ---
+JSMN_BENCHMARK_HEAD=871e2015a2e2d15e202eb023f11a833304ba44e4
+C_O2_NS_PER_PARSE=126.72
+S3_O0_NS_PER_PARSE=9835.99
+S3_O1_NS_PER_PARSE=9661.93
+GEOMEAN_S3_O0_VS_C_O2=52.65x
+GEOMEAN_S3_O1_VS_C_O2=51.48x
+GEOMEAN_S3_O1_VS_S3_O0=0.98x
+S3_O0_VS_C_O2=77.62x slower
+S3_O1_VS_C_O2=76.25x slower
+S3_O1_VS_S3_O0=1.02x faster
+C_O2_ELF_BYTES=16224
+C_O2_TEXT_BYTES=3521
+S3_O1_ELF_BYTES=1146240
+S3_O1_TEXT_BYTES=1131729
+FIXTURES_EXPECTED=6
+FIXTURES_COMPLETED=6
+FIXTURES_BLOCKED=0
+RUN_END=H4 EXIT=0 UTC=2026-08-22T15:15:10Z

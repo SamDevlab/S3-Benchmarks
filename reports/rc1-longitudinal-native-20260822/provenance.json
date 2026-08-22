@@ -1,0 +1,19 @@
+{
+  "benchmark_analysis_sha": "4ef8b605489e21f6affa2eb9fc244e54ae31004d",
+  "benchmark_start_sha": "871e2015a2e2d15e202eb023f11a833304ba44e4",
+  "full_suite_runs": 0,
+  "historical_shas": {
+    "H0": "85541b782571c80d4857d013d1fb25b4997c1eb9",
+    "H1": "631b51e70562a33183ac14d0be5bbe2ddd140779",
+    "H2": "5dd6844607ba3a2d5830ed836fb9026eed86d0fb",
+    "H3": "2316300f7f6c119004009b713849cae1c101d1a5",
+    "H4": "e23b092bec100cedc520841a7dd0f4488090b6a1",
+    "H5": "9b39c7070d7bfa23d709c2128eb0b0bbef164177"
+  },
+  "new_t4_runs": 0,
+  "raw_p1_provenance": "PASS",
+  "rc1_tag": "v1.0.0-rc1",
+  "rc1_tag_target": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "s3_main_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "s3_mutated": false
+}
