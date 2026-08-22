@@ -1,0 +1,16 @@
+{
+  "benchmark_sha": "ee1af3071aac5479e721f96f1f33b729310c9202",
+  "environment_hash": "d84a07c9c4f25d8fa371b8e08f5e66eecf1f47727ab28da4b4fdde4c1aeebfd2",
+  "host_id": "host-82ca33bd0651e1e3",
+  "mode": "preflight-only",
+  "run_id": "linux-clean-preflight-20260822-145649",
+  "s3_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "s3_tag": "v1.0.0-rc1",
+  "s3_tree": "3b360c51859ed2ee20484ddb4a4dd10d490ed4ea",
+  "schema": "s3.rc1.automation.manifest.v1",
+  "start_time": "2026-08-22T17:56:49.887474+00:00",
+  "status": "RUNNING",
+  "transport": {
+    "kind": "local"
+  }
+}
