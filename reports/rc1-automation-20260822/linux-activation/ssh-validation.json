@@ -1,0 +1,15 @@
+{
+  "schema": "s3.rc1.automation.ssh-validation.v1",
+  "ssh_connection": "PASS",
+  "ssh_non_interactive": "PASS",
+  "ssh_exit_propagation": "PASS",
+  "ssh_stdout_capture": "PASS",
+  "ssh_stderr_capture": "PASS",
+  "ssh_timeout_propagation": "PASS",
+  "ssh_timeout_return_code": 124,
+  "ssh_secret_leak_check": "PASS",
+  "ssh_run_id_propagation": "PASS",
+  "ssh_remote_path_explicit": "PASS",
+  "ssh_executor_ready": "YES_PRESTAGED_CHECKOUTS_ONLY",
+  "automatic_remote_checkout_mutation": false
+}

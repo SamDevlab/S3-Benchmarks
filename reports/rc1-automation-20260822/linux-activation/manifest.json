@@ -1,0 +1,22 @@
+{
+  "schema": "s3.rc1.automation.linux-activation.manifest.v1",
+  "campaign_start_sha": "e7fa20dc28ada7f0c008b4f10699e23c6e70c684",
+  "campaign_final_source_sha": "675593cd5d57c885c430484ba1c68061bc82d904",
+  "pr": 12,
+  "branch": "benchmark/rc1-longitudinal-native-v2-20260822",
+  "rc1_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "rc1_tag": "v1.0.0-rc1",
+  "rc1_tag_target": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "remote_host": "Ubuntuserve",
+  "remote_rc1_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+  "remote_rc1_worktree_clean": true,
+  "remote_benchmark_sha": "6ae9e1f8bcff79557c02eb20c786e70d42eeda1d",
+  "remote_benchmark_worktree_clean": false,
+  "remote_benchmark_ready": false,
+  "remote_m230_available": false,
+  "preflight_status": "NOT_RUN_REMOTE_CHECKOUT_INVALID",
+  "performance_eligible": false,
+  "timing_smoke_executed": false,
+  "timing_smoke_promoted": false,
+  "status": "SSH_VALIDATED_BUT_LINUX_CHECKOUT_GATE_BLOCKED"
+}

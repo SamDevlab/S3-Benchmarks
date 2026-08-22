@@ -1,0 +1,14 @@
+{
+  "schema": "s3.rc1.automation.platform-semantics.v1",
+  "windows_p1": "PASS",
+  "windows_p7": "NOT_RUN_PLATFORM",
+  "windows_p8": "NOT_RUN_PLATFORM",
+  "windows_p9": "NOT_RUN_PLATFORM",
+  "not_run_platform_class": "CAPABILITY_DEFERMENT",
+  "not_run_platform_is_correctness_failure": "NO",
+  "not_run_platform_is_regression": "NO",
+  "not_run_platform_is_automation_failure": "NO",
+  "aggregate_status": "CORRECTNESS_PARTIAL_BY_PLATFORM",
+  "exit_code_policy_valid": "YES",
+  "local_correctness_exit": 0
+}
