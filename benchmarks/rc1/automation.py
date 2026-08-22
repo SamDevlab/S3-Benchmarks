@@ -500,6 +500,65 @@ def _append_history(path: Path, record: dict[str, Any]) -> None:
         stream.write(json.dumps(record, sort_keys=True) + "\n")
 
 
+def _run_remote_automation(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
+    if not args.remote_benchmark_root or not args.remote_s3_repo:
+        raise AutomationError("SSH mode requires --remote-benchmark-root and --remote-s3-repo")
+    transport = SSHTransport(args.ssh_host, args.ssh_port, args.ssh_user)
+    benchmark_sha = args.benchmark_sha or _git(BASE_DIR, "rev-parse", "--verify", "HEAD")
+    s3_sha = args.s3_sha or RC1_SHA
+    run_id = args.run_id or _generated_run_id()
+    remote_output = args.remote_output_dir or f"/tmp/s3-rc1-automation-{run_id}"
+    remote_args = [
+        "python3",
+        "-m",
+        "benchmarks.rc1.automation",
+        "--mode",
+        args.mode,
+        "--s3-repo",
+        args.remote_s3_repo,
+        "--s3-sha",
+        s3_sha,
+        "--benchmark-sha",
+        benchmark_sha,
+        "--run-id",
+        run_id,
+        "--output-dir",
+        remote_output,
+        "--history-file",
+        f"{remote_output}/history.jsonl",
+        "--cpu-affinity",
+        args.cpu_affinity,
+        "--preflight-blocks",
+        str(args.preflight_blocks),
+        "--preflight-samples",
+        str(args.preflight_samples),
+        "--preflight-warmups",
+        str(args.preflight_warmups),
+        "--preflight-iterations",
+        str(args.preflight_iterations),
+        "--timing-repetitions",
+        str(args.timing_repetitions),
+        "--timing-parses",
+        str(args.timing_parses),
+        "--timing-timeout",
+        str(args.timing_timeout),
+    ]
+    for value in args.remote_s3_root:
+        remote_args.extend(["--s3-root", value])
+    remote = _run(transport.command(remote_args, cwd=args.remote_benchmark_root))
+    print(remote.stdout, end="")
+    if remote.stderr:
+        print(remote.stderr, file=sys.stderr, end="")
+    local_root = args.output_dir.resolve() / run_id
+    local_root.parent.mkdir(parents=True, exist_ok=True)
+    copy = _run(["scp", "-P", str(args.ssh_port), "-r", f"{transport.target}:{remote_output}/{run_id}", str(local_root.parent)])
+    if copy.returncode != 0:
+        raise AutomationError(f"unable to archive remote automation evidence: {copy.stderr.strip()}")
+    status = {"status": "PASS" if remote.returncode == 0 else "FAIL", "remote_returncode": remote.returncode, "run_id": run_id, "transport": {"host": args.ssh_host, "port": args.ssh_port, "user": args.ssh_user}, "evidence_dir": str(local_root)}
+    _write_once(local_root / "remote-status.json", status)
+    return remote.returncode, status
+
+
 def _machine_status(context: RunContext, mode: str, correctness: dict[str, Any], preflight: dict[str, Any] | None, timing: dict[str, Any] | None, regression: dict[str, Any]) -> dict[str, Any]:
     environment_status = (preflight or {}).get("classification", "NOT_RUN")
     return {
@@ -523,6 +582,8 @@ def run_automation(args: argparse.Namespace) -> tuple[int, dict[str, Any]]:
     mode = args.mode
     if mode not in MODES:
         raise AutomationError(f"unsupported automation mode: {mode}")
+    if args.ssh_host:
+        return _run_remote_automation(args)
     benchmark_sha = args.benchmark_sha or _git(BASE_DIR, "rev-parse", "--verify", "HEAD")
     s3_repo = args.s3_repo.resolve() if args.s3_repo else None
     s3_sha = args.s3_sha or (RC1_SHA if s3_repo is None else _git(s3_repo, "rev-parse", "--verify", "HEAD"))
@@ -598,6 +659,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ssh-host", default=None)
     parser.add_argument("--ssh-port", type=int, default=22)
     parser.add_argument("--ssh-user", default=None)
+    parser.add_argument("--remote-benchmark-root", default=None)
+    parser.add_argument("--remote-s3-repo", default=None)
+    parser.add_argument("--remote-s3-root", action="append", default=[], metavar="CHECKPOINT=PATH")
+    parser.add_argument("--remote-output-dir", default=None)
     parser.add_argument("--cpu-affinity", default="")
     parser.add_argument("--preflight-blocks", type=int, default=5)
     parser.add_argument("--preflight-samples", type=int, default=10)
