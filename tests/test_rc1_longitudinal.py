@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
 from benchmarks.rc1.workloads import WORKLOADS, run_all_contract_probes, workload_map
-from tools.rc1_longitudinal import _control_drift, _delta, _geomean
+from tools.rc1_longitudinal import _control_drift, _delta, _geomean, _load_p1
 
 
 def test_rc1_workload_registry_is_complete_and_unique():
@@ -45,3 +46,9 @@ def test_raw_workload_payload_is_json_stable():
     assert len(row["input_sha256"]) == 64
     assert json.dumps(row, sort_keys=True)
 
+
+def test_campaign_raw_p1_reports_have_pinned_provenance_and_shape():
+    root = Path(__file__).resolve().parents[1] / "reports" / "rc1-longitudinal-native-20260822" / "p1" / "raw"
+    reports = _load_p1(root)
+    assert tuple(reports) == ("H0", "H1", "H2", "H3", "H4", "H5")
+    assert all(report["correctness"]["status"] == "PASS" for report in reports.values())

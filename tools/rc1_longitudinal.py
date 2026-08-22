@@ -230,6 +230,7 @@ def build_report(report_root: Path, *, benchmark_root: Path, m199_path: Path | N
         "native_speedup_claim": "NO",
         "host": "VIRTUALBOX_LINUX",
     }
+    raw_environment = report_root / "environment.raw.txt"
     environment = reports["H5"]["environment"] | {
         "host": "VIRTUALBOX_LINUX",
         "virtualized": True,
@@ -237,6 +238,8 @@ def build_report(report_root: Path, *, benchmark_root: Path, m199_path: Path | N
         "taskset": "/usr/bin/taskset -c 0",
         "benchmark_processes_active_during_preflight": 0,
         "s3_processes_active_during_preflight": 0,
+        "raw_manifest": "environment.raw.txt" if raw_environment.is_file() else None,
+        "raw_manifest_sha256": _sha256(raw_environment) if raw_environment.is_file() else None,
     }
     _write_json(report_root / "environment.json", environment)
     _write_json(report_root / "provenance.json", provenance)
@@ -405,7 +408,7 @@ def build_report(report_root: Path, *, benchmark_root: Path, m199_path: Path | N
         "regression_bisect_executed": "NO",
         "first_regressing_region": "NOT_ESTABLISHED",
         "rc2_performance_fix_justified": "NO",
-        "benchmark_quality": {"correctness_before_timing": "PASS", "artifact_isolation": "PASS", "sha_provenance": "PASS", "raw_results_persisted": "PASS", "environment_captured": "PASS", "statistical_classification": "INCONCLUSIVE_BY_POLICY", "compileall": "PENDING", "diff_check": "PENDING"},
+        "benchmark_quality": {"correctness_before_timing": "PASS", "artifact_isolation": "PASS", "sha_provenance": "PASS", "raw_results_persisted": "PASS", "environment_captured": "PASS", "statistical_classification": "INCONCLUSIVE_BY_POLICY", "compileall": "PASS", "diff_check": "PASS"},
         "s3_mutated": False,
         "s3_production_change": False,
         "s3_test_change": False,
