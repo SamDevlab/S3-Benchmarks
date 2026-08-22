@@ -1,116 +1,128 @@
 # M1.71-M1.80 Benchmark Candidates
 
-These are **candidate campaigns**, not published benchmark results.
-
 The current S3 baseline is `SamDevlab/S3@cd6804f72757d6936ca1ec6c20d5badf55d1aac4`.
 
 ## Candidate A — async executor and channels
 
+**Correctness preflight: PROMOTED** → [`benchmarks/async_runtime`](../../benchmarks/async_runtime/README.md)
+
 Primary references: `rust-lang/rust`, `tokio-rs/tokio`.
 
-Bounded workload ideas:
-
-- create and complete N trivial cooperative tasks;
-- chained await depth with equivalent observable result;
-- timer wake scheduling with a deterministic/fake clock for correctness;
-- bounded channel ping-pong with capacities 1, 8, and 64;
-- cancellation/drop correctness before timing.
-
-Metrics after correctness passes:
-
-- ns/task completion;
-- ns/channel message;
-- generated code size where native comparison is meaningful;
-- allocations or frame counts when the runtime exposes stable counters.
+Performance remains deferred until a native S3 workload with equivalent observable semantics exists.
 
 ## Candidate B — reactor and loopback networking
 
+**Correctness preflight: PROMOTED** → [`benchmarks/network_loopback`](../../benchmarks/network_loopback/README.md)
+
 Primary references: `tokio-rs/mio`, `libuv/libuv`.
 
-Bounded workload ideas:
-
-- localhost TCP connect/accept/read/write;
-- UDP loopback send/receive;
-- readiness re-arm after WouldBlock;
-- fixed-size payload throughput;
-- resource cleanup after cancellation/peer-close.
-
-Public internet must not be required.
+The promoted preflight verifies deterministic reactor and provider-neutral local-network semantics without public internet. Native socket/reactor performance remains deferred.
 
 ## Candidate C — TLS local handshake
 
+**Correctness preflight: PROMOTED** → [`benchmarks/tls_local`](../../benchmarks/tls_local/README.md)
+
 Primary reference: `rustls/rustls`.
 
-Bounded workload ideas:
-
-- local trusted certificate handshake;
-- repeated handshake/session setup;
-- fixed-size encrypted echo;
-- hostname mismatch and untrusted-certificate rejection as correctness gates;
-- cancellation during handshake and cleanup.
-
-Certificate and hostname verification must remain enabled. A benchmark that disables verification is invalid.
+The promoted preflight validates the provider-neutral TLS state machine and secure defaults. It does not claim native TLS, trust-store, or external-chain execution certification.
 
 ## Candidate D — real-world provider pipeline
 
-Application reference: `harry0703/MoneyPrinterTurbo`.
+**Integration correctness preflight: PROMOTED** → [`benchmarks/provider_pipeline`](../../benchmarks/provider_pipeline/README.md)
 
-Do **not** port the full application. Extract a compact workload that exercises the same engineering shape:
+Application reference: `harry0703/MoneyPrinterTurbo` pinned at `d4c0e45da4ac0889af77f7307f52f9d5d4f74942`.
 
-1. parse deterministic configuration;
-2. select a provider from a declarative registry;
-3. issue a local HTTP/TLS request to a fixture server;
-4. parse the response;
-5. write a deterministic result file;
-6. optionally invoke one bounded local process where S3 process APIs support it.
+The promoted V1 workload extracts only the useful application shape rather than porting the full project:
 
-This candidate is valuable as an integration benchmark after the lower-level async/network/TLS campaigns are stable.
+1. deterministic config file read through S3 OS services;
+2. stable provider-ID lookup in a benchmark-local declarative registry;
+3. default/explicit model resolution;
+4. deterministic local DNS and async network connect;
+5. async TLS handshake/read/write with certificate and hostname validation required;
+6. deterministic HTTP-like request envelope;
+7. local fixture provider response;
+8. response parse;
+9. deterministic result-file write/readback through S3 OS services;
+10. cleanup after success and after a late output-path failure.
+
+The gate additionally proves that an unknown provider fails before network activity starts and that `../` output escape is rejected.
+
+### Explicit V1 limitation
+
+JSON parsing/serialization is provided by the Python benchmark harness because the pinned M1.71-M1.80 S3 baseline does not expose a general JSON runtime for this workload. The report labels this as:
+
+`python_benchmark_harness_not_s3_runtime_feature`
+
+Therefore this candidate is an integration/workload-shape gate, not evidence that S3 already has a production JSON library.
+
+No real AI provider, API key, public internet, or MoneyPrinterTurbo runtime is used.
 
 ## Candidate E — AArch64 backend structure and code quality
 
-Primary reference: `llvm/llvm-project`.
+**Structural correctness preflight: PROMOTED** → [`benchmarks/aarch64`](../../benchmarks/aarch64/README.md)
 
-This is not a claim that S3 and LLVM have equivalent optimizer scope. The comparison must use bounded kernels with equivalent semantics.
+Primary reference: `llvm/llvm-project` pinned at `b562ef546e46face7172d174e1a5f5454c470eee`.
 
-Candidate checks:
+The promoted gate currently validates only the contracts actually modeled by S3 M1.77/M1.78:
 
-- AArch64 function-call ABI fixtures;
-- integer and floating argument/return placement;
-- aggregate/sret layout;
-- stack alignment;
-- ELF structural validity for Linux AArch64;
-- Mach-O structural validity for macOS ARM64;
-- instruction count and code size for tiny arithmetic/control-flow kernels.
+- target registration;
+- AAPCS64 scalar integer argument locations;
+- scalar return in `x0`;
+- deterministic structural return assembly;
+- ELF64 AArch64 identity;
+- Mach-O ARM64 executable-header identity;
+- execution-certification deferment;
+- fail-closed invalid inputs.
 
-Execution timing is valid only on a real matching target environment. Structural checks must be reported separately from execution certification.
+The gate explicitly records the following as unmodeled rather than inferring support:
+
+- floating-point ABI classification;
+- explicit 16-byte stack-alignment proof;
+- aggregate argument/return and `sret`;
+- ELF sections/relocations;
+- Mach-O load commands/sections/relocations;
+- machine-code encoding;
+- native link/execution.
+
+Therefore LLVM remains a pinned architecture/codegen reference only. Comparative instruction-count/code-size claims and execution timing are invalid until S3 has equivalent native object generation and execution paths.
 
 ## Candidate F — package resolver, cache and reproducibility
 
+**Correctness preflight: PROMOTED** → [`benchmarks/package_repro`](../../benchmarks/package_repro/README.md)
+
 Primary references: `rust-lang/cargo`, `astral-sh/uv`.
 
-Candidate workloads:
+The promoted gate uses local deterministic fixtures and verifies:
 
-- resolve a deterministic local dependency graph;
+- package lock mapping-order determinism;
 - identical multi-parent dependency identity;
-- conflicting identity rejection;
-- lockfile regeneration determinism;
-- warm-cache vs cold-cache local fixture resolution;
-- offline cache hit;
-- checksum mismatch rejection;
-- bounded archive extraction/path traversal rejection;
-- repeat toolchain/package bundle hash comparison.
+- reachable identity conflict rejection;
+- unreachable conflict isolation;
+- stable lock SHA-256;
+- exact content-addressed registry locks;
+- offline cache reuse after registry-object removal;
+- checksum verification on cache hits;
+- deterministic install paths;
+- archive traversal and duplicate canonical path rejection;
+- bounded member extraction;
+- byte-identical toolchain bundles across input order;
+- deterministic manifest/ZIP metadata;
+- corruption and machine-path rejection;
+- registry publishing and remote release remain unavailable.
 
-Do not use live public registries for correctness. Use a local fixture registry/content store.
+Cargo and uv remain pinned design/reference projects only. This preflight does not execute public registries or claim resolver performance equivalence.
 
-## Promotion order
+## Promotion state
 
-Recommended order:
+All six M1.71-M1.80 candidates are now represented by bounded executable correctness/structural/integration preflights:
 
-1. async executor/channels;
-2. reactor/loopback networking;
-3. TLS local handshake;
-4. AArch64 structural/code-quality campaign;
-5. package resolver/cache/reproducibility;
-6. real-world provider pipeline.
+1. async runtime;
+2. reactor/network;
+3. TLS;
+4. provider application pipeline;
+5. AArch64 structure;
+6. package/cache/reproducibility.
 
-Do not promote all candidates at once. Each candidate becomes executable only after its differential correctness or structural-equivalence contract is complete.
+The next benchmark-program step should **not** silently repin these workloads to code under active M1.81-M1.90 development. Add a separate immutable M1.81-M1.90 reference/baseline only after that roadmap is merged and reviewed.
+
+Native performance/code-quality comparisons remain allowed only where an equivalent native S3 execution path and an explicit correctness/equivalence contract exist. No hosted Python timing or structural-only output should be presented as native S3 performance.
