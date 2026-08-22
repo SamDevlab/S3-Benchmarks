@@ -12,7 +12,7 @@ with GCC/CC, x86-64, and KVM virtualization.
 The activation stopped before `preflight-only`. The only available benchmark
 checkout was at `6ae9e1f8bcff79557c02eb20c786e70d42eeda1d` and contained
 untracked historical reports, while this campaign requires the exact final
-automation HEAD `675593cd5d57c885c430484ba1c68061bc82d904`. Existing remote
+automation HEAD `ee1af3071aac5479e721f96f1f33b729310c9202`. Existing remote
 checkouts were not changed or cleaned to manufacture a valid candidate.
 
 Therefore no C control samples or RC1 timing smoke were run. Performance

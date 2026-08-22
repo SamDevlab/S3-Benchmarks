@@ -1,7 +1,7 @@
 {
   "schema": "s3.rc1.automation.linux-activation.manifest.v1",
   "campaign_start_sha": "e7fa20dc28ada7f0c008b4f10699e23c6e70c684",
-  "campaign_final_source_sha": "675593cd5d57c885c430484ba1c68061bc82d904",
+  "campaign_final_source_sha": "ee1af3071aac5479e721f96f1f33b729310c9202",
   "pr": 12,
   "branch": "benchmark/rc1-longitudinal-native-v2-20260822",
   "rc1_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
