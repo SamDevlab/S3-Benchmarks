@@ -152,8 +152,13 @@ def _paired_ratio(rows: list[dict[str, Any]], left: tuple[str, str], right: tupl
 
 def run_campaign(args: argparse.Namespace) -> dict[str, Any]:
     roots = {key: Path(value).resolve() for key, value in (item.split("=", 1) for item in args.s3_root)}
-    if set(roots) != set(CHECKPOINT_SHAS):
-        raise SystemExit("P7-P9 requires H4 and H5 S3 roots")
+    checkpoints = args.checkpoints or ["H4", "H5"]
+    if any(checkpoint not in CHECKPOINT_SHAS for checkpoint in checkpoints):
+        raise SystemExit("P7-P9 supports only H4 and H5 S3 roots")
+    if not args.correctness_only and checkpoints != ["H4", "H5"]:
+        raise SystemExit("P7-P9 timing requires H4 and H5 S3 roots")
+    if set(roots) != set(checkpoints):
+        raise SystemExit("one P7-P9 S3 root is required for each selected checkpoint")
     for checkpoint, root in roots.items():
         require_provenance(s3_repo=root, requested_s3_sha=CHECKPOINT_SHAS[checkpoint], benchmark_repo=BASE_DIR, requested_benchmark_sha=args.benchmark_sha)
     artifact_root = args.artifact_root.resolve()
@@ -179,6 +184,35 @@ def run_campaign(args: argparse.Namespace) -> dict[str, Any]:
             if result != c_result:
                 correctness["status"] = "FAIL"
                 raise RuntimeError(f"{workload.workload_id} correctness mismatch {key}: {result} != {c_result}")
+        if args.correctness_only:
+            summary = {
+                "schema": "s3.rc1.p7-p9.native-summary.v1",
+                "run_id": args.run_id,
+                "workload": workload.workload_id,
+                "name": workload.name,
+                "status": "CORRECTNESS_ONLY",
+                "correctness": correctness,
+                "inputs_pinned": True,
+                "oracle_defined": True,
+                "sample_level_data_available": "NOT_APPLICABLE",
+                "repeatable": "NOT_RUN",
+                "control_stable": "NOT_RUN",
+                "control_drift_percent": None,
+                "summaries": [],
+                "paired": None,
+                "structural": {
+                    "s3": {checkpoint: {opt: manifest["records"][opt]["metrics"] for opt in ("O0", "O1")} for checkpoint, manifest in s3_manifests.items()},
+                    "c": {opt: control["variants"][opt]["metrics"] for opt in ("O0", "O2", "O3")},
+                },
+                "provenance": {"benchmark_sha": args.benchmark_sha, "s3_shas": {checkpoint: CHECKPOINT_SHAS[checkpoint] for checkpoint in checkpoints}},
+                "raw_samples": None,
+                "protocol": {"correctness_before_timing": True, "timing": "NOT_RUN", "checkpoints": checkpoints},
+                "perf": "NOT_RUN_BY_MODE",
+            }
+            _json(report_root / workload.workload_id / "summary.json", summary)
+            (report_root / workload.workload_id / "summary.md").write_text("# " + workload.workload_id + " correctness-only workload\n\n" + json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+            all_summaries.append(summary)
+            continue
         rows: list[dict[str, Any]] = []
         for warmup in range(args.warmups):
             for checkpoint, variant, _role in _schedule(warmup):
@@ -231,9 +265,9 @@ def run_campaign(args: argparse.Namespace) -> dict[str, Any]:
         _json(report_root / workload.workload_id / "summary.json", summary)
         (report_root / workload.workload_id / "summary.md").write_text("# " + workload.workload_id + " native workload\n\n" + json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         all_summaries.append(summary)
-    result = {"schema": "s3.rc1.p7-p9.native-result.v1", "run_id": args.run_id, "status": "PASS", "workloads": all_summaries, "provenance": {"benchmark_sha": args.benchmark_sha, "s3_shas": CHECKPOINT_SHAS}}
+    result = {"schema": "s3.rc1.p7-p9.native-result.v1", "run_id": args.run_id, "status": "PASS", "workloads": all_summaries, "provenance": {"benchmark_sha": args.benchmark_sha, "s3_shas": {checkpoint: CHECKPOINT_SHAS[checkpoint] for checkpoint in checkpoints}}}
     _json(report_root / "summary.json", result)
-    _json(report_root / "protocol.json", {"workloads": [item["workload"] for item in all_summaries], "correctness_before_timing": True, "sample_level_data_available": "YES", "native_speedup_claim": "NO"})
+    _json(report_root / "protocol.json", {"workloads": [item["workload"] for item in all_summaries], "correctness_before_timing": True, "sample_level_data_available": "YES" if not args.correctness_only else "NOT_APPLICABLE", "native_speedup_claim": "NO", "mode": "correctness-only" if args.correctness_only else "timed"})
     print(json.dumps({"status": "PASS", "workloads": [item["workload"] + ":" + item["status"] for item in all_summaries]}, sort_keys=True))
     return result
 
@@ -245,6 +279,8 @@ def main() -> int:
     parser.add_argument("--artifact-root", type=Path, required=True)
     parser.add_argument("--report-root", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
+    parser.add_argument("--checkpoints", nargs="+", choices=sorted(CHECKPOINT_SHAS), default=None)
+    parser.add_argument("--correctness-only", action="store_true")
     parser.add_argument("--warmups", type=int, default=5)
     parser.add_argument("--repetitions", type=int, default=30)
     parser.add_argument("--cpu-affinity", default="taskset -c 0")
