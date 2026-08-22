@@ -131,12 +131,42 @@ def _compile_controls(control_root: Path, fixture_root: Path, parses: int, *, re
 
 
 def _host_preflight(output: Path, samples: int = 8) -> dict[str, Any]:
+    def process_ancestors() -> set[int]:
+        ancestors: set[int] = set()
+        current = os.getpid()
+        while current > 1 and current not in ancestors:
+            ancestors.add(current)
+            try:
+                stat = Path(f"/proc/{current}/stat").read_text(encoding="utf-8")
+                current = int(stat.rsplit(")", 1)[1].split()[1])
+            except (FileNotFoundError, ValueError, IndexError):
+                break
+        return ancestors
+
+    ignored_processes = process_ancestors()
     observations: list[dict[str, Any]] = []
     for index in range(samples):
-        uptime = subprocess.run(["uptime"], capture_output=True, text=True, check=False).stdout.strip()
-        free = subprocess.run(["free", "-m"], capture_output=True, text=True, check=False).stdout.strip()
-        active = subprocess.run(["pgrep", "-af", "(runner|p1_stability|benchmarks)"], capture_output=True, text=True, check=False).stdout.splitlines()
-        active = [line for line in active if str(os.getpid()) not in line]
+        def command_output(command: list[str]) -> str:
+            if shutil.which(command[0]) is None:
+                return ""
+            return subprocess.run(command, capture_output=True, text=True, check=False).stdout.strip()
+
+        uptime = command_output(["uptime"])
+        free = command_output(["free", "-m"])
+        if shutil.which("pgrep") is None:
+            active = []
+        else:
+            active = subprocess.run(["pgrep", "-af", "(runner|p1_stability|benchmarks)"], capture_output=True, text=True, check=False).stdout.splitlines()
+        filtered: list[str] = []
+        for line in active:
+            try:
+                process_id = int(line.split(maxsplit=1)[0])
+            except (ValueError, IndexError):
+                filtered.append(line)
+                continue
+            if process_id not in ignored_processes:
+                filtered.append(line)
+        active = filtered
         observations.append({"index": index + 1, "timestamp": datetime.now(timezone.utc).isoformat(), "uptime": uptime, "free_m": free, "active_benchmark_processes": active})
         if index + 1 < samples:
             time.sleep(5)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pytest
 
 from benchmarks.rc1.native_workloads import NATIVE_WORKLOADS
@@ -37,3 +38,12 @@ def test_native_workloads_are_pinned_and_have_both_implementations():
         assert item.s3_source.strip().startswith("fn ")
         assert "program returned:" in item.c_source
         assert item.operations_per_run > 0
+
+
+def test_preflight_ignores_the_current_process_ancestry(tmp_path, monkeypatch):
+    from tools import p1_stability
+
+    monkeypatch.setattr(p1_stability.time, "sleep", lambda _seconds: None)
+    result = p1_stability._host_preflight(tmp_path / "preflight.json", samples=1)
+    assert result["host_ready"] is True
+    assert result["samples"][0]["active_benchmark_processes"] == []
