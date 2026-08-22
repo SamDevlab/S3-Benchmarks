@@ -112,7 +112,7 @@ class SSHTransport:
         remote = shlex.join(list(argv))
         if cwd:
             remote = f"cd -- {shlex.quote(cwd)} && {remote}"
-        return ["ssh", "-p", str(self.port), self.target, remote]
+        return ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-p", str(self.port), self.target, remote]
 
 
 def _now() -> str:

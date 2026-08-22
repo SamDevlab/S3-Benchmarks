@@ -94,6 +94,10 @@ def test_ssh_transport_is_explicit_and_does_not_store_credentials():
     assert transport.target == "runner@benchmark-host"
     assert transport.command(["python3", "-m", "benchmarks.rc1.automation"], cwd="/srv/bench") == [
         "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
         "-p",
         "2222",
         "runner@benchmark-host",
