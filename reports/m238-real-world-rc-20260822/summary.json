@@ -1,0 +1,53 @@
+{
+  "milestone": "M2.38",
+  "name": "external-real-world-performance-campaign",
+  "benchmark_branch": "benchmark/m238-real-world-rc-20260822",
+  "benchmark_start_sha": "7875801a03f758158e0d0685709f02f8b8f3cd15",
+  "benchmark_sha": "7875801a03f758158e0d0685709f02f8b8f3cd15",
+  "baseline_s3_sha": "e23b092bec100cedc520841a7dd0f4488090b6a1",
+  "candidate_s3_sha": "39aa289b3de16c3832ef331085265b0e458707a3",
+  "environment": {
+    "host": "Windows AMD64",
+    "virtualized_linux": false,
+    "bare_metal_validation": false,
+    "native_linux_toolchain": "UNAVAILABLE"
+  },
+  "p1_jsmn": {
+    "correctness": "PASS",
+    "fixtures_completed": 6,
+    "differential_parity": "100%",
+    "native_timing": "DEFERRED_BY_ENVIRONMENT",
+    "assembly_instruction_count_s3_o1": 48784,
+    "assembly_branch_count_s3_o1": 12524,
+    "raw_sha256": "63a0454a54dcded12a36be9a019ffd060368d73a4a7643a6b063a5351c2d00ec"
+  },
+  "m199_hosted_characterization": {
+    "correctness": "PASS",
+    "timing_class": "CHARACTERIZATION_ONLY",
+    "native_speedup_claim": "NO",
+    "control": {
+      "same_parsed_assembly_program": true,
+      "off": "original AssemblyProgram",
+      "on": "eliminate_redundant_noop_moves(original)",
+      "timing": "hosted Emulator",
+      "native_x86_generation": "supplementary structural probe only",
+      "native_speedup_claim": "none"
+    },
+    "with_self_moves_off_median_ns": 4734800,
+    "with_self_moves_on_median_ns": 4628700,
+    "without_self_moves_off_median_ns": 4121400,
+    "without_self_moves_on_median_ns": 3945900,
+    "provenance": "PASS",
+    "raw_sha256": "19575e9023eef8087f74960e5899a33c76eb4c77b55c0a7d0a429d2399503c18"
+  },
+  "p2_p18": "DEFERRED",
+  "improved": [],
+  "regressed": [],
+  "unchanged_within_noise": [],
+  "inconclusive": [],
+  "deferred": ["P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "P10", "P11", "P12", "P13", "P14", "P15", "P16", "P17", "P18"],
+  "status": "CHARACTERIZATION_ONLY",
+  "benchmark_correctness": "PASS",
+  "timing_class": "CHARACTERIZATION_ONLY",
+  "native_speedup_claim": "NO"
+}
