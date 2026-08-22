@@ -108,4 +108,3 @@ def run_contract_probe(workload: WorkloadContract) -> dict[str, Any]:
 
 def run_all_contract_probes() -> list[dict[str, Any]]:
     return [run_contract_probe(workload) for workload in WORKLOADS]
-
