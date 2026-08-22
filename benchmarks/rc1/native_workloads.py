@@ -16,8 +16,8 @@ class NativeWorkload:
 
 
 P7_S3 = """\
-fn p7_step(a: tryte, b: tryte) -> tryte:
-    mut product: tryte = a * b
+fn p7_step(a: i64, b: i64) -> i64:
+    mut product: i64 = a * b
     match product <=> 120:
         -1:
             product = product + 3
@@ -27,11 +27,11 @@ fn p7_step(a: tryte, b: tryte) -> tryte:
             product = product - 1
     return product
 
-fn main() -> tryte:
-    mut outer: tryte = 0
-    mut checksum: tryte = 0
+fn main() -> i64:
+    mut outer: i64 = 0
+    mut checksum: i64 = 0
     while outer <=> 8:
-        mut inner: tryte = 0
+        mut inner: i64 = 0
         while inner <=> 8:
             checksum = checksum + p7_step(outer + 1, inner + 1)
             match checksum <=> 180:
