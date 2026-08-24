@@ -1,0 +1,8 @@
+{
+  "schema": "s3.benchmark.stage.v1",
+  "stage": "stage2",
+  "compiler_kind": "stage2",
+  "compiler_artifact_sha256": null,
+  "status": "FAIL_CLOSED",
+  "reason": "Stage1 did not produce an executable compiler artifact"
+}

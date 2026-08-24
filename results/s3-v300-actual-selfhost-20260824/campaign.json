@@ -1,0 +1,12 @@
+{
+  "schema": "s3.benchmark.campaign.v1",
+  "campaign": "s3-v300-actual-selfhost-20260824",
+  "s3_repo": "SamDevlab/S3",
+  "s3_certification_sha": "b9c8fdd8b27802d3a10df20f7ae19c04e2895e62",
+  "benchmark_repo": "SamDevlab/S3-Benchmarks",
+  "benchmark_repo_sha": "871e2015a2e2d15e202eb023f11a833304ba44e4",
+  "compiler_source_manifest_sha256": "aebc6f536c8bc44e861cd09f8bc5fceadf5ad26739763d7007179d48a465d4b4",
+  "network_required_during_benchmark": false,
+  "production_promotion": false,
+  "status": "SELF_HOSTING_BLOCKED_BEFORE_STAGE2"
+}
