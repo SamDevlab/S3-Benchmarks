@@ -56,6 +56,16 @@ def cases() -> tuple[Case, ...]:
             "VALID_SOURCE_PINNED_FROM_S3_TEST_RELATIONAL_PARSER",
         ),
         Case(
+            "mutable_reassignment_example",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    mut value: tryte = 10\n"
+            "    value = value + 5\n"
+            "    return value\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_PINNED_FROM_S3_EXAMPLE_MUTABLE_VALUE",
+        ),
+        Case(
             "parameter_ordinal_0",
             "parameters",
             "fn choose(a: i64, b: i64, c: i64, d: i64, e: i64, f: i64) -> i64:\n"
