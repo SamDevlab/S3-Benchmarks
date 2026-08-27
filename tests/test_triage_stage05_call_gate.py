@@ -1,6 +1,26 @@
 from tools.triage_stage05_call_gate import triage
 
 
+def test_multiarg_only_z0_with_unresolved_fail_closed_routes_to_evaluator() -> None:
+    result = triage({
+        "ONE_ARG_Z_MASK": "3",
+        "TWO_ARG_Z_MASK": "0",
+        "UNRESOLVED_CALLEE_FAIL_CLOSED": "PASS",
+    })
+    assert result["classification"] == "MULTI_ARG_ONLY_EVALUATOR_BLOCKER"
+    assert result["next_owner"] == "MULTI_ARG_EVALUATOR_DIAGNOSIS"
+    assert result["arrays_unlocked"] is False
+
+
+def test_multiarg_only_z0_without_unresolved_evidence_still_stays_narrow() -> None:
+    result = triage({
+        "ONE_ARG_Z_MASK": "3",
+        "TWO_ARG_Z_MASK": "0",
+    })
+    assert result["classification"] == "MULTI_ARG_ONLY_VALID_CALL_Z0"
+    assert result["next_owner"] == "MULTI_ARG_EVALUATOR_OR_FIRST_POST_PARSE_SETTER"
+
+
 def test_z3_routes_to_strict_before_arrays() -> None:
     result = triage({
         "ZERO_ARG_Z_MASK": "3",
@@ -41,10 +61,10 @@ def test_all_z7_plus_strict_pass_continues_internal_matrix_only() -> None:
     assert result["arrays_unlocked"] is False
 
 
-def test_any_z0_stops_broadening() -> None:
+def test_any_other_z0_stops_broadening() -> None:
     result = triage({
-        "ZERO_ARG_Z_MASK": "3",
-        "ONE_ARG_Z_MASK": "0",
+        "ZERO_ARG_Z_MASK": "0",
+        "ONE_ARG_Z_MASK": "3",
     })
     assert result["classification"] == "VALID_CALL_REGRESSION_OR_FAIL_CLOSED"
     assert result["next_owner"] == "FIRST_Z0_FIXTURE"
