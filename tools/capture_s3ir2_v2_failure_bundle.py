@@ -33,6 +33,17 @@ def _load_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def _actual_sha(report: dict[str, Any], label: str) -> str | None:
+    actual = report.get("actual_files")
+    if not isinstance(actual, dict):
+        return None
+    item = actual.get(label)
+    if not isinstance(item, dict):
+        return None
+    value = item.get("sha256")
+    return value if isinstance(value, str) else None
+
+
 def capture(
     source: Path,
     stream: Path,
@@ -69,31 +80,25 @@ def capture(
     }
 
     conformance_data = _load_json(conformance_out)
-    candidate_identity: dict[str, object] = {
-        "candidate_git_sha": None,
-        "candidate_source_sha256": None,
-        "candidate_binary_sha256": None,
-        "control_revision": None,
-        "native_provenance_status": "NOT_SUPPLIED",
-        "native_binding_status": "NOT_SUPPLIED",
-    }
 
+    copied_candidate_source_sha: str | None = None
+    copied_candidate_binary_sha: str | None = None
     if candidate_source is not None:
         files["candidate_source"] = _copy(
             candidate_source,
             output,
             "candidate-source.s3",
         )
-        candidate_identity["candidate_source_sha256"] = files["candidate_source"]["sha256"]
-
+        copied_candidate_source_sha = str(files["candidate_source"]["sha256"])
     if candidate_binary is not None:
         files["candidate_binary"] = _copy(
             candidate_binary,
             output,
             "candidate-binary",
         )
-        candidate_identity["candidate_binary_sha256"] = files["candidate_binary"]["sha256"]
+        copied_candidate_binary_sha = str(files["candidate_binary"]["sha256"])
 
+    provenance_data: dict[str, Any] | None = None
     if native_provenance is not None:
         files["native_provenance"] = _copy(
             native_provenance,
@@ -101,26 +106,8 @@ def capture(
             "native-provenance.json",
         )
         provenance_data = _load_json(output / "native-provenance.json")
-        candidate_identity["candidate_git_sha"] = provenance_data.get("candidate_git_sha")
-        candidate_identity["control_revision"] = provenance_data.get("control_revision")
-        candidate_identity["native_provenance_status"] = provenance_data.get(
-            "status", "UNKNOWN"
-        )
-        actual_files = provenance_data.get("actual_files", {})
-        if isinstance(actual_files, dict):
-            source_facts = actual_files.get("candidate_source")
-            binary_facts = actual_files.get("candidate_binary")
-            if (
-                candidate_identity["candidate_source_sha256"] is None
-                and isinstance(source_facts, dict)
-            ):
-                candidate_identity["candidate_source_sha256"] = source_facts.get("sha256")
-            if (
-                candidate_identity["candidate_binary_sha256"] is None
-                and isinstance(binary_facts, dict)
-            ):
-                candidate_identity["candidate_binary_sha256"] = binary_facts.get("sha256")
 
+    binding_data: dict[str, Any] | None = None
     if native_binding is not None:
         files["native_binding"] = _copy(
             native_binding,
@@ -128,41 +115,116 @@ def capture(
             "native-binding.json",
         )
         binding_data = _load_json(output / "native-binding.json")
-        candidate_identity["native_binding_status"] = binding_data.get("status", "UNKNOWN")
-        primary = binding_data.get("primary")
-        if isinstance(primary, dict):
-            for field in (
-                "candidate_git_sha",
-                "candidate_source_sha256",
-                "candidate_binary_sha256",
-                "control_revision",
-            ):
-                if candidate_identity.get(field) is None:
-                    candidate_identity[field] = primary.get(field)
+
+    proven_candidate_source_sha = (
+        _actual_sha(provenance_data, "candidate_source")
+        if provenance_data is not None
+        else None
+    )
+    proven_candidate_binary_sha = (
+        _actual_sha(provenance_data, "candidate_binary")
+        if provenance_data is not None
+        else None
+    )
+    proven_fixture_sha = (
+        _actual_sha(provenance_data, "fixture_source")
+        if provenance_data is not None
+        else None
+    )
+    proven_stream_sha = (
+        _actual_sha(provenance_data, "stream")
+        if provenance_data is not None
+        else None
+    )
+
+    candidate_identity: dict[str, object] = {
+        "candidate_git_sha": (
+            provenance_data.get("candidate_git_sha")
+            if provenance_data is not None
+            else None
+        ),
+        "control_revision": (
+            provenance_data.get("control_revision")
+            if provenance_data is not None
+            else None
+        ),
+        "copied_candidate_source_sha256": copied_candidate_source_sha,
+        "proven_candidate_source_sha256": proven_candidate_source_sha,
+        "copied_candidate_binary_sha256": copied_candidate_binary_sha,
+        "proven_candidate_binary_sha256": proven_candidate_binary_sha,
+        "proven_fixture_source_sha256": proven_fixture_sha,
+        "proven_stream_sha256": proven_stream_sha,
+        "native_provenance_status": (
+            provenance_data.get("status", "UNKNOWN")
+            if provenance_data is not None
+            else "NOT_SUPPLIED"
+        ),
+        "native_binding_status": (
+            binding_data.get("status", "UNKNOWN")
+            if binding_data is not None
+            else "NOT_SUPPLIED"
+        ),
+    }
 
     identity_errors: list[str] = []
-    if candidate_source is not None and native_provenance is not None:
-        provenance_source = candidate_identity.get("candidate_source_sha256")
-        copied_source = files["candidate_source"]["sha256"]
-        if provenance_source != copied_source:
+    bundle_fixture_sha = str(files["source"]["sha256"])
+    bundle_stream_sha = str(files["stream"]["sha256"])
+
+    if provenance_data is not None:
+        if provenance_data.get("status") != "PASS":
+            identity_errors.append("native provenance status is not PASS")
+        if proven_fixture_sha != bundle_fixture_sha:
+            identity_errors.append("bundle fixture SHA differs from native provenance")
+        if proven_stream_sha != bundle_stream_sha:
+            identity_errors.append("bundle stream SHA differs from native provenance")
+        if candidate_source is not None and proven_candidate_source_sha != copied_candidate_source_sha:
             identity_errors.append("candidate source SHA differs from native provenance")
-    if candidate_binary is not None and native_provenance is not None:
-        provenance_binary = candidate_identity.get("candidate_binary_sha256")
-        copied_binary = files["candidate_binary"]["sha256"]
-        if provenance_binary != copied_binary:
+        if candidate_binary is not None and proven_candidate_binary_sha != copied_candidate_binary_sha:
             identity_errors.append("candidate binary SHA differs from native provenance")
+
+    if binding_data is not None:
+        if binding_data.get("status") != "PASS":
+            identity_errors.append("native binding status is not PASS")
+        primary = binding_data.get("primary")
+        if not isinstance(primary, dict):
+            identity_errors.append("native binding lacks primary identity")
+        else:
+            comparisons = {
+                "candidate_git_sha": candidate_identity.get("candidate_git_sha"),
+                "candidate_source_sha256": proven_candidate_source_sha,
+                "candidate_binary_sha256": proven_candidate_binary_sha,
+                "fixture_source_sha256": proven_fixture_sha,
+                "stream_sha256": proven_stream_sha,
+                "control_revision": candidate_identity.get("control_revision"),
+            }
+            for field, expected in comparisons.items():
+                if expected is not None and primary.get(field) != expected:
+                    identity_errors.append(
+                        f"native binding primary {field} differs from native provenance"
+                    )
+
+    if native_provenance is None and (
+        candidate_source is not None or candidate_binary is not None or native_binding is not None
+    ):
+        identity_errors.append(
+            "candidate/native-binding artifacts supplied without native provenance"
+        )
 
     manifest: dict[str, object] = {
         "schema": "s3-benchmarks.bootstrap.s3ir2-v2-failure-bundle.v1",
-        "source_sha256": files["source"]["sha256"],
-        "stream_sha256": files["stream"]["sha256"],
+        "source_sha256": bundle_fixture_sha,
+        "stream_sha256": bundle_stream_sha,
         "conformance_sha256": files["conformance"]["sha256"],
         "ingest_sha256": files["ingest"]["sha256"],
         "conformance_status": conformance_data.get("status", "UNKNOWN"),
         "structural_status": ingest_report["structural_status"],
         "completeness_mask": ingest_report["completeness_mask"],
         "candidate_identity": candidate_identity,
-        "candidate_identity_status": "PASS" if not identity_errors else "FAIL",
+        "candidate_identity_status": (
+            "PASS"
+            if provenance_data is not None and not identity_errors
+            else ("NOT_SUPPLIED" if provenance_data is None and not identity_errors else "FAIL")
+        ),
         "candidate_identity_errors": identity_errors,
         "files": files,
         "minimization_status": "NOT_RUN",
