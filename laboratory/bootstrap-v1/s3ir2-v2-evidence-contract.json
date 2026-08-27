@@ -1,0 +1,32 @@
+{
+  "schema": "s3-benchmarks.bootstrap.s3ir2-v2-evidence-contract.v1",
+  "protocol": "S3IR2 v2",
+  "producer": "SamDevlab/S3 Stage1 candidate",
+  "consumer": "SamDevlab/S3-Benchmarks Bootstrap Laboratory",
+  "required_inputs": [
+    "source.s3",
+    "candidate.s3ir2",
+    "conformance.json"
+  ],
+  "optional_inputs": [
+    "repeat-2.s3ir2",
+    "repeat-3.s3ir2",
+    "native-build-metadata.json",
+    "resource-envelope.json"
+  ],
+  "consumer_outputs": [
+    "ingest.json",
+    "determinism.json when repeated streams are supplied",
+    "scorecard.json",
+    "triage.json when conformance is not PASS",
+    "evidence-manifest.json"
+  ],
+  "authority_rules": {
+    "structural_stream_validation": "S3-Benchmarks ingest_s3ir2_v2.py",
+    "semantic_conformance": "SamDevlab/S3 tools/verify_stage1_semantic_conformance_v2.py",
+    "determinism": "S3-Benchmarks exact-byte repeated stream checker",
+    "performance_claims": "NOT_AUTHORIZED_BY_THIS_CONTRACT"
+  },
+  "promotion_rule": "A completeness bit alone never promotes a lane. A proven lane requires structural PASS plus S3 strict semantic conformance PASS. S5 qualification additionally requires deterministic repeated bytes.",
+  "mutation_rule": "The consumer is read-only with respect to the S3 checkout and candidate artifacts."
+}
