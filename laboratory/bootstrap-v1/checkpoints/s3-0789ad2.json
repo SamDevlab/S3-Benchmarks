@@ -1,0 +1,59 @@
+{
+  "schema": "s3.bootstrap-laboratory-snapshot.v1",
+  "provenance": {
+    "s3_commit": "0789ad2df5f200c6b35b67d591d10e016c1a557a",
+    "benchmark_commit": "9c5fbb25b42198018a0b22f13998755ad423ac9e",
+    "source_lock_valid": true,
+    "benchmark_lock_valid": true,
+    "s3_pr": 268,
+    "s3_branch": "feature/actual-stage1-compiler-seed-20260824",
+    "checkpoint_date": "2026-08-26"
+  },
+  "bootstrap": {
+    "stage0_reference": "PASS",
+    "stage1": "BLOCKED",
+    "stage1_self_emit": "NOT_AUTHORIZED",
+    "stage2": "NOT_CREATED",
+    "stage3": "NOT_STARTED",
+    "full_self_hosting": false
+  },
+  "semantic_ir": {
+    "typed_values": "BLOCKED",
+    "instruction_def_use": "BLOCKED",
+    "call_dataflow": "BLOCKED",
+    "complete_terminators": "BLOCKED",
+    "canonical_serialization": "BLOCKED"
+  },
+  "determinism": {
+    "stage1_stage2_stage3_equivalence": "NOT_AUTHORIZED"
+  },
+  "resources": {
+    "peak_rss_bytes": null,
+    "compile_wall_seconds": null,
+    "artifact_bytes": null,
+    "assembly_bytes": 0,
+    "semantic_value_count": null,
+    "instruction_count": null,
+    "block_count": null,
+    "call_count": null
+  },
+  "performance_eligibility": {
+    "correctness_pass": false,
+    "equivalent_workload": false,
+    "stable_environment": false,
+    "performance_valid": false
+  },
+  "evidence_notes": {
+    "linux_ssh": "OK",
+    "linux_arch": "x86_64",
+    "python": "3.14.4",
+    "persistent_build_or_pytest_processes": "NONE",
+    "focused_previous": "74 passed, 3 skipped",
+    "compileall": "PASS",
+    "json_validation": "PASS",
+    "diff_check": "PASS",
+    "general_emitter": "BLOCKED_INCOMPLETE_IR",
+    "canonical_source_changed_by_this_benchmark_branch": false,
+    "native_evidence_created_by_this_benchmark_branch": false
+  }
+}
