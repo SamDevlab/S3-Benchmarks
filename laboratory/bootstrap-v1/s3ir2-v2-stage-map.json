@@ -16,9 +16,20 @@
       "required_cases": [
         "wide_literal_positive",
         "wide_literal_negative",
+        "relational_precedence_v06",
+        "mutable_reassignment_example",
         "local_identity"
       ],
-      "gate_focus": ["typed constants", "identifier uses", "instruction results", "O edges", "R edges"]
+      "gate_focus": [
+        "typed constants",
+        "unary negation",
+        "identifier uses",
+        "comparison and precedence",
+        "reassignment",
+        "instruction results",
+        "O edges",
+        "R edges"
+      ]
     },
     "05_CALLS_ARRAYS_S3": {
       "required_cases": [
@@ -43,6 +54,8 @@
     "07_SERIALIZATION_S5": {
       "required_cases": [
         "wide_literal_positive",
+        "relational_precedence_v06",
+        "mutable_reassignment_example",
         "parameter_ordinal_5",
         "nested_calls",
         "local_identity",
