@@ -22,6 +22,10 @@ STAGE_MAP = {
     }
 }
 
+CANDIDATE_SHA = "a" * 40
+SOURCE_SHA = "b" * 64
+BINARY_SHA = "c" * 64
+
 
 def _manifest(
     *,
@@ -35,6 +39,10 @@ def _manifest(
         else "BLOCKED"
     )
     return {
+        "candidate_git_sha": CANDIDATE_SHA,
+        "candidate_source_sha256": SOURCE_SHA,
+        "candidate_binary_sha256": BINARY_SHA,
+        "control_revision": 3,
         "structural_status": "PASS",
         "native_provenance_status": native,
         "semantic_conformance_status": semantic,
@@ -78,28 +86,55 @@ def test_full_campaign_passes_only_with_all_proofs() -> None:
 
 def test_checkpoint_is_immutable_and_hash_bound(tmp_path: Path) -> None:
     evidence = tmp_path / "evidence-manifest.json"
-    evidence.write_text(
-        json.dumps(_manifest()) + "\n",
-        encoding="utf-8",
-    )
+    evidence.write_text(json.dumps(_manifest()) + "\n", encoding="utf-8")
     output = tmp_path / "candidate" / "case.json"
     checkpoint = record(
-        candidate_sha="abc123",
-        candidate_source_sha256="deadbeef",
+        candidate_sha=CANDIDATE_SHA,
+        candidate_source_sha256=SOURCE_SHA,
         case_id="local_identity",
         stage_id="03_PASS1_BINDINGS",
         evidence_manifest=evidence,
         output=output,
     )
-    assert checkpoint["candidate_git_sha"] == "abc123"
+    assert checkpoint["candidate_git_sha"] == CANDIDATE_SHA
+    assert checkpoint["candidate_source_sha256"] == SOURCE_SHA
+    assert checkpoint["candidate_binary_sha256"] == BINARY_SHA
     assert checkpoint["immutable"] is True
     assert output.exists()
     with pytest.raises(FileExistsError):
         record(
-            candidate_sha="def456",
-            candidate_source_sha256="cafebabe",
+            candidate_sha=CANDIDATE_SHA,
+            candidate_source_sha256=SOURCE_SHA,
             case_id="local_identity",
             stage_id="03_PASS1_BINDINGS",
             evidence_manifest=evidence,
             output=output,
+        )
+
+
+def test_checkpoint_rejects_identity_relabeling(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence-manifest.json"
+    evidence.write_text(json.dumps(_manifest()) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="candidate_sha does not match"):
+        record(
+            candidate_sha="d" * 40,
+            candidate_source_sha256=SOURCE_SHA,
+            case_id="local_identity",
+            stage_id="03_PASS1_BINDINGS",
+            evidence_manifest=evidence,
+            output=tmp_path / "wrong.json",
+        )
+
+
+def test_checkpoint_rejects_malformed_hashes(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence-manifest.json"
+    evidence.write_text(json.dumps(_manifest()) + "\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="candidate_sha"):
+        record(
+            candidate_sha="abc123",
+            candidate_source_sha256=SOURCE_SHA,
+            case_id="local_identity",
+            stage_id="03_PASS1_BINDINGS",
+            evidence_manifest=evidence,
+            output=tmp_path / "bad.json",
         )
