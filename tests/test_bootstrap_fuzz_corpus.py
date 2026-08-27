@@ -20,9 +20,15 @@ def test_generator_writes_hash_locked_manifest(tmp_path: Path) -> None:
     assert manifest["deterministic"] is True
     assert manifest["compiler_invoked"] is False
     assert manifest["case_count"] == len(cases())
-    assert {"wide_literals", "parameters", "calls", "locals"} <= set(
-        manifest["categories"]
-    )
+    assert {
+        "wide_literals",
+        "parameters",
+        "calls",
+        "locals",
+        "control_flow",
+        "control_flow_calls",
+        "arrays_control_flow",
+    } <= set(manifest["categories"])
 
     for record in manifest["cases"]:
         data = (tmp_path / record["path"]).read_bytes()
@@ -54,3 +60,15 @@ def test_wide_literal_cases_are_not_preclassified_as_compiler_failures() -> None
     wide = [case for case in cases() if case.category == "wide_literals"]
     assert len(wide) == 2
     assert all("VALID_SOURCE" in case.current_stage1_expectation for case in wide)
+
+
+def test_control_flow_cases_require_complete_terminators() -> None:
+    selected = [
+        case
+        for case in cases()
+        if case.category in {"control_flow", "control_flow_calls", "arrays_control_flow"}
+    ]
+    assert len(selected) == 4
+    assert all("complete_terminators" in case.required_surfaces for case in selected)
+    assert any("match -1:" in case.source for case in selected)
+    assert any("while value <=> 3:" in case.source for case in selected)
