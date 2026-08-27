@@ -44,11 +44,22 @@ def test_normalize_parser_attempt_rejects_duplicate_keys() -> None:
     assert report["duplicate_keys"] == ["PARSER_ATTEMPT_ID"]
 
 
-def test_normalize_parser_attempt_does_not_infer_from_prose() -> None:
+def test_normalize_parser_attempt_does_not_infer_from_prose_or_missing_status() -> None:
     report = normalize(
         "Parser passou completamente agora.\n"
         "PARSER_ATTEMPT_ID=a1\n"
         f"CANDIDATE_SOURCE_SHA256={'c' * 64}\n"
+    )
+    assert report["normalization_status"] == "BLOCKED"
+    assert report["parser_status"] == "MISSING"
+    assert "PARSER_STATUS missing" in report["normalization_errors"]
+
+
+def test_normalize_parser_attempt_accepts_explicit_not_run() -> None:
+    report = normalize(
+        "PARSER_ATTEMPT_ID=a1\n"
+        f"CANDIDATE_SOURCE_SHA256={'d' * 64}\n"
+        "PARSER_STATUS=NOT_RUN\n"
     )
     assert report["normalization_status"] == "PASS"
     assert report["parser_status"] == "NOT_RUN"
