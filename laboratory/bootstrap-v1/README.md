@@ -63,6 +63,39 @@ Stage1/Stage2/Stage3 artifacts + observations
 A case-level differential PASS never promotes an IR surface by itself. IR closure
 continues to require explicit Stage1 semantic evidence.
 
+## One-command orchestration
+
+`tools/run_bootstrap_lab.py` composes the read-only pipeline and writes all reports
+under one output directory. It never edits the S3 checkout and never creates or
+promotes Stage2/Stage3.
+
+Minimal evidence-only run:
+
+```bash
+python tools/run_bootstrap_lab.py \
+  --s3-repo /path/to/S3 \
+  --benchmark-repo . \
+  --expected-s3-commit <40-char-sha> \
+  --expected-benchmark-commit <40-char-sha> \
+  --output-dir .artifacts/bootstrap-run
+```
+
+This always creates at least:
+
+```text
+corpus/manifest.json
+current-bootstrap.json
+snapshot-validation.json
+stage-equivalence.json
+summary.json
+```
+
+Optional differential, characterization and determinism stages are enabled only
+when their commands/artifacts are explicitly supplied. `summary.json` being PASS
+means only that the requested evidence pipeline completed without a hard
+contradiction; it does **not** mean Stage1 closure, self-hosting or performance
+qualification.
+
 ## Evidence import
 
 ```bash
@@ -79,6 +112,12 @@ The importer consumes `reports/selfhost/stage1/semantic-ir-requirements.json` an
 maps explicit `semantic_relationships` into the five surfaces. Host/reference IR
 counts remain provenance only and are never copied into Stage1 resource metrics.
 
+Selected supplemental Stage1 JSON evidence such as
+`call-argument-pool-closure.json` and `call-argument-pool-audit.json` is attached
+by exact SHA-256/status for provenance. Supplemental capacity evidence has
+`promotion_effect=NONE_PROVENANCE_ONLY`: a closed call pool does not by itself
+close typed values, def/use, call dataflow, terminators or serialization.
+
 ## Differential campaign
 
 Generate the deterministic corpus:
@@ -87,19 +126,36 @@ Generate the deterministic corpus:
 python tools/generate_bootstrap_fuzz_corpus.py --output .artifacts/bootstrap-corpus
 ```
 
-Run reference only while Stage1 is unavailable:
+The differential runner uses an **explicit observation contract**. It does not
+assume all execution modes expose program semantics the same way.
+
+For the hosted S3 CLI, `run` prints `program returned: N`. Use:
 
 ```bash
 python tools/run_bootstrap_differential.py \
   .artifacts/bootstrap-corpus/manifest.json \
   --reference-command "python -m bootstrap.s3.cli run {source}" \
+  --reference-observation program-return-line \
   --output .artifacts/differential.json
 ```
 
-When a Stage1 executable exists, add `--stage1-command`. The known
-`S3_STAGE1_EMITTER_BLOCKED` marker is classified as `STAGE1_BLOCKED`; an
-unrecognized Stage1 error, timeout, reference failure, or semantic mismatch is a
-hard campaign failure.
+If the compared Stage1/native command is an already-built program whose exit code
+is intentionally the program result, use:
+
+```text
+--stage1-observation exit-code
+```
+
+Supported observation modes are:
+
+- `stdout`: command must exit 0 and exact stdout is the observable value;
+- `program-return-line`: command must exit 0 and `program returned: N` is parsed;
+- `exit-code`: the process status itself is the observable value; use only when
+  that is intentionally the program contract, not for a compiler driver.
+
+The known `S3_STAGE1_EMITTER_BLOCKED` marker takes precedence over exit-code
+observation and is classified as `STAGE1_BLOCKED`. An unrecognized Stage1 error,
+timeout, reference failure or semantic mismatch is a hard campaign failure.
 
 Create the case-level semantic coverage report with:
 
@@ -109,6 +165,24 @@ python tools/summarize_bootstrap_semantic_coverage.py \
   --differential .artifacts/differential.json \
   --output .artifacts/semantic-coverage.json
 ```
+
+## Reliability corpus
+
+The deterministic corpus currently stresses:
+
+- wide positive/negative i64 literals;
+- parameter ordinals 0, 5 and 6;
+- nested calls;
+- reused call results;
+- local def/use;
+- while/control-flow termination;
+- ternary match/branch pressure;
+- call dataflow inside loops;
+- array indexing inside loops.
+
+Each fixture is hashed in `manifest.json`. Generated source is input material only;
+it becomes evidence only after running against exact pinned implementations under
+an explicit differential contract.
 
 ## Resource characterization
 
@@ -146,6 +220,9 @@ python tools/check_bootstrap_determinism.py source.s3 \
   --repeats 3 \
   --output .artifacts/determinism.json
 ```
+
+Deterministic bytes are a reproducibility property, not proof of semantic
+correctness.
 
 The stage comparator keeps byte reproducibility separate from semantic
 observations:
