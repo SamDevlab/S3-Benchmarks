@@ -1,9 +1,9 @@
 """Compare two S3IR2 v2 campaign reports and fail closed on regressions.
 
 The comparison is candidate-relative laboratory evidence. It does not promote a
-compiler. A regression is any previously passing structural, semantic, or
-required-determinism case that ceases to pass in the newer campaign, or a stage
-that falls from PASS_EVIDENCE_SET.
+compiler. A regression is any previously passing structural, native-provenance,
+semantic, or required-determinism case that ceases to pass in the newer campaign,
+or a stage that falls from PASS_EVIDENCE_SET.
 """
 
 from __future__ import annotations
@@ -74,6 +74,7 @@ def compare(baseline: dict[str, Any], candidate: dict[str, Any]) -> dict[str, An
                 continue
             dimensions = (
                 ("structural_status", "PASS"),
+                ("native_provenance_status", "PASS"),
                 ("semantic_conformance_status", "PASS"),
             )
             for dimension, passing in dimensions:
