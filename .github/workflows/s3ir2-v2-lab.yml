@@ -17,6 +17,7 @@ on:
       - "tools/render_s3ir2_v2_native_metadata.py"
       - "tools/validate_s3ir2_v2_native_provenance.py"
       - "tools/evaluate_stage04_expression_checkpoint.py"
+      - "tools/compare_stage04_expression_checkpoints.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_evidence_set.py"
@@ -26,6 +27,7 @@ on:
       - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_native_provenance.py"
       - "tests/test_stage04_expression_checkpoint.py"
+      - "tests/test_compare_stage04_expression_checkpoints.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -49,6 +51,7 @@ on:
       - "tools/render_s3ir2_v2_native_metadata.py"
       - "tools/validate_s3ir2_v2_native_provenance.py"
       - "tools/evaluate_stage04_expression_checkpoint.py"
+      - "tools/compare_stage04_expression_checkpoints.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_evidence_set.py"
@@ -58,6 +61,7 @@ on:
       - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_native_provenance.py"
       - "tests/test_stage04_expression_checkpoint.py"
+      - "tests/test_compare_stage04_expression_checkpoints.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -94,6 +98,7 @@ jobs:
             tools/render_s3ir2_v2_native_metadata.py \
             tools/validate_s3ir2_v2_native_provenance.py \
             tools/evaluate_stage04_expression_checkpoint.py \
+            tools/compare_stage04_expression_checkpoints.py \
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py \
             tests/test_s3ir2_v2_evidence_set.py \
@@ -102,7 +107,8 @@ jobs:
             tests/test_minimize_s3_failure.py \
             tests/test_compare_s3ir2_v2_campaigns.py \
             tests/test_s3ir2_v2_native_provenance.py \
-            tests/test_stage04_expression_checkpoint.py
+            tests/test_stage04_expression_checkpoint.py \
+            tests/test_compare_stage04_expression_checkpoints.py
       - name: Validate v2 laboratory JSON
         run: |
           python -c "import json; json.load(open('laboratory/bootstrap-v1/s3ir2-v2-stage-map.json', encoding='utf-8'))"
@@ -121,4 +127,5 @@ jobs:
             tests/test_minimize_s3_failure.py \
             tests/test_compare_s3ir2_v2_campaigns.py \
             tests/test_s3ir2_v2_native_provenance.py \
-            tests/test_stage04_expression_checkpoint.py
+            tests/test_stage04_expression_checkpoint.py \
+            tests/test_compare_stage04_expression_checkpoints.py
