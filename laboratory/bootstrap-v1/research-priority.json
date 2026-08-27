@@ -1,47 +1,84 @@
 {
-  "schema": "s3.bootstrap-research-priority.v1",
+  "schema": "s3.bootstrap-research-priority.v2",
   "date": "2026-08-26",
-  "principle": "CLOSE_THE_VERTICAL_BOOTSTRAP_PATH_BEFORE_EXPANDING_HORIZONTAL_RESEARCH",
-  "active": [
+  "strategy": "CLOSE_VERTICAL_BOOTSTRAP_WITH_PARALLEL_READ_ONLY_LAB_SUPPORT",
+  "compiler_owner": {
+    "repository": "SamDevlab/S3",
+    "pull_request": 268,
+    "exclusive_mutation_scope": [
+      "selfhost/compiler/s3c_stage1.s3",
+      "active Stage1 implementation tests and local qualification reports"
+    ],
+    "parallel_lab_must_not_mutate_compiler": true
+  },
+  "parallel_order": [
+    {
+      "priority": 0,
+      "workstream": "stage1_compiler_and_general_emitter",
+      "owner": "Codex/current compiler development",
+      "parallel_lab_action": "CONSUME_EVIDENCE_ONLY"
+    },
     {
       "priority": 1,
-      "area": "stage1_ir_general_emitter",
-      "repository": "SamDevlab/S3",
-      "ownership": "CODEX_ACTIVE_DO_NOT_TOUCH_FROM_BENCHMARK_LAB"
+      "workstream": "bootstrap_evidence_adapter",
+      "status": "IMPLEMENTED",
+      "rule": "READ_ONLY_FAIL_CLOSED"
     },
     {
       "priority": 2,
-      "area": "bootstrap_laboratory",
-      "repository": "SamDevlab/S3-Benchmarks",
-      "ownership": "PARALLEL_SAFE"
+      "workstream": "bootstrap_reliability_corpus",
+      "status": "IMPLEMENTED_EXPANDABLE",
+      "rule": "GENERATED_CASES_ARE_NOT_EVIDENCE_UNTIL_RUN"
     },
     {
       "priority": 3,
-      "area": "bootstrap_reliability_corpus",
-      "repository": "SamDevlab/S3-Benchmarks",
-      "ownership": "PARALLEL_SAFE"
+      "workstream": "stage0_stage1_differential",
+      "status": "IMPLEMENTED_AWAITS_EXECUTION_CONTEXT",
+      "rule": "EXPLICIT_OBSERVATION_CONTRACT_REQUIRED"
     },
     {
       "priority": 4,
-      "area": "provenance_and_host_eligibility",
-      "repository": "SamDevlab/S3-Benchmarks",
-      "ownership": "PARALLEL_SAFE"
+      "workstream": "semantic_coverage",
+      "status": "IMPLEMENTED",
+      "rule": "CASE_PASS_NEVER_PROMOTES_AUTHORITATIVE_IR_SURFACE"
+    },
+    {
+      "priority": 5,
+      "workstream": "resource_characterization",
+      "status": "IMPLEMENTED",
+      "rule": "CHARACTERIZATION_ONLY_NO_SPEEDUP_CLAIM"
+    },
+    {
+      "priority": 6,
+      "workstream": "determinism",
+      "status": "IMPLEMENTED",
+      "rule": "BYTE_REPRODUCIBILITY_IS_NOT_SEMANTIC_CORRECTNESS"
+    },
+    {
+      "priority": 7,
+      "workstream": "stage2_stage3_equivalence",
+      "status": "PREPARED_BLOCKED_BY_ARTIFACT_AVAILABILITY",
+      "rule": "MISSING_STAGE_REMAINS_NOT_AVAILABLE"
+    },
+    {
+      "priority": 8,
+      "workstream": "comparative_performance",
+      "status": "DEFERRED_UNTIL_CORRECTNESS_EQUIVALENCE_AND_HOST_ELIGIBILITY",
+      "rule": "DO_NOT_RELAX_DRIFT_OR_HOST_GATES"
     }
   ],
-  "preserve_but_defer_new_expansion": [
-    "real_world_performance_campaign_expansion",
-    "quantum",
-    "accelerator_gpu",
-    "embedded",
-    "new_abl_optimizer_search",
-    "new_horizontal_milestone_trains"
+  "frozen_horizontal_expansion": [
+    "new quantum scope",
+    "new accelerator/GPU scope",
+    "new embedded scope",
+    "new ABL optimization scope",
+    "new exotic performance corpus"
   ],
-  "unfreeze_conditions": [
-    "stage1_general_emitter_closed",
-    "stage1_self_emit_pass",
-    "stage2_artifact_created_and_correct",
-    "stage3_artifact_created_and_correct",
-    "stage1_stage2_stage3_equivalence_pass"
-  ],
-  "note": "Deferred research is preserved and may receive maintenance/security fixes. The policy only defers new expansion competing with the self-hosting critical path."
+  "resume_horizontal_expansion_when": [
+    "Stage1 semantic IR closure is explicit",
+    "general emitter closes required operations",
+    "Stage1 self-emit passes",
+    "Stage2 exists and passes correctness",
+    "Stage3 exists and bootstrap equivalence is measurable"
+  ]
 }
