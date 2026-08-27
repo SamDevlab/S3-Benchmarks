@@ -1,0 +1,57 @@
+{
+  "schema": "s3-benchmarks.bootstrap.s3ir2-v2-stage-map.v1",
+  "protocol": "S3IR2 v2",
+  "source_corpus": "tools/generate_bootstrap_fuzz_corpus.py",
+  "promotion_effect": "NONE_PLANNING_ONLY",
+  "stages": {
+    "03_PASS1_BINDINGS": {
+      "required_cases": [
+        "parameter_ordinal_0",
+        "parameter_ordinal_5",
+        "local_identity"
+      ],
+      "gate_focus": ["function ownership", "parameter order", "local binding identity", "mutability", "source identity"]
+    },
+    "04_EXPRESSIONS_S1_S2": {
+      "required_cases": [
+        "wide_literal_positive",
+        "wide_literal_negative",
+        "local_identity"
+      ],
+      "gate_focus": ["typed constants", "identifier uses", "instruction results", "O edges", "R edges"]
+    },
+    "05_CALLS_ARRAYS_S3": {
+      "required_cases": [
+        "parameter_ordinal_0",
+        "parameter_ordinal_5",
+        "parameter_ordinal_6",
+        "nested_calls",
+        "call_result_reuse",
+        "array_index_loop"
+      ],
+      "gate_focus": ["callee identity", "ordered A edges", "call result R edges", "array/index def-use", "fail-closed seventh parameter"]
+    },
+    "06_CONTROL_FLOW_S4": {
+      "required_cases": [
+        "while_counter",
+        "match_three_way",
+        "loop_call_dataflow",
+        "array_index_loop"
+      ],
+      "gate_focus": ["RETURN value", "JUMP target", "loop back-edge", "BRANCH3 condition", "negative/zero/positive targets"]
+    },
+    "07_SERIALIZATION_S5": {
+      "required_cases": [
+        "wide_literal_positive",
+        "parameter_ordinal_5",
+        "nested_calls",
+        "local_identity",
+        "while_counter",
+        "match_three_way",
+        "array_index_loop"
+      ],
+      "gate_focus": ["deterministic record order", "repeatable bytes", "Z 31 only after S1-S4", "strict S3 conformance"]
+    }
+  },
+  "rule": "A mapped case only becomes evidence after execution against an exact candidate and strict S3 semantic conformance. This file does not authorize canonical mutation or bootstrap promotion."
+}
