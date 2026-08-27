@@ -1,7 +1,8 @@
 {
   "schema": "s3-benchmarks.bootstrap.stage05-fixture-plan.v1",
   "stage_id": "05_CALLS_ARRAYS_S3",
-  "activation_status": "PREPARED_NOT_ACTIVE",
+  "activation_status": "ACTIVE_PENDING_REFERENCE_PINNING",
+  "live_control_revision": 10,
   "existing_corpus_cases": [
     "parameter_ordinal_0",
     "parameter_ordinal_5",
@@ -12,6 +13,16 @@
     "loop_call_dataflow"
   ],
   "prepared_cases": {
+    "internal_one_arg_call": {
+      "category": "calls",
+      "source": "fn helper(value: i64) -> i64:\n    return value\n\nfn main() -> i64:\n    return helper(1)\n",
+      "sha256": "769480e71eb4ed6711aa1bc608f000ea6f2802894df9796871277a33d72b2f34",
+      "bytes": 87,
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "Exact minimal fixture from the live Stage05 paired diagnosis that currently reproduces parse_ok falling to false during call parsing.",
+      "expected_reference_semantics": "PENDING_EXACT_REFERENCE_VALIDATION_BEFORE_OFFICIAL_STAGE_MAP",
+      "current_observation": "LIVE_CODEX_VALID_CALL_PARSER_BLOCKER"
+    },
     "zero_arg_call": {
       "category": "calls",
       "source": "fn answer() -> i64:\n    return 7\n\nfn main() -> i64:\n    return answer()\n",
@@ -53,6 +64,6 @@
       "expected": "REFERENCE_REJECTS_AND_STAGE1_FAILS_CLOSED"
     }
   },
-  "activation_rule": "Do not add prepared/negative cases to the official stage map until the live S3 control plane activates Stage05. On activation, first validate exact sources with the S3 reference compiler and freeze their SHA-256 values.",
-  "promotion_effect": "NONE_PLANNING_ONLY"
+  "activation_rule": "Stage05 is active. The exact internal_one_arg_call input is hash-pinned for regression tracking, but it must still be executed through the authoritative S3 reference compiler before being promoted into the official stage map. Do not silently treat the pinned source hash as semantic PASS evidence.",
+  "promotion_effect": "NONE_FIXTURE_PINNING_ONLY"
 }
