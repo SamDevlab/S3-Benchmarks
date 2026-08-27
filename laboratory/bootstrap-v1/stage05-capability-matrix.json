@@ -1,0 +1,79 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage05-capability-matrix.v1",
+  "stage_id": "05_CALLS_ARRAYS_S3",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "capabilities": {
+    "zero_argument_call": {
+      "fixture_status": "PREPARED_NOT_PINNED",
+      "fixtures": ["zero_arg_call"]
+    },
+    "ordered_multi_argument_call": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["parameter_ordinal_0", "parameter_ordinal_5"]
+    },
+    "nested_call": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["nested_calls"]
+    },
+    "call_result_reuse": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["call_result_reuse"]
+    },
+    "internal_callee_resolution": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["nested_calls", "call_result_reuse"]
+    },
+    "foreign_callee_resolution": {
+      "fixture_status": "PREPARED_NOT_PINNED",
+      "fixtures": ["foreign_call_i64"]
+    },
+    "ordered_call_argument_edges": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["parameter_ordinal_5", "nested_calls", "call_result_reuse"]
+    },
+    "call_result_edges": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["call_result_reuse", "nested_calls"]
+    },
+    "seventh_parameter_fail_closed": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["parameter_ordinal_6"],
+      "expected": "FAIL_CLOSED_UNTIL_STACK_ARGUMENT_LOWERING_OR_EXPLICIT_REPRESENTATION"
+    },
+    "array_identity_and_storage": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["array_index_loop"]
+    },
+    "array_index_load": {
+      "fixture_status": "PREPARED_NOT_PINNED",
+      "fixtures": ["array_index_load", "array_index_loop"]
+    },
+    "array_index_store": {
+      "fixture_status": "PREPARED_NOT_PINNED",
+      "fixtures": ["array_index_store"]
+    },
+    "array_index_operand_value": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["array_index_loop"]
+    },
+    "call_inside_control_flow": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["loop_call_dataflow"]
+    },
+    "unresolved_callee_fail_closed": {
+      "fixture_status": "NEGATIVE_CASE_NOT_YET_PINNED",
+      "fixtures": ["unresolved_callee_fail_closed"]
+    },
+    "constant_array_oob_fail_closed": {
+      "fixture_status": "NEGATIVE_CASE_NOT_YET_PINNED",
+      "fixtures": ["constant_array_oob_fail_closed"]
+    }
+  },
+  "capacity_policy": {
+    "historical_call_pool_is_provenance_only": true,
+    "blind_reuse_of_736_746_for_new_source": false,
+    "required": "Measure exact call/argument pressure on the exact candidate/source before changing physical capacity. Semantic call IDs and ordered A edges are not physical pool slots."
+  },
+  "authority": "Planning matrix only. The live S3 control plane must activate Stage05 before these prepared fixtures become gate requirements.",
+  "promotion_effect": "NONE_PLANNING_ONLY"
+}
