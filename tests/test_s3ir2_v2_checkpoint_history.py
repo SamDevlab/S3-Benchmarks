@@ -57,7 +57,7 @@ def test_history_uses_explicit_checkpoint_order() -> None:
     assert "03_PASS1_BINDINGS:b" in report["timeline"][1]["newly_passing_cases"]
 
 
-def test_history_reports_lost_passing_case() -> None:
+def test_history_reports_lost_passing_case_only_when_reobserved() -> None:
     c1 = "a" * 40
     c2 = "b" * 40
     report = summarize(
@@ -68,6 +68,23 @@ def test_history_reports_lost_passing_case() -> None:
         ],
     )
     assert report["timeline"][1]["lost_passing_cases"] == ["03_PASS1_BINDINGS:a"]
+    assert report["timeline"][1]["not_reobserved_previous_pass_cases"] == []
+
+
+def test_history_marks_missing_rerun_as_not_reobserved() -> None:
+    c1 = "a" * 40
+    c2 = "b" * 40
+    report = summarize(
+        STAGE_MAP,
+        [
+            _checkpoint(c1, "c" * 64, "d" * 64, "03_PASS1_BINDINGS", "a", "PASS"),
+            _checkpoint(c2, "e" * 64, "f" * 64, "04_EXPRESSIONS_S1_S2", "c", "PASS"),
+        ],
+    )
+    second = report["timeline"][1]
+    assert second["lost_passing_cases"] == []
+    assert second["not_reobserved_previous_pass_cases"] == ["03_PASS1_BINDINGS:a"]
+    assert second["newly_passing_cases"] == ["04_EXPRESSIONS_S1_S2:c"]
 
 
 def test_history_rejects_identity_drift_within_same_candidate() -> None:
