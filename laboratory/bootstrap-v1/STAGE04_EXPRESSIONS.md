@@ -6,7 +6,7 @@ It is read-only laboratory infrastructure. It does not mutate or authorize mutat
 
 ## Live route
 
-The live control plane is currently expected to be at control revision 4 with:
+The live control plane is currently expected to be at control revision 5 with:
 
 ```text
 active_stage=04_EXPRESSIONS_S1_S2
@@ -18,6 +18,29 @@ t4_authorized=false
 ```
 
 The laboratory does not treat this file as control authority; the authoritative live control state remains the S3 control branch.
+
+## Current operator scope
+
+The current S3 language/AST/IR does not contain arithmetic multiplication, division, or remainder.
+
+Stage04 operator coverage is constrained to the currently supported scalar operators:
+
+```text
+unary:  -  ~
+binary: +  -  &  |  <=>  ==  !=  <  <=  >  >=
+```
+
+Do not use `a + b * c` as a precedence requirement. `*` is not arithmetic multiplication in the current AST/IR.
+
+A repository-supported V0.6 precedence source is:
+
+```s3
+mut res: trit = 1 <=> 2 < 3
+```
+
+with expected association `(1 <=> 2) < 3`.
+
+The Stage04 gate requires the checkpoint to report multiply/divide/remainder as `FAIL_CLOSED` or `NOT_APPLICABLE`, never as a newly implemented PASS feature.
 
 ## Why Stage04 is tracked separately
 
@@ -50,7 +73,9 @@ integer_literal_lowering
 negative_wide_literal_lowering
 identifier_lookup
 lexical_shadowing
-unary_lowering
+unary_negate
+unary_invert
+supported_binary_operators
 binary_precedence
 comparison_lowering
 local_initialization
@@ -58,15 +83,16 @@ assignment_reassignment
 instruction_result_ids
 ordered_operand_edges
 single_result_definition
+unsupported_multiply_divide_remainder
 candidate_stage0_check
 focused_native_v2_conformance
 s1_typed_values
 s2_def_use
 ```
 
-The gate remains BLOCKED if any required field is not explicit PASS.
+Every ordinary required field must be explicit PASS. `unsupported_multiply_divide_remainder` must instead be `FAIL_CLOSED` or `NOT_APPLICABLE`.
 
-The following invariants are also mandatory during Stage04:
+The following invariants are mandatory during Stage04:
 
 ```text
 canonical_source_mutated=false
@@ -115,22 +141,24 @@ At the current planning state:
 - comparison: pinned;
 - reassignment: pinned;
 - unary negation: partially pinned through the negative-wide-literal case;
-- generic unary coverage: still incomplete;
+- generic unary coverage including focused `~`: still incomplete;
 - lexical shadowing: repository semantics prove shadowing exists, but a minimal Stage04-only fixture is not yet pinned.
 
-Do not convert these planning gaps into compiler failures. Do not convert them into PASS either.
+The V0.6 syntax specification explicitly preserves `~` as inversion, so lack of a focused fixture is a test-corpus gap, not ambiguity about whether the operator exists.
+
+Do not convert planning gaps into compiler failures. Do not convert them into PASS either.
 
 ## Fixture coverage audit
 
 Use `tools/audit_stage04_fixture_coverage.py`.
 
-The expected current state is `INCOMPLETE_FIXTURE_COVERAGE` while generic unary and focused lexical-shadowing coverage remain incomplete.
+The expected current state is `INCOMPLETE_FIXTURE_COVERAGE` while focused unary-invert and lexical-shadowing coverage remain incomplete.
 
 This is not a Stage04 implementation failure; it is a test-corpus completeness signal.
 
 ## Stage04 retrospective campaign
 
-The broader `s3ir2-v2-stage-map.json` now requires these Stage04 cases:
+The broader `s3ir2-v2-stage-map.json` requires these Stage04 cases:
 
 ```text
 wide_literal_positive
