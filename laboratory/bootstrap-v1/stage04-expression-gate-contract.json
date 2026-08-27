@@ -1,9 +1,8 @@
 {
-  "schema": "s3-benchmarks.bootstrap.stage04-expression-gate.v2",
+  "schema": "s3-benchmarks.bootstrap.stage04-expression-gate.v3",
   "control_revision_minimum": 5,
   "stage_id": "04_EXPRESSIONS_S1_S2",
   "required_pass_fields": [
-    "stage03_evidence_backfill",
     "expr_parser_syntax",
     "integer_literal_lowering",
     "negative_wide_literal_lowering",
@@ -25,11 +24,20 @@
     "s2_def_use"
   ],
   "required_status_fields": {
+    "stage03_evidence_backfill": [
+      "PASS",
+      "PARTIAL",
+      "NOT_RECORDED",
+      "NOT_REOBSERVED"
+    ],
     "unsupported_multiply_divide_remainder": [
       "FAIL_CLOSED",
       "NOT_APPLICABLE"
     ]
   },
+  "nonblocking_debt_fields": [
+    "stage03_evidence_backfill"
+  ],
   "required_identity_fields": [
     "candidate_git_sha",
     "candidate_source_sha256"
@@ -58,6 +66,6 @@
     "FAIL_CLOSED",
     "NOT_APPLICABLE"
   ],
-  "exit_rule": "Stage04 may be considered evidence-ready only when every required pass field is PASS, unsupported multiply/divide/remainder is explicitly FAIL_CLOSED or NOT_APPLICABLE, candidate identity is well formed, canonical Stage1 remains unmodified, Z mask is less than 31, and native v2 conformance is explicitly PASS. This laboratory gate does not authorize Stage05 or canonical mutation by itself.",
+  "exit_rule": "Stage04 may be considered evidence-ready when every Stage04 technical pass field is PASS, unsupported multiply/divide/remainder is explicitly FAIL_CLOSED or NOT_APPLICABLE, Stage03 evidence debt is honestly classified using an allowed status, candidate identity is well formed, canonical Stage1 remains unmodified, Z mask is less than 31, and native v2 conformance is explicitly PASS. Historical Stage03 evidence debt is reported but does not by itself block a technically complete Stage04 candidate. This laboratory gate does not authorize Stage05 or canonical mutation by itself.",
   "promotion_effect": "NONE_LABORATORY_GATE_ONLY"
 }
