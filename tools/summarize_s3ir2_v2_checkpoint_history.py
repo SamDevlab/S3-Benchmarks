@@ -2,7 +2,9 @@
 
 Checkpoint order is explicit: the order of --checkpoint arguments defines the
 observed history. Git SHAs are identifiers, never sorted numerically or
-lexicographically to infer time.
+lexicographically to infer time. A previously passing case is only marked lost
+when the newer candidate re-observes that same case and it no longer passes;
+missing reruns are reported separately as not re-observed.
 """
 
 from __future__ import annotations
@@ -58,7 +60,6 @@ def summarize(stage_map: dict[str, Any], checkpoints: list[dict[str, Any]]) -> d
                 "first_sequence": sequence,
                 "last_sequence": sequence,
                 "cases": {},
-                "stages": {},
             }
         candidate = candidates[candidate_sha]
         candidate["last_sequence"] = sequence
@@ -81,7 +82,7 @@ def summarize(stage_map: dict[str, Any], checkpoints: list[dict[str, Any]]) -> d
                 f"checkpoint {sequence}: duplicate case checkpoint for {candidate_sha} {case_key}"
             )
             continue
-        case_row = {
+        candidate["cases"][case_key] = {
             "stage_id": stage_id,
             "case_id": case_id,
             "sequence": sequence,
@@ -91,13 +92,13 @@ def summarize(stage_map: dict[str, Any], checkpoints: list[dict[str, Any]]) -> d
             "determinism_status": evidence.get("determinism_status", "NOT_EVALUATED"),
             "qualification_gate": evidence.get("qualification_gate", "UNKNOWN"),
         }
-        candidate["cases"][case_key] = case_row
 
     timeline: list[dict[str, Any]] = []
     previous_passed_cases: set[str] = set()
     for ordinal, candidate_sha in enumerate(candidate_order):
         candidate = candidates[candidate_sha]
         stages: dict[str, Any] = {}
+        observed_case_keys = set(candidate["cases"])
         passing_case_keys = {
             key
             for key, row in candidate["cases"].items()
@@ -139,7 +140,9 @@ def summarize(stage_map: dict[str, Any], checkpoints: list[dict[str, Any]]) -> d
             }
 
         newly_passing = sorted(passing_case_keys - previous_passed_cases)
-        lost_passing = sorted(previous_passed_cases - passing_case_keys)
+        reobserved_previous = previous_passed_cases & observed_case_keys
+        lost_passing = sorted(reobserved_previous - passing_case_keys)
+        not_reobserved = sorted(previous_passed_cases - observed_case_keys)
         timeline.append({
             "ordinal": ordinal,
             "candidate_git_sha": candidate_sha,
@@ -152,6 +155,7 @@ def summarize(stage_map: dict[str, Any], checkpoints: list[dict[str, Any]]) -> d
             "passing_case_count": len(passing_case_keys),
             "newly_passing_cases": newly_passing,
             "lost_passing_cases": lost_passing,
+            "not_reobserved_previous_pass_cases": not_reobserved,
         })
         previous_passed_cases = passing_case_keys
 
