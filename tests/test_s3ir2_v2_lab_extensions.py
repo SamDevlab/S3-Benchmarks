@@ -7,6 +7,7 @@ from tools.capture_s3ir2_v2_failure_bundle import capture
 from tools.check_s3ir2_v2_determinism import check
 from tools.classify_s3ir2_v2_failure import classify
 from tools.ingest_s3ir2_v2 import ingest
+from tools.ingest_s3ir2_v2_evidence_set import ingest_set
 from tools.render_s3ir2_v2_scorecard import build_scorecard
 
 
@@ -81,3 +82,32 @@ def test_failure_triage_points_to_call_lane() -> None:
     })
     assert report["primary_lane"] == "S3_call_dataflow"
     assert report["scores"]["S3_call_dataflow"] >= 2
+
+
+def test_evidence_set_requires_repeat_for_final_qualification(tmp_path: Path) -> None:
+    source = tmp_path / "source.s3"
+    stream = tmp_path / "candidate.s3ir2"
+    repeat = tmp_path / "repeat.s3ir2"
+    conformance = tmp_path / "conformance.json"
+    output = tmp_path / "evidence"
+    source.write_text("fn main() -> i64:\n    return 1\n", encoding="utf-8")
+    stream.write_text(STREAM, encoding="utf-8")
+    repeat.write_text(STREAM, encoding="utf-8")
+    conformance.write_text(json.dumps({"status": "PASS", "errors": []}), encoding="utf-8")
+    manifest = ingest_set(
+        source=source,
+        stream=stream,
+        conformance=conformance,
+        repeats=[],
+        output=output,
+    )
+    assert manifest["qualification_gate"] == "BLOCKED"
+    manifest = ingest_set(
+        source=source,
+        stream=stream,
+        conformance=conformance,
+        repeats=[repeat],
+        output=output,
+    )
+    assert manifest["qualification_gate"] == "PASS"
+    assert manifest["determinism_status"] == "PASS"
