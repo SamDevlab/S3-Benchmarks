@@ -21,11 +21,11 @@
     },
     "instruction_result_ids": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls"]
+      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
     },
     "ordered_operand_edges": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls"]
+      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
     },
     "unary_lowering": {
       "fixture_status": "PARTIAL_PINNED",
@@ -43,9 +43,9 @@
       "reason": "Focused V0.6 relational precedence fixture plus existing loop compare input."
     },
     "assignment_reassignment": {
-      "fixture_status": "PARTIAL_PINNED",
-      "fixtures": ["while_counter", "match_three_way"],
-      "reason": "Existing fixtures exercise mutation in control-flow contexts; a focused Stage04 reassignment fixture is still preferred."
+      "fixture_status": "PINNED",
+      "fixtures": ["mutable_reassignment_example", "while_counter", "match_three_way"],
+      "reason": "Focused source copied exactly from S3 examples/mutable_value.s3, plus control-flow mutation cases."
     },
     "lexical_shadowing": {
       "fixture_status": "FIXTURE_NOT_YET_PINNED",
@@ -54,11 +54,12 @@
     },
     "single_result_definition": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls"]
+      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
     }
   },
   "external_syntax_evidence": {
     "relational_precedence_v06": "SamDevlab/S3 tests/test_s3_relational_parser.py",
+    "mutable_reassignment_example": "SamDevlab/S3 examples/mutable_value.s3",
     "shadowing_available_but_not_minimal": "SamDevlab/S3 tests/test_reference_types_semantic.py::test_shadowed_symbols_have_distinct_reference_origins"
   },
   "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. PARTIAL_PINNED is still incomplete for final focused-fixture coverage. FIXTURE_NOT_YET_PINNED is a planning gap, not a compiler failure.",
