@@ -2,9 +2,10 @@
 
 This is a laboratory summary only. It never authorizes canonical Stage1 mutation
 or bootstrap promotion. A stage can be marked evidence-PASS only when every
-required mapped case is present and has strict S3 semantic conformance PASS.
-Stage 07 additionally requires deterministic repeated bytes for every case.
-The full campaign requires every mapped stage to be evidence-PASS.
+required mapped case is present, comes from a validated native candidate, and
+has strict S3 semantic conformance PASS. Stage 07 additionally requires
+deterministic repeated bytes for every case. The full campaign requires every
+mapped stage to be evidence-PASS.
 """
 
 from __future__ import annotations
@@ -27,9 +28,10 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
     for stage_id, stage in stage_map["stages"].items():
         required = list(stage["required_cases"])
         missing = [case_id for case_id in required if case_id not in case_manifests]
-        structural_fail = []
-        conformance_fail = []
-        determinism_fail = []
+        structural_fail: list[str] = []
+        native_fail: list[str] = []
+        conformance_fail: list[str] = []
+        determinism_fail: list[str] = []
         case_rows: list[dict[str, Any]] = []
         for case_id in required:
             manifest = case_manifests.get(case_id)
@@ -37,10 +39,13 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
                 case_rows.append({"case_id": case_id, "status": "MISSING"})
                 continue
             structural = str(manifest.get("structural_status", "UNKNOWN"))
+            native = str(manifest.get("native_provenance_status", "NOT_EVALUATED"))
             semantic = str(manifest.get("semantic_conformance_status", "UNKNOWN"))
             determinism = str(manifest.get("determinism_status", "NOT_EVALUATED"))
             if structural != "PASS":
                 structural_fail.append(case_id)
+            if native != "PASS":
+                native_fail.append(case_id)
             if semantic != "PASS":
                 conformance_fail.append(case_id)
             if stage_id == "07_SERIALIZATION_S5" and determinism != "PASS":
@@ -48,6 +53,7 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
             case_rows.append({
                 "case_id": case_id,
                 "structural_status": structural,
+                "native_provenance_status": native,
                 "semantic_conformance_status": semantic,
                 "determinism_status": determinism,
                 "qualification_gate": manifest.get("qualification_gate", "UNKNOWN"),
@@ -57,6 +63,8 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
             status = "INCOMPLETE_EVIDENCE"
         elif structural_fail:
             status = "STRUCTURAL_FAIL"
+        elif native_fail:
+            status = "NATIVE_PROVENANCE_BLOCKED"
         elif conformance_fail:
             status = "SEMANTIC_CONFORMANCE_BLOCKED"
         elif determinism_fail:
@@ -70,6 +78,7 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
             "observed_case_count": len(required) - len(missing),
             "missing_cases": missing,
             "structural_fail_cases": structural_fail,
+            "native_provenance_fail_cases": native_fail,
             "conformance_fail_cases": conformance_fail,
             "determinism_fail_cases": determinism_fail,
             "gate_focus": list(stage.get("gate_focus", [])),
