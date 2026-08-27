@@ -13,8 +13,11 @@ on:
       - "tools/measure_bootstrap_resource_envelope.py"
       - "tools/check_bootstrap_determinism.py"
       - "tools/compare_bootstrap_stages.py"
+      - "tools/run_bootstrap_lab.py"
       - "tests/test_bootstrap_*.py"
       - "tests/test_compare_bootstrap_stages.py"
+      - "tests/test_import_s3_bootstrap_evidence.py"
+      - "tests/test_run_bootstrap_lab.py"
       - ".github/workflows/bootstrap-lab.yml"
   pull_request:
     paths:
@@ -28,8 +31,11 @@ on:
       - "tools/measure_bootstrap_resource_envelope.py"
       - "tools/check_bootstrap_determinism.py"
       - "tools/compare_bootstrap_stages.py"
+      - "tools/run_bootstrap_lab.py"
       - "tests/test_bootstrap_*.py"
       - "tests/test_compare_bootstrap_stages.py"
+      - "tests/test_import_s3_bootstrap_evidence.py"
+      - "tests/test_run_bootstrap_lab.py"
       - ".github/workflows/bootstrap-lab.yml"
   workflow_dispatch:
 
@@ -58,6 +64,7 @@ jobs:
             tools/measure_bootstrap_resource_envelope.py \
             tools/check_bootstrap_determinism.py \
             tools/compare_bootstrap_stages.py \
+            tools/run_bootstrap_lab.py \
             tests/test_bootstrap_laboratory.py \
             tests/test_bootstrap_fuzz_corpus.py \
             tests/test_bootstrap_host_classification.py \
@@ -65,7 +72,8 @@ jobs:
             tests/test_bootstrap_differential.py \
             tests/test_bootstrap_semantic_coverage.py \
             tests/test_bootstrap_resource_and_determinism.py \
-            tests/test_compare_bootstrap_stages.py
+            tests/test_compare_bootstrap_stages.py \
+            tests/test_run_bootstrap_lab.py
 
       - name: Validate contract JSON
         run: |
@@ -83,13 +91,23 @@ jobs:
             tests/test_bootstrap_differential.py \
             tests/test_bootstrap_semantic_coverage.py \
             tests/test_bootstrap_resource_and_determinism.py \
-            tests/test_compare_bootstrap_stages.py
+            tests/test_compare_bootstrap_stages.py \
+            tests/test_run_bootstrap_lab.py
 
       - name: Validate pinned current checkpoint
         run: python tools/check_bootstrap_laboratory.py laboratory/bootstrap-v1/checkpoints/s3-0789ad2.json
 
       - name: Generate deterministic bootstrap corpus
         run: python tools/generate_bootstrap_fuzz_corpus.py --output .artifacts/bootstrap-corpus
+
+      - name: Smoke explicit differential observation contract
+        run: |
+          python - <<'PY'
+          from tools.run_bootstrap_differential import classify_observations
+          ref = {"status":"COMPLETED","returncode":0,"stdout":"program returned: 37\n","stderr":""}
+          native = {"status":"COMPLETED","returncode":37,"stdout":"","stderr":""}
+          assert classify_observations(ref, native, reference_mode="program-return-line", stage1_mode="exit-code") == "PASS"
+          PY
 
       - name: Smoke resource characterization tool
         run: |
