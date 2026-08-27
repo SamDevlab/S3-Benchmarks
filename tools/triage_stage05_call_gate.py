@@ -29,6 +29,17 @@ def _int(value: str | None) -> int | None:
         return None
 
 
+def _truth(value: str | None) -> bool | None:
+    if value is None:
+        return None
+    normalized = value.strip().upper()
+    if normalized in {"1", "-1", "TRUE", "YES", "PASS", "PASSED", "FAIL_CLOSED"}:
+        return True
+    if normalized in {"0", "FALSE", "NO", "FAIL", "FAILED"}:
+        return False
+    return None
+
+
 def triage(fields: dict[str, str]) -> dict[str, Any]:
     masks = {
         "zero": _int(fields.get("ZERO_ARG_Z_MASK")),
@@ -37,14 +48,40 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
     }
     strict = (fields.get("STRICT_CONFORMANCE_STATUS") or "NOT_RUN").upper()
     first_error = fields.get("STRICT_FIRST_ERROR", "")
+    unresolved_fail_closed = _truth(fields.get("UNRESOLVED_CALLEE_FAIL_CLOSED"))
+    one_eval_marker = fields.get("ONE_ARG_EVAL_ERROR_MARKER", "")
+    two_eval_marker = fields.get("TWO_ARG_EVAL_ERROR_MARKER", "")
     base = {
-        "schema": "s3-benchmarks.bootstrap.stage05-call-gate-triage.v1",
+        "schema": "s3-benchmarks.bootstrap.stage05-call-gate-triage.v2",
         "masks": masks,
         "strict_conformance_status": strict,
+        "unresolved_callee_fail_closed": unresolved_fail_closed,
+        "one_arg_eval_error_marker": one_eval_marker,
+        "two_arg_eval_error_marker": two_eval_marker,
         "promotion_effect": "NONE_TRIAGE_ONLY",
         "arrays_unlocked": False,
         "foreign_calls_unlocked": False,
     }
+
+    # Revision-21 route: the one-argument control is structurally alive while the
+    # ordered two-argument reproducer alone falls to Z0. With unresolved-callee
+    # fail-closed preserved, do not reopen capacity/resolution/parser. Finish the
+    # evaluator A/B and classify its first differing error marker.
+    if masks["one"] in {3, 7} and masks["two"] == 0 and unresolved_fail_closed is True:
+        return {
+            **base,
+            "classification": "MULTI_ARG_ONLY_EVALUATOR_BLOCKER",
+            "next_owner": "MULTI_ARG_EVALUATOR_DIAGNOSIS",
+            "action": "Use the same instrumented binary for one-arg control versus ordered two-arg reproducer. Classify the first multiarg-only evaluator marker as argument compatibility/ordinal, post-call result/return state, shared evaluator regression, or post-evaluator completeness. Do not open arrays, capacity, callee resolution, or generic parser work.",
+        }
+
+    if masks["one"] in {3, 7} and masks["two"] == 0:
+        return {
+            **base,
+            "classification": "MULTI_ARG_ONLY_VALID_CALL_Z0",
+            "next_owner": "MULTI_ARG_EVALUATOR_OR_FIRST_POST_PARSE_SETTER",
+            "action": "Preserve the two-argument raw stream and compare it against the one-argument positive control. If unresolved fail-closed is known-good, prefer evaluator-state diagnosis over parser/capacity/resolution.",
+        }
 
     observed = [value for value in masks.values() if value is not None]
     if any(value == 0 for value in observed):
