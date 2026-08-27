@@ -22,6 +22,7 @@ def test_generator_writes_hash_locked_manifest(tmp_path: Path) -> None:
     assert manifest["case_count"] == len(cases())
     assert {
         "wide_literals",
+        "expressions",
         "parameters",
         "calls",
         "locals",
@@ -60,6 +61,29 @@ def test_wide_literal_cases_are_not_preclassified_as_compiler_failures() -> None
     wide = [case for case in cases() if case.category == "wide_literals"]
     assert len(wide) == 2
     assert all("VALID_SOURCE" in case.current_stage1_expectation for case in wide)
+
+
+def test_pinned_relational_precedence_source_matches_s3_v06_test() -> None:
+    case = next(item for item in cases() if item.case_id == "relational_precedence_v06")
+    assert case.source == (
+        "fn main() -> tryte:\n"
+        "    mut res: trit = 1 <=> 2 < 3\n"
+        "    return 0\n"
+    )
+    assert case.category == "expressions"
+    assert "PINNED_FROM_S3_TEST_RELATIONAL_PARSER" in case.current_stage1_expectation
+
+
+def test_pinned_mutable_reassignment_source_matches_s3_example() -> None:
+    case = next(item for item in cases() if item.case_id == "mutable_reassignment_example")
+    assert case.source == (
+        "fn main() -> tryte:\n"
+        "    mut value: tryte = 10\n"
+        "    value = value + 5\n"
+        "    return value\n"
+    )
+    assert case.category == "expressions"
+    assert "PINNED_FROM_S3_EXAMPLE_MUTABLE_VALUE" in case.current_stage1_expectation
 
 
 def test_control_flow_cases_require_complete_terminators() -> None:
