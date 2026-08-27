@@ -3,15 +3,20 @@
   "protocol": "S3IR2 v2",
   "producer": "SamDevlab/S3 Stage1 candidate",
   "consumer": "SamDevlab/S3-Benchmarks Bootstrap Laboratory",
-  "required_inputs": [
+  "base_required_inputs": [
     "source.s3",
     "candidate.s3ir2",
     "conformance.json"
   ],
-  "optional_inputs": [
+  "required_for_final_qualification": [
+    "native-provenance.json with status PASS",
+    "at least one repeat stream with exact-byte determinism PASS"
+  ],
+  "recommended_repeat_inputs": [
     "repeat-2.s3ir2",
-    "repeat-3.s3ir2",
-    "native-build-metadata.json",
+    "repeat-3.s3ir2"
+  ],
+  "optional_inputs": [
     "resource-envelope.json"
   ],
   "consumer_outputs": [
@@ -21,12 +26,14 @@
     "triage.json when conformance is not PASS",
     "evidence-manifest.json"
   ],
+  "native_provenance_contract": "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json",
   "authority_rules": {
     "structural_stream_validation": "S3-Benchmarks ingest_s3ir2_v2.py",
     "semantic_conformance": "SamDevlab/S3 tools/verify_stage1_semantic_conformance_v2.py",
+    "native_provenance": "S3-Benchmarks validate_s3ir2_v2_native_provenance.py recomputes candidate-source, candidate-binary, fixture, and stream hashes",
     "determinism": "S3-Benchmarks exact-byte repeated stream checker",
     "performance_claims": "NOT_AUTHORIZED_BY_THIS_CONTRACT"
   },
-  "promotion_rule": "A completeness bit alone never promotes a lane. A proven lane requires structural PASS plus S3 strict semantic conformance PASS. S5 qualification additionally requires deterministic repeated bytes.",
+  "promotion_rule": "A completeness bit alone never promotes a lane. Final laboratory qualification requires structural PASS, validated native provenance PASS, S3 strict semantic conformance PASS, and deterministic repeated stream bytes. S3-Benchmarks still has no authority to mutate or promote the S3 compiler.",
   "mutation_rule": "The consumer is read-only with respect to the S3 checkout and candidate artifacts."
 }
