@@ -12,12 +12,15 @@ on:
       - "tools/aggregate_s3ir2_v2_campaign.py"
       - "tools/record_s3ir2_v2_checkpoint.py"
       - "tools/minimize_s3_failure.py"
+      - "tools/compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_campaign_and_checkpoint.py"
       - "tests/test_minimize_s3_failure.py"
+      - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
+      - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   pull_request:
     paths:
@@ -30,12 +33,15 @@ on:
       - "tools/aggregate_s3ir2_v2_campaign.py"
       - "tools/record_s3ir2_v2_checkpoint.py"
       - "tools/minimize_s3_failure.py"
+      - "tools/compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_campaign_and_checkpoint.py"
       - "tests/test_minimize_s3_failure.py"
+      - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
+      - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   workflow_dispatch:
 
@@ -61,10 +67,12 @@ jobs:
             tools/aggregate_s3ir2_v2_campaign.py \
             tools/record_s3ir2_v2_checkpoint.py \
             tools/minimize_s3_failure.py \
+            tools/compare_s3ir2_v2_campaigns.py \
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py \
             tests/test_s3ir2_v2_campaign_and_checkpoint.py \
-            tests/test_minimize_s3_failure.py
+            tests/test_minimize_s3_failure.py \
+            tests/test_compare_s3ir2_v2_campaigns.py
       - name: Validate v2 laboratory JSON
         run: |
           python -c "import json; json.load(open('laboratory/bootstrap-v1/s3ir2-v2-stage-map.json', encoding='utf-8'))"
@@ -75,4 +83,5 @@ jobs:
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py \
             tests/test_s3ir2_v2_campaign_and_checkpoint.py \
-            tests/test_minimize_s3_failure.py
+            tests/test_minimize_s3_failure.py \
+            tests/test_compare_s3ir2_v2_campaigns.py
