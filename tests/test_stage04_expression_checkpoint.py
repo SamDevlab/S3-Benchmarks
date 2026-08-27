@@ -5,7 +5,7 @@ from tools.evaluate_stage04_expression_checkpoint import evaluate
 
 CONTRACT = {
     "stage_id": "04_EXPRESSIONS_S1_S2",
-    "control_revision_minimum": 4,
+    "control_revision_minimum": 5,
     "required_pass_fields": [
         "stage03_evidence_backfill",
         "expr_parser_syntax",
@@ -13,7 +13,9 @@ CONTRACT = {
         "negative_wide_literal_lowering",
         "identifier_lookup",
         "lexical_shadowing",
-        "unary_lowering",
+        "unary_negate",
+        "unary_invert",
+        "supported_binary_operators",
         "binary_precedence",
         "comparison_lowering",
         "local_initialization",
@@ -26,18 +28,23 @@ CONTRACT = {
         "s1_typed_values",
         "s2_def_use",
     ],
+    "required_status_fields": {
+        "unsupported_multiply_divide_remainder": ["FAIL_CLOSED", "NOT_APPLICABLE"],
+    },
     "required_invariants": {"z_mask_must_be_less_than": 31},
 }
 
 
 def _checkpoint() -> dict:
+    gates = {field: "PASS" for field in CONTRACT["required_pass_fields"]}
+    gates["unsupported_multiply_divide_remainder"] = "NOT_APPLICABLE"
     return {
         "stage_id": "04_EXPRESSIONS_S1_S2",
-        "control_revision": 4,
+        "control_revision": 5,
         "candidate_git_sha": "a" * 40,
         "candidate_source_sha256": "b" * 64,
         "candidate_binary_sha256": "c" * 64,
-        "gates": {field: "PASS" for field in CONTRACT["required_pass_fields"]},
+        "gates": gates,
         "invariants": {
             "canonical_source_mutated": False,
             "self_emit_authorized": False,
@@ -83,3 +90,25 @@ def test_stage04_gate_rejects_canonical_mutation() -> None:
     report = evaluate(CONTRACT, checkpoint)
     assert report["status"] == "BLOCKED"
     assert any("canonical_source_mutated" in error for error in report["errors"])
+
+
+def test_stage04_gate_rejects_speculative_multiply_support() -> None:
+    checkpoint = _checkpoint()
+    checkpoint["gates"]["unsupported_multiply_divide_remainder"] = "PASS"
+    report = evaluate(CONTRACT, checkpoint)
+    assert report["status"] == "BLOCKED"
+    assert report["status_field_failures"] == [
+        {
+            "field": "unsupported_multiply_divide_remainder",
+            "observed": "PASS",
+            "allowed": ["FAIL_CLOSED", "NOT_APPLICABLE"],
+        }
+    ]
+
+
+def test_stage04_gate_requires_revision_5_or_newer() -> None:
+    checkpoint = _checkpoint()
+    checkpoint["control_revision"] = 4
+    report = evaluate(CONTRACT, checkpoint)
+    assert report["status"] == "BLOCKED"
+    assert any("control_revision" in error for error in report["errors"])
