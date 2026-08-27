@@ -2,12 +2,14 @@
 
 The importer never mutates the S3 checkout and never promotes missing or ambiguous
 evidence to PASS. It consumes the current semantic-IR requirements artifact when
-available and can verify exact Git provenance for both repositories.
+available, verifies exact Git provenance, and attaches selected supplemental Stage1
+JSON evidence as provenance only.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -23,6 +25,15 @@ RELATIONSHIP_GROUPS = {
     "complete_terminators": ("complete_terminator_values",),
     "canonical_serialization": ("canonical_serialized_ir",),
 }
+
+SUPPLEMENTAL_STAGE1_JSON = (
+    "call-argument-pool-closure.json",
+    "call-argument-pool-audit.json",
+)
+
+
+def _sha256_bytes(value: bytes) -> str:
+    return hashlib.sha256(value).hexdigest()
 
 
 def _git_head(repo: Path) -> str | None:
@@ -67,6 +78,53 @@ def _surface_state(relationships: dict[str, Any], names: tuple[str, ...]) -> str
         return "PASS"
     # False, missing, malformed, or mixed evidence stays fail-closed.
     return "BLOCKED"
+
+
+def summarize_supplemental_json(path: Path) -> dict[str, Any]:
+    """Return bounded provenance from a supplemental evidence JSON file.
+
+    Supplemental evidence is deliberately not mapped into semantic surface PASS.
+    The summary records identity/status plus a few capacity facts useful for the
+    current Stage1 call-pool checkpoint.
+    """
+    raw = path.read_bytes()
+    payload = json.loads(raw.decode("utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"supplemental evidence must contain an object: {path}")
+
+    row: dict[str, Any] = {
+        "path": str(path),
+        "sha256": _sha256_bytes(raw),
+        "status": payload.get("status"),
+        "schema": payload.get("schema") or payload.get("schema_version"),
+        "promotion_effect": "NONE_PROVENANCE_ONLY",
+    }
+    pool = payload.get("pool")
+    if isinstance(pool, dict):
+        row["pool"] = {
+            "required_capacity": pool.get("required_capacity"),
+            "selected_capacity": pool.get("selected_capacity"),
+            "headroom": pool.get("headroom"),
+            "bank_sizes": pool.get("bank_sizes"),
+        }
+    runtime = payload.get("runtime_measurement")
+    if isinstance(runtime, dict):
+        row["runtime_measurement"] = {
+            "total_calls": runtime.get("total_calls"),
+            "total_call_arguments": runtime.get("total_call_arguments"),
+            "max_call_arity": runtime.get("max_call_arity"),
+            "pool_used": runtime.get("pool_used"),
+            "pool_gate": runtime.get("pool_gate"),
+        }
+    remaining = payload.get("remaining_blocker")
+    if isinstance(remaining, dict):
+        row["remaining_blocker"] = {
+            "id": remaining.get("id"),
+            "stage": remaining.get("stage"),
+            "stage1_to_stage2": remaining.get("stage1_to_stage2"),
+            "stage3": remaining.get("stage3"),
+        }
+    return row
 
 
 def snapshot_from_semantic_requirements(
@@ -142,6 +200,7 @@ def snapshot_from_semantic_requirements(
             "host_oracle_status": host_oracle_status,
             "host_oracle_used_as_stage1_evidence": False,
             "missing_lossless_typed_lanes": semantic.get("missing_lossless_typed_lanes", []),
+            "supplemental_evidence": [],
             "import_policy": "READ_ONLY_FAIL_CLOSED",
         },
     }
@@ -154,7 +213,8 @@ def import_checkout(
     expected_s3_commit: str | None = None,
     expected_benchmark_commit: str | None = None,
 ) -> dict[str, Any]:
-    semantic_path = s3_repo / "reports" / "selfhost" / "stage1" / "semantic-ir-requirements.json"
+    stage1_reports = s3_repo / "reports" / "selfhost" / "stage1"
+    semantic_path = stage1_reports / "semantic-ir-requirements.json"
     if not semantic_path.is_file():
         raise FileNotFoundError(f"required evidence artifact not found: {semantic_path}")
     semantic = json.loads(semantic_path.read_text(encoding="utf-8"))
@@ -173,13 +233,21 @@ def import_checkout(
         bench_head
         and (expected_benchmark_commit is None or bench_head == expected_benchmark_commit)
     )
-    return snapshot_from_semantic_requirements(
+    snapshot = snapshot_from_semantic_requirements(
         semantic,
         s3_commit=s3_commit,
         benchmark_commit=benchmark_commit,
         source_lock_valid=source_lock_valid,
         benchmark_lock_valid=benchmark_lock_valid,
     )
+
+    supplemental: list[dict[str, Any]] = []
+    for filename in SUPPLEMENTAL_STAGE1_JSON:
+        path = stage1_reports / filename
+        if path.is_file():
+            supplemental.append(summarize_supplemental_json(path))
+    snapshot["evidence_notes"]["supplemental_evidence"] = supplemental
+    return snapshot
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -204,6 +272,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"SOURCE_LOCK_VALID={snapshot['provenance']['source_lock_valid']}")
     print(f"STAGE1={snapshot['bootstrap']['stage1']}")
     print(f"STAGE2={snapshot['bootstrap']['stage2']}")
+    print(f"SUPPLEMENTAL_EVIDENCE={len(snapshot['evidence_notes']['supplemental_evidence'])}")
     return 0
 
 
