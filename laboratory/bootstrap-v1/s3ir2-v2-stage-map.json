@@ -10,25 +10,41 @@
         "parameter_ordinal_5",
         "local_identity"
       ],
-      "gate_focus": ["function ownership", "parameter order", "local binding identity", "mutability", "source identity"]
+      "gate_focus": [
+        "function ownership",
+        "parameter order",
+        "local binding identity",
+        "mutability",
+        "source identity"
+      ]
     },
     "04_EXPRESSIONS_S1_S2": {
       "required_cases": [
         "wide_literal_positive",
         "wide_literal_negative",
+        "unary_negate_tryte",
+        "unary_invert_tryte",
+        "subtraction_lowering",
+        "tritwise_and",
+        "tritwise_or",
+        "relational_equal",
         "relational_precedence_v06",
+        "mixed_expression_precedence",
         "mutable_reassignment_example",
         "local_identity"
       ],
       "gate_focus": [
         "typed constants",
         "unary negation",
+        "unary inversion",
+        "subtraction as INVERT plus ADD",
+        "tritwise min/max operators",
         "identifier uses",
-        "comparison and precedence",
+        "relational comparison and precedence",
         "reassignment",
         "instruction results",
-        "O edges",
-        "R edges"
+        "ordered O edges",
+        "single R definition per result"
       ]
     },
     "05_CALLS_ARRAYS_S3": {
@@ -40,7 +56,13 @@
         "call_result_reuse",
         "array_index_loop"
       ],
-      "gate_focus": ["callee identity", "ordered A edges", "call result R edges", "array/index def-use", "fail-closed seventh parameter"]
+      "gate_focus": [
+        "callee identity",
+        "ordered A edges",
+        "call result R edges",
+        "array/index def-use",
+        "fail-closed seventh parameter"
+      ]
     },
     "06_CONTROL_FLOW_S4": {
       "required_cases": [
@@ -49,12 +71,20 @@
         "loop_call_dataflow",
         "array_index_loop"
       ],
-      "gate_focus": ["RETURN value", "JUMP target", "loop back-edge", "BRANCH3 condition", "negative/zero/positive targets"]
+      "gate_focus": [
+        "RETURN value",
+        "JUMP target",
+        "loop back-edge",
+        "BRANCH3 condition",
+        "negative/zero/positive targets"
+      ]
     },
     "07_SERIALIZATION_S5": {
       "required_cases": [
         "wide_literal_positive",
-        "relational_precedence_v06",
+        "unary_invert_tryte",
+        "subtraction_lowering",
+        "mixed_expression_precedence",
         "mutable_reassignment_example",
         "parameter_ordinal_5",
         "nested_calls",
@@ -63,7 +93,12 @@
         "match_three_way",
         "array_index_loop"
       ],
-      "gate_focus": ["deterministic record order", "repeatable bytes", "Z 31 only after S1-S4", "strict S3 conformance"]
+      "gate_focus": [
+        "deterministic record order",
+        "repeatable bytes",
+        "Z 31 only after S1-S4",
+        "strict S3 conformance"
+      ]
     }
   },
   "rule": "A mapped case only becomes evidence after execution against an exact candidate and strict S3 semantic conformance. This file does not authorize canonical mutation or bootstrap promotion."
