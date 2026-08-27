@@ -19,6 +19,7 @@ from tools.compare_bootstrap_stages import STAGES, compare as compare_stages
 from tools.generate_bootstrap_fuzz_corpus import generate as generate_corpus
 from tools.import_s3_bootstrap_evidence import import_checkout
 from tools.measure_bootstrap_resource_envelope import measure as measure_resources
+from tools.render_bootstrap_scorecard import build_scorecard, render_markdown
 from tools.run_bootstrap_differential import run_campaign
 from tools.summarize_bootstrap_semantic_coverage import summarize as summarize_coverage
 
@@ -91,6 +92,11 @@ def run_lab(
     validation = validate_snapshot(snapshot, contract)
     _write(output_dir / "snapshot-validation.json", validation)
 
+    differential: dict[str, Any] | None = None
+    coverage: dict[str, Any] | None = None
+    resource_report: dict[str, Any] | None = None
+    determinism: dict[str, Any] | None = None
+
     components: dict[str, Any] = {
         "corpus": {
             "status": "PASS",
@@ -106,6 +112,7 @@ def run_lab(
         "resources": {"status": "NOT_RUN"},
         "determinism": {"status": "NOT_RUN"},
         "stage_equivalence": {"status": "NOT_AVAILABLE"},
+        "scorecard": {"status": "PENDING"},
     }
     hard_failure = validation["status"] != "PASS"
 
@@ -156,9 +163,10 @@ def run_lab(
             "path": str(resource_path),
             "performance_claim": False,
         }
-        # A requested resource command failure is evidence of command failure, but
-        # characterization ineligibility must never be interpreted as performance FAIL.
-        if resource_report["classification"] in {"COMMAND_FAILED", "TIMEOUT_CHARACTERIZATION"}:
+        if resource_report["classification"] in {
+            "COMMAND_FAILED",
+            "TIMEOUT_CHARACTERIZATION",
+        }:
             hard_failure = True
 
     if (determinism_source is None) != (determinism_command is None):
@@ -193,6 +201,27 @@ def run_lab(
     }
     if equivalence_state == "FAIL":
         hard_failure = True
+
+    scorecard = build_scorecard(
+        snapshot,
+        differential=differential,
+        coverage=coverage,
+        resources=resource_report,
+        determinism=determinism,
+        stage_equivalence=equivalence,
+    )
+    scorecard_json = output_dir / "scorecard.json"
+    scorecard_md = output_dir / "scorecard.md"
+    _write(scorecard_json, scorecard)
+    scorecard_md.write_text(
+        render_markdown(scorecard), encoding="utf-8", newline="\n"
+    )
+    components["scorecard"] = {
+        "status": "PASS",
+        "json": str(scorecard_json),
+        "markdown": str(scorecard_md),
+        "single_numeric_score": None,
+    }
 
     summary = {
         "schema": "s3.bootstrap-laboratory-run.v1",
