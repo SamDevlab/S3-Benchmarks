@@ -1,8 +1,8 @@
 """Record one immutable S3IR2 v2 laboratory checkpoint.
 
-The recorder is intentionally append-only by path: it refuses to overwrite an
-existing checkpoint. It binds candidate/source identity to the evidence-set
-manifest so later candidate revisions cannot silently replace older evidence.
+The recorder is append-only by path and binds the requested candidate identity to
+the identity already proven inside the evidence-set manifest. External SHA
+arguments cannot override or relabel the evidence.
 """
 
 from __future__ import annotations
@@ -10,8 +10,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
+
+HEX40 = re.compile(r"^[0-9a-f]{40}$")
+HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 
 def _sha_bytes(data: bytes) -> str:
@@ -29,22 +33,47 @@ def record(
 ) -> dict[str, Any]:
     if output.exists():
         raise FileExistsError(f"checkpoint already exists: {output}")
+    if not HEX40.fullmatch(candidate_sha):
+        raise ValueError("candidate_sha must be 40 lowercase hex characters")
+    if not HEX64.fullmatch(candidate_source_sha256):
+        raise ValueError("candidate_source_sha256 must be 64 lowercase hex characters")
+    if not case_id.strip():
+        raise ValueError("case_id must be non-empty")
+    if not stage_id.strip():
+        raise ValueError("stage_id must be non-empty")
+
     manifest_bytes = evidence_manifest.read_bytes()
     manifest = json.loads(manifest_bytes.decode("utf-8"))
     if not isinstance(manifest, dict):
         raise ValueError("evidence manifest must be a JSON object")
+
+    manifest_candidate_sha = manifest.get("candidate_git_sha")
+    manifest_source_sha = manifest.get("candidate_source_sha256")
+    if manifest_candidate_sha != candidate_sha:
+        raise ValueError("candidate_sha does not match evidence manifest candidate_git_sha")
+    if manifest_source_sha != candidate_source_sha256:
+        raise ValueError(
+            "candidate_source_sha256 does not match evidence manifest candidate_source_sha256"
+        )
+
+    candidate_binary_sha = manifest.get("candidate_binary_sha256")
+    if not isinstance(candidate_binary_sha, str) or not HEX64.fullmatch(candidate_binary_sha):
+        raise ValueError("evidence manifest lacks a valid candidate_binary_sha256")
 
     checkpoint = {
         "schema": "s3-benchmarks.bootstrap.s3ir2-v2-checkpoint.v1",
         "protocol": "S3IR2 v2",
         "candidate_git_sha": candidate_sha,
         "candidate_source_sha256": candidate_source_sha256,
+        "candidate_binary_sha256": candidate_binary_sha,
+        "control_revision": manifest.get("control_revision"),
         "case_id": case_id,
         "stage_id": stage_id,
         "evidence_manifest": {
             "path": str(evidence_manifest),
             "sha256": _sha_bytes(manifest_bytes),
             "structural_status": manifest.get("structural_status", "UNKNOWN"),
+            "native_provenance_status": manifest.get("native_provenance_status", "UNKNOWN"),
             "semantic_conformance_status": manifest.get("semantic_conformance_status", "UNKNOWN"),
             "determinism_status": manifest.get("determinism_status", "NOT_EVALUATED"),
             "qualification_gate": manifest.get("qualification_gate", "UNKNOWN"),
