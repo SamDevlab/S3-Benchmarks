@@ -28,6 +28,8 @@ on:
       - "tools/run_stage04_parser_recovery_gate.py"
       - "tools/audit_stage05_preparedness.py"
       - "tools/check_stage05_activation.py"
+      - "tools/check_prepared_stage_activation.py"
+      - "tools/evaluate_prepared_stage_checkpoint.py"
       - "tests/test_bootstrap_fuzz_corpus.py"
       - "tests/test_s3ir2_stage_map_contract.py"
       - "tests/test_s3ir2_v2_ingest.py"
@@ -49,6 +51,8 @@ on:
       - "tests/test_run_stage04_parser_recovery_gate.py"
       - "tests/test_stage05_preparedness.py"
       - "tests/test_stage05_activation.py"
+      - "tests/test_prepared_stage_activation.py"
+      - "tests/test_prepared_stage_checkpoint.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -59,8 +63,15 @@ on:
       - "laboratory/bootstrap-v1/stage04-parser-attempt-template.json"
       - "laboratory/bootstrap-v1/stage05-fixture-plan.json"
       - "laboratory/bootstrap-v1/stage05-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage07-serialization-plan.json"
+      - "laboratory/bootstrap-v1/stage07-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage07-gate-contract.json"
       - "laboratory/bootstrap-v1/STAGE04_EXPRESSIONS.md"
       - "laboratory/bootstrap-v1/STAGE05_CALLS_ARRAYS.md"
+      - "laboratory/bootstrap-v1/STAGE06_CONTROL_FLOW.md"
+      - "laboratory/bootstrap-v1/STAGE07_SERIALIZATION.md"
       - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   pull_request:
@@ -90,6 +101,8 @@ on:
       - "tools/run_stage04_parser_recovery_gate.py"
       - "tools/audit_stage05_preparedness.py"
       - "tools/check_stage05_activation.py"
+      - "tools/check_prepared_stage_activation.py"
+      - "tools/evaluate_prepared_stage_checkpoint.py"
       - "tests/test_bootstrap_fuzz_corpus.py"
       - "tests/test_s3ir2_stage_map_contract.py"
       - "tests/test_s3ir2_v2_ingest.py"
@@ -111,6 +124,8 @@ on:
       - "tests/test_run_stage04_parser_recovery_gate.py"
       - "tests/test_stage05_preparedness.py"
       - "tests/test_stage05_activation.py"
+      - "tests/test_prepared_stage_activation.py"
+      - "tests/test_prepared_stage_checkpoint.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -121,8 +136,15 @@ on:
       - "laboratory/bootstrap-v1/stage04-parser-attempt-template.json"
       - "laboratory/bootstrap-v1/stage05-fixture-plan.json"
       - "laboratory/bootstrap-v1/stage05-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage07-serialization-plan.json"
+      - "laboratory/bootstrap-v1/stage07-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage07-gate-contract.json"
       - "laboratory/bootstrap-v1/STAGE04_EXPRESSIONS.md"
       - "laboratory/bootstrap-v1/STAGE05_CALLS_ARRAYS.md"
+      - "laboratory/bootstrap-v1/STAGE06_CONTROL_FLOW.md"
+      - "laboratory/bootstrap-v1/STAGE07_SERIALIZATION.md"
       - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   workflow_dispatch:
@@ -165,6 +187,8 @@ jobs:
             tools/run_stage04_parser_recovery_gate.py \
             tools/audit_stage05_preparedness.py \
             tools/check_stage05_activation.py \
+            tools/check_prepared_stage_activation.py \
+            tools/evaluate_prepared_stage_checkpoint.py \
             tests/test_bootstrap_fuzz_corpus.py \
             tests/test_s3ir2_stage_map_contract.py \
             tests/test_s3ir2_v2_ingest.py \
@@ -185,7 +209,9 @@ jobs:
             tests/test_normalize_stage04_parser_attempt.py \
             tests/test_run_stage04_parser_recovery_gate.py \
             tests/test_stage05_preparedness.py \
-            tests/test_stage05_activation.py
+            tests/test_stage05_activation.py \
+            tests/test_prepared_stage_activation.py \
+            tests/test_prepared_stage_checkpoint.py
       - name: Validate v2 laboratory JSON
         run: |
           python -c "import json; json.load(open('laboratory/bootstrap-v1/s3ir2-v2-stage-map.json', encoding='utf-8'))"
@@ -198,6 +224,11 @@ jobs:
           python -c "import json; json.load(open('laboratory/bootstrap-v1/stage04-parser-attempt-template.json', encoding='utf-8'))"
           python -c "import json; json.load(open('laboratory/bootstrap-v1/stage05-fixture-plan.json', encoding='utf-8'))"
           python -c "import json; json.load(open('laboratory/bootstrap-v1/stage05-capability-matrix.json', encoding='utf-8'))"
+          python -c "import json; json.load(open('laboratory/bootstrap-v1/stage06-capability-matrix.json', encoding='utf-8'))"
+          python -c "import json; json.load(open('laboratory/bootstrap-v1/stage06-gate-contract.json', encoding='utf-8'))"
+          python -c "import json; json.load(open('laboratory/bootstrap-v1/stage07-serialization-plan.json', encoding='utf-8'))"
+          python -c "import json; json.load(open('laboratory/bootstrap-v1/stage07-capability-matrix.json', encoding='utf-8'))"
+          python -c "import json; json.load(open('laboratory/bootstrap-v1/stage07-gate-contract.json', encoding='utf-8'))"
       - name: Run focused v2 laboratory tests
         run: |
           python -m pytest -q \
@@ -221,4 +252,6 @@ jobs:
             tests/test_normalize_stage04_parser_attempt.py \
             tests/test_run_stage04_parser_recovery_gate.py \
             tests/test_stage05_preparedness.py \
-            tests/test_stage05_activation.py
+            tests/test_stage05_activation.py \
+            tests/test_prepared_stage_activation.py \
+            tests/test_prepared_stage_checkpoint.py
