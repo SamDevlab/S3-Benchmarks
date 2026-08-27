@@ -1,4 +1,4 @@
-"""Audit whether every Stage04 semantic capability has a pinned focused fixture."""
+"""Audit whether every applicable Stage04 semantic capability has a pinned focused fixture."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ def audit(matrix: dict[str, Any]) -> dict[str, Any]:
     pinned: list[str] = []
     partial: list[str] = []
     missing: list[str] = []
+    not_applicable: list[str] = []
     invalid: list[str] = []
     rows: list[dict[str, Any]] = []
 
@@ -37,6 +38,11 @@ def audit(matrix: dict[str, Any]) -> dict[str, Any]:
             partial.append(str(name))
         elif status == "FIXTURE_NOT_YET_PINNED":
             missing.append(str(name))
+        elif status == "NOT_APPLICABLE_BY_LANGUAGE_CONTRACT":
+            if fixtures:
+                invalid.append(str(name))
+            else:
+                not_applicable.append(str(name))
         else:
             invalid.append(str(name))
         rows.append({
@@ -45,19 +51,23 @@ def audit(matrix: dict[str, Any]) -> dict[str, Any]:
             "fixtures": list(fixtures),
         })
 
-    complete = not partial and not missing and not invalid and bool(rows)
+    applicable_count = len(rows) - len(not_applicable)
+    complete = not partial and not missing and not invalid and applicable_count > 0
     return {
-        "schema": "s3-benchmarks.bootstrap.stage04-fixture-audit.v1",
+        "schema": "s3-benchmarks.bootstrap.stage04-fixture-audit.v2",
         "stage_id": matrix.get("stage_id"),
         "status": "PASS" if complete else "INCOMPLETE_FIXTURE_COVERAGE",
         "capability_count": len(rows),
+        "applicable_capability_count": applicable_count,
         "pinned_count": len(pinned),
         "partial_count": len(partial),
         "missing_count": len(missing),
+        "not_applicable_count": len(not_applicable),
         "invalid_count": len(invalid),
         "pinned_capabilities": pinned,
         "partial_capabilities": partial,
         "missing_capabilities": missing,
+        "not_applicable_capabilities": not_applicable,
         "invalid_capabilities": invalid,
         "capabilities": rows,
         "promotion_effect": "NONE_FIXTURE_PLANNING_ONLY",
@@ -82,6 +92,7 @@ def main() -> int:
     print(f"PINNED={report['pinned_count']}")
     print(f"PARTIAL={report['partial_count']}")
     print(f"MISSING={report['missing_count']}")
+    print(f"NOT_APPLICABLE={report['not_applicable_count']}")
     return 0 if report["status"] == "PASS" else 3
 
 
