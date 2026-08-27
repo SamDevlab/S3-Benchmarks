@@ -22,6 +22,7 @@ def _load(path: Path) -> dict[str, Any]:
 def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, Any]:
     errors: list[str] = []
     blocked_fields: list[str] = []
+    status_field_failures: list[dict[str, Any]] = []
 
     if checkpoint.get("stage_id") != contract.get("stage_id"):
         errors.append("stage_id mismatch")
@@ -54,6 +55,22 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
         if status != "PASS":
             blocked_fields.append(str(field))
 
+    required_status_fields = contract.get("required_status_fields", {})
+    if not isinstance(required_status_fields, dict):
+        errors.append("contract.required_status_fields must be an object")
+        required_status_fields = {}
+    for field, allowed in required_status_fields.items():
+        if not isinstance(allowed, list) or not allowed:
+            errors.append(f"contract required status field {field} has no allowed values")
+            continue
+        observed = gates.get(field, "MISSING")
+        if observed not in allowed:
+            status_field_failures.append({
+                "field": str(field),
+                "observed": observed,
+                "allowed": list(allowed),
+            })
+
     invariants = checkpoint.get("invariants")
     if not isinstance(invariants, dict):
         errors.append("checkpoint.invariants must be an object")
@@ -72,9 +89,13 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
     elif z_mask >= int(contract.get("required_invariants", {}).get("z_mask_must_be_less_than", 31)):
         errors.append("z_mask must remain below 31 during Stage04")
 
-    status = "PASS" if not errors and not blocked_fields else "BLOCKED"
+    status = (
+        "PASS"
+        if not errors and not blocked_fields and not status_field_failures
+        else "BLOCKED"
+    )
     return {
-        "schema": "s3-benchmarks.bootstrap.stage04-expression-evaluation.v1",
+        "schema": "s3-benchmarks.bootstrap.stage04-expression-evaluation.v2",
         "stage_id": contract.get("stage_id"),
         "status": status,
         "control_revision": revision,
@@ -82,6 +103,7 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
         "candidate_source_sha256": candidate_source_sha,
         "candidate_binary_sha256": candidate_binary_sha,
         "blocked_fields": blocked_fields,
+        "status_field_failures": status_field_failures,
         "errors": errors,
         "next_stage_candidate": "05_CALLS_ARRAYS_S3" if status == "PASS" else None,
         "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
@@ -102,6 +124,7 @@ def main() -> int:
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     print(f"STAGE04_GATE={report['status']}")
     print(f"BLOCKED_FIELDS={len(report['blocked_fields'])}")
+    print(f"STATUS_FIELD_FAILURES={len(report['status_field_failures'])}")
     return 0 if report["status"] == "PASS" else 3
 
 
