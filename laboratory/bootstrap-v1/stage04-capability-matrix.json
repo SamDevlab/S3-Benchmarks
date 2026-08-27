@@ -28,19 +28,19 @@
       "fixtures": ["local_identity", "nested_calls"]
     },
     "unary_lowering": {
-      "fixture_status": "FIXTURE_NOT_YET_PINNED",
-      "fixtures": [],
-      "reason": "Do not invent S3 unary syntax without a repository-confirmed source fixture."
+      "fixture_status": "PARTIAL_PINNED",
+      "fixtures": ["wide_literal_negative"],
+      "reason": "Negative wide literal pins unary negation. A second focused unary operator fixture should still be pinned before treating generic unary coverage as complete."
     },
     "binary_precedence": {
-      "fixture_status": "FIXTURE_NOT_YET_PINNED",
-      "fixtures": [],
-      "reason": "A dedicated precedence fixture must be copied from or validated against repository-supported S3 syntax."
+      "fixture_status": "PINNED",
+      "fixtures": ["relational_precedence_v06"],
+      "reason": "Source copied exactly from S3 tests/test_s3_relational_parser.py V0.6 precedence case."
     },
     "comparison_lowering": {
-      "fixture_status": "PARTIAL_PINNED",
-      "fixtures": ["while_counter"],
-      "reason": "Current corpus exercises <=> inside while, but Stage04 still needs a focused expression-level comparison fixture before final qualification."
+      "fixture_status": "PINNED",
+      "fixtures": ["relational_precedence_v06", "while_counter"],
+      "reason": "Focused V0.6 relational precedence fixture plus existing loop compare input."
     },
     "assignment_reassignment": {
       "fixture_status": "PARTIAL_PINNED",
@@ -50,13 +50,17 @@
     "lexical_shadowing": {
       "fixture_status": "FIXTURE_NOT_YET_PINNED",
       "fixtures": [],
-      "reason": "Shadowing semantics are too important to infer from an invented fixture; pin one from the Stage03/Stage04 candidate tests when Codex exposes it."
+      "reason": "S3 main contains a valid shadowing semantic test, but its fixture also exercises reference types. Do not overload the Stage04 minimal gate; pin a focused candidate fixture when available."
     },
     "single_result_definition": {
       "fixture_status": "PINNED",
       "fixtures": ["local_identity", "nested_calls"]
     }
   },
-  "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. FIXTURE_NOT_YET_PINNED is a planning gap, not a compiler failure.",
+  "external_syntax_evidence": {
+    "relational_precedence_v06": "SamDevlab/S3 tests/test_s3_relational_parser.py",
+    "shadowing_available_but_not_minimal": "SamDevlab/S3 tests/test_reference_types_semantic.py::test_shadowed_symbols_have_distinct_reference_origins"
+  },
+  "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. PARTIAL_PINNED is still incomplete for final focused-fixture coverage. FIXTURE_NOT_YET_PINNED is a planning gap, not a compiler failure.",
   "promotion_effect": "NONE_PLANNING_ONLY"
 }
