@@ -13,6 +13,7 @@ on:
       - "tools/measure_bootstrap_resource_envelope.py"
       - "tools/check_bootstrap_determinism.py"
       - "tools/compare_bootstrap_stages.py"
+      - "tools/render_bootstrap_scorecard.py"
       - "tools/run_bootstrap_lab.py"
       - "tests/test_bootstrap_*.py"
       - "tests/test_compare_bootstrap_stages.py"
@@ -31,6 +32,7 @@ on:
       - "tools/measure_bootstrap_resource_envelope.py"
       - "tools/check_bootstrap_determinism.py"
       - "tools/compare_bootstrap_stages.py"
+      - "tools/render_bootstrap_scorecard.py"
       - "tools/run_bootstrap_lab.py"
       - "tests/test_bootstrap_*.py"
       - "tests/test_compare_bootstrap_stages.py"
@@ -64,6 +66,7 @@ jobs:
             tools/measure_bootstrap_resource_envelope.py \
             tools/check_bootstrap_determinism.py \
             tools/compare_bootstrap_stages.py \
+            tools/render_bootstrap_scorecard.py \
             tools/run_bootstrap_lab.py \
             tests/test_bootstrap_laboratory.py \
             tests/test_bootstrap_fuzz_corpus.py \
@@ -72,6 +75,7 @@ jobs:
             tests/test_bootstrap_differential.py \
             tests/test_bootstrap_semantic_coverage.py \
             tests/test_bootstrap_resource_and_determinism.py \
+            tests/test_bootstrap_scorecard.py \
             tests/test_compare_bootstrap_stages.py \
             tests/test_run_bootstrap_lab.py
 
@@ -91,6 +95,7 @@ jobs:
             tests/test_bootstrap_differential.py \
             tests/test_bootstrap_semantic_coverage.py \
             tests/test_bootstrap_resource_and_determinism.py \
+            tests/test_bootstrap_scorecard.py \
             tests/test_compare_bootstrap_stages.py \
             tests/test_run_bootstrap_lab.py
 
@@ -120,3 +125,11 @@ jobs:
           python tools/compare_bootstrap_stages.py \
             --output .artifacts/stage-equivalence-smoke.json
           python -c "import json; d=json.load(open('.artifacts/stage-equivalence-smoke.json')); assert d['stage1_stage2_stage3_observable_equivalence'] == 'NOT_AVAILABLE'"
+
+      - name: Render separated-dimension scorecard
+        run: |
+          python tools/render_bootstrap_scorecard.py \
+            --snapshot laboratory/bootstrap-v1/checkpoints/s3-0789ad2.json \
+            --output-json .artifacts/scorecard.json \
+            --output-markdown .artifacts/scorecard.md
+          python -c "import json; d=json.load(open('.artifacts/scorecard.json')); assert d['single_numeric_score'] is None; assert d['dimensions']['semantic_ir']['typed_values'] == 'BLOCKED'"
