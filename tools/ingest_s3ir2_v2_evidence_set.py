@@ -231,6 +231,10 @@ def ingest_set(
     manifest: dict[str, object] = {
         "schema": "s3-benchmarks.bootstrap.s3ir2-v2-evidence-set.v1",
         "protocol": "S3IR2 v2",
+        "candidate_git_sha": primary_binding.get("candidate_git_sha"),
+        "candidate_source_sha256": primary_binding.get("candidate_source_sha256"),
+        "candidate_binary_sha256": primary_binding.get("candidate_binary_sha256"),
+        "control_revision": primary_binding.get("control_revision"),
         "files": files,
         "repeat_stream_count": len(repeats),
         "repeat_native_provenance_count": len(repeat_native_provenance),
