@@ -1,7 +1,21 @@
 from tools.triage_stage05_call_gate import triage
 
 
-def test_multiarg_only_z0_with_unresolved_fail_closed_routes_to_evaluator() -> None:
+def test_consumed_token_fallthrough_supersedes_evaluator_hypothesis() -> None:
+    result = triage({
+        "ONE_ARG_Z_MASK": "3",
+        "TWO_ARG_Z_MASK": "0",
+        "UNRESOLVED_CALLEE_FAIL_CLOSED": "PASS",
+        "PARSE_OK_BEFORE_EVALUATOR": "0",
+        "STAGE05_TOKEN_ALREADY_CONSUMED": "-1",
+        "LEGACY_DISPATCH_REACHED_AFTER_STAGE05_CONSUME": "-1",
+    })
+    assert result["classification"] == "STAGE05_CONSUMED_TOKEN_FALLS_THROUGH_LEGACY_DISPATCH"
+    assert result["next_owner"] == "STAGE05_CONSUMED_TOKEN_LEGACY_GUARD"
+    assert result["arrays_unlocked"] is False
+
+
+def test_multiarg_only_z0_with_unresolved_fail_closed_routes_to_evaluator_without_stronger_trace() -> None:
     result = triage({
         "ONE_ARG_Z_MASK": "3",
         "TWO_ARG_Z_MASK": "0",
