@@ -1,4 +1,4 @@
-"""Guard prepared Stage05/06/07 laboratory plans against the live S3 control-plane snapshot."""
+"""Guard prepared Stage05/06/07/08 laboratory plans against the live S3 control-plane snapshot."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ SUPPORTED_STAGES = {
     "05_CALLS_ARRAYS_S3",
     "06_CONTROL_FLOW_S4",
     "07_SERIALIZATION_S5",
+    "08_CANONICAL_SOURCE_INPUT",
 }
 
 
