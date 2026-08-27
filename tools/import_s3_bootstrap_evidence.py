@@ -1,9 +1,9 @@
 """Import read-only S3 Stage1 evidence into a Bootstrap Laboratory snapshot.
 
 The importer never mutates the S3 checkout and never promotes missing or ambiguous
-evidence to PASS. It consumes the current semantic-IR requirements artifact when
-available, verifies exact Git provenance, and attaches selected supplemental Stage1
-JSON evidence as provenance only.
+evidence to PASS. It consumes the current semantic-IR requirements artifact,
+verifies Git + canonical-source provenance, and attaches selected supplemental
+Stage1 JSON evidence as provenance only.
 """
 
 from __future__ import annotations
@@ -30,10 +30,15 @@ SUPPLEMENTAL_STAGE1_JSON = (
     "call-argument-pool-closure.json",
     "call-argument-pool-audit.json",
 )
+CANONICAL_STAGE1_SOURCE = Path("selfhost/compiler/s3c_stage1.s3")
 
 
 def _sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def _sha256_file(path: Path) -> str | None:
+    return _sha256_bytes(path.read_bytes()) if path.is_file() else None
 
 
 def _git_head(repo: Path) -> str | None:
@@ -76,21 +81,47 @@ def _surface_state(relationships: dict[str, Any], names: tuple[str, ...]) -> str
     values = [relationships.get(name) for name in names]
     if values and all(value is True for value in values):
         return "PASS"
-    # False, missing, malformed, or mixed evidence stays fail-closed.
     return "BLOCKED"
 
 
-def summarize_supplemental_json(path: Path) -> dict[str, Any]:
+def _semantic_source_sha256(semantic: dict[str, Any]) -> str | None:
+    source = semantic.get("source")
+    if not isinstance(source, dict):
+        return None
+    value = source.get("sha256")
+    return value if isinstance(value, str) and len(value) == 64 else None
+
+
+def summarize_supplemental_json(
+    path: Path,
+    *,
+    current_semantic_source_sha256: str | None = None,
+) -> dict[str, Any]:
     """Return bounded provenance from a supplemental evidence JSON file.
 
-    Supplemental evidence is deliberately not mapped into semantic surface PASS.
-    The summary records identity/status plus a few capacity facts useful for the
-    current Stage1 call-pool checkpoint.
+    Supplemental evidence is never mapped into semantic surface PASS. If the
+    supplemental measurement identifies a canonical source hash, applicability is
+    compared with the current semantic-evidence source hash so retained historical
+    reports cannot silently become current evidence.
     """
     raw = path.read_bytes()
     payload = json.loads(raw.decode("utf-8"))
     if not isinstance(payload, dict):
         raise ValueError(f"supplemental evidence must contain an object: {path}")
+
+    measured_source_sha256 = None
+    clean_source = payload.get("clean_source_gate")
+    if isinstance(clean_source, dict):
+        candidate = clean_source.get("source_sha256")
+        if isinstance(candidate, str) and len(candidate) == 64:
+            measured_source_sha256 = candidate
+
+    if measured_source_sha256 is None or current_semantic_source_sha256 is None:
+        source_applicability = "UNKNOWN"
+    elif measured_source_sha256 == current_semantic_source_sha256:
+        source_applicability = "MATCH"
+    else:
+        source_applicability = "HISTORICAL_SOURCE_MISMATCH"
 
     row: dict[str, Any] = {
         "path": str(path),
@@ -98,6 +129,9 @@ def summarize_supplemental_json(path: Path) -> dict[str, Any]:
         "status": payload.get("status"),
         "schema": payload.get("schema") or payload.get("schema_version"),
         "promotion_effect": "NONE_PROVENANCE_ONLY",
+        "measured_source_sha256": measured_source_sha256,
+        "current_semantic_source_sha256": current_semantic_source_sha256,
+        "source_applicability": source_applicability,
     }
     pool = payload.get("pool")
     if isinstance(pool, dict):
@@ -154,7 +188,6 @@ def snapshot_from_semantic_requirements(
 
     reference_ir = semantic.get("reference_typed_ir")
     reference_ir = reference_ir if isinstance(reference_ir, dict) else {}
-    host_oracle_status = reference_ir.get("status")
 
     return {
         "schema": "s3.bootstrap-laboratory-snapshot.v1",
@@ -197,7 +230,8 @@ def snapshot_from_semantic_requirements(
         "evidence_notes": {
             "semantic_requirements_schema": semantic.get("schema"),
             "semantic_requirements_status": semantic.get("status"),
-            "host_oracle_status": host_oracle_status,
+            "semantic_source_sha256": _semantic_source_sha256(semantic),
+            "host_oracle_status": reference_ir.get("status"),
             "host_oracle_used_as_stage1_evidence": False,
             "missing_lossless_typed_lanes": semantic.get("missing_lossless_typed_lanes", []),
             "supplemental_evidence": [],
@@ -225,14 +259,23 @@ def import_checkout(
     bench_head = _git_head(benchmark_repo)
     s3_commit = s3_head or expected_s3_commit or "UNKNOWN_S3_COMMIT"
     benchmark_commit = bench_head or expected_benchmark_commit or "UNKNOWN_BENCHMARK_COMMIT"
-    source_lock_valid = bool(
-        s3_head
-        and (expected_s3_commit is None or s3_head == expected_s3_commit)
+
+    git_source_lock_valid = bool(
+        s3_head and (expected_s3_commit is None or s3_head == expected_s3_commit)
     )
+    semantic_source_sha256 = _semantic_source_sha256(semantic)
+    actual_source_sha256 = _sha256_file(s3_repo / CANONICAL_STAGE1_SOURCE)
+    semantic_source_lock_valid = bool(
+        semantic_source_sha256
+        and actual_source_sha256
+        and semantic_source_sha256 == actual_source_sha256
+    )
+    source_lock_valid = git_source_lock_valid and semantic_source_lock_valid
     benchmark_lock_valid = bool(
         bench_head
         and (expected_benchmark_commit is None or bench_head == expected_benchmark_commit)
     )
+
     snapshot = snapshot_from_semantic_requirements(
         semantic,
         s3_commit=s3_commit,
@@ -240,12 +283,24 @@ def import_checkout(
         source_lock_valid=source_lock_valid,
         benchmark_lock_valid=benchmark_lock_valid,
     )
+    snapshot["evidence_notes"].update(
+        {
+            "git_source_lock_valid": git_source_lock_valid,
+            "semantic_source_lock_valid": semantic_source_lock_valid,
+            "actual_canonical_source_sha256": actual_source_sha256,
+        }
+    )
 
     supplemental: list[dict[str, Any]] = []
     for filename in SUPPLEMENTAL_STAGE1_JSON:
         path = stage1_reports / filename
         if path.is_file():
-            supplemental.append(summarize_supplemental_json(path))
+            supplemental.append(
+                summarize_supplemental_json(
+                    path,
+                    current_semantic_source_sha256=semantic_source_sha256,
+                )
+            )
     snapshot["evidence_notes"]["supplemental_evidence"] = supplemental
     return snapshot
 
