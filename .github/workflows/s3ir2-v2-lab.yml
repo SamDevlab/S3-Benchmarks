@@ -7,6 +7,7 @@ on:
       - "tools/render_s3ir2_v2_scorecard.py"
       - "tools/check_s3ir2_v2_determinism.py"
       - "tools/capture_s3ir2_v2_failure_bundle.py"
+      - "tools/classify_s3ir2_v2_failure.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
@@ -17,6 +18,7 @@ on:
       - "tools/render_s3ir2_v2_scorecard.py"
       - "tools/check_s3ir2_v2_determinism.py"
       - "tools/capture_s3ir2_v2_failure_bundle.py"
+      - "tools/classify_s3ir2_v2_failure.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
@@ -40,6 +42,7 @@ jobs:
             tools/render_s3ir2_v2_scorecard.py \
             tools/check_s3ir2_v2_determinism.py \
             tools/capture_s3ir2_v2_failure_bundle.py \
+            tools/classify_s3ir2_v2_failure.py \
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py
       - name: Validate stage map
