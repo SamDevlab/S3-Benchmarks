@@ -18,34 +18,55 @@ Z 31
 """
 
 
-def _files(tmp_path: Path) -> tuple[Path, Path, Path]:
+def _files(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     source = tmp_path / "case.s3"
     stream = tmp_path / "case.s3ir2"
     conformance = tmp_path / "conformance.json"
+    native = tmp_path / "native-provenance.json"
     source.write_text("fn main() -> i64:\n    return 1\n", encoding="utf-8")
     stream.write_text(STREAM, encoding="utf-8")
     conformance.write_text(json.dumps({"status": "PASS", "errors": []}) + "\n", encoding="utf-8")
-    return source, stream, conformance
+    native.write_text(json.dumps({"status": "PASS", "errors": []}) + "\n", encoding="utf-8")
+    return source, stream, conformance, native
 
 
 def test_evidence_set_requires_repeat_determinism_for_gate(tmp_path: Path) -> None:
-    source, stream, conformance = _files(tmp_path)
+    source, stream, conformance, native = _files(tmp_path)
     output = tmp_path / "out"
     manifest = ingest_set(
         source=source,
         stream=stream,
         conformance=conformance,
         repeats=[],
+        native_provenance=native,
         output=output,
     )
     assert manifest["structural_status"] == "PASS"
     assert manifest["semantic_conformance_status"] == "PASS"
+    assert manifest["native_provenance_status"] == "PASS"
     assert manifest["determinism_status"] == "NOT_EVALUATED"
     assert manifest["qualification_gate"] == "BLOCKED"
 
 
-def test_evidence_set_passes_lab_gate_with_conformance_and_exact_repeats(tmp_path: Path) -> None:
-    source, stream, conformance = _files(tmp_path)
+def test_evidence_set_requires_native_provenance_for_gate(tmp_path: Path) -> None:
+    source, stream, conformance, _native = _files(tmp_path)
+    repeat = tmp_path / "repeat.s3ir2"
+    repeat.write_text(STREAM, encoding="utf-8")
+    manifest = ingest_set(
+        source=source,
+        stream=stream,
+        conformance=conformance,
+        repeats=[repeat],
+        native_provenance=None,
+        output=tmp_path / "out",
+    )
+    assert manifest["determinism_status"] == "PASS"
+    assert manifest["native_provenance_status"] == "NOT_EVALUATED"
+    assert manifest["qualification_gate"] == "BLOCKED"
+
+
+def test_evidence_set_passes_lab_gate_with_all_proofs(tmp_path: Path) -> None:
+    source, stream, conformance, native = _files(tmp_path)
     repeat2 = tmp_path / "repeat2.s3ir2"
     repeat3 = tmp_path / "repeat3.s3ir2"
     repeat2.write_text(STREAM, encoding="utf-8")
@@ -56,11 +77,13 @@ def test_evidence_set_passes_lab_gate_with_conformance_and_exact_repeats(tmp_pat
         stream=stream,
         conformance=conformance,
         repeats=[repeat2, repeat3],
+        native_provenance=native,
         output=output,
     )
     assert manifest["structural_status"] == "PASS"
     assert manifest["semantic_conformance_status"] == "PASS"
     assert manifest["determinism_status"] == "PASS"
+    assert manifest["native_provenance_status"] == "PASS"
     assert manifest["qualification_gate"] == "PASS"
     assert (output / "ingest.json").exists()
     assert (output / "determinism.json").exists()
