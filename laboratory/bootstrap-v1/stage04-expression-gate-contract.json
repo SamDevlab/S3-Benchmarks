@@ -1,6 +1,6 @@
 {
-  "schema": "s3-benchmarks.bootstrap.stage04-expression-gate.v1",
-  "control_revision_minimum": 4,
+  "schema": "s3-benchmarks.bootstrap.stage04-expression-gate.v2",
+  "control_revision_minimum": 5,
   "stage_id": "04_EXPRESSIONS_S1_S2",
   "required_pass_fields": [
     "stage03_evidence_backfill",
@@ -9,7 +9,9 @@
     "negative_wide_literal_lowering",
     "identifier_lookup",
     "lexical_shadowing",
-    "unary_lowering",
+    "unary_negate",
+    "unary_invert",
+    "supported_binary_operators",
     "binary_precedence",
     "comparison_lowering",
     "local_initialization",
@@ -22,6 +24,12 @@
     "s1_typed_values",
     "s2_def_use"
   ],
+  "required_status_fields": {
+    "unsupported_multiply_divide_remainder": [
+      "FAIL_CLOSED",
+      "NOT_APPLICABLE"
+    ]
+  },
   "required_identity_fields": [
     "candidate_git_sha",
     "candidate_source_sha256"
@@ -35,13 +43,21 @@
     "self_emit_authorized": false,
     "stage2_authorized": false
   },
+  "authoritative_operator_scope": {
+    "unary": ["-", "~"],
+    "binary": ["+", "-", "&", "|", "<=>", "==", "!=", "<", "<=", ">", ">="],
+    "not_in_current_ast_ir": ["multiply", "divide", "remainder"]
+  },
   "status_values": [
     "PASS",
     "BLOCKED",
     "NOT_RUN",
     "NOT_RECORDED",
-    "PARTIAL"
+    "NOT_REOBSERVED",
+    "PARTIAL",
+    "FAIL_CLOSED",
+    "NOT_APPLICABLE"
   ],
-  "exit_rule": "Stage04 may be considered evidence-ready only when every required pass field is PASS, candidate identity is well formed, canonical Stage1 remains unmodified, Z mask is less than 31, and native v2 conformance is explicitly PASS. This laboratory gate does not authorize Stage05 or canonical mutation by itself.",
+  "exit_rule": "Stage04 may be considered evidence-ready only when every required pass field is PASS, unsupported multiply/divide/remainder is explicitly FAIL_CLOSED or NOT_APPLICABLE, candidate identity is well formed, canonical Stage1 remains unmodified, Z mask is less than 31, and native v2 conformance is explicitly PASS. This laboratory gate does not authorize Stage05 or canonical mutation by itself.",
   "promotion_effect": "NONE_LABORATORY_GATE_ONLY"
 }
