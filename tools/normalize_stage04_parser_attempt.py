@@ -58,16 +58,21 @@ def normalize(text: str) -> dict[str, Any]:
     if source is None or HEX64.fullmatch(source) is None:
         errors.append("CANDIDATE_SOURCE_SHA256 must be 64 lowercase hex characters")
 
-    status = values.get("PARSER_STATUS", "NOT_RUN").upper()
-    aliases = {
-        "BLOCKED": "BLOCKED_SYNTAX",
-        "SYNTAX_BLOCKED": "BLOCKED_SYNTAX",
-        "STRUCTURAL_BLOCKED": "BLOCKED_STRUCTURAL",
-        "NOT RUN": "NOT_RUN",
-    }
-    status = aliases.get(status, status)
-    if status not in VALID_STATUS:
-        errors.append(f"PARSER_STATUS invalid: {status}")
+    status_raw = values.get("PARSER_STATUS")
+    if status_raw is None or not status_raw.strip():
+        errors.append("PARSER_STATUS missing")
+        status = "MISSING"
+    else:
+        status = status_raw.upper()
+        aliases = {
+            "BLOCKED": "BLOCKED_SYNTAX",
+            "SYNTAX_BLOCKED": "BLOCKED_SYNTAX",
+            "STRUCTURAL_BLOCKED": "BLOCKED_STRUCTURAL",
+            "NOT RUN": "NOT_RUN",
+        }
+        status = aliases.get(status, status)
+        if status not in VALID_STATUS:
+            errors.append(f"PARSER_STATUS invalid: {status}")
 
     line = _optional_int(values, "DIAGNOSTIC_LINE", errors)
     column = _optional_int(values, "DIAGNOSTIC_COLUMN", errors)
