@@ -20,6 +20,8 @@ on:
       - "tools/evaluate_stage04_expression_checkpoint.py"
       - "tools/compare_stage04_expression_checkpoints.py"
       - "tools/audit_stage04_fixture_coverage.py"
+      - "tools/normalize_codex_stage04_report.py"
+      - "tools/run_stage04_report_gate.py"
       - "tests/test_bootstrap_fuzz_corpus.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
@@ -33,6 +35,8 @@ on:
       - "tests/test_compare_stage04_expression_checkpoints.py"
       - "tests/test_stage04_fixture_coverage.py"
       - "tests/test_stage04_mapping_consistency.py"
+      - "tests/test_normalize_codex_stage04_report.py"
+      - "tests/test_run_stage04_report_gate.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -61,6 +65,8 @@ on:
       - "tools/evaluate_stage04_expression_checkpoint.py"
       - "tools/compare_stage04_expression_checkpoints.py"
       - "tools/audit_stage04_fixture_coverage.py"
+      - "tools/normalize_codex_stage04_report.py"
+      - "tools/run_stage04_report_gate.py"
       - "tests/test_bootstrap_fuzz_corpus.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
@@ -74,6 +80,8 @@ on:
       - "tests/test_compare_stage04_expression_checkpoints.py"
       - "tests/test_stage04_fixture_coverage.py"
       - "tests/test_stage04_mapping_consistency.py"
+      - "tests/test_normalize_codex_stage04_report.py"
+      - "tests/test_run_stage04_report_gate.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
@@ -115,6 +123,8 @@ jobs:
             tools/evaluate_stage04_expression_checkpoint.py \
             tools/compare_stage04_expression_checkpoints.py \
             tools/audit_stage04_fixture_coverage.py \
+            tools/normalize_codex_stage04_report.py \
+            tools/run_stage04_report_gate.py \
             tests/test_bootstrap_fuzz_corpus.py \
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py \
@@ -127,7 +137,9 @@ jobs:
             tests/test_stage04_expression_checkpoint.py \
             tests/test_compare_stage04_expression_checkpoints.py \
             tests/test_stage04_fixture_coverage.py \
-            tests/test_stage04_mapping_consistency.py
+            tests/test_stage04_mapping_consistency.py \
+            tests/test_normalize_codex_stage04_report.py \
+            tests/test_run_stage04_report_gate.py
       - name: Validate v2 laboratory JSON
         run: |
           python -c "import json; json.load(open('laboratory/bootstrap-v1/s3ir2-v2-stage-map.json', encoding='utf-8'))"
@@ -151,4 +163,6 @@ jobs:
             tests/test_stage04_expression_checkpoint.py \
             tests/test_compare_stage04_expression_checkpoints.py \
             tests/test_stage04_fixture_coverage.py \
-            tests/test_stage04_mapping_consistency.py
+            tests/test_stage04_mapping_consistency.py \
+            tests/test_normalize_codex_stage04_report.py \
+            tests/test_run_stage04_report_gate.py
