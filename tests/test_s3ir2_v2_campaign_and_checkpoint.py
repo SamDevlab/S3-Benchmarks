@@ -23,12 +23,23 @@ STAGE_MAP = {
 }
 
 
-def _manifest(*, semantic: str = "PASS", deterministic: str = "PASS") -> dict[str, object]:
+def _manifest(
+    *,
+    native: str = "PASS",
+    semantic: str = "PASS",
+    deterministic: str = "PASS",
+) -> dict[str, object]:
+    qualification = (
+        "PASS"
+        if native == "PASS" and semantic == "PASS" and deterministic == "PASS"
+        else "BLOCKED"
+    )
     return {
         "structural_status": "PASS",
+        "native_provenance_status": native,
         "semantic_conformance_status": semantic,
         "determinism_status": deterministic,
-        "qualification_gate": "PASS" if semantic == "PASS" and deterministic == "PASS" else "BLOCKED",
+        "qualification_gate": qualification,
     }
 
 
@@ -36,6 +47,13 @@ def test_campaign_requires_every_mapped_case() -> None:
     report = aggregate(STAGE_MAP, {"a": _manifest()})
     assert report["stages"]["03_PASS1_BINDINGS"]["status"] == "INCOMPLETE_EVIDENCE"
     assert report["stages"]["03_PASS1_BINDINGS"]["missing_cases"] == ["b"]
+    assert report["full_v2_fixture_campaign"] == "BLOCKED"
+
+
+def test_campaign_requires_native_provenance() -> None:
+    report = aggregate(STAGE_MAP, {"a": _manifest(), "b": _manifest(native="NOT_EVALUATED")})
+    assert report["stages"]["03_PASS1_BINDINGS"]["status"] == "NATIVE_PROVENANCE_BLOCKED"
+    assert report["stages"]["03_PASS1_BINDINGS"]["native_provenance_fail_cases"] == ["b"]
     assert report["full_v2_fixture_campaign"] == "BLOCKED"
 
 
@@ -51,7 +69,7 @@ def test_stage07_requires_determinism() -> None:
     assert report["stages"]["07_SERIALIZATION_S5"]["status"] == "DETERMINISM_BLOCKED"
 
 
-def test_full_campaign_passes_only_with_conformance_and_determinism() -> None:
+def test_full_campaign_passes_only_with_all_proofs() -> None:
     report = aggregate(STAGE_MAP, {"a": _manifest(), "b": _manifest()})
     assert report["stages"]["03_PASS1_BINDINGS"]["status"] == "PASS_EVIDENCE_SET"
     assert report["stages"]["07_SERIALIZATION_S5"]["status"] == "PASS_EVIDENCE_SET"
