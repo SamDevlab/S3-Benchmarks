@@ -1,6 +1,19 @@
 from tools.triage_stage05_close_probe import triage
 
 
+def test_classifies_special_open_legacy_dispatch_first_setter() -> None:
+    result = triage({
+        "SPECIAL_OPEN_ACTIVE": "-1",
+        "BEFORE_SPECIAL_OPEN_PARSE_OK": "-1",
+        "AFTER_SPECIAL_OPEN_PARSE_OK": "0",
+        "ARGUMENT_PARSE_STARTED": "0",
+        "Z_MASK": "0",
+    })
+    assert result["classification"] == "SYNTHETIC_CALL_OPEN_KIND_FALLS_THROUGH_LEGACY_OPERAND_DISPATCH"
+    assert result["next_owner"] == "LEGACY_OPERAND_DISPATCH_SPECIAL_OPEN_GUARD"
+    assert result["continue_broadening"] is False
+
+
 def test_classifies_argument_stop_before_close() -> None:
     result = triage({
         "BEFORE_CLOSE_PARSE_OK": "0",
@@ -46,5 +59,5 @@ def test_z7_still_requires_strict_conformance() -> None:
 
 def test_incomplete_evidence_blocks_repair_selection() -> None:
     result = triage({"BEFORE_CLOSE_PARSE_OK": "-1"})
-    assert result["classification"] == "INSUFFICIENT_CLOSE_PROBE"
+    assert result["classification"] == "INSUFFICIENT_PARSER_PROBE"
     assert result["continue_broadening"] is False
