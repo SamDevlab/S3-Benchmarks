@@ -1,5 +1,5 @@
 {
-  "schema": "s3-benchmarks.bootstrap.stage04-capability-matrix.v1",
+  "schema": "s3-benchmarks.bootstrap.stage04-capability-matrix.v2",
   "stage_id": "04_EXPRESSIONS_S1_S2",
   "source_corpus": "tools/generate_bootstrap_fuzz_corpus.py",
   "capabilities": {
@@ -17,51 +17,101 @@
     },
     "local_initialization": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity"]
+      "fixtures": ["local_identity", "mutable_reassignment_example"]
     },
     "instruction_result_ids": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
+      "fixtures": [
+        "local_identity",
+        "unary_negate_tryte",
+        "unary_invert_tryte",
+        "subtraction_lowering",
+        "tritwise_and",
+        "tritwise_or",
+        "relational_equal",
+        "mixed_expression_precedence",
+        "mutable_reassignment_example"
+      ]
     },
     "ordered_operand_edges": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
+      "fixtures": [
+        "local_identity",
+        "subtraction_lowering",
+        "tritwise_and",
+        "tritwise_or",
+        "relational_equal",
+        "mixed_expression_precedence",
+        "mutable_reassignment_example"
+      ]
     },
-    "unary_lowering": {
-      "fixture_status": "PARTIAL_PINNED",
-      "fixtures": ["wide_literal_negative"],
-      "reason": "Negative wide literal pins unary negation. A second focused unary operator fixture should still be pinned before treating generic unary coverage as complete."
+    "unary_negate": {
+      "fixture_status": "PINNED",
+      "fixtures": ["wide_literal_negative", "unary_negate_tryte"]
+    },
+    "unary_invert": {
+      "fixture_status": "PINNED",
+      "fixtures": ["unary_invert_tryte"]
+    },
+    "subtraction_lowering": {
+      "fixture_status": "PINNED",
+      "fixtures": ["subtraction_lowering"],
+      "reason": "Normative S3 language requires subtraction to lower as INVERT followed by ADD; no native subtraction opcode."
+    },
+    "tritwise_and": {
+      "fixture_status": "PINNED",
+      "fixtures": ["tritwise_and"]
+    },
+    "tritwise_or": {
+      "fixture_status": "PINNED",
+      "fixtures": ["tritwise_or"]
     },
     "binary_precedence": {
       "fixture_status": "PINNED",
-      "fixtures": ["relational_precedence_v06"],
-      "reason": "Source copied exactly from S3 tests/test_s3_relational_parser.py V0.6 precedence case."
+      "fixtures": ["relational_precedence_v06", "mixed_expression_precedence"],
+      "reason": "Covers the normative 0.6 precedence ladder without unsupported multiply/divide/remainder operators."
     },
     "comparison_lowering": {
       "fixture_status": "PINNED",
-      "fixtures": ["relational_precedence_v06", "while_counter"],
-      "reason": "Focused V0.6 relational precedence fixture plus existing loop compare input."
+      "fixtures": ["relational_equal", "relational_precedence_v06", "while_counter"],
+      "reason": "Focused equality, relational precedence, and existing loop compare inputs."
     },
     "assignment_reassignment": {
       "fixture_status": "PINNED",
       "fixtures": ["mutable_reassignment_example", "while_counter", "match_three_way"],
-      "reason": "Focused source copied exactly from S3 examples/mutable_value.s3, plus control-flow mutation cases."
+      "reason": "Focused mutable assignment plus control-flow mutation cases."
     },
     "lexical_shadowing": {
       "fixture_status": "FIXTURE_NOT_YET_PINNED",
       "fixtures": [],
-      "reason": "S3 main contains a valid shadowing semantic test, but its fixture also exercises reference types. Do not overload the Stage04 minimal gate; pin a focused candidate fixture when available."
+      "reason": "The S3 repository proves shadowing in a reference-type semantic test. Keep this explicit gap until a focused minimal fixture is independently qualified rather than inventing simplified syntax evidence."
     },
     "single_result_definition": {
       "fixture_status": "PINNED",
-      "fixtures": ["local_identity", "nested_calls", "mutable_reassignment_example"]
+      "fixtures": [
+        "local_identity",
+        "unary_negate_tryte",
+        "unary_invert_tryte",
+        "subtraction_lowering",
+        "tritwise_and",
+        "tritwise_or",
+        "relational_equal",
+        "mixed_expression_precedence",
+        "mutable_reassignment_example"
+      ]
+    },
+    "unsupported_multiply_divide_remainder": {
+      "fixture_status": "NOT_APPLICABLE_BY_LANGUAGE_CONTRACT",
+      "fixtures": [],
+      "reason": "Current S3 AST/IR does not define arithmetic multiply/divide/remainder. Stage04 must not implement or require them."
     }
   },
   "external_syntax_evidence": {
+    "normative_operator_precedence": "SamDevlab/S3 spec/language.md",
     "relational_precedence_v06": "SamDevlab/S3 tests/test_s3_relational_parser.py",
     "mutable_reassignment_example": "SamDevlab/S3 examples/mutable_value.s3",
     "shadowing_available_but_not_minimal": "SamDevlab/S3 tests/test_reference_types_semantic.py::test_shadowed_symbols_have_distinct_reference_origins"
   },
-  "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. PARTIAL_PINNED is still incomplete for final focused-fixture coverage. FIXTURE_NOT_YET_PINNED is a planning gap, not a compiler failure.",
+  "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. FIXTURE_NOT_YET_PINNED remains an explicit planning gap, not a compiler failure. NOT_APPLICABLE_BY_LANGUAGE_CONTRACT means the capability must not be introduced into Stage04.",
   "promotion_effect": "NONE_PLANNING_ONLY"
 }
