@@ -11,6 +11,7 @@ on:
       - "tools/ingest_s3ir2_v2_evidence_set.py"
       - "tools/aggregate_s3ir2_v2_campaign.py"
       - "tools/record_s3ir2_v2_checkpoint.py"
+      - "tools/summarize_s3ir2_v2_checkpoint_history.py"
       - "tools/minimize_s3_failure.py"
       - "tools/compare_s3ir2_v2_campaigns.py"
       - "tools/render_s3ir2_v2_native_metadata.py"
@@ -19,6 +20,7 @@ on:
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_evidence_set.py"
       - "tests/test_s3ir2_v2_campaign_and_checkpoint.py"
+      - "tests/test_s3ir2_v2_checkpoint_history.py"
       - "tests/test_minimize_s3_failure.py"
       - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_native_provenance.py"
@@ -37,6 +39,7 @@ on:
       - "tools/ingest_s3ir2_v2_evidence_set.py"
       - "tools/aggregate_s3ir2_v2_campaign.py"
       - "tools/record_s3ir2_v2_checkpoint.py"
+      - "tools/summarize_s3ir2_v2_checkpoint_history.py"
       - "tools/minimize_s3_failure.py"
       - "tools/compare_s3ir2_v2_campaigns.py"
       - "tools/render_s3ir2_v2_native_metadata.py"
@@ -45,6 +48,7 @@ on:
       - "tests/test_s3ir2_v2_lab_extensions.py"
       - "tests/test_s3ir2_v2_evidence_set.py"
       - "tests/test_s3ir2_v2_campaign_and_checkpoint.py"
+      - "tests/test_s3ir2_v2_checkpoint_history.py"
       - "tests/test_minimize_s3_failure.py"
       - "tests/test_compare_s3ir2_v2_campaigns.py"
       - "tests/test_s3ir2_v2_native_provenance.py"
@@ -76,6 +80,7 @@ jobs:
             tools/ingest_s3ir2_v2_evidence_set.py \
             tools/aggregate_s3ir2_v2_campaign.py \
             tools/record_s3ir2_v2_checkpoint.py \
+            tools/summarize_s3ir2_v2_checkpoint_history.py \
             tools/minimize_s3_failure.py \
             tools/compare_s3ir2_v2_campaigns.py \
             tools/render_s3ir2_v2_native_metadata.py \
@@ -84,6 +89,7 @@ jobs:
             tests/test_s3ir2_v2_lab_extensions.py \
             tests/test_s3ir2_v2_evidence_set.py \
             tests/test_s3ir2_v2_campaign_and_checkpoint.py \
+            tests/test_s3ir2_v2_checkpoint_history.py \
             tests/test_minimize_s3_failure.py \
             tests/test_compare_s3ir2_v2_campaigns.py \
             tests/test_s3ir2_v2_native_provenance.py
@@ -99,6 +105,7 @@ jobs:
             tests/test_s3ir2_v2_lab_extensions.py \
             tests/test_s3ir2_v2_evidence_set.py \
             tests/test_s3ir2_v2_campaign_and_checkpoint.py \
+            tests/test_s3ir2_v2_checkpoint_history.py \
             tests/test_minimize_s3_failure.py \
             tests/test_compare_s3ir2_v2_campaigns.py \
             tests/test_s3ir2_v2_native_provenance.py
