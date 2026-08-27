@@ -13,6 +13,7 @@ on:
       - "tools/record_s3ir2_v2_checkpoint.py"
       - "tools/minimize_s3_failure.py"
       - "tools/compare_s3ir2_v2_campaigns.py"
+      - "tools/render_s3ir2_v2_native_metadata.py"
       - "tools/validate_s3ir2_v2_native_provenance.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
@@ -38,6 +39,7 @@ on:
       - "tools/record_s3ir2_v2_checkpoint.py"
       - "tools/minimize_s3_failure.py"
       - "tools/compare_s3ir2_v2_campaigns.py"
+      - "tools/render_s3ir2_v2_native_metadata.py"
       - "tools/validate_s3ir2_v2_native_provenance.py"
       - "tests/test_s3ir2_v2_ingest.py"
       - "tests/test_s3ir2_v2_lab_extensions.py"
@@ -76,6 +78,7 @@ jobs:
             tools/record_s3ir2_v2_checkpoint.py \
             tools/minimize_s3_failure.py \
             tools/compare_s3ir2_v2_campaigns.py \
+            tools/render_s3ir2_v2_native_metadata.py \
             tools/validate_s3ir2_v2_native_provenance.py \
             tests/test_s3ir2_v2_ingest.py \
             tests/test_s3ir2_v2_lab_extensions.py \
