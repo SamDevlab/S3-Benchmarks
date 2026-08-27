@@ -47,6 +47,64 @@ def cases() -> tuple[Case, ...]:
             "VALID_SOURCE_GENERAL_EMITTER_MAY_BLOCK",
         ),
         Case(
+            "unary_negate_tryte",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    value: tryte = 12\n"
+            "    return -value\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_OPERATOR",
+        ),
+        Case(
+            "unary_invert_tryte",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    value: tryte = 12\n"
+            "    return ~value\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_OPERATOR",
+        ),
+        Case(
+            "subtraction_lowering",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    left: tryte = 20\n"
+            "    right: tryte = 7\n"
+            "    return left - right\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_SUBTRACTION_MUST_LOWER_AS_INVERT_PLUS_ADD",
+        ),
+        Case(
+            "tritwise_and",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    left: tryte = 10\n"
+            "    right: tryte = 5\n"
+            "    return left & right\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_OPERATOR",
+        ),
+        Case(
+            "tritwise_or",
+            "expressions",
+            "fn main() -> tryte:\n"
+            "    left: tryte = 10\n"
+            "    right: tryte = 5\n"
+            "    return left | right\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_OPERATOR",
+        ),
+        Case(
+            "relational_equal",
+            "expressions",
+            "fn main() -> trit:\n"
+            "    left: tryte = 10\n"
+            "    right: tryte = 10\n"
+            "    return left == right\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_RELATIONAL_OPERATOR",
+        ),
+        Case(
             "relational_precedence_v06",
             "expressions",
             "fn main() -> tryte:\n"
@@ -54,6 +112,16 @@ def cases() -> tuple[Case, ...]:
             "    return 0\n",
             ("typed_values", "instruction_def_use"),
             "VALID_SOURCE_PINNED_FROM_S3_TEST_RELATIONAL_PARSER",
+        ),
+        Case(
+            "mixed_expression_precedence",
+            "expressions",
+            "fn main() -> trit:\n"
+            "    left: tryte = 4\n"
+            "    right: tryte = 2\n"
+            "    return left + right & 5 | 6 <=> 7 < 8\n",
+            ("typed_values", "instruction_def_use"),
+            "VALID_SOURCE_NORMATIVE_S3_06_PRECEDENCE_CHAIN",
         ),
         Case(
             "mutable_reassignment_example",
