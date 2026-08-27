@@ -1,4 +1,9 @@
-from tools.import_s3_bootstrap_evidence import snapshot_from_semantic_requirements
+import json
+
+from tools.import_s3_bootstrap_evidence import (
+    snapshot_from_semantic_requirements,
+    summarize_supplemental_json,
+)
 
 
 def _semantic(relationships: dict[str, object]) -> dict[str, object]:
@@ -75,3 +80,43 @@ def test_host_oracle_counts_do_not_fill_stage1_resource_metrics() -> None:
     snapshot = _snapshot({})
     assert snapshot["resources"]["instruction_count"] is None
     assert snapshot["resources"]["semantic_value_count"] is None
+
+
+def test_call_pool_closure_is_summarized_without_promotion(tmp_path) -> None:
+    evidence = tmp_path / "call-argument-pool-closure.json"
+    evidence.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "status": "POOL_CLOSED_EMITTER_BLOCKED",
+                "pool": {
+                    "required_capacity": 736,
+                    "selected_capacity": 746,
+                    "headroom": 10,
+                    "bank_sizes": [365, 365, 16],
+                },
+                "runtime_measurement": {
+                    "total_calls": 656,
+                    "total_call_arguments": 736,
+                    "max_call_arity": 4,
+                    "pool_used": 736,
+                    "pool_gate": "PASS",
+                },
+                "remaining_blocker": {
+                    "id": "GENERAL_EMITTER_CAPABILITY_GAP",
+                    "stage": "general emitter",
+                    "stage1_to_stage2": "BLOCKED_NOT_STARTED",
+                    "stage3": "NOT_STARTED",
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    row = summarize_supplemental_json(evidence)
+    assert row["status"] == "POOL_CLOSED_EMITTER_BLOCKED"
+    assert row["pool"]["required_capacity"] == 736
+    assert row["pool"]["selected_capacity"] == 746
+    assert row["pool"]["headroom"] == 10
+    assert row["runtime_measurement"]["pool_gate"] == "PASS"
+    assert row["remaining_blocker"]["id"] == "GENERAL_EMITTER_CAPABILITY_GAP"
+    assert row["promotion_effect"] == "NONE_PROVENANCE_ONLY"
