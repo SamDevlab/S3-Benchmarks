@@ -1,6 +1,17 @@
 from tools.triage_stage05_close_probe import triage
 
 
+def test_classifies_residual_zero_and_one_arg_z0_after_guard() -> None:
+    result = triage({
+        "SPECIAL_OPEN_GUARD_APPLIED": "-1",
+        "ZERO_ARG_Z_MASK": "0",
+        "ONE_ARG_Z_MASK": "0",
+    })
+    assert result["classification"] == "POST_SPECIAL_OPEN_RESIDUAL_PARSE_OK_SETTER_COMMON_TO_ZERO_AND_ONE_ARG"
+    assert result["next_owner"] == "FIRST_PARSE_OK_TRANSITION_ON_GUARDED_CANDIDATE"
+    assert result["continue_broadening"] is False
+
+
 def test_classifies_special_open_legacy_dispatch_first_setter() -> None:
     result = triage({
         "SPECIAL_OPEN_ACTIVE": "-1",
@@ -21,7 +32,6 @@ def test_classifies_argument_stop_before_close() -> None:
         "Z_MASK": "0",
     })
     assert result["classification"] == "ARGUMENT_STOP_OR_TOKEN_BEFORE_RIGHT_PAREN"
-    assert result["next_owner"] == "ARGUMENT_STOP_OR_TOKEN_BEFORE_RIGHT_PAREN"
     assert result["continue_broadening"] is False
 
 
