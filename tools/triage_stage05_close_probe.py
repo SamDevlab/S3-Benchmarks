@@ -42,32 +42,57 @@ def _truth(value: str | None) -> bool | None:
     return None
 
 
+def _int(value: str | None) -> int | None:
+    if value is None:
+        return None
+    try:
+        return int(value)
+    except ValueError:
+        return None
+
+
 def triage(fields: dict[str, str]) -> dict[str, Any]:
     before_special = _truth(fields.get("BEFORE_SPECIAL_OPEN_PARSE_OK"))
     after_special = _truth(fields.get("AFTER_SPECIAL_OPEN_PARSE_OK"))
     special_open_active = _truth(fields.get("SPECIAL_OPEN_ACTIVE"))
     argument_parse_started = _truth(fields.get("ARGUMENT_PARSE_STARTED"))
+    special_open_guard_applied = _truth(fields.get("SPECIAL_OPEN_GUARD_APPLIED"))
 
     before = _truth(fields.get("BEFORE_CLOSE_PARSE_OK"))
     after = _truth(fields.get("AFTER_CLOSE_PARSE_OK"))
-    z_mask_raw = fields.get("Z_MASK")
-    try:
-        z_mask = int(z_mask_raw) if z_mask_raw is not None else None
-    except ValueError:
-        z_mask = None
+    z_mask = _int(fields.get("Z_MASK"))
+    zero_arg_z = _int(fields.get("ZERO_ARG_Z_MASK"))
+    one_arg_z = _int(fields.get("ONE_ARG_Z_MASK"))
 
     base: dict[str, Any] = {
-        "schema": "s3-benchmarks.bootstrap.stage05-parser-probe-triage.v2",
+        "schema": "s3-benchmarks.bootstrap.stage05-parser-probe-triage.v3",
         "before_special_open_parse_ok": before_special,
         "after_special_open_parse_ok": after_special,
         "special_open_active": special_open_active,
         "argument_parse_started": argument_parse_started,
+        "special_open_guard_applied": special_open_guard_applied,
         "before_close_parse_ok": before,
         "after_close_parse_ok": after,
         "z_mask": z_mask,
+        "zero_arg_z_mask": zero_arg_z,
+        "one_arg_z_mask": one_arg_z,
         "promotion_effect": "NONE_TRIAGE_ONLY",
         "one_blocker_per_cycle": True,
     }
+
+    # Revision-18 evidence: after applying the proven special-open guard, both
+    # zero- and one-argument internal calls can still end Z 0. That de-prioritizes
+    # argument-specific logic and requires a first-transition trace on the guarded
+    # candidate before choosing another permanent repair.
+    if special_open_guard_applied is True and zero_arg_z == 0 and one_arg_z == 0:
+        return {
+            **base,
+            "status": "RESIDUAL_BLOCKER_CLASSIFIED",
+            "classification": "POST_SPECIAL_OPEN_RESIDUAL_PARSE_OK_SETTER_COMMON_TO_ZERO_AND_ONE_ARG",
+            "next_owner": "FIRST_PARSE_OK_TRANSITION_ON_GUARDED_CANDIDATE",
+            "repair_action": "Do not patch arity or argument parsing by default. Finish one token trace on the guarded candidate and locate the first parse_ok -1 -> 0 transition; classify it as incomplete guard coverage, common call-close state, post-call fallthrough/frame restoration, or completeness if parse_ok never flips.",
+            "continue_broadening": False,
+        }
 
     # Revision-17 root cause: the Stage05 synthetic open marker is valid parser
     # state, but the legacy operand dispatcher must not consume/reject it as a
@@ -93,7 +118,7 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
             "status": "FIRST_BLOCKER_CLASSIFIED",
             "classification": "ARGUMENT_STOP_OR_TOKEN_BEFORE_RIGHT_PAREN",
             "next_owner": "ARGUMENT_STOP_OR_TOKEN_BEFORE_RIGHT_PAREN",
-            "repair_action": "Inspect only the argument-expression stop predicate and token immediately before RIGHT_PAREN. Do not patch call-close bookkeeping yet.",
+            "repair_action": "Inspect only the first proven pre-close setter. If zero-arg and one-arg both fail, prefer common call state over argument-specific logic.",
             "continue_broadening": False,
         }
 
@@ -103,7 +128,7 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
             "status": "FIRST_BLOCKER_CLASSIFIED",
             "classification": "RIGHT_PAREN_CALL_CLOSE",
             "next_owner": "CURRENT_CODE_EQ_2_CALL_CLOSE",
-            "repair_action": "Find the first exact close condition that flips parse_ok: arity/argument-complete predicate, single depth decrement, generic RIGHT_PAREN fallthrough, or call-frame restoration. Patch one proven condition only.",
+            "repair_action": "Find the first exact common close condition that flips parse_ok: depth decrement, frame pop/restore, operator marker removal, or generic RIGHT_PAREN fallthrough. Patch one proven condition only.",
             "continue_broadening": False,
         }
 
@@ -113,7 +138,7 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
             "status": "PARSER_CLOSE_CLEARED",
             "classification": "POST_PARSE_FINALIZATION_OR_COMPLETENESS",
             "next_owner": "STRICT_STAGE05_CONFORMANCE_FIRST_MISMATCH",
-            "repair_action": "Regenerate a clean candidate and run strict Stage05 conformance before any further parser edit.",
+            "repair_action": "Regenerate a clean candidate and run strict Stage05 conformance/completeness before any further parser edit.",
             "continue_broadening": False,
         }
 
@@ -132,7 +157,7 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
         "status": "BLOCKED_INCOMPLETE_EVIDENCE",
         "classification": "INSUFFICIENT_PARSER_PROBE",
         "next_owner": "PRESERVE_RAW_PROBE",
-        "repair_action": "Provide either the special-open before/after state or the close before/after state from one run before choosing a repair.",
+        "repair_action": "Provide either post-guard zero/one-arg results, the special-open before/after state, or the close before/after state from one run before choosing a repair.",
         "continue_broadening": False,
     }
 
