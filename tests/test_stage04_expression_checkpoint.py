@@ -7,7 +7,6 @@ CONTRACT = {
     "stage_id": "04_EXPRESSIONS_S1_S2",
     "control_revision_minimum": 5,
     "required_pass_fields": [
-        "stage03_evidence_backfill",
         "expr_parser_syntax",
         "integer_literal_lowering",
         "negative_wide_literal_lowering",
@@ -29,14 +28,17 @@ CONTRACT = {
         "s2_def_use",
     ],
     "required_status_fields": {
+        "stage03_evidence_backfill": ["PASS", "PARTIAL", "NOT_RECORDED", "NOT_REOBSERVED"],
         "unsupported_multiply_divide_remainder": ["FAIL_CLOSED", "NOT_APPLICABLE"],
     },
+    "nonblocking_debt_fields": ["stage03_evidence_backfill"],
     "required_invariants": {"z_mask_must_be_less_than": 31},
 }
 
 
 def _checkpoint() -> dict:
     gates = {field: "PASS" for field in CONTRACT["required_pass_fields"]}
+    gates["stage03_evidence_backfill"] = "PASS"
     gates["unsupported_multiply_divide_remainder"] = "NOT_APPLICABLE"
     return {
         "stage_id": "04_EXPRESSIONS_S1_S2",
@@ -58,14 +60,22 @@ def test_stage04_gate_passes_only_complete_checkpoint() -> None:
     report = evaluate(CONTRACT, _checkpoint())
     assert report["status"] == "PASS"
     assert report["next_stage_candidate"] == "05_CALLS_ARRAYS_S3"
+    assert report["nonblocking_evidence_debt"] == []
 
 
-def test_stage04_gate_blocks_missing_stage03_backfill() -> None:
+def test_stage03_backfill_debt_is_reported_but_nonblocking() -> None:
     checkpoint = _checkpoint()
     checkpoint["gates"]["stage03_evidence_backfill"] = "NOT_RECORDED"
     report = evaluate(CONTRACT, checkpoint)
-    assert report["status"] == "BLOCKED"
-    assert "stage03_evidence_backfill" in report["blocked_fields"]
+    assert report["status"] == "PASS"
+    assert report["blocked_fields"] == []
+    assert report["nonblocking_evidence_debt"] == [
+        {
+            "field": "stage03_evidence_backfill",
+            "observed": "NOT_RECORDED",
+            "blocking": False,
+        }
+    ]
 
 
 def test_stage04_gate_blocks_parser_incomplete() -> None:
