@@ -13,6 +13,7 @@ def _semantic(relationships: dict[str, object]) -> dict[str, object]:
         "stage1_self_emit": "BLOCKED_UNTIL_MISSING_LANES_EXIST_AND_VERIFY",
         "stage2": "NOT_STARTED",
         "stage3": "NOT_STARTED",
+        "source": {"sha256": "c" * 64},
         "missing_lossless_typed_lanes": ["typed_constant_interning_and_definition_ids"],
         "storage_evidence": {"semantic_relationships": relationships},
         "reference_typed_ir": {
@@ -82,9 +83,8 @@ def test_host_oracle_counts_do_not_fill_stage1_resource_metrics() -> None:
     assert snapshot["resources"]["semantic_value_count"] is None
 
 
-def test_call_pool_closure_is_summarized_without_promotion(tmp_path) -> None:
-    evidence = tmp_path / "call-argument-pool-closure.json"
-    evidence.write_text(
+def _write_call_pool_fixture(path, measured_sha: str) -> None:
+    path.write_text(
         json.dumps(
             {
                 "schema_version": 1,
@@ -102,6 +102,7 @@ def test_call_pool_closure_is_summarized_without_promotion(tmp_path) -> None:
                     "pool_used": 736,
                     "pool_gate": "PASS",
                 },
+                "clean_source_gate": {"source_sha256": measured_sha},
                 "remaining_blocker": {
                     "id": "GENERAL_EMITTER_CAPABILITY_GAP",
                     "stage": "general emitter",
@@ -112,11 +113,34 @@ def test_call_pool_closure_is_summarized_without_promotion(tmp_path) -> None:
         ),
         encoding="utf-8",
     )
-    row = summarize_supplemental_json(evidence)
+
+
+def test_call_pool_closure_matching_source_is_still_provenance_only(tmp_path) -> None:
+    evidence = tmp_path / "call-argument-pool-closure.json"
+    current_sha = "d" * 64
+    _write_call_pool_fixture(evidence, current_sha)
+    row = summarize_supplemental_json(
+        evidence,
+        current_semantic_source_sha256=current_sha,
+    )
     assert row["status"] == "POOL_CLOSED_EMITTER_BLOCKED"
     assert row["pool"]["required_capacity"] == 736
     assert row["pool"]["selected_capacity"] == 746
     assert row["pool"]["headroom"] == 10
     assert row["runtime_measurement"]["pool_gate"] == "PASS"
     assert row["remaining_blocker"]["id"] == "GENERAL_EMITTER_CAPABILITY_GAP"
+    assert row["source_applicability"] == "MATCH"
+    assert row["promotion_effect"] == "NONE_PROVENANCE_ONLY"
+
+
+def test_historical_call_pool_source_mismatch_is_explicit(tmp_path) -> None:
+    evidence = tmp_path / "call-argument-pool-closure.json"
+    _write_call_pool_fixture(evidence, "1" * 64)
+    row = summarize_supplemental_json(
+        evidence,
+        current_semantic_source_sha256="2" * 64,
+    )
+    assert row["source_applicability"] == "HISTORICAL_SOURCE_MISMATCH"
+    assert row["measured_source_sha256"] == "1" * 64
+    assert row["current_semantic_source_sha256"] == "2" * 64
     assert row["promotion_effect"] == "NONE_PROVENANCE_ONLY"
