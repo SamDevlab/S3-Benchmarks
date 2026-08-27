@@ -1,0 +1,62 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage04-capability-matrix.v1",
+  "stage_id": "04_EXPRESSIONS_S1_S2",
+  "source_corpus": "tools/generate_bootstrap_fuzz_corpus.py",
+  "capabilities": {
+    "integer_literal_lowering": {
+      "fixture_status": "PINNED",
+      "fixtures": ["wide_literal_positive", "local_identity"]
+    },
+    "negative_wide_literal_lowering": {
+      "fixture_status": "PINNED",
+      "fixtures": ["wide_literal_negative"]
+    },
+    "identifier_lookup": {
+      "fixture_status": "PINNED",
+      "fixtures": ["local_identity", "parameter_ordinal_0", "parameter_ordinal_5"]
+    },
+    "local_initialization": {
+      "fixture_status": "PINNED",
+      "fixtures": ["local_identity"]
+    },
+    "instruction_result_ids": {
+      "fixture_status": "PINNED",
+      "fixtures": ["local_identity", "nested_calls"]
+    },
+    "ordered_operand_edges": {
+      "fixture_status": "PINNED",
+      "fixtures": ["local_identity", "nested_calls"]
+    },
+    "unary_lowering": {
+      "fixture_status": "FIXTURE_NOT_YET_PINNED",
+      "fixtures": [],
+      "reason": "Do not invent S3 unary syntax without a repository-confirmed source fixture."
+    },
+    "binary_precedence": {
+      "fixture_status": "FIXTURE_NOT_YET_PINNED",
+      "fixtures": [],
+      "reason": "A dedicated precedence fixture must be copied from or validated against repository-supported S3 syntax."
+    },
+    "comparison_lowering": {
+      "fixture_status": "PARTIAL_PINNED",
+      "fixtures": ["while_counter"],
+      "reason": "Current corpus exercises <=> inside while, but Stage04 still needs a focused expression-level comparison fixture before final qualification."
+    },
+    "assignment_reassignment": {
+      "fixture_status": "PARTIAL_PINNED",
+      "fixtures": ["while_counter", "match_three_way"],
+      "reason": "Existing fixtures exercise mutation in control-flow contexts; a focused Stage04 reassignment fixture is still preferred."
+    },
+    "lexical_shadowing": {
+      "fixture_status": "FIXTURE_NOT_YET_PINNED",
+      "fixtures": [],
+      "reason": "Shadowing semantics are too important to infer from an invented fixture; pin one from the Stage03/Stage04 candidate tests when Codex exposes it."
+    },
+    "single_result_definition": {
+      "fixture_status": "PINNED",
+      "fixtures": ["local_identity", "nested_calls"]
+    }
+  },
+  "rule": "PINNED means the laboratory already has a deterministic source input relevant to the capability; it is not PASS evidence until executed against an exact candidate with native provenance and strict S3 conformance. FIXTURE_NOT_YET_PINNED is a planning gap, not a compiler failure.",
+  "promotion_effect": "NONE_PLANNING_ONLY"
+}
