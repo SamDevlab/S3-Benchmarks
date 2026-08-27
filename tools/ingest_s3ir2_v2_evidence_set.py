@@ -23,6 +23,7 @@ def ingest_set(
     stream: Path,
     conformance: Path,
     repeats: list[Path],
+    native_provenance: Path | None,
     output: Path,
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=True)
@@ -30,6 +31,11 @@ def ingest_set(
     stream_text = stream.read_text(encoding="utf-8")
     structural = ingest(stream_text, source_sha256=source_sha)
     conformance_data = json.loads(conformance.read_text(encoding="utf-8"))
+    native_data = (
+        json.loads(native_provenance.read_text(encoding="utf-8"))
+        if native_provenance is not None
+        else None
+    )
 
     ingest_path = output / "ingest.json"
     ingest_path.write_text(
@@ -51,6 +57,7 @@ def ingest_set(
         structural,
         conformance=conformance_data,
         determinism=determinism_data,
+        native_provenance=native_data,
     )
     scorecard_path = output / "scorecard.json"
     scorecard_path.write_text(
@@ -74,6 +81,11 @@ def ingest_set(
         "ingest": {"path": str(ingest_path), "sha256": _sha(ingest_path)},
         "scorecard": {"path": str(scorecard_path), "sha256": _sha(scorecard_path)},
     }
+    if native_provenance is not None:
+        files["native_provenance"] = {
+            "path": str(native_provenance),
+            "sha256": _sha(native_provenance),
+        }
     if determinism_path is not None:
         files["determinism"] = {
             "path": str(determinism_path),
@@ -94,6 +106,11 @@ def ingest_set(
             if determinism_data is not None
             else "NOT_EVALUATED"
         ),
+        "native_provenance_status": (
+            native_data.get("status", "UNKNOWN")
+            if isinstance(native_data, dict)
+            else "NOT_EVALUATED"
+        ),
         "qualification_gate": scorecard["qualification_gate"],
         "promotion_effect": "NONE_LABORATORY_EVIDENCE_ONLY",
     }
@@ -111,6 +128,7 @@ def main() -> int:
     parser.add_argument("--stream", type=Path, required=True)
     parser.add_argument("--conformance", type=Path, required=True)
     parser.add_argument("--repeat-stream", action="append", type=Path, default=[])
+    parser.add_argument("--native-provenance", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
@@ -119,6 +137,7 @@ def main() -> int:
             stream=args.stream,
             conformance=args.conformance,
             repeats=args.repeat_stream,
+            native_provenance=args.native_provenance,
             output=args.output,
         )
     except (OSError, ValueError, json.JSONDecodeError) as error:
@@ -126,6 +145,7 @@ def main() -> int:
     print(f"QUALIFICATION_GATE={manifest['qualification_gate']}")
     print(f"SEMANTIC_CONFORMANCE={manifest['semantic_conformance_status']}")
     print(f"DETERMINISM={manifest['determinism_status']}")
+    print(f"NATIVE_PROVENANCE={manifest['native_provenance_status']}")
     return 0
 
 
