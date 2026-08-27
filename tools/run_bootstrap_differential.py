@@ -160,7 +160,14 @@ def main(argv: list[str] | None = None) -> int:
     print(f"OUTPUT={args.output}")
     print(f"CASES={report['case_count']}")
     print(f"COUNTS={json.dumps(report['counts'], sort_keys=True)}")
-    return 0 if not any(key in report["counts"] for key in ("SEMANTIC_MISMATCH", "REFERENCE_FAIL", "REFERENCE_TIMEOUT")) else 2
+    hard_failures = {
+        "SEMANTIC_MISMATCH",
+        "REFERENCE_FAIL",
+        "REFERENCE_TIMEOUT",
+        "STAGE1_FAIL",
+        "STAGE1_TIMEOUT",
+    }
+    return 2 if any(key in report["counts"] for key in hard_failures) else 0
 
 
 if __name__ == "__main__":
