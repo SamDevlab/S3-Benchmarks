@@ -33,9 +33,9 @@ def _truth(value: str | None) -> bool | None:
     if value is None:
         return None
     normalized = value.strip().upper()
-    if normalized in {"1", "-1", "TRUE", "YES", "PASS", "PASSED", "FAIL_CLOSED"}:
+    if normalized in {"1", "-1", "TRUE", "YES", "PASS", "PASSED", "FAIL_CLOSED", "VALID"}:
         return True
-    if normalized in {"0", "FALSE", "NO", "FAIL", "FAILED"}:
+    if normalized in {"0", "FALSE", "NO", "FAIL", "FAILED", "INVALID"}:
         return False
     return None
 
@@ -51,28 +51,49 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
     unresolved_fail_closed = _truth(fields.get("UNRESOLVED_CALLEE_FAIL_CLOSED"))
     one_eval_marker = fields.get("ONE_ARG_EVAL_ERROR_MARKER", "")
     two_eval_marker = fields.get("TWO_ARG_EVAL_ERROR_MARKER", "")
+    parse_ok_before_evaluator = _truth(fields.get("PARSE_OK_BEFORE_EVALUATOR"))
+    stage05_token_consumed = _truth(fields.get("STAGE05_TOKEN_ALREADY_CONSUMED"))
+    legacy_dispatch_reached = _truth(fields.get("LEGACY_DISPATCH_REACHED_AFTER_STAGE05_CONSUME"))
     base = {
-        "schema": "s3-benchmarks.bootstrap.stage05-call-gate-triage.v2",
+        "schema": "s3-benchmarks.bootstrap.stage05-call-gate-triage.v3",
         "masks": masks,
         "strict_conformance_status": strict,
         "unresolved_callee_fail_closed": unresolved_fail_closed,
         "one_arg_eval_error_marker": one_eval_marker,
         "two_arg_eval_error_marker": two_eval_marker,
+        "parse_ok_before_evaluator": parse_ok_before_evaluator,
+        "stage05_token_already_consumed": stage05_token_consumed,
+        "legacy_dispatch_reached_after_stage05_consume": legacy_dispatch_reached,
         "promotion_effect": "NONE_TRIAGE_ONLY",
         "arrays_unlocked": False,
         "foreign_calls_unlocked": False,
     }
 
+    # Revision-22 route: evaluator telemetry is not the owner when parse_ok is
+    # already invalid before evaluation. If Stage05 consumed the token and the
+    # same token still reached legacy dispatch, route to the ownership guard.
+    if (
+        parse_ok_before_evaluator is False
+        and stage05_token_consumed is True
+        and legacy_dispatch_reached is True
+    ):
+        return {
+            **base,
+            "classification": "STAGE05_CONSUMED_TOKEN_FALLS_THROUGH_LEGACY_DISPATCH",
+            "next_owner": "STAGE05_CONSUMED_TOKEN_LEGACY_GUARD",
+            "action": "Preserve the localized consumed-token guard: only tokens explicitly consumed by Stage05 in the current cycle skip legacy reprocessing. Do not globally whitelist punctuation. Finish the clean build, then run zero/one/two-arg fixtures on the same binary before strict conformance.",
+        }
+
     # Revision-21 route: the one-argument control is structurally alive while the
     # ordered two-argument reproducer alone falls to Z0. With unresolved-callee
-    # fail-closed preserved, do not reopen capacity/resolution/parser. Finish the
-    # evaluator A/B and classify its first differing error marker.
+    # fail-closed preserved, use evaluator A/B only until stronger parser evidence
+    # such as the revision-22 route above supersedes it.
     if masks["one"] in {3, 7} and masks["two"] == 0 and unresolved_fail_closed is True:
         return {
             **base,
             "classification": "MULTI_ARG_ONLY_EVALUATOR_BLOCKER",
             "next_owner": "MULTI_ARG_EVALUATOR_DIAGNOSIS",
-            "action": "Use the same instrumented binary for one-arg control versus ordered two-arg reproducer. Classify the first multiarg-only evaluator marker as argument compatibility/ordinal, post-call result/return state, shared evaluator regression, or post-evaluator completeness. Do not open arrays, capacity, callee resolution, or generic parser work.",
+            "action": "Use the same instrumented binary for one-arg control versus ordered two-arg reproducer unless parse_ok is already invalid before evaluation. Do not open arrays, capacity or callee resolution.",
         }
 
     if masks["one"] in {3, 7} and masks["two"] == 0:
@@ -80,7 +101,7 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
             **base,
             "classification": "MULTI_ARG_ONLY_VALID_CALL_Z0",
             "next_owner": "MULTI_ARG_EVALUATOR_OR_FIRST_POST_PARSE_SETTER",
-            "action": "Preserve the two-argument raw stream and compare it against the one-argument positive control. If unresolved fail-closed is known-good, prefer evaluator-state diagnosis over parser/capacity/resolution.",
+            "action": "Preserve the two-argument raw stream and compare it against the one-argument positive control. Prefer the first proven parser/evaluator setter rather than broadening.",
         }
 
     observed = [value for value in masks.values() if value is not None]
