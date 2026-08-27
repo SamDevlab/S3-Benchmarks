@@ -109,6 +109,60 @@ def cases() -> tuple[Case, ...]:
             ("typed_values", "instruction_def_use", "call_dataflow"),
             "VALID_SOURCE_GENERAL_EMITTER_MAY_BLOCK",
         ),
+        Case(
+            "while_counter",
+            "control_flow",
+            "fn main() -> i64:\n"
+            "    mut value: i64 = 0\n"
+            "    while value <=> 3:\n"
+            "        value = value + 1\n"
+            "    return value\n",
+            ("typed_values", "instruction_def_use", "complete_terminators"),
+            "VALID_SOURCE_EXPECT_STAGE1_BLOCK_UNTIL_COMPLETE_TERMINATORS",
+        ),
+        Case(
+            "match_three_way",
+            "control_flow",
+            "fn main() -> i64:\n"
+            "    mut value: i64 = 0\n"
+            "    match -1:\n"
+            "        -1:\n"
+            "            value = 11\n"
+            "        0:\n"
+            "            value = 22\n"
+            "        1:\n"
+            "            value = 33\n"
+            "    return value\n",
+            ("typed_values", "instruction_def_use", "complete_terminators"),
+            "VALID_SOURCE_EXPECT_STAGE1_BLOCK_UNTIL_BRANCH3_CONDITION_AND_TARGETS",
+        ),
+        Case(
+            "loop_call_dataflow",
+            "control_flow_calls",
+            "fn inc(value: i64) -> i64:\n"
+            "    return value + 1\n\n"
+            "fn main() -> i64:\n"
+            "    mut value: i64 = 0\n"
+            "    while value <=> 3:\n"
+            "        value = inc(value)\n"
+            "    return value\n",
+            ("typed_values", "instruction_def_use", "call_dataflow", "complete_terminators"),
+            "VALID_SOURCE_EXPECT_STAGE1_BLOCK_UNTIL_CALL_AND_TERMINATOR_DATAFLOW",
+        ),
+        Case(
+            "array_index_loop",
+            "arrays_control_flow",
+            "fn main() -> i64:\n"
+            "    mut buf: i64[3] = [10, 20, 30]\n"
+            "    mut i: i64 = 0\n"
+            "    mut total: i64 = 0\n"
+            "    while i <=> 3:\n"
+            "        total = total + buf[i]\n"
+            "        i = i + 1\n"
+            "    return total\n",
+            ("typed_values", "instruction_def_use", "complete_terminators"),
+            "VALID_SOURCE_EXPECT_STAGE1_BLOCK_UNTIL_ARRAY_DEF_USE_AND_TERMINATORS",
+        ),
     )
 
 
