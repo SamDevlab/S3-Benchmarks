@@ -1,4 +1,4 @@
-"""Classify the current Stage05 call-close probe without semantic promotion.
+"""Classify the current Stage05 parser probe without semantic promotion.
 
 Input is a text file containing KEY=VALUE lines copied from the paired Codex
 checkpoint or raw normalized probe summary. The tool maps the first observed
@@ -43,6 +43,11 @@ def _truth(value: str | None) -> bool | None:
 
 
 def triage(fields: dict[str, str]) -> dict[str, Any]:
+    before_special = _truth(fields.get("BEFORE_SPECIAL_OPEN_PARSE_OK"))
+    after_special = _truth(fields.get("AFTER_SPECIAL_OPEN_PARSE_OK"))
+    special_open_active = _truth(fields.get("SPECIAL_OPEN_ACTIVE"))
+    argument_parse_started = _truth(fields.get("ARGUMENT_PARSE_STARTED"))
+
     before = _truth(fields.get("BEFORE_CLOSE_PARSE_OK"))
     after = _truth(fields.get("AFTER_CLOSE_PARSE_OK"))
     z_mask_raw = fields.get("Z_MASK")
@@ -52,13 +57,35 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
         z_mask = None
 
     base: dict[str, Any] = {
-        "schema": "s3-benchmarks.bootstrap.stage05-close-probe-triage.v1",
+        "schema": "s3-benchmarks.bootstrap.stage05-parser-probe-triage.v2",
+        "before_special_open_parse_ok": before_special,
+        "after_special_open_parse_ok": after_special,
+        "special_open_active": special_open_active,
+        "argument_parse_started": argument_parse_started,
         "before_close_parse_ok": before,
         "after_close_parse_ok": after,
         "z_mask": z_mask,
         "promotion_effect": "NONE_TRIAGE_ONLY",
         "one_blocker_per_cycle": True,
     }
+
+    # Revision-17 root cause: the Stage05 synthetic open marker is valid parser
+    # state, but the legacy operand dispatcher must not consume/reject it as a
+    # normal operand before argument parsing begins.
+    if (
+        special_open_active is True
+        and before_special is True
+        and after_special is False
+        and argument_parse_started is False
+    ):
+        return {
+            **base,
+            "status": "FIRST_BLOCKER_CLASSIFIED",
+            "classification": "SYNTHETIC_CALL_OPEN_KIND_FALLS_THROUGH_LEGACY_OPERAND_DISPATCH",
+            "next_owner": "LEGACY_OPERAND_DISPATCH_SPECIAL_OPEN_GUARD",
+            "repair_action": "Guard only the legacy operand-dispatch rejection while stage05_special_open is active; preserve all normal operand behavior and do not modify call-close or comparison truth conventions.",
+            "continue_broadening": False,
+        }
 
     if before is False:
         return {
@@ -103,9 +130,9 @@ def triage(fields: dict[str, str]) -> dict[str, Any]:
     return {
         **base,
         "status": "BLOCKED_INCOMPLETE_EVIDENCE",
-        "classification": "INSUFFICIENT_CLOSE_PROBE",
+        "classification": "INSUFFICIENT_PARSER_PROBE",
         "next_owner": "PRESERVE_RAW_PROBE",
-        "repair_action": "Provide BEFORE_CLOSE_PARSE_OK, AFTER_CLOSE_PARSE_OK and Z_MASK from the same run before choosing a repair.",
+        "repair_action": "Provide either the special-open before/after state or the close before/after state from one run before choosing a repair.",
         "continue_broadening": False,
     }
 
@@ -120,7 +147,7 @@ def main() -> int:
         fields = _parse_lines(args.probe_text.read_text(encoding="utf-8"))
         result = triage(fields)
     except OSError as error:
-        parser.exit(2, f"STAGE05_CLOSE_TRIAGE_ERROR={error}\n")
+        parser.exit(2, f"STAGE05_PARSER_TRIAGE_ERROR={error}\n")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
