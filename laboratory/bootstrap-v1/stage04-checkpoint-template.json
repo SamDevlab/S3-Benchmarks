@@ -1,7 +1,7 @@
 {
-  "schema": "s3.stage1.codex-stage-checkpoint.v1",
+  "schema": "s3.stage1.codex-stage-checkpoint.v2",
   "stage_id": "04_EXPRESSIONS_S1_S2",
-  "control_revision": 4,
+  "control_revision": 5,
   "candidate_git_sha": null,
   "candidate_source_sha256": null,
   "candidate_binary_sha256": null,
@@ -12,7 +12,9 @@
     "negative_wide_literal_lowering": "BLOCKED",
     "identifier_lookup": "BLOCKED",
     "lexical_shadowing": "BLOCKED",
-    "unary_lowering": "BLOCKED",
+    "unary_negate": "BLOCKED",
+    "unary_invert": "BLOCKED",
+    "supported_binary_operators": "BLOCKED",
     "binary_precedence": "BLOCKED",
     "comparison_lowering": "BLOCKED",
     "local_initialization": "BLOCKED",
@@ -20,6 +22,7 @@
     "instruction_result_ids": "BLOCKED",
     "ordered_operand_edges": "BLOCKED",
     "single_result_definition": "BLOCKED",
+    "unsupported_multiply_divide_remainder": "NOT_APPLICABLE",
     "candidate_stage0_check": "BLOCKED",
     "focused_native_v2_conformance": "NOT_RUN",
     "s1_typed_values": "BLOCKED",
@@ -32,5 +35,5 @@
     "z_mask": 0
   },
   "first_real_blocker": null,
-  "notes": "Template only. Replace null identity fields and statuses from executed evidence; never turn missing evidence into PASS."
+  "notes": "Template only. Current S3 has no arithmetic multiplication/division/remainder in AST/IR. Replace null identity fields and statuses from executed evidence; never turn missing evidence into PASS."
 }
