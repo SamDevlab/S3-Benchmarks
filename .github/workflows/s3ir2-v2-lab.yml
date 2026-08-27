@@ -32,12 +32,14 @@ on:
       - "tests/test_stage04_expression_checkpoint.py"
       - "tests/test_compare_stage04_expression_checkpoints.py"
       - "tests/test_stage04_fixture_coverage.py"
+      - "tests/test_stage04_mapping_consistency.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
       - "laboratory/bootstrap-v1/stage04-expression-gate-contract.json"
       - "laboratory/bootstrap-v1/stage04-checkpoint-template.json"
       - "laboratory/bootstrap-v1/stage04-capability-matrix.json"
+      - "laboratory/bootstrap-v1/STAGE04_EXPRESSIONS.md"
       - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   pull_request:
@@ -71,12 +73,14 @@ on:
       - "tests/test_stage04_expression_checkpoint.py"
       - "tests/test_compare_stage04_expression_checkpoints.py"
       - "tests/test_stage04_fixture_coverage.py"
+      - "tests/test_stage04_mapping_consistency.py"
       - "laboratory/bootstrap-v1/s3ir2-v2-stage-map.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-evidence-contract.json"
       - "laboratory/bootstrap-v1/s3ir2-v2-native-provenance-contract.json"
       - "laboratory/bootstrap-v1/stage04-expression-gate-contract.json"
       - "laboratory/bootstrap-v1/stage04-checkpoint-template.json"
       - "laboratory/bootstrap-v1/stage04-capability-matrix.json"
+      - "laboratory/bootstrap-v1/STAGE04_EXPRESSIONS.md"
       - "laboratory/bootstrap-v1/S3IR2_V2_LAB.md"
       - ".github/workflows/s3ir2-v2-lab.yml"
   workflow_dispatch:
@@ -122,7 +126,8 @@ jobs:
             tests/test_s3ir2_v2_native_provenance.py \
             tests/test_stage04_expression_checkpoint.py \
             tests/test_compare_stage04_expression_checkpoints.py \
-            tests/test_stage04_fixture_coverage.py
+            tests/test_stage04_fixture_coverage.py \
+            tests/test_stage04_mapping_consistency.py
       - name: Validate v2 laboratory JSON
         run: |
           python -c "import json; json.load(open('laboratory/bootstrap-v1/s3ir2-v2-stage-map.json', encoding='utf-8'))"
@@ -145,4 +150,5 @@ jobs:
             tests/test_s3ir2_v2_native_provenance.py \
             tests/test_stage04_expression_checkpoint.py \
             tests/test_compare_stage04_expression_checkpoints.py \
-            tests/test_stage04_fixture_coverage.py
+            tests/test_stage04_fixture_coverage.py \
+            tests/test_stage04_mapping_consistency.py
