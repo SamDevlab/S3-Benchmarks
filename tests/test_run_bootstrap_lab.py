@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -20,6 +21,11 @@ def _git_init(repo: Path) -> str:
 
 
 def _write_semantic_evidence(repo: Path) -> None:
+    canonical = repo / "selfhost" / "compiler" / "s3c_stage1.s3"
+    canonical.parent.mkdir(parents=True, exist_ok=True)
+    canonical.write_text("fn main() -> i64:\n    return 0\n", encoding="utf-8")
+    source_sha = hashlib.sha256(canonical.read_bytes()).hexdigest()
+
     path = repo / "reports" / "selfhost" / "stage1" / "semantic-ir-requirements.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -30,6 +36,10 @@ def _write_semantic_evidence(repo: Path) -> None:
                 "stage1_self_emit": "BLOCKED_UNTIL_MISSING_LANES_EXIST_AND_VERIFY",
                 "stage2": "NOT_STARTED",
                 "stage3": "NOT_STARTED",
+                "source": {
+                    "path": str(canonical),
+                    "sha256": source_sha,
+                },
                 "storage_evidence": {
                     "semantic_relationships": {
                         "typed_value_definitions": False,
@@ -50,7 +60,17 @@ def _write_semantic_evidence(repo: Path) -> None:
         + "\n",
         encoding="utf-8",
     )
-    subprocess.run(["git", "-C", str(repo), "add", str(path.relative_to(repo))], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repo),
+            "add",
+            str(path.relative_to(repo)),
+            str(canonical.relative_to(repo)),
+        ],
+        check=True,
+    )
     subprocess.run(["git", "-C", str(repo), "commit", "-q", "-m", "evidence"], check=True)
 
 
@@ -75,6 +95,8 @@ def test_orchestrator_is_read_only_and_fail_closed(tmp_path) -> None:
     assert before_status == after_status == ""
     assert exit_code == 0
     assert summary["status"] == "PASS"
+    assert summary["provenance"]["source_lock_valid"] is True
+    assert summary["provenance"]["benchmark_lock_valid"] is True
     assert summary["bootstrap"]["stage1"] == "BLOCKED"
     assert summary["bootstrap"]["stage1_self_emit"] == "BLOCKED"
     assert summary["bootstrap"]["stage2"] == "NOT_STARTED"
