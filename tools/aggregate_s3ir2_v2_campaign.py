@@ -4,6 +4,7 @@ This is a laboratory summary only. It never authorizes canonical Stage1 mutation
 or bootstrap promotion. A stage can be marked evidence-PASS only when every
 required mapped case is present and has strict S3 semantic conformance PASS.
 Stage 07 additionally requires deterministic repeated bytes for every case.
+The full campaign requires every mapped stage to be evidence-PASS.
 """
 
 from __future__ import annotations
@@ -75,12 +76,14 @@ def aggregate(stage_map: dict[str, Any], case_manifests: dict[str, dict[str, Any
             "cases": case_rows,
         }
 
-    all_stage07 = stages.get("07_SERIALIZATION_S5", {}).get("status") == "PASS_EVIDENCE_SET"
+    all_stages_pass = bool(stages) and all(
+        stage["status"] == "PASS_EVIDENCE_SET" for stage in stages.values()
+    )
     return {
         "schema": "s3-benchmarks.bootstrap.s3ir2-v2-campaign.v1",
         "protocol": "S3IR2 v2",
         "stages": stages,
-        "full_v2_fixture_campaign": "PASS" if all_stage07 else "BLOCKED",
+        "full_v2_fixture_campaign": "PASS" if all_stages_pass else "BLOCKED",
         "promotion_effect": "NONE_LABORATORY_SUMMARY_ONLY",
     }
 
