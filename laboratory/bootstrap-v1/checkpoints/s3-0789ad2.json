@@ -2,7 +2,7 @@
   "schema": "s3.bootstrap-laboratory-snapshot.v1",
   "provenance": {
     "s3_commit": "0789ad2df5f200c6b35b67d591d10e016c1a557a",
-    "benchmark_commit": "0f1ef67f1d6e2094d606079a084ccfbacea311d7",
+    "benchmark_commit": "1fe3a367b52adde035dee49cbb9674b94b44199f",
     "source_lock_valid": true,
     "benchmark_lock_valid": true,
     "s3_pr": 268,
@@ -53,6 +53,10 @@
     "json_validation": "PASS",
     "diff_check": "PASS",
     "general_emitter": "BLOCKED_INCOMPLETE_IR",
+    "semantic_source_sha256": "ec6bef92782fe253f4b1c1390d90f95017670a3cbb65497eff9dba12a2e7623c",
+    "actual_canonical_source_sha256": "ec6bef92782fe253f4b1c1390d90f95017670a3cbb65497eff9dba12a2e7623c",
+    "git_source_lock_valid": true,
+    "semantic_source_lock_valid": true,
     "canonical_source_changed_by_this_benchmark_branch": false,
     "native_evidence_created_by_this_benchmark_branch": false,
     "supplemental_evidence": [
@@ -61,6 +65,9 @@
         "github_blob_sha": "41e629bdac9a0da4e4362ca605925945983cc407",
         "status": "POOL_CLOSED_EMITTER_BLOCKED",
         "promotion_effect": "NONE_PROVENANCE_ONLY",
+        "measured_source_sha256": "20fddbb73eee9ae09de911493f2f2da01ab582c7a6de879ea2e557946716a341",
+        "current_semantic_source_sha256": "ec6bef92782fe253f4b1c1390d90f95017670a3cbb65497eff9dba12a2e7623c",
+        "source_applicability": "HISTORICAL_SOURCE_MISMATCH",
         "pool": {
           "required_capacity": 736,
           "selected_capacity": 746,
