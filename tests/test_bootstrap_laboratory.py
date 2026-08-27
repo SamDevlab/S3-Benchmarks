@@ -7,6 +7,13 @@ from tools.check_bootstrap_laboratory import validate
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT = ROOT / "laboratory" / "bootstrap-v1" / "contract.json"
+CURRENT_CHECKPOINT = (
+    ROOT
+    / "laboratory"
+    / "bootstrap-v1"
+    / "checkpoints"
+    / "s3-0789ad2.json"
+)
 
 
 def _contract() -> dict:
@@ -64,6 +71,17 @@ def test_current_blocked_bootstrap_state_is_valid_evidence() -> None:
     assert result["derived"]["all_semantic_surfaces_pass"] is False
     assert result["derived"]["stage2_created"] is False
     assert result["derived"]["performance_valid_expected"] is False
+
+
+def test_pinned_current_checkpoint_is_valid_and_fail_closed() -> None:
+    snapshot = json.loads(CURRENT_CHECKPOINT.read_text(encoding="utf-8"))
+    result = validate(snapshot, _contract())
+    assert result["status"] == "PASS"
+    assert snapshot["provenance"]["s3_commit"].startswith("0789ad2")
+    assert snapshot["bootstrap"]["stage1_self_emit"] == "NOT_AUTHORIZED"
+    assert snapshot["bootstrap"]["stage2"] == "NOT_CREATED"
+    assert snapshot["bootstrap"]["full_self_hosting"] is False
+    assert snapshot["performance_eligibility"]["performance_valid"] is False
 
 
 def test_stage2_cannot_exist_before_self_emit_and_semantic_closure() -> None:
