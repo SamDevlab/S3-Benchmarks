@@ -23,6 +23,7 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
     errors: list[str] = []
     blocked_fields: list[str] = []
     status_field_failures: list[dict[str, Any]] = []
+    evidence_debt: list[dict[str, Any]] = []
 
     if checkpoint.get("stage_id") != contract.get("stage_id"):
         errors.append("stage_id mismatch")
@@ -59,6 +60,9 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
     if not isinstance(required_status_fields, dict):
         errors.append("contract.required_status_fields must be an object")
         required_status_fields = {}
+    debt_fields = {
+        str(field) for field in contract.get("nonblocking_debt_fields", [])
+    }
     for field, allowed in required_status_fields.items():
         if not isinstance(allowed, list) or not allowed:
             errors.append(f"contract required status field {field} has no allowed values")
@@ -69,6 +73,12 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
                 "field": str(field),
                 "observed": observed,
                 "allowed": list(allowed),
+            })
+        elif str(field) in debt_fields and observed != "PASS":
+            evidence_debt.append({
+                "field": str(field),
+                "observed": observed,
+                "blocking": False,
             })
 
     invariants = checkpoint.get("invariants")
@@ -95,7 +105,7 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
         else "BLOCKED"
     )
     return {
-        "schema": "s3-benchmarks.bootstrap.stage04-expression-evaluation.v2",
+        "schema": "s3-benchmarks.bootstrap.stage04-expression-evaluation.v3",
         "stage_id": contract.get("stage_id"),
         "status": status,
         "control_revision": revision,
@@ -104,6 +114,7 @@ def evaluate(contract: dict[str, Any], checkpoint: dict[str, Any]) -> dict[str, 
         "candidate_binary_sha256": candidate_binary_sha,
         "blocked_fields": blocked_fields,
         "status_field_failures": status_field_failures,
+        "nonblocking_evidence_debt": evidence_debt,
         "errors": errors,
         "next_stage_candidate": "05_CALLS_ARRAYS_S3" if status == "PASS" else None,
         "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
@@ -125,6 +136,7 @@ def main() -> int:
     print(f"STAGE04_GATE={report['status']}")
     print(f"BLOCKED_FIELDS={len(report['blocked_fields'])}")
     print(f"STATUS_FIELD_FAILURES={len(report['status_field_failures'])}")
+    print(f"NONBLOCKING_EVIDENCE_DEBT={len(report['nonblocking_evidence_debt'])}")
     return 0 if report["status"] == "PASS" else 3
 
 
