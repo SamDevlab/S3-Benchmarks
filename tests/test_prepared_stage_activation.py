@@ -32,12 +32,27 @@ def test_stage07_becomes_ready_only_when_control_selects_it() -> None:
     assert report["next_action"] == "VALIDATE_PREPARED_STAGE_INPUTS"
 
 
+def test_stage08_becomes_ready_without_authorizing_canonical_mutation() -> None:
+    report = check(_control("08_CANONICAL_SOURCE_INPUT"), _plan("08_CANONICAL_SOURCE_INPUT"))
+    assert report["status"] == "READY_TO_VALIDATE_PREPARED_STAGE"
+    assert report["activation_authorized_by_this_tool"] is False
+    assert report["unexpected_authorizations"] == []
+
+
 def test_guard_rejects_unexpected_self_emit_authorization() -> None:
     control = _control("06_CONTROL_FLOW_S4")
     control["self_emit_authorized"] = True
     report = check(control, _plan("06_CONTROL_FLOW_S4"))
     assert report["status"] == "INVALID_CONTROL_SNAPSHOT"
     assert "self_emit_authorized" in report["unexpected_authorizations"]
+
+
+def test_guard_rejects_unexpected_canonical_mutation_authorization_during_stage08_input_only() -> None:
+    control = _control("08_CANONICAL_SOURCE_INPUT")
+    control["canonical_stage1_mutation_authorized"] = True
+    report = check(control, _plan("08_CANONICAL_SOURCE_INPUT"))
+    assert report["status"] == "INVALID_CONTROL_SNAPSHOT"
+    assert "canonical_stage1_mutation_authorized" in report["unexpected_authorizations"]
 
 
 def test_guard_rejects_non_prepared_plan() -> None:
