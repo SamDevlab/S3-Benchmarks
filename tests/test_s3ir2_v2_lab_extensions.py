@@ -5,6 +5,7 @@ from pathlib import Path
 
 from tools.capture_s3ir2_v2_failure_bundle import capture
 from tools.check_s3ir2_v2_determinism import check
+from tools.classify_s3ir2_v2_failure import classify
 from tools.ingest_s3ir2_v2 import ingest
 from tools.render_s3ir2_v2_scorecard import build_scorecard
 
@@ -68,3 +69,15 @@ def test_failure_bundle_preserves_hashes(tmp_path: Path) -> None:
     assert manifest["minimization_status"] == "NOT_RUN"
     assert (output / "manifest.json").exists()
     assert (output / "ingest.json").exists()
+
+
+def test_failure_triage_points_to_call_lane() -> None:
+    report = classify({
+        "status": "FAIL",
+        "errors": [
+            "call 7 argument count mismatch",
+            "callee function identity mismatch",
+        ],
+    })
+    assert report["primary_lane"] == "S3_call_dataflow"
+    assert report["scores"]["S3_call_dataflow"] >= 2
