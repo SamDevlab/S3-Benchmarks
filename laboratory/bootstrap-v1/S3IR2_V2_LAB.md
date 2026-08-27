@@ -7,27 +7,72 @@ This guide documents the independent S3-Benchmarks consumer for Stage1 semantic-
 The S3 repository owns semantic truth.
 
 - `SamDevlab/S3/tools/verify_stage1_semantic_conformance_v2.py` is the strict semantic conformance authority.
-- This laboratory validates stream structure, exact-byte determinism, provenance, campaign completeness, and regressions.
+- This laboratory validates stream structure, exact-byte determinism, native artifact provenance, campaign completeness, and regressions.
 - A completeness bit or a structurally valid stream never promotes a semantic lane by itself.
 - This laboratory never authorizes canonical Stage1 mutation, SELF_EMIT, Stage2, Stage3, T4, or performance claims.
 
 ## Evidence lifecycle
 
-For one fixture, S3 should produce:
+For one fixture, S3 should preserve the exact producer inputs/artifacts:
+
+```text
+candidate-source.s3
+candidate-binary
+source.s3
+candidate.s3ir2
+native-metadata.json
+conformance.json
+repeat-2.s3ir2      # required for final deterministic qualification
+repeat-3.s3ir2      # strongly recommended
+```
+
+### 1. Native provenance first
+
+`native-metadata.json` follows `s3.stage1.native-semantic-evidence.v1` and declares:
+
+```text
+candidate_git_sha
+candidate_source_sha256 / candidate_source_bytes
+candidate_binary_sha256 / candidate_binary_bytes
+fixture_source_sha256 / fixture_source_bytes
+stream_sha256 / stream_bytes
+platform.os = linux
+platform.arch = x86_64
+build.status = PASS
+build.exit_code = 0
+run.status = PASS
+run.exit_code = <integer>
+control_revision
+```
+
+Run `tools/validate_s3ir2_v2_native_provenance.py` with the actual candidate source, binary, fixture, and stream. The validator recomputes hashes and byte sizes; metadata alone is insufficient.
+
+The output is `native-provenance.json` with `status=PASS/FAIL`.
+
+### 2. Strict S3 semantic conformance
+
+Run the authoritative S3 verifier against `source.s3` and `candidate.s3ir2` and preserve its `conformance.json`.
+
+S3-Benchmarks never substitutes its own structural parser for that semantic proof.
+
+### 3. Evidence-set ingestion
+
+`tools/ingest_s3ir2_v2_evidence_set.py` consumes:
 
 ```text
 source.s3
 candidate.s3ir2
 conformance.json
-repeat-2.s3ir2      # recommended; required for S5 qualification
-repeat-3.s3ir2      # recommended; required for stronger determinism evidence
+native-provenance.json
+repeat-2.s3ir2
+repeat-3.s3ir2
 ```
 
-`tools/ingest_s3ir2_v2_evidence_set.py` converts that set into:
+and produces:
 
 ```text
 ingest.json
-determinism.json    # when repeats are supplied
+determinism.json
 scorecard.json
 triage.json         # when conformance is not PASS
 evidence-manifest.json
@@ -35,11 +80,20 @@ evidence-manifest.json
 
 The evidence-set manifest is the unit consumed by campaign aggregation and immutable checkpoint recording.
 
+A final evidence-set `qualification_gate=PASS` requires all of:
+
+```text
+structural S3IR2 validation = PASS
+native provenance = PASS
+strict S3 semantic conformance = PASS
+deterministic repeated stream bytes = PASS
+```
+
 ## Incremental Codex stages vs campaign evidence
 
 The live Codex control plane owns incremental gates such as Stage 03 Pass1 bindings. The campaign aggregator is not a replacement for those live implementation gates.
 
-In particular, Stage 03 may legitimately report `S1=PARTIAL_EXPECTED` while constants/results are still unimplemented. A final retrospective campaign only becomes `PASS_EVIDENCE_SET` after the later full candidate can rerun those mapped Stage 03 cases with strict semantic conformance PASS.
+In particular, Stage 03 may legitimately report `S1=PARTIAL_EXPECTED` while constants/results are still unimplemented. A final retrospective campaign only becomes `PASS_EVIDENCE_SET` after the later full candidate can rerun those mapped Stage 03 cases with validated native provenance and strict semantic conformance PASS.
 
 This separation prevents a partial stream from being promoted merely because the current development slice behaved as expected.
 
@@ -57,7 +111,15 @@ This separation prevents a partial stream from being promoted merely because the
 
 Use `tools/aggregate_s3ir2_v2_campaign.py` with `CASE_ID=PATH` evidence manifests.
 
-A stage is `PASS_EVIDENCE_SET` only when every required case is present, structurally valid, and has strict S3 conformance PASS. Stage 07 additionally requires determinism PASS for every required case.
+A stage is `PASS_EVIDENCE_SET` only when every required case is present and has:
+
+```text
+structural_status = PASS
+native_provenance_status = PASS
+semantic_conformance_status = PASS
+```
+
+Stage 07 additionally requires `determinism_status=PASS` for every required case.
 
 `FULL_V2_FIXTURE_CAMPAIGN=PASS` requires every mapped stage to be `PASS_EVIDENCE_SET`.
 
@@ -81,6 +143,7 @@ Use `tools/compare_s3ir2_v2_campaigns.py` to compare a newer candidate campaign 
 The regression gate fails when a previously passing:
 
 - structural status;
+- native provenance status;
 - semantic conformance status;
 - Stage 07 determinism status;
 - stage evidence set
@@ -93,7 +156,7 @@ Improvements are reported separately from regressions.
 
 When strict conformance fails:
 
-1. keep the exact source, stream, and conformance JSON;
+1. keep the exact candidate source/binary, fixture source, stream, native provenance, and conformance JSON;
 2. run structural ingest;
 3. run `tools/classify_s3ir2_v2_failure.py` to estimate S1/S2/S3/S4/S5 ownership;
 4. use `tools/capture_s3ir2_v2_failure_bundle.py` to preserve hashes and files;
@@ -106,9 +169,9 @@ The minimizer never invokes a shell and does not understand S3 syntax. Invalid r
 
 S5 is stronger than semantic equivalence alone.
 
-For one exact source and candidate artifact, repeated semantic streams should be byte-identical. `tools/check_s3ir2_v2_determinism.py` reports exact SHA-256 equality across repetitions.
+For one exact source and candidate binary, repeated semantic streams should be byte-identical. `tools/check_s3ir2_v2_determinism.py` reports exact SHA-256 equality across repetitions.
 
-Deterministic output is not, by itself, proof of semantic correctness; both determinism and strict S3 semantic conformance are required.
+Deterministic output is not, by itself, proof of semantic correctness; native provenance and strict S3 semantic conformance are also required.
 
 ## Performance boundary
 
