@@ -5,15 +5,19 @@ on:
     paths:
       - "tools/triage_stage05_close_probe.py"
       - "tools/triage_stage05_conformance.py"
+      - "tools/triage_stage05_call_gate.py"
       - "tests/test_triage_stage05_close_probe.py"
       - "tests/test_triage_stage05_conformance.py"
+      - "tests/test_triage_stage05_call_gate.py"
       - ".github/workflows/stage05-paired-triage.yml"
   pull_request:
     paths:
       - "tools/triage_stage05_close_probe.py"
       - "tools/triage_stage05_conformance.py"
+      - "tools/triage_stage05_call_gate.py"
       - "tests/test_triage_stage05_close_probe.py"
       - "tests/test_triage_stage05_conformance.py"
+      - "tests/test_triage_stage05_call_gate.py"
       - ".github/workflows/stage05-paired-triage.yml"
   workflow_dispatch:
 
@@ -32,10 +36,13 @@ jobs:
           python -m compileall -q \
             tools/triage_stage05_close_probe.py \
             tools/triage_stage05_conformance.py \
+            tools/triage_stage05_call_gate.py \
             tests/test_triage_stage05_close_probe.py \
-            tests/test_triage_stage05_conformance.py
+            tests/test_triage_stage05_conformance.py \
+            tests/test_triage_stage05_call_gate.py
       - name: Run Stage05 triage tests
         run: |
           python -m pytest -q \
             tests/test_triage_stage05_close_probe.py \
-            tests/test_triage_stage05_conformance.py
+            tests/test_triage_stage05_conformance.py \
+            tests/test_triage_stage05_call_gate.py
