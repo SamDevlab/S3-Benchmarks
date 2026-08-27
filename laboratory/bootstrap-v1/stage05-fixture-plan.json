@@ -1,0 +1,58 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage05-fixture-plan.v1",
+  "stage_id": "05_CALLS_ARRAYS_S3",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "existing_corpus_cases": [
+    "parameter_ordinal_0",
+    "parameter_ordinal_5",
+    "parameter_ordinal_6",
+    "nested_calls",
+    "call_result_reuse",
+    "array_index_loop",
+    "loop_call_dataflow"
+  ],
+  "prepared_cases": {
+    "zero_arg_call": {
+      "category": "calls",
+      "source": "fn answer() -> i64:\n    return 7\n\nfn main() -> i64:\n    return answer()\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 function-call syntax; zero-argument specialization of existing internal call model",
+      "expected_reference_semantics": "VALID_SOURCE"
+    },
+    "foreign_call_i64": {
+      "category": "foreign_calls",
+      "source": "foreign fn host_add(a: i64, b: i64) -> i64\nfn main() -> i64:\n    return host_add(7, 8)\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "SamDevlab/S3 tests/test_ffi_capability.py::test_foreign_and_exported_functions_are_source_visible_and_stable",
+      "expected_reference_semantics": "VALID_SOURCE_REQUIRES_FOREIGN_SYMBOL_AT_NATIVE_LINK_OR_SEMANTIC_STREAM_ONLY"
+    },
+    "array_index_store": {
+      "category": "arrays",
+      "source": "fn main() -> i64:\n    mut values: i64[3] = [10, 20, 30]\n    values[1] = 5\n    return values[1]\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 normative fixed-array assignment syntax",
+      "expected_reference_semantics": "VALID_SOURCE"
+    },
+    "array_index_load": {
+      "category": "arrays",
+      "source": "fn main() -> i64:\n    values: i64[3] = [10, 20, 30]\n    index: i64 = 1\n    return values[index]\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 normative fixed-array indexing syntax",
+      "expected_reference_semantics": "VALID_SOURCE"
+    }
+  },
+  "negative_cases_to_pin_on_activation": {
+    "unresolved_callee_fail_closed": {
+      "purpose": "Prove unresolved internal callee does not create a fabricated C/A/R record.",
+      "source_shape": "fn main() -> i64: return missing(1)",
+      "expected": "REFERENCE_REJECTS_AND_STAGE1_FAILS_CLOSED"
+    },
+    "constant_array_oob_fail_closed": {
+      "purpose": "Prove constant out-of-range index is rejected according to language semantics.",
+      "source_shape": "fixed array length 3 indexed by constant 3",
+      "expected": "REFERENCE_REJECTS_AND_STAGE1_FAILS_CLOSED"
+    }
+  },
+  "activation_rule": "Do not add prepared/negative cases to the official stage map until the live S3 control plane activates Stage05. On activation, first validate exact sources with the S3 reference compiler and freeze their SHA-256 values.",
+  "promotion_effect": "NONE_PLANNING_ONLY"
+}
