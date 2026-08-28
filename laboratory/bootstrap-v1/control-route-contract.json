@@ -1,0 +1,24 @@
+{
+  "schema": "s3-benchmarks.bootstrap.control-route-contract.v1",
+  "source": "SamDevlab/S3 control/codex-stage1-semantic-v2-20260827 codex-control/STAGE_SEQUENCE.json",
+  "observed_source_blob_sha": "cd4aed2bb637f48dd1989800912c122e8f56327e",
+  "sequence": [
+    {"id":"01_PRECHECK_AND_IMPORT","file":"codex-control/stages/01_PRECHECK_AND_IMPORT.md","authorization":null},
+    {"id":"02_HOSTED_CONTRACT_QUALIFICATION","file":"codex-control/stages/02_HOSTED_CONTRACT_QUALIFICATION.md","authorization":null},
+    {"id":"03_PASS1_BINDINGS","file":"codex-control/stages/03_PASS1_BINDINGS.md","authorization":null},
+    {"id":"04_EXPRESSIONS_S1_S2","file":"codex-control/stages/04_EXPRESSIONS_S1_S2.md","authorization":null},
+    {"id":"05_CALLS_ARRAYS_S3","file":"codex-control/stages/05_CALLS_ARRAYS_S3.md","authorization":null},
+    {"id":"06_CONTROL_FLOW_S4","file":"codex-control/stages/06_CONTROL_FLOW_S4.md","authorization":null},
+    {"id":"07_SERIALIZATION_S5","file":"codex-control/stages/07_SERIALIZATION_S5.md","authorization":null},
+    {"id":"08_CANONICAL_SOURCE_INPUT","file":"codex-control/stages/08_CANONICAL_SOURCE_INPUT.md","authorization":null},
+    {"id":"09_CANONICAL_INTEGRATION","file":"codex-control/stages/09_CANONICAL_INTEGRATION.md","authorization":"canonical_stage1_mutation_authorized"},
+    {"id":"10_GENERAL_EMITTER","file":"codex-control/stages/10_GENERAL_EMITTER.md","authorization":"canonical_stage1_mutation_authorized"},
+    {"id":"11_SELF_EMIT_BOOTSTRAP","file":"codex-control/stages/11_SELF_EMIT_BOOTSTRAP.md","authorization":"per_action_self_emit_stage2_stage3_t4"}
+  ],
+  "rules": {
+    "failure": "remain in failing stage while implementing/fixing",
+    "authorization": "never infer authorization; re-fetch live CURRENT.json",
+    "revision_change": "live CURRENT.json and OVERRIDES.md take precedence"
+  },
+  "promotion_effect": "NONE_DRIFT_DETECTION_ONLY"
+}

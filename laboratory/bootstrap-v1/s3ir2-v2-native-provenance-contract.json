@@ -1,0 +1,35 @@
+{
+  "schema": "s3-benchmarks.bootstrap.s3ir2-v2-native-provenance-contract.v1",
+  "protocol": "S3IR2 v2",
+  "purpose": "Bind one semantic stream to the exact native Stage1 candidate artifact and fixture that produced it.",
+  "metadata_schema": "s3.stage1.native-semantic-evidence.v1",
+  "required_metadata": [
+    "candidate_git_sha",
+    "candidate_source_sha256",
+    "candidate_source_bytes",
+    "candidate_binary_sha256",
+    "candidate_binary_bytes",
+    "fixture_source_sha256",
+    "fixture_source_bytes",
+    "stream_sha256",
+    "stream_bytes",
+    "platform",
+    "build",
+    "run",
+    "control_revision"
+  ],
+  "platform_requirements": {
+    "os": "linux",
+    "arch": "x86_64"
+  },
+  "build_requirements": {
+    "status": "PASS",
+    "exit_code": 0
+  },
+  "run_requirements": {
+    "status": "PASS"
+  },
+  "hash_policy": "Validator recomputes SHA-256 and byte sizes from the supplied candidate source, candidate binary, fixture source, and S3IR2 stream. Declared metadata alone is insufficient.",
+  "qualification_rule": "Final S3IR2 v2 laboratory qualification requires native provenance PASS in addition to structural PASS, strict S3 semantic conformance PASS, and deterministic repeated stream bytes.",
+  "promotion_effect": "NONE_PROVENANCE_GATE_ONLY"
+}

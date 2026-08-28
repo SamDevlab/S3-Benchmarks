@@ -1,0 +1,49 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage07-serialization-plan.v1",
+  "stage_id": "07_SERIALIZATION_S5",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "control_contract_source": "SamDevlab/S3 codex-control/stages/07_SERIALIZATION_S5.md",
+  "protocol": "S3IR2 v2",
+  "record_families": ["F", "B", "V", "M", "I", "O", "R", "C", "A", "T", "Z"],
+  "complete_mask": 31,
+  "minimum_repeat_count": 3,
+  "required_fixture_mix": [
+    "wide_literal_positive",
+    "unary_invert_tryte",
+    "subtraction_lowering",
+    "relational_precedence_v06",
+    "mutable_reassignment_example",
+    "parameter_ordinal_5",
+    "nested_calls",
+    "call_result_reuse",
+    "while_counter",
+    "match_three_way",
+    "array_index_loop"
+  ],
+  "requirements": {
+    "parseable_stream": true,
+    "internal_v2_verifier": "PASS",
+    "strict_s3_semantic_conformance": "PASS",
+    "completeness_mask": 31,
+    "repeat_stream_bytes_identical": true,
+    "native_provenance_for_each_repeat": true,
+    "preserve_stream_sha256": true,
+    "preserve_conformance_json": true
+  },
+  "fail_closed_rules": [
+    "If any S1-S4 dependency is unresolved, do not emit Z 31 as authoritative completeness.",
+    "A copied stream file is not a repeated native run.",
+    "Completeness bits alone do not prove semantic conformance.",
+    "Benchmark evidence cannot authorize canonical mutation or bootstrap promotion."
+  ],
+  "exit_gate": {
+    "S1": "PASS",
+    "S2": "PASS",
+    "S3": "PASS",
+    "S4": "PASS",
+    "S5_CANONICAL_SERIALIZATION": "PASS",
+    "FOCUSED_V2_CONFORMANCE": "PASS",
+    "DETERMINISTIC_REPEAT": "PASS"
+  },
+  "promotion_effect": "NONE_PLANNING_ONLY"
+}

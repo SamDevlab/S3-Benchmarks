@@ -1,0 +1,79 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage05-fixture-plan.v1",
+  "stage_id": "05_CALLS_ARRAYS_S3",
+  "activation_status": "ACTIVE_PENDING_REFERENCE_PINNING",
+  "live_control_revision": 11,
+  "existing_corpus_cases": [
+    "parameter_ordinal_0",
+    "parameter_ordinal_5",
+    "parameter_ordinal_6",
+    "nested_calls",
+    "call_result_reuse",
+    "array_index_loop",
+    "loop_call_dataflow"
+  ],
+  "prepared_cases": {
+    "grouping_control_same_shape": {
+      "category": "expressions_control",
+      "source": "fn helper(value: i64) -> i64:\n    return value\n\nfn main() -> i64:\n    return (1)\n",
+      "sha256": "644ff711960765a99f981fbfc98c94bb65dd66b5c8b76f8194ec2e672d6c2b8b",
+      "bytes": 81,
+      "required_surfaces": ["typed_values", "instruction_def_use"],
+      "provenance": "Exact A-side control from the Stage05 call-vs-grouping paired differential; preserves the same two-function shape as the call reproducer while replacing postfix call syntax with ordinary grouping.",
+      "expected_reference_semantics": "PENDING_EXACT_REFERENCE_VALIDATION_BEFORE_OFFICIAL_STAGE_MAP",
+      "current_observation": "CONTROL_ONLY_NOT_YET_RUN_IN_LIVE_CODEX_DIFFERENTIAL"
+    },
+    "internal_one_arg_call": {
+      "category": "calls",
+      "source": "fn helper(value: i64) -> i64:\n    return value\n\nfn main() -> i64:\n    return helper(1)\n",
+      "sha256": "769480e71eb4ed6711aa1bc608f000ea6f2802894df9796871277a33d72b2f34",
+      "bytes": 87,
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "Exact B-side minimal fixture from the live Stage05 paired diagnosis that reproduces parse_ok falling to false during call parsing.",
+      "expected_reference_semantics": "PENDING_EXACT_REFERENCE_VALIDATION_BEFORE_OFFICIAL_STAGE_MAP",
+      "current_observation": "LIVE_CODEX_VALID_CALL_PARSER_BLOCKER"
+    },
+    "zero_arg_call": {
+      "category": "calls",
+      "source": "fn answer() -> i64:\n    return 7\n\nfn main() -> i64:\n    return answer()\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 function-call syntax; zero-argument specialization of existing internal call model",
+      "expected_reference_semantics": "VALID_SOURCE"
+    },
+    "foreign_call_i64": {
+      "category": "foreign_calls",
+      "source": "foreign fn host_add(a: i64, b: i64) -> i64\nfn main() -> i64:\n    return host_add(7, 8)\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "SamDevlab/S3 tests/test_ffi_capability.py::test_foreign_and_exported_functions_are_source_visible_and_stable",
+      "expected_reference_semantics": "VALID_SOURCE_REQUIRES_FOREIGN_SYMBOL_AT_NATIVE_LINK_OR_SEMANTIC_STREAM_ONLY"
+    },
+    "array_index_store": {
+      "category": "arrays",
+      "source": "fn main() -> i64:\n    mut values: i64[3] = [10, 20, 30]\n    values[1] = 5\n    return values[1]\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 normative fixed-array assignment syntax",
+      "expected_reference_semantics": "VALID_SOURCE"
+    },
+    "array_index_load": {
+      "category": "arrays",
+      "source": "fn main() -> i64:\n    values: i64[3] = [10, 20, 30]\n    index: i64 = 1\n    return values[index]\n",
+      "required_surfaces": ["typed_values", "instruction_def_use", "call_dataflow"],
+      "provenance": "S3 normative fixed-array indexing syntax",
+      "expected_reference_semantics": "VALID_SOURCE"
+    }
+  },
+  "negative_cases_to_pin_on_activation": {
+    "unresolved_callee_fail_closed": {
+      "purpose": "Prove unresolved internal callee does not create a fabricated C/A/R record.",
+      "source_shape": "fn main() -> i64: return missing(1)",
+      "expected": "REFERENCE_REJECTS_AND_STAGE1_FAILS_CLOSED"
+    },
+    "constant_array_oob_fail_closed": {
+      "purpose": "Prove constant out-of-range index is rejected according to language semantics.",
+      "source_shape": "fixed array length 3 indexed by constant 3",
+      "expected": "REFERENCE_REJECTS_AND_STAGE1_FAILS_CLOSED"
+    }
+  },
+  "activation_rule": "Stage05 is active. The exact A/B call-vs-grouping inputs are hash-pinned for regression tracking but must still be executed through the authoritative S3 reference compiler before promotion into the official stage map. The grouping control does not claim S3 call completeness; it exists to isolate generic parenthesis behavior from postfix call behavior.",
+  "promotion_effect": "NONE_FIXTURE_PINNING_ONLY"
+}

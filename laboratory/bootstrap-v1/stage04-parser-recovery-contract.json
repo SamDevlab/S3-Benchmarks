@@ -1,0 +1,33 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage04-parser-recovery.v1",
+  "stage_id": "04_EXPRESSIONS_S1_S2",
+  "purpose": "Track parser-repair attempts without confusing syntax recovery with S1/S2 semantic failure.",
+  "required_attempt_fields": [
+    "attempt_id",
+    "candidate_source_sha256",
+    "parser_status"
+  ],
+  "optional_attempt_fields": [
+    "diagnostic_code",
+    "diagnostic_line",
+    "diagnostic_column",
+    "diagnostic_class",
+    "diagnostic_fingerprint",
+    "note"
+  ],
+  "parser_status_values": [
+    "PASS",
+    "BLOCKED_SYNTAX",
+    "BLOCKED_STRUCTURAL",
+    "NOT_RUN"
+  ],
+  "progress_rules": {
+    "parser_pass": "PASS is progress and closes parser-recovery only; it does not prove S1 or S2.",
+    "changed_blocker": "A changed diagnostic fingerprint after a changed candidate source is FORWARD_RECOVERY_PROGRESS, not a semantic regression.",
+    "same_blocker_changed_source": "The same blocker fingerprint across multiple changed candidate sources is STALLED_REPAIR when repeated at least three consecutive observed attempts.",
+    "same_source_same_blocker": "Repeated observation on the exact same source is REOBSERVATION_ONLY, not progress or regression.",
+    "missing_diagnostic": "A blocked parser without a diagnostic fingerprint remains BLOCKED_UNCLASSIFIED."
+  },
+  "semantic_boundary": "Parser recovery evidence may only affect EXPR_PARSER_SYNTAX. It must never set S1_TYPED_VALUES or S2_DEF_USE to FAIL/PASS by itself.",
+  "promotion_effect": "NONE_DIAGNOSTIC_TRACKING_ONLY"
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage11-action-authorization.v1",
+  "stage_id": "11_SELF_EMIT_BOOTSTRAP",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "control_contract_source": "SamDevlab/S3 codex-control/stages/11_SELF_EMIT_BOOTSTRAP.md",
+  "actions": {
+    "SELF_EMIT": {
+      "authorization_field": "self_emit_authorized",
+      "required_prior_pass": ["s1", "s2", "s3", "s4", "s5", "general_emitter", "canonical_stage1_emission"]
+    },
+    "STAGE2": {
+      "authorization_field": "stage2_authorized",
+      "required_prior_pass": ["self_emit"]
+    },
+    "STAGE3": {
+      "authorization_field": "stage3_authorized",
+      "required_prior_pass": ["stage2"]
+    },
+    "T4": {
+      "authorization_field": "t4_authorized",
+      "required_prior_pass": ["self_emit", "stage2", "stage3", "stage2_stage3_equivalence"]
+    }
+  },
+  "rules": [
+    "Re-read live control before every action.",
+    "Never infer a later authorization from an earlier PASS.",
+    "SELF_EMIT must not delegate compilation to Stage0/host shortcuts that invalidate self-hosting evidence.",
+    "Stage2 requires a real successful SELF_EMIT artifact.",
+    "Stage3 requires a real Stage2 compiler artifact.",
+    "T4 requires all preceding bootstrap gates complete."
+  ],
+  "action_performed_by_this_contract": false,
+  "promotion_effect": "NONE_AUTHORIZATION_FIREWALL_ONLY"
+}

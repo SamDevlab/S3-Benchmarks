@@ -1,0 +1,45 @@
+{
+  "schema": "s3-benchmarks.bootstrap.remote-s3-observation.v1",
+  "observed_s3_pr": 268,
+  "observed_remote_head": "326d42f8a2623ced5a2151d6daaf2d67743faca8",
+  "previous_observed_head": "0789ad2df5f200c6b35b67d591d10e016c1a557a",
+  "compare": {
+    "status": "ahead",
+    "ahead_by": 2,
+    "behind_by": 0,
+    "added_paths": [
+      "reports/selfhost/stage1/PASS1_BINDINGS_CANDIDATE_20260827.md",
+      "tests/test_patch_stage1_semantic_port_v2.py",
+      "tools/patch_stage1_semantic_port_v2.py"
+    ]
+  },
+  "stage03_report": {
+    "path": "reports/selfhost/stage1/PASS1_BINDINGS_CANDIDATE_20260827.md",
+    "reported_control_revision": 3,
+    "reported_head": "0789ad2df5f200c6b35b67d591d10e016c1a557a",
+    "canonical_source_sha256": "739dc6ac16c2c79a4f3bff0b7ca2f40324171b3ad155f7a6265747d441cb5758",
+    "candidate_source_sha256": "fa7c94454791290b683d1602bacc72cef4511905e3c32045e9022fab84dd32d0",
+    "linux_x86_64_native_candidate_build": "PASS_REPORTED",
+    "linux_x86_64_trivial_probe": "PASS_REPORTED",
+    "pass1_functions": "PASS_REPORTED",
+    "pass1_signatures": "PASS_REPORTED",
+    "pass1_parameters": "PASS_REPORTED",
+    "pass1_locals": "PASS_REPORTED",
+    "pass1_loop_bindings": "PASS_REPORTED",
+    "pass1_scope_resolution": "PASS_REPORTED",
+    "pass1_shadowing": "PASS_REPORTED",
+    "candidate_stage0_check": "PASS_REPORTED",
+    "s1": "PARTIAL_EXPECTED_REPORTED"
+  },
+  "applicability": {
+    "remote_head_execution_proven": false,
+    "classification": "BASE_CANDIDATE_REPORT_PRESENT_IN_NEWER_REMOTE_HEAD",
+    "reason": "The Stage03 report embedded in remote HEAD 326d42f8 reports HEAD 0789ad2. It is retained as Stage03 candidate evidence/provenance, not silently relabeled as an execution proof for remote HEAD 326d42f8."
+  },
+  "stage04_local_work_observed_from_user_report": true,
+  "stage04_remote_artifact_observed": false,
+  "canonical_mutation_authorized": false,
+  "self_emit_authorized": false,
+  "stage2_authorized": false,
+  "promotion_effect": "NONE_REMOTE_OBSERVATION_ONLY"
+}
