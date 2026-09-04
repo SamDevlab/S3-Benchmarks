@@ -1,41 +1,92 @@
 # S3 Language External Benchmarks
 
-This repository (**`SamDevlab/S3-Benchmarks`**) is an independent, reproducible, and technically rigorous benchmark suite for evaluating real-world workloads compiled with the S3 programming language compiler (`SamDevlab/S3`).
+Public, reproducible benchmark and correctness harness for workloads implemented with the **S3 programming language**.
 
-## Fundamental Rule
+This repository is intentionally separate from the main S3 compiler repository so benchmark methodology, reference pins and result contracts can be inspected independently.
 
-> **CORRECTNESS BEFORE PERFORMANCE.**
-> No performance result is valid unless the reference implementation and S3 produce 100% semantically equivalent observable behavior under the campaign's explicit equivalence contract.
+> **CORRECTNESS BEFORE PERFORMANCE.** A timing result is invalid unless the S3 implementation and the reference implementation satisfy the campaign's explicit observable-equivalence contract.
 
-## Executable Workloads
+## Why this repository exists
 
-- [`benchmarks/jsmn`](benchmarks/jsmn/README.md): Upstream C `zserge/jsmn` vs S3 behavioral port kernel.
+Compiler benchmarks are easy to overstate. S3-Benchmarks uses a stricter model:
 
-## Candidate Benchmark Corpus
+1. pin an external reference workload;
+2. define the observable behavior that must match;
+3. verify equivalence first;
+4. only then collect performance measurements;
+5. keep candidate workloads separate from executable benchmark claims.
 
-The repository now tracks a pinned external reference corpus for the post-M1.80 benchmark program:
+```mermaid
+flowchart LR
+    A[Pinned upstream] --> B[Reference execution]
+    C[S3 implementation] --> D[S3 execution]
+    B --> E[Equivalence contract]
+    D --> E
+    E -->|PASS| F[Performance measurement]
+    E -->|FAIL| G[Benchmark invalid]
+```
 
-- [`references/upstreams-m171-m180.json`](references/upstreams-m171-m180.json): immutable upstream pins and milestone mapping.
-- [`references/README.md`](references/README.md): policy for promoting external projects into reproducible S3 benchmark campaigns.
-- [`candidates/m171-m180`](candidates/m171-m180/README.md): bounded candidate campaigns for async/runtime, reactor/networking, TLS, AArch64, package resolution/reproducibility, and a real-world provider pipeline.
+## Executable workload
 
-The current references are Rust, Tokio, Mio, rustls, libuv, LLVM, Cargo, and uv. MoneyPrinterTurbo is tracked only as a future real-world workload shape; it is not treated as a compiler oracle and is not vendored into this repository.
+### [`benchmarks/jsmn`](benchmarks/jsmn/README.md)
 
-## Execution
+Compares the upstream C implementation of `zserge/jsmn` with an S3 behavioral port kernel under a differential correctness contract.
+
+## Candidate corpus
+
+The post-M1.80 program tracks pinned external references for future campaigns:
+
+- [`references/upstreams-m171-m180.json`](references/upstreams-m171-m180.json) — immutable upstream pins and milestone mapping;
+- [`references/README.md`](references/README.md) — promotion policy for external workloads;
+- [`candidates/m171-m180`](candidates/m171-m180/README.md) — bounded campaign candidates.
+
+Current references include:
+
+- Rust;
+- Tokio;
+- Mio;
+- rustls;
+- libuv;
+- LLVM;
+- Cargo;
+- uv.
+
+MoneyPrinterTurbo is tracked only as a possible real-world workload shape. It is **not** treated as a compiler oracle and is not vendored as an executable benchmark claim.
+
+## Running the suite
 
 ```bash
-# Differential correctness check
+# Differential correctness only
 python tools/runner.py --verify-only
 
-# Benchmark smoke test
+# Short benchmark smoke
 python tools/runner.py --smoke
 
-# Full statistical benchmark suite
+# Full statistical run
 python tools/runner.py --full
 ```
 
-The commands above currently execute the JSMN campaign only. Candidate campaigns must not be presented as benchmark results until their own correctness/structural-equivalence harnesses exist.
+At present these commands execute the **JSMN campaign**. Candidate campaigns are not benchmark results until they have their own correctness and structural-equivalence harnesses.
 
-## CI Integration
+## Result validity
 
-GitHub Actions workflow `.github/workflows/tests.yml` enforces automated verification on every push and PR for the currently executable suite.
+A result should be treated as valid only when all applicable checks pass:
+
+- pinned reference identity;
+- deterministic input corpus;
+- semantic/observable equivalence;
+- expected checksum/output;
+- campaign-specific structural checks;
+- successful benchmark harness completion.
+
+A faster run with different observable behavior is a **failed compiler/workload comparison**, not a performance win.
+
+## CI
+
+`.github/workflows/tests.yml` executes verification for the currently supported executable suite on pushes and pull requests.
+
+## Relationship to S3
+
+The main S3 compiler project explores typed IR, verification, SSA/CFG, optimization, S3 Assembly and native Linux x86-64 generation.
+
+This repository does not duplicate the compiler. Its role is to provide **external, auditable evidence** for workload correctness and performance characterization as S3 evolves.
