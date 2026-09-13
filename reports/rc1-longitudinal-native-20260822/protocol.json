@@ -1,0 +1,17 @@
+{
+  "control_drift_policy": "HIGH control drift makes affected longitudinal classifications INCONCLUSIVE",
+  "correctness_before_timing": true,
+  "host": "VIRTUALBOX_LINUX",
+  "measurement": {
+    "affinity": "taskset -c 0",
+    "input_setup": "EMBEDDED_BYTES_BOTH_C_AND_S3",
+    "parses_per_sample": 10000,
+    "process_startup": "AMORTIZED_NOT_SUBTRACTED",
+    "repetitions": 30,
+    "scope": "NATIVE_PROCESS_WITH_INTERNAL_PARSE_LOOP",
+    "warmups": 5
+  },
+  "native_speedup_claim": "NO",
+  "raw_sample_vectors_persisted": false,
+  "statistical_method": "predeclared aggregate-only review; paired/bootstrap CI unavailable"
+}

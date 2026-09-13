@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "CURRENT_CAPABILITY",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "9925d2df94e719cb872b9e7c2f6c92f289bcfa3f2b7e1302ee44697d5f020946",
+  "inputs_pinned": true,
+  "name": "S3 test runner",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "current benchmark runner cannot invoke a canonical S3 test project",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P15"
+}

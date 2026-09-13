@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "deeff4ed3a1031c06acaf67bba679194d7dd3d7a870ae6dffbedde0d6dba47f8",
+  "inputs_pinned": true,
+  "name": "cold compiler latency",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "incremental project corpus is not yet part of the public S3 CLI",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P2"
+}

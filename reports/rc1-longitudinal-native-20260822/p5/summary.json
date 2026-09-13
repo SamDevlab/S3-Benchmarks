@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "d73c363e6bae391f3890b17a4bea2acbf0c407e31988c206f8674f2b73ae2865",
+  "inputs_pinned": true,
+  "name": "transitive interface invalidation",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "workspace invalidation protocol requires a future S3 project runner",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P5"
+}

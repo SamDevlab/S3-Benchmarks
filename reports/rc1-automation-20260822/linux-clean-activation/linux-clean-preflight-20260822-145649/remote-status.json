@@ -1,0 +1,11 @@
+{
+  "evidence_dir": "C:\\Users\\samue\\Downloads\\S3\\S3-Benchmarks-m235-mega-20260822\\reports\\rc1-automation-20260822\\linux-clean-activation\\linux-clean-preflight-20260822-145649",
+  "remote_returncode": 24,
+  "run_id": "linux-clean-preflight-20260822-145649",
+  "status": "FAIL",
+  "transport": {
+    "host": "s3-vm",
+    "port": 2222,
+    "user": "vboxuser"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "0d1362169650a1726780f9ec645d63f4adefcb83aae6f6790f53367c3396e711",
+  "inputs_pinned": true,
+  "name": "direct leaf invalidation",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "dependency invalidation counters are not exposed by the current RC1 harness",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P4"
+}
