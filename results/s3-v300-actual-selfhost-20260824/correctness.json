@@ -1,0 +1,11 @@
+{
+  "schema": "s3.benchmark.correctness.v1",
+  "python_reference": "PASS",
+  "python_reference_command": "python tools/runner.py --verify-only",
+  "python_reference_exit": 0,
+  "stage2": "BLOCKED_ARTIFACT_UNAVAILABLE",
+  "stage3": "BLOCKED_ARTIFACT_UNAVAILABLE",
+  "stage2_stage3_equivalence": "NOT_APPLICABLE",
+  "jsmn": "PASS_PYTHON_REFERENCE_ONLY",
+  "correctness_before_performance": true
+}
