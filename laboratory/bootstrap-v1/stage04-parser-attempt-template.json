@@ -1,0 +1,13 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage04-parser-attempt.v1",
+  "attempt_id": "replace-me",
+  "candidate_source_sha256": "replace-with-64-lowercase-hex",
+  "parser_status": "NOT_RUN",
+  "diagnostic_code": null,
+  "diagnostic_line": null,
+  "diagnostic_column": null,
+  "diagnostic_class": null,
+  "diagnostic_fingerprint": null,
+  "note": null,
+  "evidence_rule": "Populate only from an actual parser/check invocation. Do not infer PASS from prose or from a changed error message."
+}

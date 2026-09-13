@@ -1,0 +1,33 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage08-canonical-input.v1",
+  "stage_id": "08_CANONICAL_SOURCE_INPUT",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "control_contract_source": "SamDevlab/S3 codex-control/stages/08_CANONICAL_SOURCE_INPUT.md",
+  "required_pass_fields": [
+    "canonical_source_as_input",
+    "canonical_source_v2_conformance",
+    "canonical_source_determinism",
+    "native_provenance",
+    "s1_typed_values",
+    "s2_def_use",
+    "s3_call_dataflow",
+    "s4_complete_terminators",
+    "s5_canonical_serialization"
+  ],
+  "required_invariants": {
+    "canonical_source_mutated": false,
+    "z_mask": 31
+  },
+  "required_identity": [
+    "candidate_git_sha",
+    "candidate_source_sha256",
+    "candidate_binary_sha256",
+    "canonical_source_sha256",
+    "canonical_source_bytes",
+    "stream_sha256"
+  ],
+  "next_stage_candidate": "09_CANONICAL_INTEGRATION",
+  "authorization_after_pass": "RECHECK_LIVE_CONTROL_CANONICAL_STAGE1_MUTATION_AUTHORIZATION",
+  "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
+  "rule": "Stage08 proves semantic representability of the exact supplied canonical Stage1 source as input only. It never authorizes canonical mutation. The validator must recompute canonical source SHA256/bytes from the supplied source file."
+}

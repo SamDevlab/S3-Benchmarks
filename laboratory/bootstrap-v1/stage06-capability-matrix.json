@@ -1,0 +1,64 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage06-capability-matrix.v1",
+  "stage_id": "06_CONTROL_FLOW_S4",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "control_contract_source": "SamDevlab/S3 codex-control/stages/06_CONTROL_FLOW_S4.md",
+  "promotion_effect": "NONE_PLANNING_ONLY",
+  "capabilities": {
+    "return_terminator": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["wide_literal_positive", "local_identity"],
+      "requirements": ["kind=RETURN", "semantic return value id", "no branch targets"]
+    },
+    "jump_terminator": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["while_counter"],
+      "requirements": ["kind=JUMP", "one numeric target", "other targets absent/-1"]
+    },
+    "branch3_terminator": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["match_three_way"],
+      "requirements": ["condition value id", "negative target", "zero target", "positive target"]
+    },
+    "while_entry_body_backedge_exit": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["while_counter", "loop_call_dataflow", "array_index_loop"]
+    },
+    "match_three_way_targets": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["match_three_way"]
+    },
+    "control_with_call_dataflow": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["loop_call_dataflow"]
+    },
+    "control_with_array_dataflow": {
+      "fixture_status": "PINNED_EXISTING_CORPUS",
+      "fixtures": ["array_index_loop"]
+    },
+    "nested_control_flow": {
+      "fixture_status": "PREPARED_GAP",
+      "fixtures": [],
+      "reason": "Only pin if canonical Stage1/source audit demonstrates a required nested-control shape not already covered by the existing corpus."
+    },
+    "break_continue_required_subset": {
+      "fixture_status": "CANONICAL_USAGE_REQUIRED_BEFORE_PINNING",
+      "fixtures": [],
+      "reason": "Do not expand Stage06 horizontally. Pin only if the exact canonical self-source uses break/continue in the candidate lowering subset."
+    },
+    "block_terminator_coverage": {
+      "fixture_status": "DERIVED_GATE",
+      "fixtures": ["wide_literal_positive", "while_counter", "match_three_way", "loop_call_dataflow", "array_index_loop"],
+      "requirement": "100_PERCENT_FOR_QUALIFIED_FIXTURES"
+    }
+  },
+  "exit_gate": {
+    "S1": "PASS",
+    "S2": "PASS",
+    "S3": "PASS",
+    "S4_COMPLETE_TERMINATORS": "PASS",
+    "BLOCK_TERMINATOR_COVERAGE": "100_PERCENT_FOR_QUALIFIED_FIXTURES",
+    "BRANCH3_TARGET_ORDER": "PASS"
+  },
+  "rule": "Prepared capability rows are planning only. Do not activate Stage06 or claim S4 from this matrix. Every block/callee/value reference must be resolved in exact-candidate evidence before S4 PASS."
+}

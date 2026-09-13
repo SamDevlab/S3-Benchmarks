@@ -1,0 +1,38 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage10-general-emitter.v1",
+  "stage_id": "10_GENERAL_EMITTER",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "control_contract_source": "SamDevlab/S3 codex-control/stages/10_GENERAL_EMITTER.md",
+  "required_pass_fields": [
+    "canonical_semantic_integration",
+    "s1_typed_values",
+    "s2_def_use",
+    "s3_call_dataflow",
+    "s4_complete_terminators",
+    "s5_canonical_serialization",
+    "focused_codegen_native_fixtures",
+    "general_emitter",
+    "canonical_stage1_emission"
+  ],
+  "required_principles": [
+    "consume semantic records rather than lexical shortcuts",
+    "no self-source-specific special cases",
+    "preserve ABI/signature semantics",
+    "unsupported semantic opcode fails closed"
+  ],
+  "required_identity": [
+    "candidate_git_sha",
+    "canonical_source_sha256",
+    "emitter_source_sha256",
+    "emitted_artifact_sha256"
+  ],
+  "required_invariants": {
+    "self_emit_authorized": false,
+    "stage2_authorized": false,
+    "stage3_authorized": false,
+    "t4_authorized": false
+  },
+  "next_stage_candidate": "11_SELF_EMIT_BOOTSTRAP",
+  "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
+  "rule": "General Emitter qualification does not authorize SELF_EMIT. The live control manifest must be re-read before any Stage11 action."
+}

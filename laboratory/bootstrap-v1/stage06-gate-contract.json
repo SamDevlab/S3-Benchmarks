@@ -1,0 +1,31 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage-gate.v1",
+  "stage_id": "06_CONTROL_FLOW_S4",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "required_pass_fields": [
+    "s1_typed_values",
+    "s2_def_use",
+    "s3_call_dataflow",
+    "s4_complete_terminators",
+    "return_terminator",
+    "jump_terminator",
+    "branch3_terminator",
+    "branch3_target_order",
+    "block_terminator_coverage",
+    "candidate_stage0_check",
+    "focused_native_v2_conformance"
+  ],
+  "required_invariants": {
+    "canonical_source_mutated": false,
+    "self_emit_authorized": false,
+    "stage2_authorized": false,
+    "z_mask_relation": "LT",
+    "z_mask_value": 31
+  },
+  "special_values": {
+    "block_terminator_coverage": ["PASS"]
+  },
+  "next_stage_candidate": "07_SERIALIZATION_S5",
+  "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
+  "rule": "Stage06 PASS is advisory laboratory evidence only. Z 31 is forbidden until S5 serialization closes in Stage07."
+}

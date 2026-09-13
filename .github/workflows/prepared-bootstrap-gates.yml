@@ -1,0 +1,117 @@
+name: Prepared Bootstrap Gates
+
+on:
+  push:
+    paths:
+      - "tools/check_prepared_stage_activation.py"
+      - "tools/evaluate_prepared_stage_checkpoint.py"
+      - "tools/validate_stage08_canonical_input.py"
+      - "tools/check_stage09_authorization.py"
+      - "tools/validate_stage10_general_emitter.py"
+      - "tools/check_stage11_action_authorization.py"
+      - "tools/validate_control_route_snapshot.py"
+      - "tests/test_prepared_stage_activation.py"
+      - "tests/test_prepared_stage_checkpoint.py"
+      - "tests/test_stage08_canonical_input.py"
+      - "tests/test_stage09_authorization.py"
+      - "tests/test_stage10_general_emitter.py"
+      - "tests/test_stage11_action_authorization.py"
+      - "tests/test_control_route_snapshot.py"
+      - "laboratory/bootstrap-v1/stage06-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage07-serialization-plan.json"
+      - "laboratory/bootstrap-v1/stage07-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage07-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage08-canonical-input-contract.json"
+      - "laboratory/bootstrap-v1/stage09-authorization-contract.json"
+      - "laboratory/bootstrap-v1/stage10-general-emitter-contract.json"
+      - "laboratory/bootstrap-v1/stage11-action-authorization-contract.json"
+      - "laboratory/bootstrap-v1/control-route-contract.json"
+      - ".github/workflows/prepared-bootstrap-gates.yml"
+  pull_request:
+    paths:
+      - "tools/check_prepared_stage_activation.py"
+      - "tools/evaluate_prepared_stage_checkpoint.py"
+      - "tools/validate_stage08_canonical_input.py"
+      - "tools/check_stage09_authorization.py"
+      - "tools/validate_stage10_general_emitter.py"
+      - "tools/check_stage11_action_authorization.py"
+      - "tools/validate_control_route_snapshot.py"
+      - "tests/test_prepared_stage_activation.py"
+      - "tests/test_prepared_stage_checkpoint.py"
+      - "tests/test_stage08_canonical_input.py"
+      - "tests/test_stage09_authorization.py"
+      - "tests/test_stage10_general_emitter.py"
+      - "tests/test_stage11_action_authorization.py"
+      - "tests/test_control_route_snapshot.py"
+      - "laboratory/bootstrap-v1/stage06-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage06-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage07-serialization-plan.json"
+      - "laboratory/bootstrap-v1/stage07-capability-matrix.json"
+      - "laboratory/bootstrap-v1/stage07-gate-contract.json"
+      - "laboratory/bootstrap-v1/stage08-canonical-input-contract.json"
+      - "laboratory/bootstrap-v1/stage09-authorization-contract.json"
+      - "laboratory/bootstrap-v1/stage10-general-emitter-contract.json"
+      - "laboratory/bootstrap-v1/stage11-action-authorization-contract.json"
+      - "laboratory/bootstrap-v1/control-route-contract.json"
+      - ".github/workflows/prepared-bootstrap-gates.yml"
+  workflow_dispatch:
+
+jobs:
+  prepared-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install pytest
+      - name: Compile prepared-gate tools and tests
+        run: |
+          python -m compileall -q \
+            tools/check_prepared_stage_activation.py \
+            tools/evaluate_prepared_stage_checkpoint.py \
+            tools/validate_stage08_canonical_input.py \
+            tools/check_stage09_authorization.py \
+            tools/validate_stage10_general_emitter.py \
+            tools/check_stage11_action_authorization.py \
+            tools/validate_control_route_snapshot.py \
+            tests/test_prepared_stage_activation.py \
+            tests/test_prepared_stage_checkpoint.py \
+            tests/test_stage08_canonical_input.py \
+            tests/test_stage09_authorization.py \
+            tests/test_stage10_general_emitter.py \
+            tests/test_stage11_action_authorization.py \
+            tests/test_control_route_snapshot.py
+      - name: Validate prepared-gate JSON
+        run: |
+          python - <<'PY'
+          import json
+          paths = [
+              'laboratory/bootstrap-v1/stage06-capability-matrix.json',
+              'laboratory/bootstrap-v1/stage06-gate-contract.json',
+              'laboratory/bootstrap-v1/stage07-serialization-plan.json',
+              'laboratory/bootstrap-v1/stage07-capability-matrix.json',
+              'laboratory/bootstrap-v1/stage07-gate-contract.json',
+              'laboratory/bootstrap-v1/stage08-canonical-input-contract.json',
+              'laboratory/bootstrap-v1/stage09-authorization-contract.json',
+              'laboratory/bootstrap-v1/stage10-general-emitter-contract.json',
+              'laboratory/bootstrap-v1/stage11-action-authorization-contract.json',
+              'laboratory/bootstrap-v1/control-route-contract.json',
+          ]
+          for path in paths:
+              with open(path, encoding='utf-8') as handle:
+                  json.load(handle)
+          print(f'JSON_OK={len(paths)}')
+          PY
+      - name: Run prepared-gate tests
+        run: |
+          python -m pytest -q \
+            tests/test_prepared_stage_activation.py \
+            tests/test_prepared_stage_checkpoint.py \
+            tests/test_stage08_canonical_input.py \
+            tests/test_stage09_authorization.py \
+            tests/test_stage10_general_emitter.py \
+            tests/test_stage11_action_authorization.py \
+            tests/test_control_route_snapshot.py
