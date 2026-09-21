@@ -78,6 +78,19 @@ def test_phase_a_selects_one_common_runtime_k() -> None:
     assert decision["status"] == "PASS"
 
 
+def test_phase_a_keeps_largest_safe_k_when_target_floor_is_unreachable() -> None:
+    calibration = {
+        label: [
+            {"K": 1, "status": "PASS", "elapsed_ns": 100_000},
+            {"K": 100, "status": "PASS", "elapsed_ns": 2_000_000},
+        ]
+        for label in VARIANTS
+    }
+    selected, decision = _select_common_k(calibration)
+    assert selected == 100
+    assert decision["status"] == "FALLBACK_BELOW_TARGET_MIN"
+
+
 def test_phase_a_records_explicit_s3_instruction_budget() -> None:
     assert S3_FFI_MAX_INSTRUCTIONS == 10_000_000_000
 

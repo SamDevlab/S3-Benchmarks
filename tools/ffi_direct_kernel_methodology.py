@@ -492,8 +492,13 @@ def _select_common_k(calibration: dict[str, list[dict[str, Any]]]) -> tuple[int 
         candidates.append({"K": k, "fastest_ns": fastest, "slowest_ns": slowest, "preferred": PREFERRED_MIN_NS <= fastest <= PREFERRED_MAX_NS})
     preferred = [item for item in candidates if item["preferred"]]
     selected = max(preferred or candidates, key=lambda item: item["K"]) if (preferred or candidates) else None
-    valid = selected is not None and selected["fastest_ns"] >= TARGET_MIN_NS
-    return (selected["K"] if selected and valid else None), {"candidates": candidates, "selected": selected, "status": "PASS" if valid else "NO_COMMON_FIXED_WORK_WINDOW"}
+    if selected is None:
+        return None, {"candidates": candidates, "selected": None, "status": "NO_COMMON_FIXED_WORK_WINDOW"}
+    if selected["fastest_ns"] >= TARGET_MIN_NS:
+        status = "PASS"
+    else:
+        status = "FALLBACK_BELOW_TARGET_MIN"
+    return selected["K"], {"candidates": candidates, "selected": selected, "status": status}
 
 
 def _canary(s3_repo: Path, root: Path) -> dict[str, str]:
