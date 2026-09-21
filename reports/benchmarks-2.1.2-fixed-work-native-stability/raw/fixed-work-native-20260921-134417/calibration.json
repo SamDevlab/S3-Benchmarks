@@ -1,0 +1,926 @@
+{
+  "hpc.prk.nstream": {
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 1550764.0,
+        "slowest_ns": 1810921.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1734898,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1810921,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1620843,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 1550764,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1644831.0,
+        "slowest_ns": 2206845.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1829996,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1935513,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1644831,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2206845,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100,
+        "fastest_ns": 1838897.0,
+        "slowest_ns": 2026660.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1838897,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1956237,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1895093,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2026660,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 1831476.0,
+        "slowest_ns": 6152204.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1874599,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1831476,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 6152204,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 5908386,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 1808866.0,
+        "slowest_ns": 47222667.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2122867,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1808866,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 47222667,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 47086570,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 4327898.0,
+        "slowest_ns": 445241657.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 4327898,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 4421839,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 437634080,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 445241657,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": 24218508.0,
+        "slowest_ns": 4503800814.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 28889222,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 24218508,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 4503800814,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 4361405765,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 226917947,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 170906741,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      }
+    ],
+    "selected": null,
+    "status": "NO_COMMON_FIXED_WORK_WINDOW",
+    "workload_id": "hpc.prk.nstream"
+  },
+  "memory.babelstream.triad": {
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 1549758.0,
+        "slowest_ns": 2433260.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2433260,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2185075,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1549758,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 1578104,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1504352.0,
+        "slowest_ns": 1887111.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1887111,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1754790,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1504352,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 1752484,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100,
+        "fastest_ns": 1757680.0,
+        "slowest_ns": 2912479.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2912479,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1757680,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 2161544,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 1901502,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 1972257.0,
+        "slowest_ns": 4936336.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2081920,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1972257,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 4767270,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 4936336,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 2104052.0,
+        "slowest_ns": 38055045.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2104052,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2546802,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 38055045,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 35001634,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 3266672.0,
+        "slowest_ns": 317742491.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 3299969,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 3266672,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 317742491,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 317212763,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": 17485158.0,
+        "slowest_ns": 3313862603.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 17485158,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 17751932,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 3190108710,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 3313862603,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 175285819,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 147003038,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      }
+    ],
+    "selected": null,
+    "status": "NO_COMMON_FIXED_WORK_WINDOW",
+    "workload_id": "memory.babelstream.triad"
+  },
+  "numerical.polybench.gemm": {
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 1744943.0,
+        "slowest_ns": 1979242.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1979242,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1954381,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 1747391,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 1744943,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1784334.0,
+        "slowest_ns": 3863886.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1784334,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2075445,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 3521626,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 3863886,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100,
+        "fastest_ns": 1980864.0,
+        "slowest_ns": 23269632.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2134122,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1980864,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 23269632,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 22622409,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 2240574.0,
+        "slowest_ns": 214538087.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2240574,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2994271,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 214538087,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 214108002,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 6924127.0,
+        "slowest_ns": 2126968968.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 6924127,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 8682113,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 2099687753,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2126968968,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 46296142,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 73431878,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 364124611,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 682960500,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 3855217313,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      }
+    ],
+    "selected": null,
+    "status": "NO_COMMON_FIXED_WORK_WINDOW",
+    "workload_id": "numerical.polybench.gemm"
+  },
+  "scientific.rmsd.batch": {
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 1737834.0,
+        "slowest_ns": 2254280.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2254280,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1737834,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 2022365,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2155347,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1693784.0,
+        "slowest_ns": 2128134.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1919070,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1693784,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 2009733,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2128134,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100,
+        "fastest_ns": 1690894.0,
+        "slowest_ns": 2327991.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 1690894,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2161597,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 2327991,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 2256725,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 1810387.0,
+        "slowest_ns": 9253584.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2157634,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 1810387,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 9253584,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 9079890,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 2264245.0,
+        "slowest_ns": 74770190.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 2726835,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 2264245,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 74472181,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 74770190,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 6184934.0,
+        "slowest_ns": 717364310.0,
+        "status": "PASS",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 6184934,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 7604476,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": 712835464,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": 717364310,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 53800261,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 49954431,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      },
+      {
+        "K": 10000000,
+        "fastest_ns": null,
+        "slowest_ns": null,
+        "status": "FAIL",
+        "variants": {
+          "CLANG_O2": {
+            "elapsed_ns": 444325383,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "GCC_O2": {
+            "elapsed_ns": 453449275,
+            "status": "PASS",
+            "timeout_seconds": 5.0
+          },
+          "S3_O0": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          },
+          "S3_O1": {
+            "elapsed_ns": null,
+            "status": "TIMEOUT",
+            "timeout_seconds": 5.0
+          }
+        }
+      }
+    ],
+    "selected": null,
+    "status": "NO_COMMON_FIXED_WORK_WINDOW",
+    "workload_id": "scientific.rmsd.batch"
+  }
+}

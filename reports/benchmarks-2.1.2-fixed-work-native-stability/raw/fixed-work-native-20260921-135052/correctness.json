@@ -1,0 +1,229 @@
+{
+  "points": [
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1903687,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O0",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1896000,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O1",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1578936,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "GCC_O2",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1973427,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "CLANG_O2",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1475952,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O0",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1659189,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O1",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1745796,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "GCC_O2",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1891111,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "CLANG_O2",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1738113,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O0",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1897321,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O1",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1599865,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "GCC_O2",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 2366619,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "CLANG_O2",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1695479,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O0",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1507256,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "S3_O1",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1814433,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "GCC_O2",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "sample": {
+        "canary": 1,
+        "elapsed_ns": 1950745,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "stdout": "program returned: 1",
+        "timeout_seconds": 5.0
+      },
+      "status": "PASS",
+      "variant": "CLANG_O2",
+      "workload_id": "scientific.rmsd.batch"
+    }
+  ],
+  "status": "PASS"
+}
