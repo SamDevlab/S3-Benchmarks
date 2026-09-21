@@ -26,6 +26,8 @@ from typing import Any
 from protocol.provenance import require_commit
 
 ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 EXPECTED_S3_SHA = "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
 VARIANTS = ("S3_FFI_O0", "S3_FFI_O1", "GCC_O2", "CLANG_O2")
 WARMUPS = 5
