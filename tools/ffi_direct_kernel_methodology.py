@@ -34,7 +34,7 @@ VARIANTS = ("S3_FFI_O0", "S3_FFI_O1", "GCC_O2", "CLANG_O2")
 WARMUPS = 5
 REPETITIONS = 30
 CALIBRATION_LEVELS = (1, 10, 100, 1000, 10000, 100000, 1000000)
-SAMPLE_TIMEOUT_SECONDS = 30.0
+SAMPLE_TIMEOUT_SECONDS = 120.0
 TARGET_MIN_NS = 10_000_000
 PREFERRED_MIN_NS = 50_000_000
 PREFERRED_MAX_NS = 500_000_000
@@ -637,10 +637,23 @@ def _official_runs(driver: Path, pilots: tuple[FFIPilot, ...], artifacts: dict[s
                         WARMUPS,
                     )
                     samples[label].append(sample)
+            summaries: dict[str, Any] = {}
+            for label, values in samples.items():
+                valid = [float(item["elapsed_ns"]) for item in values if item.get("status") == "PASS" and "elapsed_ns" in item]
+                if len(valid) == REPETITIONS:
+                    summaries[label] = _summary(valid, pilot.work_units_per_call * k)
+                else:
+                    summaries[label] = {
+                        "status": "INCOMPLETE",
+                        "valid_samples": len(valid),
+                        "expected_samples": REPETITIONS,
+                        "failures": [item for item in values if item.get("status") != "PASS" or "elapsed_ns" not in item],
+                    }
             by_workload[pilot.workload_id] = {
                 "K_final": k,
                 "samples": samples,
-                "summaries": {label: _summary([float(item["elapsed_ns"]) for item in values], pilot.work_units_per_call * k) for label, values in samples.items()},
+                "summaries": summaries,
+                "status": "PASS" if all(item.get("status") != "INCOMPLETE" for item in summaries.values()) else "INCOMPLETE",
                 "artifact_hashes": {label: {key: artifacts[pilot.workload_id][label].get(key) for key in ("source_sha256", "assembly_sha256", "object_sha256", "library_sha256", "driver_sha256")} for label in VARIANTS},
                 "export_symbols": {label: artifacts[pilot.workload_id][label]["export_symbol"] for label in VARIANTS},
             }
@@ -716,9 +729,12 @@ def run_phase_a(s3_repo: Path, benchmark_sha: str) -> Path:
     reproducible = True
     for workload in official["run_a"]:
         for label in VARIANTS:
-            first = official["run_a"][workload]["summaries"][label]
-            second = official["run_b"][workload]["summaries"][label]
-            reproducible = reproducible and abs(first["median_ns"] - second["median_ns"]) / max(first["median_ns"], second["median_ns"]) <= 0.25
+                first = official["run_a"].get(workload, {}).get("summaries", {}).get(label, {})
+                second = official["run_b"].get(workload, {}).get("summaries", {}).get(label, {})
+                if "median_ns" not in first or "median_ns" not in second:
+                    reproducible = False
+                    continue
+                reproducible = reproducible and abs(first["median_ns"] - second["median_ns"]) / max(first["median_ns"], second["median_ns"]) <= 0.25
     result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
     result.update({"calibration": decisions, "direct_ffi_measurement": "PASS", "timing_scope": "KERNEL_PLUS_MATCHED_FFI_BOUNDARY", "run_a": "PASS", "run_b": "PASS", "same_artifact_a_b": "PASS", "ffi_reproducibility": "PASS" if reproducible else "FAIL", "official": official, "perf": _perf_probe(), "phase_a_gate": "PASS" if reproducible else "PARTIAL", "status": "COMPLETE" if reproducible else "REPRODUCIBILITY_OPEN"})
     _write_phase_a_reports(report_root, result)

@@ -1,5 +1,6 @@
 from tools.ffi_direct_kernel_methodology import (
     S3_FFI_MAX_INSTRUCTIONS,
+    SAMPLE_TIMEOUT_SECONDS,
     VARIANTS,
     _driver_source,
     _pilot_sources,
@@ -74,3 +75,7 @@ def test_phase_a_selects_one_common_runtime_k() -> None:
 
 def test_phase_a_records_explicit_s3_instruction_budget() -> None:
     assert S3_FFI_MAX_INSTRUCTIONS == 10_000_000_000
+
+
+def test_phase_a_timeout_covers_warmups_and_large_fixed_work() -> None:
+    assert SAMPLE_TIMEOUT_SECONDS == 120.0
