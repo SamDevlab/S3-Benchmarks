@@ -12,6 +12,7 @@ from tools.direct_kernel_methodology import (
     expected_repeated_value,
     fit_slope,
     pilot_cases,
+    _fixed_pressure_map,
     _fixed_work_summary,
     _select_fixed_work_level,
     _select_adaptive_levels,
@@ -120,6 +121,20 @@ def test_fixed_work_summary_reports_work_normalized_statistics():
     assert summary["ns_per_work_unit"] == 12
     assert summary["p95_ns"] == 140
     assert summary["mad_ns"] == 10
+
+
+def test_fixed_work_no_window_does_not_claim_run_ab_evidence():
+    result = {
+        "fixed_work_window": False,
+        "same_machine_reproduction": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+        "same_binary_run_a_run_b": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+        "perf": {"available": "NO"},
+    }
+    pressure_map = _fixed_pressure_map(result)
+    variability = next(item for item in pressure_map["pressures"] if item["pressure"] == "MEASUREMENT_VARIABILITY")
+    assert pressure_map["status"] == "NOT_ACTIONABLE_NO_COMMON_FIXED_WORK_WINDOW"
+    assert variability["classification"] == "NOT_ASSESSED"
+    assert "not executed" in variability["evidence"]
 
 
 def test_timing_audit_does_not_claim_a_direct_s3_timer_or_kernel_abi(tmp_path: Path):

@@ -1052,13 +1052,14 @@ def _fixed_work_measurement(
 def _fixed_pressure_map(result: dict[str, Any]) -> dict[str, Any]:
     reproducible = result["same_machine_reproduction"] == "PASS"
     perf_available = result["perf"]["available"] == "YES"
+    fixed_work_window = result["fixed_work_window"]
     def entry(name: str, classification: str, strength: str, causality: str, evidence: str) -> dict[str, str]:
         return {"pressure": name, "classification": classification, "evidence_strength": strength, "causality": causality, "evidence": evidence}
     return {
-        "status": "ACTIONABLE" if reproducible else "NOT_ACTIONABLE_REPRODUCIBILITY_OPEN",
+        "status": "ACTIONABLE" if reproducible else "NOT_ACTIONABLE_REPRODUCIBILITY_OPEN" if fixed_work_window else "NOT_ACTIONABLE_NO_COMMON_FIXED_WORK_WINDOW",
         "pressures": [
-            entry("PROCESS_STARTUP", "WEAKENED" if result["fixed_work_window"] else "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "fixed work raises the useful-work fraction but A/B must remain stable before causal attribution"),
-            entry("MEASUREMENT_VARIABILITY", "FALSIFIED" if reproducible else "STRENGTHENED", "MULTI_FAMILY", "CORRELATED", "same-binary Run A/B comparison"),
+            entry("PROCESS_STARTUP", "WEAKENED" if fixed_work_window else "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "fixed work raises the useful-work fraction but A/B must remain stable before causal attribution"),
+            entry("MEASUREMENT_VARIABILITY", "FALSIFIED" if reproducible else "STRENGTHENED" if fixed_work_window else "NOT_ASSESSED", "MULTI_FAMILY", "CORRELATED" if fixed_work_window else "UNKNOWN", "same-binary Run A/B comparison" if fixed_work_window else "Run A/B was not executed because no common fixed-work window was found"),
             entry("STATIC_CODE_DENSITY", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "assembly hashes are preserved; static size is not a dynamic cause"),
             entry("STACK_OPERATION_DENSITY", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "no dynamic counter evidence"),
             entry("RUNTIME_HELPER_PRESSURE", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "helper density not measured in this protocol"),
@@ -1312,6 +1313,11 @@ FIXED_WORK_REPETITIONS = 30
 
 
 def _fixed_work_report_markdown(result: dict[str, Any]) -> str:
+    timing_protocol = (
+        "Official builds were created once, hashed, and reused unchanged by Run A and Run B. The samples measure native process-E2E work, including the remaining startup/runtime envelope; they are not direct kernel time."
+        if result["fixed_work_window"]
+        else "Calibration found no common `K_FINAL` satisfying the bounded target across all four variants for every workload, so no official fixed binary or Run A/B was started; this is a protocol closure, not a timing result."
+    )
     return f"""# S3 Benchmarks 2.1.2 Fixed-Work Native Stability
 
 ```text
@@ -1344,7 +1350,7 @@ SHUTDOWN=NO
 
 The primary comparison uses one selected `K_FINAL` per workload, the same
 across S3 O0, S3 O1, GCC O2 and Clang O2. Calibration is discarded as timing
-evidence. {('Calibration found no common `K_FINAL` satisfying the bounded target across all four variants for every workload, so no official fixed binary or Run A/B was started; this is a protocol closure, not a timing result.' if not result['fixed_work_window'] else 'Official builds were created once, hashed, and reused unchanged by Run A and Run B. The samples measure native process-E2E work, including the remaining startup/runtime envelope; they are not direct kernel time.')}
+evidence. {timing_protocol}
 
 The historical cross-K slope evidence remains preserved in the 2.1.1 report
 and is classified `HISTORICAL_ONLY`. It is not used as the primary result here.
