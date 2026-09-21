@@ -76,10 +76,19 @@ def parse_native_result(stdout: str) -> int:
     return int(match.group(1))
 
 
+def native_canary_source(case) -> str:
+    marker = "fn main() -> f64:\n"
+    if marker not in case.source:
+        raise ValueError("candidate source does not expose the expected f64 entry point")
+    source = case.source.replace(marker, "fn main() -> i64:\n", 1)
+    body, expression = source.rsplit("    return ", 1)
+    return body + f"    if {expression.strip()} == {case.expected!r}:\n        return 1\n    return 0\n"
+
+
 def native_case(case, native_toolchain, backend_type) -> tuple[int, str]:
     compile_source, _run_source = _load_s3()
     with TemporaryDirectory(prefix="s3bench-native-") as directory:
-        program = compile_source(case.source, optimization="O0").assembly
+        program = compile_source(native_canary_source(case), optimization="O0").assembly
         text = backend_type(register_allocation=True).generate(program)
         executable = native_toolchain.build(text, Path(directory) / "candidate")
         completed = native_toolchain.run(executable)

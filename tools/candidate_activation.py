@@ -38,11 +38,12 @@ def main() -> int:
         for case in workload_cases:
             try:
                 observed, observable = native_case(case, toolchain, X8664Backend)
-                status = "NATIVE_PASS" if observed == case.expected else "NATIVE_FAIL"
-                error = None if status == "NATIVE_PASS" else f"expected {case.expected}, observed {observed}"
-                observations.append({"workload_id": case.workload_id, "size": case.size, "status": status, "expected": case.expected, "observed": observed, "native_observable": observable, "error": error})
+                expected_canary = 1
+                status = "NATIVE_PASS" if observed == expected_canary else "NATIVE_FAIL"
+                error = None if status == "NATIVE_PASS" else f"expected canary {expected_canary}, observed {observed}"
+                observations.append({"workload_id": case.workload_id, "size": case.size, "status": status, "expected": case.expected, "expected_canary": expected_canary, "observed": observed, "native_observable": observable, "error": error})
             except Exception as exc:
-                observations.append({"workload_id": case.workload_id, "size": case.size, "status": "NATIVE_BLOCKED", "expected": case.expected, "observed": None, "native_observable": None, "error": f"{type(exc).__name__}: {exc}"})
+                observations.append({"workload_id": case.workload_id, "size": case.size, "status": "NATIVE_BLOCKED", "expected": case.expected, "expected_canary": 1, "observed": None, "native_observable": None, "error": f"{type(exc).__name__}: {exc}"})
     else:
         observations = [item.to_dict() for item in run_hosted_matrix(workload_cases)]
     output = args.output or ROOT / "reports/benchmarks-2.0.1-candidate-activation/activation-results.json"

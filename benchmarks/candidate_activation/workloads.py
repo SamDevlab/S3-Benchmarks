@@ -1,8 +1,9 @@
 """Deterministic S3 source generators and independent numerical oracles.
 
 The generators deliberately use only the existing candidate's f64_vector,
-scalar arithmetic, references, and while loops.  A generated program returns
-an integer checksum so hosted and native adapters observe the same value.
+scalar arithmetic, references, and while loops.  Hosted execution returns the
+calculated f64 value; native qualification wraps that source in a separate
+integer correctness canary.
 """
 
 from __future__ import annotations
@@ -67,8 +68,6 @@ def _zeros(name: str, length: int) -> list[str]:
 
 
 def _program(body: list[str], result: str, _expected: float) -> str:
-    # Hosted execution observes the actual f64 checksum.  Native execution is
-    # intentionally reported through its separate i64 canary contract.
     return "fn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + f"\n    return {result}\n"
 
 
