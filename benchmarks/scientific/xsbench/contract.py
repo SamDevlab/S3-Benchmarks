@@ -21,15 +21,16 @@ GRID_POINTS = 5
 NUCLIDES = 3
 MATERIALS = 2
 MAX_NUCLIDES_PER_MATERIAL = 2
-GRID_BASE = 14
 GRID_STRIDE = GRID_POINTS * 6
 REACTION_WEIGHTS = (1.0, 3.0, 5.0, 7.0, 11.0)
 QUERY_ENERGIES = (0.05, 0.22, 0.37, 0.49, 0.63, 0.78, 0.91, 0.14)
 QUERY_MATERIALS = (0, 1, 0, 1, 1, 0, 1, 0)
+NUCLIDE_MAP = (0, 1, 1, 2)
+GRID_BASE = 10
 
 
 def _flat_data() -> tuple[float, ...]:
-    values: list[float] = [3.0, 5.0, 2.0, 2.0, 2.0, 2.0, 0.0, 1.0, 1.0, 2.0, 0.6, 0.4, 0.25, 0.75]
+    values: list[float] = [3.0, 5.0, 2.0, 2.0, 2.0, 2.0, 0.6, 0.4, 0.25, 0.75]
     for nuclide in range(NUCLIDES):
         for point in range(GRID_POINTS):
             energy = point / 4.0
@@ -41,7 +42,7 @@ def _flat_data() -> tuple[float, ...]:
                     0.2 + nuclide * 10 + point * 0.1,
                     0.3 + nuclide * 10 + point * 0.1,
                     0.4 + nuclide * 10 + point * 0.1,
-                )
+            )
             )
     return tuple(values)
 
@@ -84,22 +85,12 @@ def oracle_result() -> float:
 
 
 def s3_source(*, vector_mode: bool = False) -> str:
-    source = """export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64]) -> f64:
+    source = """export fn xs_lookup_batch(data: &[f64], nuclides: &[i64], energies: &[f64], materials: &[i64]) -> f64:
     mut lookup: i64 = 0
     mut checksum: f64 = 0.0
     while lookup < 8:
         mut energy: f64 = energies[lookup]
-        mut material: f64 = materials[lookup]
-        mut composition_base: i64 = 8
-        mut concentration_base: i64 = 12
-        match material <=> 0.0:
-            0:
-                composition_base = 6
-                concentration_base = 10
-
-            else:
-                composition_base = 8
-                concentration_base = 12
+        mut material: i64 = materials[lookup]
         mut position: i64 = 0
         mut total_xs: f64 = 0.0
         mut elastic_xs: f64 = 0.0
@@ -107,23 +98,13 @@ def s3_source(*, vector_mode: bool = False) -> str:
         mut fission_xs: f64 = 0.0
         mut nu_fission_xs: f64 = 0.0
         while position < 2:
-            mut composition_index: i64 = composition_base + position
-            mut nuclide_value: f64 = data[composition_index]
-            mut grid_base: i64 = 44
-            match nuclide_value <=> 1.0:
-                -1:
-                    grid_base = 14
-
-                0:
-                    grid_base = 44
-
-                1:
-                    grid_base = 74
-
-            mut concentration_index: i64 = concentration_base + position
+            mut composition_index: i64 = material * 2 + position
+            mut nuclide: i64 = nuclides[composition_index]
+            mut concentration_index: i64 = 6 + material * 2 + position
             mut concentration: f64 = data[concentration_index]
             mut low: i64 = 0
             mut high: i64 = 4
+            mut grid_base: i64 = 10 + nuclide * 30
             while high - low > 1:
                 mut middle: i64 = low + (high - low) / 2
                 mut middle_index: i64 = grid_base + middle * 6
@@ -162,50 +143,52 @@ fn main() -> i64:
 """
     if vector_mode:
         source = source.replace(
-            "export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64]) -> f64:",
-            "fn xs_lookup_batch(data: &f64_vector, energies: &f64_vector, materials: &f64_vector) -> f64:",
+            "export fn xs_lookup_batch(data: &[f64], nuclides: &[i64], energies: &[f64], materials: &[i64]) -> f64:",
+            "fn xs_lookup_batch(data: &f64_vector, nuclides: &i64_vector, energies: &f64_vector, materials: &i64_vector) -> f64:",
         )
-        for name in ("data", "energies", "materials"):
-            source = re.sub(rf"{name}\[([^]]+)\]", rf"f64_vector_get({name}, \1)", source)
+        for name, getter in (("data", "f64_vector_get"), ("energies", "f64_vector_get"), ("nuclides", "i64_vector_get"), ("materials", "i64_vector_get")):
+            source = re.sub(rf"{name}\[([^]]+)\]", rf"{getter}({name}, \1)", source)
     return source
 
 
 def hosted_source() -> str:
     pushes = [f"    discard f64_vector_push(&mut data, {value!r})" for value in DATA]
+    nuclide_pushes = [f"    discard i64_vector_push(&mut nuclides, {value})" for value in NUCLIDE_MAP]
     energy_pushes = [f"    discard f64_vector_push(&mut energies, {value!r})" for value in QUERY_ENERGIES]
-    material_pushes = [f"    discard f64_vector_push(&mut materials, {float(value)!r})" for value in QUERY_MATERIALS]
+    material_pushes = [f"    discard i64_vector_push(&mut materials, {value})" for value in QUERY_MATERIALS]
     return s3_source(vector_mode=True).replace(
         "fn main() -> i64:\n    return 0\n",
         "fn main() -> f64:\n"
-        "    mut data: f64_vector = f64_vector_new(104)\n"
+        "    mut data: f64_vector = f64_vector_new(100)\n"
         + "\n".join(pushes)
+        + "\n    mut nuclides: i64_vector = i64_vector_new(4)\n"
+        + "\n".join(nuclide_pushes)
         + "\n    mut energies: f64_vector = f64_vector_new(8)\n"
         + "\n".join(energy_pushes)
-        + "\n    mut materials: f64_vector = f64_vector_new(8)\n"
+        + "\n    mut materials: i64_vector = i64_vector_new(8)\n"
         + "\n".join(material_pushes)
-        + "\n    return xs_lookup_batch(&data, &energies, &materials)\n",
+        + "\n    return xs_lookup_batch(&data, &nuclides, &energies, &materials)\n",
     )
 
 
 def c_source() -> str:
     data = ", ".join(repr(value) for value in DATA)
     energies = ", ".join(repr(value) for value in QUERY_ENERGIES)
-    materials = ", ".join(repr(float(value)) for value in QUERY_MATERIALS)
     return f"""#include <stdint.h>
 #include <stddef.h>
-double {SYMBOL}(const double *data, int64_t data_len, const double *energies, int64_t energy_len, const double *materials, int64_t material_len) {{
-    (void)data_len; (void)energy_len; (void)material_len;
+double {SYMBOL}(const double *data, int64_t data_len, const int64_t *nuclides, int64_t nuclide_len, const double *energies, int64_t energy_len, const int64_t *materials, int64_t material_len) {{
+    (void)data_len; (void)nuclide_len; (void)energy_len; (void)material_len;
     double checksum = 0.0;
     for (int64_t lookup = 0; lookup < 8; ++lookup) {{
         double energy = energies[lookup];
-        int64_t material = (int64_t)materials[lookup];
+        int64_t material = materials[lookup];
         double channels[5] = {{0.0, 0.0, 0.0, 0.0, 0.0}};
         for (int64_t position = 0; position < 2; ++position) {{
-            int64_t composition_index = 6 + material * 2 + position;
-            int64_t nuclide = (int64_t)data[composition_index];
-            double concentration = data[10 + material * 2 + position];
+            int64_t composition_index = material * 2 + position;
+            int64_t nuclide = nuclides[composition_index];
+            double concentration = data[6 + material * 2 + position];
             int64_t low = 0, high = 4;
-            int64_t grid_base = 14 + nuclide * 30;
+            int64_t grid_base = 10 + nuclide * 30;
             while (high - low > 1) {{
                 int64_t middle = low + (high - low) / 2;
                 if (data[grid_base + middle * 6] > energy) high = middle;
@@ -226,7 +209,8 @@ double {SYMBOL}(const double *data, int64_t data_len, const double *energies, in
 
 static const double xsbench_fixture_data[] = {{{data}}};
 static const double xsbench_fixture_energies[] = {{{energies}}};
-static const double xsbench_fixture_materials[] = {{{materials}}};
+static const int64_t xsbench_fixture_nuclides[] = {{0, 1, 1, 2}};
+static const int64_t xsbench_fixture_materials[] = {{0, 1, 0, 1, 1, 0, 1, 0}};
 """
 
 

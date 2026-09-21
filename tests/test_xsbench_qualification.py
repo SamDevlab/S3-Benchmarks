@@ -43,14 +43,12 @@ def test_xsbench_fixture_and_oracle_are_deterministic() -> None:
 
 def test_xsbench_source_preserves_flat_mapping_and_no_optimized_variant() -> None:
     source = s3_source()
-    assert "export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64])" in source
-    assert "composition_base: i64 = 8" in source
-    assert "grid_base: i64 = 44" in source
+    assert "export fn xs_lookup_batch(data: &[f64], nuclides: &[i64], energies: &[f64], materials: &[i64])" in source
+    assert "composition_index: i64 = material * 2 + position" in source
+    assert "grid_base: i64 = 10 + nuclide * 30" in source
     assert "middle_energy: f64 = data[middle_index]" in source
     assert "match middle_energy <=> energy:" in source
     assert "1:\n                        high = middle" in source
-    assert "match material <=> 0.0:" in source
-    assert "match nuclide_value <=> 1.0:" in source
     assert "to_i64" not in source
     assert "return checksum" in source
     assert "openmp" not in source.lower()
@@ -62,4 +60,4 @@ def test_xsbench_hosted_source_executes_the_same_real_value_contract() -> None:
     assert "fn xs_lookup_batch(data: &f64_vector" in source
     assert "f64_vector_get(data, middle_index)" in source
     assert "f64_vector_push" in source
-    assert "return xs_lookup_batch(&data, &energies, &materials)" in source
+    assert "return xs_lookup_batch(&data, &nuclides, &energies, &materials)" in source
