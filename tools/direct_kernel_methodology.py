@@ -1098,7 +1098,81 @@ def _run_fixed_work_native_stability(
         selected[pilot.workload_id] = _calibrate_fixed_work(pilot, specs, raw_root / "calibration", toolchain, cpu_affinity)
     _write_json(raw_root / "calibration.json", selected)
     if any(item["status"] != "PASS" for item in selected.values()):
-        raise RuntimeError("NO_COMMON_FIXED_WORK_WINDOW")
+        frozen_manifest = {
+            "benchmark_sha": benchmark_sha,
+            "s3_sha": EXPECTED_S3_SHA,
+            "run_id": run_id,
+            "status": "NO_COMMON_FIXED_WORK_WINDOW",
+            "methodology": "FIXED_WORK_AMPLIFIED_PROCESS",
+            "variants": [spec[0] for spec in specs],
+            "cpu_affinity": environment["cpu_affinity"],
+            "anti_DCE_policy": "native integer canary over final observable",
+            "workloads": [
+                {
+                    "workload_id": pilot.workload_id,
+                    "family": pilot.family,
+                    "size": pilot.size,
+                    "K_final": None,
+                    "work_units_per_iteration": _pilot_work_units(pilot),
+                    "total_work_units": None,
+                    "input_dimensions": pilot.case.logical_shape,
+                    "data_layout": pilot.case.physical_layout,
+                    "index_mapping": pilot.case.index_mapping,
+                    "calibration_probes": selected[pilot.workload_id]["calibration"],
+                    "calibration_decision": None,
+                    "variants": [spec[0] for spec in specs],
+                }
+                for pilot in pilots
+            ],
+        }
+        jacobi = _jacobi_triage(s3_repo, raw_root / "jacobi", toolchain)
+        jacobi_status = (
+            "PASS"
+            if all(item["status"] == "PASS" for item in jacobi)
+            else "HARNESS_GAP"
+            if all(item["status"] == "HARNESS_GAP" for item in jacobi)
+            else "REPRODUCED_NATIVE_FAILURE"
+        )
+        result = {
+            "campaign": "S3_BENCHMARKS_2_1_2_FIXED_WORK_NATIVE_STABILITY",
+            "benchmark_sha": benchmark_sha,
+            "s3_sha": EXPECTED_S3_SHA,
+            "run_id": run_id,
+            "environment": environment,
+            "variants": [spec[0] for spec in specs],
+            "methodology": "FIXED_WORK_AMPLIFIED_PROCESS",
+            "direct_kernel_time": "NOT_AVAILABLE",
+            "callable_kernel_abi": "NO",
+            "cross_k_slope_status": "HISTORICAL_ONLY",
+            "hosted_correctness": "PASS_PRIOR_FIXED_HOSTED_REPLAY",
+            "native_correctness": "PASS",
+            "matched_flat_reference": "PASS",
+            "correctness_points": correctness,
+            "fixed_work_manifest": frozen_manifest,
+            "frozen_builds": {},
+            "build_determinism": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+            "same_binary_run_a_run_b": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+            "same_machine_reproduction": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+            "reproducibility": [],
+            "run_a": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+            "run_b": "NOT_RUN_NO_COMMON_FIXED_WORK_WINDOW",
+            "perf": environment["perf"],
+            "perf_counters": "UNAVAILABLE_PERMISSION" if environment["perf"]["available"] != "YES" else "NOT_COLLECTED",
+            "jacobi_triage": jacobi,
+            "jacobi_native_correctness": jacobi_status,
+            "jacobi_performance_measured": "NO",
+            "fixed_work_window": False,
+            "pressure_map_v3": "NOT_ACTIONABLE_NO_COMMON_FIXED_WORK_WINDOW",
+            "s3_causal_experiment_ready": "NO",
+            "next_path": "MEASUREMENT_ENVIRONMENT_INVESTIGATION",
+            "next_campaign": "S3_BENCHMARKS_2_1_2_FIXED_WORK_NATIVE_STABILITY_REFINEMENT",
+            "raw_samples": f"reports/benchmarks-2.1.2-fixed-work-native-stability/raw/{run_id}",
+            "status": "NO_COMMON_FIXED_WORK_WINDOW",
+        }
+        pressure_map = _fixed_pressure_map(result)
+        result["pressure_map_v3_detail"] = pressure_map
+        _write_fixed_work_reports(report_root, frozen_manifest, result, pressure_map, jacobi)
+        return result
     builds: dict[str, dict[str, dict[str, Any]]] = {}
     determinism: list[dict[str, Any]] = []
     for pilot in pilots:
@@ -1270,9 +1344,7 @@ SHUTDOWN=NO
 
 The primary comparison uses one selected `K_FINAL` per workload, the same
 across S3 O0, S3 O1, GCC O2 and Clang O2. Calibration is discarded as timing
-evidence. Official builds were created once, hashed, and reused unchanged by
-Run A and Run B. The samples measure native process-E2E work, including the
-remaining startup/runtime envelope; they are not direct kernel time.
+evidence. {('Calibration found no common `K_FINAL` satisfying the bounded target across all four variants for every workload, so no official fixed binary or Run A/B was started; this is a protocol closure, not a timing result.' if not result['fixed_work_window'] else 'Official builds were created once, hashed, and reused unchanged by Run A and Run B. The samples measure native process-E2E work, including the remaining startup/runtime envelope; they are not direct kernel time.')}
 
 The historical cross-K slope evidence remains preserved in the 2.1.1 report
 and is classified `HISTORICAL_ONLY`. It is not used as the primary result here.
@@ -1306,6 +1378,22 @@ fixed-work pilot builder does not expose that workload in the native replay
 generator. This is not classified as an S3 native failure and no Jacobi timing
 was collected.
 """
+
+
+def _write_fixed_work_reports(
+    report_root: Path,
+    frozen_manifest: dict[str, Any],
+    result: dict[str, Any],
+    pressure_map: dict[str, Any],
+    jacobi: list[dict[str, Any]],
+) -> None:
+    _write_json(report_root / "FIXED_WORK_MANIFEST.json", frozen_manifest)
+    _write_json(report_root / "FIXED_WORK_NATIVE_RESULT.json", result)
+    _write_json(report_root / "PRESSURE_MAP_V3.json", pressure_map)
+    _write_json(report_root / "JACOBI_CORRECTNESS_TRIAGE.json", {"status": result["jacobi_native_correctness"], "items": jacobi})
+    (report_root / "FIXED_WORK_NATIVE_REPORT.md").write_text(_fixed_work_report_markdown(result), encoding="utf-8", newline="\n")
+    (report_root / "PRESSURE_MAP_V3.md").write_text(_fixed_pressure_map_markdown(pressure_map), encoding="utf-8", newline="\n")
+    (report_root / "JACOBI_CORRECTNESS_TRIAGE.md").write_text(_jacobi_report_markdown(result), encoding="utf-8", newline="\n")
 
 
 def _write_json(path: Path, value: Any) -> None:
