@@ -348,6 +348,8 @@ def run_measurement(args: argparse.Namespace) -> Path:
     )
     os.environ["S3_REPO"] = str(s3_repo)
     os.environ["S3_COMMIT"] = provenance["s3_commit"]
+    if str(s3_repo) not in sys.path:
+        sys.path.insert(0, str(s3_repo))
     environment = collect_environment(s3_repo, benchmark_sha)
     environment["perf"] = _perf_probe()
     from bootstrap.s3.backends.x86_64 import NativeToolchain
