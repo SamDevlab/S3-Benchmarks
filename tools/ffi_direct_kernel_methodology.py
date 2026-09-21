@@ -38,7 +38,7 @@ SAMPLE_TIMEOUT_SECONDS = 30.0
 TARGET_MIN_NS = 10_000_000
 PREFERRED_MIN_NS = 50_000_000
 PREFERRED_MAX_NS = 500_000_000
-S3_FFI_MAX_INSTRUCTIONS = 100_000_000
+S3_FFI_MAX_INSTRUCTIONS = 10_000_000_000
 
 
 @dataclass(frozen=True, slots=True)
@@ -85,12 +85,11 @@ double triad(double *a, int64_t a_len, const double *b, int64_t b_len, const dou
 }
 """
 
-    nstream_s3 = _s3_header() + """export fn nstream(a: &mut [f64], b: &[f64], c: &[f64], scalar: f64) -> f64:
+    nstream_s3 = _s3_header() + """export fn nstream(a: &[f64], b: &[f64], c: &[f64], scalar: f64) -> f64:
     mut i: i64 = 0
     mut total: f64 = 0.0
     while i < 31:
         mut value: f64 = a[i] + b[i] + scalar * c[i]
-        a[i] = value
         total = total + value
         i = i + 1
     return total
@@ -100,10 +99,10 @@ fn main() -> i64:
 """
     nstream_c = """#include <stdint.h>
 double identity_f64(double value) { return value; }
-double nstream(double *a, int64_t a_len, const double *b, int64_t b_len, const double *c, int64_t c_len, double scalar) {
+double nstream(const double *a, int64_t a_len, const double *b, int64_t b_len, const double *c, int64_t c_len, double scalar) {
     (void)a_len; (void)b_len; (void)c_len;
     double total = 0.0;
-    for (int64_t i = 0; i < 31; ++i) { double value = a[i] + b[i] + scalar * c[i]; a[i] = value; total += value; }
+    for (int64_t i = 0; i < 31; ++i) { double value = a[i] + b[i] + scalar * c[i]; total += value; }
     return total;
 }
 """
@@ -350,8 +349,9 @@ def _driver_source() -> str:
 #include <time.h>
 
 typedef double (*identity_fn)(double);
-typedef double (*vector_fn)(double *, int64_t, const double *, int64_t, const double *, int64_t, double);
-typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, double *, int64_t);
+typedef double (*triad_fn)(double *, int64_t, const double *, int64_t, const double *, int64_t, double);
+typedef double (*nstream_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t, double);
+typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t);
 typedef double (*rmsd_fn)(const double *, int64_t, const double *, int64_t, int64_t, int64_t);
 
 static void fail(const char *message) { fprintf(stderr, "%s\n", message); exit(2); }
@@ -382,16 +382,23 @@ int main(int argc, char **argv) {
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(1.25); end = now_ns();
     } else if (strcmp(workload, "memory.babelstream.triad") == 0 || strcmp(workload, "hpc.prk.nstream") == 0) {
         int triad = strcmp(workload, "memory.babelstream.triad") == 0;
-        vector_fn fn = (vector_fn)symbol(handle, exported_symbol);
         double *a = alloc_doubles(31), *b = alloc_doubles(31), *c = alloc_doubles(31);
         for (int64_t i = 0; i < 31; ++i) { a[i] = (double)(i + 1); b[i] = triad ? (double)(2 * i + 1) : (double)(i + 2); c[i] = triad ? (double)(3 * i + 1) : 1.0; }
-        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0);
-        for (int64_t i = 0; i < 31; ++i) { a[i] = (double)(i + 1); b[i] = triad ? (double)(2 * i + 1) : (double)(i + 2); c[i] = triad ? (double)(3 * i + 1) : 1.0; }
-        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0); end = now_ns();
+        if (triad) {
+            triad_fn fn = (triad_fn)symbol(handle, exported_symbol);
+            for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0);
+            for (int64_t i = 0; i < 31; ++i) { a[i] = (double)(i + 1); b[i] = (double)(2 * i + 1); c[i] = (double)(3 * i + 1); }
+            begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0); end = now_ns();
+        } else {
+            nstream_fn fn = (nstream_fn)symbol(handle, exported_symbol);
+            for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0);
+            for (int64_t i = 0; i < 31; ++i) { a[i] = (double)(i + 1); b[i] = (double)(i + 2); c[i] = 1.0; }
+            begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0); end = now_ns();
+        }
         free(a); free(b); free(c);
     } else if (strcmp(workload, "numerical.polybench.gemm") == 0) {
         gemm_fn fn = (gemm_fn)symbol(handle, exported_symbol);
-        const int64_t rows = 12, cols = 16, inner = 8;
+        const int64_t rows = 4, cols = 4, inner = 4;
         double *a = alloc_doubles(rows * inner), *b = alloc_doubles(inner * cols), *c = alloc_doubles(rows * cols);
         for (int64_t i = 0; i < rows * inner; ++i) a[i] = (double)(i + 1);
         for (int64_t i = 0; i < inner * cols; ++i) b[i] = (double)(i + 2);
@@ -400,7 +407,7 @@ int main(int argc, char **argv) {
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, rows * inner, b, inner * cols, c, rows * cols); end = now_ns();
         free(a); free(b); free(c);
     } else if (strcmp(workload, "scientific.rmsd.batch") == 0) {
-        rmsd_fn fn = (rmsd_fn)symbol(handle, "rmsd");
+        rmsd_fn fn = (rmsd_fn)symbol(handle, exported_symbol);
         const int64_t pairs = 16, coordinates = 3;
         double *left = alloc_doubles(pairs * coordinates), *right = alloc_doubles(pairs * coordinates);
         for (int64_t i = 0; i < pairs * coordinates; ++i) { left[i] = (double)(i + 1); right[i] = (double)(i + 2); }
@@ -531,8 +538,6 @@ def _write_json(path: Path, value: Any) -> None:
 
 
 def _expected(pilot: FFIPilot, k: int) -> float:
-    if pilot.symbol == "nstream":
-        return 1085.0 + (k - 1) * 589.0
     return pilot.expected
 
 

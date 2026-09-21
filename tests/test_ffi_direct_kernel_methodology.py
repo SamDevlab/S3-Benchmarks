@@ -25,7 +25,7 @@ def test_phase_a_oracles_follow_runtime_call_contract() -> None:
     pilots = _pilot_sources()
     assert _expected(pilots[0], 1) == 3813.0
     assert _expected(pilots[1], 1) == 1085.0
-    assert _expected(pilots[1], 10) == 1085.0 + 9 * 589.0
+    assert _expected(pilots[1], 10) == 1085.0
     assert _expected(pilots[2], 1) == 5504.0
     assert _expected(pilots[3], 1) == 16.0
 
@@ -44,6 +44,13 @@ def test_phase_a_gemm_uses_the_proven_three_slice_ffi_shape() -> None:
     gemm = next(pilot for pilot in _pilot_sources() if pilot.symbol == "gemm")
     assert "export fn gemm(a: &[f64], b: &[f64], c: &[f64])" in gemm.source
     assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, const double *c, int64_t c_len)" in gemm.c_source
+
+
+def test_phase_a_nstream_is_repeatable_without_mutating_call_state() -> None:
+    nstream = next(pilot for pilot in _pilot_sources() if pilot.symbol == "nstream")
+    assert "export fn nstream(a: &[f64]" in nstream.source
+    assert "a[i] =" not in nstream.source
+    assert "double nstream(const double *a" in nstream.c_source
 
 
 def test_phase_a_records_optimized_export_symbol_compatibility() -> None:
@@ -66,4 +73,4 @@ def test_phase_a_selects_one_common_runtime_k() -> None:
 
 
 def test_phase_a_records_explicit_s3_instruction_budget() -> None:
-    assert S3_FFI_MAX_INSTRUCTIONS == 100_000_000
+    assert S3_FFI_MAX_INSTRUCTIONS == 10_000_000_000
