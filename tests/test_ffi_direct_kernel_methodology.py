@@ -1,4 +1,5 @@
 from tools.ffi_direct_kernel_methodology import (
+    S3_FFI_MAX_INSTRUCTIONS,
     VARIANTS,
     _driver_source,
     _pilot_sources,
@@ -62,3 +63,7 @@ def test_phase_a_selects_one_common_runtime_k() -> None:
     selected, decision = _select_common_k(calibration)
     assert selected == 100
     assert decision["status"] == "PASS"
+
+
+def test_phase_a_records_explicit_s3_instruction_budget() -> None:
+    assert S3_FFI_MAX_INSTRUCTIONS == 100_000_000

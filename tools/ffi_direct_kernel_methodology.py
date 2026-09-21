@@ -38,6 +38,7 @@ SAMPLE_TIMEOUT_SECONDS = 30.0
 TARGET_MIN_NS = 10_000_000
 PREFERRED_MIN_NS = 50_000_000
 PREFERRED_MAX_NS = 500_000_000
+S3_FFI_MAX_INSTRUCTIONS = 100_000_000
 
 
 @dataclass(frozen=True, slots=True)
@@ -271,7 +272,11 @@ def _build_s3_library(s3_repo: Path, source: str, optimization: str, output: Pat
     assembly_path = root / f"{output.stem}.s"
     object_path = root / f"{output.stem}.o"
     source_path.write_text(source, encoding="utf-8", newline="\n")
-    assembly_path.write_text(generate_ffi_assembly(ordinary_assembly), encoding="utf-8", newline="\n")
+    assembly_path.write_text(
+        generate_ffi_assembly(ordinary_assembly, max_instructions=S3_FFI_MAX_INSTRUCTIONS),
+        encoding="utf-8",
+        newline="\n",
+    )
     compiler = shutil.which("cc") or shutil.which("gcc") or shutil.which("clang")
     if compiler is None:
         raise RuntimeError("no C compiler available for S3 FFI shared library")
@@ -287,6 +292,7 @@ def _build_s3_library(s3_repo: Path, source: str, optimization: str, output: Pat
         "assembly": _display_path(assembly_path),
         "object": _display_path(object_path),
         "library": _display_path(output),
+        "max_instructions": S3_FFI_MAX_INSTRUCTIONS,
     }
 
 
