@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import math
+import re
 
 from tools.ffi_direct_kernel_methodology import FFIPilot
 
@@ -82,8 +83,8 @@ def oracle_result() -> float:
     return sum(oracle_lookup(energy, material) for energy, material in zip(QUERY_ENERGIES, QUERY_MATERIALS))
 
 
-def s3_source() -> str:
-    return """export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64]) -> f64:
+def s3_source(*, vector_mode: bool = False) -> str:
+    source = """export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64]) -> f64:
     mut lookup: i64 = 0
     mut checksum: f64 = 0.0
     while lookup < 8:
@@ -159,13 +160,21 @@ def s3_source() -> str:
 fn main() -> i64:
     return 0
 """
+    if vector_mode:
+        source = source.replace(
+            "export fn xs_lookup_batch(data: &[f64], energies: &[f64], materials: &[f64]) -> f64:",
+            "fn xs_lookup_batch(data: &f64_vector, energies: &f64_vector, materials: &f64_vector) -> f64:",
+        )
+        for name in ("data", "energies", "materials"):
+            source = re.sub(rf"{name}\[([^]]+)\]", rf"f64_vector_get({name}, \1)", source)
+    return source
 
 
 def hosted_source() -> str:
     pushes = [f"    discard f64_vector_push(&mut data, {value!r})" for value in DATA]
     energy_pushes = [f"    discard f64_vector_push(&mut energies, {value!r})" for value in QUERY_ENERGIES]
     material_pushes = [f"    discard f64_vector_push(&mut materials, {float(value)!r})" for value in QUERY_MATERIALS]
-    return s3_source().replace(
+    return s3_source(vector_mode=True).replace(
         "fn main() -> i64:\n    return 0\n",
         "fn main() -> f64:\n"
         "    mut data: f64_vector = f64_vector_new(104)\n"
