@@ -13,6 +13,7 @@ import hashlib
 import importlib
 import json
 import math
+import os
 from pathlib import Path
 import platform
 import shutil
@@ -20,7 +21,6 @@ import statistics
 import subprocess
 import sys
 import time
-from tempfile import TemporaryDirectory
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -107,22 +107,22 @@ double nstream(double *a, int64_t a_len, const double *b, int64_t b_len, const d
 }
 """
 
-    gemm_s3 = _s3_header() + """export fn gemm(a: &[f64], b: &[f64], c: &mut [f64], rows: i64, cols: i64, inner: i64) -> f64:
+    gemm_s3 = _s3_header() + """export fn gemm(a: &[f64], b: &[f64], c: &mut [f64]) -> f64:
     mut i: i64 = 0
-    while i < rows:
+    while i < 12:
         mut j: i64 = 0
-        while j < cols:
+        while j < 16:
             mut k: i64 = 0
             mut total: f64 = 1.0
-            while k < inner:
-                total = total + a[i * inner + k] * b[k * cols + j]
+            while k < 8:
+                total = total + a[i * 8 + k] * b[k * 16 + j]
                 k = k + 1
-            c[i * cols + j] = total
+            c[i * 16 + j] = total
             j = j + 1
         i = i + 1
     mut checksum: f64 = 0.0
     mut index: i64 = 0
-    while index < rows * cols:
+    while index < 12 * 16:
         checksum = checksum + c[index]
         index = index + 1
     return checksum
@@ -132,15 +132,15 @@ fn main() -> i64:
 """
     gemm_c = """#include <stdint.h>
 double identity_f64(double value) { return value; }
-double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len, int64_t rows, int64_t cols, int64_t inner) {
+double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len) {
     (void)a_len; (void)b_len; (void)c_len;
-    for (int64_t i = 0; i < rows; ++i) for (int64_t j = 0; j < cols; ++j) {
+    for (int64_t i = 0; i < 12; ++i) for (int64_t j = 0; j < 16; ++j) {
         double total = 1.0;
-        for (int64_t k = 0; k < inner; ++k) total += a[i * inner + k] * b[k * cols + j];
-        c[i * cols + j] = total;
+        for (int64_t k = 0; k < 8; ++k) total += a[i * 8 + k] * b[k * 16 + j];
+        c[i * 16 + j] = total;
     }
     double checksum = 0.0;
-    for (int64_t i = 0; i < rows * cols; ++i) checksum += c[i];
+    for (int64_t i = 0; i < 12 * 16; ++i) checksum += c[i];
     return checksum;
 }
 """
@@ -195,6 +195,33 @@ def _path_sha256(path: Path) -> str:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _machine_identity() -> tuple[str, dict[str, str | int]]:
+    cpu_model = ""
+    cpuinfo = Path("/proc/cpuinfo")
+    if cpuinfo.is_file():
+        for line in cpuinfo.read_text(encoding="utf-8", errors="replace").splitlines():
+            if line.lower().startswith("model name"):
+                _, _, value = line.partition(":")
+                cpu_model = value.strip()
+                break
+    identity: dict[str, str | int] = {
+        "system": platform.system(),
+        "machine": platform.machine(),
+        "kernel": platform.release(),
+        "cpu_model": cpu_model or platform.processor(),
+        "logical_cpus": int(os.cpu_count() or 0),
+    }
+    encoded = json.dumps(identity, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest(), identity
 
 
 def _run(command: list[str], *, cwd: Path | None = None, timeout: float = 60.0) -> subprocess.CompletedProcess[str]:
@@ -258,10 +285,10 @@ def _build_s3_library(s3_repo: Path, source: str, optimization: str, output: Pat
         "object_sha256": _path_sha256(object_path),
         "library_sha256": _path_sha256(output),
         "library_bytes": output.stat().st_size,
-        "source": str(source_path),
-        "assembly": str(assembly_path),
-        "object": str(object_path),
-        "library": str(output),
+        "source": _display_path(source_path),
+        "assembly": _display_path(assembly_path),
+        "object": _display_path(object_path),
+        "library": _display_path(output),
     }
 
 
@@ -285,10 +312,26 @@ def _build_c_library(pilot: FFIPilot, label: str, output: Path, root: Path) -> d
         "object_sha256": _path_sha256(object_path),
         "library_sha256": _path_sha256(output),
         "library_bytes": output.stat().st_size,
-        "source": str(source_path),
-        "object": str(object_path),
-        "library": str(output),
+        "source": _display_path(source_path),
+        "object": _display_path(object_path),
+        "library": _display_path(output),
     }
+
+
+def _resolve_export_symbol(library: Path, source_symbol: str, variant: str) -> dict[str, str]:
+    result = _run(["nm", "-D", "--defined-only", str(library)], timeout=10.0)
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or f"cannot inspect exported symbols: {library}")
+    symbols = {line.split()[-1] for line in result.stdout.splitlines() if line.split()}
+    if source_symbol in symbols:
+        return {"export_symbol": source_symbol, "symbol_resolution": "EXACT"}
+    compatibility_symbol = f"s3_{source_symbol}"
+    if variant == "S3_FFI_O1" and compatibility_symbol in symbols:
+        return {"export_symbol": compatibility_symbol, "symbol_resolution": "S3_O1_MANGLED_EXPORT"}
+    raise RuntimeError(
+        f"required exported symbol missing: {source_symbol} in {library}; "
+        f"available matching symbols: {sorted(symbol for symbol in symbols if source_symbol in symbol)}"
+    )
 
 
 def _driver_source() -> str:
@@ -304,7 +347,7 @@ def _driver_source() -> str:
 
 typedef double (*identity_fn)(double);
 typedef double (*vector_fn)(double *, int64_t, const double *, int64_t, const double *, int64_t, double);
-typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, double *, int64_t, int64_t, int64_t, int64_t);
+typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, double *, int64_t);
 typedef double (*rmsd_fn)(const double *, int64_t, const double *, int64_t, int64_t, int64_t);
 
 static void fail(const char *message) { fprintf(stderr, "%s\n", message); exit(2); }
@@ -320,22 +363,22 @@ static void emit_result(const char *workload, const char *variant, int64_t k, ui
 }
 
 int main(int argc, char **argv) {
-    if (argc != 7) fail("usage: driver LIB WORKLOAD VARIANT K EXPECTED WARMUPS");
-    const char *library_path = argv[1], *workload = argv[2], *variant = argv[3];
-    int64_t k = parse_i64(argv[4]), warmups = parse_i64(argv[6]);
-    double expected = parse_f64(argv[5]);
+    if (argc != 8) fail("usage: driver LIB WORKLOAD VARIANT SYMBOL K EXPECTED WARMUPS");
+    const char *library_path = argv[1], *workload = argv[2], *variant = argv[3], *exported_symbol = argv[4];
+    int64_t k = parse_i64(argv[5]), warmups = parse_i64(argv[7]);
+    double expected = parse_f64(argv[6]);
     if (k < 1 || warmups < 0) fail("invalid K or warmups");
     void *handle = dlopen(library_path, RTLD_NOW | RTLD_LOCAL);
     if (!handle) { fprintf(stderr, "dlopen: %s\n", dlerror()); return 2; }
     double observable = 0.0;
     uint64_t begin = 0, end = 0;
     if (strcmp(workload, "identity_f64") == 0) {
-        identity_fn fn = (identity_fn)symbol(handle, "identity_f64");
+        identity_fn fn = (identity_fn)symbol(handle, exported_symbol);
         for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(1.25);
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(1.25); end = now_ns();
     } else if (strcmp(workload, "memory.babelstream.triad") == 0 || strcmp(workload, "hpc.prk.nstream") == 0) {
         int triad = strcmp(workload, "memory.babelstream.triad") == 0;
-        vector_fn fn = (vector_fn)symbol(handle, triad ? "triad" : "nstream");
+        vector_fn fn = (vector_fn)symbol(handle, exported_symbol);
         double *a = alloc_doubles(31), *b = alloc_doubles(31), *c = alloc_doubles(31);
         for (int64_t i = 0; i < 31; ++i) { a[i] = (double)(i + 1); b[i] = triad ? (double)(2 * i + 1) : (double)(i + 2); c[i] = triad ? (double)(3 * i + 1) : 1.0; }
         for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0);
@@ -343,14 +386,14 @@ int main(int argc, char **argv) {
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, 31, b, 31, c, 31, 2.0); end = now_ns();
         free(a); free(b); free(c);
     } else if (strcmp(workload, "numerical.polybench.gemm") == 0) {
-        gemm_fn fn = (gemm_fn)symbol(handle, "gemm");
+        gemm_fn fn = (gemm_fn)symbol(handle, exported_symbol);
         const int64_t rows = 12, cols = 16, inner = 8;
         double *a = alloc_doubles(rows * inner), *b = alloc_doubles(inner * cols), *c = alloc_doubles(rows * cols);
         for (int64_t i = 0; i < rows * inner; ++i) a[i] = (double)(i + 1);
         for (int64_t i = 0; i < inner * cols; ++i) b[i] = (double)(i + 2);
         for (int64_t i = 0; i < rows * cols; ++i) c[i] = 1.0;
-        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, rows * inner, b, inner * cols, c, rows * cols, rows, cols, inner);
-        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, rows * inner, b, inner * cols, c, rows * cols, rows, cols, inner); end = now_ns();
+        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(a, rows * inner, b, inner * cols, c, rows * cols);
+        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(a, rows * inner, b, inner * cols, c, rows * cols); end = now_ns();
         free(a); free(b); free(c);
     } else if (strcmp(workload, "scientific.rmsd.batch") == 0) {
         rmsd_fn fn = (rmsd_fn)symbol(handle, "rmsd");
@@ -382,13 +425,13 @@ def _build_driver(root: Path) -> dict[str, Any]:
         "source_sha256": _path_sha256(source),
         "binary_sha256": _path_sha256(output),
         "binary_bytes": output.stat().st_size,
-        "source": str(source),
-        "binary": str(output),
+        "source": _display_path(source),
+        "binary": _display_path(output),
     }
 
 
-def _run_driver(driver: Path, library: Path, workload: str, variant: str, k: int, expected: float, warmups: int, affinity: int = 0) -> dict[str, Any]:
-    command = ["taskset", "-c", str(affinity), str(driver), str(library), workload, variant, str(k), f"{expected:.17g}", str(warmups)]
+def _run_driver(driver: Path, library: Path, workload: str, variant: str, exported_symbol: str, k: int, expected: float, warmups: int, affinity: int = 0) -> dict[str, Any]:
+    command = ["taskset", "-c", str(affinity), str(driver), str(library), workload, variant, exported_symbol, str(k), f"{expected:.17g}", str(warmups)]
     try:
         completed = _run(command, timeout=SAMPLE_TIMEOUT_SECONDS)
     except subprocess.TimeoutExpired:
@@ -503,9 +546,19 @@ def _build_artifacts(s3_repo: Path, pilots: tuple[FFIPilot, ...], root: Path, dr
                 metadata = _build_s3_library(s3_repo, pilot.source, "O1", library, root)
             else:
                 metadata = _build_c_library(pilot, label, library, root)
+            metadata.update(_resolve_export_symbol(library, pilot.symbol, label))
             metadata["driver_sha256"] = driver_sha
             artifacts[pilot.workload_id][label] = metadata
-            sample = _run_driver(driver, library, pilot.workload_id, label, 1, _expected(pilot, 1), WARMUPS)
+            sample = _run_driver(
+                driver,
+                library,
+                pilot.workload_id,
+                label,
+                metadata["export_symbol"],
+                1,
+                _expected(pilot, 1),
+                WARMUPS,
+            )
             correctness.append({"workload_id": pilot.workload_id, "variant": label, "sample": sample, "status": sample.get("status", "FAIL")})
     return artifacts, correctness
 
@@ -517,7 +570,16 @@ def _calibrate(pilots: tuple[FFIPilot, ...], artifacts: dict[str, dict[str, dict
         for k in CALIBRATION_LEVELS:
             samples: list[dict[str, Any]] = []
             for label in VARIANTS:
-                sample = _run_driver(driver, Path(artifacts[pilot.workload_id][label]["library"]), pilot.workload_id, label, k, _expected(pilot, k), 0)
+                sample = _run_driver(
+                    driver,
+                    Path(artifacts[pilot.workload_id][label]["library"]),
+                    pilot.workload_id,
+                    label,
+                    artifacts[pilot.workload_id][label]["export_symbol"],
+                    k,
+                    _expected(pilot, k),
+                    0,
+                )
                 samples.append({"variant": label, **sample})
             passed = all(item.get("status") == "PASS" for item in samples)
             elapsed = [item["elapsed_ns"] for item in samples if item.get("status") == "PASS"]
@@ -555,13 +617,23 @@ def _official_runs(driver: Path, pilots: tuple[FFIPilot, ...], artifacts: dict[s
                 shift = repetition % len(VARIANTS)
                 order = VARIANTS[shift:] + VARIANTS[:shift]
                 for label in order:
-                    sample = _run_driver(driver, Path(artifacts[pilot.workload_id][label]["library"]), pilot.workload_id, label, k, _expected(pilot, k), WARMUPS)
+                    sample = _run_driver(
+                        driver,
+                        Path(artifacts[pilot.workload_id][label]["library"]),
+                        pilot.workload_id,
+                        label,
+                        artifacts[pilot.workload_id][label]["export_symbol"],
+                        k,
+                        _expected(pilot, k),
+                        WARMUPS,
+                    )
                     samples[label].append(sample)
             by_workload[pilot.workload_id] = {
                 "K_final": k,
                 "samples": samples,
                 "summaries": {label: _summary([float(item["elapsed_ns"]) for item in values], pilot.work_units_per_call * k) for label, values in samples.items()},
                 "artifact_hashes": {label: {key: artifacts[pilot.workload_id][label].get(key) for key in ("source_sha256", "assembly_sha256", "object_sha256", "library_sha256", "driver_sha256")} for label in VARIANTS},
+                "export_symbols": {label: artifacts[pilot.workload_id][label]["export_symbol"] for label in VARIANTS},
             }
         _write_json(raw_root / f"{run_name}.json", by_workload)
         runs[run_name] = by_workload
@@ -569,12 +641,15 @@ def _official_runs(driver: Path, pilots: tuple[FFIPilot, ...], artifacts: dict[s
 
 
 def _result_base(benchmark_sha: str, run_id: str, driver: dict[str, Any], artifacts: dict[str, Any], correctness: list[dict[str, Any]], canary: dict[str, str], raw_root: Path) -> dict[str, Any]:
+    machine_fingerprint, machine_identity = _machine_identity()
     return {
         "campaign": "S3_BENCHMARKS_2_1_3_FFI_DIRECT_KERNEL",
         "benchmark_sha": benchmark_sha,
         "s3_sha": EXPECTED_S3_SHA,
         "run_id": run_id,
         "machine": platform.node(),
+        "machine_fingerprint": machine_fingerprint,
+        "machine_identity": machine_identity,
         "existing_ffi_reused": "PASS",
         "previous_ffi_classification": "NO_CALLABLE_KERNEL_ABI",
         "corrected_ffi_classification": "EXISTING_EXPORTED_C_ABI_AVAILABLE",
@@ -601,41 +676,43 @@ def run_phase_a(s3_repo: Path, benchmark_sha: str) -> Path:
     if platform.system() != "Linux" or platform.machine().lower() not in {"x86_64", "amd64"}:
         raise RuntimeError("Phase A requires Linux x86-64")
     s3_repo = s3_repo.resolve()
+    if require_commit(ROOT, benchmark_sha, label="benchmark repository") != benchmark_sha:
+        raise RuntimeError("benchmark repository provenance mismatch")
     if require_commit(s3_repo, EXPECTED_S3_SHA, label="S3 candidate") != EXPECTED_S3_SHA:
         raise RuntimeError("S3 candidate provenance mismatch")
     report_root = ROOT / "reports" / "benchmarks-2.1.3-ffi-direct-kernel"
     report_root.mkdir(parents=True, exist_ok=True)
-    run_id = time.strftime("ffi-direct-kernel-%Y%m%d-%H%M%S", time.gmtime())
+    run_id = time.strftime("ffi-direct-kernel-%Y%m%d-%H%M%S", time.gmtime()) + f"-{time.time_ns() % 1_000_000_000:09d}"
     raw_root = report_root / "raw" / run_id
     raw_root.mkdir(parents=True, exist_ok=True)
-    with TemporaryDirectory(prefix="s3-ffi-phase-a-") as temporary:
-        root = Path(temporary)
-        driver = _build_driver(root)
-        canary = _canary(s3_repo, root)
-        pilots = _pilot_sources()
-        artifacts, correctness = _build_artifacts(s3_repo, pilots, root, driver["binary_sha256"])
-        _write_json(raw_root / "correctness.json", correctness)
-        if not all(item["status"] == "PASS" for item in correctness):
-            result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
-            result.update({"direct_ffi_measurement": "NOT_COMPLETED", "run_a": "NOT_RUN", "run_b": "NOT_RUN", "same_artifact_a_b": "NOT_RUN", "ffi_reproducibility": "NOT_RUN", "phase_a_gate": "BLOCKED", "status": "CORRECTNESS_FAILURE"})
-            _write_phase_a_reports(report_root, result)
-            raise RuntimeError("FFI_CORRECTNESS_FAILURE")
-        decisions = _calibrate(pilots, artifacts, root / "ffi_driver", raw_root)
-        if any(item["K_final"] is None for item in decisions.values()):
-            result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
-            result.update({"calibration": decisions, "direct_ffi_measurement": "NOT_COMPLETED", "run_a": "NOT_RUN", "run_b": "NOT_RUN", "same_artifact_a_b": "NOT_RUN", "ffi_reproducibility": "NOT_RUN", "phase_a_gate": "PARTIAL", "status": "NO_COMMON_FIXED_WORK_WINDOW"})
-            _write_phase_a_reports(report_root, result)
-            return report_root / "FFI_DIRECT_KERNEL_RESULT.json"
-        official = _official_runs(root / "ffi_driver", pilots, artifacts, decisions, raw_root)
-        reproducible = True
-        for workload in official["run_a"]:
-            for label in VARIANTS:
-                first = official["run_a"][workload]["summaries"][label]
-                second = official["run_b"][workload]["summaries"][label]
-                reproducible = reproducible and abs(first["median_ns"] - second["median_ns"]) / max(first["median_ns"], second["median_ns"]) <= 0.25
+    root = raw_root / "artifacts"
+    root.mkdir(parents=True, exist_ok=True)
+    driver = _build_driver(root)
+    canary = _canary(s3_repo, root)
+    pilots = _pilot_sources()
+    artifacts, correctness = _build_artifacts(s3_repo, pilots, root, driver["binary_sha256"])
+    _write_json(raw_root / "correctness.json", correctness)
+    if not all(item["status"] == "PASS" for item in correctness):
         result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
-        result.update({"calibration": decisions, "direct_ffi_measurement": "PASS", "timing_scope": "KERNEL_PLUS_MATCHED_FFI_BOUNDARY", "run_a": "PASS", "run_b": "PASS", "same_artifact_a_b": "PASS", "ffi_reproducibility": "PASS" if reproducible else "FAIL", "official": official, "perf": _perf_probe(), "phase_a_gate": "PASS" if reproducible else "PARTIAL", "status": "COMPLETE" if reproducible else "REPRODUCIBILITY_OPEN"})
+        result.update({"direct_ffi_measurement": "NOT_COMPLETED", "run_a": "NOT_RUN", "run_b": "NOT_RUN", "same_artifact_a_b": "NOT_RUN", "ffi_reproducibility": "NOT_RUN", "phase_a_gate": "BLOCKED", "status": "CORRECTNESS_FAILURE"})
         _write_phase_a_reports(report_root, result)
+        raise RuntimeError("FFI_CORRECTNESS_FAILURE")
+    decisions = _calibrate(pilots, artifacts, root / "ffi_driver", raw_root)
+    if any(item["K_final"] is None for item in decisions.values()):
+        result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
+        result.update({"calibration": decisions, "direct_ffi_measurement": "NOT_COMPLETED", "run_a": "NOT_RUN", "run_b": "NOT_RUN", "same_artifact_a_b": "NOT_RUN", "ffi_reproducibility": "NOT_RUN", "phase_a_gate": "PARTIAL", "status": "NO_COMMON_FIXED_WORK_WINDOW"})
+        _write_phase_a_reports(report_root, result)
+        return report_root / "FFI_DIRECT_KERNEL_RESULT.json"
+    official = _official_runs(root / "ffi_driver", pilots, artifacts, decisions, raw_root)
+    reproducible = True
+    for workload in official["run_a"]:
+        for label in VARIANTS:
+            first = official["run_a"][workload]["summaries"][label]
+            second = official["run_b"][workload]["summaries"][label]
+            reproducible = reproducible and abs(first["median_ns"] - second["median_ns"]) / max(first["median_ns"], second["median_ns"]) <= 0.25
+    result = _result_base(benchmark_sha, run_id, driver, artifacts, correctness, canary, raw_root)
+    result.update({"calibration": decisions, "direct_ffi_measurement": "PASS", "timing_scope": "KERNEL_PLUS_MATCHED_FFI_BOUNDARY", "run_a": "PASS", "run_b": "PASS", "same_artifact_a_b": "PASS", "ffi_reproducibility": "PASS" if reproducible else "FAIL", "official": official, "perf": _perf_probe(), "phase_a_gate": "PASS" if reproducible else "PARTIAL", "status": "COMPLETE" if reproducible else "REPRODUCIBILITY_OPEN"})
+    _write_phase_a_reports(report_root, result)
     return report_root / "FFI_DIRECT_KERNEL_RESULT.json"
 
 

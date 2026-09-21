@@ -35,7 +35,22 @@ def test_phase_a_driver_is_shared_dlopen_runtime_k_and_monotonic_raw() -> None:
     assert "dlsym" in source
     assert "CLOCK_MONOTONIC_RAW" in source
     assert "for (int64_t i = 0; i < k; ++i)" in source
+    assert "usage: driver LIB WORKLOAD VARIANT SYMBOL K EXPECTED WARMUPS" in source
     assert "--workload" not in source
+
+
+def test_phase_a_gemm_uses_the_proven_three_slice_ffi_shape() -> None:
+    gemm = next(pilot for pilot in _pilot_sources() if pilot.symbol == "gemm")
+    assert "rows: i64" not in gemm.source
+    assert "cols: i64" not in gemm.source
+    assert "inner: i64" not in gemm.source
+    assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len)" in gemm.c_source
+
+
+def test_phase_a_records_optimized_export_symbol_compatibility() -> None:
+    source = _driver_source()
+    assert "exported_symbol" in source
+    assert "SYMBOL" in source
 
 
 def test_phase_a_selects_one_common_runtime_k() -> None:
