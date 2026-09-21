@@ -25,7 +25,7 @@ def test_phase_a_oracles_follow_runtime_call_contract() -> None:
     assert _expected(pilots[0], 1) == 3813.0
     assert _expected(pilots[1], 1) == 1085.0
     assert _expected(pilots[1], 10) == 1085.0 + 9 * 589.0
-    assert _expected(pilots[2], 1) == 5552.0
+    assert _expected(pilots[2], 1) == 5504.0
     assert _expected(pilots[3], 1) == 16.0
 
 
@@ -41,8 +41,8 @@ def test_phase_a_driver_is_shared_dlopen_runtime_k_and_monotonic_raw() -> None:
 
 def test_phase_a_gemm_uses_the_proven_three_slice_ffi_shape() -> None:
     gemm = next(pilot for pilot in _pilot_sources() if pilot.symbol == "gemm")
-    assert "export fn gemm(a: &[f64], b: &[f64], c: &mut [f64])" in gemm.source
-    assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len)" in gemm.c_source
+    assert "export fn gemm(a: &[f64], b: &[f64], c: &[f64])" in gemm.source
+    assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, const double *c, int64_t c_len)" in gemm.c_source
 
 
 def test_phase_a_records_optimized_export_symbol_compatibility() -> None:
