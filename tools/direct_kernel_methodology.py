@@ -517,12 +517,14 @@ def _build_c_replay_variant(
     build_root = root / "builds" / pilot.workload_id / f"k-{iterations}" / compiler
     build_root.mkdir(parents=True, exist_ok=False)
     source_path = build_root / "reference.c"
+    assembly_path = build_root / "reference.s"
     object_path = build_root / "reference.o"
     executable_path = build_root / "program"
     source_path.write_text(build_matched_c_source(pilot, iterations), encoding="utf-8", newline="\n")
+    assembly_command = [compiler_path, "-std=c99", "-O2", "-fno-fast-math", "-S", str(source_path), "-o", str(assembly_path)]
     compile_command = [compiler_path, "-std=c99", "-O2", "-fno-fast-math", "-c", str(source_path), "-o", str(object_path)]
     link_command = [compiler_path, str(object_path), "-lm", "-o", str(executable_path)]
-    for command in (compile_command, link_command):
+    for command in (assembly_command, compile_command, link_command):
         completed = subprocess.run(command, check=False, capture_output=True, text=True, timeout=30.0)
         if completed.returncode != 0:
             details = completed.stderr.strip() or completed.stdout.strip()
@@ -532,15 +534,15 @@ def _build_c_replay_variant(
         "compiler": compiler,
         "optimization": "O2",
         "source_path": str(source_path),
-        "assembly_path": None,
+        "assembly_path": str(assembly_path),
         "object_path": str(object_path),
         "executable_path": str(executable_path),
         "source_sha256": _path_sha256(source_path),
-        "assembly_sha256": None,
+        "assembly_sha256": _path_sha256(assembly_path),
         "object_sha256": _path_sha256(object_path),
         "executable_sha256": _path_sha256(executable_path),
         "source_bytes": source_path.stat().st_size,
-        "assembly_bytes": None,
+        "assembly_bytes": assembly_path.stat().st_size,
         "object_bytes": object_path.stat().st_size,
         "executable_bytes": executable_path.stat().st_size,
     }
@@ -802,8 +804,10 @@ def _run_native_replay(
                 "pass": relative_delta <= 0.25,
             })
     jacobi = _jacobi_triage(s3_repo, run_root / "jacobi", toolchain)
+    deterministic_status = "PASS" if all(item["determinism_status"] == "PASS" for item in run_a_workloads + run_b_workloads) else "FAIL"
+    reproducibility_status = "PASS" if all(item["pass"] for item in reproducibility) else "FAIL"
     result = {
-        "status": "PASS",
+        "status": "PASS" if deterministic_status == "PASS" and reproducibility_status == "PASS" else "METHODOLOGY_REFINEMENT_REQUIRED",
         "machine_fingerprint_sha256": environment["machine_fingerprint_sha256"],
         "environment": environment,
         "variants": [spec[0] for spec in specs],
@@ -811,8 +815,8 @@ def _run_native_replay(
         "run_b": run_b,
         "same_machine": run_a["environment"]["machine_fingerprint_sha256"] == run_b["environment"]["machine_fingerprint_sha256"],
         "same_machine_reproducibility": reproducibility,
-        "same_machine_reproducibility_status": "PASS" if all(item["pass"] for item in reproducibility) else "FAIL",
-        "deterministic_builds": "PASS" if all(item["determinism_status"] == "PASS" for item in run_a_workloads + run_b_workloads) else "FAIL",
+        "same_machine_reproducibility_status": reproducibility_status,
+        "deterministic_builds": deterministic_status,
         "jacobi_triage": jacobi,
         "protocol": {
             "timing_scope": "PROCESS_E2E_NATIVE_EXECUTABLE",
@@ -902,7 +906,8 @@ def run_campaign(args: argparse.Namespace) -> Path:
             "c_source_sha256": {str(k): hashlib.sha256(build_matched_c_source(pilot, k).encode("utf-8")).hexdigest() for k in k_levels},
         })
     native_runs = {"RUN_A": "PASS" if native_replay else "DEFERRED", "RUN_B": "PASS" if native_replay else "DEFERRED"}
-    native_replay_status = native_replay is not None and native_replay.get("status") == "PASS"
+    native_replay_status = native_replay is not None
+    native_replay_green = bool(native_replay and native_replay.get("status") == "PASS")
     deterministic_status = bool(native_replay and native_replay.get("deterministic_builds") == "PASS")
     reproduction_status = bool(native_replay and native_replay.get("same_machine_reproducibility_status") == "PASS")
     result = {
@@ -938,9 +943,9 @@ def run_campaign(args: argparse.Namespace) -> Path:
         "build_determinism": "PASS" if deterministic_status else "FAIL_OR_DEFERRED",
         "jacobi_medium_triage": native_replay["jacobi_triage"] if native_replay else "DEFERRED_TO_BOUNDED_FOLLOWUP",
         "native_replay": "reports/benchmarks-2.1.1-direct-kernel-methodology/NATIVE_REPLAY_RESULT.json" if native_replay else None,
-        "pressure_map_v2": "NATIVE_REPLAY_COMPLETE" if native_replay_status else "NATIVE_HOST_DEFERRED",
+        "pressure_map_v2": "NATIVE_REPLAY_COMPLETE" if native_replay_green else "NATIVE_REPLAY_REPRODUCIBILITY_GAP" if native_replay_status else "NATIVE_HOST_DEFERRED",
         "s3_causal_experiment_ready": "NO",
-        "next_path": "EXPAND_CORPUS_OR_CAUSAL_EXPERIMENT_AFTER_PRESSURE_REVIEW" if native_replay_status else "qualify_linux_native_host",
+        "next_path": "EXPAND_CORPUS_OR_CAUSAL_EXPERIMENT_AFTER_PRESSURE_REVIEW" if native_replay_green else "METHODOLOGY_REFINEMENT_FOR_PROCESS_E2E_SLOPE_STABILITY" if native_replay_status else "qualify_linux_native_host",
         "next_campaign": "S3_BENCHMARKS_2_2_SCIENTIFIC_MINI_APPS" if native_replay_status else "S3_BENCHMARKS_2_1_1_NATIVE_REPLAY",
         "workloads_expanded_after_pilot": "NO",
         "jsmn_direct_kernel_method": "DEFERRED",
@@ -948,13 +953,13 @@ def run_campaign(args: argparse.Namespace) -> Path:
         "full_suite": "NOT_RUN_BENCHMARK_SCOPE",
         "compileall": "PASS",
         "diff_check": "PASS",
-        "status": "COMPLETE_NATIVE_REPLAY" if native_replay_status else "ENVIRONMENT_DEFERRED",
+        "status": "COMPLETE_NATIVE_REPLAY" if native_replay_green else "METHODOLOGY_REFINEMENT_REQUIRED" if native_replay_status else "ENVIRONMENT_DEFERRED",
         "host_platform": f"{platform.system()} {platform.machine()}",
         "hosted_pilot_gate": hosted["status"],
         "native_toolchain_available": native_available,
-        "native_replay_status": "PASS" if native_replay_status else "DEFERRED",
+        "native_replay_status": "PASS" if native_replay_green else "METHODOLOGY_REFINEMENT_REQUIRED" if native_replay_status else "DEFERRED",
         "build_determinism_status": "PASS" if deterministic_status else "FAIL_OR_DEFERRED",
-        "native_replay_result": native_replay,
+        "native_replay_result": "reports/benchmarks-2.1.1-direct-kernel-methodology/NATIVE_REPLAY_RESULT.json" if native_replay else None,
     }
     _write_json(report_root / "RESULT.json", result)
     _write_json(raw_root / "hosted-pilot-validation.json", {"benchmark_head": benchmark_sha, "s3_sha": s3_sha, "levels": list(k_levels), "runs": hosted})

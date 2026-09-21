@@ -1,145 +1,28 @@
 {
   "base_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
   "base_pr": 17,
-  "benchmark_head": "50024f29ef2103dc0be974a9a45711a1646cd95a",
-  "calibration": "NOT_APPLICABLE_NO_DIRECT_TIMER",
+  "benchmark_head": "2229fa568ecbe1a52d7c4ccc0094b8e602735c2f",
+  "build_determinism": "PASS",
+  "build_determinism_status": "PASS",
+  "calibration": "PROCESS_E2E_NO_DIRECT_TIMER",
   "campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY",
   "compileall": "PASS",
-  "convergence_test": "NOT_RUN_NATIVE",
+  "convergence_test": "FAIL_OR_DEFERRED",
   "diff_check": "PASS",
   "direct_internal_timer_available": "NO",
-  "direct_kernel_time": "NOT_AVAILABLE",
-  "estimated_fixed_envelope_ns": null,
-  "estimated_incremental_kernel_cost_ns": null,
+  "direct_kernel_time": "NOT_AVAILABLE_NO_INTERNAL_TIMER",
+  "estimated_fixed_envelope_ns": "SEE_NATIVE_REPLAY_RESULT",
+  "estimated_incremental_kernel_cost_ns": "SEE_NATIVE_REPLAY_RESULT",
   "exported_kernel_call_available": "NO",
   "external_amortization_required": "YES",
-  "full_suite": "NOT_RUN",
-  "hosted_pilot_validation": [
-    {
-      "levels": [
-        {
-          "K": 1,
-          "expected": 3813.0,
-          "observed": 3813.0,
-          "pass": true
-        },
-        {
-          "K": 10,
-          "expected": 3813.0,
-          "observed": 3813.0,
-          "pass": true
-        },
-        {
-          "K": 100,
-          "expected": 3813.0,
-          "observed": 3813.0,
-          "pass": true
-        },
-        {
-          "K": 1000,
-          "expected": 3813.0,
-          "observed": 3813.0,
-          "pass": true
-        }
-      ],
-      "size": "medium",
-      "status": "PASS",
-      "workload_id": "memory.babelstream.triad"
-    },
-    {
-      "levels": [
-        {
-          "K": 1,
-          "expected": 1085.0,
-          "observed": 1085.0,
-          "pass": true
-        },
-        {
-          "K": 10,
-          "expected": 6386.0,
-          "observed": 6386.0,
-          "pass": true
-        },
-        {
-          "K": 100,
-          "expected": 59396.0,
-          "observed": 59396.0,
-          "pass": true
-        },
-        {
-          "K": 1000,
-          "expected": 589496.0,
-          "observed": 589496.0,
-          "pass": true
-        }
-      ],
-      "size": "medium",
-      "status": "PASS",
-      "workload_id": "hpc.prk.nstream"
-    },
-    {
-      "levels": [
-        {
-          "K": 1,
-          "expected": 5008704.0,
-          "observed": 5008704.0,
-          "pass": true
-        },
-        {
-          "K": 10,
-          "expected": 5008704.0,
-          "observed": 5008704.0,
-          "pass": true
-        },
-        {
-          "K": 100,
-          "expected": 5008704.0,
-          "observed": 5008704.0,
-          "pass": true
-        },
-        {
-          "K": 1000,
-          "expected": 5008704.0,
-          "observed": 5008704.0,
-          "pass": true
-        }
-      ],
-      "size": "medium",
-      "status": "PASS",
-      "workload_id": "numerical.polybench.gemm"
-    },
-    {
-      "levels": [
-        {
-          "K": 1,
-          "expected": 16.0,
-          "observed": 16.0,
-          "pass": true
-        },
-        {
-          "K": 10,
-          "expected": 16.0,
-          "observed": 16.0,
-          "pass": true
-        },
-        {
-          "K": 100,
-          "expected": 16.0,
-          "observed": 16.0,
-          "pass": true
-        },
-        {
-          "K": 1000,
-          "expected": 16.0,
-          "observed": 16.0,
-          "pass": true
-        }
-      ],
-      "size": "medium",
-      "status": "PASS",
-      "workload_id": "scientific.rmsd.batch"
-    }
-  ],
+  "full_suite": "NOT_RUN_BENCHMARK_SCOPE",
+  "host_platform": "Linux x86_64",
+  "hosted_pilot_gate": "PASS_PRIOR_FIXED_HOSTED_REPLAY",
+  "hosted_pilot_validation": {
+    "replayed_in_this_campaign": false,
+    "source": "reports/benchmarks-2.1.1-direct-kernel-methodology/raw/hosted-pilot-validation.json",
+    "status": "PASS_PRIOR_FIXED_HOSTED_REPLAY"
+  },
   "in_process_repetition": "PASS",
   "iteration_levels": [
     1,
@@ -147,29 +30,85 @@
     100,
     1000
   ],
-  "jacobi_medium_triage": "DEFERRED_TO_BOUNDED_FOLLOWUP",
+  "jacobi_medium_triage": [
+    {
+      "hosted": {
+        "O0": {
+          "expected": 18.666666666666668,
+          "observed": 18.666666666666668,
+          "pass": true
+        },
+        "O1": {
+          "expected": 18.666666666666668,
+          "observed": 18.666666666666668,
+          "pass": true
+        }
+      },
+      "native": {
+        "O0": {
+          "error": "ValueError: unsupported pilot: numerical.polybench.jacobi_1d",
+          "status": "FAIL"
+        },
+        "O1": {
+          "error": "ValueError: unsupported pilot: numerical.polybench.jacobi_1d",
+          "status": "FAIL"
+        }
+      },
+      "size": "small",
+      "status": "NATIVE_CORRECTNESS_OPEN",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "hosted": {
+        "O0": {
+          "expected": 164.66666666666666,
+          "observed": 164.66666666666669,
+          "pass": true
+        },
+        "O1": {
+          "expected": 164.66666666666666,
+          "observed": 164.66666666666669,
+          "pass": true
+        }
+      },
+      "native": {
+        "O0": {
+          "error": "ValueError: unsupported pilot: numerical.polybench.jacobi_1d",
+          "status": "FAIL"
+        },
+        "O1": {
+          "error": "ValueError: unsupported pilot: numerical.polybench.jacobi_1d",
+          "status": "FAIL"
+        }
+      },
+      "size": "medium",
+      "status": "NATIVE_CORRECTNESS_OPEN",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    }
+  ],
   "jsmn_direct_kernel_method": "DEFERRED",
   "matched_flat_c_reference": "PASS",
-  "native_blocker": "no callable S3 kernel ABI or direct timer in the pinned source",
-  "native_execution": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
-  "next_campaign": "S3_BENCHMARKS_2_1_1_NATIVE_KERNEL_ABI",
-  "next_path": "qualify_a_callable_s3_kernel_abi_or_direct_timer_before_native_timing",
+  "native_blocker": null,
+  "native_execution": "PASS",
+  "native_replay": "reports/benchmarks-2.1.1-direct-kernel-methodology/NATIVE_REPLAY_RESULT.json",
+  "native_replay_result": "reports/benchmarks-2.1.1-direct-kernel-methodology/NATIVE_REPLAY_RESULT.json",
+  "native_replay_status": "METHODOLOGY_REFINEMENT_REQUIRED",
+  "native_toolchain_available": true,
+  "next_campaign": "S3_BENCHMARKS_2_2_SCIENTIFIC_MINI_APPS",
+  "next_path": "METHODOLOGY_REFINEMENT_FOR_PROCESS_E2E_SLOPE_STABILITY",
   "pilot_gate": "PASS",
-  "pressure_map_v2": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
-  "raw_samples": "NONE_NO_DIRECT_KERNEL_TIMER",
-  "run_a": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
-  "run_b": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
+  "pressure_map_v2": "NATIVE_REPLAY_REPRODUCIBILITY_GAP",
+  "raw_samples": "reports/benchmarks-2.1.1-direct-kernel-methodology/raw/native-replay-20260921",
+  "run_a": "PASS",
+  "run_b": "PASS",
   "s3_causal_experiment_ready": "NO",
   "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "s3_source_changed": false,
-  "same_machine_reproduction": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
+  "same_machine_reproduction": "FAIL_OR_DEFERRED",
   "selected_method": "METHOD_C_IN_PROCESS_AMORTIZATION",
-  "slope_model": "NOT_RUN_NATIVE",
-  "slope_model_r2": null,
-  "status": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
-  "host_platform": "Linux x86_64",
-  "hosted_pilot_gate": "PASS",
-  "native_toolchain_available": true,
+  "slope_model": "EMPIRICAL_PROCESS_E2E_INCREMENTAL_COST",
+  "slope_model_r2": "SEE_NATIVE_REPLAY_RESULT",
+  "status": "METHODOLOGY_REFINEMENT_REQUIRED",
   "timing_audit": {
     "DIRECT_INTERNAL_TIMER_AVAILABLE": "NO",
     "EXPORTED_KERNEL_CALL_AVAILABLE": "NO",

@@ -12,6 +12,7 @@ from tools.direct_kernel_methodology import (
     expected_repeated_value,
     fit_slope,
     pilot_cases,
+    _select_adaptive_levels,
 )
 
 
@@ -48,6 +49,15 @@ def test_matched_c_references_are_flat_and_do_not_use_blas_or_fast_math():
         assert "-Ofast" not in source
 
 
+def test_matched_c_references_compare_the_final_kernel_result_not_a_sum_of_runs():
+    for pilot in pilot_cases():
+        source = build_matched_c_source(pilot, 10)
+        assert "observable = total;" in source or "observable = checksum;" in source
+        assert "observable += total;" not in source
+        assert "observable += checksum;" not in source
+        assert "fabs(observable -" in source
+
+
 def test_repeated_work_values_match_the_declared_kernel_contract():
     for pilot in pilot_cases():
         one = expected_repeated_value(pilot, 1)
@@ -78,6 +88,17 @@ def test_slope_model_is_empirical_and_reports_fit_quality():
     assert fit["slope_ns_per_iteration"] > 0
     assert 0.0 <= fit["r_squared"] <= 1.0
     assert "residual_summary" in fit
+
+
+def test_adaptive_levels_keep_three_common_levels_under_the_guard():
+    probes = {
+        "S3_O0": {"elapsed_ns": 100_000.0},
+        "S3_O1": {"elapsed_ns": 120_000.0},
+        "GCC_O2": {"elapsed_ns": 80_000.0},
+    }
+    levels, guard = _select_adaptive_levels(probes)
+    assert levels == (1, 10, 100, 1000)
+    assert guard["skipped"] == {}
 
 
 def test_timing_audit_does_not_claim_a_direct_s3_timer_or_kernel_abi(tmp_path: Path):
