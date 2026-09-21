@@ -119,7 +119,8 @@ def s3_source() -> str:
                 1:
                     grid_base = 74
 
-            mut concentration: f64 = data[concentration_base + position]
+            mut concentration_index: i64 = concentration_base + position
+            mut concentration: f64 = data[concentration_index]
             mut low: i64 = 0
             mut high: i64 = 4
             while high - low > 1:
@@ -135,11 +136,21 @@ def s3_source() -> str:
             mut low_index: i64 = grid_base + low * 6
             mut high_index: i64 = grid_base + high * 6
             mut factor: f64 = (data[high_index] - energy) / (data[high_index] - data[low_index])
-            total_xs = total_xs + concentration * (data[high_index + 1] - factor * (data[high_index + 1] - data[low_index + 1]))
-            elastic_xs = elastic_xs + concentration * (data[high_index + 2] - factor * (data[high_index + 2] - data[low_index + 2]))
-            absorption_xs = absorption_xs + concentration * (data[high_index + 3] - factor * (data[high_index + 3] - data[low_index + 3]))
-            fission_xs = fission_xs + concentration * (data[high_index + 4] - factor * (data[high_index + 4] - data[low_index + 4]))
-            nu_fission_xs = nu_fission_xs + concentration * (data[high_index + 5] - factor * (data[high_index + 5] - data[low_index + 5]))
+            mut high_total_index: i64 = high_index + 1
+            mut low_total_index: i64 = low_index + 1
+            mut high_elastic_index: i64 = high_index + 2
+            mut low_elastic_index: i64 = low_index + 2
+            mut high_absorption_index: i64 = high_index + 3
+            mut low_absorption_index: i64 = low_index + 3
+            mut high_fission_index: i64 = high_index + 4
+            mut low_fission_index: i64 = low_index + 4
+            mut high_nu_fission_index: i64 = high_index + 5
+            mut low_nu_fission_index: i64 = low_index + 5
+            total_xs = total_xs + concentration * (data[high_total_index] - factor * (data[high_total_index] - data[low_total_index]))
+            elastic_xs = elastic_xs + concentration * (data[high_elastic_index] - factor * (data[high_elastic_index] - data[low_elastic_index]))
+            absorption_xs = absorption_xs + concentration * (data[high_absorption_index] - factor * (data[high_absorption_index] - data[low_absorption_index]))
+            fission_xs = fission_xs + concentration * (data[high_fission_index] - factor * (data[high_fission_index] - data[low_fission_index]))
+            nu_fission_xs = nu_fission_xs + concentration * (data[high_nu_fission_index] - factor * (data[high_nu_fission_index] - data[low_nu_fission_index]))
             position = position + 1
         checksum = checksum + total_xs + 3.0 * elastic_xs + 5.0 * absorption_xs + 7.0 * fission_xs + 11.0 * nu_fission_xs
         lookup = lookup + 1
