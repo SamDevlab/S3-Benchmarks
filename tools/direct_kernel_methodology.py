@@ -359,6 +359,90 @@ def _path_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _run_text(command: list[str], *, timeout: float = 10.0) -> str | None:
+    try:
+        completed = subprocess.run(command, check=False, capture_output=True, text=True, timeout=timeout)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if completed.returncode != 0:
+        return None
+    return (completed.stdout or completed.stderr).strip()
+
+
+def _tool_version(command: str) -> str:
+    value = _run_text([command, "--version"])
+    return value.splitlines()[0] if value else "UNAVAILABLE"
+
+
+def _collect_native_environment(s3_repo: Path, benchmark_sha: str, s3_sha: str) -> dict[str, Any]:
+    lscpu = _run_text(["lscpu"]) or ""
+    cpu: dict[str, str] = {}
+    for line in lscpu.splitlines():
+        if ":" in line:
+            key, value = line.split(":", 1)
+            cpu[key.strip()] = value.strip()
+    logical = os.cpu_count() or 1
+    affinity = sorted(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else None
+    meminfo = _run_text(["cat", "/proc/meminfo"]) or ""
+    ram = next((line.split(":", 1)[1].strip() for line in meminfo.splitlines() if line.startswith("MemTotal:")), "UNAVAILABLE")
+    governor = sorted(Path("/sys/devices/system/cpu").glob("cpu*/cpufreq/scaling_governor"))
+    governors = sorted({path.read_text(encoding="utf-8").strip() for path in governor}) or ["UNAVAILABLE"]
+    turbo_raw = _run_text(["cat", "/sys/devices/system/cpu/intel_pstate/no_turbo"]) or "UNAVAILABLE"
+    turbo = "ENABLED_OR_UNCONTROLLED" if turbo_raw == "0" else "DISABLED" if turbo_raw == "1" else "UNAVAILABLE"
+    smt = _run_text(["cat", "/sys/devices/system/cpu/smt/active"]) or "UNAVAILABLE"
+    stable = {
+        "architecture": platform.machine(),
+        "cpu_model": cpu.get("Model name", platform.processor()),
+        "cpu_vendor": cpu.get("Vendor ID", "UNAVAILABLE"),
+        "cpu_family": cpu.get("CPU family", "UNAVAILABLE"),
+        "cpu_model_id": cpu.get("Model", "UNAVAILABLE"),
+        "cpu_stepping": cpu.get("Stepping", "UNAVAILABLE"),
+        "physical_cores": cpu.get("Core(s) per socket", "UNAVAILABLE"),
+        "logical_cores": logical,
+        "ram": ram,
+        "kernel": platform.release(),
+        "distribution": _run_text(["cat", "/etc/os-release"]) or "UNAVAILABLE",
+        "cache_l1d": cpu.get("L1d cache", "UNAVAILABLE"),
+        "cache_l1i": cpu.get("L1i cache", "UNAVAILABLE"),
+        "cache_l2": cpu.get("L2 cache", "UNAVAILABLE"),
+        "cache_l3": cpu.get("L3 cache", "UNAVAILABLE"),
+        "numa": cpu.get("NUMA node(s)", "UNAVAILABLE"),
+    }
+    fingerprint = hashlib.sha256(json.dumps(stable, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+    load = os.getloadavg() if hasattr(os, "getloadavg") else None
+    return {
+        **stable,
+        "machine_fingerprint_sha256": fingerprint,
+        "hostname": platform.node(),
+        "os": platform.system(),
+        "os_release": platform.release(),
+        "python_version": platform.python_version(),
+        "benchmark_repo_sha": benchmark_sha,
+        "s3_sha": s3_sha,
+        "gcc_version": _tool_version("gcc"),
+        "clang_version": _tool_version("clang"),
+        "as_version": _tool_version("as"),
+        "ld_version": _tool_version("ld"),
+        "perf_version": _tool_version("perf"),
+        "cpu_affinity": affinity,
+        "smt_status": smt,
+        "cpu_governor": governors,
+        "turbo_state": turbo,
+        "load_average_before": load,
+        "environment_noisy": bool(load and load[0] > logical),
+    }
+
+
+def _perf_availability() -> dict[str, str]:
+    perf = shutil.which("perf")
+    if perf is None:
+        return {"available": "NO", "permission": "NOT_INSTALLED"}
+    completed = subprocess.run([perf, "stat", "-e", "cycles", "true"], check=False, capture_output=True, text=True)
+    if completed.returncode != 0:
+        return {"available": "NO", "permission": "DENIED_OR_UNAVAILABLE"}
+    return {"available": "YES", "permission": "AVAILABLE_BUT_NOT_COLLECTED_PER_SAMPLE"}
+
+
 def _pilot_work_units(pilot: Pilot) -> int:
     if pilot.workload_id in {"memory.babelstream.triad", "hpc.prk.nstream"}:
         return 31
@@ -666,9 +750,8 @@ def _run_native_replay(
     report_root: Path,
     toolchain: Any,
 ) -> dict[str, Any]:
-    from native_measurement import _perf_probe, collect_environment
-    environment = collect_environment(s3_repo, benchmark_sha)
-    environment["perf"] = _perf_probe()
+    environment = _collect_native_environment(s3_repo, benchmark_sha, EXPECTED_S3_SHA)
+    environment["perf"] = _perf_availability()
     specs = _native_variant_specs()
     run_root = report_root / "raw" / "native-replay-20260921"
     run_root.mkdir(parents=True, exist_ok=True)
