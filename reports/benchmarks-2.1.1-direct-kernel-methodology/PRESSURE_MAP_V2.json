@@ -1,0 +1,6 @@
+{
+  "causal_experiment_ready": false,
+  "measurement_variability": "A_B_REPRODUCIBILITY_GAP",
+  "process_e2e_startup_and_runtime_initialization": "OBSERVED_STARTUP_ENVELOPE",
+  "static_code_and_stack_operation_density": "OBSERVED_NOT_CAUSAL"
+}

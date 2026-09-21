@@ -1,0 +1,126 @@
+fn candidate_sqrt(value: f64) -> f64:
+    return sqrt(value)
+
+fn main() -> i64:
+    mut left: f64_vector = f64_vector_new(48)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 2.0)
+    discard f64_vector_push(&mut left, 3.0)
+    discard f64_vector_push(&mut left, 4.0)
+    discard f64_vector_push(&mut left, 5.0)
+    discard f64_vector_push(&mut left, 6.0)
+    discard f64_vector_push(&mut left, 7.0)
+    discard f64_vector_push(&mut left, 8.0)
+    discard f64_vector_push(&mut left, 9.0)
+    discard f64_vector_push(&mut left, 10.0)
+    discard f64_vector_push(&mut left, 11.0)
+    discard f64_vector_push(&mut left, 12.0)
+    discard f64_vector_push(&mut left, 13.0)
+    discard f64_vector_push(&mut left, 14.0)
+    discard f64_vector_push(&mut left, 15.0)
+    discard f64_vector_push(&mut left, 16.0)
+    discard f64_vector_push(&mut left, 17.0)
+    discard f64_vector_push(&mut left, 18.0)
+    discard f64_vector_push(&mut left, 19.0)
+    discard f64_vector_push(&mut left, 20.0)
+    discard f64_vector_push(&mut left, 21.0)
+    discard f64_vector_push(&mut left, 22.0)
+    discard f64_vector_push(&mut left, 23.0)
+    discard f64_vector_push(&mut left, 24.0)
+    discard f64_vector_push(&mut left, 25.0)
+    discard f64_vector_push(&mut left, 26.0)
+    discard f64_vector_push(&mut left, 27.0)
+    discard f64_vector_push(&mut left, 28.0)
+    discard f64_vector_push(&mut left, 29.0)
+    discard f64_vector_push(&mut left, 30.0)
+    discard f64_vector_push(&mut left, 31.0)
+    discard f64_vector_push(&mut left, 32.0)
+    discard f64_vector_push(&mut left, 33.0)
+    discard f64_vector_push(&mut left, 34.0)
+    discard f64_vector_push(&mut left, 35.0)
+    discard f64_vector_push(&mut left, 36.0)
+    discard f64_vector_push(&mut left, 37.0)
+    discard f64_vector_push(&mut left, 38.0)
+    discard f64_vector_push(&mut left, 39.0)
+    discard f64_vector_push(&mut left, 40.0)
+    discard f64_vector_push(&mut left, 41.0)
+    discard f64_vector_push(&mut left, 42.0)
+    discard f64_vector_push(&mut left, 43.0)
+    discard f64_vector_push(&mut left, 44.0)
+    discard f64_vector_push(&mut left, 45.0)
+    discard f64_vector_push(&mut left, 46.0)
+    discard f64_vector_push(&mut left, 47.0)
+    discard f64_vector_push(&mut left, 48.0)
+    mut right: f64_vector = f64_vector_new(48)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 3.0)
+    discard f64_vector_push(&mut right, 4.0)
+    discard f64_vector_push(&mut right, 5.0)
+    discard f64_vector_push(&mut right, 6.0)
+    discard f64_vector_push(&mut right, 7.0)
+    discard f64_vector_push(&mut right, 8.0)
+    discard f64_vector_push(&mut right, 9.0)
+    discard f64_vector_push(&mut right, 10.0)
+    discard f64_vector_push(&mut right, 11.0)
+    discard f64_vector_push(&mut right, 12.0)
+    discard f64_vector_push(&mut right, 13.0)
+    discard f64_vector_push(&mut right, 14.0)
+    discard f64_vector_push(&mut right, 15.0)
+    discard f64_vector_push(&mut right, 16.0)
+    discard f64_vector_push(&mut right, 17.0)
+    discard f64_vector_push(&mut right, 18.0)
+    discard f64_vector_push(&mut right, 19.0)
+    discard f64_vector_push(&mut right, 20.0)
+    discard f64_vector_push(&mut right, 21.0)
+    discard f64_vector_push(&mut right, 22.0)
+    discard f64_vector_push(&mut right, 23.0)
+    discard f64_vector_push(&mut right, 24.0)
+    discard f64_vector_push(&mut right, 25.0)
+    discard f64_vector_push(&mut right, 26.0)
+    discard f64_vector_push(&mut right, 27.0)
+    discard f64_vector_push(&mut right, 28.0)
+    discard f64_vector_push(&mut right, 29.0)
+    discard f64_vector_push(&mut right, 30.0)
+    discard f64_vector_push(&mut right, 31.0)
+    discard f64_vector_push(&mut right, 32.0)
+    discard f64_vector_push(&mut right, 33.0)
+    discard f64_vector_push(&mut right, 34.0)
+    discard f64_vector_push(&mut right, 35.0)
+    discard f64_vector_push(&mut right, 36.0)
+    discard f64_vector_push(&mut right, 37.0)
+    discard f64_vector_push(&mut right, 38.0)
+    discard f64_vector_push(&mut right, 39.0)
+    discard f64_vector_push(&mut right, 40.0)
+    discard f64_vector_push(&mut right, 41.0)
+    discard f64_vector_push(&mut right, 42.0)
+    discard f64_vector_push(&mut right, 43.0)
+    discard f64_vector_push(&mut right, 44.0)
+    discard f64_vector_push(&mut right, 45.0)
+    discard f64_vector_push(&mut right, 46.0)
+    discard f64_vector_push(&mut right, 47.0)
+    discard f64_vector_push(&mut right, 48.0)
+    discard f64_vector_push(&mut right, 49.0)
+    mut repetition: i64 = 0
+    mut last_result: f64 = 0.0
+    while repetition < 10:
+        mut pair: i64 = 0
+        mut total: f64 = 0.0
+        while pair < 16:
+            mut coordinate: i64 = 0
+            mut ssd: f64 = 0.0
+            while coordinate < 3:
+                mut offset: i64 = pair * 3 + coordinate
+                mut delta: f64 = f64_vector_get(&left, offset) - f64_vector_get(&right, offset)
+                ssd = ssd + delta * delta
+                coordinate = coordinate + 1
+            total = total + candidate_sqrt(ssd / 3.0)
+            pair = pair + 1
+        last_result = total
+        repetition = repetition + 1
+    match last_result <=> 16.0:
+        -1:
+            return 0
+        0:
+            return 1
+        1:
+            return 0

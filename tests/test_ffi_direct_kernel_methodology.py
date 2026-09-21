@@ -1,0 +1,122 @@
+from pathlib import Path
+from unittest.mock import patch
+
+import tools.ffi_direct_kernel_methodology as methodology
+from tools.ffi_direct_kernel_methodology import (
+    S3_FFI_MAX_INSTRUCTIONS,
+    SAMPLE_TIMEOUT_SECONDS,
+    VARIANTS,
+    _driver_source,
+    _calibrate,
+    _pilot_sources,
+    _select_common_k,
+    _expected,
+)
+
+
+def test_phase_a_declares_four_ffi_families_and_matching_symbols() -> None:
+    pilots = _pilot_sources()
+    assert [pilot.workload_id for pilot in pilots] == [
+        "memory.babelstream.triad",
+        "hpc.prk.nstream",
+        "numerical.polybench.gemm",
+        "scientific.rmsd.batch",
+    ]
+    assert [pilot.symbol for pilot in pilots] == ["triad", "nstream", "gemm", "rmsd"]
+    assert all("export fn identity_f64" in pilot.source for pilot in pilots)
+    assert all("double identity_f64" in pilot.c_source for pilot in pilots)
+
+
+def test_phase_a_oracles_follow_runtime_call_contract() -> None:
+    pilots = _pilot_sources()
+    assert _expected(pilots[0], 1) == 3813.0
+    assert _expected(pilots[1], 1) == 1085.0
+    assert _expected(pilots[1], 10) == 1085.0
+    assert _expected(pilots[2], 1) == 5504.0
+    assert _expected(pilots[3], 1) == 16.0
+
+
+def test_phase_a_driver_is_shared_dlopen_runtime_k_and_monotonic_raw() -> None:
+    source = _driver_source()
+    assert "dlopen" in source
+    assert "dlsym" in source
+    assert "CLOCK_MONOTONIC_RAW" in source
+    assert "for (int64_t i = 0; i < k; ++i)" in source
+    assert "usage: driver LIB WORKLOAD VARIANT SYMBOL K EXPECTED WARMUPS" in source
+    assert "--workload" not in source
+
+
+def test_phase_a_gemm_uses_the_proven_three_slice_ffi_shape() -> None:
+    gemm = next(pilot for pilot in _pilot_sources() if pilot.symbol == "gemm")
+    assert "export fn gemm(a: &[f64], b: &[f64], c: &[f64])" in gemm.source
+    assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, const double *c, int64_t c_len)" in gemm.c_source
+
+
+def test_phase_a_nstream_is_repeatable_without_mutating_call_state() -> None:
+    nstream = next(pilot for pilot in _pilot_sources() if pilot.symbol == "nstream")
+    assert "export fn nstream(a: &[f64]" in nstream.source
+    assert "a[i] =" not in nstream.source
+    assert "double nstream(const double *a" in nstream.c_source
+
+
+def test_phase_a_records_optimized_export_symbol_compatibility() -> None:
+    source = _driver_source()
+    assert "exported_symbol" in source
+    assert "SYMBOL" in source
+
+
+def test_phase_a_selects_one_common_runtime_k() -> None:
+    calibration = {
+        label: [
+            {"K": 1, "status": "PASS", "elapsed_ns": 1_000_000},
+            {"K": 100, "status": "PASS", "elapsed_ns": 70_000_000 if label == VARIANTS[0] else 90_000_000},
+        ]
+        for label in VARIANTS
+    }
+    selected, decision = _select_common_k(calibration)
+    assert selected == 100
+    assert decision["status"] == "PASS"
+
+
+def test_phase_a_keeps_largest_safe_k_when_target_floor_is_unreachable() -> None:
+    calibration = {
+        label: [
+            {"K": 1, "status": "PASS", "elapsed_ns": 100_000},
+            {"K": 100, "status": "PASS", "elapsed_ns": 2_000_000},
+        ]
+        for label in VARIANTS
+    }
+    selected, decision = _select_common_k(calibration)
+    assert selected == 100
+    assert decision["status"] == "FALLBACK_BELOW_TARGET_MIN"
+
+
+def test_phase_a_records_explicit_s3_instruction_budget() -> None:
+    assert S3_FFI_MAX_INSTRUCTIONS == 10_000_000_000
+
+
+def test_phase_a_timeout_covers_warmups_and_large_fixed_work() -> None:
+    assert SAMPLE_TIMEOUT_SECONDS == 120.0
+
+
+def test_phase_a_calibration_uses_the_official_warmup_regime() -> None:
+    pilot = _pilot_sources()[0]
+    artifacts = {
+        pilot.workload_id: {
+            label: {"library": f"{label}.so", "export_symbol": pilot.symbol}
+            for label in VARIANTS
+        }
+    }
+    observed_warmups: list[int] = []
+
+    def fake_run_driver(*args: object) -> dict[str, object]:
+        observed_warmups.append(int(args[-1]))
+        return {"status": "PASS", "elapsed_ns": 100_000_000}
+
+    with patch.object(methodology, "_run_driver", side_effect=fake_run_driver), patch.object(
+        methodology, "_write_json"
+    ):
+        _calibrate((pilot,), artifacts, Path("driver"), Path("raw"))
+
+    assert observed_warmups
+    assert set(observed_warmups) == {methodology.WARMUPS}

@@ -1,0 +1,69 @@
+{
+  "causal_experiment_ready": false,
+  "pressures": [
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "fixed work raises the useful-work fraction but A/B must remain stable before causal attribution",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "PROCESS_STARTUP"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "NOT_ASSESSED",
+      "evidence": "Run A/B was not executed because no common fixed-work window was found",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "MEASUREMENT_VARIABILITY"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "assembly hashes are preserved; static size is not a dynamic cause",
+      "evidence_strength": "MULTI_WORKLOAD",
+      "pressure": "STATIC_CODE_DENSITY"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "no dynamic counter evidence",
+      "evidence_strength": "MULTI_WORKLOAD",
+      "pressure": "STACK_OPERATION_DENSITY"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "helper density not measured in this protocol",
+      "evidence_strength": "MULTI_WORKLOAD",
+      "pressure": "RUNTIME_HELPER_PRESSURE"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "perf counters unavailable or not collected",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "MEMORY_BANDWIDTH"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "perf counters unavailable or not collected",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "CACHE_LOCALITY"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "perf counters unavailable or not collected",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "BRANCHING"
+    },
+    {
+      "causality": "UNKNOWN",
+      "classification": "UNCHANGED",
+      "evidence": "perf counters unavailable or not collected",
+      "evidence_strength": "MULTI_FAMILY",
+      "pressure": "NUMERIC_THROUGHPUT"
+    }
+  ],
+  "status": "NOT_ACTIONABLE_NO_COMMON_FIXED_WORK_WINDOW"
+}

@@ -1,0 +1,4 @@
+START_UTC=2026-09-21T11:26:47Z
+RESULT=/home/vboxuser/S3-Benchmarks-2.1.1-direct-kernel-20260921-fixed/reports/benchmarks-2.1.1-direct-kernel-methodology/RESULT.json
+DIRECT_KERNEL_NATIVE_FIXED_EXIT=0
+END_UTC=2026-09-21T12:10:02Z
