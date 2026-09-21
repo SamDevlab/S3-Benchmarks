@@ -12,6 +12,8 @@ from tools.direct_kernel_methodology import (
     expected_repeated_value,
     fit_slope,
     pilot_cases,
+    _fixed_work_summary,
+    _select_fixed_work_level,
     _select_adaptive_levels,
 )
 
@@ -99,6 +101,25 @@ def test_adaptive_levels_keep_three_common_levels_under_the_guard():
     levels, guard = _select_adaptive_levels(probes)
     assert levels == (1, 10, 100, 1000)
     assert guard["skipped"] == {}
+
+
+def test_fixed_work_selects_one_common_level_and_prefers_the_target_window():
+    calibration = [
+        {"K": 1000, "status": "PASS", "fastest_ns": 260_000_000, "slowest_ns": 900_000_000},
+        {"K": 2000, "status": "PASS", "fastest_ns": 700_000_000, "slowest_ns": 2_400_000_000},
+    ]
+    selected = _select_fixed_work_level(calibration)
+    assert selected is not None
+    assert selected["K"] == 2000
+
+
+def test_fixed_work_summary_reports_work_normalized_statistics():
+    summary = _fixed_work_summary([100, 110, 120, 130, 140], 10)
+    assert summary["N"] == 5
+    assert summary["median_ns"] == 120
+    assert summary["ns_per_work_unit"] == 12
+    assert summary["p95_ns"] == 140
+    assert summary["mad_ns"] == 10
 
 
 def test_timing_audit_does_not_claim_a_direct_s3_timer_or_kernel_abi(tmp_path: Path):

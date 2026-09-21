@@ -19,9 +19,11 @@ from pathlib import Path
 import platform
 import re
 import shutil
+import statistics
 import subprocess
 import sys
 import time
+from tempfile import TemporaryDirectory
 from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -50,6 +52,11 @@ NATIVE_SAMPLE_TIMEOUT_SECONDS = 2.0
 NATIVE_PROJECTED_SAMPLE_LIMIT_SECONDS = 1.8
 ADAPTIVE_K_LEVELS = (1, 5, 10, 20, 100, 1000)
 CONVERGENCE_RELATIVE_LIMIT = 0.25
+FIXED_WORK_TARGET_MIN_NS = 250_000_000
+FIXED_WORK_PREFERRED_MIN_NS = 500_000_000
+FIXED_WORK_PREFERRED_MAX_NS = 1_000_000_000
+FIXED_WORK_SAMPLE_TIMEOUT_SECONDS = 5.0
+FIXED_WORK_CALIBRATION_LEVELS = (1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)
 
 
 @dataclass(frozen=True, slots=True)
@@ -568,22 +575,31 @@ def _parse_native_canary(stdout: str) -> int:
     return int(match.group(1))
 
 
-def _run_native_sample(build: dict[str, Any]) -> dict[str, Any]:
+def _run_native_sample(
+    build: dict[str, Any],
+    *,
+    timeout_seconds: float = NATIVE_SAMPLE_TIMEOUT_SECONDS,
+    cpu_affinity: int | None = None,
+) -> dict[str, Any]:
     executable = Path(build["executable_path"])
+    command = [os.fspath(executable)]
+    taskset = shutil.which("taskset")
+    if cpu_affinity is not None and taskset is not None:
+        command = [taskset, "-c", str(cpu_affinity), *command]
     start = time.perf_counter_ns()
     try:
         completed = subprocess.run(
-            [os.fspath(executable)],
+            command,
             check=False,
             capture_output=True,
             text=True,
-            timeout=NATIVE_SAMPLE_TIMEOUT_SECONDS,
+            timeout=timeout_seconds,
         )
     except subprocess.TimeoutExpired:
         return {
             "status": "TIMEOUT",
             "elapsed_ns": None,
-            "timeout_seconds": NATIVE_SAMPLE_TIMEOUT_SECONDS,
+            "timeout_seconds": timeout_seconds,
         }
     elapsed_ns = time.perf_counter_ns() - start
     stdout = completed.stdout.strip()
@@ -597,6 +613,7 @@ def _run_native_sample(build: dict[str, Any]) -> dict[str, Any]:
     return {
         "status": "PASS" if canary == 1 else "FAIL",
         "elapsed_ns": elapsed_ns,
+        "timeout_seconds": timeout_seconds,
         "returncode": completed.returncode,
         "canary": canary,
         "stdout": stdout,
@@ -855,9 +872,439 @@ def _jacobi_triage(s3_repo: Path, root: Path, toolchain: Any) -> list[dict[str, 
                 item["native"][optimization] = {"status": sample["status"], "canary": sample.get("canary"), "build": build}
             except Exception as error:
                 item["native"][optimization] = {"status": "FAIL", "error": f"{type(error).__name__}: {error}"}
-        item["status"] = "PASS" if all(value["pass"] for value in item["hosted"].values()) and all(value["status"] == "PASS" for value in item["native"].values()) else "NATIVE_CORRECTNESS_OPEN"
+        native_values = list(item["native"].values())
+        if all(value["status"] == "PASS" for value in native_values):
+            item["status"] = "PASS" if all(value["pass"] for value in item["hosted"].values()) else "HOSTED_CORRECTNESS_FAIL"
+        elif all("unsupported pilot" in value.get("error", "") for value in native_values):
+            item["status"] = "HARNESS_GAP"
+        else:
+            item["status"] = "REPRODUCED_NATIVE_FAILURE"
         result.append(item)
     return result
+
+
+def _fixed_work_summary(samples: list[int], total_work_units: int) -> dict[str, Any]:
+    if not samples or total_work_units < 1:
+        raise ValueError("fixed-work samples and work units must be positive")
+    ordered = sorted(float(value) for value in samples)
+    median = statistics.median(ordered)
+    mean = statistics.fmean(ordered)
+    deviations = [abs(value - median) for value in ordered]
+    p95 = ordered[max(0, math.ceil(0.95 * len(ordered)) - 1)]
+    stddev = statistics.stdev(ordered) if len(ordered) > 1 else 0.0
+    return {
+        "N": len(ordered),
+        "min_ns": ordered[0],
+        "median_ns": median,
+        "mean_ns": mean,
+        "max_ns": ordered[-1],
+        "p95_ns": p95,
+        "stddev_ns": stddev,
+        "mad_ns": statistics.median(deviations),
+        "cv": stddev / mean if mean else float("inf"),
+        "total_work_units": total_work_units,
+        "ns_per_work_unit": median / total_work_units,
+    }
+
+
+def _select_fixed_work_level(calibration: list[dict[str, Any]]) -> dict[str, Any] | None:
+    valid = [
+        item for item in calibration
+        if item.get("status") == "PASS"
+        and item["fastest_ns"] >= FIXED_WORK_TARGET_MIN_NS
+        and item["slowest_ns"] <= FIXED_WORK_SAMPLE_TIMEOUT_SECONDS * 1_000_000_000
+    ]
+    if not valid:
+        return None
+    preferred = [
+        item for item in valid
+        if FIXED_WORK_PREFERRED_MIN_NS <= item["fastest_ns"] <= FIXED_WORK_PREFERRED_MAX_NS
+    ]
+    candidates = preferred or valid
+    return min(candidates, key=lambda item: abs(item["fastest_ns"] - 750_000_000))
+
+
+def _fixed_work_correctness(
+    pilots: tuple[Pilot, ...],
+    specs: list[tuple[str, str, str]],
+    root: Path,
+    toolchain: Any,
+    cpu_affinity: int | None,
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    with TemporaryDirectory(prefix="s3bench-fixed-correctness-") as directory:
+        temporary_root = Path(directory)
+        for pilot in pilots:
+            for spec in specs:
+                build = _build_replay_variant(pilot, 1, spec, temporary_root / pilot.workload_id / spec[0], toolchain)
+                sample = _run_native_sample(
+                    build,
+                    timeout_seconds=FIXED_WORK_SAMPLE_TIMEOUT_SECONDS,
+                    cpu_affinity=cpu_affinity,
+                )
+                records.append({
+                    "workload_id": pilot.workload_id,
+                    "variant": spec[0],
+                    "status": "PASS" if sample.get("status") == "PASS" and sample.get("canary") == 1 else "FAIL",
+                    "sample": sample,
+                })
+    return records
+
+
+def _calibrate_fixed_work(
+    pilot: Pilot,
+    specs: list[tuple[str, str, str]],
+    root: Path,
+    toolchain: Any,
+    cpu_affinity: int | None,
+) -> dict[str, Any]:
+    calibration: list[dict[str, Any]] = []
+    for iterations in FIXED_WORK_CALIBRATION_LEVELS:
+        with TemporaryDirectory(prefix=f"s3bench-calibration-{pilot.workload_id}-") as directory:
+            level: dict[str, Any] = {"K": iterations, "variants": {}}
+            for spec in specs:
+                build = _build_replay_variant(pilot, iterations, spec, Path(directory) / spec[0], toolchain)
+                sample = _run_native_sample(
+                    build,
+                    timeout_seconds=FIXED_WORK_SAMPLE_TIMEOUT_SECONDS,
+                    cpu_affinity=cpu_affinity,
+                )
+                level["variants"][spec[0]] = {
+                    "status": sample.get("status"),
+                    "elapsed_ns": sample.get("elapsed_ns"),
+                    "timeout_seconds": sample.get("timeout_seconds"),
+                }
+            elapsed = [
+                float(item["elapsed_ns"])
+                for item in level["variants"].values()
+                if item.get("status") == "PASS" and item.get("elapsed_ns") is not None
+            ]
+            level["fastest_ns"] = min(elapsed) if len(elapsed) == len(specs) else None
+            level["slowest_ns"] = max(elapsed) if len(elapsed) == len(specs) else None
+            level["status"] = "PASS" if len(elapsed) == len(specs) else "FAIL"
+            calibration.append(level)
+            if level["status"] == "PASS" and level["slowest_ns"] > FIXED_WORK_SAMPLE_TIMEOUT_SECONDS * 1_000_000_000:
+                break
+            if level["status"] == "PASS" and level["fastest_ns"] >= FIXED_WORK_PREFERRED_MIN_NS:
+                break
+    selection = _select_fixed_work_level(calibration)
+    return {
+        "workload_id": pilot.workload_id,
+        "calibration": calibration,
+        "selected": selection,
+        "status": "PASS" if selection else "NO_COMMON_FIXED_WORK_WINDOW",
+    }
+
+
+def _fixed_work_measurement(
+    run_id: str,
+    pilots: tuple[Pilot, ...],
+    specs: list[tuple[str, str, str]],
+    selected: dict[str, dict[str, Any]],
+    builds: dict[str, dict[str, dict[str, Any]]],
+    environment: dict[str, Any],
+    cpu_affinity: int | None,
+) -> dict[str, Any]:
+    labels = [spec[0] for spec in specs]
+    workloads: list[dict[str, Any]] = []
+    for pilot in pilots:
+        choice = selected[pilot.workload_id]["selected"]
+        iterations = int(choice["K"])
+        samples: dict[str, list[int]] = {label: [] for label in labels}
+        warmups: dict[str, list[int]] = {label: [] for label in labels}
+        for order in _interleaved_labels(labels, FIXED_WORK_WARMUPS):
+            for label in order:
+                sample = _run_native_sample(
+                    builds[pilot.workload_id][label],
+                    timeout_seconds=FIXED_WORK_SAMPLE_TIMEOUT_SECONDS,
+                    cpu_affinity=cpu_affinity,
+                )
+                if sample.get("status") != "PASS":
+                    raise RuntimeError(f"fixed-work warmup failed: {pilot.workload_id} {label}: {sample}")
+                warmups[label].append(int(sample["elapsed_ns"]))
+        for order in _interleaved_labels(labels, FIXED_WORK_REPETITIONS):
+            for label in order:
+                sample = _run_native_sample(
+                    builds[pilot.workload_id][label],
+                    timeout_seconds=FIXED_WORK_SAMPLE_TIMEOUT_SECONDS,
+                    cpu_affinity=cpu_affinity,
+                )
+                if sample.get("status") != "PASS":
+                    raise RuntimeError(f"fixed-work measurement failed: {pilot.workload_id} {label}: {sample}")
+                samples[label].append(int(sample["elapsed_ns"]))
+        total_work_units = _pilot_work_units(pilot) * iterations
+        workloads.append({
+            "workload_id": pilot.workload_id,
+            "size": pilot.size,
+            "K_final": iterations,
+            "work_units_per_iteration": _pilot_work_units(pilot),
+            "total_work_units": total_work_units,
+            "environment": environment,
+            "binary_sha256": {label: builds[pilot.workload_id][label]["executable_sha256"] for label in labels},
+            "warmups_ns": warmups,
+            "samples_ns": samples,
+            "summaries": {label: _fixed_work_summary(values, total_work_units) for label, values in samples.items()},
+        })
+    return {"run_id": run_id, "environment": environment, "workloads": workloads}
+
+
+def _fixed_pressure_map(result: dict[str, Any]) -> dict[str, Any]:
+    reproducible = result["same_machine_reproduction"] == "PASS"
+    perf_available = result["perf"]["available"] == "YES"
+    def entry(name: str, classification: str, strength: str, causality: str, evidence: str) -> dict[str, str]:
+        return {"pressure": name, "classification": classification, "evidence_strength": strength, "causality": causality, "evidence": evidence}
+    return {
+        "status": "ACTIONABLE" if reproducible else "NOT_ACTIONABLE_REPRODUCIBILITY_OPEN",
+        "pressures": [
+            entry("PROCESS_STARTUP", "WEAKENED" if result["fixed_work_window"] else "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "fixed work raises the useful-work fraction but A/B must remain stable before causal attribution"),
+            entry("MEASUREMENT_VARIABILITY", "FALSIFIED" if reproducible else "STRENGTHENED", "MULTI_FAMILY", "CORRELATED", "same-binary Run A/B comparison"),
+            entry("STATIC_CODE_DENSITY", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "assembly hashes are preserved; static size is not a dynamic cause"),
+            entry("STACK_OPERATION_DENSITY", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "no dynamic counter evidence"),
+            entry("RUNTIME_HELPER_PRESSURE", "UNCHANGED", "MULTI_WORKLOAD", "UNKNOWN", "helper density not measured in this protocol"),
+            entry("MEMORY_BANDWIDTH", "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "perf counters unavailable or not collected"),
+            entry("CACHE_LOCALITY", "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "perf counters unavailable or not collected"),
+            entry("BRANCHING", "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "perf counters unavailable or not collected"),
+            entry("NUMERIC_THROUGHPUT", "UNCHANGED", "MULTI_FAMILY", "UNKNOWN", "perf counters unavailable or not collected"),
+        ],
+        "causal_experiment_ready": reproducible and perf_available,
+    }
+
+
+def _run_fixed_work_native_stability(
+    s3_repo: Path,
+    benchmark_sha: str,
+    report_root: Path,
+    toolchain: Any,
+) -> dict[str, Any]:
+    specs = _native_variant_specs()
+    pilots = pilot_cases()
+    if [spec[0] for spec in specs] != ["S3_O0", "S3_O1", "GCC_O2", "CLANG_O2"]:
+        raise RuntimeError("fixed-work protocol requires S3_O0, S3_O1, GCC_O2 and CLANG_O2")
+    cpu_affinity = 0 if shutil.which("taskset") else None
+    environment = _collect_native_environment(s3_repo, benchmark_sha, EXPECTED_S3_SHA)
+    environment["cpu_affinity"] = [cpu_affinity] if cpu_affinity is not None else environment.get("cpu_affinity")
+    environment["perf"] = _perf_availability()
+    run_id = time.strftime("fixed-work-native-%Y%m%d-%H%M%S", time.gmtime())
+    raw_root = report_root / "raw" / run_id
+    raw_root.mkdir(parents=True, exist_ok=False)
+    correctness = _fixed_work_correctness(pilots, specs, raw_root / "correctness", toolchain, cpu_affinity)
+    correctness_status = "PASS" if len(correctness) == 16 and all(item["status"] == "PASS" for item in correctness) else "FAIL"
+    _write_json(raw_root / "correctness.json", {"points": correctness, "status": correctness_status})
+    if correctness_status != "PASS":
+        raise RuntimeError("fixed-work native correctness gate failed; no performance was collected")
+    selected: dict[str, dict[str, Any]] = {}
+    for pilot in pilots:
+        selected[pilot.workload_id] = _calibrate_fixed_work(pilot, specs, raw_root / "calibration", toolchain, cpu_affinity)
+    _write_json(raw_root / "calibration.json", selected)
+    if any(item["status"] != "PASS" for item in selected.values()):
+        raise RuntimeError("NO_COMMON_FIXED_WORK_WINDOW")
+    builds: dict[str, dict[str, dict[str, Any]]] = {}
+    determinism: list[dict[str, Any]] = []
+    for pilot in pilots:
+        iterations = int(selected[pilot.workload_id]["selected"]["K"])
+        builds[pilot.workload_id] = {}
+        for spec in specs:
+            build = _build_replay_variant(pilot, iterations, spec, raw_root / "official", toolchain)
+            canary = _run_native_sample(build, timeout_seconds=FIXED_WORK_SAMPLE_TIMEOUT_SECONDS, cpu_affinity=cpu_affinity)
+            if canary.get("status") != "PASS":
+                raise RuntimeError(f"official fixed-work canary failed: {pilot.workload_id} {spec[0]}: {canary}")
+            builds[pilot.workload_id][spec[0]] = build
+            with TemporaryDirectory(prefix="s3bench-fixed-determinism-") as directory:
+                duplicate = _build_replay_variant(pilot, iterations, spec, Path(directory), toolchain)
+                fields = ("source_sha256", "assembly_sha256", "object_sha256", "executable_sha256")
+                determinism.append({
+                    "workload_id": pilot.workload_id,
+                    "variant": spec[0],
+                    "first": {field: build[field] for field in fields},
+                    "second": {field: duplicate[field] for field in fields},
+                    "pass": all(build[field] == duplicate[field] for field in fields),
+                })
+    frozen_manifest = {
+        "benchmark_sha": benchmark_sha,
+        "s3_sha": EXPECTED_S3_SHA,
+        "run_id": run_id,
+        "methodology": "FIXED_WORK_AMPLIFIED_PROCESS",
+        "variants": [spec[0] for spec in specs],
+        "cpu_affinity": environment["cpu_affinity"],
+        "anti_DCE_policy": "native integer canary over final observable",
+        "workloads": [
+            {
+                "workload_id": pilot.workload_id,
+                "family": pilot.family,
+                "size": pilot.size,
+                "K_final": selected[pilot.workload_id]["selected"]["K"],
+                "work_units_per_iteration": _pilot_work_units(pilot),
+                "total_work_units": _pilot_work_units(pilot) * selected[pilot.workload_id]["selected"]["K"],
+                "input_dimensions": pilot.case.logical_shape,
+                "data_layout": pilot.case.physical_layout,
+                "index_mapping": pilot.case.index_mapping,
+                "calibration_probes": selected[pilot.workload_id]["calibration"],
+                "calibration_decision": selected[pilot.workload_id]["selected"],
+                "variants": [spec[0] for spec in specs],
+            }
+            for pilot in pilots
+        ],
+    }
+    _write_json(raw_root / "frozen-build-manifest.json", {"builds": builds, "determinism": determinism})
+    _write_json(raw_root / "FIXED_WORK_MANIFEST.json", frozen_manifest)
+    environment_after_build = _collect_native_environment(s3_repo, benchmark_sha, EXPECTED_S3_SHA)
+    run_a = _fixed_work_measurement("A", pilots, specs, selected, builds, {"before": environment, "after": environment_after_build}, cpu_affinity)
+    _write_json(raw_root / "run-a.json", run_a)
+    environment_before_b = _collect_native_environment(s3_repo, benchmark_sha, EXPECTED_S3_SHA)
+    run_b = _fixed_work_measurement("B", pilots, specs, selected, builds, {"before": environment_before_b}, cpu_affinity)
+    run_b["environment"]["after"] = _collect_native_environment(s3_repo, benchmark_sha, EXPECTED_S3_SHA)
+    _write_json(raw_root / "run-b.json", run_b)
+    labels = [spec[0] for spec in specs]
+    by_a = {item["workload_id"]: item for item in run_a["workloads"]}
+    by_b = {item["workload_id"]: item for item in run_b["workloads"]}
+    reproducibility: list[dict[str, Any]] = []
+    for pilot in pilots:
+        for label in labels:
+            a = by_a[pilot.workload_id]["summaries"][label]
+            b = by_b[pilot.workload_id]["summaries"][label]
+            relative_delta = abs(a["ns_per_work_unit"] - b["ns_per_work_unit"]) / max(abs(a["ns_per_work_unit"]), abs(b["ns_per_work_unit"]), 1e-12)
+            reproducibility.append({
+                "workload_id": pilot.workload_id,
+                "variant": label,
+                "median_a_ns": a["median_ns"],
+                "median_b_ns": b["median_ns"],
+                "cv_a": a["cv"],
+                "cv_b": b["cv"],
+                "ns_per_work_unit_a": a["ns_per_work_unit"],
+                "ns_per_work_unit_b": b["ns_per_work_unit"],
+                "relative_delta": relative_delta,
+                "limit": CONVERGENCE_RELATIVE_LIMIT,
+                "pass": relative_delta <= CONVERGENCE_RELATIVE_LIMIT,
+            })
+    same_binary = all(
+        by_a[pilot.workload_id]["binary_sha256"] == by_b[pilot.workload_id]["binary_sha256"]
+        for pilot in pilots
+    )
+    same_machine = run_a["environment"]["before"]["machine_fingerprint_sha256"] == run_b["environment"]["before"]["machine_fingerprint_sha256"]
+    reproducibility_status = "PASS" if same_binary and same_machine and all(item["pass"] for item in reproducibility) else "FAIL"
+    deterministic_status = "PASS" if all(item["pass"] for item in determinism) else "FAIL"
+    jacobi = _jacobi_triage(s3_repo, raw_root / "jacobi", toolchain)
+    result = {
+        "campaign": "S3_BENCHMARKS_2_1_2_FIXED_WORK_NATIVE_STABILITY",
+        "benchmark_sha": benchmark_sha,
+        "s3_sha": EXPECTED_S3_SHA,
+        "run_id": run_id,
+        "environment": environment,
+        "variants": labels,
+        "methodology": "FIXED_WORK_AMPLIFIED_PROCESS",
+        "direct_kernel_time": "NOT_AVAILABLE",
+        "callable_kernel_abi": "NO",
+        "cross_k_slope_status": "HISTORICAL_ONLY",
+        "hosted_correctness": "PASS_PRIOR_FIXED_HOSTED_REPLAY",
+        "native_correctness": "PASS",
+        "matched_flat_reference": "PASS",
+        "correctness_points": correctness,
+        "fixed_work_manifest": frozen_manifest,
+        "frozen_builds": builds,
+        "build_determinism": deterministic_status,
+        "same_binary_run_a_run_b": "PASS" if same_binary else "FAIL",
+        "same_machine_reproduction": reproducibility_status,
+        "reproducibility": reproducibility,
+        "run_a": run_a,
+        "run_b": run_b,
+        "perf": environment["perf"],
+        "perf_counters": "UNAVAILABLE_PERMISSION" if environment["perf"]["available"] != "YES" else "NOT_COLLECTED",
+        "jacobi_triage": jacobi,
+        "jacobi_native_correctness": "PASS" if all(item["status"] == "PASS" for item in jacobi) else "HARNESS_GAP" if all(item["status"] == "HARNESS_GAP" for item in jacobi) else "REPRODUCED_NATIVE_FAILURE",
+        "jacobi_performance_measured": "NO",
+        "fixed_work_window": True,
+        "pressure_map_v3": "ACTIONABLE" if reproducibility_status == "PASS" else "NOT_ACTIONABLE_REPRODUCIBILITY_OPEN",
+        "s3_causal_experiment_ready": "YES" if reproducibility_status == "PASS" and environment["perf"]["available"] == "YES" else "NO",
+        "next_path": "EVIDENCE_DRIVEN" if reproducibility_status == "PASS" else "MEASUREMENT_ENVIRONMENT_INVESTIGATION",
+        "next_campaign": "S3_BENCHMARKS_2_2_SCIENTIFIC_MINI_APPS" if reproducibility_status == "PASS" else "S3_BENCHMARKS_2_1_2_FIXED_WORK_NATIVE_STABILITY_REFINEMENT",
+        "raw_samples": f"reports/benchmarks-2.1.2-fixed-work-native-stability/raw/{run_id}",
+        "status": "COMPLETE" if reproducibility_status == "PASS" else "MEASUREMENT_REPRODUCIBILITY_OPEN",
+    }
+    pressure_map = _fixed_pressure_map(result)
+    result["pressure_map_v3_detail"] = pressure_map
+    _write_json(report_root / "FIXED_WORK_MANIFEST.json", frozen_manifest)
+    _write_json(report_root / "FIXED_WORK_NATIVE_RESULT.json", result)
+    _write_json(report_root / "PRESSURE_MAP_V3.json", pressure_map)
+    _write_json(report_root / "JACOBI_CORRECTNESS_TRIAGE.json", {"status": result["jacobi_native_correctness"], "items": jacobi})
+    (report_root / "FIXED_WORK_NATIVE_REPORT.md").write_text(_fixed_work_report_markdown(result), encoding="utf-8", newline="\n")
+    (report_root / "PRESSURE_MAP_V3.md").write_text(_fixed_pressure_map_markdown(pressure_map), encoding="utf-8", newline="\n")
+    (report_root / "JACOBI_CORRECTNESS_TRIAGE.md").write_text(_jacobi_report_markdown(result), encoding="utf-8", newline="\n")
+    return result
+
+
+FIXED_WORK_WARMUPS = 5
+FIXED_WORK_REPETITIONS = 30
+
+
+def _fixed_work_report_markdown(result: dict[str, Any]) -> str:
+    return f"""# S3 Benchmarks 2.1.2 Fixed-Work Native Stability
+
+```text
+CAMPAIGN=S3_BENCHMARKS_2_1_2_FIXED_WORK_NATIVE_STABILITY
+BENCHMARK_HEAD={result['benchmark_sha']}
+S3_SHA={result['s3_sha']}
+MACHINE_FINGERPRINT={result['environment']['machine_fingerprint_sha256']}
+METHODOLOGY=FIXED_WORK_AMPLIFIED_PROCESS
+DIRECT_KERNEL_TIME=NOT_AVAILABLE
+CALLABLE_KERNEL_ABI=NO
+CROSS_K_SLOPE_STATUS=HISTORICAL_ONLY
+NATIVE_CORRECTNESS={result['native_correctness']}
+MATCHED_FLAT_REFERENCE={result['matched_flat_reference']}
+FROZEN_BINARY_A_B={result['same_binary_run_a_run_b']}
+BUILD_DETERMINISM={result['build_determinism']}
+SAME_MACHINE_REPRODUCTION={result['same_machine_reproduction']}
+PERF_DIAGNOSTICS={result['perf_counters']}
+JACOBI_NATIVE_CORRECTNESS={result['jacobi_native_correctness']}
+JACOBI_PERFORMANCE_MEASURED=NO
+PRESSURE_MAP_V3={result['pressure_map_v3']}
+S3_CAUSAL_EXPERIMENT_READY={result['s3_causal_experiment_ready']}
+NEXT_PATH={result['next_path']}
+STATUS={result['status']}
+PR=18
+MERGE=NO
+TAG=NO
+RELEASE=NO
+SHUTDOWN=NO
+```
+
+The primary comparison uses one selected `K_FINAL` per workload, the same
+across S3 O0, S3 O1, GCC O2 and Clang O2. Calibration is discarded as timing
+evidence. Official builds were created once, hashed, and reused unchanged by
+Run A and Run B. The samples measure native process-E2E work, including the
+remaining startup/runtime envelope; they are not direct kernel time.
+
+The historical cross-K slope evidence remains preserved in the 2.1.1 report
+and is classified `HISTORICAL_ONLY`. It is not used as the primary result here.
+
+Raw JSON, frozen manifests, build hashes, calibration decisions and all sample
+arrays are under `{result['raw_samples']}`. Derived executables, objects and
+assembly payloads may be removed after hashing; their SHA-256 values remain in
+the frozen manifest.
+"""
+
+
+def _fixed_pressure_map_markdown(pressure_map: dict[str, Any]) -> str:
+    lines = ["# Pressure Map V3", "", "| Pressure | Classification | Evidence strength | Causality |", "| --- | --- | --- | --- |"]
+    for item in pressure_map["pressures"]:
+        lines.append(f"| {item['pressure']} | {item['classification']} | {item['evidence_strength']} | {item['causality']} |")
+    lines.extend(["", f"`PRESSURE_MAP_V3={pressure_map['status']}`", f"`S3_CAUSAL_EXPERIMENT_READY={'YES' if pressure_map['causal_experiment_ready'] else 'NO'}`", "", "No pressure is promoted to a compiler optimization target without reproducible fixed-work evidence and a discriminating experiment."])
+    return "\n".join(lines) + "\n"
+
+
+def _jacobi_report_markdown(result: dict[str, Any]) -> str:
+    return f"""# Jacobi Correctness Triage
+
+```text
+JACOBI_NATIVE_CORRECTNESS={result['jacobi_native_correctness']}
+JACOBI_PERFORMANCE_MEASURED=NO
+```
+
+Hosted small and medium O0/O1 checks remain recorded. The native adapter
+currently reports an explicit `HARNESS_GAP` for the Jacobi pilot because the
+fixed-work pilot builder does not expose that workload in the native replay
+generator. This is not classified as an S3 native failure and no Jacobi timing
+was collected.
+"""
 
 
 def _write_json(path: Path, value: Any) -> None:
@@ -976,6 +1423,30 @@ def run_campaign(args: argparse.Namespace) -> Path:
     return report_root / "RESULT.json"
 
 
+def run_fixed_work_campaign(args: argparse.Namespace) -> Path:
+    """Run the 2.1.2 frozen-work protocol on the controlled native host."""
+
+    root = ROOT
+    s3_repo = args.s3_repo.resolve()
+    benchmark_sha = require_commit(root, args.benchmark_sha, label="benchmark repository")
+    s3_sha = require_commit(s3_repo, args.s3_sha, label="S3 candidate")
+    if s3_sha != EXPECTED_S3_SHA:
+        raise RuntimeError(f"S3 candidate is not the pinned source: {s3_sha} != {EXPECTED_S3_SHA}")
+    if platform.system() != "Linux" or platform.machine().lower() not in {"x86_64", "amd64"}:
+        raise RuntimeError("fixed-work native stability requires Linux x86-64")
+    from bootstrap.s3.backends.x86_64 import NativeToolchain
+
+    report_root = root / "reports" / "benchmarks-2.1.2-fixed-work-native-stability"
+    report_root.mkdir(parents=True, exist_ok=True)
+    os.environ["S3_REPO"] = str(s3_repo)
+    os.environ["S3_COMMIT"] = s3_sha
+    if str(s3_repo) not in sys.path:
+        sys.path.insert(0, str(s3_repo))
+    _run_fixed_work_native_stability(s3_repo, benchmark_sha, report_root, NativeToolchain.detect())
+    print(f"FIXED_WORK_RESULT={report_root / 'FIXED_WORK_NATIVE_RESULT.json'}")
+    return report_root / "FIXED_WORK_NATIVE_RESULT.json"
+
+
 def _methodology_markdown(audit: dict[str, Any], native_available: bool, native_error: str, k_levels: tuple[int, ...]) -> str:
     native_state = "available" if native_available else f"deferred: {native_error}"
     return f"""# Direct Kernel Methodology 2.1.1
@@ -1079,8 +1550,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--s3-sha", default=EXPECTED_S3_SHA)
     parser.add_argument("--benchmark-sha", required=True)
     parser.add_argument("--k", dest="k_levels", type=int, nargs="+", default=list(DEFAULT_K_LEVELS))
+    parser.add_argument("--fixed-work", action="store_true", help="run the 2.1.2 frozen-work native stability protocol")
     args = parser.parse_args(argv)
-    path = run_campaign(args)
+    path = run_fixed_work_campaign(args) if args.fixed_work else run_campaign(args)
     print(f"RESULT={path}")
     return 0
 
