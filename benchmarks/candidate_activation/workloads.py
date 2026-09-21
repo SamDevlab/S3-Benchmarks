@@ -110,7 +110,7 @@ def _zeros(name: str, length: int) -> list[str]:
 
 
 def _program(body: list[str], result: str, _expected: float) -> str:
-    return "foreign fn sqrt(value: f64) -> f64:\n\nfn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + f"\n    return {result}\n"
+    return "foreign fn sqrt(value: f64) -> f64\n\nfn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + f"\n    return {result}\n"
 
 
 def _nstream_source(n: int) -> str:
@@ -185,7 +185,7 @@ def _rmsd_single_source(length: int) -> str:
         "        index = index + 1",
     ]
     body += [f"    return candidate_sqrt(total / {float(length)!r})"]
-    return "foreign fn sqrt(value: f64) -> f64:\n\nfn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + "\n"
+    return "foreign fn sqrt(value: f64) -> f64\n\nfn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + "\n"
 
 
 def _rmsd_single_oracle(length: int) -> float:
