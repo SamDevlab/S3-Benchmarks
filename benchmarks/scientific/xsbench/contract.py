@@ -106,10 +106,12 @@ def s3_source() -> str:
                 mut middle: i64 = low + (high - low) / 2
                 mut middle_index: i64 = grid_base + middle * 6
                 mut middle_energy: f64 = data[middle_index]
-                match middle_energy > energy:
-                    high = middle
-                else:
-                    low = middle
+                match middle_energy <=> energy:
+                    1:
+                        high = middle
+
+                    else:
+                        low = middle
             mut low_index: i64 = grid_base + low * 6
             mut high_index: i64 = grid_base + high * 6
             mut factor: f64 = (data[high_index] - energy) / (data[high_index] - data[low_index])
