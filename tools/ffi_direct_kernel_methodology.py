@@ -353,6 +353,7 @@ typedef double (*triad_fn)(double *, int64_t, const double *, int64_t, const dou
 typedef double (*nstream_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t, double);
 typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t);
 typedef double (*rmsd_fn)(const double *, int64_t, const double *, int64_t, int64_t, int64_t);
+typedef double (*xsbench_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t);
 
 static void fail(const char *message) { fprintf(stderr, "%s\n", message); exit(2); }
 static double *alloc_doubles(size_t count) { double *p = calloc(count, sizeof(*p)); if (!p) fail("allocation failed"); return p; }
@@ -414,6 +415,31 @@ int main(int argc, char **argv) {
         for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates);
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates); end = now_ns();
         free(left); free(right);
+    } else if (strcmp(workload, "scientific.xsbench.compatible_lookup") == 0) {
+        xsbench_fn fn = (xsbench_fn)symbol(handle, exported_symbol);
+        static const double data[] = {
+            3.0, 5.0, 2.0, 2.0, 2.0, 2.0, 0.0, 1.0, 1.0, 2.0,
+            0.6, 0.4, 0.25, 0.75,
+            0.0, 1.0, 0.1, 0.2, 0.3, 0.4,
+            0.25, 2.0, 0.2, 0.3, 0.4, 0.5,
+            0.5, 3.0, 0.3, 0.4, 0.5, 0.6,
+            0.75, 4.0, 0.4, 0.5, 0.6, 0.7,
+            1.0, 5.0, 0.5, 0.6, 0.7, 0.8,
+            0.0, 11.0, 10.1, 10.2, 10.3, 10.4,
+            0.25, 12.0, 10.2, 10.3, 10.4, 10.5,
+            0.5, 13.0, 10.3, 10.4, 10.5, 10.6,
+            0.75, 14.0, 10.4, 10.5, 10.6, 10.7,
+            1.0, 15.0, 10.5, 10.6, 10.7, 10.8,
+            0.0, 21.0, 20.1, 20.2, 20.3, 20.4,
+            0.25, 22.0, 20.2, 20.3, 20.4, 20.5,
+            0.5, 23.0, 20.3, 20.4, 20.5, 20.6,
+            0.75, 24.0, 20.4, 20.5, 20.6, 20.7,
+            1.0, 25.0, 20.5, 20.6, 20.7, 20.8
+        };
+        static const double energies[] = {0.05, 0.22, 0.37, 0.49, 0.63, 0.78, 0.91, 0.14};
+        static const double materials[] = {0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0};
+        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), energies, 8, materials, 8);
+        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), energies, 8, materials, 8); end = now_ns();
     } else fail("unknown workload");
     dlclose(handle);
     emit_result(workload, variant, k, end - begin, observable, expected);
