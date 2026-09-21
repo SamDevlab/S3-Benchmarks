@@ -14,9 +14,9 @@
   "exported_kernel_call_available": "NO",
   "external_amortization_required": "YES",
   "full_suite": "27 passed, 1 skipped, 0 failed",
-  "full_suite_sha": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "full_suite_sha": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
   "functional_head": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
-  "final_candidate_head": "55605e6b70bd1e7c2f3de699d5d7ae7465603707",
+  "final_candidate_head": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
   "source_changed_after_final_gates": false,
   "hosted_pilot_validation": [
     {
