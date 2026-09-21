@@ -4,7 +4,8 @@
 
 ```text
 CAMPAIGN=S3_BENCHMARKS_2_1_1_NATIVE_REPLAY
-BENCHMARK_HEAD=2229fa568ecbe1a52d7c4ccc0094b8e602735c2f
+BENCHMARK_HEAD=8b0bd1d2f4f4e693ab6effa7659e011cf82ecf8c
+EXECUTION_REPLAY_HEAD=8b0bd1d2f4f4e693ab6effa7659e011cf82ecf8c
 S3_SHA=e07d0b5464bf472b2ca18993f3e196a234ff0fc5
 HOST=Linux x86_64
 MACHINE_FINGERPRINT_SHA256=9f6c7cbbdbbc2d056ffc306f76a1dcd9df194e15167cb037542da54e97b59393
@@ -29,7 +30,7 @@ level used five warmups and thirty interleaved samples, with a 2.0 second hard
 per-sample timeout. Run A and independent Run B used the same machine
 fingerprint. All raw sample arrays and build records are preserved under:
 
-`raw/native-replay-20260921/`
+`raw/native-replay-20260921-final/`
 
 All raw timing arrays, probe records, source fixtures and SHA-256 build
 manifests are preserved. Derived native payloads (executables, objects and

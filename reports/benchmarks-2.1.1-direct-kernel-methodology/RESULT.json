@@ -1,7 +1,7 @@
 {
   "base_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
   "base_pr": 17,
-  "benchmark_head": "2229fa568ecbe1a52d7c4ccc0094b8e602735c2f",
+  "benchmark_head": "8b0bd1d2f4f4e693ab6effa7659e011cf82ecf8c",
   "build_determinism": "PASS",
   "build_determinism_status": "PASS",
   "calibration": "PROCESS_E2E_NO_DIRECT_TIMER",
@@ -98,7 +98,7 @@
   "next_path": "METHODOLOGY_REFINEMENT_FOR_PROCESS_E2E_SLOPE_STABILITY",
   "pilot_gate": "PASS",
   "pressure_map_v2": "NATIVE_REPLAY_REPRODUCIBILITY_GAP",
-  "raw_samples": "reports/benchmarks-2.1.1-direct-kernel-methodology/raw/native-replay-20260921",
+  "raw_samples": "reports/benchmarks-2.1.1-direct-kernel-methodology/raw/native-replay-20260921-final",
   "run_a": "PASS",
   "run_b": "PASS",
   "s3_causal_experiment_ready": "NO",

@@ -1,5 +1,9 @@
 # Direct Kernel Methodology 2.1.1
 
+Final native replay provenance: `BENCHMARK_EXECUTION_HEAD=8b0bd1d2f4f4e693ab6effa7659e011cf82ecf8c`,
+`S3_SHA=e07d0b5464bf472b2ca18993f3e196a234ff0fc5`, with raw evidence under
+`raw/native-replay-20260921-final/`.
+
 The benchmark repository remains pinned to the S3 candidate and does not modify
 the S3 compiler. The audit selected `METHOD_C_IN_PROCESS_AMORTIZATION` because the
 pinned source has no internal timer or exported callable kernel ABI. The native
