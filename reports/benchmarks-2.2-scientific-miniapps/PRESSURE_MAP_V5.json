@@ -1,0 +1,23 @@
+{
+  "causal_experiment_ready": false,
+  "pressures": [
+    {
+      "causality": "NOT_ESTABLISHED",
+      "evidence_strength": "CORRECTNESS_AND_NATIVE_CANARY",
+      "families": ["RMSD_SINGLE", "RMSD_BATCH", "RMSD_MATRIX"],
+      "name": "scientific indexed-vector and nested-loop representability",
+      "scientific_correctness": "PASS",
+      "timing": "NOT_RUN",
+      "native_speedup_claim": "NO"
+    },
+    {
+      "causality": "NOT_APPLICABLE",
+      "evidence_strength": "AUDIT_ONLY",
+      "families": ["XSBench", "miniBUDE", "miniMD"],
+      "name": "external scientific workload promotion requires provenance and adapter closure",
+      "promotion": "DEFERRED"
+    }
+  ],
+  "next_discriminating_experiment": "qualify one deferred workload with immutable source, license, input contract, independent oracle, and matched native canary before timing",
+  "status": "PHASE_B_CORRECTNESS_COMPLETE"
+}
