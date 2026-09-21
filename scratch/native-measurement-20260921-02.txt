@@ -1,0 +1,94 @@
+CORRECTNESS 1/31 hpc.prk.nstream small
+MEASURE 1/31 hpc.prk.nstream small s3-o0
+MEASURE 1/31 hpc.prk.nstream small s3-o1
+CORRECTNESS 2/31 memory.babelstream.copy small
+MEASURE 2/31 memory.babelstream.copy small s3-o0
+MEASURE 2/31 memory.babelstream.copy small s3-o1
+CORRECTNESS 3/31 memory.babelstream.scale small
+MEASURE 3/31 memory.babelstream.scale small s3-o0
+MEASURE 3/31 memory.babelstream.scale small s3-o1
+CORRECTNESS 4/31 memory.babelstream.add small
+MEASURE 4/31 memory.babelstream.add small s3-o0
+MEASURE 4/31 memory.babelstream.add small s3-o1
+CORRECTNESS 5/31 memory.babelstream.triad small
+MEASURE 5/31 memory.babelstream.triad small s3-o0
+MEASURE 5/31 memory.babelstream.triad small s3-o1
+CORRECTNESS 6/31 memory.babelstream.dot small
+MEASURE 6/31 memory.babelstream.dot small s3-o0
+MEASURE 6/31 memory.babelstream.dot small s3-o1
+CORRECTNESS 7/31 scientific.rmsd.batch small
+MEASURE 7/31 scientific.rmsd.batch small s3-o0
+MEASURE 7/31 scientific.rmsd.batch small s3-o1
+CORRECTNESS 8/31 scientific.rmsd.matrix small
+MEASURE 8/31 scientific.rmsd.matrix small s3-o0
+MEASURE 8/31 scientific.rmsd.matrix small s3-o1
+CORRECTNESS 9/31 hpc.prk.transpose small
+MEASURE 9/31 hpc.prk.transpose small s3-o0
+MEASURE 9/31 hpc.prk.transpose small s3-o1
+CORRECTNESS 10/31 numerical.polybench.atax small
+MEASURE 10/31 numerical.polybench.atax small s3-o0
+MEASURE 10/31 numerical.polybench.atax small s3-o1
+CORRECTNESS 11/31 numerical.polybench.mvt small
+MEASURE 11/31 numerical.polybench.mvt small s3-o0
+MEASURE 11/31 numerical.polybench.mvt small s3-o1
+CORRECTNESS 12/31 numerical.polybench.gemm small
+MEASURE 12/31 numerical.polybench.gemm small s3-o0
+MEASURE 12/31 numerical.polybench.gemm small s3-o1
+CORRECTNESS 13/31 language.plb2.matmul small
+MEASURE 13/31 language.plb2.matmul small s3-o0
+MEASURE 13/31 language.plb2.matmul small s3-o1
+CORRECTNESS 14/31 numerical.polybench.2mm small
+MEASURE 14/31 numerical.polybench.2mm small s3-o0
+MEASURE 14/31 numerical.polybench.2mm small s3-o1
+CORRECTNESS 15/31 numerical.polybench.jacobi_1d small
+MEASURE 15/31 numerical.polybench.jacobi_1d small s3-o0
+MEASURE 15/31 numerical.polybench.jacobi_1d small s3-o1
+CORRECTNESS 16/31 hpc.prk.nstream medium
+MEASURE 16/31 hpc.prk.nstream medium s3-o0
+MEASURE 16/31 hpc.prk.nstream medium s3-o1
+CORRECTNESS 17/31 memory.babelstream.copy medium
+MEASURE 17/31 memory.babelstream.copy medium s3-o0
+MEASURE 17/31 memory.babelstream.copy medium s3-o1
+CORRECTNESS 18/31 memory.babelstream.scale medium
+MEASURE 18/31 memory.babelstream.scale medium s3-o0
+MEASURE 18/31 memory.babelstream.scale medium s3-o1
+CORRECTNESS 19/31 memory.babelstream.add medium
+MEASURE 19/31 memory.babelstream.add medium s3-o0
+MEASURE 19/31 memory.babelstream.add medium s3-o1
+CORRECTNESS 20/31 memory.babelstream.triad medium
+MEASURE 20/31 memory.babelstream.triad medium s3-o0
+MEASURE 20/31 memory.babelstream.triad medium s3-o1
+CORRECTNESS 21/31 memory.babelstream.dot medium
+MEASURE 21/31 memory.babelstream.dot medium s3-o0
+MEASURE 21/31 memory.babelstream.dot medium s3-o1
+CORRECTNESS 22/31 scientific.rmsd.batch medium
+MEASURE 22/31 scientific.rmsd.batch medium s3-o0
+MEASURE 22/31 scientific.rmsd.batch medium s3-o1
+CORRECTNESS 23/31 scientific.rmsd.matrix medium
+MEASURE 23/31 scientific.rmsd.matrix medium s3-o0
+MEASURE 23/31 scientific.rmsd.matrix medium s3-o1
+CORRECTNESS 24/31 scientific.rmsd.single medium
+MEASURE 24/31 scientific.rmsd.single medium s3-o0
+MEASURE 24/31 scientific.rmsd.single medium s3-o1
+CORRECTNESS 25/31 hpc.prk.transpose medium
+MEASURE 25/31 hpc.prk.transpose medium s3-o0
+MEASURE 25/31 hpc.prk.transpose medium s3-o1
+CORRECTNESS 26/31 numerical.polybench.atax medium
+MEASURE 26/31 numerical.polybench.atax medium s3-o0
+MEASURE 26/31 numerical.polybench.atax medium s3-o1
+CORRECTNESS 27/31 numerical.polybench.mvt medium
+MEASURE 27/31 numerical.polybench.mvt medium s3-o0
+MEASURE 27/31 numerical.polybench.mvt medium s3-o1
+CORRECTNESS 28/31 numerical.polybench.gemm medium
+MEASURE 28/31 numerical.polybench.gemm medium s3-o0
+MEASURE 28/31 numerical.polybench.gemm medium s3-o1
+CORRECTNESS 29/31 language.plb2.matmul medium
+MEASURE 29/31 language.plb2.matmul medium s3-o0
+MEASURE 29/31 language.plb2.matmul medium s3-o1
+CORRECTNESS 30/31 numerical.polybench.2mm medium
+MEASURE 30/31 numerical.polybench.2mm medium s3-o0
+MEASURE 30/31 numerical.polybench.2mm medium s3-o1
+CORRECTNESS 31/31 numerical.polybench.jacobi_1d medium
+SKIP 31/31 numerical.polybench.jacobi_1d medium: native correctness canary failed: 'program returned: 0\n'
+RUN_ID=native-v1-20260921-02
+MEASUREMENT_RESULTS=/tmp/s3-benchmarks-2-1-20260921/baselines/native-v1/native-v1-20260921-02/measurement-results.json

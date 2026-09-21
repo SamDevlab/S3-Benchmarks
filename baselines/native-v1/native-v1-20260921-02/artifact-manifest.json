@@ -1,0 +1,14 @@
+{
+  "artifact_count": 485,
+  "measurement_results": {
+    "bytes": 585309,
+    "path": "measurement-results.json",
+    "sha256": "2bacdfc3b185f4e5bb2a5829085804cb7bc363394429cf1347332e2ba86255d6"
+  },
+  "provenance": {
+    "benchmark_commit": "70e95bfe963bf7b49175d5eeb978ff5a9404d5f0",
+    "s3_commit": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+  },
+  "run_id": "native-v1-20260921-02",
+  "schema": "s3.benchmark.artifact-manifest.v2"
+}
