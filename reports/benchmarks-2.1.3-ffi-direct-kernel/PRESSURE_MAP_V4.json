@@ -1,0 +1,25 @@
+{
+  "causal_experiment_ready": false,
+  "next_discriminating_experiment": "measure a matched identity boundary and supported native counters on a controlled host",
+  "pressures": [
+    {
+      "causality": "CORRELATED",
+      "direct_ffi_evidence": "PASS",
+      "evidence_strength": "MULTI_FAMILY",
+      "families": ["TRIAD", "NSTREAM", "GEMM", "RMSD_BATCH"],
+      "name": "high S3 call-loop cost relative to matched C references",
+      "perf_evidence": "UNAVAILABLE_BY_POLICY",
+      "structural_evidence": "matched ABI and frozen artifact hashes"
+    },
+    {
+      "causality": "CORRELATED",
+      "direct_ffi_evidence": "PASS",
+      "evidence_strength": "MULTI_FAMILY",
+      "families": ["TRIAD", "NSTREAM", "GEMM", "RMSD_BATCH"],
+      "name": "S3_FFI_O1 lower call-loop cost than S3_FFI_O0",
+      "perf_evidence": "UNAVAILABLE_BY_POLICY",
+      "structural_evidence": "O0/O1 artifacts are distinct and provenance-pinned"
+    }
+  ],
+  "status": "READY_FOR_PHASE_B"
+}

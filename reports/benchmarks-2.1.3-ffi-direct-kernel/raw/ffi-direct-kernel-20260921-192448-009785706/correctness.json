@@ -1,0 +1,466 @@
+[
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/triad-S3_FFI_O0.so",
+        "memory.babelstream.triad",
+        "S3_FFI_O0",
+        "triad",
+        "1",
+        "3813",
+        "5"
+      ],
+      "elapsed_ns": 3600,
+      "expected": 3813,
+      "observable": 3813,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O0",
+      "workload": "memory.babelstream.triad"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O0",
+    "workload_id": "memory.babelstream.triad"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/triad-S3_FFI_O1.so",
+        "memory.babelstream.triad",
+        "S3_FFI_O1",
+        "s3_triad",
+        "1",
+        "3813",
+        "5"
+      ],
+      "elapsed_ns": 1830,
+      "expected": 3813,
+      "observable": 3813,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O1",
+      "workload": "memory.babelstream.triad"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O1",
+    "workload_id": "memory.babelstream.triad"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/triad-GCC_O2.so",
+        "memory.babelstream.triad",
+        "GCC_O2",
+        "triad",
+        "1",
+        "3813",
+        "5"
+      ],
+      "elapsed_ns": 340,
+      "expected": 3813,
+      "observable": 3813,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "GCC_O2",
+      "workload": "memory.babelstream.triad"
+    },
+    "status": "PASS",
+    "variant": "GCC_O2",
+    "workload_id": "memory.babelstream.triad"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/triad-CLANG_O2.so",
+        "memory.babelstream.triad",
+        "CLANG_O2",
+        "triad",
+        "1",
+        "3813",
+        "5"
+      ],
+      "elapsed_ns": 130,
+      "expected": 3813,
+      "observable": 3813,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "CLANG_O2",
+      "workload": "memory.babelstream.triad"
+    },
+    "status": "PASS",
+    "variant": "CLANG_O2",
+    "workload_id": "memory.babelstream.triad"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/nstream-S3_FFI_O0.so",
+        "hpc.prk.nstream",
+        "S3_FFI_O0",
+        "nstream",
+        "1",
+        "1085",
+        "5"
+      ],
+      "elapsed_ns": 3860,
+      "expected": 1085,
+      "observable": 1085,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O0",
+      "workload": "hpc.prk.nstream"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O0",
+    "workload_id": "hpc.prk.nstream"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/nstream-S3_FFI_O1.so",
+        "hpc.prk.nstream",
+        "S3_FFI_O1",
+        "s3_nstream",
+        "1",
+        "1085",
+        "5"
+      ],
+      "elapsed_ns": 2220,
+      "expected": 1085,
+      "observable": 1085,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O1",
+      "workload": "hpc.prk.nstream"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O1",
+    "workload_id": "hpc.prk.nstream"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/nstream-GCC_O2.so",
+        "hpc.prk.nstream",
+        "GCC_O2",
+        "nstream",
+        "1",
+        "1085",
+        "5"
+      ],
+      "elapsed_ns": 310,
+      "expected": 1085,
+      "observable": 1085,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "GCC_O2",
+      "workload": "hpc.prk.nstream"
+    },
+    "status": "PASS",
+    "variant": "GCC_O2",
+    "workload_id": "hpc.prk.nstream"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/nstream-CLANG_O2.so",
+        "hpc.prk.nstream",
+        "CLANG_O2",
+        "nstream",
+        "1",
+        "1085",
+        "5"
+      ],
+      "elapsed_ns": 140,
+      "expected": 1085,
+      "observable": 1085,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "CLANG_O2",
+      "workload": "hpc.prk.nstream"
+    },
+    "status": "PASS",
+    "variant": "CLANG_O2",
+    "workload_id": "hpc.prk.nstream"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/gemm-S3_FFI_O0.so",
+        "numerical.polybench.gemm",
+        "S3_FFI_O0",
+        "gemm",
+        "1",
+        "5504",
+        "5"
+      ],
+      "elapsed_ns": 10340,
+      "expected": 5504,
+      "observable": 5504,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O0",
+      "workload": "numerical.polybench.gemm"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O0",
+    "workload_id": "numerical.polybench.gemm"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/gemm-S3_FFI_O1.so",
+        "numerical.polybench.gemm",
+        "S3_FFI_O1",
+        "s3_gemm",
+        "1",
+        "5504",
+        "5"
+      ],
+      "elapsed_ns": 6260,
+      "expected": 5504,
+      "observable": 5504,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O1",
+      "workload": "numerical.polybench.gemm"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O1",
+    "workload_id": "numerical.polybench.gemm"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/gemm-GCC_O2.so",
+        "numerical.polybench.gemm",
+        "GCC_O2",
+        "gemm",
+        "1",
+        "5504",
+        "5"
+      ],
+      "elapsed_ns": 470,
+      "expected": 5504,
+      "observable": 5504,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "GCC_O2",
+      "workload": "numerical.polybench.gemm"
+    },
+    "status": "PASS",
+    "variant": "GCC_O2",
+    "workload_id": "numerical.polybench.gemm"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/gemm-CLANG_O2.so",
+        "numerical.polybench.gemm",
+        "CLANG_O2",
+        "gemm",
+        "1",
+        "5504",
+        "5"
+      ],
+      "elapsed_ns": 120,
+      "expected": 5504,
+      "observable": 5504,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "CLANG_O2",
+      "workload": "numerical.polybench.gemm"
+    },
+    "status": "PASS",
+    "variant": "CLANG_O2",
+    "workload_id": "numerical.polybench.gemm"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/rmsd-S3_FFI_O0.so",
+        "scientific.rmsd.batch",
+        "S3_FFI_O0",
+        "rmsd",
+        "1",
+        "16",
+        "5"
+      ],
+      "elapsed_ns": 6620,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O0",
+      "workload": "scientific.rmsd.batch"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O0",
+    "workload_id": "scientific.rmsd.batch"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/rmsd-S3_FFI_O1.so",
+        "scientific.rmsd.batch",
+        "S3_FFI_O1",
+        "rmsd",
+        "1",
+        "16",
+        "5"
+      ],
+      "elapsed_ns": 10950,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_FFI_O1",
+      "workload": "scientific.rmsd.batch"
+    },
+    "status": "PASS",
+    "variant": "S3_FFI_O1",
+    "workload_id": "scientific.rmsd.batch"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/rmsd-GCC_O2.so",
+        "scientific.rmsd.batch",
+        "GCC_O2",
+        "rmsd",
+        "1",
+        "16",
+        "5"
+      ],
+      "elapsed_ns": 250,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "GCC_O2",
+      "workload": "scientific.rmsd.batch"
+    },
+    "status": "PASS",
+    "variant": "GCC_O2",
+    "workload_id": "scientific.rmsd.batch"
+  },
+  {
+    "sample": {
+      "K": 1,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.1.3-ffi-direct-kernel-20260921/reports/benchmarks-2.1.3-ffi-direct-kernel/raw/ffi-direct-kernel-20260921-192448-009785706/artifacts/rmsd-CLANG_O2.so",
+        "scientific.rmsd.batch",
+        "CLANG_O2",
+        "rmsd",
+        "1",
+        "16",
+        "5"
+      ],
+      "elapsed_ns": 370,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "CLANG_O2",
+      "workload": "scientific.rmsd.batch"
+    },
+    "status": "PASS",
+    "variant": "CLANG_O2",
+    "workload_id": "scientific.rmsd.batch"
+  }
+]
