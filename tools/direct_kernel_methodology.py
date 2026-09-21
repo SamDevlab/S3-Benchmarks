@@ -666,7 +666,7 @@ def _run_native_replay(
     report_root: Path,
     toolchain: Any,
 ) -> dict[str, Any]:
-    from tools.native_measurement import _perf_probe, collect_environment
+    from native_measurement import _perf_probe, collect_environment
     environment = collect_environment(s3_repo, benchmark_sha)
     environment["perf"] = _perf_probe()
     specs = _native_variant_specs()
