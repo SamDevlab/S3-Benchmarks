@@ -1,0 +1,90 @@
+fn candidate_sqrt(value: f64) -> f64:
+    return sqrt(value)
+
+fn main() -> f64:
+    mut left: f64_vector = f64_vector_new(27)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 1.0)
+    mut right: f64_vector = f64_vector_new(27)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 2.0)
+    mut result: f64_vector = f64_vector_new(9)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    discard f64_vector_push(&mut result, 0.0)
+    mut p: i64 = 0
+    mut checksum: f64 = 0.0
+    while p < 3:
+        mut q: i64 = 0
+        while q < 3:
+            mut coordinate: i64 = 0
+            mut ssd: f64 = 0.0
+            while coordinate < 3:
+                mut left_offset: i64 = (p * to_i64(3) + q) * to_i64(3) + coordinate
+                mut right_offset: i64 = (q * to_i64(3) + p) * to_i64(3) + coordinate
+                mut delta: f64 = f64_vector_get(&left, left_offset) - f64_vector_get(&right, right_offset)
+                ssd = ssd + delta * delta
+                coordinate = coordinate + 1
+            mut value: f64 = candidate_sqrt(ssd / 3.0)
+            mut result_index: i64 = p * to_i64(3) + q
+            discard f64_vector_set(&mut result, result_index, value)
+            checksum = checksum + value
+            q = q + 1
+        p = p + 1
+    return checksum

@@ -1,0 +1,30 @@
+{
+  "source": {
+    "project": "TSVC",
+    "upstream_sha": "badf9adb2974867ac0937718d85a44dec6dec95a",
+    "source_path": "src/tsvc.c",
+    "total_named_loops": 138,
+    "vendored_code": false
+  },
+  "audit_scope": "representative compatibility audit; no TSVC source is vendored or claimed as implemented",
+  "selected_loops": [
+    {"id": "s000", "source_line": 47, "family": "linear dependence", "pattern": "independent 1D loop", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "independent scalar loop is representable by an original S3 adapter"},
+    {"id": "s111", "source_line": 68, "family": "linear dependence", "pattern": "odd-stride dependence", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "explicit stride/index arithmetic is available to an adapter"},
+    {"id": "s1111", "source_line": 88, "family": "data access", "pattern": "jump in data access", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "explicit indexed access is representable"},
+    {"id": "s112", "source_line": 110, "family": "linear dependence", "pattern": "loop reversal", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "bounded reverse traversal is representable"},
+    {"id": "s114", "source_line": 194, "family": "linear dependence", "pattern": "2D transpose-like access", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_LAYOUT_ADAPTATION", "classification_changed": true, "why": "logical matrix can use flat storage with explicit mapping"},
+    {"id": "s121", "source_line": 360, "family": "induction variables", "pattern": "scalar-store ambiguity", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "mutable scalar/reference operations are available"},
+    {"id": "s131", "source_line": 583, "family": "global data flow", "pattern": "forward substitution", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "scalar def/use and arithmetic are available"},
+    {"id": "s151", "source_line": 664, "family": "interprocedural data flow", "pattern": "parameter passed to subroutine", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "typed helper calls are available"},
+    {"id": "s171", "source_line": 798, "family": "symbolic dependence", "pattern": "symbolic stride/index", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "runtime stride parameters can be indexed explicitly"},
+    {"id": "s211", "source_line": 952, "family": "statement scheduling", "pattern": "statement reordering", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "the scalar operation sequence can be encoded directly"},
+    {"id": "s221", "source_line": 1019, "family": "loop transformation", "pattern": "loop distribution and partial recursion", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "bounded loops and explicit recurrence state are available"},
+    {"id": "s241", "source_line": 1230, "family": "dependence breaking", "pattern": "node splitting/preload", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "temporary scalar staging is representable"},
+    {"id": "s251", "source_line": 1369, "family": "expansion", "pattern": "scalar and array expansion", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "indexed vector storage is available"},
+    {"id": "s271", "source_line": 1666, "family": "control flow", "pattern": "singularity handling", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "conditional control flow is available"},
+    {"id": "s311", "source_line": 2253, "family": "reduction", "pattern": "sum reduction", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "scalar reduction state is available"},
+    {"id": "s321", "source_line": 2677, "family": "recurrence", "pattern": "first-order linear recurrence", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_BENCHMARK_ADAPTER", "classification_changed": true, "why": "loop-carried scalar state is available"},
+    {"id": "s341", "source_line": 2807, "family": "packing", "pattern": "pack positive values with unknown output index", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "DATA_DEPENDENCE_ADAPTER_REQUIRED", "classification_changed": true, "why": "conditional indexed writes need a dedicated faithful adapter"},
+    {"id": "s421", "source_line": 3008, "family": "storage/equivalence", "pattern": "flat 2D equivalence", "previous_classification": "NOT_SUPPORTED_YET/corpus-audit", "new_classification": "SUPPORTED_WITH_LAYOUT_ADAPTATION", "classification_changed": true, "why": "logical 2D storage can be represented as a flat buffer"}
+  ]
+}
