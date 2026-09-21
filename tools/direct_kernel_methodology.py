@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass, replace
 import hashlib
+import importlib
 import json
 import math
 import os
@@ -1434,17 +1435,35 @@ def run_fixed_work_campaign(args: argparse.Namespace) -> Path:
         raise RuntimeError(f"S3 candidate is not the pinned source: {s3_sha} != {EXPECTED_S3_SHA}")
     if platform.system() != "Linux" or platform.machine().lower() not in {"x86_64", "amd64"}:
         raise RuntimeError("fixed-work native stability requires Linux x86-64")
-    from bootstrap.s3.backends.x86_64 import NativeToolchain
-
     report_root = root / "reports" / "benchmarks-2.1.2-fixed-work-native-stability"
     report_root.mkdir(parents=True, exist_ok=True)
     os.environ["S3_REPO"] = str(s3_repo)
     os.environ["S3_COMMIT"] = s3_sha
-    if str(s3_repo) not in sys.path:
-        sys.path.insert(0, str(s3_repo))
+    _activate_pinned_s3_modules(s3_repo)
+    from bootstrap.s3.backends.x86_64 import NativeToolchain
+
     _run_fixed_work_native_stability(s3_repo, benchmark_sha, report_root, NativeToolchain.detect())
     print(f"FIXED_WORK_RESULT={report_root / 'FIXED_WORK_NATIVE_RESULT.json'}")
     return report_root / "FIXED_WORK_NATIVE_RESULT.json"
+
+
+def _activate_pinned_s3_modules(s3_repo: Path) -> None:
+    """Make the benchmark process fail closed on a stale installed S3 module."""
+
+    repo = s3_repo.resolve()
+    if not (repo / "bootstrap" / "s3" / "pipeline.py").is_file():
+        raise RuntimeError(f"S3_REPO is not a complete S3 checkout: {repo}")
+    for name in list(sys.modules):
+        if name == "bootstrap" or name.startswith("bootstrap."):
+            del sys.modules[name]
+    sys.path[:] = [entry for entry in sys.path if entry != str(repo)]
+    sys.path.insert(0, str(repo))
+    pipeline = importlib.import_module("bootstrap.s3.pipeline")
+    loaded = Path(pipeline.__file__).resolve()
+    try:
+        loaded.relative_to(repo)
+    except ValueError as error:
+        raise RuntimeError(f"S3 module escaped pinned checkout: {loaded}") from error
 
 
 def _methodology_markdown(audit: dict[str, Any], native_available: bool, native_error: str, k_levels: tuple[int, ...]) -> str:
