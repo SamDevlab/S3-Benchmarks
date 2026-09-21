@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 import hashlib
+import importlib
 import math
 import os
 from pathlib import Path
@@ -36,12 +37,32 @@ class CandidateObservation:
         return asdict(self)
 
 
+def _reset_loaded_s3_modules() -> None:
+    """Drop only the S3 bootstrap namespace before selecting a new checkout."""
+
+    for name in tuple(sys.modules):
+        if name == "bootstrap" or name.startswith("bootstrap."):
+            del sys.modules[name]
+
+
 def _load_s3():
     repo = Path(os.environ.get("S3_REPO", r"C:\Users\samue\Downloads\S3\S3-Benchmarks\scratch\s3-e07-checked-20260920")).resolve()
     require_commit(repo, os.environ.get("S3_COMMIT", EXPECTED_S3_SHA), label="S3 candidate")
-    if str(repo) not in sys.path:
-        sys.path.insert(0, str(repo))
+    expected_pipeline = (repo / "bootstrap" / "s3" / "pipeline.py").resolve()
+    loaded_pipeline = sys.modules.get("bootstrap.s3.pipeline")
+    if loaded_pipeline is not None:
+        loaded_path = Path(getattr(loaded_pipeline, "__file__", "")).resolve()
+        if loaded_path != expected_pipeline:
+            _reset_loaded_s3_modules()
+    sys.path[:] = [entry for entry in sys.path if Path(entry or ".").resolve() != repo]
+    sys.path.insert(0, str(repo))
+    importlib.invalidate_caches()
     from bootstrap.s3.pipeline import compile_source, run_source
+    actual_pipeline = Path(compile_source.__code__.co_filename).resolve()
+    if actual_pipeline != expected_pipeline:
+        raise RuntimeError(
+            f"S3 candidate import escaped pinned checkout: expected={expected_pipeline} actual={actual_pipeline}"
+        )
     return compile_source, run_source
 
 

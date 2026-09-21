@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from benchmarks.candidate_activation.adapters import native_case, run_hosted  # noqa: E402
+from benchmarks.candidate_activation.adapters import _load_s3, native_case, run_hosted  # noqa: E402
 from benchmarks.scientific.rmsd.expansion import expansion_cases  # noqa: E402
 from protocol.provenance import require_commit  # noqa: E402
 
@@ -30,6 +30,8 @@ UPSTREAM_SHA = "1ad8ecee48d95ab43b49bd9f2fe4f8f07d9106bd"
 def _run_cases(s3_repo: Path, cases: tuple[Any, ...]) -> list[dict[str, Any]]:
     os.environ["S3_REPO"] = str(s3_repo)
     os.environ["S3_COMMIT"] = EXPECTED_S3_SHA
+    # Select the pinned candidate before importing any backend modules from it.
+    _load_s3()
     from bootstrap.s3.backends.x86_64 import NativeToolchain, X8664Backend
 
     toolchain = NativeToolchain.detect()
