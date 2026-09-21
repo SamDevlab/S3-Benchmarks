@@ -587,7 +587,7 @@ def _calibrate(pilots: tuple[FFIPilot, ...], artifacts: dict[str, dict[str, dict
                     artifacts[pilot.workload_id][label]["export_symbol"],
                     k,
                     _expected(pilot, k),
-                    0,
+                    WARMUPS,
                 )
                 samples.append({"variant": label, **sample})
             passed = all(item.get("status") == "PASS" for item in samples)

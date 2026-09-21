@@ -1,8 +1,13 @@
+from pathlib import Path
+from unittest.mock import patch
+
+import tools.ffi_direct_kernel_methodology as methodology
 from tools.ffi_direct_kernel_methodology import (
     S3_FFI_MAX_INSTRUCTIONS,
     SAMPLE_TIMEOUT_SECONDS,
     VARIANTS,
     _driver_source,
+    _calibrate,
     _pilot_sources,
     _select_common_k,
     _expected,
@@ -79,3 +84,26 @@ def test_phase_a_records_explicit_s3_instruction_budget() -> None:
 
 def test_phase_a_timeout_covers_warmups_and_large_fixed_work() -> None:
     assert SAMPLE_TIMEOUT_SECONDS == 120.0
+
+
+def test_phase_a_calibration_uses_the_official_warmup_regime() -> None:
+    pilot = _pilot_sources()[0]
+    artifacts = {
+        pilot.workload_id: {
+            label: {"library": f"{label}.so", "export_symbol": pilot.symbol}
+            for label in VARIANTS
+        }
+    }
+    observed_warmups: list[int] = []
+
+    def fake_run_driver(*args: object) -> dict[str, object]:
+        observed_warmups.append(int(args[-1]))
+        return {"status": "PASS", "elapsed_ns": 100_000_000}
+
+    with patch.object(methodology, "_run_driver", side_effect=fake_run_driver), patch.object(
+        methodology, "_write_json"
+    ):
+        _calibrate((pilot,), artifacts, Path("driver"), Path("raw"))
+
+    assert observed_warmups
+    assert set(observed_warmups) == {methodology.WARMUPS}
