@@ -16,6 +16,8 @@ K levels planned: `1, 10, 100, 1000`.
 
 The C references use `gcc -O2` or `clang -O2` when available, without BLAS,
 `-ffast-math`, or `-Ofast`. Their flat layouts and loop order are explicit in
-the generated sources. Native execution is currently **deferred: native S3 qualification requires Linux x86-64; detected Windows AMD64**.
+the generated sources. The Linux x86-64 hosted replay is **available**. This is
+not direct native S3 kernel execution: the pinned source exposes no callable
+kernel ABI or internal timer, so no native speedup claim is made.
 
 No naive empty-process subtraction is used. No S3 optimization was made.

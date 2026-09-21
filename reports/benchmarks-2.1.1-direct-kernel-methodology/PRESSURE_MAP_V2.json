@@ -1,6 +1,6 @@
 {
   "causal_experiment_ready": false,
-  "measurement_variability": "UNRESOLVED_NATIVE_DEFERRED",
-  "process_e2e_startup_and_runtime_initialization": "UNRESOLVED_NATIVE_DEFERRED",
-  "static_code_and_stack_operation_density": "UNRESOLVED_NATIVE_DEFERRED"
+  "measurement_variability": "UNRESOLVED_NO_REPEATED_TIMING_PROTOCOL",
+  "process_e2e_startup_and_runtime_initialization": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
+  "static_code_and_stack_operation_density": "UNRESOLVED_NO_DIRECT_KERNEL_TIMER"
 }

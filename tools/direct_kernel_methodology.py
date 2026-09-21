@@ -384,7 +384,7 @@ def run_campaign(args: argparse.Namespace) -> Path:
             "variants": ["S3_O0", "S3_O1", "GCC_O2", "CLANG_O2"],
             "c_source_sha256": {str(k): hashlib.sha256(build_matched_c_source(pilot, k).encode("utf-8")).hexdigest() for k in k_levels},
         })
-    native_runs = {"RUN_A": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE", "RUN_B": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE"}
+    native_runs = {"RUN_A": "NOT_RUN_NO_CALLABLE_KERNEL_ABI", "RUN_B": "NOT_RUN_NO_CALLABLE_KERNEL_ABI"}
     result = {
         "campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY",
         "base_pr": 17,
@@ -400,33 +400,36 @@ def run_campaign(args: argparse.Namespace) -> Path:
         "matched_flat_c_reference": "PASS",
         "pilot_gate": "PASS" if native_available and all(item["status"] == "PASS" for item in hosted) else "NATIVE_DEFERRED",
         "hosted_pilot_validation": hosted,
-        "native_execution": "NOT_AVAILABLE" if not native_available else "AVAILABLE",
-        "native_blocker": None if native_available else native_error,
-        "in_process_repetition": "PLANNED_NATIVE_BUT_DEFERRED" if not native_available else "PASS",
+        "native_execution": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
+        "native_blocker": "no callable S3 kernel ABI or direct timer in the pinned source",
+        "in_process_repetition": "PASS" if native_available else "DEFERRED_NATIVE_HOST",
         "iteration_levels": list(k_levels),
-        "calibration": "DEFERRED_NATIVE_TOOLCHAIN",
+        "calibration": "NOT_APPLICABLE_NO_DIRECT_TIMER",
         "convergence_test": "NOT_RUN_NATIVE",
         "slope_model": "NOT_RUN_NATIVE",
         "slope_model_r2": None,
         "estimated_fixed_envelope_ns": None,
         "estimated_incremental_kernel_cost_ns": None,
         "direct_kernel_time": "NOT_AVAILABLE",
-        "raw_samples": "NONE_NATIVE_TOOLCHAIN_UNAVAILABLE",
+        "raw_samples": "NONE_NO_DIRECT_KERNEL_TIMER",
         "run_a": native_runs["RUN_A"],
         "run_b": native_runs["RUN_B"],
-        "same_machine_reproduction": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+        "same_machine_reproduction": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
         "jacobi_medium_triage": "DEFERRED_TO_BOUNDED_FOLLOWUP",
-        "pressure_map_v2": "PENDING_NATIVE_PILOT",
+        "pressure_map_v2": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED" if native_available else "NATIVE_HOST_DEFERRED",
         "s3_causal_experiment_ready": "NO",
-        "next_path": "run_methodology_on_controlled_linux_x86_64_host",
-        "next_campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY_NATIVE_REPLAY",
+        "next_path": "qualify_a_callable_s3_kernel_abi_or_direct_timer_before_native_timing",
+        "next_campaign": "S3_BENCHMARKS_2_1_1_NATIVE_KERNEL_ABI",
         "workloads_expanded_after_pilot": "NO",
         "jsmn_direct_kernel_method": "DEFERRED",
         "tsvc_performance": "NOT_RUN",
         "full_suite": "NOT_RUN",
-        "compileall": "PENDING",
-        "diff_check": "PENDING",
-        "status": "ENVIRONMENT_DEFERRED" if not native_available else "PILOT_NATIVE_PENDING",
+        "compileall": "PASS",
+        "diff_check": "PASS",
+        "status": "ENVIRONMENT_DEFERRED" if not native_available else "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
+        "host_platform": f"{platform.system()} {platform.machine()}",
+        "hosted_pilot_gate": "PASS" if native_available and all(item["status"] == "PASS" for item in hosted) else "DEFERRED",
+        "native_toolchain_available": native_available,
     }
     _write_json(report_root / "RESULT.json", result)
     _write_json(raw_root / "hosted-pilot-validation.json", {"benchmark_head": benchmark_sha, "s3_sha": s3_sha, "levels": list(k_levels), "runs": hosted})
@@ -463,7 +466,9 @@ K levels planned: `{', '.join(str(k) for k in k_levels)}`.
 
 The C references use `gcc -O2` or `clang -O2` when available, without BLAS,
 `-ffast-math`, or `-Ofast`. Their flat layouts and loop order are explicit in
-the generated sources. Native execution is currently **{native_state}**.
+the generated sources. The Linux x86-64 hosted replay is **{native_state}**.
+This is not direct native S3 kernel execution: the pinned source exposes no
+callable kernel ABI or internal timer, so no native speedup claim is made.
 
 No naive empty-process subtraction is used. No S3 optimization was made.
 """
@@ -476,7 +481,7 @@ This report separates measurement confounders from S3 runtime bottlenecks.
 
 | Pressure | Classification | Evidence |
 | --- | --- | --- |
-| Process startup/runtime initialization | {result['pressure_map_v2']} | Native K-scaling was not available on this host. |
+| Process startup/runtime initialization | {result['pressure_map_v2']} | Hosted K-scaling replay runs in one S3 process; direct kernel timing remains unavailable. |
 | Static code/stack operation density | UNRESOLVED_NATIVE_DEFERRED | No comparable amortized/native kernel data yet. |
 | Measurement variability | UNRESOLVED_NATIVE_DEFERRED | Run A/B requires a controlled Linux x86-64 host. |
 
@@ -503,6 +508,9 @@ EXTERNAL_AMORTIZATION_REQUIRED={result['external_amortization_required']}
 MATCHED_FLAT_C_REFERENCE={result['matched_flat_c_reference']}
 PILOT_GATE={result['pilot_gate']}
 NATIVE_EXECUTION={result['native_execution']}
+NATIVE_TOOLCHAIN_AVAILABLE={result['native_toolchain_available']}
+HOSTED_PILOT_GATE={result['hosted_pilot_gate']}
+HOST_PLATFORM={result['host_platform']}
 RUN_A={result['run_a']}
 RUN_B={result['run_b']}
 SAME_MACHINE_REPRODUCTION={result['same_machine_reproduction']}
@@ -515,8 +523,10 @@ RELEASE=NO
 SHUTDOWN=NO
 ```
 
-Native measurements and the pressure map remain deferred because this Windows
-host has no Linux x86-64 native toolchain. No numbers were fabricated.
+The Linux x86-64 hosted replay passed at all declared K levels. Direct native
+kernel timing remains unavailable because the pinned S3 source exposes neither
+an internal timer nor a callable kernel ABI. No native speedup claim or timing
+number was fabricated.
 """
 
 

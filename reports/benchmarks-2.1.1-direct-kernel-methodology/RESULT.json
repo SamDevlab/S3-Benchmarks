@@ -1,8 +1,8 @@
 {
   "base_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
   "base_pr": 17,
-  "benchmark_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
-  "calibration": "DEFERRED_NATIVE_TOOLCHAIN",
+  "benchmark_head": "50024f29ef2103dc0be974a9a45711a1646cd95a",
+  "calibration": "NOT_APPLICABLE_NO_DIRECT_TIMER",
   "campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY",
   "compileall": "PASS",
   "convergence_test": "NOT_RUN_NATIVE",
@@ -13,38 +13,134 @@
   "estimated_incremental_kernel_cost_ns": null,
   "exported_kernel_call_available": "NO",
   "external_amortization_required": "YES",
-  "full_suite": "27 passed, 1 skipped, 0 failed",
-  "full_suite_sha": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
-  "functional_head": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
-  "final_candidate_head": "9579388f7b5521bd92f1a0bcf26d7323ac1b82b1",
-  "source_changed_after_final_gates": false,
+  "full_suite": "NOT_RUN",
   "hosted_pilot_validation": [
     {
-      "levels": [],
+      "levels": [
+        {
+          "K": 1,
+          "expected": 3813.0,
+          "observed": 3813.0,
+          "pass": true
+        },
+        {
+          "K": 10,
+          "expected": 3813.0,
+          "observed": 3813.0,
+          "pass": true
+        },
+        {
+          "K": 100,
+          "expected": 3813.0,
+          "observed": 3813.0,
+          "pass": true
+        },
+        {
+          "K": 1000,
+          "expected": 3813.0,
+          "observed": 3813.0,
+          "pass": true
+        }
+      ],
       "size": "medium",
-      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "status": "PASS",
       "workload_id": "memory.babelstream.triad"
     },
     {
-      "levels": [],
+      "levels": [
+        {
+          "K": 1,
+          "expected": 1085.0,
+          "observed": 1085.0,
+          "pass": true
+        },
+        {
+          "K": 10,
+          "expected": 6386.0,
+          "observed": 6386.0,
+          "pass": true
+        },
+        {
+          "K": 100,
+          "expected": 59396.0,
+          "observed": 59396.0,
+          "pass": true
+        },
+        {
+          "K": 1000,
+          "expected": 589496.0,
+          "observed": 589496.0,
+          "pass": true
+        }
+      ],
       "size": "medium",
-      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "status": "PASS",
       "workload_id": "hpc.prk.nstream"
     },
     {
-      "levels": [],
+      "levels": [
+        {
+          "K": 1,
+          "expected": 5008704.0,
+          "observed": 5008704.0,
+          "pass": true
+        },
+        {
+          "K": 10,
+          "expected": 5008704.0,
+          "observed": 5008704.0,
+          "pass": true
+        },
+        {
+          "K": 100,
+          "expected": 5008704.0,
+          "observed": 5008704.0,
+          "pass": true
+        },
+        {
+          "K": 1000,
+          "expected": 5008704.0,
+          "observed": 5008704.0,
+          "pass": true
+        }
+      ],
       "size": "medium",
-      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "status": "PASS",
       "workload_id": "numerical.polybench.gemm"
     },
     {
-      "levels": [],
+      "levels": [
+        {
+          "K": 1,
+          "expected": 16.0,
+          "observed": 16.0,
+          "pass": true
+        },
+        {
+          "K": 10,
+          "expected": 16.0,
+          "observed": 16.0,
+          "pass": true
+        },
+        {
+          "K": 100,
+          "expected": 16.0,
+          "observed": 16.0,
+          "pass": true
+        },
+        {
+          "K": 1000,
+          "expected": 16.0,
+          "observed": 16.0,
+          "pass": true
+        }
+      ],
       "size": "medium",
-      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "status": "PASS",
       "workload_id": "scientific.rmsd.batch"
     }
   ],
-  "in_process_repetition": "PLANNED_NATIVE_BUT_DEFERRED",
+  "in_process_repetition": "PASS",
   "iteration_levels": [
     1,
     10,
@@ -54,23 +150,26 @@
   "jacobi_medium_triage": "DEFERRED_TO_BOUNDED_FOLLOWUP",
   "jsmn_direct_kernel_method": "DEFERRED",
   "matched_flat_c_reference": "PASS",
-  "native_blocker": "native S3 qualification requires Linux x86-64; detected Windows AMD64",
-  "native_execution": "NOT_AVAILABLE",
-  "next_campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY_NATIVE_REPLAY",
-  "next_path": "run_methodology_on_controlled_linux_x86_64_host",
-  "pilot_gate": "NATIVE_DEFERRED",
-  "pressure_map_v2": "PENDING_NATIVE_PILOT",
-  "raw_samples": "NONE_NATIVE_TOOLCHAIN_UNAVAILABLE",
-  "run_a": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
-  "run_b": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "native_blocker": "no callable S3 kernel ABI or direct timer in the pinned source",
+  "native_execution": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
+  "next_campaign": "S3_BENCHMARKS_2_1_1_NATIVE_KERNEL_ABI",
+  "next_path": "qualify_a_callable_s3_kernel_abi_or_direct_timer_before_native_timing",
+  "pilot_gate": "PASS",
+  "pressure_map_v2": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
+  "raw_samples": "NONE_NO_DIRECT_KERNEL_TIMER",
+  "run_a": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
+  "run_b": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
   "s3_causal_experiment_ready": "NO",
   "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "s3_source_changed": false,
-  "same_machine_reproduction": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "same_machine_reproduction": "NOT_RUN_NO_CALLABLE_KERNEL_ABI",
   "selected_method": "METHOD_C_IN_PROCESS_AMORTIZATION",
   "slope_model": "NOT_RUN_NATIVE",
   "slope_model_r2": null,
-  "status": "ENVIRONMENT_DEFERRED",
+  "status": "HOSTED_PILOT_COMPLETE_NATIVE_KERNEL_DEFERRED",
+  "host_platform": "Linux x86_64",
+  "hosted_pilot_gate": "PASS",
+  "native_toolchain_available": true,
   "timing_audit": {
     "DIRECT_INTERNAL_TIMER_AVAILABLE": "NO",
     "EXPORTED_KERNEL_CALL_AVAILABLE": "NO",
