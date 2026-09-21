@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from benchmarks.scientific.xsbench.contract import hosted_source, oracle_result, pilot  # noqa: E402
+from benchmarks.scientific.xsbench.contract import FIXTURE_LOOKUPS, fixture_pilots, hosted_source, oracle_result  # noqa: E402
 from protocol.provenance import require_commit  # noqa: E402
 from tools.ffi_direct_kernel_methodology import (  # noqa: E402
     EXPECTED_S3_SHA,
@@ -39,18 +39,21 @@ UPSTREAM_LICENSE = "MIT-like permissive license in LICENSE"
 
 def _hosted_matrix(s3_repo: Path) -> dict[str, Any]:
     pipeline = _activate_s3_modules(s3_repo)
-    observed: dict[str, float] = {}
-    for optimization in ("O0", "O1"):
-        value = pipeline.run_source(hosted_source(), optimization=optimization)
-        if isinstance(value, bool) or not isinstance(value, (int, float)):
-            raise TypeError(f"hosted XSBench subset returned non-numeric value: {value!r}")
-        observed[optimization] = float(value)
-    expected = oracle_result()
-    if any(not math.isclose(value, expected, rel_tol=1e-12, abs_tol=1e-12) for value in observed.values()):
-        raise AssertionError(f"hosted oracle mismatch: expected={expected} observed={observed}")
-    if not math.isclose(observed["O0"], observed["O1"], rel_tol=1e-12, abs_tol=1e-12):
-        raise AssertionError(f"hosted O0/O1 mismatch: {observed}")
-    return {"expected": expected, "observed": observed, "status": "PASS"}
+    fixtures: dict[str, Any] = {}
+    for fixture, lookup_count in FIXTURE_LOOKUPS.items():
+        observed: dict[str, float] = {}
+        for optimization in ("O0", "O1"):
+            value = pipeline.run_source(hosted_source(fixture), optimization=optimization)
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                raise TypeError(f"hosted XSBench subset returned non-numeric value: {value!r}")
+            observed[optimization] = float(value)
+        expected = oracle_result(lookup_count)
+        if any(not math.isclose(value, expected, rel_tol=1e-12, abs_tol=1e-12) for value in observed.values()):
+            raise AssertionError(f"hosted oracle mismatch for {fixture}: expected={expected} observed={observed}")
+        if not math.isclose(observed["O0"], observed["O1"], rel_tol=1e-12, abs_tol=1e-12):
+            raise AssertionError(f"hosted O0/O1 mismatch for {fixture}: {observed}")
+        fixtures[fixture] = {"expected": expected, "observed": observed, "status": "PASS", "lookup_count": lookup_count}
+    return {"fixtures": fixtures, "status": "PASS"}
 
 
 def run(s3_repo: Path, benchmark_sha: str) -> Path:
@@ -66,21 +69,31 @@ def run(s3_repo: Path, benchmark_sha: str) -> Path:
     artifact_root.mkdir(parents=True, exist_ok=True)
     hosted = _hosted_matrix(s3_repo)
     driver = _build_driver(artifact_root)
-    xs_pilot = pilot()
-    artifacts, correctness = _build_artifacts(s3_repo, (xs_pilot,), artifact_root, driver["binary_sha256"])
+    xs_pilots = fixture_pilots()
+    artifacts, correctness = _build_artifacts(s3_repo, xs_pilots, artifact_root, driver["binary_sha256"])
     _write_json(raw_root / "correctness.json", correctness)
     if not all(item["status"] == "PASS" for item in correctness):
         raise RuntimeError("XSBENCH_FFI_CORRECTNESS_FAILURE")
-    decisions = _calibrate((xs_pilot,), artifacts, artifact_root / "ffi_driver", raw_root)
-    if decisions[xs_pilot.workload_id]["K_final"] is None:
+    decisions = _calibrate(xs_pilots, artifacts, artifact_root / "ffi_driver", raw_root)
+    if any(decisions[pilot_item.workload_id]["K_final"] is None for pilot_item in xs_pilots):
         raise RuntimeError("XSBENCH_NO_COMMON_FIXED_WORK_WINDOW")
-    official = _official_runs(artifact_root / "ffi_driver", (xs_pilot,), artifacts, decisions, raw_root)
-    first = official["run_a"][xs_pilot.workload_id]["summaries"]
-    second = official["run_b"][xs_pilot.workload_id]["summaries"]
+    official = _official_runs(artifact_root / "ffi_driver", xs_pilots, artifacts, decisions, raw_root)
     reproducible = all(
-        label in first and label in second and "median_ns" in first[label] and "median_ns" in second[label]
-        and abs(first[label]["median_ns"] - second[label]["median_ns"]) / max(first[label]["median_ns"], second[label]["median_ns"]) <= 0.25
-        for label in VARIANTS
+        all(
+            label in official["run_a"][pilot_item.workload_id]["summaries"]
+            and label in official["run_b"][pilot_item.workload_id]["summaries"]
+            and "median_ns" in official["run_a"][pilot_item.workload_id]["summaries"][label]
+            and "median_ns" in official["run_b"][pilot_item.workload_id]["summaries"][label]
+            and abs(
+                official["run_a"][pilot_item.workload_id]["summaries"][label]["median_ns"]
+                - official["run_b"][pilot_item.workload_id]["summaries"][label]["median_ns"]
+            ) / max(
+                official["run_a"][pilot_item.workload_id]["summaries"][label]["median_ns"],
+                official["run_b"][pilot_item.workload_id]["summaries"][label]["median_ns"],
+            ) <= 0.25
+            for label in VARIANTS
+        )
+        for pilot_item in xs_pilots
     )
     result = {
         "campaign": "S3_BENCHMARKS_2_2_1_XSBENCH_QUALIFICATION",
@@ -98,7 +111,7 @@ def run(s3_repo: Path, benchmark_sha: str) -> Path:
         "native_observable": "REAL_F64_FFI_RESULT",
         "artifacts": artifacts,
         "calibration": decisions,
-        "k_final": decisions[xs_pilot.workload_id]["K_final"],
+        "k_final": {pilot_item.workload_id: decisions[pilot_item.workload_id]["K_final"] for pilot_item in xs_pilots},
         "warmups": WARMUPS,
         "repetitions": REPETITIONS,
         "run_a": "PASS",

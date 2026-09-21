@@ -5,11 +5,14 @@ import math
 
 from benchmarks.scientific.xsbench.contract import (
     DATA,
+    FIXTURE_LOOKUPS,
     LOOKUPS_PER_CALL,
     QUERY_ENERGIES,
     QUERY_MATERIALS,
     WORKLOAD_ID,
     fixture_summary,
+    fixture_metadata,
+    fixture_pilots,
     hosted_source,
     oracle_lookup,
     oracle_result,
@@ -48,7 +51,9 @@ def test_xsbench_source_preserves_flat_mapping_and_no_optimized_variant() -> Non
     assert "grid_base: i64 = 10 + nuclide * 25" in source
     assert "middle_energy_ticks: i64 = metadata[middle_index]" in source
     assert "match middle_energy_ticks <=> energy_ticks:" in source
-    assert "1:\n                        high = middle" in source
+    assert "fn xsbench_binary_search(metadata: &[i64]" in source
+    assert "1:\n                high = middle" in source
+    assert "xsbench_binary_search(metadata, nuclide, energy_ticks, 4)" in source
     assert "to_i64" not in source
     assert "return checksum" in source
     assert "openmp" not in source.lower()
@@ -62,3 +67,16 @@ def test_xsbench_hosted_source_executes_the_same_real_value_contract() -> None:
     assert "i64_vector_get(metadata, middle_index)" in source
     assert "f64_vector_push" in source
     assert "return xs_lookup_batch(&data, &metadata)" in source
+
+
+def test_xsbench_fixture_tiers_have_explicit_lookup_accounting() -> None:
+    assert FIXTURE_LOOKUPS == {"TINY": 1, "SMALL": 4, "MEDIUM": 8}
+    pilots = fixture_pilots()
+    assert [pilot_item.workload_id.rsplit(".", 1)[-1] for pilot_item in pilots] == ["tiny", "small", "medium"]
+    for fixture, lookup_count in FIXTURE_LOOKUPS.items():
+        metadata = fixture_metadata(fixture)
+        assert len(metadata) == 36
+        assert metadata[35] == lookup_count
+        assert fixture_summary(fixture).lookup_count == lookup_count
+        assert math.isclose(fixture_summary(fixture).expected, oracle_result(lookup_count), rel_tol=1e-12, abs_tol=1e-12)
+    assert "mut lookup_limit: i64 = metadata[35]" in s3_source()

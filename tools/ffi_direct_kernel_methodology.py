@@ -435,9 +435,14 @@ int main(int argc, char **argv) {
             24.0, 20.4, 20.5, 20.6, 20.7,
             25.0, 20.5, 20.6, 20.7, 20.8
         };
-        static const int64_t metadata[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 63, 78, 91, 14, 0, 1, 0, 1, 1, 0, 1, 0};
-        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 35);
-        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 35); end = now_ns();
+        static const int64_t metadata_tiny[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+        static const int64_t metadata_small[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 4};
+        static const int64_t metadata_medium[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 63, 78, 91, 14, 0, 1, 0, 1, 1, 0, 1, 0, 8};
+        const int64_t *metadata = metadata_medium;
+        if (strcmp(workload, "scientific.xsbench.compatible_lookup.tiny") == 0) metadata = metadata_tiny;
+        else if (strcmp(workload, "scientific.xsbench.compatible_lookup.small") == 0) metadata = metadata_small;
+        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 36);
+        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 36); end = now_ns();
     } else fail("unknown workload");
     dlclose(handle);
     emit_result(workload, variant, k, end - begin, observable, expected);
@@ -577,7 +582,8 @@ def _build_artifacts(s3_repo: Path, pilots: tuple[FFIPilot, ...], root: Path, dr
     for pilot in pilots:
         artifacts[pilot.workload_id] = {}
         for label in VARIANTS:
-            library = root / f"{pilot.symbol}-{label}.so"
+            artifact_stem = pilot.workload_id.replace(".", "-")
+            library = root / f"{artifact_stem}-{label}.so"
             if label == "S3_FFI_O0":
                 metadata = _build_s3_library(s3_repo, pilot.source, "O0", library, root)
             elif label == "S3_FFI_O1":

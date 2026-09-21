@@ -27,13 +27,28 @@ REACTION_WEIGHTS = (1.0, 3.0, 5.0, 7.0, 11.0)
 QUERY_ENERGIES = (0.05, 0.22, 0.37, 0.49, 0.63, 0.78, 0.91, 0.14)
 QUERY_ENERGY_TICKS = (5, 22, 37, 49, 63, 78, 91, 14)
 QUERY_MATERIALS = (0, 1, 0, 1, 1, 0, 1, 0)
+FIXTURE_LOOKUPS = {"TINY": 1, "SMALL": 4, "MEDIUM": LOOKUPS_PER_CALL}
 NUCLIDE_MAP = (0, 1, 1, 2)
 GRID_ENERGY_TICKS = (0, 25, 50, 75, 100) * NUCLIDES
 INDEX_METADATA = NUCLIDE_MAP + GRID_ENERGY_TICKS
-QUERY_METADATA = INDEX_METADATA + QUERY_ENERGY_TICKS + QUERY_MATERIALS
 QUERY_ENERGY_BASE = len(INDEX_METADATA)
 QUERY_MATERIAL_BASE = QUERY_ENERGY_BASE + len(QUERY_ENERGY_TICKS)
+QUERY_COUNT_INDEX = QUERY_MATERIAL_BASE + len(QUERY_MATERIALS)
 GRID_BASE = 10
+
+
+def fixture_metadata(fixture: str = "MEDIUM") -> tuple[int, ...]:
+    name = fixture.upper()
+    try:
+        lookup_count = FIXTURE_LOOKUPS[name]
+    except KeyError as error:
+        raise ValueError(f"unknown XSBench fixture tier: {fixture!r}") from error
+    energies = QUERY_ENERGY_TICKS[:lookup_count] + (0,) * (LOOKUPS_PER_CALL - lookup_count)
+    materials = QUERY_MATERIALS[:lookup_count] + (0,) * (LOOKUPS_PER_CALL - lookup_count)
+    return INDEX_METADATA + energies + materials + (lookup_count,)
+
+
+QUERY_METADATA = fixture_metadata()
 
 
 def _flat_data() -> tuple[float, ...]:
@@ -87,15 +102,31 @@ def oracle_lookup(energy: float, material: int) -> float:
     return sum(weight * value for weight, value in zip(REACTION_WEIGHTS, channels))
 
 
-def oracle_result() -> float:
-    return sum(oracle_lookup(energy, material) for energy, material in zip(QUERY_ENERGIES, QUERY_MATERIALS))
+def oracle_result(lookup_count: int = LOOKUPS_PER_CALL) -> float:
+    return sum(oracle_lookup(energy, material) for energy, material in zip(QUERY_ENERGIES[:lookup_count], QUERY_MATERIALS[:lookup_count]))
 
 
 def s3_source(*, vector_mode: bool = False) -> str:
-    source = """export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:
+    source = """fn xsbench_binary_search(metadata: &[i64], nuclide: i64, energy_ticks: i64, last_point: i64) -> i64:
+    mut low: i64 = 0
+    mut high: i64 = last_point
+    while high - low > 1:
+        mut middle: i64 = low + (high - low) / 2
+        mut middle_index: i64 = 4 + nuclide * 5 + middle
+        mut middle_energy_ticks: i64 = metadata[middle_index]
+        match middle_energy_ticks <=> energy_ticks:
+            1:
+                high = middle
+
+            else:
+                low = middle
+    return low
+
+export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:
     mut lookup: i64 = 0
     mut checksum: f64 = 0.0
-    while lookup < 8:
+    mut lookup_limit: i64 = metadata[35]
+    while lookup < lookup_limit:
         mut query_energy_index: i64 = 19 + lookup
         mut query_material_index: i64 = 27 + lookup
         mut energy_ticks: i64 = metadata[query_energy_index]
@@ -112,19 +143,9 @@ def s3_source(*, vector_mode: bool = False) -> str:
             mut nuclide: i64 = metadata[composition_index]
             mut concentration_index: i64 = 6 + material * 2 + position
             mut concentration: f64 = data[concentration_index]
-            mut low: i64 = 0
-            mut high: i64 = 4
             mut grid_base: i64 = 10 + nuclide * 25
-            while high - low > 1:
-                mut middle: i64 = low + (high - low) / 2
-                mut middle_index: i64 = 4 + nuclide * 5 + middle
-                mut middle_energy_ticks: i64 = metadata[middle_index]
-                match middle_energy_ticks <=> energy_ticks:
-                    1:
-                        high = middle
-
-                    else:
-                        low = middle
+            mut low: i64 = xsbench_binary_search(metadata, nuclide, energy_ticks, 4)
+            mut high: i64 = low + 1
             mut low_index: i64 = grid_base + low * 5
             mut high_index: i64 = grid_base + high * 5
             mut low_energy_index: i64 = 4 + nuclide * 5 + low
@@ -162,34 +183,39 @@ fn main() -> i64:
             "export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:",
             "fn xs_lookup_batch(data: &f64_vector, metadata: &i64_vector) -> f64:",
         )
+        source = source.replace(
+            "fn xsbench_binary_search(metadata: &[i64],",
+            "fn xsbench_binary_search(metadata: &i64_vector,",
+        )
         for name, getter in (("data", "f64_vector_get"), ("metadata", "i64_vector_get")):
             source = re.sub(rf"\b{name}\[([^]]+)\]", rf"{getter}({name}, \1)", source)
     return source
 
 
-def hosted_source() -> str:
+def hosted_source(fixture: str = "MEDIUM") -> str:
     pushes = [f"    discard f64_vector_push(&mut data, {value!r})" for value in DATA]
-    metadata_pushes = [f"    discard i64_vector_push(&mut metadata, {value})" for value in QUERY_METADATA]
+    metadata_pushes = [f"    discard i64_vector_push(&mut metadata, {value})" for value in fixture_metadata(fixture)]
     return s3_source(vector_mode=True).replace(
         "fn main() -> i64:\n    return 0\n",
         "fn main() -> f64:\n"
         "    mut data: f64_vector = f64_vector_new(85)\n"
         + "\n".join(pushes)
-        + "\n    mut metadata: i64_vector = i64_vector_new(35)\n"
+        + "\n    mut metadata: i64_vector = i64_vector_new(36)\n"
         + "\n".join(metadata_pushes)
         + "\n    return xs_lookup_batch(&data, &metadata)\n",
     )
 
 
-def c_source() -> str:
+def c_source(fixture: str = "MEDIUM") -> str:
     data = ", ".join(repr(value) for value in DATA)
-    metadata = ", ".join(str(value) for value in QUERY_METADATA)
+    metadata = ", ".join(str(value) for value in fixture_metadata(fixture))
     return f"""#include <stdint.h>
 #include <stddef.h>
 double {SYMBOL}(const double *data, int64_t data_len, const int64_t *metadata, int64_t metadata_len) {{
     (void)data_len; (void)metadata_len;
     double checksum = 0.0;
-    for (int64_t lookup = 0; lookup < 8; ++lookup) {{
+    int64_t lookup_limit = metadata[35];
+    for (int64_t lookup = 0; lookup < lookup_limit; ++lookup) {{
         int64_t energy_ticks = metadata[19 + lookup];
         double energy = (double)energy_ticks / 100.0;
         int64_t material = metadata[27 + lookup];
@@ -239,6 +265,23 @@ def pilot() -> FFIPilot:
     )
 
 
+def fixture_pilots() -> tuple[FFIPilot, ...]:
+    return tuple(
+        FFIPilot(
+            f"{WORKLOAD_ID}.{fixture.lower()}",
+            SYMBOL,
+            s3_source(),
+            c_source(fixture),
+            oracle_result(lookup_count),
+            lookup_count,
+            "2 materials x 2 nuclides x 5-point grids x 5 reaction channels",
+            "material * max_nuclides + position; nuclide * grid_stride + point",
+            "scientific-irregular",
+        )
+        for fixture, lookup_count in FIXTURE_LOOKUPS.items()
+    )
+
+
 @dataclass(frozen=True, slots=True)
 class FixtureSummary:
     data_values: int
@@ -246,5 +289,6 @@ class FixtureSummary:
     expected: float
 
 
-def fixture_summary() -> FixtureSummary:
-    return FixtureSummary(len(DATA), LOOKUPS_PER_CALL, oracle_result())
+def fixture_summary(fixture: str = "MEDIUM") -> FixtureSummary:
+    lookup_count = FIXTURE_LOOKUPS[fixture.upper()]
+    return FixtureSummary(len(DATA), lookup_count, oracle_result(lookup_count))
