@@ -51,6 +51,48 @@ def cases() -> tuple[WorkloadCase, ...]:
     return tuple(result)
 
 
+def performance_cases() -> tuple[WorkloadCase, ...]:
+    """Return the fixed 2.1 native-measurement corpus.
+
+    The sizes are declared here before any timing is collected.  The existing
+    2.0.1 tiny/small cases remain unchanged; this corpus selects small and a
+    separately generated medium point, and excludes the capability-only TSVC
+    subset.  The adapter is still the same source/oracle generator used by the
+    correctness campaign.
+    """
+
+    result = [
+        case
+        for case in cases()
+        if case.size == "small" and case.workload_id != "compiler.tsvc.initial-subset"
+    ]
+    vector_specs = (
+        ("hpc.prk.nstream", 31, _nstream_source, _nstream_oracle, "1D vector", "i"),
+        ("memory.babelstream.copy", 31, _babel_copy_source, _babel_copy_oracle, "1D vector", "i"),
+        ("memory.babelstream.scale", 31, _babel_scale_source, _babel_scale_oracle, "1D vector", "i"),
+        ("memory.babelstream.add", 31, _babel_add_source, _babel_add_oracle, "1D vector", "i"),
+        ("memory.babelstream.triad", 31, _babel_triad_source, _babel_triad_oracle, "1D vector", "i"),
+        ("memory.babelstream.dot", 31, _babel_dot_source, _babel_dot_oracle, "1D vector", "i"),
+        ("scientific.rmsd.batch", 16, _rmsd_batch_source, _rmsd_batch_oracle, "pair_count x coordinates_per_pair", "pair * coordinates_per_pair + coordinate"),
+        ("scientific.rmsd.matrix", 4, _rmsd_matrix_source, _rmsd_matrix_oracle, "P x Q pair matrix", "p * Q + q"),
+        ("scientific.rmsd.single", 31, _rmsd_single_source, _rmsd_single_oracle, "1D vector pair", "i"),
+    )
+    matrix_specs = (
+        ("hpc.prk.transpose", (12, 16), _transpose_source, _transpose_oracle, "12 x 16", "row * cols + column"),
+        ("numerical.polybench.atax", (12, 16), _atax_source, _atax_oracle, "A[12,16], x[16], y[16]", "i * N + j"),
+        ("numerical.polybench.mvt", (12, 16), _mvt_source, _mvt_oracle, "A[12,16], x1[12], x2[16]", "i * N + j"),
+        ("numerical.polybench.gemm", (12, 16, 8), _gemm_source, _gemm_oracle, "A[12,K], B[K,16], C[12,16]", "i * stride + j"),
+        ("language.plb2.matmul", (12, 16, 8), _gemm_source, _gemm_oracle, "A[12,K], B[K,16], C[12,16]", "i * stride + j"),
+        ("numerical.polybench.2mm", (12, 16, 8), _two_mm_source, _two_mm_oracle, "A[12,K], B[K,16], C[16,K], D[K,16]", "i * stride + j"),
+        ("numerical.polybench.jacobi_1d", 18, _jacobi_source, _jacobi_oracle, "two 1D vectors length 18", "i"),
+    )
+    for workload_id, shape, builder, oracle, logical_shape, index_mapping in vector_specs:
+        result.append(_case(workload_id, "medium", shape, builder, oracle, logical_shape, "flat f64_vector", index_mapping))
+    for workload_id, shape, builder, oracle, logical_shape, index_mapping in matrix_specs:
+        result.append(_case(workload_id, "medium", shape, builder, oracle, logical_shape, "flat f64_vector", index_mapping))
+    return tuple(result)
+
+
 def _case(workload_id: str, size: str, shape, builder: Callable, oracle: Callable, logical_shape: str, physical_layout: str, index_mapping: str) -> WorkloadCase:
     source = builder(shape)
     return WorkloadCase(workload_id, size, source, float(oracle(shape)), "SUPPORTED_WITH_BENCHMARK_ADAPTER", logical_shape, physical_layout, index_mapping)
@@ -128,6 +170,26 @@ def _rmsd_batch_source(pair_count: int) -> str:
 
 
 def _rmsd_batch_oracle(pair_count: int) -> float: return float(pair_count)
+
+
+def _rmsd_single_source(length: int) -> str:
+    left_values = [float(i + 1) for i in range(length)]
+    right_values = [float(i + 2) for i in range(length)]
+    body = _vector("left", left_values) + _vector("right", right_values)
+    body += [
+        "    mut index: i64 = 0",
+        "    mut total: f64 = 0.0",
+        f"    while index < {length}:",
+        "        mut delta: f64 = f64_vector_get(&left, index) - f64_vector_get(&right, index)",
+        "        total = total + delta * delta",
+        "        index = index + 1",
+    ]
+    body += [f"    return candidate_sqrt(total / {float(length)!r})"]
+    return "fn candidate_sqrt(value: f64) -> f64:\n    return sqrt(value)\n\nfn main() -> f64:\n" + "\n".join(body) + "\n"
+
+
+def _rmsd_single_oracle(length: int) -> float:
+    return 1.0
 
 
 def _rmsd_matrix_source(dimension: int) -> str:

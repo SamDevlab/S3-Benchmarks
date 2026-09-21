@@ -1,0 +1,70 @@
+{
+  "evidence_limits": [
+    "All timings are PROCESS_E2E and include process launch, runtime initialization, workload, and one final canary.",
+    "No direct KERNEL timing was collected; setup/work separation for kernel attribution is therefore unavailable.",
+    "perf counters were unavailable by host permission, so dynamic cycles, instructions, branches, and cache misses are unavailable.",
+    "No GCC/Clang reference binaries were included in this first S3-only native baseline."
+  ],
+  "measurement_run": "native-v1-20260921-02",
+  "pressures": [
+    {
+      "affected_families": [
+        "hpc",
+        "language",
+        "memory",
+        "numerical",
+        "scientific"
+      ],
+      "affected_workloads": 30,
+      "causality": "UNKNOWN",
+      "evidence_strength": "MULTI_FAMILY",
+      "next_experiment": "Add a direct kernel-mode adapter with setup outside the timed region and compare it with the same E2E row.",
+      "observed": "Every sample is a native process boundary measurement.",
+      "pressure": "PROCESS_E2E_STARTUP_AND_RUNTIME_INITIALIZATION"
+    },
+    {
+      "affected_families": [
+        "hpc",
+        "language",
+        "memory",
+        "numerical",
+        "scientific"
+      ],
+      "affected_workloads": 30,
+      "causality": "UNKNOWN",
+      "evidence_strength": "MULTI_FAMILY",
+      "next_experiment": "Pair one direct kernel sample with assembly counters and a flat C reference before attributing cost to a compiler mechanism.",
+      "observed": "Assembly instruction, branch, call-site, and stack-operation counts are available and scale with generated workload shape.",
+      "pressure": "STATIC_CODE_AND_STACK_OPERATION_DENSITY"
+    },
+    {
+      "affected_families": [
+        "hpc",
+        "language",
+        "memory",
+        "numerical",
+        "scientific"
+      ],
+      "affected_workloads": 30,
+      "causality": "UNKNOWN",
+      "evidence_strength": "MULTI_FAMILY",
+      "next_experiment": "Repeat one fixed machine run with direct kernel timing and the same affinity before changing compiler code.",
+      "observed": "Raw samples and CV/p95 are retained; several small process-E2E rows have broad tails.",
+      "pressure": "MEASUREMENT_VARIABILITY"
+    },
+    {
+      "affected_families": [],
+      "affected_workloads": 0,
+      "causality": "UNKNOWN",
+      "evidence_strength": "UNAVAILABLE",
+      "next_experiment": "Resolve measurement-only perf permission or use a supported counter collection host; do not alter system policy in this campaign.",
+      "observed": "No valid perf counters and no direct kernel timing.",
+      "pressure": "MEMORY_BANDWIDTH_CACHE_LOCALITY_DYNAMIC_COUNTERS"
+    }
+  ],
+  "provenance": {
+    "benchmark_commit": "70e95bfe963bf7b49175d5eeb978ff5a9404d5f0",
+    "s3_commit": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+  },
+  "schema": "s3.benchmark.pressure-map.v1"
+}
