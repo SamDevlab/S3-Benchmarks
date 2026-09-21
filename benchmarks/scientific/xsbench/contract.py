@@ -105,7 +105,8 @@ def s3_source() -> str:
             while high - low > 1:
                 mut middle: i64 = low + (high - low) / 2
                 mut middle_index: i64 = grid_base + middle * 6
-                if data[middle_index] > energy:
+                mut middle_energy: f64 = data[middle_index]
+                if middle_energy > energy:
                     high = middle
                 else:
                     low = middle
