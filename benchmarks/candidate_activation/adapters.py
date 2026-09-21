@@ -82,7 +82,8 @@ def native_canary_source(case) -> str:
         raise ValueError("candidate source does not expose the expected f64 entry point")
     source = case.source.replace(marker, "fn main() -> i64:\n", 1)
     body, expression = source.rsplit("    return ", 1)
-    return body + f"    if {expression.strip()} == {case.expected!r}:\n        return 1\n    return 0\n"
+    value = expression.strip()
+    return body + f"    match {value} <=> {case.expected!r}:\n        -1:\n            return 0\n        0:\n            return 1\n        1:\n            return 0\n"
 
 
 def native_case(case, native_toolchain, backend_type) -> tuple[int, str]:
