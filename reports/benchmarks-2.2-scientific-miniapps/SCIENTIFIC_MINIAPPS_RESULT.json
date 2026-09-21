@@ -1,0 +1,116 @@
+{
+  "benchmark_sha": "aacee293056cd3422bf25bd9c9a9834c67bb6f71",
+  "campaign": "S3_BENCHMARKS_2_2_SCIENTIFIC_MINIAPPS",
+  "observations": [
+    {
+      "error": null,
+      "expected": 1.0,
+      "hosted": {
+        "O0": 1.0,
+        "O1": 1.0
+      },
+      "index_mapping": "i",
+      "logical_shape": "two vectors of length 7",
+      "native_canary": 1,
+      "native_observable": "CANARY",
+      "native_status": "PASS",
+      "physical_layout": "flat f64_vector",
+      "size": "SMALL",
+      "source_bytes": 1052,
+      "source_sha256": "b8824d88262e1f02f04b9eb397e9346042700ea217bb44ec3165a592bae06467",
+      "status": "PASS",
+      "workload_id": "scientific.rmsd.small"
+    },
+    {
+      "error": null,
+      "expected": 1.0,
+      "hosted": {
+        "O0": 1.0,
+        "O1": 1.0
+      },
+      "index_mapping": "i",
+      "logical_shape": "two vectors of length 31",
+      "native_canary": 1,
+      "native_observable": "CANARY",
+      "native_status": "PASS",
+      "physical_layout": "flat f64_vector",
+      "size": "MEDIUM",
+      "source_bytes": 3237,
+      "source_sha256": "e7c945c57f66e5e3889361936d75426f540b161154de13796643bf57fa089322",
+      "status": "PASS",
+      "workload_id": "scientific.rmsd.medium"
+    },
+    {
+      "error": null,
+      "expected": 1.0,
+      "hosted": {
+        "O0": 1.0,
+        "O1": 1.0
+      },
+      "index_mapping": "i",
+      "logical_shape": "two vectors of length 127",
+      "native_canary": 1,
+      "native_observable": "CANARY",
+      "native_status": "PASS",
+      "physical_layout": "flat f64_vector",
+      "size": "LARGE",
+      "source_bytes": 12034,
+      "source_sha256": "3a90c2301f99f90683782a187e55e88603798bc8c0ab86eca68ecf36d26d389d",
+      "status": "PASS",
+      "workload_id": "scientific.rmsd.large"
+    },
+    {
+      "error": null,
+      "expected": 64.0,
+      "hosted": {
+        "O0": 64.0,
+        "O1": 64.0
+      },
+      "index_mapping": "pair * coordinates + coordinate",
+      "logical_shape": "64 vector pairs x 3 coordinates",
+      "native_canary": 1,
+      "native_observable": "CANARY",
+      "native_status": "PASS",
+      "physical_layout": "flat f64_vector",
+      "size": "BATCH_LARGE",
+      "source_bytes": 18287,
+      "source_sha256": "99b3e6608550cf2859b035a2f5b434ce9d2b42c05b4441ac4a663b5872450c52",
+      "status": "PASS",
+      "workload_id": "scientific.rmsd.batch_large"
+    },
+    {
+      "error": null,
+      "expected": 64.0,
+      "hosted": {
+        "O0": 64.0,
+        "O1": 64.0
+      },
+      "index_mapping": "(row * dimension + column) * coordinates + coordinate",
+      "logical_shape": "8 x 8 pair matrix x 3 coordinates",
+      "native_canary": 1,
+      "native_observable": "CANARY",
+      "native_status": "PASS",
+      "physical_layout": "flat f64_vector",
+      "size": "MATRIX_LARGE",
+      "source_bytes": 21104,
+      "source_sha256": "6842d36007221d512e978f577ed0d802cc22485db77e609b6443b211f17ac7e9",
+      "status": "PASS",
+      "workload_id": "scientific.rmsd.matrix_large"
+    }
+  ],
+  "phase_b_gate": "PASS",
+  "platform": {
+    "machine": "x86_64",
+    "system": "Linux"
+  },
+  "rmsd_expansion": "PASS",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_source_changed": "NO",
+  "scientific_hosted_correctness": "PASS",
+  "scientific_native_correctness": "PASS",
+  "status": "COMPLETE",
+  "synthetic_timing": "ABSENT",
+  "timing": "NOT_RUN",
+  "upstream_reference": "charnley.rmsd",
+  "upstream_sha": "1ad8ecee48d95ab43b49bd9f2fe4f8f07d9106bd"
+}
