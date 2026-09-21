@@ -279,15 +279,17 @@ def build_matched_c_source(pilot: Pilot, iterations: int) -> str:
 
 
 def expected_repeated_value(pilot: Pilot, iterations: int) -> float:
+    if iterations < 1:
+        raise ValueError("iterations must be positive")
     if pilot.workload_id == "memory.babelstream.triad":
-        return pilot.case.expected * iterations
+        return float(pilot.case.expected)
     if pilot.workload_id == "hpc.prk.nstream":
         n = 31
         first = sum((i + 1) + (i + 2) + 2 for i in range(n))
         delta = sum((i + 2) + 2 for i in range(n))
-        return float(iterations * first + (iterations * (iterations - 1) // 2) * delta)
+        return float(first + (iterations - 1) * delta)
     if pilot.workload_id in {"numerical.polybench.gemm", "scientific.rmsd.batch"}:
-        return pilot.case.expected * iterations
+        return float(pilot.case.expected)
     raise ValueError(f"unsupported pilot: {pilot.workload_id}")
 
 

@@ -52,7 +52,23 @@ def test_repeated_work_values_match_the_declared_kernel_contract():
     for pilot in pilot_cases():
         one = expected_repeated_value(pilot, 1)
         assert math.isclose(one, pilot.case.expected, rel_tol=1e-12, abs_tol=1e-12)
-        assert math.isfinite(expected_repeated_value(pilot, DEFAULT_K_LEVELS[-1]))
+        repeated = expected_repeated_value(pilot, DEFAULT_K_LEVELS[-1])
+        assert math.isfinite(repeated)
+        if pilot.workload_id == "hpc.prk.nstream":
+            assert repeated == 589496.0
+        else:
+            assert repeated == pilot.case.expected
+
+
+def test_repeated_work_rejects_non_positive_iteration_counts():
+    pilot = pilot_cases()[0]
+    for iterations in (0, -1):
+        try:
+            expected_repeated_value(pilot, iterations)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("non-positive iterations must be rejected")
 
 
 def test_slope_model_is_empirical_and_reports_fit_quality():
