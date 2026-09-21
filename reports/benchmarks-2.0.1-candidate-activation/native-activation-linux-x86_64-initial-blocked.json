@@ -1,0 +1,294 @@
+{
+  "observations": [
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 32.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 10.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 44.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 26.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 60.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 50.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 2.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 4.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 77.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 28.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 140.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 77.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 189.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 252.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 3.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 9.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 86.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 564.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 108.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 150.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 150.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 504.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 13.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 584.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 6740.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 483.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 498.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 498.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 1500.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 18.666666666666668,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 2.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "tiny",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "compiler.tsvc.initial-subset"
+    },
+    {
+      "error": "NativeBackendError: native entry function 'main' cannot return f64 until the standalone runtime provides decimal float output",
+      "expected": 2.0,
+      "native_observable": null,
+      "observed": null,
+      "size": "small",
+      "status": "NATIVE_BLOCKED",
+      "workload_id": "compiler.tsvc.initial-subset"
+    }
+  ],
+  "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS",
+  "s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+}

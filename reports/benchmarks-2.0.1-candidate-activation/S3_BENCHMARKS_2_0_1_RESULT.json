@@ -1,12 +1,13 @@
 {
   "campaign": "S3-BENCHMARKS-2.0.1-CANDIDATE-ACTIVATION",
   "base_head": "2891ae5a2a8ee558267aeaa54c7cbc42156e2373",
-  "functional_commit": "1ceb99b0876b53a99740fd4ce2793652cd707d13",
-  "final_candidate_head": "f44fec82414e5ca3f911770699cd1a07e1850dda",
+  "functional_commit": "39551020fb52b4b9f7f712fc52216520029d439a",
+  "final_candidate_head": "39551020fb52b4b9f7f712fc52216520029d439a",
   "pr": 16,
   "pr_url": "https://github.com/SamDevlab/S3-Benchmarks/pull/16",
   "s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "s3_source_changed": false,
+  "source_changed_after_final_gates": false,
   "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS",
   "hosted": {
     "cases": 32,
@@ -17,14 +18,17 @@
   },
   "native_linux_x86_64": {
     "cases": 32,
-    "pass": 0,
+    "pass": 32,
     "fail": 0,
-    "blocked": 32,
-    "status": "BLOCKED",
-    "blocker_class": "TRUE_BACKEND_CAPABILITY_BLOCKER",
-    "blocker": "standalone native runtime cannot return decimal f64 from entry function",
+    "blocked": 0,
+    "status": "PASS",
+    "observable": "CANARY",
+    "canary_value": 1,
+    "blocker_class": "NONE",
+    "blocker": null,
     "raw_evidence": "native-activation-linux-x86_64.json",
-    "raw_evidence_sha256": "3ee07223cdf66f2d2fe6085ecbb097a94569c75b7992d3fa54781e2c83bb49ae"
+    "raw_evidence_sha256": "978f02e152fffb1ddde36e666a1bc6f1c8b89249963b9700db49a20cc2d33d0d",
+    "initial_blocked_evidence_sha256": "3ee07223cdf66f2d2fe6085ecbb097a94569c75b7992d3fa54781e2c83bb49ae"
   },
   "tsvc_audit": {
     "upstream_sha": "badf9adb2974867ac0937718d85a44dec6dec95a",
@@ -38,13 +42,13 @@
     "skipped": 1,
     "failed": 0,
     "exit": 0,
-    "transcript": "final-full-suite-20260920.txt",
-    "transcript_sha256": "5745b1e2497908d1e9d0249d7b056a33a71401dfde70df1d46ec608370b0d3c6"
+    "transcript": "final-full-suite-20260920-v2.txt",
+    "transcript_sha256": "36c1baf2465fe04c8034f5e50a5922030c35c376fa5da01d3eabba0dce831c0c"
   },
   "compileall": "PASS",
   "diff_check": "PASS",
-  "next_path": "Path B",
-  "next_campaign": "S3_CAPABILITY_CAMPAIGN_FOR_NATIVE_DECIMAL_F64_OUTPUT",
+  "next_path": "Path A",
+  "next_campaign": "S3_BENCHMARKS_2_1_NATIVE_MEASUREMENT",
   "merge": false,
   "tag": false,
   "release": false,
