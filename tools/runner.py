@@ -350,6 +350,11 @@ def main():
     parser.add_argument("--smoke", action="store_true", help="Run short smoke benchmark cycle")
     parser.add_argument("--full", action="store_true", help="Run full statistical benchmark suite")
     parser.add_argument("--verify-only", action="store_true", help="Run differential correctness gate only")
+    parser.add_argument(
+        "--workload",
+        default="jsmn",
+        help="Workload adapter to run; 'jsmn' is the legacy default and compatibility alias",
+    )
     parser.add_argument("--run-id", help="Unique run identity; an unused identity is generated when omitted")
     parser.add_argument(
         "--artifact-root",
@@ -365,6 +370,15 @@ def main():
     parser.add_argument("--output-json", type=Path)
     parser.add_argument("--output-markdown", type=Path)
     args = parser.parse_args()
+
+    if args.workload != "jsmn":
+        print(
+            f"WORKLOAD={args.workload}\nSTATUS=NOT_SUPPORTED_YET\n"
+            "FIRST_MISSING_CAPABILITY=workload-adapter\n"
+            "EVIDENCE=no executable adapter is registered for this workload yet\n"
+            "MINIMUM_REQUIRED_CAPABILITY=independent workload adapter",
+        )
+        return
 
     try:
         if not args.s3_sha or not args.benchmark_sha:
