@@ -358,9 +358,20 @@ def run_measurement(args: argparse.Namespace) -> Path:
     run = RunIdentity.create(args.output_root, args.run_id)
     measurements: list[dict[str, Any]] = []
     gates: list[dict[str, Any]] = []
+    skipped_runtime: list[dict[str, str]] = []
     for index, case in enumerate(cases, start=1):
         print(f"CORRECTNESS {index}/{len(cases)} {case.workload_id} {case.size}", flush=True)
-        correctness = _correctness_gate(case, toolchain, run.run_root)
+        try:
+            correctness = _correctness_gate(case, toolchain, run.run_root)
+        except Exception as error:
+            skipped_runtime.append({
+                "id": case.workload_id,
+                "size": case.size,
+                "status": "NATIVE_NOT_QUALIFIED",
+                "reason": f"{type(error).__name__}: {error}",
+            })
+            print(f"SKIP {index}/{len(cases)} {case.workload_id} {case.size}: {error}", flush=True)
+            continue
         gates.append({"workload_id": case.workload_id, "size": case.size, **correctness})
         built_variants = [
             _build_variant(case, "O0", "s3-o0", run.run_root, toolchain),
@@ -400,6 +411,7 @@ def run_measurement(args: argparse.Namespace) -> Path:
                 "compiler.tsvc.initial-subset": "capability_shape_evidence_only",
                 "hpc.prk.stencil": "not_activated_in_2.0.1",
                 "hpc.prk.dgemm": "not_activated_in_2.0.1",
+                "runtime": skipped_runtime,
             },
         },
         "correctness_gates": gates,
