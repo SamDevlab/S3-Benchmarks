@@ -108,21 +108,24 @@ double nstream(double *a, int64_t a_len, const double *b, int64_t b_len, const d
 """
 
     gemm_s3 = _s3_header() + """export fn gemm(a: &[f64], b: &[f64], c: &mut [f64]) -> f64:
+    mut rows: i64 = 12
+    mut cols: i64 = 16
+    mut inner: i64 = 8
     mut i: i64 = 0
-    while i < 12:
+    while i < rows:
         mut j: i64 = 0
-        while j < 16:
+        while j < cols:
             mut k: i64 = 0
             mut total: f64 = 1.0
-            while k < 8:
-                total = total + a[i * 8 + k] * b[k * 16 + j]
+            while k < inner:
+                total = total + a[i * inner + k] * b[k * cols + j]
                 k = k + 1
-            c[i * 16 + j] = total
+            c[i * cols + j] = total
             j = j + 1
         i = i + 1
     mut checksum: f64 = 0.0
     mut index: i64 = 0
-    while index < 12 * 16:
+    while index < rows * cols:
         checksum = checksum + c[index]
         index = index + 1
     return checksum

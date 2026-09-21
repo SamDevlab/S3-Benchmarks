@@ -41,9 +41,7 @@ def test_phase_a_driver_is_shared_dlopen_runtime_k_and_monotonic_raw() -> None:
 
 def test_phase_a_gemm_uses_the_proven_three_slice_ffi_shape() -> None:
     gemm = next(pilot for pilot in _pilot_sources() if pilot.symbol == "gemm")
-    assert "rows: i64" not in gemm.source
-    assert "cols: i64" not in gemm.source
-    assert "inner: i64" not in gemm.source
+    assert "export fn gemm(a: &[f64], b: &[f64], c: &mut [f64])" in gemm.source
     assert "double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len)" in gemm.c_source
 
 
