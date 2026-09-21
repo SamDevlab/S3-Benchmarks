@@ -25,7 +25,7 @@ def test_phase_a_oracles_follow_runtime_call_contract() -> None:
     assert _expected(pilots[0], 1) == 3813.0
     assert _expected(pilots[1], 1) == 1085.0
     assert _expected(pilots[1], 10) == 1085.0 + 9 * 589.0
-    assert _expected(pilots[2], 1) == 5008704.0
+    assert _expected(pilots[2], 1) == 5552.0
     assert _expected(pilots[3], 1) == 16.0
 
 

@@ -108,9 +108,9 @@ double nstream(double *a, int64_t a_len, const double *b, int64_t b_len, const d
 """
 
     gemm_s3 = _s3_header() + """export fn gemm(a: &[f64], b: &[f64], c: &mut [f64]) -> f64:
-    mut rows: i64 = 12
-    mut cols: i64 = 16
-    mut inner: i64 = 8
+    mut rows: i64 = 4
+    mut cols: i64 = 4
+    mut inner: i64 = 4
     mut i: i64 = 0
     while i < rows:
         mut j: i64 = 0
@@ -137,13 +137,13 @@ fn main() -> i64:
 double identity_f64(double value) { return value; }
 double gemm(const double *a, int64_t a_len, const double *b, int64_t b_len, double *c, int64_t c_len) {
     (void)a_len; (void)b_len; (void)c_len;
-    for (int64_t i = 0; i < 12; ++i) for (int64_t j = 0; j < 16; ++j) {
+    for (int64_t i = 0; i < 4; ++i) for (int64_t j = 0; j < 4; ++j) {
         double total = 1.0;
-        for (int64_t k = 0; k < 8; ++k) total += a[i * 8 + k] * b[k * 16 + j];
-        c[i * 16 + j] = total;
+        for (int64_t k = 0; k < 4; ++k) total += a[i * 4 + k] * b[k * 4 + j];
+        c[i * 4 + j] = total;
     }
     double checksum = 0.0;
-    for (int64_t i = 0; i < 12 * 16; ++i) checksum += c[i];
+    for (int64_t i = 0; i < 4 * 4; ++i) checksum += c[i];
     return checksum;
 }
 """
@@ -187,7 +187,7 @@ double rmsd(const double *left, int64_t left_len, const double *right, int64_t r
     return (
         FFIPilot("memory.babelstream.triad", "triad", triad_s3, triad_c, 3813.0, 31, "1D vector", "i", "memory"),
         FFIPilot("hpc.prk.nstream", "nstream", nstream_s3, nstream_c, 1085.0, 31, "1D vector", "i", "hpc"),
-        FFIPilot("numerical.polybench.gemm", "gemm", gemm_s3, gemm_c, 5008704.0, 12 * 16 * 8, "A[12,K], B[K,16], C[12,16]", "i * stride + j", "numerical"),
+        FFIPilot("numerical.polybench.gemm", "gemm", gemm_s3, gemm_c, 5552.0, 4 * 4 * 4, "A[4,K], B[K,4], C[4,4]", "i * stride + j", "numerical"),
         FFIPilot("scientific.rmsd.batch", "rmsd", rmsd_s3, rmsd_c, 16.0, 16 * 3, "pair_count x coordinates_per_pair", "pair * coordinates_per_pair + coordinate", "scientific"),
     )
 
