@@ -30,6 +30,9 @@ QUERY_MATERIALS = (0, 1, 0, 1, 1, 0, 1, 0)
 NUCLIDE_MAP = (0, 1, 1, 2)
 GRID_ENERGY_TICKS = (0, 25, 50, 75, 100) * NUCLIDES
 INDEX_METADATA = NUCLIDE_MAP + GRID_ENERGY_TICKS
+QUERY_METADATA = INDEX_METADATA + QUERY_ENERGY_TICKS + QUERY_MATERIALS
+QUERY_ENERGY_BASE = len(INDEX_METADATA)
+QUERY_MATERIAL_BASE = QUERY_ENERGY_BASE + len(QUERY_ENERGY_TICKS)
 GRID_BASE = 10
 
 
@@ -89,13 +92,15 @@ def oracle_result() -> float:
 
 
 def s3_source(*, vector_mode: bool = False) -> str:
-    source = """export fn xs_lookup_batch(data: &[f64], metadata: &[i64], energies: &[i64], materials: &[i64]) -> f64:
+    source = """export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:
     mut lookup: i64 = 0
     mut checksum: f64 = 0.0
     while lookup < 8:
-        mut energy_ticks: i64 = energies[lookup]
+        mut query_energy_index: i64 = 19 + lookup
+        mut query_material_index: i64 = 27 + lookup
+        mut energy_ticks: i64 = metadata[query_energy_index]
         mut energy: f64 = to_f64(energy_ticks) / 100.0
-        mut material: i64 = materials[lookup]
+        mut material: i64 = metadata[query_material_index]
         mut position: i64 = 0
         mut total_xs: f64 = 0.0
         mut elastic_xs: f64 = 0.0
@@ -154,47 +159,40 @@ fn main() -> i64:
 """
     if vector_mode:
         source = source.replace(
-            "export fn xs_lookup_batch(data: &[f64], metadata: &[i64], energies: &[i64], materials: &[i64]) -> f64:",
-            "fn xs_lookup_batch(data: &f64_vector, metadata: &i64_vector, energies: &i64_vector, materials: &i64_vector) -> f64:",
+            "export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:",
+            "fn xs_lookup_batch(data: &f64_vector, metadata: &i64_vector) -> f64:",
         )
-        for name, getter in (("data", "f64_vector_get"), ("metadata", "i64_vector_get"), ("energies", "i64_vector_get"), ("materials", "i64_vector_get")):
+        for name, getter in (("data", "f64_vector_get"), ("metadata", "i64_vector_get")):
             source = re.sub(rf"\b{name}\[([^]]+)\]", rf"{getter}({name}, \1)", source)
     return source
 
 
 def hosted_source() -> str:
     pushes = [f"    discard f64_vector_push(&mut data, {value!r})" for value in DATA]
-    metadata_pushes = [f"    discard i64_vector_push(&mut metadata, {value})" for value in INDEX_METADATA]
-    energy_pushes = [f"    discard i64_vector_push(&mut energies, {value})" for value in QUERY_ENERGY_TICKS]
-    material_pushes = [f"    discard i64_vector_push(&mut materials, {value})" for value in QUERY_MATERIALS]
+    metadata_pushes = [f"    discard i64_vector_push(&mut metadata, {value})" for value in QUERY_METADATA]
     return s3_source(vector_mode=True).replace(
         "fn main() -> i64:\n    return 0\n",
         "fn main() -> f64:\n"
         "    mut data: f64_vector = f64_vector_new(85)\n"
         + "\n".join(pushes)
-        + "\n    mut metadata: i64_vector = i64_vector_new(19)\n"
+        + "\n    mut metadata: i64_vector = i64_vector_new(35)\n"
         + "\n".join(metadata_pushes)
-        + "\n    mut energies: i64_vector = i64_vector_new(8)\n"
-        + "\n".join(energy_pushes)
-        + "\n    mut materials: i64_vector = i64_vector_new(8)\n"
-        + "\n".join(material_pushes)
-        + "\n    return xs_lookup_batch(&data, &metadata, &energies, &materials)\n",
+        + "\n    return xs_lookup_batch(&data, &metadata)\n",
     )
 
 
 def c_source() -> str:
     data = ", ".join(repr(value) for value in DATA)
-    metadata = ", ".join(str(value) for value in INDEX_METADATA)
-    energies = ", ".join(str(value) for value in QUERY_ENERGY_TICKS)
+    metadata = ", ".join(str(value) for value in QUERY_METADATA)
     return f"""#include <stdint.h>
 #include <stddef.h>
-double {SYMBOL}(const double *data, int64_t data_len, const int64_t *metadata, int64_t metadata_len, const int64_t *energies, int64_t energy_len, const int64_t *materials, int64_t material_len) {{
-    (void)data_len; (void)metadata_len; (void)energy_len; (void)material_len;
+double {SYMBOL}(const double *data, int64_t data_len, const int64_t *metadata, int64_t metadata_len) {{
+    (void)data_len; (void)metadata_len;
     double checksum = 0.0;
     for (int64_t lookup = 0; lookup < 8; ++lookup) {{
-        int64_t energy_ticks = energies[lookup];
+        int64_t energy_ticks = metadata[19 + lookup];
         double energy = (double)energy_ticks / 100.0;
-        int64_t material = materials[lookup];
+        int64_t material = metadata[27 + lookup];
         double channels[5] = {{0.0, 0.0, 0.0, 0.0, 0.0}};
         for (int64_t position = 0; position < 2; ++position) {{
             int64_t composition_index = material * 2 + position;
@@ -223,9 +221,7 @@ double {SYMBOL}(const double *data, int64_t data_len, const int64_t *metadata, i
 }}
 
 static const double xsbench_fixture_data[] = {{{data}}};
-static const int64_t xsbench_fixture_energies[] = {{{energies}}};
 static const int64_t xsbench_fixture_metadata[] = {{{metadata}}};
-static const int64_t xsbench_fixture_materials[] = {{0, 1, 0, 1, 1, 0, 1, 0}};
 """
 
 

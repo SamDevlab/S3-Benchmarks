@@ -353,7 +353,7 @@ typedef double (*triad_fn)(double *, int64_t, const double *, int64_t, const dou
 typedef double (*nstream_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t, double);
 typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t);
 typedef double (*rmsd_fn)(const double *, int64_t, const double *, int64_t, int64_t, int64_t);
-typedef double (*xsbench_fn)(const double *, int64_t, const int64_t *, int64_t, const int64_t *, int64_t, const int64_t *, int64_t);
+typedef double (*xsbench_fn)(const double *, int64_t, const int64_t *, int64_t);
 
 static void fail(const char *message) { fprintf(stderr, "%s\n", message); exit(2); }
 static double *alloc_doubles(size_t count) { double *p = calloc(count, sizeof(*p)); if (!p) fail("allocation failed"); return p; }
@@ -435,11 +435,9 @@ int main(int argc, char **argv) {
             24.0, 20.4, 20.5, 20.6, 20.7,
             25.0, 20.5, 20.6, 20.7, 20.8
         };
-        static const int64_t metadata[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100};
-        static const int64_t energies[] = {5, 22, 37, 49, 63, 78, 91, 14};
-        static const int64_t materials[] = {0, 1, 0, 1, 1, 0, 1, 0};
-        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 19, energies, 8, materials, 8);
-        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 19, energies, 8, materials, 8); end = now_ns();
+        static const int64_t metadata[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 63, 78, 91, 14, 0, 1, 0, 1, 1, 0, 1, 0};
+        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 35);
+        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 35); end = now_ns();
     } else fail("unknown workload");
     dlclose(handle);
     emit_result(workload, variant, k, end - begin, observable, expected);
