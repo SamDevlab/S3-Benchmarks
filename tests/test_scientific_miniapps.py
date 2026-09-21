@@ -33,6 +33,7 @@ def test_rmsd_expansion_oracles_are_independent_and_positive() -> None:
 def test_rmsd_expansion_sources_preserve_flat_layout_and_sqrt() -> None:
     for case in expansion_cases():
         assert case.physical_layout == "flat f64_vector"
+        assert case.source.startswith("foreign fn sqrt(value: f64) -> f64:")
         assert "candidate_sqrt" in case.source
         assert "while" in case.source
         assert case.index_mapping
