@@ -1,0 +1,86 @@
+{
+  "benchmark_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "pilots": [
+    {
+      "c_source_sha256": {
+        "1": "b8204a68306dd30ded6e6ac6e4ba4429840e004df1169b7308e75d7d48804589",
+        "10": "a2d9252314a1a24be41b0ad60229abf0311845063ee9f04608e1387e8fe5f462",
+        "100": "c7571c5cbcb3207bb038eec75f32a5b2701adb6a727f38fac54c9fdef5bcb1c5",
+        "1000": "f8ec9df7f1de438b2f46c61105608353c853cfb98717ec717db716822532d2a7"
+      },
+      "family": "memory",
+      "kernel_boundary": "A[i] = B[i] + 2 * C[i]",
+      "setup_boundary": "allocate and initialize three flat vectors",
+      "size": "medium",
+      "variants": [
+        "S3_O0",
+        "S3_O1",
+        "GCC_O2",
+        "CLANG_O2"
+      ],
+      "work_unit": "one element processed",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "c_source_sha256": {
+        "1": "1de78eac2eb4cc5c6095895f76f500f77f1115e8a8b22c2d18ae6507665dafd3",
+        "10": "aa751342cbdb66df2d65105961dbeb8f00f78bbc2008ff771cbd08c3bcb5b9c4",
+        "100": "16d7a3cb27a34f6e0298b22321acf28200545a940eb476e35256cdd9525aa005",
+        "1000": "99d4f9f918e057b86fd2600c600c48da85ba0bf6d81edf87b31c761c05a94dd4"
+      },
+      "family": "hpc",
+      "kernel_boundary": "A[i] = A[i] + B[i] + 2 * C[i]",
+      "setup_boundary": "allocate and initialize three flat vectors",
+      "size": "medium",
+      "variants": [
+        "S3_O0",
+        "S3_O1",
+        "GCC_O2",
+        "CLANG_O2"
+      ],
+      "work_unit": "one element processed",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "c_source_sha256": {
+        "1": "ae65a8fde996e7309ecfc2c6610d9c3b5f7090f9cf5a3b392fc9f5e61d87ca07",
+        "10": "ad0509233ed5fba1a539bc1a1dabbdaff0bff30bd046fb019d78366bcc3f20c0",
+        "100": "c0f2259be81bbcb7c3cf553145cf853ffae7bd30a43e59e99ecd221d9eb1e829",
+        "1000": "92d0b5c230d87faf0e1cc26a259e1c30b60ba96bce9a2d649fcb9f3ea041b500"
+      },
+      "family": "numerical",
+      "kernel_boundary": "C[i,j] = 1 + sum(A[i,k] * B[k,j])",
+      "setup_boundary": "allocate and initialize flat A, B, and C matrices",
+      "size": "medium",
+      "variants": [
+        "S3_O0",
+        "S3_O1",
+        "GCC_O2",
+        "CLANG_O2"
+      ],
+      "work_unit": "one output element",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "c_source_sha256": {
+        "1": "2bdbbad9e6afa59ca2d88917dfe8670a4c928bf46d4396cb374c5bab5280aeb6",
+        "10": "8addf2290ba11bee9a8a2864ea0d36f7358c00d61cb4228d419231c13a104cab",
+        "100": "6727cf88ab659d5c93846ce2e2d5148641351d38b605ba50e3d240f49bcdd36d",
+        "1000": "ca310f464d317a9aa0260f99eb767838eb1f3a3c586186941c8336080abb00f6"
+      },
+      "family": "scientific",
+      "kernel_boundary": "one RMSD reduction per pair",
+      "setup_boundary": "allocate and initialize flat left/right coordinate arrays",
+      "size": "medium",
+      "variants": [
+        "S3_O0",
+        "S3_O1",
+        "GCC_O2",
+        "CLANG_O2"
+      ],
+      "work_unit": "one pair RMSD",
+      "workload_id": "scientific.rmsd.batch"
+    }
+  ],
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+}

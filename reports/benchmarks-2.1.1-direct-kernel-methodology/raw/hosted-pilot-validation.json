@@ -1,0 +1,36 @@
+{
+  "benchmark_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "levels": [
+    1,
+    10,
+    100,
+    1000
+  ],
+  "runs": [
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "scientific.rmsd.batch"
+    }
+  ],
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+}

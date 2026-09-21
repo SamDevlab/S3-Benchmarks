@@ -1,0 +1,96 @@
+{
+  "base_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "base_pr": 17,
+  "benchmark_head": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "calibration": "DEFERRED_NATIVE_TOOLCHAIN",
+  "campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY",
+  "compileall": "PASS",
+  "convergence_test": "NOT_RUN_NATIVE",
+  "diff_check": "PASS",
+  "direct_internal_timer_available": "NO",
+  "direct_kernel_time": "NOT_AVAILABLE",
+  "estimated_fixed_envelope_ns": null,
+  "estimated_incremental_kernel_cost_ns": null,
+  "exported_kernel_call_available": "NO",
+  "external_amortization_required": "YES",
+  "full_suite": "27 passed, 1 skipped, 0 failed",
+  "full_suite_sha": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+  "hosted_pilot_validation": [
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "levels": [],
+      "size": "medium",
+      "status": "DEFERRED_NATIVE_TOOLCHAIN_UNAVAILABLE",
+      "workload_id": "scientific.rmsd.batch"
+    }
+  ],
+  "in_process_repetition": "PLANNED_NATIVE_BUT_DEFERRED",
+  "iteration_levels": [
+    1,
+    10,
+    100,
+    1000
+  ],
+  "jacobi_medium_triage": "DEFERRED_TO_BOUNDED_FOLLOWUP",
+  "jsmn_direct_kernel_method": "DEFERRED",
+  "matched_flat_c_reference": "PASS",
+  "native_blocker": "native S3 qualification requires Linux x86-64; detected Windows AMD64",
+  "native_execution": "NOT_AVAILABLE",
+  "next_campaign": "S3_BENCHMARKS_2_1_1_DIRECT_KERNEL_METHODOLOGY_NATIVE_REPLAY",
+  "next_path": "run_methodology_on_controlled_linux_x86_64_host",
+  "pilot_gate": "NATIVE_DEFERRED",
+  "pressure_map_v2": "PENDING_NATIVE_PILOT",
+  "raw_samples": "NONE_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "run_a": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "run_b": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "s3_causal_experiment_ready": "NO",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_source_changed": false,
+  "same_machine_reproduction": "NOT_RUN_NATIVE_TOOLCHAIN_UNAVAILABLE",
+  "selected_method": "METHOD_C_IN_PROCESS_AMORTIZATION",
+  "slope_model": "NOT_RUN_NATIVE",
+  "slope_model_r2": null,
+  "status": "ENVIRONMENT_DEFERRED",
+  "timing_audit": {
+    "DIRECT_INTERNAL_TIMER_AVAILABLE": "NO",
+    "EXPORTED_KERNEL_CALL_AVAILABLE": "NO",
+    "EXTERNAL_AMORTIZATION_REQUIRED": "YES",
+    "SELECTED_METHOD": "METHOD_C_IN_PROCESS_AMORTIZATION",
+    "abi_matches": [],
+    "abi_search_patterns": [
+      "dlopen",
+      "shared[_ -]?library",
+      "cffi",
+      "syscall",
+      "extern\\s+\\\"C\\\""
+    ],
+    "direct_matches": [],
+    "direct_search_patterns": [
+      "clock_gettime",
+      "rdtsc",
+      "perf_counter",
+      "monotonic"
+    ],
+    "existing_python_clock": "time.perf_counter_ns in benchmark-side harness",
+    "native_call_path": "S3_NATIVE_X86_64 executable only; no callable kernel ABI"
+  },
+  "tsvc_performance": "NOT_RUN",
+  "workloads_expanded_after_pilot": "NO"
+}

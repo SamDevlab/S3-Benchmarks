@@ -1,0 +1,6 @@
+{
+  "causal_experiment_ready": false,
+  "measurement_variability": "UNRESOLVED_NATIVE_DEFERRED",
+  "process_e2e_startup_and_runtime_initialization": "UNRESOLVED_NATIVE_DEFERRED",
+  "static_code_and_stack_operation_density": "UNRESOLVED_NATIVE_DEFERRED"
+}
