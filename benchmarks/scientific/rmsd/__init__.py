@@ -1,0 +1,1 @@
+"""Independent RMSD workload definition."""

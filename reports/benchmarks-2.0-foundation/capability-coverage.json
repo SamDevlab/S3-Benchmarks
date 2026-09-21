@@ -1,0 +1,103 @@
+{
+  "registry_digest": "b05c980a1275d4433de51f728f530d1a947f2198ee041191c5ac63c962d67cbf",
+  "rows": [
+    {
+      "correctness_pass": false,
+      "family": "compiler",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "compiler.tsvc.initial"
+    },
+    {
+      "correctness_pass": false,
+      "family": "hpc",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "hpc.prk.initial"
+    },
+    {
+      "correctness_pass": false,
+      "family": "language",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "correctness_pass": false,
+      "family": "memory",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "memory.babelstream.initial"
+    },
+    {
+      "correctness_pass": false,
+      "family": "numerical",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "numerical.polybench.initial"
+    },
+    {
+      "correctness_pass": true,
+      "family": "realworld",
+      "implemented": true,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": false,
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "realworld.jsmn"
+    },
+    {
+      "correctness_pass": false,
+      "family": "scientific",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "correctness_pass": false,
+      "family": "scientific",
+      "implemented": false,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": true,
+      "status": "NOT_SUPPORTED_YET",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "correctness_pass": true,
+      "family": "scientific",
+      "implemented": true,
+      "measured": false,
+      "native_pass": false,
+      "not_supported": false,
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "scientific.rmsd.single"
+    }
+  ],
+  "schema": "s3.capability-coverage.v1",
+  "summary": {
+    "correctness_pass": 2,
+    "measured": 0,
+    "native_pass": 0,
+    "not_supported": 7,
+    "workloads": 9
+  }
+}

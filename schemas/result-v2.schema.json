@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "s3.benchmark.result.v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run", "provenance", "environment", "workload", "variant", "correctness", "build", "measurement_protocol", "samples", "statistics", "artifact_metrics", "hardware_metrics", "derived_metrics"],
+  "properties": {
+    "schema": {"const": "s3.benchmark.result.v2"},
+    "run": {"type": "object", "required": ["run_id", "timestamp_utc", "reproducibility_level"]},
+    "provenance": {"type": "object", "required": ["benchmark_repo_sha", "s3_sha", "upstream_shas"]},
+    "environment": {"type": "object"},
+    "workload": {"type": "object", "required": ["id", "family", "work_unit"]},
+    "variant": {"type": "object", "required": ["id", "role"]},
+    "correctness": {"type": "object", "required": ["status"]},
+    "build": {"type": "object"},
+    "measurement_protocol": {"type": "object", "required": ["timing_scope", "warmups", "repetitions", "synthetic_timing"]},
+    "samples": {"type": "array", "items": {"type": "number"}},
+    "statistics": {"type": "object"},
+    "artifact_metrics": {"type": "object"},
+    "hardware_metrics": {"type": "object"},
+    "derived_metrics": {"type": "object"}
+  }
+}

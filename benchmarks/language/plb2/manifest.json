@@ -1,0 +1,22 @@
+{
+  "id": "language.plb2.matmul",
+  "family": "language",
+  "description": "Algorithm-parity candidate for the plb2 matmul workload.",
+  "upstream_reference": "attractivechaos.plb2",
+  "upstream_sha": "1181b3b83fea52ee85a66548845f8bf92e33fb67",
+  "work_unit": "one matrix output element",
+  "input_sizes": ["tiny", "small"],
+  "reference_variants": ["upstream-c"],
+  "s3_variants": [],
+  "correctness_contract": {
+    "algorithm_parity": true,
+    "first_missing_capability": "multidimensional-data",
+    "evidence": "No S3 matmul port is present in the pinned candidate.",
+    "minimum_required_capability": "deterministic nested matrix indexing"
+  },
+  "build_recipe": {"reference": "external-pinned-checkout", "s3": "deferred"},
+  "run_recipe": {"mode": "not_supported_yet", "network": false},
+  "measurement_protocol": {"timing_scope": "KERNEL", "warmups": 0, "repetitions": 1, "interleaved": true, "synthetic_timing": false},
+  "capability_requirements": ["multidimensional-data", "nested-loop-indexing"],
+  "status": "NOT_SUPPORTED_YET"
+}

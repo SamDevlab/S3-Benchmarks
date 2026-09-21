@@ -1,0 +1,22 @@
+{
+  "id": "memory.babelstream.initial",
+  "family": "memory",
+  "description": "Initial scalar memory-kernel audit for BabelStream operations.",
+  "upstream_reference": "uob-hpc.babelstream",
+  "upstream_sha": "17ab377b0e919e14fd3df2b67268761fdac8abb3",
+  "work_unit": "one element processed",
+  "input_sizes": ["small-cache", "medium", "large-memory"],
+  "reference_variants": ["upstream-c"],
+  "s3_variants": [],
+  "correctness_contract": {
+    "kernels": ["copy", "scale", "add", "triad", "dot"],
+    "first_missing_capability": "bounded-array-workload-driver",
+    "evidence": "The pinned S3 candidate has no independent BabelStream adapter in this repository.",
+    "minimum_required_capability": "repeatable native flat-array kernel execution"
+  },
+  "build_recipe": {"reference": "external-pinned-checkout", "s3": "deferred"},
+  "run_recipe": {"mode": "not_supported_yet", "network": false, "kernels": ["copy", "scale", "add", "triad", "dot"]},
+  "measurement_protocol": {"timing_scope": "KERNEL", "warmups": 0, "repetitions": 1, "interleaved": true, "synthetic_timing": false},
+  "capability_requirements": ["bounded-array-workload-driver"],
+  "status": "NOT_SUPPORTED_YET"
+}

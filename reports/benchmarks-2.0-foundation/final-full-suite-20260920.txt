@@ -1,0 +1,4 @@
+COMMAND=python -m pytest -q
+................                                                         [100%]
+16 passed in 1.34s
+EXIT=0
