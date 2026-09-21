@@ -88,7 +88,17 @@ def s3_source() -> str:
     mut checksum: f64 = 0.0
     while lookup < 8:
         mut energy: f64 = energies[lookup]
-        mut material: i64 = to_i64(materials[lookup])
+        mut material: f64 = materials[lookup]
+        mut composition_base: i64 = 8
+        mut concentration_base: i64 = 12
+        match material <=> 0.0:
+            0:
+                composition_base = 6
+                concentration_base = 10
+
+            else:
+                composition_base = 8
+                concentration_base = 12
         mut position: i64 = 0
         mut total_xs: f64 = 0.0
         mut elastic_xs: f64 = 0.0
@@ -96,12 +106,22 @@ def s3_source() -> str:
         mut fission_xs: f64 = 0.0
         mut nu_fission_xs: f64 = 0.0
         while position < 2:
-            mut composition_index: i64 = 6 + material * 2 + position
-            mut nuclide: i64 = to_i64(data[composition_index])
-            mut concentration: f64 = data[10 + material * 2 + position]
+            mut composition_index: i64 = composition_base + position
+            mut nuclide_value: f64 = data[composition_index]
+            mut grid_base: i64 = 44
+            match nuclide_value <=> 1.0:
+                -1:
+                    grid_base = 14
+
+                0:
+                    grid_base = 44
+
+                1:
+                    grid_base = 74
+
+            mut concentration: f64 = data[concentration_base + position]
             mut low: i64 = 0
             mut high: i64 = 4
-            mut grid_base: i64 = 14 + nuclide * 30
             while high - low > 1:
                 mut middle: i64 = low + (high - low) / 2
                 mut middle_index: i64 = grid_base + middle * 6
