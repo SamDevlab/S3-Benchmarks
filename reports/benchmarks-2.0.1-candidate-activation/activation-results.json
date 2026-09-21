@@ -1,0 +1,680 @@
+{
+  "generated_sources": [
+    {
+      "bytes": 1049,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\hpc_prk_nstream__tiny.s3",
+      "sha256": "7f6665d1da2586b6d39882b6ce8c3c3bf1bf54c0e0fb1d863cc57c37c8dbf333",
+      "size": "tiny",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "bytes": 665,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_copy__tiny.s3",
+      "sha256": "fa92bec7eaea90aba14b1fe4c51654c068b2781f9ba063524a4125509f78130e",
+      "size": "tiny",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "bytes": 721,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_scale__tiny.s3",
+      "sha256": "a53577fdd8b18bbd0b5bf777a06208f032dfc31d655e5511513f62ddf25fdce1",
+      "size": "tiny",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "bytes": 945,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_add__tiny.s3",
+      "sha256": "3d610496690805fd23f0a6c36a11d2048c3228254083acc3751284c168a0358b",
+      "size": "tiny",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "bytes": 951,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_triad__tiny.s3",
+      "sha256": "1f998368918c13e78e80eab893fbfb6fd6c608802ea96a81dbeef766f48afbf1",
+      "size": "tiny",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "bytes": 896,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_dot__tiny.s3",
+      "sha256": "415be72e95ee67482ba22399f88255500e12ce51a262d152a866d116ca476862",
+      "size": "tiny",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "bytes": 1174,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\scientific_rmsd_batch__tiny.s3",
+      "sha256": "e79ff20f41dea5f8235f261b9b55fd3c1ff6b48c7083fad1e7cff1f8a60bae39",
+      "size": "tiny",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "bytes": 2321,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\scientific_rmsd_matrix__tiny.s3",
+      "sha256": "1b54c8078b3260b4ce854b1c749f53d0bcc1df5a0d5e7df6a5bc03bb0b3bb4ff",
+      "size": "tiny",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "bytes": 1418,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\hpc_prk_nstream__small.s3",
+      "sha256": "9a9fcd1c9ddb1a148c1e9d8a2fa1c34ef7a4899240ae80ae635f329bb341f24c",
+      "size": "small",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "bytes": 913,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_copy__small.s3",
+      "sha256": "74c3e56069dad3b9bd8a0e0af97123feabf9318a566654a56e6547ea5a55acfb",
+      "size": "small",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "bytes": 972,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_scale__small.s3",
+      "sha256": "41f65a6fb29c05880b55147a963d46da5e3265c45a29b024ea692de9e09583b7",
+      "size": "small",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "bytes": 1319,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_add__small.s3",
+      "sha256": "fee43d6e9c1712deda936f3db440db32d84cafd7debc5f56cfc68e7da44d507a",
+      "size": "small",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "bytes": 1325,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_triad__small.s3",
+      "sha256": "6d10e8d1420ef0c5b4f4618a0960843ec54805680206a169d040446c9902d37d",
+      "size": "small",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "bytes": 1270,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\memory_babelstream_dot__small.s3",
+      "sha256": "a998f022219ee6cebdace3641f1ed066239c287ad3444ef60112b6aa53f16c52",
+      "size": "small",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "bytes": 1442,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\scientific_rmsd_batch__small.s3",
+      "sha256": "a8420922c61a20c46f7cf5e04c8d689bda70c37b1434a7ce4057570cde430acc",
+      "size": "small",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "bytes": 3886,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\scientific_rmsd_matrix__small.s3",
+      "sha256": "d743b4244072bff8b489042b828bd175b7ac18174e7e3ef0e5d3d9bc065eaf56",
+      "size": "small",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "bytes": 1326,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\hpc_prk_transpose__tiny.s3",
+      "sha256": "5638a4a8c0e59b16704e2fb08feb22eb26d8f6f79ee88bf346487f942781043d",
+      "size": "tiny",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "bytes": 1689,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_atax__tiny.s3",
+      "sha256": "6f906411b9403b193bd192364de75552b2385244356d320e1f05b1fdc955ef48",
+      "size": "tiny",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "bytes": 1747,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_mvt__tiny.s3",
+      "sha256": "c77ebe740b4897bf2353c3d6b2bb331f856c0aed7020e22f3aeb607dd30626cc",
+      "size": "tiny",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "bytes": 1571,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_gemm__tiny.s3",
+      "sha256": "00f7842cb17d6d0e88aebec2fb8e61e9fec68b44010ff316ea0a0a582c76b8b6",
+      "size": "tiny",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "bytes": 1571,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\language_plb2_matmul__tiny.s3",
+      "sha256": "00f7842cb17d6d0e88aebec2fb8e61e9fec68b44010ff316ea0a0a582c76b8b6",
+      "size": "tiny",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "bytes": 3036,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_2mm__tiny.s3",
+      "sha256": "18fa0c4fd478460cfd6632509585c019e2348bbb990ea251b6b8224f879540a3",
+      "size": "tiny",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "bytes": 1112,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_jacobi_1d__tiny.s3",
+      "sha256": "02bbb66b79df956e3b78085feb68e3885d6da245119f57193603c4c9a9d7e1f1",
+      "size": "tiny",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "bytes": 1878,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\hpc_prk_transpose__small.s3",
+      "sha256": "3244e8a26af1744206230849dab98015450c0e2f09088537b8512e73c500e353",
+      "size": "small",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "bytes": 2094,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_atax__small.s3",
+      "sha256": "4fd0bf211aeae0fd38468c65a2101590fa92ad78ec5c9f3e286f8d4765ea8c38",
+      "size": "small",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "bytes": 2195,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_mvt__small.s3",
+      "sha256": "722faef7fc015be86d42d7b0743272aacad547b66c5e371d655034b81a8cd30d",
+      "size": "small",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "bytes": 1983,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_gemm__small.s3",
+      "sha256": "7d86ae8ce6a6c37a8f99ad0ddbb0609260cd3db5dd25f5522080f4edea932a9e",
+      "size": "small",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "bytes": 1983,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\language_plb2_matmul__small.s3",
+      "sha256": "7d86ae8ce6a6c37a8f99ad0ddbb0609260cd3db5dd25f5522080f4edea932a9e",
+      "size": "small",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "bytes": 3886,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_2mm__small.s3",
+      "sha256": "225efb6d20bc9295845b873e97e7587af31f61121f9a7632c440b21d9974f68e",
+      "size": "small",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "bytes": 1194,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\numerical_polybench_jacobi_1d__small.s3",
+      "sha256": "b7ec006687ee4853fce71dab22cc4d98e69ebf7d2deff026dd0c7dd6658154d4",
+      "size": "small",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "bytes": 648,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\compiler_tsvc_initial-subset__tiny.s3",
+      "sha256": "91f10a6b3c0560c6adba4709aa12394515ecc30fc8ed399207d612ff5f5631b2",
+      "size": "tiny",
+      "workload_id": "compiler.tsvc.initial-subset"
+    },
+    {
+      "bytes": 730,
+      "path": "reports\\benchmarks-2.0.1-candidate-activation\\generated\\compiler_tsvc_initial-subset__small.s3",
+      "sha256": "ee68996a0a5e0bd4faeb60590182333d2f91be1f495fbc159a31a2b1f8bd9fe3",
+      "size": "small",
+      "workload_id": "compiler.tsvc.initial-subset"
+    }
+  ],
+  "observations": [
+    {
+      "error": null,
+      "expected": 32.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 32.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "7f6665d1da2586b6d39882b6ce8c3c3bf1bf54c0e0fb1d863cc57c37c8dbf333",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "error": null,
+      "expected": 10.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 10.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "fa92bec7eaea90aba14b1fe4c51654c068b2781f9ba063524a4125509f78130e",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "error": null,
+      "expected": 44.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 44.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "a53577fdd8b18bbd0b5bf777a06208f032dfc31d655e5511513f62ddf25fdce1",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "error": null,
+      "expected": 26.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 26.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "3d610496690805fd23f0a6c36a11d2048c3228254083acc3751284c168a0358b",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "error": null,
+      "expected": 60.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 60.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "1f998368918c13e78e80eab893fbfb6fd6c608802ea96a81dbeef766f48afbf1",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "error": null,
+      "expected": 50.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 50.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "415be72e95ee67482ba22399f88255500e12ce51a262d152a866d116ca476862",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "error": null,
+      "expected": 2.0,
+      "hosted": "PASS",
+      "index_mapping": "pair * coordinates_per_pair + coordinate",
+      "logical_shape": "pair_count x coordinates_per_pair",
+      "native": "NOT_RUN",
+      "observed": 2.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "e79ff20f41dea5f8235f261b9b55fd3c1ff6b48c7083fad1e7cff1f8a60bae39",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "error": null,
+      "expected": 4.0,
+      "hosted": "PASS",
+      "index_mapping": "p * Q + q",
+      "logical_shape": "P x Q pair matrix",
+      "native": "NOT_RUN",
+      "observed": 4.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "1b54c8078b3260b4ce854b1c749f53d0bcc1df5a0d5e7df6a5bc03bb0b3bb4ff",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "error": null,
+      "expected": 77.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 77.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "9a9fcd1c9ddb1a148c1e9d8a2fa1c34ef7a4899240ae80ae635f329bb341f24c",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "hpc.prk.nstream"
+    },
+    {
+      "error": null,
+      "expected": 28.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 28.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "74c3e56069dad3b9bd8a0e0af97123feabf9318a566654a56e6547ea5a55acfb",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.copy"
+    },
+    {
+      "error": null,
+      "expected": 140.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 140.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "41f65a6fb29c05880b55147a963d46da5e3265c45a29b024ea692de9e09583b7",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.scale"
+    },
+    {
+      "error": null,
+      "expected": 77.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 77.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "fee43d6e9c1712deda936f3db440db32d84cafd7debc5f56cfc68e7da44d507a",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.add"
+    },
+    {
+      "error": null,
+      "expected": 189.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 189.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "6d10e8d1420ef0c5b4f4618a0960843ec54805680206a169d040446c9902d37d",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.triad"
+    },
+    {
+      "error": null,
+      "expected": 252.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "1D vector",
+      "native": "NOT_RUN",
+      "observed": 252.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "a998f022219ee6cebdace3641f1ed066239c287ad3444ef60112b6aa53f16c52",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "memory.babelstream.dot"
+    },
+    {
+      "error": null,
+      "expected": 3.0,
+      "hosted": "PASS",
+      "index_mapping": "pair * coordinates_per_pair + coordinate",
+      "logical_shape": "pair_count x coordinates_per_pair",
+      "native": "NOT_RUN",
+      "observed": 3.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "a8420922c61a20c46f7cf5e04c8d689bda70c37b1434a7ce4057570cde430acc",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "scientific.rmsd.batch"
+    },
+    {
+      "error": null,
+      "expected": 9.0,
+      "hosted": "PASS",
+      "index_mapping": "p * Q + q",
+      "logical_shape": "P x Q pair matrix",
+      "native": "NOT_RUN",
+      "observed": 9.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "d743b4244072bff8b489042b828bd175b7ac18174e7e3ef0e5d3d9bc065eaf56",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "scientific.rmsd.matrix"
+    },
+    {
+      "error": null,
+      "expected": 86.0,
+      "hosted": "PASS",
+      "index_mapping": "row * cols + column",
+      "logical_shape": "2 x 3",
+      "native": "NOT_RUN",
+      "observed": 86.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "5638a4a8c0e59b16704e2fb08feb22eb26d8f6f79ee88bf346487f942781043d",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "error": null,
+      "expected": 564.0,
+      "hosted": "PASS",
+      "index_mapping": "i * N + j",
+      "logical_shape": "A[2,3], x[3], y[3]",
+      "native": "NOT_RUN",
+      "observed": 564.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "6f906411b9403b193bd192364de75552b2385244356d320e1f05b1fdc955ef48",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "error": null,
+      "expected": 108.0,
+      "hosted": "PASS",
+      "index_mapping": "i * N + j",
+      "logical_shape": "A[2,3], x1[2], x2[3]",
+      "native": "NOT_RUN",
+      "observed": 108.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "c77ebe740b4897bf2353c3d6b2bb331f856c0aed7020e22f3aeb607dd30626cc",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "error": null,
+      "expected": 150.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[2,K], B[K,3], C[2,3]",
+      "native": "NOT_RUN",
+      "observed": 150.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "00f7842cb17d6d0e88aebec2fb8e61e9fec68b44010ff316ea0a0a582c76b8b6",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "error": null,
+      "expected": 150.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[2,K], B[K,3], C[2,3]",
+      "native": "NOT_RUN",
+      "observed": 150.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "00f7842cb17d6d0e88aebec2fb8e61e9fec68b44010ff316ea0a0a582c76b8b6",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "error": null,
+      "expected": 504.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[2,K], B[K,3], C[3,K], D[K,3]",
+      "native": "NOT_RUN",
+      "observed": 504.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "18fa0c4fd478460cfd6632509585c019e2348bbb990ea251b6b8224f879540a3",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "error": null,
+      "expected": 13.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "two 1D vectors length 5",
+      "native": "NOT_RUN",
+      "observed": 13.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "02bbb66b79df956e3b78085feb68e3885d6da245119f57193603c4c9a9d7e1f1",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "error": null,
+      "expected": 584.0,
+      "hosted": "PASS",
+      "index_mapping": "row * cols + column",
+      "logical_shape": "3 x 4",
+      "native": "NOT_RUN",
+      "observed": 584.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "3244e8a26af1744206230849dab98015450c0e2f09088537b8512e73c500e353",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "hpc.prk.transpose"
+    },
+    {
+      "error": null,
+      "expected": 6740.0,
+      "hosted": "PASS",
+      "index_mapping": "i * N + j",
+      "logical_shape": "A[3,4], x[4], y[4]",
+      "native": "NOT_RUN",
+      "observed": 6740.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "4fd0bf211aeae0fd38468c65a2101590fa92ad78ec5c9f3e286f8d4765ea8c38",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.atax"
+    },
+    {
+      "error": null,
+      "expected": 483.0,
+      "hosted": "PASS",
+      "index_mapping": "i * N + j",
+      "logical_shape": "A[3,4], x1[3], x2[4]",
+      "native": "NOT_RUN",
+      "observed": 483.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "722faef7fc015be86d42d7b0743272aacad547b66c5e371d655034b81a8cd30d",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.mvt"
+    },
+    {
+      "error": null,
+      "expected": 498.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[3,K], B[K,4], C[3,4]",
+      "native": "NOT_RUN",
+      "observed": 498.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "7d86ae8ce6a6c37a8f99ad0ddbb0609260cd3db5dd25f5522080f4edea932a9e",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.gemm"
+    },
+    {
+      "error": null,
+      "expected": 498.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[3,K], B[K,4], C[3,4]",
+      "native": "NOT_RUN",
+      "observed": 498.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "7d86ae8ce6a6c37a8f99ad0ddbb0609260cd3db5dd25f5522080f4edea932a9e",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "language.plb2.matmul"
+    },
+    {
+      "error": null,
+      "expected": 1500.0,
+      "hosted": "PASS",
+      "index_mapping": "i * stride + j",
+      "logical_shape": "A[3,K], B[K,4], C[4,K], D[K,4]",
+      "native": "NOT_RUN",
+      "observed": 1500.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "225efb6d20bc9295845b873e97e7587af31f61121f9a7632c440b21d9974f68e",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.2mm"
+    },
+    {
+      "error": null,
+      "expected": 18.666666666666668,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "two 1D vectors length 6",
+      "native": "NOT_RUN",
+      "observed": 18.666666666666668,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "b7ec006687ee4853fce71dab22cc4d98e69ebf7d2deff026dd0c7dd6658154d4",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "numerical.polybench.jacobi_1d"
+    },
+    {
+      "error": null,
+      "expected": 2.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "selected scalar loop corpus",
+      "native": "NOT_RUN",
+      "observed": 2.0,
+      "physical_layout": "flat f64_vector",
+      "size": "tiny",
+      "source_sha256": "91f10a6b3c0560c6adba4709aa12394515ecc30fc8ed399207d612ff5f5631b2",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "compiler.tsvc.initial-subset"
+    },
+    {
+      "error": null,
+      "expected": 2.0,
+      "hosted": "PASS",
+      "index_mapping": "i",
+      "logical_shape": "selected scalar loop corpus",
+      "native": "NOT_RUN",
+      "observed": 2.0,
+      "physical_layout": "flat f64_vector",
+      "size": "small",
+      "source_sha256": "ee68996a0a5e0bd4faeb60590182333d2f91be1f495fbc159a31a2b1f8bd9fe3",
+      "status": "CORRECTNESS_PASS",
+      "workload_id": "compiler.tsvc.initial-subset"
+    }
+  ],
+  "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS",
+  "s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
+}

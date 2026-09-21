@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
+import hashlib
 import json
 from pathlib import Path
 import platform
@@ -44,9 +45,33 @@ def main() -> int:
                 observations.append({"workload_id": case.workload_id, "size": case.size, "status": "NATIVE_BLOCKED", "expected": case.expected, "observed": None, "native_observable": None, "error": f"{type(exc).__name__}: {exc}"})
     else:
         observations = [item.to_dict() for item in run_hosted_matrix(workload_cases)]
-    payload = {"s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5", "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS", "observations": observations}
     output = args.output or ROOT / "reports/benchmarks-2.0.1-candidate-activation/activation-results.json"
     output.parent.mkdir(parents=True, exist_ok=True)
+    generated_dir = output.parent / "generated"
+    generated_dir.mkdir(parents=True, exist_ok=True)
+    generated_sources = []
+    for case in workload_cases:
+        filename = f"{case.workload_id.replace('.', '_')}__{case.size}.s3"
+        source_path = generated_dir / filename
+        source_bytes = case.source.encode("utf-8")
+        source_path.write_bytes(source_bytes)
+        generated_sources.append(
+            {
+                "workload_id": case.workload_id,
+                "size": case.size,
+                "path": source_path.relative_to(ROOT).as_posix()
+                if source_path.is_relative_to(ROOT)
+                else str(source_path),
+                "sha256": hashlib.sha256(source_bytes).hexdigest(),
+                "bytes": len(source_bytes),
+            }
+        )
+    payload = {
+        "s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+        "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS",
+        "generated_sources": generated_sources,
+        "observations": observations,
+    }
     output.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"OBSERVATIONS={len(observations)}")
     print(f"REPORT={output}")

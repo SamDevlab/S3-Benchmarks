@@ -1,0 +1,36 @@
+fn candidate_sqrt(value: f64) -> f64:
+    return sqrt(value)
+
+fn main() -> f64:
+    mut a: f64_vector = f64_vector_new(7)
+    discard f64_vector_push(&mut a, 1.0)
+    discard f64_vector_push(&mut a, 2.0)
+    discard f64_vector_push(&mut a, 3.0)
+    discard f64_vector_push(&mut a, 4.0)
+    discard f64_vector_push(&mut a, 5.0)
+    discard f64_vector_push(&mut a, 6.0)
+    discard f64_vector_push(&mut a, 7.0)
+    mut b: f64_vector = f64_vector_new(7)
+    discard f64_vector_push(&mut b, 1.0)
+    discard f64_vector_push(&mut b, 3.0)
+    discard f64_vector_push(&mut b, 5.0)
+    discard f64_vector_push(&mut b, 7.0)
+    discard f64_vector_push(&mut b, 9.0)
+    discard f64_vector_push(&mut b, 11.0)
+    discard f64_vector_push(&mut b, 13.0)
+    mut c: f64_vector = f64_vector_new(7)
+    discard f64_vector_push(&mut c, 1.0)
+    discard f64_vector_push(&mut c, 4.0)
+    discard f64_vector_push(&mut c, 7.0)
+    discard f64_vector_push(&mut c, 10.0)
+    discard f64_vector_push(&mut c, 13.0)
+    discard f64_vector_push(&mut c, 16.0)
+    discard f64_vector_push(&mut c, 19.0)
+    mut i: i64 = 0
+    mut total: f64 = 0.0
+    while i < 7:
+        mut value: f64 = f64_vector_get(&b, i) + 2.0 * f64_vector_get(&c, i)
+        discard f64_vector_set(&mut a, i, value)
+        total = total + value
+        i = i + 1
+    return total

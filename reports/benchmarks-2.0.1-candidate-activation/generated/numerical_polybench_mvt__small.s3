@@ -1,0 +1,56 @@
+fn candidate_sqrt(value: f64) -> f64:
+    return sqrt(value)
+
+fn main() -> f64:
+    mut matrix: f64_vector = f64_vector_new(12)
+    discard f64_vector_push(&mut matrix, 1.0)
+    discard f64_vector_push(&mut matrix, 2.0)
+    discard f64_vector_push(&mut matrix, 3.0)
+    discard f64_vector_push(&mut matrix, 4.0)
+    discard f64_vector_push(&mut matrix, 5.0)
+    discard f64_vector_push(&mut matrix, 6.0)
+    discard f64_vector_push(&mut matrix, 7.0)
+    discard f64_vector_push(&mut matrix, 8.0)
+    discard f64_vector_push(&mut matrix, 9.0)
+    discard f64_vector_push(&mut matrix, 10.0)
+    discard f64_vector_push(&mut matrix, 11.0)
+    discard f64_vector_push(&mut matrix, 12.0)
+    mut x1: f64_vector = f64_vector_new(3)
+    discard f64_vector_push(&mut x1, 1.0)
+    discard f64_vector_push(&mut x1, 2.0)
+    discard f64_vector_push(&mut x1, 3.0)
+    mut x2: f64_vector = f64_vector_new(4)
+    discard f64_vector_push(&mut x2, 2.0)
+    discard f64_vector_push(&mut x2, 3.0)
+    discard f64_vector_push(&mut x2, 4.0)
+    discard f64_vector_push(&mut x2, 5.0)
+    mut y1: f64_vector = f64_vector_new(3)
+    discard f64_vector_push(&mut y1, 1.0)
+    discard f64_vector_push(&mut y1, 1.0)
+    discard f64_vector_push(&mut y1, 1.0)
+    mut y2: f64_vector = f64_vector_new(4)
+    discard f64_vector_push(&mut y2, 1.0)
+    discard f64_vector_push(&mut y2, 1.0)
+    discard f64_vector_push(&mut y2, 1.0)
+    discard f64_vector_push(&mut y2, 1.0)
+    mut i: i64 = 0
+    while i < 3:
+        mut j: i64 = 0
+        while j < 4:
+            mut index: i64 = i * to_i64(4) + j
+            mut value1: f64 = f64_vector_get(&y1, i) + f64_vector_get(&matrix, index) * f64_vector_get(&x2, j)
+            discard f64_vector_set(&mut y1, i, value1)
+            mut value2: f64 = f64_vector_get(&y2, j) + f64_vector_get(&matrix, index) * f64_vector_get(&x1, i)
+            discard f64_vector_set(&mut y2, j, value2)
+            j = j + 1
+        i = i + 1
+    mut checksum: f64 = 0.0
+    mut k: i64 = 0
+    while k < 3:
+        checksum = checksum + f64_vector_get(&y1, k)
+        k = k + 1
+    k = 0
+    while k < 4:
+        checksum = checksum + f64_vector_get(&y2, k)
+        k = k + 1
+    return checksum

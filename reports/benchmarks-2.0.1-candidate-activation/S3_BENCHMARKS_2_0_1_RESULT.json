@@ -1,0 +1,49 @@
+{
+  "campaign": "S3-BENCHMARKS-2.0.1-CANDIDATE-ACTIVATION",
+  "base_head": "2891ae5a2a8ee558267aeaa54c7cbc42156e2373",
+  "functional_commit": "1ceb99b0876b53a99740fd4ce2793652cd707d13",
+  "s3_candidate_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_source_changed": false,
+  "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS",
+  "hosted": {
+    "cases": 32,
+    "pass": 32,
+    "fail": 0,
+    "status": "PASS",
+    "performance_results_valid": "NO_NEW_PERFORMANCE_RESULTS"
+  },
+  "native_linux_x86_64": {
+    "cases": 32,
+    "pass": 0,
+    "fail": 0,
+    "blocked": 32,
+    "status": "BLOCKED",
+    "blocker_class": "TRUE_BACKEND_CAPABILITY_BLOCKER",
+    "blocker": "standalone native runtime cannot return decimal f64 from entry function",
+    "raw_evidence": "native-activation-linux-x86_64.json",
+    "raw_evidence_sha256": "3ee07223cdf66f2d2fe6085ecbb097a94569c75b7992d3fa54781e2c83bb49ae"
+  },
+  "tsvc_audit": {
+    "upstream_sha": "badf9adb2974867ac0937718d85a44dec6dec95a",
+    "named_loops": 138,
+    "representative_loops": 18,
+    "implemented": false,
+    "vendored_code": false
+  },
+  "full_suite": {
+    "passed": 18,
+    "skipped": 1,
+    "failed": 0,
+    "exit": 0,
+    "transcript": "final-full-suite-20260920.txt",
+    "transcript_sha256": "5745b1e2497908d1e9d0249d7b056a33a71401dfde70df1d46ec608370b0d3c6"
+  },
+  "compileall": "PASS",
+  "diff_check": "PASS",
+  "next_path": "Path B",
+  "next_campaign": "S3_CAPABILITY_CAMPAIGN_FOR_NATIVE_DECIMAL_F64_OUTPUT",
+  "merge": false,
+  "tag": false,
+  "release": false,
+  "shutdown": false
+}

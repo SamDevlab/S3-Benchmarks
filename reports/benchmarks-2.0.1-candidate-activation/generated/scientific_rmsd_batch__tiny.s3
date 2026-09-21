@@ -1,0 +1,31 @@
+fn candidate_sqrt(value: f64) -> f64:
+    return sqrt(value)
+
+fn main() -> f64:
+    mut left: f64_vector = f64_vector_new(6)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 2.0)
+    discard f64_vector_push(&mut left, 3.0)
+    discard f64_vector_push(&mut left, 4.0)
+    discard f64_vector_push(&mut left, 5.0)
+    discard f64_vector_push(&mut left, 6.0)
+    mut right: f64_vector = f64_vector_new(6)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 3.0)
+    discard f64_vector_push(&mut right, 4.0)
+    discard f64_vector_push(&mut right, 5.0)
+    discard f64_vector_push(&mut right, 6.0)
+    discard f64_vector_push(&mut right, 7.0)
+    mut pair: i64 = 0
+    mut total: f64 = 0.0
+    while pair < 2:
+        mut coordinate: i64 = 0
+        mut ssd: f64 = 0.0
+        while coordinate < 3:
+            mut offset: i64 = pair * 3 + coordinate
+            mut delta: f64 = f64_vector_get(&left, offset) - f64_vector_get(&right, offset)
+            ssd = ssd + delta * delta
+            coordinate = coordinate + 1
+        total = total + candidate_sqrt(ssd / 3.0)
+        pair = pair + 1
+    return total
