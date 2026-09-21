@@ -415,7 +415,10 @@ int main(int argc, char **argv) {
         for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates);
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates); end = now_ns();
         free(left); free(right);
-    } else if (strcmp(workload, "scientific.xsbench.compatible_lookup") == 0) {
+    } else if (strcmp(workload, "scientific.xsbench.compatible_lookup") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.tiny") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.small") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.medium") == 0) {
         xsbench_fn fn = (xsbench_fn)symbol(handle, exported_symbol);
         static const double data[] = {
             3.0, 5.0, 2.0, 2.0, 2.0, 2.0, 0.6, 0.4, 0.25, 0.75,
