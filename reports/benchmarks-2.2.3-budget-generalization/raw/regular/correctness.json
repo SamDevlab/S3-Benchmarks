@@ -1,0 +1,150 @@
+{
+  "differential_oracle": "PASS",
+  "native_variants": {
+    "CLANG_O2": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-clang_o2.so",
+        "scientific.rmsd.batch",
+        "CLANG_O2",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 139910603,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "CLANG_O2",
+      "workload": "scientific.rmsd.batch"
+    },
+    "GCC_O2": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-gcc_o2.so",
+        "scientific.rmsd.batch",
+        "GCC_O2",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 106747053,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "GCC_O2",
+      "workload": "scientific.rmsd.batch"
+    },
+    "S3_O0_BASELINE": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-s3_o0_baseline.so",
+        "scientific.rmsd.batch",
+        "S3_O0_BASELINE",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 13613644826,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_O0_BASELINE",
+      "workload": "scientific.rmsd.batch"
+    },
+    "S3_O0_NO_BUDGET": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-s3_o0_no_budget.so",
+        "scientific.rmsd.batch",
+        "S3_O0_NO_BUDGET",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 5451823541,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_O0_NO_BUDGET",
+      "workload": "scientific.rmsd.batch"
+    },
+    "S3_O1_BASELINE": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-s3_o1_baseline.so",
+        "scientific.rmsd.batch",
+        "S3_O1_BASELINE",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 13480797743,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_O1_BASELINE",
+      "workload": "scientific.rmsd.batch"
+    },
+    "S3_O1_NO_BUDGET": {
+      "K": 2000000,
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/driver/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/budget-generalization-20260922-142637-521668934/regular/artifacts-k2000000/scientific-rmsd-batch-s3_o1_no_budget.so",
+        "scientific.rmsd.batch",
+        "S3_O1_NO_BUDGET",
+        "rmsd",
+        "2000000",
+        "16",
+        "0"
+      ],
+      "elapsed_ns": 5300095946,
+      "expected": 16,
+      "observable": 16,
+      "returncode": 0,
+      "status": "PASS",
+      "stderr": "",
+      "variant": "S3_O1_NO_BUDGET",
+      "workload": "scientific.rmsd.batch"
+    }
+  },
+  "status": "PASS"
+}

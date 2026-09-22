@@ -2,15 +2,17 @@
 
 Date: 2026-09-22
 
-- Lane A: instruction-budget attribution complete on the recovered Linux guest;
-  H2 confirmed for the scoped XSBench protocol and H3 not confirmed.
-- Lane B: Frontier Lab V1 created with a single active causal experiment and
-  no new workload pilot started.
-- S3 source changes: none.
+- Lane A: instruction-budget attribution is causally confirmed for the pinned
+  XSBench positive control, the existing RMSD FFI pilot, and the JSMN native
+  parser path.
+- Lane B: multi-workload replication closed H7 as `CONFIRMED_GENERAL` across
+  three workload classes. O09 is complete.
+- S3 source changes: none; the pinned S3 SHA remains
+  `e07d0b5464bf472b2ca18993f3e196a234ff0fc5`.
 - Production optimization: none.
 - Qualified performance index: NOT_AVAILABLE.
-- Maximum active work: one causal experiment, one lab infrastructure task,
-  zero new workload pilots.
+- Next safe research action: O21 safe budget design review. It must remain
+  benchmark-side and research-first until a separate design gate passes.
 
-The next safe action is multi-workload budget-causal replication. No S3 change
-is authorized from this checkpoint. Host and VM remain running by policy.
+The current evidence is bounded to the declared Linux x86-64 protocols. Host
+and VM remain running by policy.

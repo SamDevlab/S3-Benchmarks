@@ -1,0 +1,6 @@
+FULL_SUITE_START=2026-09-22T14:08:13.8997385-03:00
+FULL_SUITE_HEAD=e3a056f95af9cf5fed27db34a4ece2e022c33717
+......s...............................................................   [100%]
+69 passed, 1 skipped in 4.16s
+FULL_SUITE_EXIT=0
+FULL_SUITE_END=2026-09-22T14:08:19.1252801-03:00

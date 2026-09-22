@@ -1,0 +1,21 @@
+{
+  "clang": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+  "cpu_affinity": 0,
+  "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "host": {
+    "architecture": "x86_64",
+    "cpu_family": "23",
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "cpu_model_id": "24",
+    "cpu_stepping": "1",
+    "cpu_vendor": "AuthenticAMD",
+    "kernel": "7.0.0-31-generic",
+    "logical_cores": 3,
+    "physical_cores": "3"
+  },
+  "host_fingerprint": "9a3f305bd7d750ac2a6e86903c7487575d629e222bedd22dc70634519ec50b56",
+  "hostname": "Ubuntuserve",
+  "perf_binary": true,
+  "python": "3.14.4",
+  "timer": "CLOCK_MONOTONIC_RAW"
+}

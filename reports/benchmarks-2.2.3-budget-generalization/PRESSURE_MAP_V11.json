@@ -1,0 +1,48 @@
+{
+  "benchmark_sha": "f2b4acb510b5f0e6a9e04287d3061194094d1417",
+  "evidence_scope": "causal instruction-budget experiment only; other cells are not causal claims",
+  "host_fingerprint": "9a3f305bd7d750ac2a6e86903c7487575d629e222bedd22dc70634519ec50b56",
+  "rows": [
+    {
+      "bounds": "NOT_MEASURED",
+      "calls": "OBSERVED_STATIC_ONLY",
+      "class": "regular_numeric",
+      "frame": "NOT_MEASURED",
+      "indexing": "NOT_MEASURED",
+      "initialization": "NOT_MEASURED",
+      "instruction_budget": "CONFIRMED_CAUSAL",
+      "register_pressure": "NOT_MEASURED",
+      "runtime_helpers": "NOT_MEASURED",
+      "stack": "NOT_MEASURED",
+      "workload": "scientific.rmsd.batch"
+    },
+    {
+      "bounds": "OBSERVED_ONLY",
+      "calls": "NOT_MEASURED",
+      "class": "irregular_scientific",
+      "frame": "WEAKENED",
+      "indexing": "OBSERVED_ONLY",
+      "initialization": "NOT_MEASURED",
+      "instruction_budget": "CONFIRMED_CAUSAL",
+      "register_pressure": "NOT_MEASURED",
+      "runtime_helpers": "NOT_MEASURED",
+      "stack": "NOT_MEASURED",
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    },
+    {
+      "bounds": "NOT_MEASURED",
+      "calls": "NOT_MEASURED",
+      "class": "control_flow_or_parsing",
+      "frame": "NOT_MEASURED",
+      "indexing": "OBSERVED_ONLY",
+      "initialization": "NOT_MEASURED",
+      "instruction_budget": "CONFIRMED_CAUSAL",
+      "register_pressure": "NOT_MEASURED",
+      "runtime_helpers": "NOT_MEASURED",
+      "stack": "NOT_MEASURED",
+      "workload": "realworld.jsmn"
+    }
+  ],
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "schema": "s3.pressure-map.v11"
+}
