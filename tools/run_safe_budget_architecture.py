@@ -432,6 +432,20 @@ def run_campaign(s3_repo: Path, benchmark_sha: str, *, run_timing: bool = True) 
     _write_json(raw_root / "safety_corpus.json", safety)
     native_boundary = _native_boundary_probe(s3_repo, raw_root)
     _write_json(raw_root / "native_boundary.json", native_boundary)
+    if not run_timing:
+        result = {
+            "campaign": CAMPAIGN,
+            "benchmark_sha": benchmark_sha,
+            "s3_sha": EXPECTED_S3_SHA,
+            "host_fingerprint": fingerprint,
+            "safety_equivalence": {"tier": "E0", "status": "PASS" if native_boundary["status"] == "PASS" and safety["status"] == "PASS" else "FAIL", "differential": native_boundary, "corpus": safety},
+            "candidate_prototypes": [{"name": "P0", "status": "ORACLE"}, {"name": "PNEG", "status": "LOWER_BOUND_ONLY"}, {"name": "P1", "status": "UNDER_TEST"}, {"name": "P2", "status": "BLOCKED_BY_EXACTNESS_PROOF"}],
+            "p2": {"implemented": False, "safety_equivalence": "BLOCKED"},
+            "diagnostic_only": True,
+            "s3_source_changed": False,
+        }
+        _write_json(report_root / "SAFE_BUDGET_ARCHITECTURE_SAFETY_RESULT.json", result)
+        return report_root / "SAFE_BUDGET_ARCHITECTURE_SAFETY_RESULT.json"
     workloads: list[dict[str, Any]] = []
     pilots = {item.workload_id: item for item in _pilot_sources()}
     pilots[xsbench_pilot().workload_id + ".medium"] = xsbench_pilot()
