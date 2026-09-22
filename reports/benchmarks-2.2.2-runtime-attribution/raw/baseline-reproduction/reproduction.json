@@ -1,0 +1,16 @@
+{
+  "O0": {
+    "bytes": 683759,
+    "max_instructions": 10000000000,
+    "path": "reports\\benchmarks-2.2.2-runtime-attribution\\raw\\baseline-reproduction\\scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.s",
+    "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+    "sha256": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02"
+  },
+  "O1": {
+    "bytes": 684692,
+    "max_instructions": 10000000000,
+    "path": "reports\\benchmarks-2.2.2-runtime-attribution\\raw\\baseline-reproduction\\scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.s",
+    "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+    "sha256": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3"
+  }
+}
