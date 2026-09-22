@@ -21,9 +21,10 @@ does not consolidate it.
 
 ## S3 research relationships
 
-PR #190 is an open conflicting Draft register/memory policy experiment. The
-current XSBench residual cannot be matched to it yet because the diagnostic
-native result is unavailable. Classification: `UNKNOWN`, not activation.
+PR #190 is an open conflicting Draft register/memory policy experiment. Its
+families are a `POSSIBLE_MATCH` to the unresolved generated-code residual, but
+there is no causal match to the XSBench result and no activation decision.
+Classification: `POSSIBLE_MATCH`, research-only, not activation.
 
 Other read-only capability references are recorded in the final report; no S3
 branch is merged, modified, or enabled here.

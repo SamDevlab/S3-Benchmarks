@@ -1,20 +1,25 @@
 # Safe Instruction-Budget Design Space
 
-This is a research inventory, not a production recommendation. Any future
-design must preserve bounded execution, deterministic failure, and runaway
-detection before it can be considered.
+This document is research planning only. It follows the XSBench H2 result and
+does not authorize a production S3 change or select a winner.
 
-Candidates to measure independently:
+| design | bounded execution | runaway detection | nested calls / loops | verification burden | open experiment |
+|---|---|---|---|---|---|
+| A. current global per-instruction counter | yes | direct | direct | low, existing | measure baseline semantics |
+| B. register-resident decrementing counter | must prove spill/reload safety | direct if preserved | ABI-sensitive | high | native correctness and signal paths |
+| C. basic-block charging | yes if block cost is conservative | block boundary | calls and loops need exact accounting | medium | compare worst-case bounds |
+| D. weighted basic-block charging | yes only with sound weights | block boundary | nested control flow | high | validate conservative weights |
+| E. loop-chunk charging | yes with loop bound policy | chunk boundary | nested loops and breaks | high | prove loop accounting |
+| F. function-level charging | coarse bound only | call/return boundary | recursion and callbacks | medium | establish lower-bound safety |
+| G. periodic checkpoint accounting | interval-dependent | checkpoint latency | nested calls may exceed interval | high | bound detection latency |
+| H. hybrid static/dynamic budget | potentially yes | mixed | all dynamic escape paths | very high | formal accounting model |
+| I. checked native mode | yes | explicit checked path | preserve all safety checks | medium | mode contract and differential tests |
+| J. optimized bounded native mode | only after proof | explicit | all safety paths | very high | multi-workload qualification |
 
-- per-basic-block accounting;
-- weighted-block accounting;
-- loop-trip accounting;
-- batched counter decrementing;
-- register-resident accounting with spill-safe exit paths;
-- function-level budget charging;
-- periodic sampling with an explicit detection bound;
-- checked, benchmark, and production execution modes;
-- compile-time proven bounded regions.
+Every future design must preserve `BOUNDED_EXECUTION`,
+`RUNAWAY_DETECTION`, `DETERMINISTIC_BUDGET_FAILURE`, `NESTED_CALL_ACCOUNTING`,
+`LOOP_ACCOUNTING`, and `ERROR_REPORTING`. Removing protection permanently is
+not a valid design.
 
-Required future gates: correctness, bounded execution, runaway detection,
-measured overhead, and multi-workload validation. None is implemented here.
+Required next evidence is multi-workload causal replication, not immediate S3
+implementation. No design is selected by this document.

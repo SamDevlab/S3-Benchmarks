@@ -1,9 +1,9 @@
-"""Benchmark-side static audit and diagnostic rewrite for S3 native assembly.
+"""Benchmark-side static audit and diagnostic rewrites for S3 native assembly.
 
-The rewrite is deliberately narrow: it removes only the exact four-line
-instruction-budget accounting sequence emitted by the pinned S3 backend. It
-does not change S3 source, compiler behavior, frame checks, bounds checks,
-calls, ABI setup, or data layout.
+The rewrites are deliberately narrow: they remove only exact accounting
+sequences emitted by the pinned S3 backend. They do not change S3 source,
+compiler behavior, stack frames, bounds checks, calls, ABI setup, or data
+layout.
 """
 
 from __future__ import annotations
@@ -18,12 +18,27 @@ from typing import Any
 
 
 INSTRUCTION_LIMIT = 10_000_000_000
+FRAME_LIMIT = 1024
+FRAME_SITE_COUNT = 3
 _SITE = r"\.L__s3_failure_site_[0-9]+"
 _BUDGET_BLOCK = re.compile(
     rf"^    movabs r11, (?P<limit>[0-9]+)\n"
     rf"^    cmp qword ptr \[rip \+ __s3_instruction_count\], r11\n"
     rf"^    jae (?P<label>{_SITE})\n"
     rf"^    inc qword ptr \[rip \+ __s3_instruction_count\]\n",
+    re.MULTILINE,
+)
+_FRAME_ENTRY_BLOCK = re.compile(
+    rf"^    inc qword ptr \[rip \+ __s3_frame_count\]\n"
+    rf"^    cmp qword ptr \[rip \+ __s3_frame_count\], (?P<limit>[0-9]+)\n"
+    rf"^    jg (?P<label>{_SITE})\n"
+    rf"^    push rbp\n",
+    re.MULTILINE,
+)
+_FRAME_EXIT_BLOCK = re.compile(
+    r"^    dec qword ptr \[rip \+ __s3_frame_count\]\n"
+    r"^    leave\n"
+    r"^    ret\n",
     re.MULTILINE,
 )
 
@@ -115,6 +130,57 @@ def remove_instruction_budget_instrumentation(text: str) -> tuple[str, RewriteRe
     return output, result
 
 
+def _frame_matches(text: str) -> tuple[list[re.Match[str]], list[re.Match[str]]]:
+    entries = list(_FRAME_ENTRY_BLOCK.finditer(text))
+    exits = list(_FRAME_EXIT_BLOCK.finditer(text))
+    if len(entries) != FRAME_SITE_COUNT or len(exits) != FRAME_SITE_COUNT:
+        raise DiagnosticRewriteError(
+            "frame accounting site count does not match the pinned three-function layout"
+        )
+    if any(int(match.group("limit")) != FRAME_LIMIT for match in entries):
+        raise DiagnosticRewriteError("frame accounting site has an unexpected limit")
+    return entries, exits
+
+
+def remove_frame_budget_instrumentation(text: str) -> tuple[str, RewriteResult]:
+    """Remove only the exact frame entry/exit accounting in the pinned artifact.
+
+    The function intentionally requires all three complete entry and exit
+    sites. A partial or future layout is rejected rather than approximated.
+    Dead failure-report blocks remain byte-for-byte present; only the proven
+    accounting instructions are removed.
+    """
+
+    entries, exits = _frame_matches(text)
+    matches = sorted((*entries, *exits), key=lambda match: match.start())
+    chunks: list[str] = []
+    cursor = 0
+    for match in matches:
+        chunks.append(text[cursor : match.start()])
+        # Keep the function prologue and return instructions. The matched
+        # neighbors prove the exact shape; only accounting instructions are
+        # removed from the diagnostic artifact.
+        replacement = (
+            "    push rbp\n"
+            if match in entries
+            else "    leave\n    ret\n"
+        )
+        chunks.append(replacement)
+        cursor = match.end()
+    chunks.append(text[cursor:])
+    output = "".join(chunks)
+    result = RewriteResult(
+        input_sha256=_sha256_text(text),
+        output_sha256=_sha256_text(output),
+        expected_sites=FRAME_SITE_COUNT,
+        removed_sites=FRAME_SITE_COUNT,
+        unexpected_mutations=0,
+    )
+    if result.removed_sites != result.expected_sites:
+        raise DiagnosticRewriteError("removed frame site count does not match expected site count")
+    return output, result
+
+
 def _instruction_lines(lines: list[str]) -> list[str]:
     instructions: list[str] = []
     for line in lines:
@@ -201,6 +267,10 @@ def main() -> int:
     rewrite.add_argument("--input", type=Path, required=True)
     rewrite.add_argument("--output", type=Path, required=True)
     rewrite.add_argument("--report", type=Path, required=True)
+    frame_rewrite = subparsers.add_parser("rewrite-frame")
+    frame_rewrite.add_argument("--input", type=Path, required=True)
+    frame_rewrite.add_argument("--output", type=Path, required=True)
+    frame_rewrite.add_argument("--report", type=Path, required=True)
 
     audit = subparsers.add_parser("audit")
     audit.add_argument("--input", type=Path, required=True)
@@ -211,11 +281,14 @@ def main() -> int:
     text = args.input.read_text(encoding="utf-8")
     if args.command == "rewrite":
         output, report = remove_instruction_budget_instrumentation(text)
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(output, encoding="utf-8", newline="\n")
-        _write_json(args.report, report.as_dict())
+    elif args.command == "rewrite-frame":
+        output, report = remove_frame_budget_instrumentation(text)
     else:
         _write_json(args.output, audit_assembly(text, binary=args.binary))
+        return 0
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(output, encoding="utf-8", newline="\n")
+    _write_json(args.report, report.as_dict())
     return 0
 
 

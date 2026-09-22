@@ -1,0 +1,61 @@
+{
+  "K": 750000,
+  "balanced_interleaving": true,
+  "clock": "CLOCK_MONOTONIC_RAW",
+  "cpu_affinity": 0,
+  "ended_utc": "2026-09-22T12:13:57.637231+00:00",
+  "external_warmup_samples": 5,
+  "fresh_process": true,
+  "host_fingerprint": "9f6c7cbbdbbc2d056ffc306f76a1dcd9df194e15167cb037542da54e97b59393",
+  "inline_warmups": 0,
+  "mode": "frame",
+  "repetitions": 30,
+  "run_records": 180,
+  "session": "I",
+  "started_utc": "2026-09-22T11:48:43.824337+00:00",
+  "variants": [
+    {
+      "artifact_sha256": "bc4218f91a785be5815b91484e6d851e9324c152fa6fd4e24448d8b5bb7a351b",
+      "bytes": 262856,
+      "key": "A",
+      "label": "S3_FFI_O0_NO_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0.so"
+    },
+    {
+      "artifact_sha256": "7fd016dd913a5cc2559a45b18770ae0c086795687bc6253afc23169d5640fcc8",
+      "bytes": 279256,
+      "key": "B",
+      "label": "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0-no-frame.so"
+    },
+    {
+      "artifact_sha256": "a2261ee35ed1fffb245960e5666cd56113df34beb68a260b24ba913478773794",
+      "bytes": 262856,
+      "key": "C",
+      "label": "S3_FFI_O1_NO_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1.so"
+    },
+    {
+      "artifact_sha256": "d16c27589613d81eb8ee154df59a3a2a2b829afc19c01bb3b197acd26c8efc92",
+      "bytes": 279256,
+      "key": "D",
+      "label": "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1-no-frame.so"
+    },
+    {
+      "artifact_sha256": "007785bb60e437daa7cfd0440ff36507454e440070e41beeb177a6e8a937028a",
+      "bytes": 15488,
+      "key": "E",
+      "label": "GCC_O2",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/gcc-O2.so"
+    },
+    {
+      "artifact_sha256": "3cf447ee2d4ca414ee518862be5623b949132c55aaae35ef1661023dc3d8528f",
+      "bytes": 15240,
+      "key": "F",
+      "label": "CLANG_O2",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/clang-O2.so"
+    }
+  ],
+  "warmup_records": 30
+}

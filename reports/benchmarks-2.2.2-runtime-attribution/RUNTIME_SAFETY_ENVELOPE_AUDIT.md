@@ -1,60 +1,54 @@
 # Runtime Safety Envelope Audit
 
-Campaign: `S3_BENCHMARKS_2_2_2_RUNTIME_COST_ATTRIBUTION_FRONTIER_LAB_V1`
+Campaign: `S3_BENCHMARKS_2_2_2_1_LINUX_NATIVE_RESUME_CAUSAL_CLOSURE`
 
-## Scope
-
-This is a benchmark-side audit of the frozen S3 assembly generated from
+This is a benchmark-side audit of assembly generated from pinned S3 source
 `e07d0b5464bf472b2ca18993f3e196a234ff0fc5`. No S3 source, compiler, runtime,
-ABI, or instruction-limit implementation was changed.
+ABI, or safety implementation was changed.
 
-The input assembly was regenerated from a clean archive of the pinned S3
-commit and matched the frozen O0/O1 assembly byte-for-byte. The native shared
-objects were not rebuilt in this Windows session because the configured Linux
-guest (`s3-vm`, `127.0.0.1:2222`) was unavailable.
+## Transformation boundaries
 
-## Observed safety mechanisms
+The instruction diagnostic removes only the exact four-line accounting block at
+the pinned `10000000000` limit. The frame diagnostic removes only the exact
+three entry/exit accounting pairs at the pinned frame limit of 1024. Bounds,
+initialization, indexing, calls, ABI setup, arithmetic, control flow, prologue,
+return path, and failure-report blocks remain in the diagnostic artifacts.
 
-- instruction budget: exact `movabs` + counter compare + failure branch + counter increment;
-- frame budget: entry counter and limit checks;
-- bounds/reference/initialization checks: retained and not transformed;
-- calls, ABI setup, stack layout, and arithmetic: retained and not transformed.
+Both transforms are fail-closed and benchmark-side. They are not production
+artifacts and do not establish a safe optimized runtime mode.
 
 ## Static counts
 
-| metric | O0 baseline | O0 diagnostic | O1 baseline | O1 diagnostic |
+| metric | O0 baseline | O0 no-budget | O1 baseline | O1 no-budget |
 |---|---:|---:|---:|---:|
-| assembly lines | 17938 | 15854 | 17934 | 15854 |
-| instructions | 12812 | 10728 | 12812 | 10732 |
-| logical instruction sites | 10716 | 10716 | 10720 | 10720 |
+| ELF bytes | 279240 | 262856 | 279240 | 262856 |
+| `.text` bytes | 72420 | 56781 | 72725 | 57116 |
 | instruction-budget sites | 521 | 0 | 520 | 0 |
 | frame-limit sites | 3 | 3 | 3 | 3 |
-| static branches | 3031 | 2510 | 3028 | 2508 |
-| static calls | 56 | 56 | 56 | 56 |
-| stack operations (approx.) | 1978 | 1978 | 2062 | 2062 |
-| memory loads (approx.) | 4811 | 3769 | 4892 | 3852 |
-| memory stores (approx.) | 1964 | 1443 | 2047 | 1527 |
 
-The load/store columns are static memory-operand approximations, not dynamic
-hardware counts. `.text` size for the diagnostic object is unavailable until
-the assembly is built on Linux. Frozen baseline shared-object size is 279280
-bytes for both S3 O0 and O1; GCC O2 is 15520 bytes and Clang O2 is 15272
-bytes in the prior frozen artifact set.
+The instruction-budget rewrite removed 2084 O0 and 2080 O1 static
+instructions, exactly four per recognized site. The frame rewrite removed three
+entry accounting groups and three exit accounting groups per level, while
+preserving function prologues and returns. `UNEXPECTED_MUTATIONS=0` for both
+rewriters.
 
-## Diagnostic transformation contract
+Static counts are not dynamic execution counts. Loops and calls can amplify
+the execution of any remaining checks.
 
-The benchmark-side rewriter removes only complete four-line sites with the
-exact pinned limit `10000000000`. O0 removed 521/521 sites and O1 removed
-520/520 sites. The reports contain input/output assembly hashes and record
-`unexpected_mutations=0`. Partial, unknown, or mixed layouts fail closed.
+## Native correctness and timing
 
-No diagnostic shared object was produced in this session. Therefore this
-report does not claim diagnostic correctness, native equivalence, or causal
-timing.
+The no-budget variants passed the independent TINY/SMALL/MEDIUM oracle. The
+G/H protocol passed for all six base variants. The frame no-budget/no-frame
+variants also passed correctness and I/J reproducibility, but removing frame
+accounting increased runtime at both O0 and O1. Consequently frame causality is
+not confirmed and no frame share is reported.
 
-## Evidence paths
+## Provenance
 
-- regenerated assembly: `reports/benchmarks-2.2.2-runtime-attribution/raw/baseline-reproduction/`;
-- transformed assembly and static audits: `reports/benchmarks-2.2.2-runtime-attribution/raw/diagnostic-assembly/`;
-- rewriter: `tools/runtime_attribution.py`;
-- rewriter tests: `tests/test_runtime_attribution.py`.
+Raw evidence is preserved under:
+
+`reports/benchmarks-2.2.2-runtime-attribution/raw/native-resume-20260922-074209/`
+
+The environment changed relative to the earlier E/F fingerprint, so the
+baseline shared objects are classified as a semantic rebuild with toolchain
+drift rather than byte-identical frozen reproductions.

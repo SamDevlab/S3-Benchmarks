@@ -1,0 +1,10 @@
+{
+  "diagnostic_only": true,
+  "expected_sites": 3,
+  "input_assembly_sha": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3",
+  "output_assembly_sha": "3546eccc6b67c0658c853a4a1321ed8b6f711f55beae6379054576dc30c658b6",
+  "production_artifact": false,
+  "removed_sites": 3,
+  "s3_source_changed": false,
+  "unexpected_mutations": 0
+}

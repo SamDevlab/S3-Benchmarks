@@ -2,57 +2,60 @@
 
 ## Decision
 
-`INSTRUCTION_BUDGET_CAUSALITY=UNDER_TEST`
+`INSTRUCTION_BUDGET_CAUSALITY=CONFIRMED_CAUSAL`
 
-The controlled assembly transformation is structurally valid, but the
-causal experiment is not complete. The Linux build, TINY/SMALL/MEDIUM native
-correctness, and independent Run G/Run H timing sessions could not run because
-the configured Linux guest was unreachable. Existing E/F timings are
-historical evidence and are not reused as causal measurements.
+The exact benchmark-side rewrite removed only complete instruction-budget
+accounting blocks from the pinned O0/O1 assembly. Native diagnostic correctness
+passed for TINY, SMALL, and MEDIUM. Independent G/H sessions each completed 30
+fresh-process official samples for all six variants, and every G/H median delta
+was within the declared 25% criterion.
 
-## Hypothesis
+## Controlled protocol
 
-`NATIVE_INSTRUCTION_BUDGET_INSTRUMENTATION` is a primary causal candidate for
-the observed XSBench runtime pressure. It is not yet a proven cause.
+- workload: `scientific.xsbench.compatible_lookup.medium`
+- K: `750000`
+- inline warmups: `0`
+- external warmups: `5` per variant
+- official repetitions: `30` per variant per session
+- fresh process: yes
+- balanced interleaving: yes
+- CPU affinity: `0`
+- clock: `CLOCK_MONOTONIC_RAW`
+- sessions: G and H
 
-## Controlled transformation
+## Result
 
-Input: the exact pinned O0/O1 S3 assembly. Output: the same text with only
-complete instruction-budget accounting blocks removed. Frame checks, bounds,
-initialization, calls, ABI, arithmetic, control flow, and memory layout are
-untouched. The transformation is deterministic, pattern-specific, auditable,
-and fail-closed.
+| level | baseline median ns | diagnostic median ns | ratio | removed baseline share |
+|---|---:|---:|---:|---:|
+| O0 | 14325439969.5 | 6191784662.5 | 2.3136205069 | 0.5677769984 |
+| O1 | 13832552419.5 | 6547907311.0 | 2.1125150010 | 0.5266305804 |
+
+The no-budget residual remained 45.6107x/48.2340x against GCC and
+58.5551x/61.9229x against Clang for O0/O1 respectively. The experiment proves
+the material cost of this safety instrumentation under this workload and host;
+it does not justify removing the protection or claiming production speedup.
 
 ## Gates
 
 | gate | result |
 |---|---|
 | pinned assembly reproduction | PASS |
-| rewriter focused tests | PASS, 7 passed |
-| static transformation audit | PASS, O0 521 sites and O1 520 sites removed |
-| unexpected assembly mutations | PASS, 0 |
-| diagnostic native build | NOT_RUN, Linux guest unavailable |
-| diagnostic correctness | NOT_RUN |
-| Run G | NOT_RUN |
-| Run H | NOT_RUN |
-| G/H reproducibility | NOT_RUN |
+| instruction-budget rewriter audit | PASS, O0 521 and O1 520 sites |
+| unexpected mutations | PASS, 0 |
+| diagnostic native build | PASS |
+| diagnostic native correctness | PASS, 18/18 base observations |
+| Run G | PASS |
+| Run H | PASS |
+| G/H reproducibility | PASS, maximum delta 0.0537918232 |
+| frame conditional gate | executed; attribution NOT_CONFIRMED |
 
-## Why no causal number is reported
+The frame experiment is recorded separately and is not part of the H2 causal
+number. Removing frame accounting made both diagnostic variants slower in I/J,
+so `FRAME_SHARE_OF_RESIDUAL=NOT_VALID`.
 
-The required protocol compares fresh G/H sessions for baseline and diagnostic
-variants at `K=750000`, with five external warmups, zero inline warmups, 30
-fresh-process repetitions, CPU 0 affinity, `CLOCK_MONOTONIC_RAW`, and balanced
-interleaving. No part of that protocol was substituted with old E/F samples.
+## Scope
 
-`INSTRUCTION_BUDGET_COST_RATIO_O0=NOT_AVAILABLE`
-`INSTRUCTION_BUDGET_COST_RATIO_O1=NOT_AVAILABLE`
-
-The residual gap and excess-time attribution are consequently
-`NOT_INTERPRETABLE`. Frame attribution is deferred until the first causal
-experiment has a valid diagnostic timing result.
-
-## Safety interpretation
-
-Even if a future G/H run shows a large timing change, it will establish the
-cost of this safety envelope under this workload and protocol. It will not
-justify a production speed claim or removal of bounded-execution protection.
+This is evidence for one XSBench workload, one pinned S3 source, one Linux
+x86-64 guest fingerprint, and the declared protocol. Other workloads remain
+`NOT_MEASURED`; `QUALIFIED_PERFORMANCE_INDEX=NOT_AVAILABLE` and
+`S3_PRODUCTION_CHANGE_READY=NO`.

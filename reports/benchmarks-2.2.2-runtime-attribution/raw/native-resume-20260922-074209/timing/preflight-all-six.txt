@@ -1,0 +1,6 @@
+VARIANT=S3_FFI_O0_BASELINE {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O0_BASELINE","K":750000,"elapsed_ns":13964181059,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=S3_FFI_O0_NO_BUDGET {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O0_NO_BUDGET","K":750000,"elapsed_ns":6051971118,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=S3_FFI_O1_BASELINE {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O1_BASELINE","K":750000,"elapsed_ns":13886293553,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=S3_FFI_O1_NO_BUDGET {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O1_NO_BUDGET","K":750000,"elapsed_ns":6618188777,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=GCC_O2 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"GCC_O2","K":750000,"elapsed_ns":125998504,"observable":2444.0959999999995,"expected":2444.096,"returncode":0}
+VARIANT=CLANG_O2 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"CLANG_O2","K":750000,"elapsed_ns":117302256,"observable":2444.0959999999995,"expected":2444.096,"returncode":0}
