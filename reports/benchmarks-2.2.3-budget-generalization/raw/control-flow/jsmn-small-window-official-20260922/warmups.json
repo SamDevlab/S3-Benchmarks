@@ -1,0 +1,464 @@
+{
+  "CLANG_O2": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 99257964,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 102130768,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 103212287,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 98871084,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 96711208,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "GCC_O2": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 115642509,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 108276700,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 119382697,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 106289613,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+        "--loop",
+        "1250000"
+      ],
+      "elapsed_ns": 112390834,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "S3_O0_BASELINE": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 27561094629,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 26005197849,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 28116320299,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 24956379780,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 24539882155,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "S3_O0_NO_BUDGET": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11137206297,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11247864663,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11944426170,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 12952309517,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 12241442634,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "S3_O1_BASELINE": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 25387132480,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 26213570225,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 25787275452,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 25371722665,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 24775687437,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ],
+  "S3_O1_NO_BUDGET": [
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11744384829,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11173403784,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11858825150,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11273402646,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 12455593684,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  ]
+}

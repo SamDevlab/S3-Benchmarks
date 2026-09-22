@@ -1,0 +1,80 @@
+{
+  "K": 1250000,
+  "artifact_hashes": {
+    "CLANG_O2": {
+      "assembly": null,
+      "diagnostic_assembly": null,
+      "executable": "12b7f7c10244ee91a28f50e5ee8c8b25b761b878d471648415c7787fec4e27f9",
+      "source": "9309e0a9b637e09bd316f5cf78974fa47361d6d741c9c5f469e26650b7aeee66"
+    },
+    "GCC_O2": {
+      "assembly": null,
+      "diagnostic_assembly": null,
+      "executable": "5721623392a1a752ae904ecf31809a28afb5ebadf63966ef21dd00f250723c38",
+      "source": "9309e0a9b637e09bd316f5cf78974fa47361d6d741c9c5f469e26650b7aeee66"
+    },
+    "S3_O0_BASELINE": {
+      "assembly": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9",
+      "diagnostic_assembly": null,
+      "executable": "7cbab71d348a053c45fd60d47d2d49191553047e3593a95541ceb96521473909",
+      "source": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb"
+    },
+    "S3_O0_NO_BUDGET": {
+      "assembly": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9",
+      "diagnostic_assembly": "9860125c3d081e0f352661360eae184b971db90ab17f07fbaa4ee40c85d85b08",
+      "executable": "55680d293a15467165270281c863e5d15a5126dc95a5526ab512a12e33c20a82",
+      "source": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb"
+    },
+    "S3_O1_BASELINE": {
+      "assembly": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add",
+      "diagnostic_assembly": null,
+      "executable": "d0746c02f55b74893ea236243dea64facdfabf6f87b53051dc78cbb4cbf6a502",
+      "source": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb"
+    },
+    "S3_O1_NO_BUDGET": {
+      "assembly": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add",
+      "diagnostic_assembly": "d758083585001a9b2aaf100df2649ee3d74e84a8f6e576a971fed641dccbb4ff",
+      "executable": "369d9433d245087a88783d4aab047c54fb585a925f38eb4a007e54a095a5fa09",
+      "source": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb"
+    }
+  },
+  "benchmark_sha": "f2b4acb510b5f0e6a9e04287d3061194094d1417",
+  "budget_sites": {
+    "CLANG_O2": 0,
+    "GCC_O2": 0,
+    "S3_O0_BASELINE": 2475,
+    "S3_O0_NO_BUDGET": 2475,
+    "S3_O1_BASELINE": 2427,
+    "S3_O1_NO_BUDGET": 2427
+  },
+  "control_provenance": {
+    "compiler_variants": [
+      "GCC_O2",
+      "CLANG_O2"
+    ],
+    "control": "upstream jsmn C runner",
+    "oracle": "reference_jsmn_oracle plus existing compare_results contract"
+  },
+  "host_fingerprint": "9a3f305bd7d750ac2a6e86903c7487575d629e222bedd22dc70634519ec50b56",
+  "raw_files": [
+    "calibration.json",
+    "correctness.json",
+    "warmups.json",
+    "run_1.json",
+    "run_2.json"
+  ],
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "schema": "s3.budget-artifact-manifest.v1",
+  "source_provenance": {
+    "benchmark_sha": "f2b4acb510b5f0e6a9e04287d3061194094d1417",
+    "fixture": "small/small_01_flat.json",
+    "fixture_selection_reason": "medium fixture exceeds existing S3 input capacity 96; no S3 change permitted",
+    "fixture_sha256": "5b9988d08bc1232158affa81602708da40d5bc38333a4435f8607e7e8c7ba655",
+    "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+    "source": "benchmarks/jsmn/s3/jsmn_demo.s3",
+    "upstream_reference": "zserge.jsmn",
+    "upstream_sha": "25647e692c7906b96ffd2b05ca54c097948e879c"
+  },
+  "timing_scope": "PROCESS_E2E",
+  "workload": "realworld.jsmn"
+}

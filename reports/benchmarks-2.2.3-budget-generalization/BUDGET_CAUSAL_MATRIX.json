@@ -1,0 +1,66 @@
+{
+  "aggregation": "NONE; percentages are reported per workload only",
+  "benchmark_sha": "f2b4acb510b5f0e6a9e04287d3061194094d1417",
+  "campaign": "S3_BENCHMARKS_2_2_3_MULTI_WORKLOAD_BUDGET_CAUSAL_VALIDATION",
+  "host_fingerprint": "9a3f305bd7d750ac2a6e86903c7487575d629e222bedd22dc70634519ec50b56",
+  "observed_budget_share_range": {
+    "max": 0.6197746369703057,
+    "min": 0.517773325196107,
+    "scope": "descriptive range across per-workload O0/O1 shares"
+  },
+  "rows": [
+    {
+      "K": 2000000,
+      "budget_ratio_o0": 2.5218501865482588,
+      "budget_ratio_o1": 2.6300191865998777,
+      "budget_share_o0": 0.6034657390299882,
+      "budget_share_o1": 0.6197746369703057,
+      "budget_sites_o0": 113,
+      "budget_sites_o1": 113,
+      "causal_classification": "CONFIRMED_CAUSAL",
+      "class": "regular_numeric",
+      "correctness_status": "PASS",
+      "large_effect_threshold": 0.25,
+      "material_share_threshold": 0.1,
+      "reproducibility_pass": true,
+      "timing_scope": "KERNEL",
+      "workload": "scientific.rmsd.batch"
+    },
+    {
+      "K": 750000,
+      "budget_ratio_o0": 2.3136205069050235,
+      "budget_ratio_o1": 2.1125150009778446,
+      "budget_share_o0": 0.5677769984249836,
+      "budget_share_o1": 0.5266305803570066,
+      "budget_sites_o0": 521,
+      "budget_sites_o1": 520,
+      "causal_classification": "CONFIRMED_CAUSAL",
+      "class": "irregular_scientific",
+      "correctness_status": "PASS",
+      "large_effect_threshold": 0.25,
+      "material_share_threshold": 0.1,
+      "reproducibility_pass": true,
+      "timing_scope": "KERNEL",
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    },
+    {
+      "K": 1250000,
+      "budget_ratio_o0": 2.073713571333792,
+      "budget_ratio_o1": 2.1857747330514607,
+      "budget_share_o0": 0.517773325196107,
+      "budget_share_o1": 0.542496312690034,
+      "budget_sites_o0": 2475,
+      "budget_sites_o1": 2427,
+      "causal_classification": "CONFIRMED_CAUSAL",
+      "class": "control_flow_or_parsing",
+      "correctness_status": "PASS",
+      "large_effect_threshold": 0.25,
+      "material_share_threshold": 0.1,
+      "reproducibility_pass": true,
+      "timing_scope": "PROCESS_E2E",
+      "workload": "realworld.jsmn"
+    }
+  ],
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "schema": "s3.budget-causal-matrix.v1"
+}

@@ -1,0 +1,790 @@
+{
+  "rows": [
+    {
+      "K": 1,
+      "fastest_ns": 1619147,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-clang_o2",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2017717,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-gcc_o2",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1840147,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2078646,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1733028,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1619147,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2096627,
+          "expected": 9,
+          "observed": 9,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 2096627,
+      "status": "PASS"
+    },
+    {
+      "K": 10,
+      "fastest_ns": 1726187,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-clang_o2",
+            "--loop",
+            "10"
+          ],
+          "elapsed_ns": 1944847,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-gcc_o2",
+            "--loop",
+            "10"
+          ],
+          "elapsed_ns": 2363127,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2032247,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1883987,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1825317,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1726187,
+          "expected": 90,
+          "observed": 90,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 2363127,
+      "status": "PASS"
+    },
+    {
+      "K": 100,
+      "fastest_ns": 2113887,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-clang_o2",
+            "--loop",
+            "100"
+          ],
+          "elapsed_ns": 2113887,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-gcc_o2",
+            "--loop",
+            "100"
+          ],
+          "elapsed_ns": 2566996,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 4100124,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2804226,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 4054444,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2354347,
+          "expected": 100,
+          "observed": 100,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 4100124,
+      "status": "PASS"
+    },
+    {
+      "K": 1000,
+      "fastest_ns": 2126327,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-clang_o2",
+            "--loop",
+            "1000"
+          ],
+          "elapsed_ns": 2126327,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-gcc_o2",
+            "--loop",
+            "1000"
+          ],
+          "elapsed_ns": 2593596,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 23082696,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 11287824,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 21322698,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 11407393,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 23082696,
+      "status": "PASS"
+    },
+    {
+      "K": 10000,
+      "fastest_ns": 2747986,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-clang_o2",
+            "--loop",
+            "10000"
+          ],
+          "elapsed_ns": 2747986,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-gcc_o2",
+            "--loop",
+            "10000"
+          ],
+          "elapsed_ns": 3107495,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 209779339,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 93331453,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 202492311,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k10000/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 95186980,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 209779339,
+      "status": "PASS"
+    },
+    {
+      "K": 100000,
+      "fastest_ns": 11445413,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-clang_o2",
+            "--loop",
+            "100000"
+          ],
+          "elapsed_ns": 11445413,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-gcc_o2",
+            "--loop",
+            "100000"
+          ],
+          "elapsed_ns": 11986572,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 2019067696,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 908144098,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 1978473385,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k100000/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 920207500,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 2019067696,
+      "status": "PASS"
+    },
+    {
+      "K": 1000000,
+      "fastest_ns": 83599177,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-clang_o2",
+            "--loop",
+            "1000000"
+          ],
+          "elapsed_ns": 83599177,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-gcc_o2",
+            "--loop",
+            "1000000"
+          ],
+          "elapsed_ns": 88684838,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 23099751684,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 12318149641,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 20768479890,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1000000/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 9342772190,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 23099751684,
+      "status": "PASS"
+    },
+    {
+      "K": 1250000,
+      "fastest_ns": 107621340,
+      "samples": {
+        "CLANG_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-clang_o2",
+            "--loop",
+            "1250000"
+          ],
+          "elapsed_ns": 107621340,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "GCC_O2": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-gcc_o2",
+            "--loop",
+            "1250000"
+          ],
+          "elapsed_ns": 126027714,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 26582463196,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O0_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o0-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 12673748435,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_BASELINE": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-baseline",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 27741119853,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        },
+        "S3_O1_NO_BUDGET": {
+          "command": [
+            "/usr/bin/taskset",
+            "-c",
+            "0",
+            "/home/vboxuser/S3-Benchmarks-2.2.3-budget-generalization-20260922/reports/benchmarks-2.2.3-budget-generalization/raw/control-flow/jsmn-small-window-official-20260922/artifacts-k1250000/jsmn-s3-o1-no-budget",
+            "--loop",
+            "1"
+          ],
+          "elapsed_ns": 13829199567,
+          "expected": 0,
+          "observed": 0,
+          "returncode": 0,
+          "status": "PASS"
+        }
+      },
+      "slowest_ns": 27741119853,
+      "status": "PASS"
+    }
+  ],
+  "selected_K": 1250000,
+  "workload": "realworld.jsmn"
+}

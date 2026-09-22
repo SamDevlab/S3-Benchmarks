@@ -13,7 +13,7 @@ tasks. Status reflects this campaign's checkpoint.
 | O06 | compare stack traffic | code structure | static/dynamic relation | perf availability | DEFER |
 | O07 | register-pressure differential | code structure | backend evidence | controlled emitter variant | DEFER |
 | O08 | runtime helper attribution | runtime | call cost evidence | helper inventory | DEFER |
-| O09 | multi-workload budget replication | causal runtime | holdout validity | O01 | NEXT |
+| O09 | multi-workload budget replication | causal runtime | holdout validity | O01 | COMPLETE |
 | O10 | BEEBS readiness adapter | embedded | diversity | license/oracle audit | WATCH |
 | O11 | CoreMark correctness pilot | embedded | compact control flow | adapter | WATCH |
 | O12 | miniBUDE readiness pilot | scientific | irregular diversity | license/oracle | INVESTIGATE |
@@ -23,12 +23,14 @@ tasks. Status reflects this campaign's checkpoint.
 | O16 | YARPGen differential corpus | correctness | compiler robustness | safe harness | WATCH |
 | O17 | CSmith differential corpus | correctness | randomized robustness | bounded runner | WATCH |
 | O18 | reproducibility fingerprint schema | methodology | cross-host comparability | host matrix | DEFER |
-| O19 | evidence registry for causal artifacts | infrastructure | provenance | schema design | NEXT |
+| O19 | evidence registry for causal artifacts | infrastructure | provenance | schema design | COMPLETE |
 | O20 | benchmark stack consolidation plan | governance | lower documentation debt | owner decision | DEFER |
-| O21 | safe budget design review | runtime design | future bounded-mode options | O01 | DEFERRED_RESEARCH |
+| O21 | safe budget design review | runtime design | future bounded-mode options | O09 | NEXT |
 | O22 | checked-vs-benchmark mode study | runtime design | safety/perf boundary | O01 | DEFERRED_RESEARCH |
 
-O01 and O02 are closed as experimental actions. O02's
+O01, O02, O09, and O19 are closed as experimental or evidence actions. O02's
 `COMPLETE_NOT_CONFIRMED` status records that the intervention was executed but
-did not establish a positive frame attribution. The next safe evidence action
-is O09; O21 and O22 remain deferred until multi-workload evidence exists.
+did not establish a positive frame attribution. H7 is now
+`CONFIRMED_GENERAL` for the three tested classes. The next safe research action
+is O21; it must not be treated as production optimization or as authorization
+to activate a runtime change.
