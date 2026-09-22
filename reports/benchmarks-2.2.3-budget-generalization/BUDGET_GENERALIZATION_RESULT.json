@@ -73,6 +73,17 @@
       "CLANG_O2"
     ]
   },
+  "publication": {
+    "base": "research/benchmarks-2.2.2-runtime-attribution-frontier-lab",
+    "branch": "research/benchmarks-2.2.3-budget-generalization",
+    "draft": true,
+    "evidence_head_before_publication_metadata": "11354f15b52638db25e53d8a06d4264aa2a8e1f2",
+    "merged": false,
+    "pr": 22,
+    "remote_sync": true,
+    "state": "OPEN",
+    "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/22"
+  },
   "qualified_performance_index": "NOT_AVAILABLE",
   "s3_production_change_ready": false,
   "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
