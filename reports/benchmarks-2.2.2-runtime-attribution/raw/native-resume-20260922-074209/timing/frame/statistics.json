@@ -1,0 +1,395 @@
+{
+  "combined": {
+    "CLANG_O2": {
+      "cv": 0.20430923026736056,
+      "mad_ns": 18499539.5,
+      "max_ns": 202232231,
+      "mean_ns": 132481429.73333333,
+      "median_ns": 122608788.0,
+      "min_ns": 100606531,
+      "n": 60,
+      "p95_ns": 178977086,
+      "stdev_ns": 27067178.93353675
+    },
+    "GCC_O2": {
+      "cv": 0.18588171121458744,
+      "mad_ns": 12163606.5,
+      "max_ns": 247417335,
+      "mean_ns": 155800048.68333334,
+      "median_ns": 143972162.0,
+      "min_ns": 125028586,
+      "n": 60,
+      "p95_ns": 206761994,
+      "stdev_ns": 28960379.65657403
+    },
+    "S3_FFI_O0_NO_BUDGET": {
+      "cv": 0.08307632375047094,
+      "mad_ns": 252968561.5,
+      "max_ns": 9450499924,
+      "mean_ns": 6648811650.133333,
+      "median_ns": 6451890176.0,
+      "min_ns": 5948367087,
+      "n": 60,
+      "p95_ns": 7348178467,
+      "stdev_ns": 552358829.2023797
+    },
+    "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET": {
+      "cv": 0.0491414894010225,
+      "mad_ns": 449783301.5,
+      "max_ns": 17821051717,
+      "mean_ns": 15164345510.75,
+      "median_ns": 14915428362.0,
+      "min_ns": 14207241179,
+      "n": 60,
+      "p95_ns": 16409661644,
+      "stdev_ns": 745198524.1899643
+    },
+    "S3_FFI_O1_NO_BUDGET": {
+      "cv": 0.07226453402219402,
+      "mad_ns": 297023215.0,
+      "max_ns": 8860814712,
+      "mean_ns": 7031474413.516666,
+      "median_ns": 6939367312.0,
+      "min_ns": 6397643349,
+      "n": 60,
+      "p95_ns": 7655604494,
+      "stdev_ns": 508126221.9817618
+    },
+    "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET": {
+      "cv": 0.04798315748098899,
+      "mad_ns": 344538905.5,
+      "max_ns": 16737496559,
+      "mean_ns": 14628964480.65,
+      "median_ns": 14378020467.5,
+      "min_ns": 13631930299,
+      "n": 60,
+      "p95_ns": 15692369974,
+      "stdev_ns": 701943906.4588232
+    }
+  },
+  "frame": {
+    "O0": {
+      "frame_attribution_valid": false,
+      "frame_cost_ratio": 0.4325648596481121,
+      "frame_only_improved_runtime": false,
+      "frame_share_of_residual": null,
+      "no_budget_median_ns": 6451890176.0,
+      "no_budget_no_frame_median_ns": 14915428362.0,
+      "residual_after_frame_to_clang": 121.65056522702109,
+      "residual_after_frame_to_gcc": 103.59939140179058
+    },
+    "O1": {
+      "frame_attribution_valid": false,
+      "frame_cost_ratio": 0.48263718414406964,
+      "frame_only_improved_runtime": false,
+      "frame_share_of_residual": null,
+      "no_budget_median_ns": 6939367312.0,
+      "no_budget_no_frame_median_ns": 14378020467.5,
+      "residual_after_frame_to_clang": 117.26745449518675,
+      "residual_after_frame_to_gcc": 99.86667052690366
+    }
+  },
+  "frame_explanation": "Removing only frame accounting preserved correctness but increased timed runtime in both independent sessions; frame contribution is not causally attributable by this intervention.",
+  "h3": "NOT_CONFIRMED",
+  "i_j_comparison": {
+    "CLANG_O2": {
+      "I_median_ns": 119554516.0,
+      "J_median_ns": 134551625.5,
+      "pass": true,
+      "relative_delta": 0.11145989091005074
+    },
+    "GCC_O2": {
+      "I_median_ns": 140702816.5,
+      "J_median_ns": 146823578.0,
+      "pass": true,
+      "relative_delta": 0.04168786501034595
+    },
+    "S3_FFI_O0_NO_BUDGET": {
+      "I_median_ns": 6442863146.0,
+      "J_median_ns": 6504687415.0,
+      "pass": true,
+      "relative_delta": 0.009504571865733535
+    },
+    "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET": {
+      "I_median_ns": 14845787328.5,
+      "J_median_ns": 15246062158.5,
+      "pass": true,
+      "relative_delta": 0.02625430920054582
+    },
+    "S3_FFI_O1_NO_BUDGET": {
+      "I_median_ns": 6889636841.0,
+      "J_median_ns": 6965170032.5,
+      "pass": true,
+      "relative_delta": 0.010844414586802121
+    },
+    "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET": {
+      "I_median_ns": 14179679541.5,
+      "J_median_ns": 14631956651.0,
+      "pass": true,
+      "relative_delta": 0.03091022754424917
+    }
+  },
+  "i_j_reproducibility": true,
+  "metadata": {
+    "I": {
+      "K": 750000,
+      "balanced_interleaving": true,
+      "clock": "CLOCK_MONOTONIC_RAW",
+      "cpu_affinity": 0,
+      "ended_utc": "2026-09-22T12:13:57.637231+00:00",
+      "external_warmup_samples": 5,
+      "fresh_process": true,
+      "host_fingerprint": "9f6c7cbbdbbc2d056ffc306f76a1dcd9df194e15167cb037542da54e97b59393",
+      "inline_warmups": 0,
+      "mode": "frame",
+      "repetitions": 30,
+      "run_records": 180,
+      "session": "I",
+      "started_utc": "2026-09-22T11:48:43.824337+00:00",
+      "variants": [
+        {
+          "artifact_sha256": "bc4218f91a785be5815b91484e6d851e9324c152fa6fd4e24448d8b5bb7a351b",
+          "bytes": 262856,
+          "key": "A",
+          "label": "S3_FFI_O0_NO_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0.so"
+        },
+        {
+          "artifact_sha256": "7fd016dd913a5cc2559a45b18770ae0c086795687bc6253afc23169d5640fcc8",
+          "bytes": 279256,
+          "key": "B",
+          "label": "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0-no-frame.so"
+        },
+        {
+          "artifact_sha256": "a2261ee35ed1fffb245960e5666cd56113df34beb68a260b24ba913478773794",
+          "bytes": 262856,
+          "key": "C",
+          "label": "S3_FFI_O1_NO_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1.so"
+        },
+        {
+          "artifact_sha256": "d16c27589613d81eb8ee154df59a3a2a2b829afc19c01bb3b197acd26c8efc92",
+          "bytes": 279256,
+          "key": "D",
+          "label": "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1-no-frame.so"
+        },
+        {
+          "artifact_sha256": "007785bb60e437daa7cfd0440ff36507454e440070e41beeb177a6e8a937028a",
+          "bytes": 15488,
+          "key": "E",
+          "label": "GCC_O2",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/gcc-O2.so"
+        },
+        {
+          "artifact_sha256": "3cf447ee2d4ca414ee518862be5623b949132c55aaae35ef1661023dc3d8528f",
+          "bytes": 15240,
+          "key": "F",
+          "label": "CLANG_O2",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/clang-O2.so"
+        }
+      ],
+      "warmup_records": 30
+    },
+    "J": {
+      "K": 750000,
+      "balanced_interleaving": true,
+      "clock": "CLOCK_MONOTONIC_RAW",
+      "cpu_affinity": 0,
+      "ended_utc": "2026-09-22T12:40:02.901128+00:00",
+      "external_warmup_samples": 5,
+      "fresh_process": true,
+      "host_fingerprint": "9f6c7cbbdbbc2d056ffc306f76a1dcd9df194e15167cb037542da54e97b59393",
+      "inline_warmups": 0,
+      "mode": "frame",
+      "repetitions": 30,
+      "run_records": 180,
+      "session": "J",
+      "started_utc": "2026-09-22T12:14:19.348198+00:00",
+      "variants": [
+        {
+          "artifact_sha256": "bc4218f91a785be5815b91484e6d851e9324c152fa6fd4e24448d8b5bb7a351b",
+          "bytes": 262856,
+          "key": "A",
+          "label": "S3_FFI_O0_NO_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0.so"
+        },
+        {
+          "artifact_sha256": "7fd016dd913a5cc2559a45b18770ae0c086795687bc6253afc23169d5640fcc8",
+          "bytes": 279256,
+          "key": "B",
+          "label": "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0-no-frame.so"
+        },
+        {
+          "artifact_sha256": "a2261ee35ed1fffb245960e5666cd56113df34beb68a260b24ba913478773794",
+          "bytes": 262856,
+          "key": "C",
+          "label": "S3_FFI_O1_NO_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1.so"
+        },
+        {
+          "artifact_sha256": "d16c27589613d81eb8ee154df59a3a2a2b829afc19c01bb3b197acd26c8efc92",
+          "bytes": 279256,
+          "key": "D",
+          "label": "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1-no-frame.so"
+        },
+        {
+          "artifact_sha256": "007785bb60e437daa7cfd0440ff36507454e440070e41beeb177a6e8a937028a",
+          "bytes": 15488,
+          "key": "E",
+          "label": "GCC_O2",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/gcc-O2.so"
+        },
+        {
+          "artifact_sha256": "3cf447ee2d4ca414ee518862be5623b949132c55aaae35ef1661023dc3d8528f",
+          "bytes": 15240,
+          "key": "F",
+          "label": "CLANG_O2",
+          "path": "/tmp/s3-bench-native-resume-20260922-074209/clang-O2.so"
+        }
+      ],
+      "warmup_records": 30
+    }
+  },
+  "sessions": {
+    "I": {
+      "CLANG_O2": {
+        "cv": 0.17020607425594428,
+        "mad_ns": 14110827.0,
+        "max_ns": 173203950,
+        "mean_ns": 125317378.86666666,
+        "median_ns": 119554516.0,
+        "min_ns": 100606531,
+        "n": 30,
+        "p95_ns": 166306688,
+        "stdev_ns": 21329779.092940167
+      },
+      "GCC_O2": {
+        "cv": 0.20512211103731406,
+        "mad_ns": 11243173.5,
+        "max_ns": 247417335,
+        "mean_ns": 154951506.66666666,
+        "median_ns": 140702816.5,
+        "min_ns": 125028586,
+        "n": 30,
+        "p95_ns": 228646031,
+        "stdev_ns": 31783980.155879106
+      },
+      "S3_FFI_O0_NO_BUDGET": {
+        "cv": 0.10483831020784945,
+        "mad_ns": 330486004.5,
+        "max_ns": 9450499924,
+        "mean_ns": 6646978317.233334,
+        "median_ns": 6442863146.0,
+        "min_ns": 5948367087,
+        "n": 30,
+        "p95_ns": 7677862131,
+        "stdev_ns": 696857974.7669574
+      },
+      "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET": {
+        "cv": 0.04624342546441968,
+        "mad_ns": 391187200.0,
+        "max_ns": 17239367346,
+        "mean_ns": 14987010917.266666,
+        "median_ns": 14845787328.5,
+        "min_ns": 14207241179,
+        "n": 30,
+        "p95_ns": 16426473665,
+        "stdev_ns": 693050722.2870651
+      },
+      "S3_FFI_O1_NO_BUDGET": {
+        "cv": 0.0821359521811303,
+        "mad_ns": 311933869.5,
+        "max_ns": 8860814712,
+        "mean_ns": 6966003587.166667,
+        "median_ns": 6889636841.0,
+        "min_ns": 6397643349,
+        "n": 30,
+        "p95_ns": 8572925528,
+        "stdev_ns": 572159337.5291035
+      },
+      "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET": {
+        "cv": 0.05303204383771157,
+        "mad_ns": 222473259.5,
+        "max_ns": 16737496559,
+        "mean_ns": 14506437249.633333,
+        "median_ns": 14179679541.5,
+        "min_ns": 13631930299,
+        "n": 30,
+        "p95_ns": 16362963549,
+        "stdev_ns": 769306016.151567
+      }
+    },
+    "J": {
+      "CLANG_O2": {
+        "cv": 0.21830820895316774,
+        "mad_ns": 25464117.5,
+        "max_ns": 202232231,
+        "mean_ns": 139645480.6,
+        "median_ns": 134551625.5,
+        "min_ns": 101303700,
+        "n": 30,
+        "p95_ns": 190395229,
+        "stdev_ns": 30485754.75819033
+      },
+      "GCC_O2": {
+        "cv": 0.16824655445223163,
+        "mad_ns": 9111046.5,
+        "max_ns": 226057856,
+        "mean_ns": 156648590.7,
+        "median_ns": 146823578.0,
+        "min_ns": 127833062,
+        "n": 30,
+        "p95_ns": 206761994,
+        "stdev_ns": 26355585.645072896
+      },
+      "S3_FFI_O0_NO_BUDGET": {
+        "cv": 0.05526741471194235,
+        "mad_ns": 235645167.5,
+        "max_ns": 7348178467,
+        "mean_ns": 6650644983.033334,
+        "median_ns": 6504687415.0,
+        "min_ns": 6215019123,
+        "n": 30,
+        "p95_ns": 7252188440,
+        "stdev_ns": 367563954.37920207
+      },
+      "S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET": {
+        "cv": 0.049829319034316685,
+        "mad_ns": 539534411.0,
+        "max_ns": 17821051717,
+        "mean_ns": 15341680104.233334,
+        "median_ns": 15246062158.5,
+        "min_ns": 14328168220,
+        "n": 30,
+        "p95_ns": 16409661644,
+        "stdev_ns": 764465472.4362717
+      },
+      "S3_FFI_O1_NO_BUDGET": {
+        "cv": 0.06126609986578092,
+        "mad_ns": 297731807.5,
+        "max_ns": 8439336555,
+        "mean_ns": 7096945239.866667,
+        "median_ns": 6965170032.5,
+        "min_ns": 6523518957,
+        "n": 30,
+        "p95_ns": 7655604494,
+        "stdev_ns": 434802155.80764973
+      },
+      "S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET": {
+        "cv": 0.04176355371563998,
+        "mad_ns": 310094274.5,
+        "max_ns": 16686603604,
+        "mean_ns": 14751491711.666666,
+        "median_ns": 14631956651.0,
+        "min_ns": 13782553027,
+        "n": 30,
+        "p95_ns": 15692369974,
+        "stdev_ns": 616074716.4860088
+      }
+    }
+  }
+}

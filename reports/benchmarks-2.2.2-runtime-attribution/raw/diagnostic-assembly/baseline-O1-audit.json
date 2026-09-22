@@ -1,0 +1,19 @@
+{
+  "binary_size_source": "reports\\benchmarks-2.2.1-xsbench\\raw\\xsbench-qualification-20260921-224913-802102762\\artifacts\\scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+  "branch_count_static": 3028,
+  "call_count_static": 56,
+  "counts_are_static": true,
+  "frame_limit_check_sites": 3,
+  "global_counter_reads": 520,
+  "global_counter_writes": 520,
+  "instruction_budget_check_sites": 520,
+  "load_count_static_approx": 4892,
+  "load_store_method": "memory-operand approximation; not dynamic counts",
+  "s3_logical_instruction_sites": 10720,
+  "so_size_bytes": 279280,
+  "stack_ops_static_approx": 2062,
+  "store_count_static_approx": 2047,
+  "text_size_bytes": null,
+  "total_assembly_lines": 17934,
+  "total_instructions": 12812
+}

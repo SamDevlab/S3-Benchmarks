@@ -1,0 +1,32 @@
+{
+  "version": "V9",
+  "campaign": "S3_BENCHMARKS_2_2_2_RUNTIME_COST_ATTRIBUTION_FRONTIER_LAB_V1",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "workload": "scientific.xsbench.compatible_lookup.medium",
+  "pressures": {
+    "instruction_budget_instrumentation": "OBSERVED_UNDER_TEST",
+    "frame_budget": "OBSERVED",
+    "bounds": "NOT_MEASURED",
+    "initialization": "OBSERVED",
+    "indexing": "OBSERVED",
+    "stack": "OBSERVED",
+    "register_pressure": "NOT_MEASURED",
+    "calls": "OBSERVED",
+    "runtime_helpers": "OBSERVED",
+    "code_size": "OBSERVED"
+  },
+  "causality": {
+    "instruction_budget_instrumentation": "UNDER_TEST",
+    "frame_budget": "NOT_MEASURED",
+    "bounds": "NOT_MEASURED",
+    "initialization": "NOT_MEASURED",
+    "indexing": "NOT_MEASURED",
+    "stack": "NOT_MEASURED",
+    "register_pressure": "NOT_MEASURED",
+    "calls": "NOT_MEASURED",
+    "runtime_helpers": "NOT_MEASURED",
+    "code_size": "NOT_MEASURED"
+  },
+  "diagnostic_native_experiment": "BLOCKED_LINUX_GUEST_UNAVAILABLE",
+  "native_speedup_claim": "NO"
+}

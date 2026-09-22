@@ -1,0 +1,4 @@
+VARIANT=S3_FFI_O0 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O0","K":750000,"elapsed_ns":14721358680,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=S3_FFI_O1 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O1","K":750000,"elapsed_ns":14242509372,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+VARIANT=GCC_O2 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"GCC_O2","K":750000,"elapsed_ns":172447665,"observable":2444.0959999999995,"expected":2444.096,"returncode":0}
+VARIANT=CLANG_O2 {"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"CLANG_O2","K":750000,"elapsed_ns":125037895,"observable":2444.0959999999995,"expected":2444.096,"returncode":0}

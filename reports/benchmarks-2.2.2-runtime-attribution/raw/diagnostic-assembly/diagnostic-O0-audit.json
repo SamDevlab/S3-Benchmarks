@@ -1,0 +1,19 @@
+{
+  "binary_size_source": "unavailable_without_native_binary",
+  "branch_count_static": 2510,
+  "call_count_static": 56,
+  "counts_are_static": true,
+  "frame_limit_check_sites": 3,
+  "global_counter_reads": 0,
+  "global_counter_writes": 0,
+  "instruction_budget_check_sites": 0,
+  "load_count_static_approx": 3769,
+  "load_store_method": "memory-operand approximation; not dynamic counts",
+  "s3_logical_instruction_sites": 10716,
+  "so_size_bytes": null,
+  "stack_ops_static_approx": 1978,
+  "store_count_static_approx": 1443,
+  "text_size_bytes": null,
+  "total_assembly_lines": 15854,
+  "total_instructions": 10728
+}

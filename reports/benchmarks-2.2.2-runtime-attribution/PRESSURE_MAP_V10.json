@@ -1,0 +1,41 @@
+{
+  "version": "V10",
+  "campaign": "S3_BENCHMARKS_2_2_2_1_LINUX_NATIVE_RESUME_CAUSAL_CLOSURE",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "benchmark_source_sha": "44015b7fc0ef6ecdf93ceeb421c25191e41c87c5",
+  "workload": "scientific.xsbench.compatible_lookup.medium",
+  "states": ["NOT_MEASURED", "OBSERVED", "CORRELATED", "CONFIRMED_CAUSAL", "WEAKENED", "FALSIFIED"],
+  "pressures": {
+    "instruction_budget_instrumentation": "CONFIRMED_CAUSAL",
+    "frame_budget": "WEAKENED",
+    "initialization": "OBSERVED",
+    "bounds": "NOT_MEASURED",
+    "indexing": "OBSERVED",
+    "stack": "OBSERVED",
+    "register_pressure": "NOT_MEASURED",
+    "calls": "OBSERVED",
+    "runtime_helpers": "OBSERVED",
+    "code_size": "OBSERVED"
+  },
+  "causal_scope": {
+    "instruction_budget_instrumentation": "XSBench_only",
+    "frame_budget": "not_confirmed_by_I_J",
+    "other_workloads": "NOT_MEASURED"
+  },
+  "h2": {
+    "status": "CONFIRMED_CAUSAL",
+    "o0_budget_share_of_baseline": 0.5677769984249836,
+    "o1_budget_share_of_baseline": 0.5266305803570066,
+    "g_h_reproducibility": "PASS",
+    "max_g_h_median_delta": 0.05379182317766434
+  },
+  "h3": {
+    "status": "NOT_CONFIRMED",
+    "frame_attribution": "NOT_CONFIRMED",
+    "frame_share_of_residual": null,
+    "reason": "no-frame intervention increased runtime in both independent sessions"
+  },
+  "qualified_performance_index": "NOT_AVAILABLE",
+  "s3_production_change_ready": false,
+  "next_campaign": "S3_BENCHMARKS_2_2_3_MULTI_WORKLOAD_BUDGET_CAUSAL_VALIDATION"
+}

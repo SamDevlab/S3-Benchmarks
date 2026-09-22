@@ -1,0 +1,6 @@
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.tiny","variant":"S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET","K":1000,"elapsed_ns":3234595,"observable":117.52000000000001,"expected":117.52,"returncode":0}
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.small","variant":"S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET","K":10000,"elapsed_ns":117851786,"observable":1212.4720000000002,"expected":1212.472,"returncode":0}
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O0_NO_BUDGET_NO_FRAME_BUDGET","K":100000,"elapsed_ns":1929013249,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.tiny","variant":"S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET","K":1000,"elapsed_ns":2639566,"observable":117.52000000000001,"expected":117.52,"returncode":0}
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.small","variant":"S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET","K":10000,"elapsed_ns":100095542,"observable":1212.4720000000002,"expected":1212.472,"returncode":0}
+{"status":"PASS","workload":"scientific.xsbench.compatible_lookup.medium","variant":"S3_FFI_O1_NO_BUDGET_NO_FRAME_BUDGET","K":100000,"elapsed_ns":1878933032,"observable":2444.0960000000005,"expected":2444.096,"returncode":0}

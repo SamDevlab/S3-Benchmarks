@@ -1,0 +1,60 @@
+{
+  "K": 750000,
+  "balanced_interleaving": true,
+  "clock": "CLOCK_MONOTONIC_RAW",
+  "cpu_affinity": 0,
+  "ended_utc": "2026-09-22T11:14:01.429321+00:00",
+  "external_warmup_samples": 5,
+  "fresh_process": true,
+  "host_fingerprint": "9f6c7cbbdbbc2d056ffc306f76a1dcd9df194e15167cb037542da54e97b59393",
+  "inline_warmups": 0,
+  "repetitions": 30,
+  "run_records": 180,
+  "session": "G",
+  "started_utc": "2026-09-22T10:49:48.753673+00:00",
+  "variants": [
+    {
+      "artifact_sha256": "6ed053dd8ea79da65226b390c4734826f94b6abb092314d4e0e4e1c646bfa303",
+      "bytes": 279240,
+      "key": "A",
+      "label": "S3_FFI_O0_BASELINE",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/baseline-O0.so"
+    },
+    {
+      "artifact_sha256": "bc4218f91a785be5815b91484e6d851e9324c152fa6fd4e24448d8b5bb7a351b",
+      "bytes": 262856,
+      "key": "B",
+      "label": "S3_FFI_O0_NO_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O0.so"
+    },
+    {
+      "artifact_sha256": "03c2c3b52e9728955ff5cf272d4427b10fc1c8596e3db6867c44457ee7b547a9",
+      "bytes": 279240,
+      "key": "C",
+      "label": "S3_FFI_O1_BASELINE",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/baseline-O1.so"
+    },
+    {
+      "artifact_sha256": "a2261ee35ed1fffb245960e5666cd56113df34beb68a260b24ba913478773794",
+      "bytes": 262856,
+      "key": "D",
+      "label": "S3_FFI_O1_NO_BUDGET",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/diagnostic-O1.so"
+    },
+    {
+      "artifact_sha256": "007785bb60e437daa7cfd0440ff36507454e440070e41beeb177a6e8a937028a",
+      "bytes": 15488,
+      "key": "E",
+      "label": "GCC_O2",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/gcc-O2.so"
+    },
+    {
+      "artifact_sha256": "3cf447ee2d4ca414ee518862be5623b949132c55aaae35ef1661023dc3d8528f",
+      "bytes": 15240,
+      "key": "F",
+      "label": "CLANG_O2",
+      "path": "/tmp/s3-bench-native-resume-20260922-074209/clang-O2.so"
+    }
+  ],
+  "warmup_records": 30
+}

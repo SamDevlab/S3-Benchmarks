@@ -1,0 +1,57 @@
+[
+  {
+    "bytes": 8777,
+    "path": "artifacts/ffi_driver.c",
+    "sha256": "1c5b0df9cbd06af5d3b55015ce98d8952ee5269d857726dd1e8cca02f466254e"
+  },
+  {
+    "bytes": 2888,
+    "path": "artifacts/xsbench_reference.c",
+    "sha256": "87095dd25697f855f6352dfb0127fb2138fdbbec57ebc22320fd609635861694"
+  },
+  {
+    "bytes": 683262,
+    "path": "artifacts/diagnostic-O0-no-frame.s",
+    "sha256": "4eb2796d278fde1fcefdf51c6c7ec6af929101aa45b13cf563a62900103e4317"
+  },
+  {
+    "bytes": 335248,
+    "path": "artifacts/diagnostic-O0-no-frame.o",
+    "sha256": "27bdcb492f06a4cf84ab61b53c89b59c95752fe65da71ccfed2ceee0600fe88d"
+  },
+  {
+    "bytes": 279256,
+    "path": "artifacts/diagnostic-O0-no-frame.so",
+    "sha256": "7fd016dd913a5cc2559a45b18770ae0c086795687bc6253afc23169d5640fcc8"
+  },
+  {
+    "bytes": 684195,
+    "path": "artifacts/diagnostic-O1-no-frame.s",
+    "sha256": "3546eccc6b67c0658c853a4a1321ed8b6f711f55beae6379054576dc30c658b6"
+  },
+  {
+    "bytes": 335128,
+    "path": "artifacts/diagnostic-O1-no-frame.o",
+    "sha256": "eea39dd333b80dd50670e4d4334f2a30210b83a0e2506cfcb516c07344accef4"
+  },
+  {
+    "bytes": 279256,
+    "path": "artifacts/diagnostic-O1-no-frame.so",
+    "sha256": "d16c27589613d81eb8ee154df59a3a2a2b829afc19c01bb3b197acd26c8efc92"
+  },
+  {
+    "bytes": 6469,
+    "path": "timing/native_session.py",
+    "sha256": "e267d7ad9bf3136ad4b6e5f9ba84fff27ae2b70e702848e8edcbb51a1786d0d4"
+  },
+  {
+    "bytes": 12499,
+    "path": "timing/statistics.json",
+    "sha256": "45ed9ef180e0f92748310b287c004e5b1051db0d3420d27fda0c26ddee482edd"
+  },
+  {
+    "bytes": 13012,
+    "path": "timing/frame/statistics.json",
+    "sha256": "5937f2ee5a2ff5d4c280a5914356c9c48ee7c9350700cf47f0ca0d2a722c1527"
+  }
+]
