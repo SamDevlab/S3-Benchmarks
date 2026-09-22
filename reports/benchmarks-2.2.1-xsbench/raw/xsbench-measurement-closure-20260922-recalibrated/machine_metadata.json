@@ -1,0 +1,14 @@
+{
+  "captured_utc": "NOT_RECORDED_BY_EXACT_HELPER",
+  "fingerprint_method": "tools.ffi_direct_kernel_methodology._machine_identity",
+  "machine_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "system": "Linux",
+  "machine": "x86_64",
+  "kernel": "7.0.0-31-generic",
+  "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+  "logical_cpus": 3,
+  "cpu_affinity": "0",
+  "clock_monotonic_raw_resolution_ns": 1,
+  "perf_binary_available": true,
+  "perf_permission": "DENIED_OR_UNSUPPORTED_BY_HOST_POLICY"
+}

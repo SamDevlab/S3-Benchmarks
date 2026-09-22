@@ -1,0 +1,32 @@
+{
+  "campaign": "S3_BENCHMARKS_2_2_1_1_XSBENCH_MEASUREMENT_CLOSURE",
+  "status": "NO_COMMON_STABLE_CONTROL_WINDOW",
+  "workload": "scientific.xsbench.compatible_lookup.medium",
+  "work_unit": "XS_LOOKUP",
+  "artifact_policy": "reuse exact frozen artifacts; no rebuild",
+  "driver_sha256": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44",
+  "libraries_sha256": {
+    "S3_FFI_O0": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+    "S3_FFI_O1": "1eb083232579c2461677443b442bbd88491fc6b220cdc655fa9b7b54bb9530f2",
+    "GCC_O2": "f711eb201bcdc66353950ac6814d11e915a219dbf3a0d64d0978de7101c29388",
+    "CLANG_O2": "9c34c07c49c17b0f4a4ae1ced4746fdb21b95837f61cc55b14d6d1df929a72cc"
+  },
+  "machine_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "machine_metadata": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260922-recalibrated/machine_metadata.json",
+  "cpu_affinity": "0",
+  "timer": "CLOCK_MONOTONIC_RAW",
+  "clock_resolution_ns": 1,
+  "warmups": 5,
+  "planned_repetitions": 30,
+  "interleaving": "existing cyclic rotation of S3_FFI_O0,S3_FFI_O1,GCC_O2,CLANG_O2",
+  "control_target_min_ms": 100,
+  "max_s3_sample_seconds": 30,
+  "initial_calibration_raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/calibration.json",
+  "corrected_calibration_raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260922-recalibrated/calibration.json",
+  "run_c_raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/run_c.json",
+  "run_d_raw": null,
+  "run_c_d_started": false,
+  "reason_no_run_d": "corrected calibration found no K satisfying both control and S3 completion constraints",
+  "no_source_changes": true,
+  "no_benchmark_rebuild": true
+}

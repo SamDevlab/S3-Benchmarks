@@ -1,0 +1,39 @@
+{
+  "version": "V8",
+  "inline_warmup_budget_confounder": "CONFIRMED",
+  "measurement_window": "AVAILABLE",
+  "selected_k": 750000,
+  "ffi_reproducibility": "PASS",
+  "performance_pressure": "WORKLOAD_LOCAL",
+  "causality": "NOT_ESTABLISHED",
+  "s3_causal_experiment_ready": "NO",
+  "same_physical_machine_e_f": "YES",
+  "original_ab_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "official_e_f_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "legacy_closure_helper_fingerprint": "97838760b4a5698e35ab5314930224216d3f936837c54a870789bc9b732a5b69",
+  "fingerprint_reconciliation": "FINGERPRINT_SCHEMA_CHANGED",
+  "perf_binary_available": "YES",
+  "perf_command_executable": "YES",
+  "perf_hardware_events_available": "NO",
+  "perf_counter_measurement": "UNAVAILABLE",
+  "perf_permission": "DENIED_OR_UNSUPPORTED_BY_HOST_POLICY",
+  "native_speedup_claim": "NO",
+  "evidence": {
+    "warmup_audit": "reports/benchmarks-2.2.1-xsbench/XSBENCH_WARMUP_BUDGET_AUDIT.md",
+    "closure": "reports/benchmarks-2.2.1-xsbench/XSBENCH_MEASUREMENT_CLOSURE_V2.md",
+    "raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-v2-20260922-warmup0-official/"
+  },
+  "ratios_run_e_median": {
+    "S3_O0_TO_GCC": 108.48032974571008,
+    "S3_O0_TO_CLANG": 135.11718701710873,
+    "S3_O1_TO_GCC": 105.20108626778564,
+    "S3_O1_TO_CLANG": 131.0327400457547
+  },
+  "full_suite": "INHERITED_52_PASSED_1_SKIPPED",
+  "full_suite_rerun": "NO_SOURCE_CHANGE",
+  "s3_source_changed": "NO",
+  "pr_merged": "NO",
+  "tag": "NO",
+  "release": "NO",
+  "shutdown": "NO"
+}

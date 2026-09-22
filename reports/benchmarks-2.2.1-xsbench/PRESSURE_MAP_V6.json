@@ -1,0 +1,18 @@
+{
+  "status": "CORRECTNESS_CLOSED_TIMING_REPRODUCIBILITY_OPEN",
+  "benchmark_functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "xsbench_sha": "ba08e5221af6106252b866e50ea123c69d31a4e2",
+  "timing_reproducibility": "FAIL",
+  "synthetic_timing": "ABSENT",
+  "perf": {"binary_available": true, "events": "UNAVAILABLE_BY_HOST_POLICY", "perf_event_paranoid": 4},
+  "pressures": [
+    {"name": "irregular_memory_access", "evidence": "flat indexed fixture", "scope": "SINGLE_WORKLOAD", "causality": "UNKNOWN"},
+    {"name": "indexing_and_bounds", "evidence": "binary search and metadata contract", "scope": "SINGLE_WORKLOAD", "causality": "UNKNOWN"},
+    {"name": "branching", "evidence": "search/interpolation control", "scope": "SINGLE_WORKLOAD", "causality": "UNKNOWN"},
+    {"name": "numeric_interpolation", "evidence": "hosted/native parity", "scope": "SINGLE_WORKLOAD", "causality": "CORRELATED"}
+  ],
+  "persistent_s3_pressures": "NOT_ESTABLISHED",
+  "causal_experiment_ready": false,
+  "candidates": []
+}

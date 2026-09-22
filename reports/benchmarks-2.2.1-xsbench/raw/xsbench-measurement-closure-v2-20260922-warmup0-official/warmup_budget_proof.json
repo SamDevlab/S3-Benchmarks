@@ -1,0 +1,104 @@
+{
+  "K": 750000,
+  "artifact_manifest": {
+    "actual": {
+      "CLANG_O2": "9c34c07c49c17b0f4a4ae1ced4746fdb21b95837f61cc55b14d6d1df929a72cc",
+      "GCC_O2": "f711eb201bcdc66353950ac6814d11e915a219dbf3a0d64d0978de7101c29388",
+      "S3_FFI_O0": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+      "S3_FFI_O1": "1eb083232579c2461677443b442bbd88491fc6b220cdc655fa9b7b54bb9530f2",
+      "driver": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44"
+    },
+    "expected": {
+      "CLANG_O2": "9c34c07c49c17b0f4a4ae1ced4746fdb21b95837f61cc55b14d6d1df929a72cc",
+      "GCC_O2": "f711eb201bcdc66353950ac6814d11e915a219dbf3a0d64d0978de7101c29388",
+      "S3_FFI_O0": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+      "S3_FFI_O1": "1eb083232579c2461677443b442bbd88491fc6b220cdc655fa9b7b54bb9530f2",
+      "driver": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44"
+    },
+    "match": true,
+    "reused_frozen_artifacts": true
+  },
+  "case_a": {
+    "name": "fresh process WARMUPS=0",
+    "sample": {
+      "K": 750000,
+      "artifact_sha256": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+        "scientific.xsbench.compatible_lookup.medium",
+        "S3_FFI_O0",
+        "xs_lookup_batch",
+        "750000",
+        "2444.096",
+        "0"
+      ],
+      "cpu_affinity": "0",
+      "driver_sha256": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44",
+      "elapsed_ns": 14312451456,
+      "ended_utc": "2026-09-22T01:59:53.746338+00:00",
+      "expected": 2444.096,
+      "instruction_limit": false,
+      "observable": 2444.0960000000005,
+      "returncode": 0,
+      "started_utc": "2026-09-22T01:59:39.431134+00:00",
+      "status": "PASS",
+      "stderr": "",
+      "stdout": "{\"status\":\"PASS\",\"workload\":\"scientific.xsbench.compatible_lookup.medium\",\"variant\":\"S3_FFI_O0\",\"K\":750000,\"elapsed_ns\":14312451456,\"observable\":2444.0960000000005,\"expected\":2444.096,\"returncode\":0}\n",
+      "timeout_seconds": 30,
+      "variant": "S3_FFI_O0",
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    }
+  },
+  "case_b": {
+    "name": "fresh process WARMUPS=1",
+    "sample": {
+      "artifact_sha256": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+      "command": [
+        "taskset",
+        "-c",
+        "0",
+        "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+        "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+        "scientific.xsbench.compatible_lookup.medium",
+        "S3_FFI_O0",
+        "xs_lookup_batch",
+        "750000",
+        "2444.096",
+        "1"
+      ],
+      "cpu_affinity": "0",
+      "driver_sha256": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44",
+      "ended_utc": "2026-09-22T02:00:17.568364+00:00",
+      "instruction_limit": true,
+      "returncode": 1,
+      "started_utc": "2026-09-22T01:59:53.746443+00:00",
+      "status": "INSTRUCTION_LIMIT",
+      "stderr": "runtime error [instruction limit] in function 'xs_lookup_batch'\nat source 40:46 (block while_body_10, TLOAD): instruction limit 10000000000 exceeded\n",
+      "stdout": "",
+      "timeout_seconds": 30
+    }
+  },
+  "environment": {
+    "K": 750000,
+    "captured_utc": "2026-09-22T01:59:39.427994+00:00",
+    "cpu_affinity": "0",
+    "inline_driver_warmups": 0,
+    "machine_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+    "machine_identity": {
+      "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+      "kernel": "7.0.0-31-generic",
+      "logical_cpus": 3,
+      "machine": "x86_64",
+      "system": "Linux"
+    },
+    "repetitions": 30,
+    "timer": "CLOCK_MONOTONIC_RAW",
+    "warmup_samples": 5
+  },
+  "inline_warmup_budget_contamination": "CONFIRMED",
+  "selected_variant": "S3_FFI_O0"
+}

@@ -1,0 +1,12 @@
+{
+  "captured_utc": "2026-09-22T01:23:29.251824+00:00",
+  "cpu_affinity": "0",
+  "machine_fingerprint": "97838760b4a5698e35ab5314930224216d3f936837c54a870789bc9b732a5b69",
+  "machine_identity": {
+    "cpu_model": "",
+    "kernel": "7.0.0-31-generic",
+    "logical_cpus": 3,
+    "machine": "x86_64",
+    "system": "Linux"
+  }
+}

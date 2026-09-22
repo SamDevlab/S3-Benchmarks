@@ -353,6 +353,7 @@ typedef double (*triad_fn)(double *, int64_t, const double *, int64_t, const dou
 typedef double (*nstream_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t, double);
 typedef double (*gemm_fn)(const double *, int64_t, const double *, int64_t, const double *, int64_t);
 typedef double (*rmsd_fn)(const double *, int64_t, const double *, int64_t, int64_t, int64_t);
+typedef double (*xsbench_fn)(const double *, int64_t, const int64_t *, int64_t);
 
 static void fail(const char *message) { fprintf(stderr, "%s\n", message); exit(2); }
 static double *alloc_doubles(size_t count) { double *p = calloc(count, sizeof(*p)); if (!p) fail("allocation failed"); return p; }
@@ -414,6 +415,37 @@ int main(int argc, char **argv) {
         for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates);
         begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(left, pairs * coordinates, right, pairs * coordinates, pairs, coordinates); end = now_ns();
         free(left); free(right);
+    } else if (strcmp(workload, "scientific.xsbench.compatible_lookup") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.tiny") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.small") == 0
+            || strcmp(workload, "scientific.xsbench.compatible_lookup.medium") == 0) {
+        xsbench_fn fn = (xsbench_fn)symbol(handle, exported_symbol);
+        static const double data[] = {
+            3.0, 5.0, 2.0, 2.0, 2.0, 2.0, 0.6, 0.4, 0.25, 0.75,
+            1.0, 0.1, 0.2, 0.3, 0.4,
+            2.0, 0.2, 0.3, 0.4, 0.5,
+            3.0, 0.3, 0.4, 0.5, 0.6,
+            4.0, 0.4, 0.5, 0.6, 0.7,
+            5.0, 0.5, 0.6, 0.7, 0.8,
+            11.0, 10.1, 10.2, 10.3, 10.4,
+            12.0, 10.2, 10.3, 10.4, 10.5,
+            13.0, 10.3, 10.4, 10.5, 10.6,
+            14.0, 10.4, 10.5, 10.6, 10.7,
+            15.0, 10.5, 10.6, 10.7, 10.8,
+            21.0, 20.1, 20.2, 20.3, 20.4,
+            22.0, 20.2, 20.3, 20.4, 20.5,
+            23.0, 20.3, 20.4, 20.5, 20.6,
+            24.0, 20.4, 20.5, 20.6, 20.7,
+            25.0, 20.5, 20.6, 20.7, 20.8
+        };
+        static const int64_t metadata_tiny[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+        static const int64_t metadata_small[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 4};
+        static const int64_t metadata_medium[] = {0, 1, 1, 2, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 0, 25, 50, 75, 100, 5, 22, 37, 49, 63, 78, 91, 14, 0, 1, 0, 1, 1, 0, 1, 0, 8};
+        const int64_t *metadata = metadata_medium;
+        if (strcmp(workload, "scientific.xsbench.compatible_lookup.tiny") == 0) metadata = metadata_tiny;
+        else if (strcmp(workload, "scientific.xsbench.compatible_lookup.small") == 0) metadata = metadata_small;
+        for (int64_t w = 0; w < warmups; ++w) for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 36);
+        begin = now_ns(); for (int64_t i = 0; i < k; ++i) observable = fn(data, (int64_t)(sizeof(data) / sizeof(data[0])), metadata, 36); end = now_ns();
     } else fail("unknown workload");
     dlclose(handle);
     emit_result(workload, variant, k, end - begin, observable, expected);
@@ -553,7 +585,8 @@ def _build_artifacts(s3_repo: Path, pilots: tuple[FFIPilot, ...], root: Path, dr
     for pilot in pilots:
         artifacts[pilot.workload_id] = {}
         for label in VARIANTS:
-            library = root / f"{pilot.symbol}-{label}.so"
+            artifact_stem = pilot.workload_id.replace(".", "-")
+            library = root / f"{artifact_stem}-{label}.so"
             if label == "S3_FFI_O0":
                 metadata = _build_s3_library(s3_repo, pilot.source, "O0", library, root)
             elif label == "S3_FFI_O1":

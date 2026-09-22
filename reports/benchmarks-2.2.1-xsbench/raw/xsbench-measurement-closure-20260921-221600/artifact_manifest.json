@@ -1,0 +1,18 @@
+{
+  "actual": {
+    "CLANG_O2": "9c34c07c49c17b0f4a4ae1ced4746fdb21b95837f61cc55b14d6d1df929a72cc",
+    "GCC_O2": "f711eb201bcdc66353950ac6814d11e915a219dbf3a0d64d0978de7101c29388",
+    "S3_FFI_O0": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+    "S3_FFI_O1": "1eb083232579c2461677443b442bbd88491fc6b220cdc655fa9b7b54bb9530f2",
+    "driver": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44"
+  },
+  "expected": {
+    "CLANG_O2": "9c34c07c49c17b0f4a4ae1ced4746fdb21b95837f61cc55b14d6d1df929a72cc",
+    "GCC_O2": "f711eb201bcdc66353950ac6814d11e915a219dbf3a0d64d0978de7101c29388",
+    "S3_FFI_O0": "dbee64d5c642758bf94b66866058da0b6a8e6fa84680ac834e9b7161c3cf23fb",
+    "S3_FFI_O1": "1eb083232579c2461677443b442bbd88491fc6b220cdc655fa9b7b54bb9530f2",
+    "driver": "178000c24abb0c1c662359a06427cf960729a5cbdd3c3affece8f5cd1619bb44"
+  },
+  "match": true,
+  "reused_frozen_artifacts": true
+}

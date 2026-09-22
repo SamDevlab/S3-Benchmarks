@@ -1,0 +1,64 @@
+{
+  "campaign": "S3_BENCHMARKS_2_2_1_1_XSBENCH_MEASUREMENT_CLOSURE",
+  "workload": "scientific.xsbench.compatible_lookup.medium",
+  "work_unit": "XS_LOOKUP",
+  "benchmark_functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "previous_benchmark_head": "6508a542a033b417aceedd78f34b017198576650",
+  "closure_head_before_this_campaign": "dae4cc85870b890b40981e3cbd480937798d91bb",
+  "benchmark_head_before_evidence": "6508a542a033b417aceedd78f34b017198576650",
+  "s3_source_changed": "NO",
+  "artifacts": "FROZEN_AND_REUSED",
+  "machine_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "cpu_affinity": "0",
+  "timer": "CLOCK_MONOTONIC_RAW",
+  "clock_monotonic_raw_resolution_ns": 1,
+  "perf_binary_available": true,
+  "perf_permission": "DENIED_OR_UNSUPPORTED_BY_HOST_POLICY",
+  "warmups": 5,
+  "repetitions": 30,
+  "calibration": {
+    "initial_attempt": {
+      "raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/calibration.json",
+      "selected_k": 500000,
+      "selection_valid": false,
+      "reason": "missing elapsed samples were treated as zero; S3 O0/O1 hit the instruction limit"
+    },
+    "corrected_attempt": {
+      "raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260922-recalibrated/calibration.json",
+      "selected_k": null,
+      "status": "NO_COMMON_STABLE_CONTROL_WINDOW",
+      "requires_all_variants_pass": true,
+      "rows": [
+        {"K": 250000, "fastest_control_ms": 54.748923, "slowest_s3_seconds": null, "all_variants_pass": false, "window_pass": false},
+        {"K": 300000, "fastest_control_ms": 44.764624, "slowest_s3_seconds": null, "all_variants_pass": false, "window_pass": false},
+        {"K": 400000, "fastest_control_ms": 87.444239, "slowest_s3_seconds": null, "all_variants_pass": false, "window_pass": false},
+        {"K": 450000, "fastest_control_ms": 109.088227, "slowest_s3_seconds": null, "all_variants_pass": false, "window_pass": false}
+      ]
+    }
+  },
+  "run_c": {
+    "status": "INCOMPLETE_AT_INVALID_K",
+    "raw": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/run_c.json",
+    "K": 500000,
+    "S3_FFI_O0_valid_samples": 0,
+    "S3_FFI_O1_valid_samples": 0,
+    "GCC_O2_valid_samples": 30,
+    "CLANG_O2_valid_samples": 30,
+    "S3_failure": "instruction limit 10000000000 exceeded"
+  },
+  "run_d": {"status": "NOT_RUN", "reason": "no valid common measurement window"},
+  "closure_pass": false,
+  "control_window_target": "fastest control >= 100 ms and all S3 samples <= 30 s",
+  "ffi_reproducibility": "OPEN",
+  "hosted_correctness": "PASS",
+  "native_correctness": "PASS",
+  "previous_full_suite": "52 passed, 1 skipped",
+  "status": "CORRECTNESS_QUALIFIED_MEASUREMENT_WINDOW_UNAVAILABLE",
+  "next_path": "MEASUREMENT_PROTOCOL_OR_ARTIFACT_SCALING_INVESTIGATION",
+  "ready_for_merge": "NO",
+  "pr": 20,
+  "pr_state": "OPEN_DRAFT",
+  "merged": "NO",
+  "tag": "NO",
+  "release": "NO"
+}

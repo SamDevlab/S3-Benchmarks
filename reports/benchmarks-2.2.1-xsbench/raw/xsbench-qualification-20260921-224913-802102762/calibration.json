@@ -1,0 +1,2322 @@
+{
+  "scientific.xsbench.compatible_lookup.medium": {
+    "K_final": 100000,
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 290,
+        "slowest_ns": 21500,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 20020,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 21500,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 520,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 290,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1460,
+        "slowest_ns": 204090,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 204090,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 196660,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 4990,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 1460,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 100,
+        "fastest_ns": 24930,
+        "slowest_ns": 2360964,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 2166988,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 2360964,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 24930,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 34100,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 234019,
+        "slowest_ns": 21717318,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 21717318,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 21040866,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 300279,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 234019,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 1558389,
+        "slowest_ns": 210903692,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 210903692,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 200979056,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 1759188,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 1558389,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 17860452,
+        "slowest_ns": 2497603386,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 2497603386,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 2123489907,
+            "expected": 2444.096,
+            "observable": 2444.0960000000005,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 25914480,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 17860452,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      },
+      {
+        "K": 1000000,
+        "status": "FAIL",
+        "variants": [
+          {
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000000",
+              "2444.096",
+              "5"
+            ],
+            "returncode": 1,
+            "status": "FAIL",
+            "stderr": "runtime error [instruction limit] in function 'xs_lookup_batch'\nat source 40:46 (block while_body_10, TLOAD): instruction limit 10000000000 exceeded",
+            "stdout": "",
+            "variant": "S3_FFI_O0"
+          },
+          {
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000000",
+              "2444.096",
+              "5"
+            ],
+            "returncode": 1,
+            "status": "FAIL",
+            "stderr": "runtime error [instruction limit] in function 'xs_lookup_batch'\nat source 60:13 (block while_body_10, TSTORE): instruction limit 10000000000 exceeded",
+            "stdout": "",
+            "variant": "S3_FFI_O1"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 318404805,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-medium-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.medium",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "2444.096",
+              "5"
+            ],
+            "elapsed_ns": 163498480,
+            "expected": 2444.096,
+            "observable": 2444.0959999999995,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.medium"
+          }
+        ]
+      }
+    ],
+    "candidates": [
+      {
+        "K": 1,
+        "fastest_ns": 290,
+        "preferred": false,
+        "slowest_ns": 21500
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1460,
+        "preferred": false,
+        "slowest_ns": 204090
+      },
+      {
+        "K": 100,
+        "fastest_ns": 24930,
+        "preferred": false,
+        "slowest_ns": 2360964
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 234019,
+        "preferred": false,
+        "slowest_ns": 21717318
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 1558389,
+        "preferred": false,
+        "slowest_ns": 210903692
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 17860452,
+        "preferred": false,
+        "slowest_ns": 2497603386
+      }
+    ],
+    "selected": {
+      "K": 100000,
+      "fastest_ns": 17860452,
+      "preferred": false,
+      "slowest_ns": 2497603386
+    },
+    "status": "PASS"
+  },
+  "scientific.xsbench.compatible_lookup.small": {
+    "K_final": 100000,
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 230,
+        "slowest_ns": 10130,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 10130,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 9850,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 320,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 230,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1270,
+        "slowest_ns": 151250,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 118280,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 151250,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1490,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1270,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 100,
+        "fastest_ns": 13110,
+        "slowest_ns": 1288009,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1288009,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1099969,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 15050,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 13110,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 122079,
+        "slowest_ns": 11390048,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 11390048,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 10762084,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 128330,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 122079,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 803679,
+        "slowest_ns": 107278289,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 107278289,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 102763908,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 911379,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 803679,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 12290958,
+        "slowest_ns": 1187725355,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1066578718,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 1187725355,
+            "expected": 1212.472,
+            "observable": 1212.4720000000002,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 14639495,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 12290958,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      },
+      {
+        "K": 1000000,
+        "status": "FAIL",
+        "variants": [
+          {
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000000",
+              "1212.472",
+              "5"
+            ],
+            "returncode": 1,
+            "status": "FAIL",
+            "stderr": "runtime error [instruction limit] in function 'xs_lookup_batch'\nat source 42:55 (block while_body_10, TCONST): instruction limit 10000000000 exceeded",
+            "stdout": "",
+            "variant": "S3_FFI_O0"
+          },
+          {
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000000",
+              "1212.472",
+              "5"
+            ],
+            "returncode": 1,
+            "status": "FAIL",
+            "stderr": "runtime error [instruction limit] in function 'xs_lookup_batch'\nat source 61:99 (block while_body_10, TMUL): instruction limit 10000000000 exceeded",
+            "stdout": "",
+            "variant": "S3_FFI_O1"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 124051338,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-small-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.small",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "1212.472",
+              "5"
+            ],
+            "elapsed_ns": 97252119,
+            "expected": 1212.472,
+            "observable": 1212.472,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.small"
+          }
+        ]
+      }
+    ],
+    "candidates": [
+      {
+        "K": 1,
+        "fastest_ns": 230,
+        "preferred": false,
+        "slowest_ns": 10130
+      },
+      {
+        "K": 10,
+        "fastest_ns": 1270,
+        "preferred": false,
+        "slowest_ns": 151250
+      },
+      {
+        "K": 100,
+        "fastest_ns": 13110,
+        "preferred": false,
+        "slowest_ns": 1288009
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 122079,
+        "preferred": false,
+        "slowest_ns": 11390048
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 803679,
+        "preferred": false,
+        "slowest_ns": 107278289
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 12290958,
+        "preferred": false,
+        "slowest_ns": 1187725355
+      }
+    ],
+    "selected": {
+      "K": 100000,
+      "fastest_ns": 12290958,
+      "preferred": false,
+      "slowest_ns": 1187725355
+    },
+    "status": "PASS"
+  },
+  "scientific.xsbench.compatible_lookup.tiny": {
+    "K_final": 1000000,
+    "calibration": [
+      {
+        "K": 1,
+        "fastest_ns": 250,
+        "slowest_ns": 2940,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 2940,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 2880,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 460,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 250,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 10,
+        "fastest_ns": 520,
+        "slowest_ns": 32000,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 28900,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 32000,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 580,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 520,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 100,
+        "fastest_ns": 3550,
+        "slowest_ns": 314960,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 314960,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 302680,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 5230,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 3550,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 32450,
+        "slowest_ns": 4100624,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 4100624,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 3991810,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 39060,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 32450,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 403590,
+        "slowest_ns": 42209003,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "10000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 37531811,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "10000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 42209003,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "10000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 437230,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 10000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "10000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 403590,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 3677536,
+        "slowest_ns": 350741852,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "100000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 337695129,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "100000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 350741852,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "100000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 4350901,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 100000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "100000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 3677536,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": 28403066,
+        "slowest_ns": 3582920150,
+        "status": "PASS",
+        "variants": [
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O0.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O0",
+              "xs_lookup_batch",
+              "1000000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 3582920150,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O0",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-S3_FFI_O1.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "S3_FFI_O1",
+              "xs_lookup_batch",
+              "1000000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 3525995854,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "S3_FFI_O1",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-GCC_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "GCC_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 35440414,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "GCC_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          },
+          {
+            "K": 1000000,
+            "command": [
+              "taskset",
+              "-c",
+              "0",
+              "/home/vboxuser/S3-Benchmarks-2.2.1-xsbench-qualification-20260921-r12/reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/ffi_driver",
+              "reports/benchmarks-2.2.1-xsbench/raw/xsbench-qualification-20260921-224913-802102762/artifacts/scientific-xsbench-compatible_lookup-tiny-CLANG_O2.so",
+              "scientific.xsbench.compatible_lookup.tiny",
+              "CLANG_O2",
+              "xs_lookup_batch",
+              "1000000",
+              "117.52",
+              "5"
+            ],
+            "elapsed_ns": 28403066,
+            "expected": 117.52,
+            "observable": 117.52000000000001,
+            "returncode": 0,
+            "status": "PASS",
+            "stderr": "",
+            "variant": "CLANG_O2",
+            "workload": "scientific.xsbench.compatible_lookup.tiny"
+          }
+        ]
+      }
+    ],
+    "candidates": [
+      {
+        "K": 1,
+        "fastest_ns": 250,
+        "preferred": false,
+        "slowest_ns": 2940
+      },
+      {
+        "K": 10,
+        "fastest_ns": 520,
+        "preferred": false,
+        "slowest_ns": 32000
+      },
+      {
+        "K": 100,
+        "fastest_ns": 3550,
+        "preferred": false,
+        "slowest_ns": 314960
+      },
+      {
+        "K": 1000,
+        "fastest_ns": 32450,
+        "preferred": false,
+        "slowest_ns": 4100624
+      },
+      {
+        "K": 10000,
+        "fastest_ns": 403590,
+        "preferred": false,
+        "slowest_ns": 42209003
+      },
+      {
+        "K": 100000,
+        "fastest_ns": 3677536,
+        "preferred": false,
+        "slowest_ns": 350741852
+      },
+      {
+        "K": 1000000,
+        "fastest_ns": 28403066,
+        "preferred": false,
+        "slowest_ns": 3582920150
+      }
+    ],
+    "selected": {
+      "K": 1000000,
+      "fastest_ns": 28403066,
+      "preferred": false,
+      "slowest_ns": 3582920150
+    },
+    "status": "PASS"
+  }
+}

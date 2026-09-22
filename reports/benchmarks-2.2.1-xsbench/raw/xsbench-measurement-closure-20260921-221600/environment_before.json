@@ -1,0 +1,22 @@
+{
+  "captured_utc": "2026-09-22T00:47:59.979021+00:00",
+  "clock_monotonic_raw_resolution": {
+    "nanoseconds": 1,
+    "rc": 0
+  },
+  "cpu_affinity": "0",
+  "free_h": "total        used        free      shared  buff/cache   available\nMem:           8.0Gi       573Mi       5.4Gi        12Mi       2.3Gi       7.5Gi\nSwap:             0B          0B          0B",
+  "loadavg": "0.18 0.06 0.09 1/148 54187",
+  "lscpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  3\nOn-line CPU(s) list:                     0-2\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 5 3400G with Radeon Vega Graphics\nCPU family:                              23\nModel:                                   24\nThread(s) per core:                      1\nCore(s) per socket:                      3\nSocket(s):                               1\nStepping:                                1\nBogoMIPS:                                7400.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall mmxext fxsr_opt rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch ssbd vmmcall fsgsbase bmi1 avx2 bmi2 rdseed adx clflushopt sha_ni arat\nHypervisor vendor:                       KVM\nVirtualization type:                     full\nL1d cache:                               96 KiB (3 instances)\nL1i cache:                               192 KiB (3 instances)\nL2 cache:                                1.5 MiB (3 instances)\nL3 cache:                                12 MiB (3 instances)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-2\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled\nVulnerability Spec rstack overflow:      Mitigation; SMT disabled\nVulnerability Spec store bypass:         Not affected\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected",
+  "machine_fingerprint": "97838760b4a5698e35ab5314930224216d3f936837c54a870789bc9b732a5b69",
+  "machine_identity": {
+    "cpu_model": "",
+    "kernel": "7.0.0-31-generic",
+    "logical_cpus": 3,
+    "machine": "x86_64",
+    "system": "Linux"
+  },
+  "nproc": "3",
+  "proc_stat_cpu": "cpu  471547 312 20752 12417005 4595 0 7734 0 0 0",
+  "uname_a": "Linux Ubuntuserve 7.0.0-31-generic #31-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 04:26:38 UTC 2026 x86_64 GNU/Linux"
+}
