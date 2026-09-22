@@ -1,0 +1,21 @@
+{
+  "campaign": "S3_BENCHMARKS_2_2_1_XSBENCH_QUALIFICATION",
+  "functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "xsbench_sha": "ba08e5221af6106252b866e50ea123c69d31a4e2",
+  "upstream_code_vendored": false,
+  "fixtures": {
+    "TINY": {"lookup_count": 1, "expected": 117.52, "hosted_o0": 117.52000000000001, "hosted_o1": 117.52000000000001, "status": "PASS"},
+    "SMALL": {"lookup_count": 4, "expected": 1212.472, "hosted_o0": 1212.4720000000002, "hosted_o1": 1212.4720000000002, "status": "PASS"},
+    "MEDIUM": {"lookup_count": 8, "expected": 2444.096, "hosted_o0": 2444.096000000001, "hosted_o1": 2444.096000000001, "status": "PASS"}
+  },
+  "hosted_correctness": "PASS",
+  "native_correctness": "PASS",
+  "native_matrix": "6/6 PASS",
+  "ffi_correctness": "12/12 PASS",
+  "native_observable": "REAL_F64_FFI_RESULT",
+  "full_suite": "52 passed, 1 skipped",
+  "full_suite_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "synthetic_timing": "ABSENT",
+  "status": "CORRECTNESS_QUALIFIED_TIMING_OPEN"
+}
