@@ -17,9 +17,15 @@ UINT64_MAX = (1 << 64) - 1
 COUNT_SYMBOL = "__s3_instruction_count"
 REMAINING_SYMBOL = "__s3_instruction_remaining"
 _FAILURE_LABEL = r"\.L__s3_failure_site_[0-9]+"
-_COUNTDOWN_SITE = re.compile(
+_COUNTDOWN_SITE_WIDE = re.compile(
     rf"^    movabs r11, (?P<limit>[0-9]+)\n"
     rf"^    cmp qword ptr \[rip \+ {COUNT_SYMBOL}\], r11\n"
+    rf"^    jae (?P<label>{_FAILURE_LABEL})\n"
+    rf"^    inc qword ptr \[rip \+ {COUNT_SYMBOL}\]\n",
+    re.MULTILINE,
+)
+_COUNTDOWN_SITE_IMMEDIATE = re.compile(
+    rf"^    cmp qword ptr \[rip \+ {COUNT_SYMBOL}\], (?P<limit>[0-9]+)\n"
     rf"^    jae (?P<label>{_FAILURE_LABEL})\n"
     rf"^    inc qword ptr \[rip \+ {COUNT_SYMBOL}\]\n",
     re.MULTILINE,
@@ -82,7 +88,8 @@ def transform_global_countdown(text: str, *, expected_limit: int | None = None) 
     process-persistent counter lifetime for a loaded artifact.
     """
 
-    matches = list(_COUNTDOWN_SITE.finditer(text))
+    matches = [*(_COUNTDOWN_SITE_WIDE.finditer(text)), *(_COUNTDOWN_SITE_IMMEDIATE.finditer(text))]
+    matches.sort(key=lambda match: match.start())
     if not matches:
         raise SafeBudgetRewriteError("no complete instruction-budget sites found")
     limits = {int(match.group("limit")) for match in matches}
@@ -125,7 +132,7 @@ def transform_global_countdown(text: str, *, expected_limit: int | None = None) 
     if storage_count != 1:
         raise SafeBudgetRewriteError("instruction-count storage was not replaced exactly once")
 
-    if _COUNTDOWN_SITE.search(output):
+    if _COUNTDOWN_SITE_WIDE.search(output) or _COUNTDOWN_SITE_IMMEDIATE.search(output):
         raise SafeBudgetRewriteError("original instruction-budget site remains")
     if COUNT_SYMBOL in output or output.count(REMAINING_SYMBOL) != len(matches) + 1:
         raise SafeBudgetRewriteError("unexpected counter references remain after rewrite")

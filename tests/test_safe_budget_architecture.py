@@ -49,6 +49,17 @@ def test_countdown_accepts_uint64_boundary_domain(limit: int) -> None:
     assert f".quad {limit}" in output
 
 
+def test_countdown_accepts_the_pinned_immediate_limit_shape() -> None:
+    source = _assembly(limit=0, sites=1).replace("    movabs r11, 0\n", "")
+    source = source.replace(
+        "    cmp qword ptr [rip + __s3_instruction_count], r11\n",
+        "    cmp qword ptr [rip + __s3_instruction_count], 0\n",
+    )
+    output, result = transform_global_countdown(source)
+    assert result.configured_limit == 0
+    assert "sub qword ptr [rip + __s3_instruction_remaining], 1" in output
+
+
 def test_countdown_contract_makes_unsigned_underflow_explicit() -> None:
     contract = countdown_boundary_contract()
     assert contract["zero_budget"]["branch"] == "jb"
