@@ -1,0 +1,22 @@
+{
+  "version": "V7",
+  "status": "MEASUREMENT_WINDOW_UNAVAILABLE",
+  "causality": "NOT_ESTABLISHED",
+  "primary_observed_pressure": "FROZEN_S3_RUNTIME_INSTRUCTION_BUDGET_AND_SCALING",
+  "secondary_observed_pressure": "CONTROL_WINDOW_INCOMPATIBILITY",
+  "environment_variability": "NOT_RETESTED_BY_VALID_C_D_PAIR",
+  "perf_counters": "UNAVAILABLE_BY_HOST_POLICY",
+  "native_speedup_claim": "NO",
+  "causal_experiment_ready": false,
+  "evidence": {
+    "corrected_calibration": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260922-recalibrated/calibration.json",
+    "invalid_initial_calibration": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/calibration.json",
+    "invalid_run_c": "reports/benchmarks-2.2.1-xsbench/raw/xsbench-measurement-closure-20260921-221600/run_c.json"
+  },
+  "observations": [
+    {"K": 200000, "fastest_control_ms": 46.860272, "s3_completion": "PASS", "window_pass": false},
+    {"K": 400000, "fastest_control_ms": 87.444239, "s3_completion": "INSTRUCTION_LIMIT", "window_pass": false},
+    {"K": 450000, "fastest_control_ms": 109.088227, "s3_completion": "INSTRUCTION_LIMIT", "window_pass": false}
+  ],
+  "next_path": "MEASUREMENT_PROTOCOL_OR_ARTIFACT_SCALING_INVESTIGATION"
+}
