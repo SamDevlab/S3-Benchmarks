@@ -264,14 +264,14 @@ def _jsmn_with_p1(s3_repo: Path, root: Path, k: int) -> dict[str, Artifact]:
         converted[new_label] = Artifact(
             artifact.workload,
             new_label,
-            artifact.path,
+            artifact.executable,
             artifact.assembly,
             artifact.source_sha256,
             artifact.assembly_sha256,
             artifact.executable_sha256,
             artifact.budget_sites,
             artifact.static_metrics,
-            artifact.run,
+            artifact.run_sample,
         )
     return converted
 
