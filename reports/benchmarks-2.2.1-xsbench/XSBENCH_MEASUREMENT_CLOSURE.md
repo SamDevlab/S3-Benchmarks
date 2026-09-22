@@ -66,7 +66,7 @@ causality is promoted.
 
 ## Protocol and provenance
 
-- S3 functional head: `edbce77725e1193e602d93258431e4fae85d6694`
+- benchmark functional head: `edbce77725e1193e602d93258431e4fae85d6694`
 - benchmark branch head before this evidence: `6508a542a033b417aceedd78f34b017198576650`
 - S3 source changed: `NO`
 - frozen driver and four library hashes: recorded in both calibration artifact manifests

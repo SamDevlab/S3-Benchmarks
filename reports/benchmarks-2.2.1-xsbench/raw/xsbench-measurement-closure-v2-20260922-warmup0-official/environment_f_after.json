@@ -1,0 +1,17 @@
+{
+  "K": 750000,
+  "captured_utc": "2026-09-22T02:33:38.019654+00:00",
+  "cpu_affinity": "0",
+  "inline_driver_warmups": 0,
+  "machine_fingerprint": "cae6d65e71c97a0b0bbc1d83697faf67958777f50b7f6fc922e5de4b175abade",
+  "machine_identity": {
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "kernel": "7.0.0-31-generic",
+    "logical_cpus": 3,
+    "machine": "x86_64",
+    "system": "Linux"
+  },
+  "repetitions": 30,
+  "timer": "CLOCK_MONOTONIC_RAW",
+  "warmup_samples": 5
+}

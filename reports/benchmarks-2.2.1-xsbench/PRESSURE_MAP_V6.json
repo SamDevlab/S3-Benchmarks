@@ -1,6 +1,6 @@
 {
   "status": "CORRECTNESS_CLOSED_TIMING_REPRODUCIBILITY_OPEN",
-  "functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "benchmark_functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
   "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "xsbench_sha": "ba08e5221af6106252b866e50ea123c69d31a4e2",
   "timing_reproducibility": "FAIL",

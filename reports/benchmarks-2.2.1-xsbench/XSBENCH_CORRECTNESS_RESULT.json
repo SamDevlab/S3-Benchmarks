@@ -1,6 +1,6 @@
 {
   "campaign": "S3_BENCHMARKS_2_2_1_XSBENCH_QUALIFICATION",
-  "functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "benchmark_functional_head": "edbce77725e1193e602d93258431e4fae85d6694",
   "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "xsbench_sha": "ba08e5221af6106252b866e50ea123c69d31a4e2",
   "upstream_code_vendored": false,
@@ -15,7 +15,7 @@
   "ffi_correctness": "12/12 PASS",
   "native_observable": "REAL_F64_FFI_RESULT",
   "full_suite": "52 passed, 1 skipped",
-  "full_suite_head": "edbce77725e1193e602d93258431e4fae85d6694",
+  "full_suite_benchmark_head": "edbce77725e1193e602d93258431e4fae85d6694",
   "synthetic_timing": "ABSENT",
   "status": "CORRECTNESS_QUALIFIED_TIMING_OPEN"
 }
