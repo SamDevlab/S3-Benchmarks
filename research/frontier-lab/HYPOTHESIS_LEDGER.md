@@ -9,6 +9,8 @@
 | H5 | register/memory code generation dominates residual | OPEN | no native differential yet |
 | H6 | FFI boundary dominates the gap | WEAKENED | matched/amortized boundary in E/F protocol |
 | H7 | instruction-budget instrumentation materially affects multiple distinct native workload classes | CONFIRMED_GENERAL | RMSD, XSBench, and JSMN each passed correctness, paired reproducibility, and material O0/O1 causal attribution |
+| H8 | an exact global-countdown budget can preserve current instruction-limit semantics with lower native overhead | CONFIRMED_SAFE_NOT_MATERIAL | P1 passed E0 native boundary equivalence and all workload correctness gates, but recovered only 8.37% at RMSD O0, -0.49% at RMSD O1, -0.62%/-1.01% at XSBench O0/O1, and 4.40%/2.33% at JSMN O0/O1; no cross-workload material-performance gate |
+| H9 | call-aware segment precharge with an exact slow path can preserve current budget semantics while amortizing accounting | BLOCKED_BY_EXACTNESS_PROOF | no explicit logical-Assembly-to-native segment map is available yet; heuristic slicing is prohibited |
 
 H6 is less plausible as the explanation for the measured 100x-scale local
 gap, but it is not claimed falsified by this campaign.

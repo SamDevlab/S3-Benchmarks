@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/tools/run_safe_budget_architecture.py", line 501, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/tools/run_safe_budget_architecture.py", line 495, in main
+    output = run_campaign(args.s3_repo, args.benchmark_sha, run_timing=not args.safety_only)
+  File "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/tools/run_safe_budget_architecture.py", line 462, in run_campaign
+    jsmn_artifacts = _jsmn_with_p1(s3_repo, jsmn_root, TARGET_K["realworld.jsmn"])
+  File "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/tools/run_safe_budget_architecture.py", line 267, in _jsmn_with_p1
+    artifact.executable,
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Artifact' object has no attribute 'executable'

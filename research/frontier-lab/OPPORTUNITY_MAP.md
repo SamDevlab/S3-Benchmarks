@@ -25,7 +25,7 @@ tasks. Status reflects this campaign's checkpoint.
 | O18 | reproducibility fingerprint schema | methodology | cross-host comparability | host matrix | DEFER |
 | O19 | evidence registry for causal artifacts | infrastructure | provenance | schema design | COMPLETE |
 | O20 | benchmark stack consolidation plan | governance | lower documentation debt | owner decision | DEFER |
-| O21 | safe budget design review | runtime design | future bounded-mode options | O09 | NEXT |
+| O21 | safe budget design review | runtime design | future bounded-mode options | O09 | COMPLETE_SAFE_NOT_PROMOTED |
 | O22 | checked-vs-benchmark mode study | runtime design | safety/perf boundary | O01 | DEFERRED_RESEARCH |
 
 O01, O02, O09, and O19 are closed as experimental or evidence actions. O02's

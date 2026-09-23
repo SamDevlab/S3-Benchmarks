@@ -1,0 +1,615 @@
+{
+  "case_count": 21,
+  "cases": [
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 0,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "rewrite": {
+        "configured_limit": 0,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "33047e3ce0bc0063ce586c6e3132853a21ff1de95930e6d8eb64ed51bab3674a",
+        "output_sha256": "51618ac7e5a90e31708a6b74a25f7e6eee0818a746eb9f4dcbbdf4c7247a2734",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 0,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "rewrite": {
+        "configured_limit": 0,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "33047e3ce0bc0063ce586c6e3132853a21ff1de95930e6d8eb64ed51bab3674a",
+        "output_sha256": "51618ac7e5a90e31708a6b74a25f7e6eee0818a746eb9f4dcbbdf4c7247a2734",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 0,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 0 exceeded\n",
+        "stdout": "CALL=0\n"
+      },
+      "rewrite": {
+        "configured_limit": 0,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "33047e3ce0bc0063ce586c6e3132853a21ff1de95930e6d8eb64ed51bab3674a",
+        "output_sha256": "51618ac7e5a90e31708a6b74a25f7e6eee0818a746eb9f4dcbbdf4c7247a2734",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 1,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 1,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "7559dbf3a8c3e222ce88f0d048259e182edf7da4b7c01da94565fbeb8977f3f8",
+        "output_sha256": "06b8b7f98544d946680e1950cf7fcc6e9c5bfc54f47baeb97f06f756b1cf51bd",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 1 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 1,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 1 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\n"
+      },
+      "rewrite": {
+        "configured_limit": 1,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "7559dbf3a8c3e222ce88f0d048259e182edf7da4b7c01da94565fbeb8977f3f8",
+        "output_sha256": "06b8b7f98544d946680e1950cf7fcc6e9c5bfc54f47baeb97f06f756b1cf51bd",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 1 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 1,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 1 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\n"
+      },
+      "rewrite": {
+        "configured_limit": 1,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "7559dbf3a8c3e222ce88f0d048259e182edf7da4b7c01da94565fbeb8977f3f8",
+        "output_sha256": "06b8b7f98544d946680e1950cf7fcc6e9c5bfc54f47baeb97f06f756b1cf51bd",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 2,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "b82a77837c43ef9c42944d61c5a8408cfb770a7bac426a0c0426d1f86ceaeca3",
+        "output_sha256": "7dd0b37e2281b466f7d38f13c464123c2dea01d25a18881a560abb9a4629e915",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 2,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "b82a77837c43ef9c42944d61c5a8408cfb770a7bac426a0c0426d1f86ceaeca3",
+        "output_sha256": "7dd0b37e2281b466f7d38f13c464123c2dea01d25a18881a560abb9a4629e915",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 2 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 2,
+      "p1": {
+        "label": "P1",
+        "returncode": 1,
+        "stderr": "runtime error [instruction limit] in function 'identity_f64'\nat source 2:5 (block entry, TRET): instruction limit 2 exceeded\n",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\n"
+      },
+      "rewrite": {
+        "configured_limit": 2,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "b82a77837c43ef9c42944d61c5a8408cfb770a7bac426a0c0426d1f86ceaeca3",
+        "output_sha256": "7dd0b37e2281b466f7d38f13c464123c2dea01d25a18881a560abb9a4629e915",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 3,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 3,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "0a2b16d6bdf2ce965157edd50e0790dac5790c12728077cb75128604374eb224",
+        "output_sha256": "a45e2b6cd31129be2ab93631dcf616658c2a8abfb27a205f02632b3ccb74e0ce",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 3,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 3,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "0a2b16d6bdf2ce965157edd50e0790dac5790c12728077cb75128604374eb224",
+        "output_sha256": "a45e2b6cd31129be2ab93631dcf616658c2a8abfb27a205f02632b3ccb74e0ce",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 3,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 3,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "0a2b16d6bdf2ce965157edd50e0790dac5790c12728077cb75128604374eb224",
+        "output_sha256": "a45e2b6cd31129be2ab93631dcf616658c2a8abfb27a205f02632b3ccb74e0ce",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 2147483647,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483647,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "758a47cb6333432bcf8cb680ab647750d3001c549a5d045fda5dede1de2d6849",
+        "output_sha256": "0eb8fbfb371ab63147322ed012a82652f879c162f2438b196a2a7ba5eff4c815",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 2147483647,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483647,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "758a47cb6333432bcf8cb680ab647750d3001c549a5d045fda5dede1de2d6849",
+        "output_sha256": "0eb8fbfb371ab63147322ed012a82652f879c162f2438b196a2a7ba5eff4c815",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 2147483647,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483647,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "758a47cb6333432bcf8cb680ab647750d3001c549a5d045fda5dede1de2d6849",
+        "output_sha256": "0eb8fbfb371ab63147322ed012a82652f879c162f2438b196a2a7ba5eff4c815",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 2147483648,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483648,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "74770f37d899bd1bdcda5da5e53dcb259abf0a36c447024d058e75cd3c5475bf",
+        "output_sha256": "25a312cb46048a51a2599567467fbfaadfcf93eb4ce86333ebe64d4b8fabb894",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 2147483648,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483648,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "74770f37d899bd1bdcda5da5e53dcb259abf0a36c447024d058e75cd3c5475bf",
+        "output_sha256": "25a312cb46048a51a2599567467fbfaadfcf93eb4ce86333ebe64d4b8fabb894",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 2147483648,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 2147483648,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "74770f37d899bd1bdcda5da5e53dcb259abf0a36c447024d058e75cd3c5475bf",
+        "output_sha256": "25a312cb46048a51a2599567467fbfaadfcf93eb4ce86333ebe64d4b8fabb894",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "calls": 1,
+      "equivalent": true,
+      "limit": 10000000000,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 10000000000,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "bffe62e4e1881948c8a918a448984bbb308a73643bdc4ad06a52b1be87adedcc",
+        "output_sha256": "4cc66248d9b75ea22c6ccd401fbc19af2047648d99b6fe8b39eee9bab1643c89",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "calls": 2,
+      "equivalent": true,
+      "limit": 10000000000,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 10000000000,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "bffe62e4e1881948c8a918a448984bbb308a73643bdc4ad06a52b1be87adedcc",
+        "output_sha256": "4cc66248d9b75ea22c6ccd401fbc19af2047648d99b6fe8b39eee9bab1643c89",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    },
+    {
+      "baseline": {
+        "label": "P0",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "calls": 3,
+      "equivalent": true,
+      "limit": 10000000000,
+      "p1": {
+        "label": "P1",
+        "returncode": 0,
+        "stderr": "",
+        "stdout": "CALL=0\nCALL=1\nCALL=2\nDONE\n"
+      },
+      "rewrite": {
+        "configured_limit": 10000000000,
+        "diagnostic_only": true,
+        "expected_sites": 3,
+        "input_sha256": "bffe62e4e1881948c8a918a448984bbb308a73643bdc4ad06a52b1be87adedcc",
+        "output_sha256": "4cc66248d9b75ea22c6ccd401fbc19af2047648d99b6fe8b39eee9bab1643c89",
+        "production_artifact": false,
+        "s3_source_changed": false,
+        "storage_replaced": true,
+        "transformed_sites": 3,
+        "unexpected_mutations": 0
+      }
+    }
+  ],
+  "status": "PASS"
+}
