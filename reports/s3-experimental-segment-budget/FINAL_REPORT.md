@@ -22,8 +22,9 @@ by default or promoting it to production.
 | S3 control | `e07d0b5464bf472b2ca18993f3e196a234ff0fc5` |
 | S3 tested source freeze | `1a76e341098b54a639fec22eecea362cc243c46f` |
 | S3 publication/report head | `8f6b8afdf780cfc413a722d1885bf3107803f71a` (documentation-only after tests) |
-| benchmark base | `8fc0aba50ca48d3f7171bdf49395df3cd880626a` |
+| benchmark measurement predecessor / P1 head | `8fc0aba50ca48d3f7171bdf49395df3cd880626a` |
 | benchmark source freeze | `84347c9c400839c739241728f8e90f4a1273c33f` |
+| validation PR base | `research/benchmarks-2.2.3-budget-generalization` at `e8463adc7284e2120dd1c205f92e6a901b813891` |
 | benchmark publication | report/evidence commits only after the source freeze; remote synchronization verified after final push |
 | S3 PR | #310, OPEN, Draft, unmerged |
 | benchmark validation PR | #24, OPEN, Draft, unmerged, based on `research/benchmarks-2.2.3-budget-generalization` |
@@ -147,7 +148,11 @@ The validation branch is synchronized with origin. PR #24 is a Draft evidence
 review, not a merge or production-promotion request. The repository's Tests
 and Benchmarks workflow is active, but GitHub reported no check runs for this
 PR head at final review (`NO_CHECKS_REPORTED`); this is not recorded as a
-passing CI run.
+passing CI run. Because PR #24 targets the 2.2.3 base while its branch descends
+from the published P1 head `8fc0aba`, its GitHub commit list includes the
+prerequisite 2.2.4 lineage as well as the 2.2.5 validation commits. PR #23
+remains open separately; this ancestry is disclosed rather than presented as
+new 2.2.5 work.
 
 Raw evidence is in `raw/segment-budget-20260923-134844-191043748/` (121 files,
 81,496,216 bytes), with the SHA-256 list at
