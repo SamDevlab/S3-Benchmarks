@@ -1,0 +1,27 @@
+{
+  "campaign": "S3_BENCHMARKS_EXPERIMENTAL_SEGMENT_BUDGET_VALIDATION",
+  "s3_control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+  "benchmark_source_sha": "84347c9c400839c739241728f8e90f4a1273c33f",
+  "correctness": "PASS",
+  "experiment_isolation": "PASS",
+  "reproducibility": "PASS",
+  "all_timed_samples_pass": true,
+  "minimum_useful_recovery": 0.25,
+  "strong_recovery": 0.5,
+  "recovery_formula": "(T(P0)-T(P2))/(T(P0)-T(PNEG))",
+  "incremental_over_p1_formula": "(T(P1)-T(P2))/(T(P0)-T(PNEG))",
+  "time_unit": "ns per fixed-K invocation; mean of two independent session medians",
+  "cells": [
+    {"workload":"scientific.rmsd.batch","optimization":"O0","K":2000000,"T_ns":{"P0":13397347907.25,"P1":13590522920.25,"P2":5008515945.5,"PNEG":5374699111.0},"p2_recovered_budget_excess":1.045644,"p2_incremental_recovery_over_p1":1.069722,"p2_over_pneg":0.931869,"reproducibility_pass":true,"max_session_median_delta":0.030791},
+    {"workload":"scientific.rmsd.batch","optimization":"O1","K":2000000,"T_ns":{"P0":13429648780.5,"P1":13582211593.75,"P2":5135060631.75,"PNEG":5363743305.25},"p2_recovered_budget_excess":1.028352,"p2_incremental_recovery_over_p1":1.047266,"p2_over_pneg":0.957365,"reproducibility_pass":true,"max_session_median_delta":0.019330},
+    {"workload":"scientific.xsbench.compatible_lookup.medium","optimization":"O0","K":750000,"T_ns":{"P0":14339706454.5,"P1":14614470380.0,"P2":6439645808.75,"PNEG":6195112087.75},"p2_recovered_budget_excess":0.969976,"p2_incremental_recovery_over_p1":1.003712,"p2_over_pneg":1.039472,"reproducibility_pass":true,"max_session_median_delta":0.011151},
+    {"workload":"scientific.xsbench.compatible_lookup.medium","optimization":"O1","K":750000,"T_ns":{"P0":13816940428.0,"P1":14020117897.5,"P2":6757831247.25,"PNEG":6612033848.25},"p2_recovered_budget_excess":0.979764,"p2_incremental_recovery_over_p1":1.007964,"p2_over_pneg":1.022050,"reproducibility_pass":true,"max_session_median_delta":0.008872},
+    {"workload":"realworld.jsmn","optimization":"O0","K":1250000,"T_ns":{"P0":24393155840.5,"P1":23661743323.5,"P2":12078769505.75,"PNEG":11028542760.5},"p2_recovered_budget_excess":0.921417,"p2_incremental_recovery_over_p1":0.866690,"p2_over_pneg":1.095228,"reproducibility_pass":true,"max_session_median_delta":0.015926},
+    {"workload":"realworld.jsmn","optimization":"O1","K":1250000,"T_ns":{"P0":23887514073.0,"P1":23457800750.25,"P2":11744599805.0,"PNEG":10887362484.75},"p2_recovered_budget_excess":0.934059,"p2_incremental_recovery_over_p1":0.901005,"p2_over_pneg":1.078737,"reproducibility_pass":true,"max_session_median_delta":0.015652}
+  ],
+  "decision": "STRONG_SUCCESS",
+  "budget_line_continues": "HARDENING_ONLY",
+  "production_ready": false,
+  "qualified_performance_index": "NOT_AVAILABLE"
+}

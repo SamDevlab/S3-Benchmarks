@@ -64,3 +64,32 @@ The next decision must use a new causal prototype and the same E0 contract;
 P1 must not be activated as a production backend. P2 remains blocked because
 no explicit logical-Assembly-to-native segment map was proven. The no-budget
 PNEG build remains only a lower-bound diagnostic.
+
+## 2.2.5 exact segment experiment closure
+
+The subsequent isolated S3 experiment implemented P2 as exact
+Assembly-structure segment planning with a per-instruction exact scalar slow
+path. P2 passed E0, workload correctness, and independent-session
+reproducibility on RMSD, XSBench, and JSMN at O0/O1. All six cells recovered
+92.14% or more of the P0-to-PNEG removable excess, exceeding the predeclared
+50% strong threshold. H9's exact-map blocker is closed; H10 and H11 are
+confirmed.
+
+Final design-space classification:
+
+```text
+BUDGET_DESIGN_STATUS=CANDIDATE_READY_FOR_HARDENING
+P0_DEFAULT=UNCHANGED
+P1=SAFE_NOT_MATERIAL
+P2=STRONG_EXPERIMENTAL_CANDIDATE
+PRODUCTION_PROMOTION=NOT_AUTHORIZED
+NO_FURTHER_BUDGET_ARCHITECTURES=YES
+```
+
+The measured P2 `.text` growth was 39.17% for RMSD, 53.35-53.57% for
+XSBench, and 58.27-58.54% for JSMN, attributable structurally to duplicated
+exact slow-path bodies. The only next budget action is hardening: investigate
+outlining/sharing that existing slow path while preserving E0, call order,
+diagnostics, deterministic segment mapping, and byte-identical default P0.
+Do not start P3/P4/P5 or infer that code-size duplication alone explains the
+remaining runtime gap.

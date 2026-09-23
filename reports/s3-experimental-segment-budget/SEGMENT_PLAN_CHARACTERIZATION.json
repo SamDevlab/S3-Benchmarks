@@ -1,0 +1,19 @@
+{
+  "s3_experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+  "benchmark_source_sha": "84347c9c400839c739241728f8e90f4a1273c33f",
+  "planner_input": "validated S3 AssemblyProgram structures, not x86 text",
+  "block_local": true,
+  "call_is_barrier": true,
+  "control_transfer_is_barrier": true,
+  "fast_segment_min_weight": 2,
+  "dynamic_accounting_events": "NOT_MEASURED",
+  "cells": [
+    {"workload":"scientific.rmsd.batch","optimization":"O0","logical_instructions":113,"segments":22,"fast_segments":17,"scalar_sites":5,"mean_weight":5.136364,"median_weight":4.0,"max_weight":34,"call_barriers":1,"control_barriers":21},
+    {"workload":"scientific.rmsd.batch","optimization":"O1","logical_instructions":113,"segments":22,"fast_segments":17,"scalar_sites":5,"mean_weight":5.136364,"median_weight":4.0,"max_weight":34,"call_barriers":1,"control_barriers":21},
+    {"workload":"scientific.xsbench.compatible_lookup.medium","optimization":"O0","logical_instructions":521,"segments":35,"fast_segments":27,"scalar_sites":8,"mean_weight":14.885714,"median_weight":4,"max_weight":258,"call_barriers":1,"control_barriers":34},
+    {"workload":"scientific.xsbench.compatible_lookup.medium","optimization":"O1","logical_instructions":520,"segments":34,"fast_segments":27,"scalar_sites":7,"mean_weight":15.294118,"median_weight":3.0,"max_weight":258,"call_barriers":1,"control_barriers":33},
+    {"workload":"realworld.jsmn","optimization":"O0","logical_instructions":2475,"segments":386,"fast_segments":298,"scalar_sites":88,"mean_weight":6.411917,"median_weight":5.0,"max_weight":783,"call_barriers":39,"control_barriers":347},
+    {"workload":"realworld.jsmn","optimization":"O1","logical_instructions":2427,"segments":356,"fast_segments":298,"scalar_sites":58,"mean_weight":6.817416,"median_weight":5.0,"max_weight":781,"call_barriers":39,"control_barriers":317}
+  ],
+  "full_per_function_plans": "raw/segment-budget-20260923-134844-191043748/segment-plans.json"
+}
