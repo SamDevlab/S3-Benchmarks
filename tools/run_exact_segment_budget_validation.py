@@ -276,15 +276,39 @@ def _host_fingerprint(benchmark_base_sha: str, benchmark_source_sha: str) -> dic
     }
 
 
-def _activate_backend(s3_repo: Path) -> tuple[Any, Any, Any]:
+def _load_budget_plan_diagnostics(*, required: bool) -> Any | None:
+    module_name = "bootstrap.s3.backends.x86_64.instruction_budget"
+    try:
+        budget_module = importlib.import_module(module_name)
+    except ModuleNotFoundError as error:
+        if not required and error.name == module_name:
+            return None
+        raise
+    return budget_module.budget_plan_diagnostics
+
+
+def _activate_backend(
+    s3_repo: Path,
+    *,
+    require_budget_diagnostics: bool = True,
+) -> tuple[Any, Any, Any | None]:
     pipeline = _activate_s3_modules(s3_repo)
     backend_module = importlib.import_module("bootstrap.s3.backends.x86_64.backend")
-    budget_module = importlib.import_module("bootstrap.s3.backends.x86_64.instruction_budget")
-    return pipeline, backend_module.X8664Backend, budget_module.budget_plan_diagnostics
+    diagnostics = _load_budget_plan_diagnostics(required=require_budget_diagnostics)
+    return pipeline, backend_module.X8664Backend, diagnostics
 
 
-def _compile_program(s3_repo: Path, source: str, optimization: str) -> tuple[Any, Any, Any]:
-    pipeline, backend_type, diagnostics = _activate_backend(s3_repo)
+def _compile_program(
+    s3_repo: Path,
+    source: str,
+    optimization: str,
+    *,
+    require_budget_diagnostics: bool = True,
+) -> tuple[Any, Any, Any | None]:
+    pipeline, backend_type, diagnostics = _activate_backend(
+        s3_repo,
+        require_budget_diagnostics=require_budget_diagnostics,
+    )
     compilation = pipeline.compile_source(source, optimization)
     _, program = compilation.require_ordinary_artifacts()
     return program, backend_type, diagnostics
@@ -303,10 +327,14 @@ def _emit_program(
         instruction_budget_mode=mode,
     )
     assembly = backend._generate_ffi(program) if ffi else backend.generate(program)
-    functions = [
-        diagnostics(function, max_instructions=S3_FFI_MAX_INSTRUCTIONS)
-        for function in program.functions
-    ]
+    functions = (
+        [
+            diagnostics(function, max_instructions=S3_FFI_MAX_INSTRUCTIONS)
+            for function in program.functions
+        ]
+        if diagnostics is not None
+        else []
+    )
     program_fingerprint = _sha256_text(repr(program))
     return assembly, program_fingerprint, _aggregate_segment_diagnostics(functions)
 
@@ -318,8 +346,14 @@ def _emit(
     mode: str,
     *,
     ffi: bool,
+    require_budget_diagnostics: bool = True,
 ) -> tuple[str, Any, str, dict[str, Any]]:
-    program, backend_type, diagnostics = _compile_program(s3_repo, source, optimization)
+    program, backend_type, diagnostics = _compile_program(
+        s3_repo,
+        source,
+        optimization,
+        require_budget_diagnostics=require_budget_diagnostics,
+    )
     assembly, fingerprint, segments = _emit_program(
         program,
         backend_type,
@@ -368,6 +402,7 @@ def _control_assembly(
         optimization,
         "per-instruction",
         ffi=ffi,
+        require_budget_diagnostics=False,
     )
     return assembly
 

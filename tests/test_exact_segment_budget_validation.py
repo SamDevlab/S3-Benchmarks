@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import pytest
+
+import tools.run_exact_segment_budget_validation as validation
 from tools.run_exact_segment_budget_validation import (
     VARIANTS,
     _balanced_order,
     _assert_same_program_instance,
     _cross_workload_result,
+    _load_budget_plan_diagnostics,
     _recovery_metrics,
     _relative_delta,
     _sample_summary,
@@ -39,6 +43,28 @@ def test_p0_and_p2_reject_distinct_compiled_program_objects() -> None:
         assert "same AssemblyProgram instance" in str(exc)
     else:
         raise AssertionError("distinct P0/P2 program objects were accepted")
+
+
+def test_missing_segment_diagnostics_are_optional_for_control_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    module_name = "bootstrap.s3.backends.x86_64.instruction_budget"
+
+    def missing_module(name: str) -> object:
+        assert name == module_name
+        raise ModuleNotFoundError("control revision predates the diagnostics module", name=module_name)
+
+    monkeypatch.setattr(validation.importlib, "import_module", missing_module)
+    assert _load_budget_plan_diagnostics(required=False) is None
+    with pytest.raises(ModuleNotFoundError, match="predates the diagnostics module"):
+        _load_budget_plan_diagnostics(required=True)
+
+
+def test_missing_dependency_inside_segment_diagnostics_is_not_masked(monkeypatch: pytest.MonkeyPatch) -> None:
+    def broken_module(name: str) -> object:
+        raise ModuleNotFoundError("diagnostics dependency is missing", name="diagnostics_dependency")
+
+    monkeypatch.setattr(validation.importlib, "import_module", broken_module)
+    with pytest.raises(ModuleNotFoundError, match="diagnostics dependency"):
+        _load_budget_plan_diagnostics(required=False)
 
 
 def test_relative_session_delta_uses_the_predeclared_max_median_denominator() -> None:
