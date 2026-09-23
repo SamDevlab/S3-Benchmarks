@@ -1,0 +1,21 @@
+{
+  "campaign": "S3_BENCHMARKS_2_2_4_SAFE_BUDGET_ARCHITECTURE_PROTOTYPES",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "p0": "CURRENT_GLOBAL_COUNT_UP",
+  "p1": "GLOBAL_COUNTDOWN_EXACT",
+  "p1_safety_tier": "E0",
+  "p1_safety": "PASS",
+  "p1_promotion": "NOT_SELECTED",
+  "p1_material_cross_workload_recovery": "FAIL",
+  "p2": "CALL_AWARE_SEGMENT_PRECHARGE_EXACT",
+  "p2_status": "BLOCKED_BY_EXACTNESS_PROOF",
+  "pneg": "LOWER_BOUND_ONLY",
+  "remaining_pressures": [
+    "representation_staging",
+    "helper_and_call_overhead",
+    "frame_or_initialization_traffic",
+    "register_pressure",
+    "native_instruction_selection"
+  ],
+  "production_change_authorized": false
+}

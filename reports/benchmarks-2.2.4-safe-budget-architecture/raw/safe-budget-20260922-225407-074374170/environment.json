@@ -1,0 +1,20 @@
+{
+  "benchmark_sha": "9928422a25d66c2ec1a37ba257b5a7a1cf6f6eb0",
+  "cpu_affinity": 0,
+  "host": {
+    "architecture": "x86_64",
+    "cpu_family": "23",
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "cpu_model_id": "24",
+    "cpu_stepping": "1",
+    "cpu_vendor": "AuthenticAMD",
+    "kernel": "7.0.0-31-generic",
+    "logical_cores": 3,
+    "physical_cores": "3"
+  },
+  "host_fingerprint": "9a3f305bd7d750ac2a6e86903c7487575d629e222bedd22dc70634519ec50b56",
+  "hostname": "Ubuntuserve",
+  "python": "3.14.4",
+  "s3_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "timer": "CLOCK_MONOTONIC_RAW"
+}

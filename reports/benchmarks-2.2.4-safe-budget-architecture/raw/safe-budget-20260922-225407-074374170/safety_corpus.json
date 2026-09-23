@@ -1,0 +1,57 @@
+{
+  "boundary_contract": {
+    "comparison": "unsigned remaining-before-instruction",
+    "max_domain": "0..18446744073709551615",
+    "one_budget": {
+      "branch": "execute",
+      "carry": 0,
+      "remaining": 1,
+      "sub_result": 0
+    },
+    "state_lifetime": "initialized once per loaded shared object; decremented across repeated calls",
+    "uint64_max_budget": {
+      "branch": "execute",
+      "carry": 0,
+      "remaining": 18446744073709551615,
+      "sub_result": 18446744073709551614
+    },
+    "zero_budget": {
+      "branch": "jb",
+      "carry": 1,
+      "remaining": 0,
+      "sub_result": 18446744073709551615
+    }
+  },
+  "case_names": [
+    "straight_line",
+    "conditional_branch",
+    "loop",
+    "nested_s3_call",
+    "multiple_s3_calls",
+    "early_return",
+    "fused_tcmp_tbr3",
+    "side_effect_before_boundary",
+    "side_effect_after_boundary",
+    "ffi_repeated_calls",
+    "exact_budget_success",
+    "one_before_completion"
+  ],
+  "cases": 12,
+  "failed": 0,
+  "fused_logical_weight": 2,
+  "output_sha256": "ed30a4cef4f9c6c1e384f68cbec932105155702d32312f348d85420224f571b2",
+  "passed": 12,
+  "status": "PASS",
+  "transform_fixture": {
+    "configured_limit": 10000000000,
+    "diagnostic_only": true,
+    "expected_sites": 2,
+    "input_sha256": "ad453a4d0af20350ebccbdb5acf269c0952d0b9587c81d4853a292382d3063e8",
+    "output_sha256": "ed30a4cef4f9c6c1e384f68cbec932105155702d32312f348d85420224f571b2",
+    "production_artifact": false,
+    "s3_source_changed": false,
+    "storage_replaced": true,
+    "transformed_sites": 2,
+    "unexpected_mutations": 0
+  }
+}

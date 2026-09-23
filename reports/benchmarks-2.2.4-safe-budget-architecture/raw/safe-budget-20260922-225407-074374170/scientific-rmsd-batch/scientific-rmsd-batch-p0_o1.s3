@@ -1,0 +1,20 @@
+export fn identity_f64(value: f64) -> f64:
+    return value
+
+export fn rmsd(left: &[f64], right: &[f64], pairs: i64, coordinates: i64) -> f64:
+    mut pair: i64 = 0
+    mut total: f64 = 0.0
+    while pair < pairs:
+        mut coordinate: i64 = 0
+        mut ssd: f64 = 0.0
+        while coordinate < coordinates:
+            mut offset: i64 = pair * coordinates + coordinate
+            mut delta: f64 = left[offset] - right[offset]
+            ssd = ssd + delta * delta
+            coordinate = coordinate + 1
+        total = total + sqrt(ssd / to_f64(coordinates))
+        pair = pair + 1
+    return total
+
+fn main() -> i64:
+    return 0

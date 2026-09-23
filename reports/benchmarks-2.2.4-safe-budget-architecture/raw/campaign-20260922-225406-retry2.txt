@@ -1,0 +1,1 @@
+SAFE_BUDGET_ARCHITECTURE_RESULT=/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/SAFE_BUDGET_ARCHITECTURE_RESULT.json
