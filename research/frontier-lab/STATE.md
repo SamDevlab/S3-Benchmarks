@@ -9,8 +9,8 @@ Date: 2026-09-23
   three workload classes. O09 is complete.
 - S3 experimental baseline: `e07d0b5464bf472b2ca18993f3e196a234ff0fc5`.
   The isolated exact-segment candidate is frozen at
-  `1a76e341098b54a639fec22eecea362cc243c46f`; its report-only publication head
-  is `8f6b8afdf780cfc413a722d1885bf3107803f71a`.
+  `1a76e341098b54a639fec22eecea362cc243c46f`; its report-only evidence is
+  published in S3 PR #310, without changing the tested source.
 - P2 exact segment accounting passed the bounded E0, correctness, and
   reproducibility gates, with strong material recovery in all six workload /
   optimization cells. H9 exact mapping is no longer blocked; H10 is confirmed
