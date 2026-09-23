@@ -9,10 +9,16 @@ from tools.run_exact_segment_budget_validation import (
     _assert_same_program_instance,
     _create_backend,
     _cross_workload_result,
+    _added_text_recovery,
+    _executable_text_metrics,
+    _hardening_result,
     _load_budget_plan_diagnostics,
     _recovery_metrics,
     _relative_delta,
     _sample_summary,
+    _segment_plan_sha256,
+    _slow_path_instruction_count,
+    _write_raw_manifest,
 )
 
 
@@ -96,17 +102,135 @@ def test_relative_session_delta_uses_the_predeclared_max_median_denominator() ->
     assert _relative_delta(0.0, 0.0) == 0.0
 
 
-def test_recovery_metrics_keep_p0_p1_p2_and_pneg_distinct() -> None:
-    result = _recovery_metrics({"P0": 100.0, "P1": 80.0, "P2": 60.0, "PNEG": 20.0})
-    assert result["p1_recovered_budget_excess"] == 0.25
+def test_recovery_metrics_compare_p2h_with_p2_and_pneg() -> None:
+    result = _recovery_metrics({"P0": 100.0, "P2": 60.0, "P2H": 50.0, "PNEG": 20.0})
     assert result["p2_recovered_budget_excess"] == 0.5
-    assert result["p2_incremental_recovery_over_p1"] == 0.25
+    assert result["p2h_recovered_budget_excess"] == 0.625
+    assert result["p2h_vs_p2"] == 50.0 / 60.0
     assert result["p2_over_pneg"] == 3.0
 
 
 def test_zero_budget_excess_is_unavailable_not_divided() -> None:
-    result = _recovery_metrics({"P0": 20.0, "P1": 20.0, "P2": 20.0, "PNEG": 20.0})
+    result = _recovery_metrics({"P0": 20.0, "P2": 20.0, "P2H": 20.0, "PNEG": 20.0})
     assert result["p2_recovered_budget_excess"] is None
+    assert result["p2h_recovered_budget_excess"] is None
+    assert result["p2h_vs_p2"] == 1.0
+
+
+def test_added_text_recovery_preserves_growth_and_regression_signs() -> None:
+    assert _added_text_recovery(100, 200, 175) == 0.25
+    assert _added_text_recovery(100, 200, 225) == -0.25
+    assert _added_text_recovery(100, 100, 90) is None
+
+
+def test_segment_plan_hash_uses_canonical_key_order() -> None:
+    assert _segment_plan_sha256({"a": 1, "b": 2}) == _segment_plan_sha256({"b": 2, "a": 1})
+
+
+def test_slow_instruction_counter_handles_inline_failure_labels() -> None:
+    assembly = """\
+.L_s3_f1_fn_b1_entry:
+    cmp rax, r10
+.L__s3_budget_0_slow:
+    cmp rax, 10
+.L__s3_failure_site_0:
+    lea rsi, [rip + message]
+    jmp __s3_fail_message
+.L__s3_budget_0_continue:
+    ret
+"""
+    assert _slow_path_instruction_count(assembly) == 3
+
+
+def test_slow_instruction_counter_counts_cold_section_including_labels() -> None:
+    assembly = """\
+.section .text.unlikely,"ax",@progbits
+.L__s3_budget_0_slow:
+    cmp rax, 10
+.L__s3_failure_site_0:
+    jmp __s3_fail_message
+.section .text
+"""
+    assert _slow_path_instruction_count(assembly) == 2
+
+
+def test_executable_text_metrics_separate_hot_cold_and_all_ax_sections(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path,
+) -> None:
+    output = """\
+  [ 1] .text             PROGBITS 0000000000001000 001000 000100 00  AX  0   0 16
+  [ 2] .text.unlikely    PROGBITS 0000000000001100 001100 000020 00  AX  0   0 16
+  [ 3] .rodata           PROGBITS 0000000000001200 001200 000050 00   A  0   0 16
+  [ 4] .plt              PROGBITS 0000000000001300 001300 000010 00  AX  0   0 16
+"""
+    monkeypatch.setattr(validation.shutil, "which", lambda name: "/usr/bin/readelf")
+    monkeypatch.setattr(
+        validation,
+        "_run",
+        lambda command: validation.subprocess.CompletedProcess(command, 0, output, ""),
+    )
+    executable = tmp_path / "candidate.so"
+
+    assert _executable_text_metrics(executable) == {
+        "hot_text_bytes": 0x100,
+        "cold_text_bytes": 0x20,
+        "total_executable_text_bytes": 0x130,
+    }
+
+
+def test_hardening_classification_requires_all_six_cells_and_frozen_thresholds() -> None:
+    cells = [
+        {
+            "correctness_pass": True,
+            "reproducibility_pass": True,
+            "p2h_vs_p2": 1.05,
+            "p2h_recovered_budget_excess": 0.50,
+            "added_text_recovery": 0.25,
+            "hot_text_recovery": 0.25,
+        }
+        for _ in range(6)
+    ]
+    assert _hardening_result(cells) == "QUALIFIED"
+    assert _hardening_result(cells[:5]) == "INCOMPLETE"
+    cells[4]["p2h_vs_p2"] = 1.050001
+    assert _hardening_result(cells) == "REJECTED_PERFORMANCE_REGRESSION"
+
+
+def test_hardening_classifies_cold_layout_only_separately() -> None:
+    cells = [
+        {
+            "correctness_pass": True,
+            "reproducibility_pass": True,
+            "p2h_vs_p2": 1.0,
+            "p2h_recovered_budget_excess": 0.7,
+            "added_text_recovery": 0.0,
+            "hot_text_recovery": 0.25,
+        }
+        for _ in range(6)
+    ]
+    assert _hardening_result(cells) == "HOT_LAYOUT_QUALIFIED"
+
+
+def test_raw_evidence_manifest_is_verified_and_never_replaced(tmp_path) -> None:
+    evidence = tmp_path / "raw"
+    evidence.mkdir()
+    artifact = evidence / "nested" / "artifact.bin"
+    artifact.parent.mkdir()
+    artifact.write_bytes(b"frozen")
+
+    manifest = _write_raw_manifest(evidence)
+
+    assert manifest == {"path": "raw-evidence-manifest.json", "entry_count": 1}
+    with pytest.raises(RuntimeError, match="refusing to replace immutable"):
+        _write_raw_manifest(evidence)
+
+
+def test_timing_variants_exclude_closed_p1_comparison() -> None:
+    assert VARIANTS == (
+        "P0_O0", "P2_O0", "P2H_O0", "PNEG_O0",
+        "P0_O1", "P2_O1", "P2H_O1", "PNEG_O1",
+    )
 
 
 def test_cross_workload_classification_requires_all_six_cells() -> None:

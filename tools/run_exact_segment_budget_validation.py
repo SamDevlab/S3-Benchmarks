@@ -42,9 +42,9 @@ from tools.ffi_direct_kernel_methodology import (  # noqa: E402
 )
 from tools.runtime_attribution import (  # noqa: E402
     audit_assembly,
+    _instruction_lines,
     remove_instruction_budget_instrumentation,
 )
-from tools.safe_budget_architecture import transform_global_countdown  # noqa: E402
 
 
 CAMPAIGN = "S3_BENCHMARKS_EXPERIMENTAL_SEGMENT_BUDGET_VALIDATION"
@@ -52,6 +52,7 @@ BENCHMARK_BASE = "8fc0aba50ca48d3f7171bdf49395df3cd880626a"
 BENCHMARK_BRANCH = "research/benchmarks-2.2.5-s3-segment-budget-validation"
 S3_CONTROL_SHA = "e07d0b5464bf472b2ca18993f3e196a234ff0fc5"
 S3_EXPERIMENT_SHA = "1a76e341098b54a639fec22eecea362cc243c46f"
+S3_HARDENING_SHA = "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333"
 EXTERNAL_WARMUPS = 5
 INLINE_WARMUPS = 0
 REPETITIONS = 30
@@ -60,6 +61,9 @@ CPU_AFFINITY = 0
 MAX_RELATIVE_SESSION_MEDIAN_DELTA = 0.25
 MINIMUM_USEFUL_RECOVERY = 0.25
 STRONG_RECOVERY = 0.50
+MAX_HARDENING_RUNTIME_REGRESSION = 0.05
+MINIMUM_RETAINED_BUDGET_RECOVERY = 0.50
+MINIMUM_HOT_LAYOUT_RECOVERY = 0.25
 TARGET_K = {
     "scientific.rmsd.batch": 2_000_000,
     "scientific.xsbench.compatible_lookup.medium": 750_000,
@@ -67,12 +71,12 @@ TARGET_K = {
 }
 VARIANTS = (
     "P0_O0",
-    "P1_O0",
     "P2_O0",
+    "P2H_O0",
     "PNEG_O0",
     "P0_O1",
-    "P1_O1",
     "P2_O1",
+    "P2H_O1",
     "PNEG_O1",
 )
 
@@ -82,6 +86,7 @@ class Artifact:
     workload: str
     variant: str
     optimization: str
+    s3_source_sha: str
     executable: Path
     assembly: Path
     source_sha256: str
@@ -103,6 +108,36 @@ def _write_json(path: Path, value: Any) -> None:
         encoding="utf-8",
         newline="\n",
     )
+
+
+def _write_raw_manifest(raw_root: Path) -> dict[str, Any]:
+    manifest_path = raw_root / "raw-evidence-manifest.json"
+    if manifest_path.exists():
+        raise RuntimeError(f"refusing to replace immutable raw manifest: {manifest_path}")
+    files = sorted(
+        path
+        for path in raw_root.rglob("*")
+        if path.is_file() and path != manifest_path
+    )
+    entries = [
+        {
+            "path": path.relative_to(raw_root).as_posix(),
+            "bytes": path.stat().st_size,
+            "sha256": sha256_file(path),
+        }
+        for path in files
+    ]
+    payload = {"schema": "s3.segment-budget.raw-manifest.v1", "files": entries}
+    manifest_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True, allow_nan=False) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    for entry in entries:
+        path = raw_root / Path(entry["path"])
+        if path.stat().st_size != entry["bytes"] or sha256_file(path) != entry["sha256"]:
+            raise RuntimeError(f"raw evidence changed during manifest verification: {entry['path']}")
+    return {"path": manifest_path.name, "entry_count": len(entries)}
 
 
 def _run(command: list[str], *, timeout: float = 30.0) -> subprocess.CompletedProcess[str]:
@@ -192,23 +227,66 @@ def _sample_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 def _recovery_metrics(times: dict[str, float]) -> dict[str, float | None]:
     p0 = times["P0"]
-    p1 = times["P1"]
     p2 = times["P2"]
+    p2h = times["P2H"]
     pneg = times["PNEG"]
     excess = p0 - pneg
     if excess == 0:
         return {
-            "p1_recovered_budget_excess": None,
             "p2_recovered_budget_excess": None,
-            "p2_incremental_recovery_over_p1": None,
+            "p2h_recovered_budget_excess": None,
+            "p2h_vs_p2": p2h / p2 if p2 else None,
             "p2_over_pneg": None,
         }
     return {
-        "p1_recovered_budget_excess": (p0 - p1) / excess,
         "p2_recovered_budget_excess": (p0 - p2) / excess,
-        "p2_incremental_recovery_over_p1": (p1 - p2) / excess,
+        "p2h_recovered_budget_excess": (p0 - p2h) / excess,
+        "p2h_vs_p2": p2h / p2 if p2 else None,
         "p2_over_pneg": p2 / pneg if pneg else None,
     }
+
+
+def _added_text_recovery(
+    p0_text: int,
+    p2_text: int,
+    p2h_text: int,
+) -> float | None:
+    p2_added = p2_text - p0_text
+    if p2_added == 0:
+        return None
+    return (p2_added - (p2h_text - p0_text)) / p2_added
+
+
+def _hardening_result(cells: list[dict[str, Any]]) -> str:
+    if len(cells) != 6:
+        return "INCOMPLETE"
+    if not all(cell.get("correctness_pass") and cell.get("reproducibility_pass") for cell in cells):
+        return "BLOCKED"
+    if any(
+        cell.get("p2h_vs_p2") is None
+        or cell["p2h_vs_p2"] > 1.0 + MAX_HARDENING_RUNTIME_REGRESSION
+        for cell in cells
+    ):
+        return "REJECTED_PERFORMANCE_REGRESSION"
+    if any(
+        cell.get("p2h_recovered_budget_excess") is None
+        or cell["p2h_recovered_budget_excess"] < MINIMUM_RETAINED_BUDGET_RECOVERY
+        for cell in cells
+    ):
+        return "CURRENT_P2_RETAINED"
+    text_recovery = [cell.get("added_text_recovery") for cell in cells]
+    if all(value is not None and value >= STRONG_RECOVERY for value in text_recovery):
+        return "STRONG_QUALIFIED"
+    if all(value is not None and value >= MINIMUM_USEFUL_RECOVERY for value in text_recovery):
+        return "QUALIFIED"
+    hot_recovery = [cell.get("hot_text_recovery") for cell in cells]
+    if all(
+        value is not None and value >= MINIMUM_HOT_LAYOUT_RECOVERY
+        for value in hot_recovery
+    ):
+        if all(value is not None and value >= 0 for value in text_recovery):
+            return "HOT_LAYOUT_QUALIFIED"
+    return "CURRENT_P2_RETAINED"
 
 
 def _cross_workload_result(recoveries: list[float]) -> str:
@@ -264,6 +342,7 @@ def _host_fingerprint(benchmark_base_sha: str, benchmark_source_sha: str) -> dic
         "benchmark_source_sha": benchmark_source_sha,
         "s3_control_sha": S3_CONTROL_SHA,
         "s3_experiment_sha": S3_EXPERIMENT_SHA,
+        "s3_hardening_sha": S3_HARDENING_SHA,
         "cpu_affinity": sorted(os.sched_getaffinity(0)),
         "timed_affinity": CPU_AFFINITY,
         "external_warmups": EXTERNAL_WARMUPS,
@@ -418,27 +497,108 @@ def _control_assembly(
 
 
 def _text_section_bytes(executable: Path) -> int:
+    return int(_executable_text_metrics(executable)["hot_text_bytes"])
+
+
+def _executable_text_metrics(executable: Path) -> dict[str, int]:
     readelf = shutil.which("readelf")
     if readelf is None:
-        raise RuntimeError("readelf is required for exact .text size")
+        raise RuntimeError("readelf is required for executable text section sizes")
     result = _run([readelf, "-W", "-S", str(executable)])
     if result.returncode != 0:
         raise RuntimeError(result.stderr.strip() or "readelf section query failed")
+    section_sizes: dict[str, int] = {}
+    executable_text_bytes = 0
     for line in result.stdout.splitlines():
         fields = line.split()
-        if ".text" in fields:
-            index = fields.index(".text")
-            if len(fields) <= index + 4:
-                break
-            return int(fields[index + 4], 16)
-    raise RuntimeError(f".text section was not found in {executable}")
+        index = next(
+            (position for position, field in enumerate(fields) if field.startswith(".")),
+            None,
+        )
+        if index is None or len(fields) <= index + 6:
+            continue
+        name = fields[index]
+        size = int(fields[index + 4], 16)
+        flags = fields[index + 6]
+        if "A" in flags and "X" in flags:
+            executable_text_bytes += size
+        if name.startswith(".text"):
+            section_sizes[name] = size
+    if ".text" not in section_sizes:
+        raise RuntimeError(f".text section was not found in {executable}")
+    return {
+        "hot_text_bytes": section_sizes[".text"],
+        "cold_text_bytes": section_sizes.get(".text.unlikely", 0),
+        "total_executable_text_bytes": executable_text_bytes,
+    }
+
+
+def _slow_path_instruction_count(assembly: str) -> int:
+    in_slow_path = False
+    in_cold_section = False
+    count = 0
+    for line in assembly.splitlines():
+        stripped = line.strip()
+        if stripped.startswith('.section .text.unlikely,'):
+            in_cold_section = True
+            continue
+        if stripped == ".section .text":
+            in_cold_section = False
+            in_slow_path = False
+            continue
+        if in_cold_section:
+            if _instruction_lines([line]):
+                count += 1
+            continue
+        if stripped.endswith(":"):
+            if stripped.startswith(".L__s3_budget_") and stripped.endswith("_slow:"):
+                in_slow_path = True
+            elif in_slow_path and (
+                stripped.startswith(".L_s3_f")
+                or stripped.startswith(".L__s3_budget_")
+            ):
+                in_slow_path = False
+            continue
+        if in_slow_path and stripped.startswith(".size "):
+            in_slow_path = False
+            continue
+        if in_slow_path and _instruction_lines([line]):
+            count += 1
+    return count
+
+
+def _slow_block_count(assembly: str) -> int:
+    return sum(
+        1
+        for line in assembly.splitlines()
+        if line.strip().startswith(".L__s3_budget_")
+        and line.strip().endswith("_slow:")
+    )
+
+
+def _segment_plan_sha256(segments: dict[str, Any]) -> str:
+    encoded = json.dumps(
+        segments,
+        sort_keys=True,
+        separators=(",", ":"),
+        allow_nan=False,
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def _native_metrics(assembly: str, executable: Path) -> dict[str, Any]:
     metrics = audit_assembly(assembly, binary=executable)
+    text_metrics = _executable_text_metrics(executable)
+    slow_instructions = _slow_path_instruction_count(assembly)
     metrics["elf_bytes"] = executable.stat().st_size
-    metrics["text_bytes"] = _text_section_bytes(executable)
+    metrics.update(text_metrics)
+    metrics["text_bytes"] = text_metrics["total_executable_text_bytes"]
     metrics["static_native_instructions"] = int(metrics["total_instructions"])
+    metrics["slow_path_native_instructions"] = slow_instructions
+    metrics["slow_block_count"] = _slow_block_count(assembly)
+    metrics["fast_path_native_instructions"] = (
+        int(metrics["total_instructions"]) - slow_instructions
+    )
     return metrics
 
 
@@ -447,7 +607,17 @@ def _write_assembly(path: Path, assembly: str) -> None:
     path.write_text(assembly, encoding="utf-8", newline="\n")
 
 
-def _build_ffi_executable(assembly: str, root: Path, driver: Path, pilot: Any, workload: str, optimization: str, variant: str, k: int) -> Artifact:
+def _build_ffi_executable(
+    assembly: str,
+    root: Path,
+    driver: Path,
+    pilot: Any,
+    workload: str,
+    optimization: str,
+    variant: str,
+    k: int,
+    s3_source_sha: str,
+) -> Artifact:
     assembly_path = root / f"{variant.lower()}.s"
     executable = root / f"{variant.lower()}.so"
     object_path = root / f"{variant.lower()}.o"
@@ -466,6 +636,7 @@ def _build_ffi_executable(assembly: str, root: Path, driver: Path, pilot: Any, w
         workload,
         variant,
         optimization,
+        s3_source_sha,
         executable,
         assembly_path,
         _sha256_text(pilot.source),
@@ -478,13 +649,8 @@ def _build_ffi_executable(assembly: str, root: Path, driver: Path, pilot: Any, w
 
 
 def _transform_variants(p0_assembly: str) -> dict[str, tuple[str, dict[str, Any]]]:
-    p1, p1_report = transform_global_countdown(
-        p0_assembly,
-        expected_limit=S3_FFI_MAX_INSTRUCTIONS,
-    )
     pneg, pneg_report = remove_instruction_budget_instrumentation(p0_assembly)
     return {
-        "P1": (p1, p1_report.as_dict()),
         "PNEG": (pneg, pneg_report.as_dict()),
     }
 
@@ -498,6 +664,7 @@ def _make_jsmn_assembly_artifact(
     source: str,
     expected: int,
     build_native_artifact: Callable[..., Any],
+    s3_source_sha: str,
 ) -> Artifact:
     assembly_path = root / f"{variant.lower()}.s"
     executable = root / variant.lower()
@@ -514,6 +681,7 @@ def _make_jsmn_assembly_artifact(
         workload,
         variant,
         optimization,
+        s3_source_sha,
         executable,
         assembly_path,
         _sha256_text(source),
@@ -534,6 +702,7 @@ def _build_ffi_cell(
     raw_root: Path,
     control_repo: Path,
     experiment_repo: Path,
+    hardening_repo: Path,
     driver: Path,
 ) -> tuple[dict[str, Artifact], dict[str, Any], dict[str, Any]]:
     cell_root = raw_root / workload.replace(".", "-") / optimization.lower()
@@ -550,7 +719,7 @@ def _build_ffi_cell(
     p0_program = program
     p2_program = program
     p0_assembly, program_fingerprint, segments = _emit_program(
-        p0_program,
+        p2_program,
         backend_type,
         diagnostics,
         "per-instruction",
@@ -566,21 +735,62 @@ def _build_ffi_cell(
     if p2_fingerprint != program_fingerprint:
         raise RuntimeError("P0/P2 did not use the same compiled AssemblyProgram")
     same_program_instance = _assert_same_program_instance(p0_program, p2_program, workload)
+
+    p2h_program, p2h_backend_type, p2h_diagnostics = _compile_program(
+        hardening_repo,
+        pilot.source,
+        optimization,
+    )
+    p2h_default_assembly, p2h_default_fingerprint, p2h_segments = _emit_program(
+        p2h_program,
+        p2h_backend_type,
+        p2h_diagnostics,
+        "per-instruction",
+        ffi=True,
+    )
+    p2h_assembly, p2h_exact_fingerprint, p2h_exact_segments = _emit_program(
+        p2h_program,
+        p2h_backend_type,
+        p2h_diagnostics,
+        "exact-segment",
+        ffi=True,
+    )
+    if p2h_default_fingerprint != program_fingerprint:
+        raise RuntimeError("P2/P2H compiled AssemblyProgram fingerprints differ")
+    if p2h_exact_fingerprint != p2h_default_fingerprint:
+        raise RuntimeError("P2H default/exact emissions used different programs")
+    if p2h_default_assembly != p0_assembly:
+        raise RuntimeError("P2H PER_INSTRUCTION output changed from P0 byte identity")
+    p2_plan_sha = _segment_plan_sha256(segments)
+    p2h_plan_sha = _segment_plan_sha256(p2h_exact_segments)
+    if p2h_exact_segments != segments or p2h_plan_sha != p2_plan_sha:
+        raise RuntimeError("P2/P2H deterministic segment plans differ")
+    if p2h_segments != p2h_exact_segments:
+        raise RuntimeError("P2H diagnostics changed between default and exact emission")
+
     p0_sha = _sha256_text(p0_assembly)
     control_sha = _sha256_text(control_assembly)
+    p2h_default_sha = _sha256_text(p2h_default_assembly)
     candidate_path = isolation_root / f"{workload.replace('.', '-')}-{optimization.lower()}-candidate-p0.s"
     _write_assembly(candidate_path, p0_assembly)
     isolation = {
         "workload": workload,
         "optimization": optimization,
         "control_sha": S3_CONTROL_SHA,
-        "experiment_sha": S3_EXPERIMENT_SHA,
+        "p2_source_sha": S3_EXPERIMENT_SHA,
+        "p2h_source_sha": S3_HARDENING_SHA,
         "control_p0_assembly_sha256": control_sha,
         "candidate_p0_assembly_sha256": p0_sha,
-        "assembly_equal": control_sha == p0_sha,
+        "p2h_default_assembly_sha256": p2h_default_sha,
+        "assembly_equal": control_sha == p0_sha == p2h_default_sha,
         "candidate_source_sha256": _sha256_text(pilot.source),
-        "program_fingerprint": program_fingerprint,
+        "p2_program_fingerprint": program_fingerprint,
+        "p2h_program_fingerprint": p2h_default_fingerprint,
+        "p2_p2h_same_assembly_program": p2h_default_fingerprint == program_fingerprint,
         "p0_and_p2_same_program_instance": same_program_instance,
+        "p2_segment_plan_sha256": p2_plan_sha,
+        "p2h_segment_plan_sha256": p2h_plan_sha,
+        "p2_p2h_segment_plan_equal": p2_plan_sha == p2h_plan_sha,
         "backend_configuration_diff": "instruction_budget_mode only",
     }
     if not isolation["assembly_equal"]:
@@ -589,8 +799,8 @@ def _build_ffi_cell(
     derived = _transform_variants(p0_assembly)
     assemblies = {
         "P0": (p0_assembly, {}),
-        "P1": derived["P1"],
         "P2": (p2_assembly, {}),
+        "P2H": (p2h_assembly, {}),
         "PNEG": derived["PNEG"],
     }
     artifacts: dict[str, Artifact] = {}
@@ -608,12 +818,31 @@ def _build_ffi_cell(
             optimization,
             label,
             k,
+            S3_HARDENING_SHA if variant == "P2H" else S3_EXPERIMENT_SHA,
+        )
+        artifacts[label].static_metrics["fast_segment_count"] = (
+            int(p2h_exact_segments["fast_segments"])
+            if variant == "P2H"
+            else int(segments["fast_segments"])
+            if variant == "P2"
+            else None
+        )
+        artifacts[label].static_metrics["segment_count"] = (
+            int(p2h_exact_segments["segment_count"])
+            if variant == "P2H"
+            else int(segments["segment_count"])
+            if variant == "P2"
+            else None
         )
         transformations[label] = report
     segment_record = {
         "workload": workload,
         "optimization": optimization,
-        **segments,
+        "p2": segments,
+        "p2h": p2h_exact_segments,
+        "p2_sha256": p2_plan_sha,
+        "p2h_sha256": p2h_plan_sha,
+        "equal": p2_plan_sha == p2h_plan_sha,
     }
     return artifacts, isolation, {"transformations": transformations, "segments": segment_record}
 
@@ -624,6 +853,7 @@ def _build_jsmn_cells(
     raw_root: Path,
     control_repo: Path,
     experiment_repo: Path,
+    hardening_repo: Path,
 ) -> tuple[dict[str, Artifact], list[dict[str, Any]], dict[str, Any], dict[str, Any]]:
     from tools.budget_generalization import _jsmn_apis  # noqa: PLC0415
 
@@ -659,7 +889,7 @@ def _build_jsmn_cells(
         p0_program = program
         p2_program = program
         p0_assembly, fingerprint, segments = _emit_program(
-            p0_program,
+            p2_program,
             backend_type,
             diagnostics,
             "per-instruction",
@@ -679,19 +909,56 @@ def _build_jsmn_cells(
             p2_program,
             "realworld.jsmn",
         )
+        p2h_program, p2h_backend_type, p2h_diagnostics = _compile_program(
+            hardening_repo,
+            source,
+            optimization,
+        )
+        p2h_default_assembly, p2h_default_fingerprint, p2h_default_segments = _emit_program(
+            p2h_program,
+            p2h_backend_type,
+            p2h_diagnostics,
+            "per-instruction",
+            ffi=False,
+        )
+        p2h_assembly, p2h_fingerprint, p2h_segments = _emit_program(
+            p2h_program,
+            p2h_backend_type,
+            p2h_diagnostics,
+            "exact-segment",
+            ffi=False,
+        )
+        if p2h_default_fingerprint != fingerprint or p2h_fingerprint != fingerprint:
+            raise RuntimeError("JSMN P2/P2H compiled AssemblyProgram fingerprints differ")
+        if p2h_default_assembly != p0_assembly:
+            raise RuntimeError("JSMN P2H PER_INSTRUCTION output changed from P0 byte identity")
+        p2_plan_sha = _segment_plan_sha256(segments)
+        p2h_plan_sha = _segment_plan_sha256(p2h_segments)
+        if p2h_segments != segments or p2h_plan_sha != p2_plan_sha:
+            raise RuntimeError("JSMN P2/P2H deterministic segment plans differ")
+        if p2h_default_segments != p2h_segments:
+            raise RuntimeError("JSMN P2H diagnostics changed between default and exact emission")
         control_sha = _sha256_text(control_assembly)
         p0_sha = _sha256_text(p0_assembly)
+        p2h_default_sha = _sha256_text(p2h_default_assembly)
         isolation = {
             "workload": "realworld.jsmn",
             "optimization": optimization,
             "control_sha": S3_CONTROL_SHA,
-            "experiment_sha": S3_EXPERIMENT_SHA,
+            "p2_source_sha": S3_EXPERIMENT_SHA,
+            "p2h_source_sha": S3_HARDENING_SHA,
             "control_p0_assembly_sha256": control_sha,
             "candidate_p0_assembly_sha256": p0_sha,
-            "assembly_equal": control_sha == p0_sha,
+            "p2h_default_assembly_sha256": p2h_default_sha,
+            "assembly_equal": control_sha == p0_sha == p2h_default_sha,
             "candidate_source_sha256": _sha256_text(source),
-            "program_fingerprint": fingerprint,
+            "p2_program_fingerprint": fingerprint,
+            "p2h_program_fingerprint": p2h_default_fingerprint,
+            "p2_p2h_same_assembly_program": p2h_default_fingerprint == fingerprint,
             "p0_and_p2_same_program_instance": same_program_instance,
+            "p2_segment_plan_sha256": p2_plan_sha,
+            "p2h_segment_plan_sha256": p2h_plan_sha,
+            "p2_p2h_segment_plan_equal": p2_plan_sha == p2h_plan_sha,
             "backend_configuration_diff": "instruction_budget_mode only",
         }
         if not isolation["assembly_equal"]:
@@ -705,12 +972,12 @@ def _build_jsmn_cells(
         _write_assembly(cell_root / "input.s3", source)
         derived = _transform_variants(p0_assembly)
         variants = {
-            "P0": p0_assembly,
-            "P1": derived["P1"][0],
-            "P2": p2_assembly,
-            "PNEG": derived["PNEG"][0],
+            "P0": (p0_assembly, S3_EXPERIMENT_SHA),
+            "P2": (p2_assembly, S3_EXPERIMENT_SHA),
+            "P2H": (p2h_assembly, S3_HARDENING_SHA),
+            "PNEG": (derived["PNEG"][0], S3_EXPERIMENT_SHA),
         }
-        for variant, assembly in variants.items():
+        for variant, (assembly, s3_source_sha) in variants.items():
             label = f"{variant}_{optimization}"
             artifact_root = cell_root / variant.lower()
             artifact_root.mkdir(parents=True, exist_ok=False)
@@ -723,13 +990,32 @@ def _build_jsmn_cells(
                 source,
                 expected,
                 build_native_artifact,
+                s3_source_sha,
+            )
+            all_artifacts[label].static_metrics["fast_segment_count"] = (
+                int(p2h_segments["fast_segments"])
+                if variant == "P2H"
+                else int(segments["fast_segments"])
+                if variant == "P2"
+                else None
+            )
+            all_artifacts[label].static_metrics["segment_count"] = (
+                int(p2h_segments["segment_count"])
+                if variant == "P2H"
+                else int(segments["segment_count"])
+                if variant == "P2"
+                else None
             )
             if variant in derived:
                 transform_rows[label] = derived[variant][1]
         segments_by_opt[optimization] = {
             "workload": "realworld.jsmn",
             "optimization": optimization,
-            **segments,
+            "p2": segments,
+            "p2h": p2h_segments,
+            "p2_sha256": p2_plan_sha,
+            "p2h_sha256": p2h_plan_sha,
+            "equal": p2_plan_sha == p2h_plan_sha,
         }
     correctness_meta = {
         "fixture_sha256": sha256_file(fixture_path),
@@ -801,6 +1087,8 @@ def _run_sessions(
                         "timestamp_ns": time.time_ns(),
                         "K": k,
                         "artifact_sha256": artifacts[label].executable_sha256,
+                        "assembly_sha256": artifacts[label].assembly_sha256,
+                        "s3_source_sha": artifacts[label].s3_source_sha,
                         "host_fingerprint": host_fingerprint,
                         "affinity": CPU_AFFINITY,
                         "inline_warmups": INLINE_WARMUPS,
@@ -829,7 +1117,10 @@ def _cell_metrics(
     workload: str,
     optimization: str,
 ) -> dict[str, Any]:
-    labels = {variant: f"{variant}_{optimization}" for variant in ("P0", "P1", "P2", "PNEG")}
+    labels = {
+        variant: f"{variant}_{optimization}"
+        for variant in ("P0", "P2", "P2H", "PNEG")
+    }
     medians = {
         variant: {
             session: float(sessions[session]["summaries"][label]["median_ns"])
@@ -847,11 +1138,37 @@ def _cell_metrics(
     }
     p0 = artifacts[labels["P0"]].static_metrics
     p2 = artifacts[labels["P2"]].static_metrics
-    text_delta = (
-        (p2["text_bytes"] - p0["text_bytes"]) / p0["text_bytes"]
-        if p0["text_bytes"]
-        else None
-    )
+    p2h = artifacts[labels["P2H"]].static_metrics
+    p2_added_text = p2["total_executable_text_bytes"] - p0["total_executable_text_bytes"]
+    p2h_added_text = p2h["total_executable_text_bytes"] - p0["total_executable_text_bytes"]
+    p2_added_hot = p2["hot_text_bytes"] - p0["hot_text_bytes"]
+    p2h_added_hot = p2h["hot_text_bytes"] - p0["hot_text_bytes"]
+    code_size = {
+        variant: {
+            "elf_bytes": artifacts[label].static_metrics["elf_bytes"],
+            "total_executable_text_bytes": artifacts[label].static_metrics[
+                "total_executable_text_bytes"
+            ],
+            "hot_text_bytes": artifacts[label].static_metrics["hot_text_bytes"],
+            "cold_text_bytes": artifacts[label].static_metrics["cold_text_bytes"],
+            "static_native_instructions": artifacts[label].static_metrics[
+                "static_native_instructions"
+            ],
+            "fast_path_native_instructions": artifacts[label].static_metrics[
+                "fast_path_native_instructions"
+            ],
+            "slow_path_native_instructions": artifacts[label].static_metrics[
+                "slow_path_native_instructions"
+            ],
+            "fast_segment_count": artifacts[label].static_metrics["fast_segment_count"],
+            "segment_count": artifacts[label].static_metrics["segment_count"],
+            "slow_block_count": artifacts[label].static_metrics["slow_block_count"],
+            "s3_source_sha": artifacts[label].s3_source_sha,
+            "assembly_sha256": artifacts[label].assembly_sha256,
+            "elf_sha256": artifacts[label].executable_sha256,
+        }
+        for variant, label in labels.items()
+    }
     return {
         "workload": workload,
         "optimization": optimization,
@@ -864,14 +1181,22 @@ def _cell_metrics(
             for value in reproducibility.values()
         ),
         **_recovery_metrics(times),
+        "added_text_recovery": (
+            (p2_added_text - p2h_added_text) / p2_added_text
+            if p2_added_text != 0
+            else None
+        ),
+        "hot_text_recovery": (
+            (p2_added_hot - p2h_added_hot) / p2_added_hot
+            if p2_added_hot != 0
+            else None
+        ),
         "code_size": {
-            "P0_elf_bytes": p0["elf_bytes"],
-            "P2_elf_bytes": p2["elf_bytes"],
-            "P0_text_bytes": p0["text_bytes"],
-            "P2_text_bytes": p2["text_bytes"],
-            "P2_text_size_delta_percent": 100.0 * text_delta if text_delta is not None else None,
-            "P0_static_native_instructions": p0["static_native_instructions"],
-            "P2_static_native_instructions": p2["static_native_instructions"],
+            "variants": code_size,
+            "P2_added_total_executable_text_bytes": p2_added_text,
+            "P2H_added_total_executable_text_bytes": p2h_added_text,
+            "P2_added_hot_text_bytes": p2_added_hot,
+            "P2H_added_hot_text_bytes": p2h_added_hot,
         },
     }
 
@@ -882,6 +1207,7 @@ def _build_ffi_workload(
     raw_root: Path,
     control_repo: Path,
     experiment_repo: Path,
+    hardening_repo: Path,
     driver_root: Path,
 ) -> tuple[dict[str, Artifact], dict[str, Any], dict[str, Any]]:
     driver_root.mkdir(parents=True, exist_ok=True)
@@ -900,6 +1226,7 @@ def _build_ffi_workload(
             raw_root=raw_root,
             control_repo=control_repo,
             experiment_repo=experiment_repo,
+            hardening_repo=hardening_repo,
             driver=driver,
         )
         artifacts.update(cell_artifacts)
@@ -917,6 +1244,7 @@ def _build_ffi_workload(
 def run_campaign(
     control_repo: Path,
     experiment_repo: Path,
+    hardening_repo: Path,
     benchmark_source_sha: str,
     benchmark_base_sha: str = BENCHMARK_BASE,
 ) -> Path:
@@ -934,8 +1262,16 @@ def run_campaign(
         pass
     require_commit(control_repo, S3_CONTROL_SHA, label="S3 control")
     require_commit(experiment_repo, S3_EXPERIMENT_SHA, label="S3 experiment")
+    require_commit(hardening_repo, S3_HARDENING_SHA, label="S3 hardening")
     _require_repo_identity(control_repo, S3_CONTROL_SHA, "S3 control")
     _require_repo_identity(experiment_repo, S3_EXPERIMENT_SHA, "S3 experiment")
+    _require_repo_identity(hardening_repo, S3_HARDENING_SHA, "S3 hardening")
+    _require_ancestor(
+        experiment_repo,
+        S3_EXPERIMENT_SHA,
+        S3_HARDENING_SHA,
+        "P2 baseline in P2H lineage",
+    )
     environment = _host_fingerprint(benchmark_base_sha, benchmark_source_sha)
     run_id = time.strftime("segment-budget-%Y%m%d-%H%M%S", time.gmtime()) + f"-{time.time_ns() % 1_000_000_000:09d}"
     report_root = ROOT / "reports" / "s3-experimental-segment-budget"
@@ -966,6 +1302,7 @@ def run_campaign(
             raw_root,
             control_repo,
             experiment_repo,
+            hardening_repo,
             raw_root / workload.replace(".", "-") / "driver",
         )
         artifact_by_workload[workload] = artifacts
@@ -978,6 +1315,7 @@ def run_campaign(
         raw_root=raw_root,
         control_repo=control_repo,
         experiment_repo=experiment_repo,
+        hardening_repo=hardening_repo,
     )
     artifact_by_workload["realworld.jsmn"] = jsmn_artifacts
     all_isolation["realworld.jsmn"] = {row["optimization"]: row for row in jsmn_isolation}
@@ -996,6 +1334,30 @@ def run_campaign(
     _write_json(raw_root / "transformations.json", all_transformations)
 
     for workload, artifacts in artifact_by_workload.items():
+        _write_json(
+            raw_root / workload.replace(".", "-") / "artifact-manifest.json",
+            {
+                "benchmark_source_sha": benchmark_source_sha,
+                "artifacts": {
+                    label: {
+                        "workload": artifact.workload,
+                        "variant": label.rsplit("_", 1)[0],
+                        "optimization": artifact.optimization,
+                        "s3_source_sha": artifact.s3_source_sha,
+                        "source_sha256": artifact.source_sha256,
+                        "assembly_sha256": artifact.assembly_sha256,
+                        "elf_sha256": artifact.executable_sha256,
+                        "elf_bytes": artifact.static_metrics["elf_bytes"],
+                        "hot_text_bytes": artifact.static_metrics["hot_text_bytes"],
+                        "cold_text_bytes": artifact.static_metrics["cold_text_bytes"],
+                        "total_executable_text_bytes": artifact.static_metrics[
+                            "total_executable_text_bytes"
+                        ],
+                    }
+                    for label, artifact in sorted(artifacts.items())
+                },
+            },
+        )
         correctness = _correctness_gate(artifacts, raw_root / workload.replace(".", "-"))
         correctness_by_workload[workload] = correctness
         all_workloads.setdefault(workload, {})["correctness"] = correctness
@@ -1021,6 +1383,8 @@ def run_campaign(
             _cell_metrics(sessions, artifacts, workload, optimization)
             for optimization in ("O0", "O1")
         ]
+        for cell in cells:
+            cell["correctness_pass"] = correctness_by_workload[workload]["status"] == "PASS"
         timing_workloads[workload] = {
             "K": TARGET_K[workload],
             "cells": cells,
@@ -1043,13 +1407,41 @@ def run_campaign(
         for workload in timing_workloads.values()
     )
     all_samples_pass = all(item["all_samples_pass"] for item in timing_workloads.values())
+    all_correctness_pass = all(
+        item["status"] == "PASS" for item in correctness_by_workload.values()
+    )
     cross_workload = _cross_workload_result(recovery_values)
+    hardening_cells = [
+        cell
+        for workload in timing_workloads.values()
+        for cell in workload["cells"]
+    ]
+    hardening_result = _hardening_result(hardening_cells)
+    h12 = {
+        "status": {
+            "STRONG_QUALIFIED": "CONFIRMED_STRUCTURAL_AND_SAFE",
+            "QUALIFIED": "CONFIRMED_STRUCTURAL_AND_SAFE",
+            "HOT_LAYOUT_QUALIFIED": "CONFIRMED_HOT_LAYOUT_ONLY",
+            "CURRENT_P2_RETAINED": "SAFE_NOT_STRUCTURALLY_MATERIAL",
+            "REJECTED_PERFORMANCE_REGRESSION": "REJECTED_PERFORMANCE",
+            "REJECTED_SEMANTICS": "REJECTED_SEMANTICS",
+            "REJECTED_COMPLEXITY": "REJECTED_COMPLEXITY",
+        }.get(hardening_result, "BLOCKED"),
+        "h12a_status": (
+            "CONFIRMED_HOT_LAYOUT_ONLY"
+            if hardening_result == "HOT_LAYOUT_QUALIFIED"
+            else "UNDER_TEST"
+            if hardening_result in {"INCOMPLETE", "BLOCKED"}
+            else "NOT_CONFIRMED"
+        ),
+    }
     result = {
         "campaign": CAMPAIGN,
         "benchmark_base_sha": benchmark_base_sha,
         "benchmark_source_head": benchmark_source_sha,
         "s3_control_sha": S3_CONTROL_SHA,
         "s3_experiment_sha": S3_EXPERIMENT_SHA,
+        "s3_hardening_sha": S3_HARDENING_SHA,
         "experiment_isolation": "PASS",
         "default_mode": "per-instruction",
         "experiment_mode": "exact-segment",
@@ -1076,6 +1468,15 @@ def run_campaign(
         "minimum_useful_recovery": MINIMUM_USEFUL_RECOVERY,
         "strong_recovery": STRONG_RECOVERY,
         "p2_cross_workload_result": cross_workload,
+        "hardening_thresholds": {
+            "max_runtime_regression": MAX_HARDENING_RUNTIME_REGRESSION,
+            "minimum_useful_added_text_recovery": MINIMUM_USEFUL_RECOVERY,
+            "strong_added_text_recovery": STRONG_RECOVERY,
+            "minimum_retained_budget_recovery": MINIMUM_RETAINED_BUDGET_RECOVERY,
+            "minimum_hot_layout_recovery": MINIMUM_HOT_LAYOUT_RECOVERY,
+        },
+        "hardening_result": hardening_result,
+        "h12": h12,
         "budget_line_continues": (
             "HARDENING_ONLY"
             if cross_workload in {"STRONG_MATERIAL_RECOVERY", "USEFUL_MATERIAL_RECOVERY"}
@@ -1085,12 +1486,36 @@ def run_campaign(
         "s3_production_change_ready": False,
         "dynamic_accounting_events": "NOT_MEASURED",
         "raw_evidence": str(raw_root.relative_to(ROOT)),
-        "status": "PASS" if all_samples_pass and all_reproducible else "INCONCLUSIVE",
+        "raw_evidence_manifest": "raw-evidence-manifest.json",
+        "p0_byte_identity": all(
+            row["assembly_equal"]
+            for workload_rows in all_isolation.values()
+            for row in workload_rows.values()
+        ),
+        "p2_segment_plan_identity": all(
+            row["equal"]
+            for workload_rows in all_segments.values()
+            for row in workload_rows.values()
+        ),
+        "e0_status": "PASS" if all_correctness_pass else "FAIL",
+        "p2h_correctness": "PASS" if all_correctness_pass else "FAIL",
+        "production_ready": False,
+        "next_campaign": "S3_EXACT_SEGMENT_BUDGET_PRODUCTION_READINESS_REVIEW",
+        "status": (
+            "PASS"
+            if all_correctness_pass
+            and all_samples_pass
+            and all_reproducible
+            and hardening_result not in {"BLOCKED", "INCOMPLETE"}
+            else "INCONCLUSIVE"
+        ),
     }
-    _write_json(report_root / "EXPERIMENTAL_SEGMENT_BUDGET_RESULT.json", result)
     _write_json(raw_root / "campaign-result.json", result)
+    manifest_result = _write_raw_manifest(raw_root)
+    _write_json(report_root / "EXPERIMENTAL_SEGMENT_BUDGET_RESULT.json", result)
     print(f"EXPERIMENTAL_SEGMENT_BUDGET_RESULT={report_root / 'EXPERIMENTAL_SEGMENT_BUDGET_RESULT.json'}", flush=True)
     print(f"RAW_EVIDENCE={raw_root}", flush=True)
+    print(f"RAW_EVIDENCE_MANIFEST={manifest_result['path']} ENTRIES={manifest_result['entry_count']}", flush=True)
     return report_root / "EXPERIMENTAL_SEGMENT_BUDGET_RESULT.json"
 
 
@@ -1098,12 +1523,14 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--s3-control", type=Path, required=True)
     parser.add_argument("--s3-experiment", type=Path, required=True)
+    parser.add_argument("--s3-hardening", type=Path, required=True)
     parser.add_argument("--benchmark-source-sha", required=True)
     parser.add_argument("--benchmark-base-sha", default=BENCHMARK_BASE)
     args = parser.parse_args(argv)
     result = run_campaign(
         args.s3_control,
         args.s3_experiment,
+        args.s3_hardening,
         args.benchmark_source_sha,
         args.benchmark_base_sha,
     )
