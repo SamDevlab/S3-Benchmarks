@@ -24,7 +24,9 @@ by default or promoting it to production.
 | S3 publication/report head | `8f6b8afdf780cfc413a722d1885bf3107803f71a` (documentation-only after tests) |
 | benchmark base | `8fc0aba50ca48d3f7171bdf49395df3cd880626a` |
 | benchmark source freeze | `84347c9c400839c739241728f8e90f4a1273c33f` |
+| benchmark report/publication head | `33f0af4899681358972c3ea95cf95b9603c184b3` (reports only after the source freeze) |
 | S3 PR | #310, OPEN, Draft, unmerged |
+| benchmark validation PR | #24, OPEN, Draft, unmerged, based on `research/benchmarks-2.2.3-budget-generalization` |
 | prior benchmark PR | #23 remains OPEN, Draft, unmerged |
 
 The original dirty Windows S3 checkout was not used. The experiment and
@@ -138,6 +140,11 @@ KEEP_HOST_RUNNING=YES
 KEEP_VM_RUNNING=YES
 KEEP_VIRTUALBOX_RUNNING=YES
 ```
+
+The benchmark source freeze is `84347c9c400839c739241728f8e90f4a1273c33f`;
+the later `33f0af4` commit contains reports and preserved evidence only. The
+validation branch is synchronized with origin. PR #24 is a Draft evidence
+review, not a merge or production-promotion request.
 
 Raw evidence is in `raw/segment-budget-20260923-134844-191043748/` (121 files,
 81,496,216 bytes), with the SHA-256 list at
