@@ -261,17 +261,21 @@ def _jsmn_with_p1(s3_repo: Path, root: Path, k: int) -> dict[str, Artifact]:
         elif label == "S3_O1_NO_BUDGET": new_label = "PNEG_O1"
         elif label in {"P1_O0", "P1_O1", "GCC_O2", "CLANG_O2"}: new_label = label
         else: continue
+        executable = getattr(artifact, "path", None) or getattr(artifact, "executable", None)
+        run = getattr(artifact, "run", None) or getattr(artifact, "run_sample", None)
+        if executable is None or run is None:
+            raise RuntimeError(f"unsupported JSMN artifact contract: {type(artifact).__name__}")
         converted[new_label] = Artifact(
             artifact.workload,
             new_label,
-            artifact.executable,
+            executable,
             artifact.assembly,
             artifact.source_sha256,
             artifact.assembly_sha256,
             artifact.executable_sha256,
             artifact.budget_sites,
             artifact.static_metrics,
-            artifact.run_sample,
+            run,
         )
     return converted
 
