@@ -7,6 +7,7 @@ from tools.run_exact_segment_budget_validation import (
     VARIANTS,
     _balanced_order,
     _assert_same_program_instance,
+    _create_backend,
     _cross_workload_result,
     _load_budget_plan_diagnostics,
     _recovery_metrics,
@@ -65,6 +66,28 @@ def test_missing_dependency_inside_segment_diagnostics_is_not_masked(monkeypatch
     monkeypatch.setattr(validation.importlib, "import_module", broken_module)
     with pytest.raises(ModuleNotFoundError, match="diagnostics dependency"):
         _load_budget_plan_diagnostics(required=False)
+
+
+def test_legacy_backend_accepts_only_the_unchanged_default_mode() -> None:
+    class LegacyBackend:
+        def __init__(self, *, max_instructions: int) -> None:
+            self.max_instructions = max_instructions
+
+    backend = _create_backend(LegacyBackend, "per-instruction")
+    assert backend.max_instructions > 0
+    with pytest.raises(RuntimeError, match="does not support the requested experimental"):
+        _create_backend(LegacyBackend, "exact-segment")
+
+
+def test_experimental_backend_receives_the_requested_mode() -> None:
+    class ExperimentalBackend:
+        def __init__(self, *, max_instructions: int, instruction_budget_mode: str) -> None:
+            self.max_instructions = max_instructions
+            self.instruction_budget_mode = instruction_budget_mode
+
+    backend = _create_backend(ExperimentalBackend, "exact-segment")
+    assert backend.max_instructions > 0
+    assert backend.instruction_budget_mode == "exact-segment"
 
 
 def test_relative_session_delta_uses_the_predeclared_max_median_denominator() -> None:

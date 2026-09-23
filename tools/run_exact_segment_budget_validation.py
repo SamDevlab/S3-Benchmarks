@@ -12,6 +12,7 @@ from collections import Counter
 from dataclasses import dataclass
 import hashlib
 import importlib
+import inspect
 import json
 import math
 import os
@@ -322,10 +323,7 @@ def _emit_program(
     *,
     ffi: bool,
 ) -> tuple[str, str, dict[str, Any]]:
-    backend = backend_type(
-        max_instructions=S3_FFI_MAX_INSTRUCTIONS,
-        instruction_budget_mode=mode,
-    )
+    backend = _create_backend(backend_type, mode)
     assembly = backend._generate_ffi(program) if ffi else backend.generate(program)
     functions = (
         [
@@ -337,6 +335,18 @@ def _emit_program(
     )
     program_fingerprint = _sha256_text(repr(program))
     return assembly, program_fingerprint, _aggregate_segment_diagnostics(functions)
+
+
+def _create_backend(backend_type: Any, mode: str) -> Any:
+    parameters = inspect.signature(backend_type).parameters
+    kwargs: dict[str, Any] = {"max_instructions": S3_FFI_MAX_INSTRUCTIONS}
+    if "instruction_budget_mode" in parameters:
+        kwargs["instruction_budget_mode"] = mode
+    elif mode != "per-instruction":
+        raise RuntimeError(
+            "backend does not support the requested experimental instruction budget mode"
+        )
+    return backend_type(**kwargs)
 
 
 def _emit(
