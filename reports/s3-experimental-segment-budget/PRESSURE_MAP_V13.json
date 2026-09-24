@@ -1,0 +1,24 @@
+{
+  "version": 13,
+  "campaign": "S3_EXACT_SEGMENT_BUDGET",
+  "s3_control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+  "benchmark_source_sha": "84347c9c400839c739241728f8e90f4a1273c33f",
+  "P0_current_budget": "SYSTEMIC_CAUSAL",
+  "P1_countdown": "SAFE_NOT_MATERIAL",
+  "P2_exact_segment": "STRONG_MATERIAL_RECOVERY",
+  "H4_bounds_index": "OPEN_NOT_MEASURED_BY_THIS_CAMPAIGN",
+  "H5_register_memory_stack": "OPEN_NOT_MEASURED_BY_THIS_CAMPAIGN",
+  "runtime_helpers": "NOT_MEASURED",
+  "instruction_selection": "NOT_CAUSALLY_ATTRIBUTED",
+  "dynamic_accounting_events": "NOT_MEASURED",
+  "qualified_performance_index": "NOT_AVAILABLE",
+  "workloads": {
+    "scientific.rmsd.batch": {"P0":"SYSTEMIC_CAUSAL","P1":"SAFE_NOT_MATERIAL","P2":"STRONG_MATERIAL_RECOVERY","p2_recovered_range":[1.028352,1.045644],"p2_over_pneg":[0.931869,0.957365]},
+    "scientific.xsbench.compatible_lookup.medium": {"P0":"SYSTEMIC_CAUSAL","P1":"SAFE_NOT_MATERIAL","P2":"STRONG_MATERIAL_RECOVERY","p2_recovered_range":[0.969976,0.979764],"p2_over_pneg":[1.022050,1.039472]},
+    "realworld.jsmn": {"P0":"SYSTEMIC_CAUSAL","P1":"SAFE_NOT_MATERIAL","P2":"STRONG_MATERIAL_RECOVERY","p2_recovered_range":[0.921417,0.934059],"p2_over_pneg":[1.078737,1.095228]}
+  },
+  "decision": "STRONG_SUCCESS",
+  "next_campaign": "S3_EXPERIMENT_SEGMENT_BUDGET_HARDENING",
+  "production_promotion": false
+}

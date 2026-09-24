@@ -1,0 +1,521 @@
+{
+  "realworld.jsmn": {
+    "status": "PASS",
+    "variants": {
+      "P0_O0": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p0/p0_o0",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 26676770989,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "P0_O1": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p0/p0_o1",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 24814016971,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "P2H_O0": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p2h/p2h_o0",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 13647790694,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "P2H_O1": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p2h/p2h_o1",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 14074539315,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "P2_O0": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p2/p2_o0",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 13578514754,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "P2_O1": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p2/p2_o1",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 13278776289,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "PNEG_O0": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/pneg/pneg_o0",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 12113466649,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      },
+      "PNEG_O1": {
+        "command": [
+          "/usr/bin/taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/pneg/pneg_o1",
+          "--loop",
+          "1"
+        ],
+        "elapsed_ns": 11555627523,
+        "expected": 0,
+        "observed": 0,
+        "returncode": 0,
+        "status": "PASS"
+      }
+    }
+  },
+  "scientific.rmsd.batch": {
+    "status": "PASS",
+    "variants": {
+      "P0_O0": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o0/p0/p0_o0.so",
+          "scientific.rmsd.batch",
+          "P0_O0",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 14927718096,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P0_O0",
+        "workload": "scientific.rmsd.batch"
+      },
+      "P0_O1": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o1/p0/p0_o1.so",
+          "scientific.rmsd.batch",
+          "P0_O1",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 14954364435,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P0_O1",
+        "workload": "scientific.rmsd.batch"
+      },
+      "P2H_O0": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o0/p2h/p2h_o0.so",
+          "scientific.rmsd.batch",
+          "P2H_O0",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 5255640105,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2H_O0",
+        "workload": "scientific.rmsd.batch"
+      },
+      "P2H_O1": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o1/p2h/p2h_o1.so",
+          "scientific.rmsd.batch",
+          "P2H_O1",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 5312537544,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2H_O1",
+        "workload": "scientific.rmsd.batch"
+      },
+      "P2_O0": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o0/p2/p2_o0.so",
+          "scientific.rmsd.batch",
+          "P2_O0",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 5104072332,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2_O0",
+        "workload": "scientific.rmsd.batch"
+      },
+      "P2_O1": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o1/p2/p2_o1.so",
+          "scientific.rmsd.batch",
+          "P2_O1",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 4916436585,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2_O1",
+        "workload": "scientific.rmsd.batch"
+      },
+      "PNEG_O0": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o0/pneg/pneg_o0.so",
+          "scientific.rmsd.batch",
+          "PNEG_O0",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 5911646549,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "PNEG_O0",
+        "workload": "scientific.rmsd.batch"
+      },
+      "PNEG_O1": {
+        "K": 2000000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-rmsd-batch/o1/pneg/pneg_o1.so",
+          "scientific.rmsd.batch",
+          "PNEG_O1",
+          "rmsd",
+          "2000000",
+          "16",
+          "0"
+        ],
+        "elapsed_ns": 5674439792,
+        "expected": 16,
+        "observable": 16,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "PNEG_O1",
+        "workload": "scientific.rmsd.batch"
+      }
+    }
+  },
+  "scientific.xsbench.compatible_lookup.medium": {
+    "status": "PASS",
+    "variants": {
+      "P0_O0": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o0/p0/p0_o0.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P0_O0",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 15833206884,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P0_O0",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "P0_O1": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o1/p0/p0_o1.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P0_O1",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 14771505802,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P0_O1",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "P2H_O0": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o0/p2h/p2h_o0.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P2H_O0",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 8635601563,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2H_O0",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "P2H_O1": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o1/p2h/p2h_o1.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P2H_O1",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 7374245862,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2H_O1",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "P2_O0": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o0/p2/p2_o0.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P2_O0",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 7698111507,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2_O0",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "P2_O1": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o1/p2/p2_o1.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "P2_O1",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 7490950487,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "P2_O1",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "PNEG_O0": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o0/pneg/pneg_o0.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "PNEG_O0",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 7283611357,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "PNEG_O0",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      },
+      "PNEG_O1": {
+        "K": 750000,
+        "command": [
+          "taskset",
+          "-c",
+          "0",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/driver/ffi_driver",
+          "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/scientific-xsbench-compatible_lookup-medium/o1/pneg/pneg_o1.so",
+          "scientific.xsbench.compatible_lookup.medium",
+          "PNEG_O1",
+          "xs_lookup_batch",
+          "750000",
+          "2444.096",
+          "0"
+        ],
+        "elapsed_ns": 7358929171,
+        "expected": 2444.096,
+        "observable": 2444.0960000000005,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "",
+        "variant": "PNEG_O1",
+        "workload": "scientific.xsbench.compatible_lookup.medium"
+      }
+    }
+  }
+}

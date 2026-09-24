@@ -1,0 +1,122 @@
+{
+  "CLANG_O2": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-clang_o2",
+      "--loop",
+      "1250000"
+    ],
+    "elapsed_ns": 108470580,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "GCC_O2": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-gcc_o2",
+      "--loop",
+      "1250000"
+    ],
+    "elapsed_ns": 114961010,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "P0_O0": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-o0-baseline",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 25432858495,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "P0_O1": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-o1-baseline",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 24897294467,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "P1_O0": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-p1-o0",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 24246274809,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "P1_O1": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-p1-o1",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 23641917072,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "PNEG_O0": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-o0-no-budget",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 12692538368,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  },
+  "PNEG_O1": {
+    "command": [
+      "/usr/bin/taskset",
+      "-c",
+      "0",
+      "/home/vboxuser/S3-Benchmarks-2.2.4-safe-budget-architecture-20260922/reports/benchmarks-2.2.4-safe-budget-architecture/raw/safe-budget-20260922-225407-074374170/realworld-jsmn/jsmn-s3-o1-no-budget",
+      "--loop",
+      "1"
+    ],
+    "elapsed_ns": 11945330122,
+    "expected": 0,
+    "observed": 0,
+    "returncode": 0,
+    "status": "PASS"
+  }
+}

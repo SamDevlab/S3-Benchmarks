@@ -1,0 +1,42 @@
+{
+  "balanced_interleaving": true,
+  "benchmark_base_sha": "8fc0aba50ca48d3f7171bdf49395df3cd880626a",
+  "benchmark_source_sha": "84347c9c400839c739241728f8e90f4a1273c33f",
+  "clock": "CLOCK_MONOTONIC_RAW",
+  "cpu_affinity": [
+    0,
+    1,
+    2
+  ],
+  "external_warmups": 5,
+  "fresh_process_per_sample": true,
+  "host": {
+    "architecture": "x86_64",
+    "cpu_family": "23",
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "cpu_model_id": "24",
+    "cpu_stepping": "1",
+    "cpu_vendor": "AuthenticAMD",
+    "distribution": "PRETTY_NAME=\"Ubuntu 26.04 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"26.04\"\nVERSION=\"26.04 LTS (Resolute Raccoon)\"\nVERSION_CODENAME=resolute\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=resolute\nLOGO=ubuntu-logo\n",
+    "kernel": "7.0.0-31-generic",
+    "logical_cores": 3,
+    "physical_cores": "3"
+  },
+  "host_fingerprint": "75237604ad5507b026b5e148a637c40db9f1f32d2ebd32e267f80afc1b207c89",
+  "hostname": "Ubuntuserve",
+  "independent_sessions": [
+    "run_1",
+    "run_2"
+  ],
+  "inline_warmups": 0,
+  "load_average_before": [
+    0.2607421875,
+    0.31298828125,
+    0.63916015625
+  ],
+  "python": "3.14.4",
+  "repetitions_per_session": 30,
+  "s3_control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "s3_experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+  "timed_affinity": 0
+}

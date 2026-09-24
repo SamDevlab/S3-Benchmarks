@@ -18,3 +18,17 @@ Scoring is criterion-based and does not reward diagnostic speed.
 `EVIDENCE_SCORE_BEFORE=77`, `EVIDENCE_SCORE_AFTER=89`, and
 `EVIDENCE_SCORE_DELTA=12`. Workload breadth is bounded to three tested
 classes; no performance index was created. `QUALIFIED_PERFORMANCE_INDEX=NOT_AVAILABLE`.
+
+## 2.2.5 campaign checkpoint
+
+The exact-segment experiment adds a strong, reproducible six-cell result, but
+does not change the criterion-based score: no new production-safe performance
+definition, cross-platform closure, or qualified performance index was
+established. For this campaign:
+
+```text
+EVIDENCE_SCORE_BEFORE=89
+EVIDENCE_SCORE_AFTER=89
+EVIDENCE_SCORE_DELTA=0
+QUALIFIED_PERFORMANCE_INDEX=NOT_AVAILABLE
+```

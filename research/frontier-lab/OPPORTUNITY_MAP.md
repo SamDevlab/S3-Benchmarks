@@ -25,12 +25,14 @@ tasks. Status reflects this campaign's checkpoint.
 | O18 | reproducibility fingerprint schema | methodology | cross-host comparability | host matrix | DEFER |
 | O19 | evidence registry for causal artifacts | infrastructure | provenance | schema design | COMPLETE |
 | O20 | benchmark stack consolidation plan | governance | lower documentation debt | owner decision | DEFER |
-| O21 | safe budget design review | runtime design | future bounded-mode options | O09 | NEXT |
+| O21 | safe budget design review | runtime design | bounded-mode E0 candidate | O09 | COMPLETE_SAFE_NOT_PROMOTED; P1 safe-not-material; P2 strong experimental result |
 | O22 | checked-vs-benchmark mode study | runtime design | safety/perf boundary | O01 | DEFERRED_RESEARCH |
+| O23 | outline/share P2 exact slow path while preserving E0 and P0 byte identity | backend hardening | reduce measured 39-58% .text growth | P2 E0 and cross-workload evidence | NEXT_HARDENING_ONLY |
 
-O01, O02, O09, and O19 are closed as experimental or evidence actions. O02's
+O01, O02, O09, O19, and O21 are closed as experimental or evidence actions. O02's
 `COMPLETE_NOT_CONFIRMED` status records that the intervention was executed but
 did not establish a positive frame attribution. H7 is now
-`CONFIRMED_GENERAL` for the three tested classes. The next safe research action
-is O21; it must not be treated as production optimization or as authorization
-to activate a runtime change.
+`CONFIRMED_GENERAL` for the three tested classes. O23 is the only next action:
+hardening the already-tested P2 mechanism, not another budget architecture.
+It must preserve E0, deterministic segment identity, call ordering, diagnostic
+sites, and default P0 byte identity. It is not production authorization.

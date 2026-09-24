@@ -1,0 +1,255 @@
+{
+  "schema": "s3.segment-budget.hardening-result.v1",
+  "campaign": "S3_EXPERIMENT_SEGMENT_BUDGET_HARDENING",
+  "status": "PASS_WITH_P2_RETAINED",
+  "hardening_result": "CURRENT_P2_RETAINED",
+  "current_p2": "STRONG_SUCCESS",
+  "h12": "SAFE_NOT_STRUCTURALLY_MATERIAL",
+  "h12a": "NOT_CONFIRMED",
+  "hypothesis_ledger": {
+    "H1": "CONFIRMED",
+    "H2": "CONFIRMED_CAUSAL_XSBENCH",
+    "H3": "NOT_CONFIRMED",
+    "H4": "OPEN",
+    "H5": "OPEN",
+    "H6": "WEAKENED",
+    "H7": "CONFIRMED_GENERAL",
+    "H8": "CONFIRMED_SAFE_NOT_MATERIAL",
+    "H9": "CONFIRMED_EXACT_MAPPING",
+    "H10": "CONFIRMED",
+    "H11": "CONFIRMED_MATERIAL",
+    "H12": "SAFE_NOT_STRUCTURALLY_MATERIAL",
+    "H12A": "NOT_CONFIRMED"
+  },
+  "evidence_score": {"value": 89, "rubric_changed": false},
+  "qualified_performance_index": "NOT_AVAILABLE",
+  "s3_control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+  "p2_baseline_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+  "p2h_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
+  "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838",
+  "benchmark_base_sha": "8fc0aba50ca48d3f7171bdf49395df3cd880626a",
+  "raw_run_id": "segment-budget-20260923-225935-431096547",
+  "host": {
+    "fingerprint_sha256": "75237604ad5507b026b5e148a637c40db9f1f32d2ebd32e267f80afc1b207c89",
+    "os": "Ubuntu 26.04 LTS",
+    "architecture": "x86_64",
+    "cpu": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "python": "3.14.4"
+  },
+  "selected_strategy": "A_COLD_OUTLINE_DUPLICATED_SLOW_PATH",
+  "strategy_audit": {
+    "A_cold_outline": "IMPLEMENTED_ONCE; E0/P0/performance gates pass, but no detected cold section or material hot/total text recovery",
+    "B_structurally_shared_exact_slow_path": "REJECTED_COMPLEXITY_BEFORE_IMPLEMENTATION",
+    "C_current_inline_duplication": "CONTROL"
+  },
+  "gates": {
+    "e0": "PASS",
+    "p2h_call_order": "PASS",
+    "p2h_callback_reentry": "PASS",
+    "p2h_repeated_ffi": "PASS",
+    "p2h_failure_context": "PASS",
+    "p2h_non_budget_failures": "PASS",
+    "linux_native_validation": "PASS",
+    "s3_compileall": "PASS",
+    "s3_diff_check": "PASS",
+    "p0_byte_identity": "PASS",
+    "p2_segment_plan_identity": "PASS",
+    "all_workload_correctness": "PASS",
+    "all_six_cells_reproducible": "PASS",
+    "runtime_non_regression_all_six": "PASS",
+    "retained_budget_recovery_all_six": "PASS",
+    "added_text_materiality_all_six": "FAIL",
+    "cold_layout_materiality": "NOT_CONFIRMED",
+    "production_ready": false
+  },
+  "thresholds": {
+    "max_p2h_over_p2": 1.05,
+    "minimum_added_text_recovery": 0.25,
+    "minimum_hot_layout_recovery": 0.25,
+    "strong_added_text_recovery": 0.5,
+    "minimum_retained_budget_recovery": 0.5,
+    "max_session_median_delta": 0.25
+  },
+  "timing_protocol": {
+    "external_warmups": 5,
+    "inline_warmups": 0,
+    "samples_per_session": 30,
+    "independent_sessions": 2,
+    "fresh_process_per_sample": true,
+    "balanced_interleaving": true,
+    "cpu_affinity": 0,
+    "clock": "CLOCK_MONOTONIC_RAW",
+    "T_definition": "mean of the two independent session medians",
+    "time_unit": "ns"
+  },
+  "benchmark_suite": {
+    "summary": "106 passed, 1 skipped in 1.48s",
+    "pytest_exit_independently_captured": false,
+    "outer_wrapper_exit": 1,
+    "wrapper_note": "The wrapper failed after pytest while parsing an invalid shell exit expression; do not reinterpret wrapper exit as pytest failure or claim independently captured pytest exit 0.",
+    "transcript_sha256": "55903d3cccb2355b2890d3c22ff01e5381f421a208645a86c6178d2ad6d1026a"
+  },
+  "raw_evidence": {
+    "manifest_schema": "s3.segment-budget.raw-manifest.v1",
+    "manifest_entries": 124,
+    "run_directory_bytes": 91895085,
+    "manifest_sha256": "3ca2fc0cf04b5579e2c0b24d3fc066e30e596cfcd356b58b99b842ab522a15a4",
+    "runner_transcript_sha256": "978b32d88d741b37ae97a9084af1a724708d868539479338ff284f1dd5db7388",
+    "consolidated_runner_result_sha256": "ce7c91fa9adaf0604d0a49fd3ba87f078913c12fe2366751c15081d1673659f3",
+    "result_path": "reports/s3-experimental-segment-budget/EXPERIMENTAL_SEGMENT_BUDGET_RESULT.json"
+  },
+  "s3_full_suite": {
+    "source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
+    "platform": "Linux x86_64",
+    "python": "campaign S3 Linux environment",
+    "result": "4375 passed, 1 skipped, 0 failed",
+    "exit": 0,
+    "transcript": "/home/vboxuser/tmp/s3-full-suite-p2h-6f320242.log",
+    "transcript_sha256": "7949a455d2784f5196372e77a484758ff913c6d414aac37b083cfe4bf028e26a"
+  },
+  "ci": {
+    "state": "CI_PRE_STEP_CAUSE_UNIDENTIFIED",
+    "rerun": false,
+    "head_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
+    "run_ids": [35918509660, 35918509672, 35918509676],
+    "evidence": "All jobs failed within about 3-5 seconds with steps=[]; no source or infrastructure cause established."
+  },
+  "workloads": [
+    {
+      "name": "realworld.jsmn",
+      "K": 1250000,
+      "cells": [
+        {
+          "optimization": "O0",
+          "mean_of_session_medians_ns": {"P0": 25924327706.25, "P2": 13148272678.0, "P2H": 13168210937.25, "PNEG": 12028581277.5},
+          "p2h_over_p2": 1.0015164166227981,
+          "added_text_recovery": -0.0015679712778688887,
+          "hot_text_recovery": -0.0015679712778688887,
+          "p2h_recovered_budget_excess": 0.9179871577541073,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 386, "fast_segments": 298, "slow_blocks": 298},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9", "elf_sha256": "ff1ecd4ebba4ef1ea72b75ce500d5e2f0b8bd39fe866a39485d17b3a49cf1c95", "total_executable_text_bytes": 309721, "hot_text_bytes": 309721, "cold_text_bytes": 0, "static_native_instructions": 50743, "fast_path_native_instructions": 50743, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "4f914b6578320582a6fa82a8311c6bd83777ea591ae92a3e45e1c6b0139712db", "elf_sha256": "4d6a63f19c814e8454f444f907da4b987bfd049b193593c207de67612361e1ef", "total_executable_text_bytes": 490209, "hot_text_bytes": 490209, "cold_text_bytes": 0, "static_native_instructions": 80984, "fast_path_native_instructions": 57165, "slow_path_native_instructions": 23819},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "f5b5a9245dd0b1ef57f1bad51cabf853284c7225e686fc03b6f1ca4f5e9e9bca", "elf_sha256": "330f51dcb88207caff71fa938bfb64f3b25a866d75e47e9a3c367ebee1d74c95", "total_executable_text_bytes": 490492, "hot_text_bytes": 490492, "cold_text_bytes": 0, "static_native_instructions": 80984, "fast_path_native_instructions": 57129, "slow_path_native_instructions": 23855},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "9860125c3d081e0f352661360eae184b971db90ab17f07fbaa4ee40c85d85b08", "elf_sha256": "f94f00c3c93f7fad8996ec350fd8b1b9990e90f987dfc423af91e79b52ba63f4", "total_executable_text_bytes": 235343, "hot_text_bytes": 235343, "cold_text_bytes": 0, "static_native_instructions": 40843, "fast_path_native_instructions": 40843, "slow_path_native_instructions": 0}
+          }
+        },
+        {
+          "optimization": "O1",
+          "mean_of_session_medians_ns": {"P0": 25248133738.5, "P2": 12824982390.5, "P2H": 12923501004.75, "PNEG": 11752065140.5},
+          "p2h_over_p2": 1.0076817738418866,
+          "added_text_recovery": -0.001557215096614313,
+          "hot_text_recovery": -0.001557215096614313,
+          "p2h_recovered_budget_excess": 0.9132016960536495,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 356, "fast_segments": 298, "slow_blocks": 298},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add", "elf_sha256": "5c750d7da3756da3b9a29613b5272837436d2734aabaadd3dd9fa50ddb995b47", "total_executable_text_bytes": 306079, "hot_text_bytes": 306079, "cold_text_bytes": 0, "static_native_instructions": 50063, "fast_path_native_instructions": 50063, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "a7ee0b6e7ca9681a9467fa204b6f6a5121c3d2b52f33e01c2e6afce5c9ffc8ed", "elf_sha256": "0a243f540fc93cf4dce13d5cc69248b0cfe10c909be7ee8da84d319c877c4495", "total_executable_text_bytes": 485245, "hot_text_bytes": 485245, "cold_text_bytes": 0, "static_native_instructions": 79991, "fast_path_native_instructions": 56416, "slow_path_native_instructions": 23575},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "dff85291ee7a6a54d5bce42e43c7ade300d3e1e04dc82bd605065693162454b2", "elf_sha256": "54912c22236af2656271850c6379da4c0f51265f5738545449b45e78a8eb7881", "total_executable_text_bytes": 485524, "hot_text_bytes": 485524, "cold_text_bytes": 0, "static_native_instructions": 79991, "fast_path_native_instructions": 56380, "slow_path_native_instructions": 23611},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "d758083585001a9b2aaf100df2649ee3d74e84a8f6e576a971fed641dccbb4ff", "elf_sha256": "239e954669709ee17aa56bbeb578218959060f92f391b33c16d060bdf775b5b3", "total_executable_text_bytes": 233151, "hot_text_bytes": 233151, "cold_text_bytes": 0, "static_native_instructions": 40355, "fast_path_native_instructions": 40355, "slow_path_native_instructions": 0}
+          }
+        }
+      ]
+    },
+    {
+      "name": "scientific.rmsd.batch",
+      "K": 2000000,
+      "cells": [
+        {
+          "optimization": "O0",
+          "mean_of_session_medians_ns": {"P0": 14140651687.5, "P2": 5274152821.0, "P2H": 5126922710.25, "PNEG": 5561926848.75},
+          "p2h_over_p2": 0.9720845952427134,
+          "added_text_recovery": -0.0036885785798972466,
+          "hot_text_recovery": -0.0036885785798972466,
+          "p2h_recovered_budget_excess": 1.050707319173485,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 22, "fast_segments": 17, "slow_blocks": 17},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b", "elf_sha256": "5432800792f4c92a36e688458d4971689ee1b93e056a7acf7242dc43151aa1c6", "total_executable_text_bytes": 19413, "hot_text_bytes": 19381, "cold_text_bytes": 0, "static_native_instructions": 3983, "fast_path_native_instructions": 3983, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "17c458b7f2e2854870643ab5fde3d1f2e3f36155bb9d340b1ebc1f2946a3659e", "elf_sha256": "5e71292d4a8fffd45f838cd77ab1af7d80a394a8fdf6c1e79e18f9c713e03bd9", "total_executable_text_bytes": 27004, "hot_text_bytes": 26972, "cold_text_bytes": 0, "static_native_instructions": 5304, "fast_path_native_instructions": 4223, "slow_path_native_instructions": 1081},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "0906ddffa6d2038f114f185ab71f4c0a442b22035dd7041f7659a56559e01ba8", "elf_sha256": "af1830b1259b60b8c3090b2bdaea2d420d406f3816e5ab51b4caeb61c1369cc0", "total_executable_text_bytes": 27032, "hot_text_bytes": 27000, "cold_text_bytes": 0, "static_native_instructions": 5304, "fast_path_native_instructions": 4222, "slow_path_native_instructions": 1082},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "2b15c4788f7f057d7252e6a7ebee6cc865967c2048598ade1e207cca2c9293b9", "elf_sha256": "5daca0aca8200dd64a6b83b82345efe35b91142017e3951c9e1ac35530376ed2", "total_executable_text_bytes": 16017, "hot_text_bytes": 15985, "cold_text_bytes": 0, "static_native_instructions": 3531, "fast_path_native_instructions": 3531, "slow_path_native_instructions": 0}
+          }
+        },
+        {
+          "optimization": "O1",
+          "mean_of_session_medians_ns": {"P0": 14185786169.75, "P2": 5050313740.0, "P2H": 5118038356.0, "PNEG": 5522386808.0},
+          "p2h_over_p2": 1.0134099819311424,
+          "added_text_recovery": -0.0036885785798972466,
+          "hot_text_recovery": -0.0036885785798972466,
+          "p2h_recovered_budget_excess": 1.046673186253568,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 22, "fast_segments": 17, "slow_blocks": 17},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b", "elf_sha256": "b8e396458fa58822816ee57c9e928163575bf74fb130d76d47ea743880d555a2", "total_executable_text_bytes": 19413, "hot_text_bytes": 19381, "cold_text_bytes": 0, "static_native_instructions": 3983, "fast_path_native_instructions": 3983, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "17c458b7f2e2854870643ab5fde3d1f2e3f36155bb9d340b1ebc1f2946a3659e", "elf_sha256": "2d2a8c965e0349a4fca0f1df4ae39fb5e7292e729c231c389d45dc637417398f", "total_executable_text_bytes": 27004, "hot_text_bytes": 26972, "cold_text_bytes": 0, "static_native_instructions": 5304, "fast_path_native_instructions": 4223, "slow_path_native_instructions": 1081},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "0906ddffa6d2038f114f185ab71f4c0a442b22035dd7041f7659a56559e01ba8", "elf_sha256": "d707aac95b8246abfe89765234b39bca52bcfef04301b49d15d8d9ec17db1dfa", "total_executable_text_bytes": 27032, "hot_text_bytes": 27000, "cold_text_bytes": 0, "static_native_instructions": 5304, "fast_path_native_instructions": 4222, "slow_path_native_instructions": 1082},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "2b15c4788f7f057d7252e6a7ebee6cc865967c2048598ade1e207cca2c9293b9", "elf_sha256": "b643c760b97fe741d61a9be3547ad9af1865820a3ba0ff81ff07b61586dfb165", "total_executable_text_bytes": 16017, "hot_text_bytes": 15985, "cold_text_bytes": 0, "static_native_instructions": 3531, "fast_path_native_instructions": 3531, "slow_path_native_instructions": 0}
+          }
+        }
+      ]
+    },
+    {
+      "name": "scientific.xsbench.compatible_lookup.medium",
+      "K": 750000,
+      "cells": [
+        {
+          "optimization": "O0",
+          "mean_of_session_medians_ns": {"P0": 15460631125.0, "P2": 6913762855.25, "P2H": 6796148382.75, "PNEG": 6760958990.75},
+          "p2h_over_p2": 0.9829883559846591,
+          "added_text_recovery": -0.0011388932028782938,
+          "hot_text_recovery": -0.0011388932028782938,
+          "p2h_recovered_budget_excess": 0.9959550898635062,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 35, "fast_segments": 27, "slow_blocks": 27},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02", "elf_sha256": "9ad7a67092bbd4c87d3578e158ea33a98d0cfb5f5a5e471880e380c23fb236d6", "total_executable_text_bytes": 72468, "hot_text_bytes": 72420, "cold_text_bytes": 0, "static_native_instructions": 12812, "fast_path_native_instructions": 12812, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "75db258fe15129e8200974f59ea732a03f61580da079c6e5267c2a4cd87983d7", "elf_sha256": "371e6bff82d7e52aba2af9ed65919670929a194308cf6d71b89b503f0152511d", "total_executable_text_bytes": 111102, "hot_text_bytes": 111054, "cold_text_bytes": 0, "static_native_instructions": 19629, "fast_path_native_instructions": 14148, "slow_path_native_instructions": 5481},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "df7064caa3ee68e27a6939f06a5a7d51f801ca5b6db340a1a32382554eb3dfa4", "elf_sha256": "7add697ee4dbbe083197907af87d94b2e207081f7a8bf40c5dc6877f8767a793", "total_executable_text_bytes": 111146, "hot_text_bytes": 111098, "cold_text_bytes": 0, "static_native_instructions": 19629, "fast_path_native_instructions": 14147, "slow_path_native_instructions": 5482},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "b541f0d6d92c1dcf277bbe995c08aeccc78fbd5010828874572c2835dea52070", "elf_sha256": "124e17ab1adcffdf0da62d612219a6ffb45e0ddc349ef672c5c4ff48e811ba8b", "total_executable_text_bytes": 56829, "hot_text_bytes": 56781, "cold_text_bytes": 0, "static_native_instructions": 10728, "fast_path_native_instructions": 10728, "slow_path_native_instructions": 0}
+          }
+        },
+        {
+          "optimization": "O1",
+          "mean_of_session_medians_ns": {"P0": 15093005435.5, "P2": 7403344806.0, "P2H": 7251695179.75, "PNEG": 7022042615.25},
+          "p2h_over_p2": 0.9795160660182819,
+          "added_text_recovery": -0.0010523613963039015,
+          "hot_text_recovery": -0.0010523613963039015,
+          "p2h_recovered_budget_excess": 0.9715458279743523,
+          "correctness": "PASS",
+          "reproducibility": "PASS",
+          "segment_plan": {"p2_and_p2h_identical": true, "segments": 34, "fast_segments": 27, "slow_blocks": 27},
+          "variants": {
+            "P0": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3", "elf_sha256": "f94d118b127f780ab50c50599e31d6ed5e3e297f82a896af6da5c0345ba7e669", "total_executable_text_bytes": 72773, "hot_text_bytes": 72725, "cold_text_bytes": 0, "static_native_instructions": 12812, "fast_path_native_instructions": 12812, "slow_path_native_instructions": 0},
+            "P2": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "597345de5a174b35c604404b0b68011d2975348d1e3c218a549c7a02044a81bd", "elf_sha256": "f9845d216082a67bcc797295e838bfe68083b92900a58ea550b861764bff47fe", "total_executable_text_bytes": 111733, "hot_text_bytes": 111685, "cold_text_bytes": 0, "static_native_instructions": 19633, "fast_path_native_instructions": 14148, "slow_path_native_instructions": 5485},
+            "P2H": {"s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "cf601284c55dd946a4cf189a575b62466c1963fc0332b85be74d6b4ef252bd0c", "elf_sha256": "1882a63e3ce2dac75317962e557da78b8cb026056b9b1ceae89e18de377e02ae", "total_executable_text_bytes": 111774, "hot_text_bytes": 111726, "cold_text_bytes": 0, "static_native_instructions": 19633, "fast_path_native_instructions": 14147, "slow_path_native_instructions": 5486},
+            "PNEG": {"s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f", "benchmark_sha": "c5b35775b62847bf2f535d61ea68db4a774bf838", "assembly_sha256": "5a5bcdcff0c12401e826059c70c6e14d9b40d55de92de7a241a67c5c6b9e73b6", "elf_sha256": "ea54b03d8d9ce60f99231837fd65cf799cdd49e13e3f75be4f7af5bdaed24358", "total_executable_text_bytes": 57164, "hot_text_bytes": 57116, "cold_text_bytes": 0, "static_native_instructions": 10732, "fast_path_native_instructions": 10732, "slow_path_native_instructions": 0}
+          }
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "benchmark_pr": 24,
+    "benchmark_pr_state": "OPEN_DRAFT_UNMERGED",
+    "benchmark_remote_head_at_audit": "e1b64d96d6979e60e71b26036d5865e7f9da04b6",
+    "local_report_branch": "research/benchmarks-2.2.5-s3-segment-budget-validation",
+    "local_report_head_before_report_commit": "c5b35775b62847bf2f535d61ea68db4a774bf838",
+    "merge": false,
+    "tag": false,
+    "release": false
+  },
+  "budget_architecture_search": "CLOSED",
+  "no_new_budget_architecture": true,
+  "next_campaign": "S3_EXACT_SEGMENT_BUDGET_PRODUCTION_READINESS_REVIEW",
+  "s3_production_change_ready": false,
+  "pr190_activation": false,
+  "power_actions": "FORBIDDEN"
+}

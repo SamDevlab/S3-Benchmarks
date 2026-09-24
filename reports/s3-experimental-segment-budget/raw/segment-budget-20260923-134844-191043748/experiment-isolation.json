@@ -1,0 +1,86 @@
+{
+  "realworld.jsmn": {
+    "O0": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9",
+      "candidate_source_sha256": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb",
+      "control_p0_assembly_sha256": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O0",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "0ceaccbaf70bec221acbd93ef10ab5227e09e4874cc3bd1d627d56d68c5ffc79",
+      "workload": "realworld.jsmn"
+    },
+    "O1": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add",
+      "candidate_source_sha256": "62f487083a484b45f578aae2f0cb11a0c3464bbebb4caa270757733ed8f1debb",
+      "control_p0_assembly_sha256": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O1",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "f9bfb0b537da9dac606f3d04f3d195fff5f30e0248dc810a3e0cff8771191e0b",
+      "workload": "realworld.jsmn"
+    }
+  },
+  "scientific.rmsd.batch": {
+    "O0": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "candidate_source_sha256": "71135b58661b3727a9460c0f6e5a3035ffde89c4ed31118ec161288fa8d620ea",
+      "control_p0_assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O0",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "d348986659158bee76e532c1bb8a095f74a6aa271a0cd289e872dbedaa27755d",
+      "workload": "scientific.rmsd.batch"
+    },
+    "O1": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "candidate_source_sha256": "71135b58661b3727a9460c0f6e5a3035ffde89c4ed31118ec161288fa8d620ea",
+      "control_p0_assembly_sha256": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O1",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "d348986659158bee76e532c1bb8a095f74a6aa271a0cd289e872dbedaa27755d",
+      "workload": "scientific.rmsd.batch"
+    }
+  },
+  "scientific.xsbench.compatible_lookup.medium": {
+    "O0": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02",
+      "candidate_source_sha256": "4f1dde22f2e6de864596fa9d9a85c75b9304f4c687220a348a974378967dc2eb",
+      "control_p0_assembly_sha256": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O0",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "777d6de48ae1e5d6a38b7ab9dbad8f1d0a7593ad0035ebd3b55eedc97f841e39",
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    },
+    "O1": {
+      "assembly_equal": true,
+      "backend_configuration_diff": "instruction_budget_mode only",
+      "candidate_p0_assembly_sha256": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3",
+      "candidate_source_sha256": "4f1dde22f2e6de864596fa9d9a85c75b9304f4c687220a348a974378967dc2eb",
+      "control_p0_assembly_sha256": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3",
+      "control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+      "experiment_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+      "optimization": "O1",
+      "p0_and_p2_same_program_instance": true,
+      "program_fingerprint": "58cd4cacaf2696d5551fa126eae2f872fe484d38d4a0ff97954ff6d71fd9c021",
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    }
+  }
+}

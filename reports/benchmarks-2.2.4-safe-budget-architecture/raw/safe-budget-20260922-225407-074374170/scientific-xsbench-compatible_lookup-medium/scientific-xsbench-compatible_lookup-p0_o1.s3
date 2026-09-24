@@ -1,0 +1,70 @@
+fn xsbench_binary_search(metadata: &[i64], nuclide: i64, energy_ticks: i64, last_point: i64) -> i64:
+    mut low: i64 = 0
+    mut high: i64 = last_point
+    while high - low > 1:
+        mut middle: i64 = low + (high - low) / 2
+        mut middle_index: i64 = 4 + nuclide * 5 + middle
+        mut middle_energy_ticks: i64 = metadata[middle_index]
+        match middle_energy_ticks <=> energy_ticks:
+            1:
+                high = middle
+
+            else:
+                low = middle
+    return low
+
+export fn xs_lookup_batch(data: &[f64], metadata: &[i64]) -> f64:
+    mut lookup: i64 = 0
+    mut checksum: f64 = 0.0
+    mut lookup_limit: i64 = metadata[35]
+    while lookup < lookup_limit:
+        mut query_energy_index: i64 = 19 + lookup
+        mut query_material_index: i64 = 27 + lookup
+        mut energy_ticks: i64 = metadata[query_energy_index]
+        mut energy: f64 = to_f64(energy_ticks) / 100.0
+        mut material: i64 = metadata[query_material_index]
+        mut position: i64 = 0
+        mut total_xs: f64 = 0.0
+        mut elastic_xs: f64 = 0.0
+        mut absorption_xs: f64 = 0.0
+        mut fission_xs: f64 = 0.0
+        mut nu_fission_xs: f64 = 0.0
+        while position < 2:
+            mut composition_index: i64 = material * 2 + position
+            mut nuclide: i64 = metadata[composition_index]
+            mut concentration_index: i64 = 6 + material * 2 + position
+            mut concentration: f64 = data[concentration_index]
+            mut grid_base: i64 = 10 + nuclide * 25
+            mut low: i64 = xsbench_binary_search(metadata, nuclide, energy_ticks, 4)
+            mut high: i64 = low + 1
+            mut low_index: i64 = grid_base + low * 5
+            mut high_index: i64 = grid_base + high * 5
+            mut low_energy_index: i64 = 4 + nuclide * 5 + low
+            mut high_energy_index: i64 = 4 + nuclide * 5 + high
+            mut low_energy_ticks: i64 = metadata[low_energy_index]
+            mut high_energy_ticks: i64 = metadata[high_energy_index]
+            mut low_energy: f64 = to_f64(low_energy_ticks) / 100.0
+            mut high_energy: f64 = to_f64(high_energy_ticks) / 100.0
+            mut factor: f64 = (high_energy - energy) / (high_energy - low_energy)
+            mut high_total_index: i64 = high_index
+            mut low_total_index: i64 = low_index
+            mut high_elastic_index: i64 = high_index + 1
+            mut low_elastic_index: i64 = low_index + 1
+            mut high_absorption_index: i64 = high_index + 2
+            mut low_absorption_index: i64 = low_index + 2
+            mut high_fission_index: i64 = high_index + 3
+            mut low_fission_index: i64 = low_index + 3
+            mut high_nu_fission_index: i64 = high_index + 4
+            mut low_nu_fission_index: i64 = low_index + 4
+            total_xs = total_xs + concentration * (data[high_total_index] - factor * (data[high_total_index] - data[low_total_index]))
+            elastic_xs = elastic_xs + concentration * (data[high_elastic_index] - factor * (data[high_elastic_index] - data[low_elastic_index]))
+            absorption_xs = absorption_xs + concentration * (data[high_absorption_index] - factor * (data[high_absorption_index] - data[low_absorption_index]))
+            fission_xs = fission_xs + concentration * (data[high_fission_index] - factor * (data[high_fission_index] - data[low_fission_index]))
+            nu_fission_xs = nu_fission_xs + concentration * (data[high_nu_fission_index] - factor * (data[high_nu_fission_index] - data[low_nu_fission_index]))
+            position = position + 1
+        checksum = checksum + total_xs + 3.0 * elastic_xs + 5.0 * absorption_xs + 7.0 * fission_xs + 11.0 * nu_fission_xs
+        lookup = lookup + 1
+    return checksum
+
+fn main() -> i64:
+    return 0
