@@ -36,6 +36,8 @@ Times below are arithmetic means of the two session medians, seconds per fixed w
 
 All P2H/P2 ratios are within the predeclared 1.05 ceiling. That safety/performance result does not offset the absent structural win: all added-text and hot-text recovery values are negative, failing the predeclared 25% materiality threshold.
 
+The hot-layout materiality threshold was also frozen at 25%; none of the six cells meets it. The previous hypothesis ledger remains unchanged: H1 `CONFIRMED`; H2 `CONFIRMED_CAUSAL_XSBENCH`; H3 `NOT_CONFIRMED`; H4/H5 `OPEN`; H6 `WEAKENED`; H7 `CONFIRMED_GENERAL`; H8 `CONFIRMED_SAFE_NOT_MATERIAL`; H9 `CONFIRMED_EXACT_MAPPING`; H10 `CONFIRMED`; H11 `CONFIRMED_MATERIAL`. H12 is `SAFE_NOT_STRUCTURALLY_MATERIAL`; H12A is `NOT_CONFIRMED`. Evidence Score remains 89/100 under the existing rubric. `QUALIFIED_PERFORMANCE_INDEX=NOT_AVAILABLE`.
+
 ## Static structure
 
 Each tuple is `total executable text bytes / hot .text bytes / cold executable text bytes / total native instructions / fast-path instructions / slow-path instructions`. P2H had zero detected cold executable bytes in every cell.

@@ -6,6 +6,23 @@
   "current_p2": "STRONG_SUCCESS",
   "h12": "SAFE_NOT_STRUCTURALLY_MATERIAL",
   "h12a": "NOT_CONFIRMED",
+  "hypothesis_ledger": {
+    "H1": "CONFIRMED",
+    "H2": "CONFIRMED_CAUSAL_XSBENCH",
+    "H3": "NOT_CONFIRMED",
+    "H4": "OPEN",
+    "H5": "OPEN",
+    "H6": "WEAKENED",
+    "H7": "CONFIRMED_GENERAL",
+    "H8": "CONFIRMED_SAFE_NOT_MATERIAL",
+    "H9": "CONFIRMED_EXACT_MAPPING",
+    "H10": "CONFIRMED",
+    "H11": "CONFIRMED_MATERIAL",
+    "H12": "SAFE_NOT_STRUCTURALLY_MATERIAL",
+    "H12A": "NOT_CONFIRMED"
+  },
+  "evidence_score": {"value": 89, "rubric_changed": false},
+  "qualified_performance_index": "NOT_AVAILABLE",
   "s3_control_sha": "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
   "p2_baseline_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
   "p2h_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
@@ -48,6 +65,7 @@
   "thresholds": {
     "max_p2h_over_p2": 1.05,
     "minimum_added_text_recovery": 0.25,
+    "minimum_hot_layout_recovery": 0.25,
     "strong_added_text_recovery": 0.5,
     "minimum_retained_budget_recovery": 0.5,
     "max_session_median_delta": 0.25
