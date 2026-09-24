@@ -1,0 +1,80 @@
+{
+  "realworld.jsmn": {
+    "PNEG_O0": {
+      "diagnostic_only": true,
+      "expected_sites": 2475,
+      "input_assembly_sha": "c461d52a360a5fe5295cb31929da29a0b5e0031833ef56c59ed0db527697b7a9",
+      "output_assembly_sha": "9860125c3d081e0f352661360eae184b971db90ab17f07fbaa4ee40c85d85b08",
+      "production_artifact": false,
+      "removed_sites": 2475,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    },
+    "PNEG_O1": {
+      "diagnostic_only": true,
+      "expected_sites": 2427,
+      "input_assembly_sha": "4d95e0aa0301d8eb2a7f7fb81c3c7ba96d7be13984d0eb39effa045120f55add",
+      "output_assembly_sha": "d758083585001a9b2aaf100df2649ee3d74e84a8f6e576a971fed641dccbb4ff",
+      "production_artifact": false,
+      "removed_sites": 2427,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    }
+  },
+  "scientific.rmsd.batch": {
+    "P0_O0": {},
+    "P0_O1": {},
+    "P2H_O0": {},
+    "P2H_O1": {},
+    "P2_O0": {},
+    "P2_O1": {},
+    "PNEG_O0": {
+      "diagnostic_only": true,
+      "expected_sites": 113,
+      "input_assembly_sha": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "output_assembly_sha": "2b15c4788f7f057d7252e6a7ebee6cc865967c2048598ade1e207cca2c9293b9",
+      "production_artifact": false,
+      "removed_sites": 113,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    },
+    "PNEG_O1": {
+      "diagnostic_only": true,
+      "expected_sites": 113,
+      "input_assembly_sha": "e637381d6431456f69c0412da5f307e7afe717bce791a8f1f2e92c2b04fe993b",
+      "output_assembly_sha": "2b15c4788f7f057d7252e6a7ebee6cc865967c2048598ade1e207cca2c9293b9",
+      "production_artifact": false,
+      "removed_sites": 113,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    }
+  },
+  "scientific.xsbench.compatible_lookup.medium": {
+    "P0_O0": {},
+    "P0_O1": {},
+    "P2H_O0": {},
+    "P2H_O1": {},
+    "P2_O0": {},
+    "P2_O1": {},
+    "PNEG_O0": {
+      "diagnostic_only": true,
+      "expected_sites": 521,
+      "input_assembly_sha": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02",
+      "output_assembly_sha": "b541f0d6d92c1dcf277bbe995c08aeccc78fbd5010828874572c2835dea52070",
+      "production_artifact": false,
+      "removed_sites": 521,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    },
+    "PNEG_O1": {
+      "diagnostic_only": true,
+      "expected_sites": 520,
+      "input_assembly_sha": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3",
+      "output_assembly_sha": "5a5bcdcff0c12401e826059c70c6e14d9b40d55de92de7a241a67c5c6b9e73b6",
+      "production_artifact": false,
+      "removed_sites": 520,
+      "s3_source_changed": false,
+      "unexpected_mutations": 0
+    }
+  }
+}

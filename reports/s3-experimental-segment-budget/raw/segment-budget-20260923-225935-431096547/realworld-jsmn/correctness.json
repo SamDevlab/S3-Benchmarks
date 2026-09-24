@@ -1,0 +1,125 @@
+{
+  "status": "PASS",
+  "variants": {
+    "P0_O0": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p0/p0_o0",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 26676770989,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "P0_O1": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p0/p0_o1",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 24814016971,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "P2H_O0": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p2h/p2h_o0",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 13647790694,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "P2H_O1": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p2h/p2h_o1",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 14074539315,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "P2_O0": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/p2/p2_o0",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 13578514754,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "P2_O1": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/p2/p2_o1",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 13278776289,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "PNEG_O0": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o0/pneg/pneg_o0",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 12113466649,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "PNEG_O1": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "0",
+        "/tmp/S3-Benchmarks-hardening-clone-c5/reports/s3-experimental-segment-budget/raw/segment-budget-20260923-225935-431096547/realworld-jsmn/o1/pneg/pneg_o1",
+        "--loop",
+        "1"
+      ],
+      "elapsed_ns": 11555627523,
+      "expected": 0,
+      "observed": 0,
+      "returncode": 0,
+      "status": "PASS"
+    }
+  }
+}

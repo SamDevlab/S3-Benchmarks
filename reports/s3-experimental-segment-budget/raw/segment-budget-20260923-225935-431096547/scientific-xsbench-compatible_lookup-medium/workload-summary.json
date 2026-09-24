@@ -1,0 +1,427 @@
+{
+  "K": 750000,
+  "all_samples_pass": true,
+  "all_variants_reproducible": true,
+  "cells": [
+    {
+      "K": 750000,
+      "T_ns_mean_of_session_medians": {
+        "P0": 15460631125.0,
+        "P2": 6913762855.25,
+        "P2H": 6796148382.75,
+        "PNEG": 6760958990.75
+      },
+      "added_text_recovery": -0.0011388932028782938,
+      "code_size": {
+        "P2H_added_hot_text_bytes": 38678,
+        "P2H_added_total_executable_text_bytes": 38678,
+        "P2_added_hot_text_bytes": 38634,
+        "P2_added_total_executable_text_bytes": 38634,
+        "variants": {
+          "P0": {
+            "assembly_sha256": "32f3b024b678394b931e422914ed64ec7c46995c78cea8cd3238c54da6784d02",
+            "cold_text_bytes": 0,
+            "elf_bytes": 279232,
+            "elf_sha256": "9ad7a67092bbd4c87d3578e158ea33a98d0cfb5f5a5e471880e380c23fb236d6",
+            "fast_path_native_instructions": 12812,
+            "fast_segment_count": null,
+            "hot_text_bytes": 72420,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": null,
+            "slow_block_count": 0,
+            "slow_path_native_instructions": 0,
+            "static_native_instructions": 12812,
+            "total_executable_text_bytes": 72468
+          },
+          "P2": {
+            "assembly_sha256": "75db258fe15129e8200974f59ea732a03f61580da079c6e5267c2a4cd87983d7",
+            "cold_text_bytes": 0,
+            "elf_bytes": 430784,
+            "elf_sha256": "371e6bff82d7e52aba2af9ed65919670929a194308cf6d71b89b503f0152511d",
+            "fast_path_native_instructions": 14148,
+            "fast_segment_count": 27,
+            "hot_text_bytes": 111054,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": 35,
+            "slow_block_count": 27,
+            "slow_path_native_instructions": 5481,
+            "static_native_instructions": 19629,
+            "total_executable_text_bytes": 111102
+          },
+          "P2H": {
+            "assembly_sha256": "df7064caa3ee68e27a6939f06a5a7d51f801ca5b6db340a1a32382554eb3dfa4",
+            "cold_text_bytes": 0,
+            "elf_bytes": 430792,
+            "elf_sha256": "7add697ee4dbbe083197907af87d94b2e207081f7a8bf40c5dc6877f8767a793",
+            "fast_path_native_instructions": 14147,
+            "fast_segment_count": 27,
+            "hot_text_bytes": 111098,
+            "s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
+            "segment_count": 35,
+            "slow_block_count": 27,
+            "slow_path_native_instructions": 5482,
+            "static_native_instructions": 19629,
+            "total_executable_text_bytes": 111146
+          },
+          "PNEG": {
+            "assembly_sha256": "b541f0d6d92c1dcf277bbe995c08aeccc78fbd5010828874572c2835dea52070",
+            "cold_text_bytes": 0,
+            "elf_bytes": 262856,
+            "elf_sha256": "124e17ab1adcffdf0da62d612219a6ffb45e0ddc349ef672c5c4ff48e811ba8b",
+            "fast_path_native_instructions": 10728,
+            "fast_segment_count": null,
+            "hot_text_bytes": 56781,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": null,
+            "slow_block_count": 0,
+            "slow_path_native_instructions": 0,
+            "static_native_instructions": 10728,
+            "total_executable_text_bytes": 56829
+          }
+        }
+      },
+      "correctness_pass": true,
+      "hot_text_recovery": -0.0011388932028782938,
+      "optimization": "O0",
+      "p2_over_pneg": 1.02260091574421,
+      "p2_recovered_budget_excess": 0.9824356754896059,
+      "p2h_recovered_budget_excess": 0.9959550898635062,
+      "p2h_vs_p2": 0.9829883559846591,
+      "relative_session_median_delta": {
+        "P0": 0.02171040648488759,
+        "P2": 0.0386417470969863,
+        "P2H": 0.0019041723409002084,
+        "PNEG": 0.01884060729737149
+      },
+      "reproducibility_pass": true,
+      "session_medians_ns": {
+        "P0": {
+          "run_1": 15290961028.5,
+          "run_2": 15630301221.5
+        },
+        "P2": {
+          "run_1": 6777551189.0,
+          "run_2": 7049974521.5
+        },
+        "P2H": {
+          "run_1": 6789671697.5,
+          "run_2": 6802625068.0
+        },
+        "PNEG": {
+          "run_1": 6696663016.5,
+          "run_2": 6825254965.0
+        }
+      },
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    },
+    {
+      "K": 750000,
+      "T_ns_mean_of_session_medians": {
+        "P0": 15093005435.5,
+        "P2": 7403344806.0,
+        "P2H": 7251695179.75,
+        "PNEG": 7022042615.25
+      },
+      "added_text_recovery": -0.0010523613963039015,
+      "code_size": {
+        "P2H_added_hot_text_bytes": 39001,
+        "P2H_added_total_executable_text_bytes": 39001,
+        "P2_added_hot_text_bytes": 38960,
+        "P2_added_total_executable_text_bytes": 38960,
+        "variants": {
+          "P0": {
+            "assembly_sha256": "8cca15cb120147e64927fe942eac9a6b2edcdb1e209cf9a5f53a2dea9b19a7e3",
+            "cold_text_bytes": 0,
+            "elf_bytes": 279232,
+            "elf_sha256": "f94d118b127f780ab50c50599e31d6ed5e3e297f82a896af6da5c0345ba7e669",
+            "fast_path_native_instructions": 12812,
+            "fast_segment_count": null,
+            "hot_text_bytes": 72725,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": null,
+            "slow_block_count": 0,
+            "slow_path_native_instructions": 0,
+            "static_native_instructions": 12812,
+            "total_executable_text_bytes": 72773
+          },
+          "P2": {
+            "assembly_sha256": "597345de5a174b35c604404b0b68011d2975348d1e3c218a549c7a02044a81bd",
+            "cold_text_bytes": 0,
+            "elf_bytes": 430784,
+            "elf_sha256": "f9845d216082a67bcc797295e838bfe68083b92900a58ea550b861764bff47fe",
+            "fast_path_native_instructions": 14148,
+            "fast_segment_count": 27,
+            "hot_text_bytes": 111685,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": 34,
+            "slow_block_count": 27,
+            "slow_path_native_instructions": 5485,
+            "static_native_instructions": 19633,
+            "total_executable_text_bytes": 111733
+          },
+          "P2H": {
+            "assembly_sha256": "cf601284c55dd946a4cf189a575b62466c1963fc0332b85be74d6b4ef252bd0c",
+            "cold_text_bytes": 0,
+            "elf_bytes": 430792,
+            "elf_sha256": "1882a63e3ce2dac75317962e557da78b8cb026056b9b1ceae89e18de377e02ae",
+            "fast_path_native_instructions": 14147,
+            "fast_segment_count": 27,
+            "hot_text_bytes": 111726,
+            "s3_source_sha": "6f320242e3c1ebbb0d2ac5d6d85272ab375e5333",
+            "segment_count": 34,
+            "slow_block_count": 27,
+            "slow_path_native_instructions": 5486,
+            "static_native_instructions": 19633,
+            "total_executable_text_bytes": 111774
+          },
+          "PNEG": {
+            "assembly_sha256": "5a5bcdcff0c12401e826059c70c6e14d9b40d55de92de7a241a67c5c6b9e73b6",
+            "cold_text_bytes": 0,
+            "elf_bytes": 262856,
+            "elf_sha256": "ea54b03d8d9ce60f99231837fd65cf799cdd49e13e3f75be4f7af5bdaed24358",
+            "fast_path_native_instructions": 10732,
+            "fast_segment_count": null,
+            "hot_text_bytes": 57116,
+            "s3_source_sha": "1a76e341098b54a639fec22eecea362cc243c46f",
+            "segment_count": null,
+            "slow_block_count": 0,
+            "slow_path_native_instructions": 0,
+            "static_native_instructions": 10732,
+            "total_executable_text_bytes": 57164
+          }
+        }
+      },
+      "correctness_pass": true,
+      "hot_text_recovery": -0.0010523613963039015,
+      "optimization": "O1",
+      "p2_over_pneg": 1.0543007514539877,
+      "p2_recovered_budget_excess": 0.9527562944791029,
+      "p2h_recovered_budget_excess": 0.9715458279743523,
+      "p2h_vs_p2": 0.9795160660182819,
+      "relative_session_median_delta": {
+        "P0": 0.014187730643458216,
+        "P2": 0.018203078956037885,
+        "P2H": 0.003157164012701479,
+        "PNEG": 0.011165538295664844
+      },
+      "reproducibility_pass": true,
+      "session_medians_ns": {
+        "P0": {
+          "run_1": 14985172737.0,
+          "run_2": 15200838134.0
+        },
+        "P2": {
+          "run_1": 7471345552.5,
+          "run_2": 7335344059.5
+        },
+        "P2H": {
+          "run_1": 7240229685.0,
+          "run_2": 7263160674.5
+        },
+        "PNEG": {
+          "run_1": 6982620085.5,
+          "run_2": 7061465145.0
+        }
+      },
+      "workload": "scientific.xsbench.compatible_lookup.medium"
+    }
+  ],
+  "sessions": {
+    "run_1": {
+      "P0_O0": {
+        "N": 30,
+        "cv": 0.054518783256214245,
+        "mad_ns": 525790357.0,
+        "max_ns": 17042937213.0,
+        "mean_ns": 15510309447.566668,
+        "median_ns": 15290961028.5,
+        "min_ns": 14183500124.0,
+        "p95_ns": 17005622922.0,
+        "status": "PASS",
+        "stddev_ns": 845603199.0086993
+      },
+      "P0_O1": {
+        "N": 30,
+        "cv": 0.05945506477997892,
+        "mad_ns": 509485677.5,
+        "max_ns": 17594340384.0,
+        "mean_ns": 15096108810.1,
+        "median_ns": 14985172737.0,
+        "min_ns": 13728464053.0,
+        "p95_ns": 16869168320.0,
+        "status": "PASS",
+        "stddev_ns": 897540127.230106
+      },
+      "P2H_O0": {
+        "N": 30,
+        "cv": 0.09047838157072133,
+        "mad_ns": 372603123.0,
+        "max_ns": 8355932606.0,
+        "mean_ns": 6863458310.8,
+        "median_ns": 6789671697.5,
+        "min_ns": 6047717338.0,
+        "p95_ns": 8269423465.0,
+        "status": "PASS",
+        "stddev_ns": 620994599.9393009
+      },
+      "P2H_O1": {
+        "N": 30,
+        "cv": 0.09356201036629987,
+        "mad_ns": 272984613.5,
+        "max_ns": 9769232193.0,
+        "mean_ns": 7404262377.333333,
+        "median_ns": 7240229685.0,
+        "min_ns": 6534761361.0,
+        "p95_ns": 9079561770.0,
+        "status": "PASS",
+        "stddev_ns": 692757673.3028654
+      },
+      "P2_O0": {
+        "N": 30,
+        "cv": 0.10928457175634908,
+        "mad_ns": 425898470.0,
+        "max_ns": 9052814893.0,
+        "mean_ns": 7028708315.033334,
+        "median_ns": 6777551189.0,
+        "min_ns": 6068476233.0,
+        "p95_ns": 8488442673.0,
+        "status": "PASS",
+        "stddev_ns": 768129378.2087078
+      },
+      "P2_O1": {
+        "N": 30,
+        "cv": 0.08566512721082802,
+        "mad_ns": 358773831.0,
+        "max_ns": 9201969852.0,
+        "mean_ns": 7599098521.9,
+        "median_ns": 7471345552.5,
+        "min_ns": 6660066473.0,
+        "p95_ns": 9183821189.0,
+        "status": "PASS",
+        "stddev_ns": 650977741.5661786
+      },
+      "PNEG_O0": {
+        "N": 30,
+        "cv": 0.08044831701438401,
+        "mad_ns": 200464500.5,
+        "max_ns": 8193779127.0,
+        "mean_ns": 6871644464.633333,
+        "median_ns": 6696663016.5,
+        "min_ns": 6108782801.0,
+        "p95_ns": 8053467037.0,
+        "status": "PASS",
+        "stddev_ns": 552812232.3009595
+      },
+      "PNEG_O1": {
+        "N": 30,
+        "cv": 0.07498641324825633,
+        "mad_ns": 354438376.0,
+        "max_ns": 8324464000.0,
+        "mean_ns": 7131464591.466666,
+        "median_ns": 6982620085.5,
+        "min_ns": 6281222357.0,
+        "p95_ns": 7994554573.0,
+        "status": "PASS",
+        "stddev_ns": 534762950.92102695
+      }
+    },
+    "run_2": {
+      "P0_O0": {
+        "N": 30,
+        "cv": 0.15160780108527705,
+        "mad_ns": 595722313.0,
+        "max_ns": 24403041765.0,
+        "mean_ns": 16511019388.766666,
+        "median_ns": 15630301221.5,
+        "min_ns": 14511151912.0,
+        "p95_ns": 23857579339.0,
+        "status": "PASS",
+        "stddev_ns": 2503199343.207289
+      },
+      "P0_O1": {
+        "N": 30,
+        "cv": 0.09089109014004106,
+        "mad_ns": 654570166.5,
+        "max_ns": 21007150276.0,
+        "mean_ns": 15572553710.6,
+        "median_ns": 15200838134.0,
+        "min_ns": 14142716175.0,
+        "p95_ns": 18455983750.0,
+        "status": "PASS",
+        "stddev_ns": 1415406383.0207756
+      },
+      "P2H_O0": {
+        "N": 30,
+        "cv": 0.2097577794793491,
+        "mad_ns": 263450163.5,
+        "max_ns": 13135120041.0,
+        "mean_ns": 7318203384.1,
+        "median_ns": 6802625068.0,
+        "min_ns": 6136662903.0,
+        "p95_ns": 11943033585.0,
+        "status": "PASS",
+        "stddev_ns": 1535050091.6270742
+      },
+      "P2H_O1": {
+        "N": 30,
+        "cv": 0.18467825787975325,
+        "mad_ns": 373234082.0,
+        "max_ns": 12773982569.0,
+        "mean_ns": 7818414589.4,
+        "median_ns": 7263160674.5,
+        "min_ns": 6643248731.0,
+        "p95_ns": 11859979435.0,
+        "status": "PASS",
+        "stddev_ns": 1443891185.7520382
+      },
+      "P2_O0": {
+        "N": 30,
+        "cv": 0.21917857055452783,
+        "mad_ns": 468265000.5,
+        "max_ns": 13273215542.0,
+        "mean_ns": 7524533280.933333,
+        "median_ns": 7049974521.5,
+        "min_ns": 6077234846.0,
+        "p95_ns": 11917427776.0,
+        "status": "PASS",
+        "stddev_ns": 1649216448.6049395
+      },
+      "P2_O1": {
+        "N": 30,
+        "cv": 0.18118063330814302,
+        "mad_ns": 417443549.0,
+        "max_ns": 13403584887.0,
+        "mean_ns": 7928381039.366667,
+        "median_ns": 7335344059.5,
+        "min_ns": 6710406823.0,
+        "p95_ns": 10599411948.0,
+        "status": "PASS",
+        "stddev_ns": 1436469097.820726
+      },
+      "PNEG_O0": {
+        "N": 30,
+        "cv": 0.1890943306193398,
+        "mad_ns": 365844985.5,
+        "max_ns": 13882222355.0,
+        "mean_ns": 7230654442.9,
+        "median_ns": 6825254965.0,
+        "min_ns": 6147471948.0,
+        "p95_ns": 8142250840.0,
+        "status": "PASS",
+        "stddev_ns": 1367275761.8199308
+      },
+      "PNEG_O1": {
+        "N": 30,
+        "cv": 0.17785861053390262,
+        "mad_ns": 312482677.0,
+        "max_ns": 12596380960.0,
+        "mean_ns": 7525583395.833333,
+        "median_ns": 7061465145.0,
+        "min_ns": 6502400409.0,
+        "p95_ns": 11114819292.0,
+        "status": "PASS",
+        "stddev_ns": 1338489806.2399251
+      }
+    }
+  }
+}
