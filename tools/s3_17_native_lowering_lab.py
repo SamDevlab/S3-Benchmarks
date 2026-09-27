@@ -30,6 +30,10 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _text_artifact_sha256(data: bytes) -> str:
+    return _sha256(data.replace(b"\r\n", b"\n"))
+
+
 def _version_line(command: str) -> str:
     executable = shutil.which(command)
     if executable is None:
@@ -56,14 +60,14 @@ def load_contract(
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     fixture_bytes = fixture_path.read_bytes()
-    if _sha256(fixture_bytes) != manifest["reference_fixture"]["sha256"]:
+    if _text_artifact_sha256(fixture_bytes) != manifest["reference_fixture"]["sha256"]:
         raise ValueError("reference fixture SHA-256 does not match the manifest")
     dataset_bytes = dataset_path.read_bytes()
-    if _sha256(dataset_bytes) != manifest["dataset_manifest"]["sha256"]:
+    if _text_artifact_sha256(dataset_bytes) != manifest["dataset_manifest"]["sha256"]:
         raise ValueError("dataset manifest SHA-256 does not match the manifest")
     adapter = manifest["control_build_adapter"]
     adapter_bytes = (ROOT / adapter["path"]).read_bytes()
-    if _sha256(adapter_bytes) != adapter["sha256"]:
+    if _text_artifact_sha256(adapter_bytes) != adapter["sha256"]:
         raise ValueError("control build adapter SHA-256 does not match the manifest")
     max_instructions = manifest["protocol"]["max_instructions"]
     if isinstance(max_instructions, bool) or not isinstance(max_instructions, int) or max_instructions < 1:
