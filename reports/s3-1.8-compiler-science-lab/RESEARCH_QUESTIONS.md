@@ -9,13 +9,13 @@
 
 ## Evidence-Lab Questions
 
-| ID | Question | Status | Qualification rule |
+| ID | Question | Final status | Evidence |
 | --- | --- | --- | --- |
-| RQ-L1 | Can artifacts be attributed across source, IR, Assembly and native regions without inventing lineage? | OPEN | Preserve unknown ranges and report coverage. |
-| RQ-L2 | Which structural metrics predict measured runtime for the continuity kernels? | OPEN | Paired, same-host, same-workload evidence; no universal model claim. |
-| RQ-L3 | Does the S3 1.6 PER optimization change exact/hybrid historical comparisons? | OPEN | Re-run only with validated comparable historical protocol; otherwise classify unavailable. |
-| RQ-L4 | Can compiler experiments and hypotheses be replicated across versions? | OPEN | Pinned SHAs, dataset, harness, toolchain, and raw samples. |
-| RQ-L5 | Can an automated experiment engine safely perform ablations? | NOT_STARTED | First establish correctness, provenance, and reproducibility invariants. |
+| RQ-L1 | Can artifacts be attributed across source, IR, Assembly and native regions without inventing lineage? | PARTIAL | Nine artifacts are hash- and candidate-pinned; S3 Assembly-to-emitted-text lineage covers 34.6%-39.3%, and unknown remains explicit. |
+| RQ-L2 | Which structural metrics predict measured runtime for the continuity kernels? | OPEN | No current paired runtime experiment was run; static metrics are not a runtime oracle. |
+| RQ-L3 | Does the S3 1.6 PER optimization change exact/hybrid historical comparisons? | INCONCLUSIVE | Historical #23/#24 evidence has no matched 1.8 artifact and protocol. |
+| RQ-L4 | Can compiler experiments and hypotheses be replicated across versions? | PARTIAL | Deterministic registry and cross-version records are pinned, but the 1.7 ELF and 1.8 text/span metric families are not directly comparable. |
+| RQ-L5 | Can an automated experiment engine safely perform ablations? | NOT_STARTED | The lab validates snapshots and registry invariants; it does not execute experiments or automated ablations. |
 
 ## Inherited 1.7 Observation
 
