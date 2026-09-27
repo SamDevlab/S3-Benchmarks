@@ -1,0 +1,671 @@
+{
+  "campaign_id": "S3_1_8_MACHINE_INTELLIGENCE_VERIFIED_OPTIMIZATION_PORTABLE_COMPUTE_AND_COMPILER_SCIENCE_LAB",
+  "default_policy": {
+    "changed": false,
+    "instruction_budget": "PER_INSTRUCTION"
+  },
+  "experiments": [
+    {
+      "classification": "KNOWN_ORIGIN_AND_NO_ESCAPE_ON_8_OF_8_REFERENCE_VALUES; DIAGNOSTIC_ONLY",
+      "evidence_artifacts": [
+        {
+          "path": "evidence/s3-1.8-baseline/references/energy.pv-timeseries-aggregation.v1.references.json",
+          "sha256": "0988d12365f294e558f216e9a9d7bb283229a5c68dfd59dc7a5538a4fde95489"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/references/engineering.point-cloud-summary.v1.references.json",
+          "sha256": "31df007fd7af517d42cc94ab678b66eb222f7b35e5857244f5053511755a0d49"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/references/geospatial.raster-window-statistics.v1.references.json",
+          "sha256": "f312c430a272cb2400afd5fcc52f1ab254b85d6799c18601bd3e0aa9e4502be2"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-REF-001",
+      "maturity": "EXPERIMENTAL",
+      "observations": {
+        "limitations": [
+          "interprocedural no-escape summaries absent",
+          "facts do not authorize transformations"
+        ],
+        "workloads": [
+          {
+            "complete_function_count": 3,
+            "escape_status_counts": {
+              "NO_ESCAPE": 3
+            },
+            "function_count": 3,
+            "known_origin_count": 3,
+            "read_uses": 5,
+            "reference_values": 3,
+            "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+            "transformation_authorized": false,
+            "unknown_uses": 0,
+            "workload_id": "energy.pv-timeseries-aggregation.v1",
+            "write_uses": 5
+          },
+          {
+            "complete_function_count": 2,
+            "escape_status_counts": {
+              "NO_ESCAPE": 2
+            },
+            "function_count": 2,
+            "known_origin_count": 2,
+            "read_uses": 11,
+            "reference_values": 2,
+            "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+            "transformation_authorized": false,
+            "unknown_uses": 0,
+            "workload_id": "engineering.point-cloud-summary.v1",
+            "write_uses": 10
+          },
+          {
+            "complete_function_count": 3,
+            "escape_status_counts": {
+              "NO_ESCAPE": 3
+            },
+            "function_count": 3,
+            "known_origin_count": 3,
+            "read_uses": 7,
+            "reference_values": 3,
+            "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+            "transformation_authorized": false,
+            "unknown_uses": 0,
+            "workload_id": "geospatial.raster-window-statistics.v1",
+            "write_uses": 6
+          }
+        ]
+      },
+      "protocol": {
+        "execution_performed": false,
+        "kind": "STATIC_IR_ANALYSIS",
+        "transformation_authorized": false
+      },
+      "research_question": "RQ1: can references be analyzed more precisely without weakening safety?"
+    },
+    {
+      "classification": "ASSEMBLY_TO_GENERATED_TEXT_LINEAGE; BINARY_AND_RUNTIME_ATTRIBUTION_INCOMPLETE",
+      "evidence_artifacts": [
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/energy.pv-timeseries-aggregation.v1.codegen.json",
+          "sha256": "3482a36623c66a993f8edb12a095f903bc5285344ecf89a77841e7698df1b671"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/engineering.point-cloud-summary.v1.codegen.json",
+          "sha256": "82f788ee0a42de4032e0642da24fec1865c9e18ef68ab4b4c9243479f1d5202a"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/geospatial.raster-window-statistics.v1.codegen.json",
+          "sha256": "6d9c0bf467a6e8e94becaa60003acd5b2b4d28a1a7a878d922ebaa9d21f7647a"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-CODEGEN-001",
+      "maturity": "PARTIAL",
+      "observations": {
+        "limitations": [
+          "mapped ranges are emitted assembly text lines, not binary addresses",
+          "generated runtime, prologue and unmodeled lines remain UNMAPPED",
+          "machine .text bytes unavailable without assembled objects"
+        ],
+        "workloads": [
+          {
+            "assembly_instruction_count": 318,
+            "compact_ea": {
+              "compact_ea_sites_applied": 0,
+              "compact_ea_sites_considered": 89,
+              "effective_policy": "baseline",
+              "fallback_reason_counts": {
+                "no_indexed_memory_operations": 2,
+                "reference_operations_present": 1
+              },
+              "function_decisions": {
+                "absolute_f64": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 0
+                },
+                "energy_series_aggregation": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:reference_operations_present",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 89
+                },
+                "main": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 0
+                }
+              },
+              "functions_considered": 3,
+              "functions_fallback": 3,
+              "functions_optimized": 0,
+              "requested_policy": "compact-ea"
+            },
+            "generated_assembly_text_bytes": 368721,
+            "machine_text_bytes": null,
+            "native_assembly_instruction_count": 7239,
+            "native_speedup_claim": false,
+            "no_op_move_candidates": 0,
+            "origin_attributed_native_instructions": 2506,
+            "origin_attribution_fraction": 0.34618,
+            "origin_unknown_native_instructions": 4733,
+            "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+            "workload_id": "energy.pv-timeseries-aggregation.v1"
+          },
+          {
+            "assembly_instruction_count": 519,
+            "compact_ea": {
+              "compact_ea_sites_applied": 0,
+              "compact_ea_sites_considered": 163,
+              "effective_policy": "baseline",
+              "fallback_reason_counts": {
+                "index_initialization_not_proven": 1,
+                "no_indexed_memory_operations": 1
+              },
+              "function_decisions": {
+                "main": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 0
+                },
+                "point_cloud_summary": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:index_initialization_not_proven",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 163
+                }
+              },
+              "functions_considered": 2,
+              "functions_fallback": 2,
+              "functions_optimized": 0,
+              "requested_policy": "compact-ea"
+            },
+            "generated_assembly_text_bytes": 595343,
+            "machine_text_bytes": null,
+            "native_assembly_instruction_count": 11151,
+            "native_speedup_claim": false,
+            "no_op_move_candidates": 0,
+            "origin_attributed_native_instructions": 4216,
+            "origin_attribution_fraction": 0.378083,
+            "origin_unknown_native_instructions": 6935,
+            "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+            "workload_id": "engineering.point-cloud-summary.v1"
+          },
+          {
+            "assembly_instruction_count": 675,
+            "compact_ea": {
+              "compact_ea_sites_applied": 0,
+              "compact_ea_sites_considered": 187,
+              "effective_policy": "baseline",
+              "fallback_reason_counts": {
+                "index_initialization_not_proven": 1,
+                "no_indexed_memory_operations": 2
+              },
+              "function_decisions": {
+                "absolute_f64": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 0
+                },
+                "main": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 0
+                },
+                "raster_window_statistics": {
+                  "applied": false,
+                  "effective_policy": "baseline",
+                  "reason": "compact_ea_fallback:index_initialization_not_proven",
+                  "requested_policy": "compact-ea",
+                  "sites_considered": 187
+                }
+              },
+              "functions_considered": 3,
+              "functions_fallback": 3,
+              "functions_optimized": 0,
+              "requested_policy": "compact-ea"
+            },
+            "generated_assembly_text_bytes": 718517,
+            "machine_text_bytes": null,
+            "native_assembly_instruction_count": 13034,
+            "native_speedup_claim": false,
+            "no_op_move_candidates": 0,
+            "origin_attributed_native_instructions": 5125,
+            "origin_attribution_fraction": 0.393202,
+            "origin_unknown_native_instructions": 7909,
+            "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+            "workload_id": "geospatial.raster-window-statistics.v1"
+          }
+        ]
+      },
+      "protocol": {
+        "execution_performed": false,
+        "instruction_budget_mode": "per-instruction",
+        "kind": "STATIC_X86_64_TEXT_ANALYSIS",
+        "native_policy": "baseline",
+        "target": "linux-x86_64",
+        "timing_measured": false
+      },
+      "research_question": "RQ2: how much emitted native assembly text can be tied to S3 Assembly operations?"
+    },
+    {
+      "classification": "STATIC_ALLOCATOR_CHARACTERIZATION_ONLY; NO_DYNAMIC_SPILL_OR_PERFORMANCE_CLAIM",
+      "evidence_artifacts": [
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/energy.pv-timeseries-aggregation.v1.codegen.json",
+          "sha256": "3482a36623c66a993f8edb12a095f903bc5285344ecf89a77841e7698df1b671"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/engineering.point-cloud-summary.v1.codegen.json",
+          "sha256": "82f788ee0a42de4032e0642da24fec1865c9e18ef68ab4b4c9243479f1d5202a"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/geospatial.raster-window-statistics.v1.codegen.json",
+          "sha256": "6d9c0bf467a6e8e94becaa60003acd5b2b4d28a1a7a878d922ebaa9d21f7647a"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-ALLOC-001",
+      "maturity": "PARTIAL",
+      "observations": {
+        "limitations": [
+          "stack-resident virtual values are not dynamic spills",
+          "r15 availability probe is allocator-only and conflicts with current budget residency"
+        ],
+        "workloads": [
+          {
+            "budget_register_allocator_capacity_probe": {
+              "comparison": "r15_reserved_for_per_instruction_budget_vs_allocator_may_use_r15",
+              "counterfactual_is_executable": false,
+              "counterfactual_stack_resident_virtual_register_count": 0,
+              "counterfactual_virtual_registers_assigned_r15": [
+                1
+              ],
+              "interpretation": "allocator-capacity sensitivity only; no emitted-code or runtime comparison",
+              "reserved_stack_resident_virtual_register_count": 0,
+              "stack_resident_delta_counterfactual_minus_reserved": 0
+            },
+            "dynamic_spills": null,
+            "function": "energy_series_aggregation",
+            "peak_live_virtual_registers": 10,
+            "same_physical_register_move_count": 0,
+            "stack_resident_virtual_register_count": 0,
+            "static_frame_bytes": 2144,
+            "virtual_register_count": 211,
+            "workload_id": "energy.pv-timeseries-aggregation.v1"
+          },
+          {
+            "budget_register_allocator_capacity_probe": {
+              "comparison": "r15_reserved_for_per_instruction_budget_vs_allocator_may_use_r15",
+              "counterfactual_is_executable": false,
+              "counterfactual_stack_resident_virtual_register_count": 0,
+              "counterfactual_virtual_registers_assigned_r15": [],
+              "interpretation": "allocator-capacity sensitivity only; no emitted-code or runtime comparison",
+              "reserved_stack_resident_virtual_register_count": 0,
+              "stack_resident_delta_counterfactual_minus_reserved": 0
+            },
+            "dynamic_spills": null,
+            "function": "point_cloud_summary",
+            "peak_live_virtual_registers": 7,
+            "same_physical_register_move_count": 0,
+            "stack_resident_virtual_register_count": 0,
+            "static_frame_bytes": 3648,
+            "virtual_register_count": 368,
+            "workload_id": "engineering.point-cloud-summary.v1"
+          },
+          {
+            "budget_register_allocator_capacity_probe": {
+              "comparison": "r15_reserved_for_per_instruction_budget_vs_allocator_may_use_r15",
+              "counterfactual_is_executable": false,
+              "counterfactual_stack_resident_virtual_register_count": 0,
+              "counterfactual_virtual_registers_assigned_r15": [
+                2
+              ],
+              "interpretation": "allocator-capacity sensitivity only; no emitted-code or runtime comparison",
+              "reserved_stack_resident_virtual_register_count": 6,
+              "stack_resident_delta_counterfactual_minus_reserved": -6
+            },
+            "dynamic_spills": null,
+            "function": "raster_window_statistics",
+            "peak_live_virtual_registers": 11,
+            "same_physical_register_move_count": 0,
+            "stack_resident_virtual_register_count": 6,
+            "static_frame_bytes": 4192,
+            "virtual_register_count": 432,
+            "workload_id": "geospatial.raster-window-statistics.v1"
+          }
+        ]
+      },
+      "protocol": {
+        "budget_register": "r15",
+        "counterfactual_is_executable": false,
+        "execution_performed": false,
+        "kind": "STATIC_REGISTER_ALLOCATION_REPORT"
+      },
+      "research_question": "RQ4: how much static frame/register pressure is visible, and what is the r15 budget reservation trade-off?"
+    },
+    {
+      "classification": "5_LOOPS_OBSERVED_0_VECTOR_BOUNDS_PROOFS_5_UNKNOWN; NO_SIMD_EMITTED",
+      "evidence_artifacts": [
+        {
+          "path": "evidence/s3-1.8-baseline/vector-legality/energy.pv-timeseries-aggregation.v1.json",
+          "sha256": "5ffb0774122238c892d42c4cf732929244c33b33d52adb1ddb0454ed2d40c12c"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/vector-legality/engineering.point-cloud-summary.v1.json",
+          "sha256": "45d4b427ff4bc7cb57ae4c24b996f5549d357e3b4dc01ead747a73b538b480d9"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/vector-legality/geospatial.raster-window-statistics.v1.json",
+          "sha256": "2ed2db591dbe25bccd0aba6156b6249c668a791a567fdb3c3dfd8783c6379793"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-VEC-001",
+      "maturity": "PARTIAL",
+      "observations": {
+        "limitations": [
+          "natural loops exist but canonical induction and vector access proofs were not recognized",
+          "general inter-iteration dependence is not modeled"
+        ],
+        "workloads": [
+          {
+            "loops_seen": 1,
+            "not_vectorizable_loops": 0,
+            "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+            "transformation_authorized": false,
+            "unknown_loops": 1,
+            "vectorizable_loops": 0,
+            "workload_id": "energy.pv-timeseries-aggregation.v1"
+          },
+          {
+            "loops_seen": 2,
+            "not_vectorizable_loops": 0,
+            "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+            "transformation_authorized": false,
+            "unknown_loops": 2,
+            "vectorizable_loops": 0,
+            "workload_id": "engineering.point-cloud-summary.v1"
+          },
+          {
+            "loops_seen": 2,
+            "not_vectorizable_loops": 0,
+            "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+            "transformation_authorized": false,
+            "unknown_loops": 2,
+            "vectorizable_loops": 0,
+            "workload_id": "geospatial.raster-window-statistics.v1"
+          }
+        ]
+      },
+      "protocol": {
+        "execution_performed": false,
+        "kind": "STATIC_LOOP_FACT_REUSE",
+        "strict_fp_preserved": true,
+        "transformation_authorized": false
+      },
+      "research_question": "RQ5: which continuity-workload loops are legally vectorizable under strict semantics?"
+    },
+    {
+      "classification": "NOT_COMPARABLE_WITHOUT_MATCHED_1_8_ARTIFACT_AND_PROTOCOL",
+      "evidence_artifacts": [
+        {
+          "path": "results/EXP-S3-17-LOWERING-002.json",
+          "sha256": "571275d03083baa600008916a3d9e7ee4b501b1cdfbfc99f32812963c89ee8cb"
+        },
+        {
+          "path": "results/EXP-S3-17-LOWERING-001.json",
+          "sha256": "13881ae714af83cb56d1d1abba5b1b8a642494ecaf7c52aac6aa21687bb2dad5"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-BUDGET-001",
+      "maturity": "INCONCLUSIVE",
+      "observations": {
+        "conclusion": "Historical exact-segment and budget experiments remain separately valid; no current 1.8 PER-vs-EXACT/HYBRID causal result is inferred.",
+        "historical_reports": [
+          {
+            "bytes": 33485,
+            "classification": "HISTORICAL_EXACT_SEGMENT_VALIDATION",
+            "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL",
+            "experiment_id": "EXP-S3-17-LOWERING-002",
+            "path": "results/EXP-S3-17-LOWERING-002.json",
+            "sha256": "571275d03083baa600008916a3d9e7ee4b501b1cdfbfc99f32812963c89ee8cb",
+            "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/24"
+          },
+          {
+            "bytes": 32549,
+            "classification": "SAFE_BUT_NOT_SELECTED_AFTER_MATERIAL_RECOVERY_GATE_FAILED",
+            "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL",
+            "experiment_id": "S3-BENCH-2.2.4-P1",
+            "path": "results/EXP-S3-17-LOWERING-001.json",
+            "sha256": "13881ae714af83cb56d1d1abba5b1b8a642494ecaf7c52aac6aa21687bb2dad5",
+            "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/23"
+          }
+        ]
+      },
+      "protocol": {
+        "default_changed": false,
+        "kind": "HISTORICAL_EVIDENCE_RECONCILIATION",
+        "new_benchmark_run": false
+      },
+      "research_question": "RQ6: does current PER materially change historical EXACT/HYBRID conclusions?"
+    },
+    {
+      "classification": "OPEN_NO_LLM_AUTHORED_PAIRED_EQUIVALENCE_CORPUS",
+      "evidence_artifacts": [],
+      "experiment_id": "EXP-S3-18-AGENT-001",
+      "maturity": "NOT_STARTED",
+      "observations": {
+        "checked_in_agent_kernel_authorship": "DETERMINISTIC_HUMAN_AUTHORED_QUALIFICATION_SAMPLES",
+        "next_evidence_needed": "paired semantics-preserving verbose/normalized programs with hosted/native equivalence"
+      },
+      "protocol": {
+        "kind": "CORPUS_AUDIT",
+        "online_model_generation": false,
+        "stylistic_scoring": false
+      },
+      "research_question": "RQ7: can agent-generated verbose programs be safely normalized?"
+    }
+  ],
+  "hypotheses": [
+    {
+      "experiment_ids": [
+        "EXP-S3-18-REF-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-001",
+      "research_question": "RQ1",
+      "statement": "Reference origins and local use effects can be summarized more precisely for the modeled workload IR without authorizing transformations.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-CODEGEN-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-002",
+      "research_question": "RQ2",
+      "statement": "A deterministic emitter sidecar can relate some S3 Assembly operations to generated native assembly-text instruction ranges.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-CODEGEN-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-003",
+      "research_question": "RQ3",
+      "statement": "A new Machine IR is required for the next useful machine-level optimization.",
+      "status": "INCONCLUSIVE"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-ALLOC-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-004",
+      "research_question": "RQ4",
+      "statement": "Reserving r15 has a measurable allocator-capacity effect on at least one continuity workload.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-VEC-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-005",
+      "research_question": "RQ5",
+      "statement": "The current loop facts are sufficient to prove vector legality for at least one continuity workload loop.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-BUDGET-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-006",
+      "research_question": "RQ6",
+      "statement": "Current PER materially changes the historical EXACT/HYBRID conclusion.",
+      "status": "INCONCLUSIVE"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-AGENT-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-007",
+      "research_question": "RQ7",
+      "statement": "The compiler reliably normalizes verbose agent-authored programs while preserving behavior.",
+      "status": "OPEN"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-REF-001",
+        "EXP-S3-18-VEC-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-008",
+      "research_question": "RQ8",
+      "statement": "Reference and loop facts can be kept target-independent even when native attribution is x86-specific.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [],
+      "hypothesis_id": "HYP-S3-18-009",
+      "research_question": "RQ9",
+      "statement": "Existing deterministic differential tests provide useful compiler correctness coverage, but do not replace a campaign-specific fuzz oracle.",
+      "status": "PARTIAL"
+    },
+    {
+      "experiment_ids": [
+        "EXP-S3-18-CODEGEN-001",
+        "EXP-S3-18-ALLOC-001"
+      ],
+      "hypothesis_id": "HYP-S3-18-010",
+      "research_question": "RQ10",
+      "statement": "Static codegen and allocator reports identify the dominant runtime bottleneck.",
+      "status": "OPEN"
+    }
+  ],
+  "negative_results": [
+    {
+      "experiment_id": "EXP-S3-18-CODEGEN-001",
+      "interpretation": "No lowering change or speedup is established.",
+      "observation": "Compact EA diagnostic applied zero sites in the three continuity workloads; effective emitted policy remained baseline.",
+      "result_id": "NEG-S3-18-001"
+    },
+    {
+      "experiment_id": "EXP-S3-18-CODEGEN-001",
+      "interpretation": "This corpus gives no target for a no-op-move elimination experiment.",
+      "observation": "The redundant no-op move analysis found zero candidates in the measured Assembly programs.",
+      "result_id": "NEG-S3-18-002"
+    },
+    {
+      "experiment_id": "EXP-S3-18-VEC-001",
+      "interpretation": "No SIMD transformation is authorized by current evidence.",
+      "observation": "Zero loops were proven vectorizable; all five observed loops remain UNKNOWN.",
+      "result_id": "NEG-S3-18-003"
+    },
+    {
+      "experiment_id": "EXP-S3-18-CODEGEN-001",
+      "interpretation": "Remaining instructions stay explicitly UNMAPPED; no complete machine-code genealogy claim.",
+      "observation": "Assembly-origin spans cover only 34.6%-39.3% of parsed native assembly-text instructions.",
+      "result_id": "NEG-S3-18-004"
+    },
+    {
+      "experiment_id": "EXP-S3-18-ALLOC-001",
+      "interpretation": "It cannot establish a runtime or production allocator benefit.",
+      "observation": "The r15-free allocator comparison is a static counterfactual and was not emitted or executed.",
+      "result_id": "NEG-S3-18-005"
+    },
+    {
+      "experiment_id": "EXP-S3-18-BUDGET-001",
+      "interpretation": "The old PER/EXACT/HYBRID conclusion remains NOT_COMPARABLE, not overturned.",
+      "observation": "Historical exact-segment and budget evidence lacks a matched 1.8 artifact and protocol.",
+      "result_id": "NEG-S3-18-006"
+    }
+  ],
+  "provenance": {
+    "bench_campaign_base": "2ca7b7802c630fec655e7826462e319fb773014c",
+    "manifest_sha256": "f9368651f63b2b0a1884802c557ea16a3f5e105e6c563ac00a41f97e1fc42438",
+    "s3_campaign_base": "f1342592aef1be7cc9fe0d390e0f3c6fc266af5a",
+    "s3_candidate_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce"
+  },
+  "research_questions": [
+    {
+      "evidence": "8/8 reference values across three kernels had known origins and NO_ESCAPE in this diagnostic; unknown calls still fail closed.",
+      "id": "RQ1",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": "34.6%-39.3% of parsed native assembly instructions mapped to Assembly-op spans; remaining lines are explicit UNMAPPED.",
+      "id": "RQ2",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": "No concrete optimization requiring a new Machine IR was qualified; Assembly-to-text provenance now covers a first observable layer.",
+      "id": "RQ3",
+      "status": "DEFERRED_WITH_EVIDENCE"
+    },
+    {
+      "evidence": "Static peak liveness/frame/stack-resident metrics were recorded; no dynamic spill or PMU evidence.",
+      "id": "RQ4",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": "5 natural loops, no recognized canonical induction/vector bounds proofs; all remain UNKNOWN.",
+      "id": "RQ5",
+      "status": "OPEN"
+    },
+    {
+      "evidence": "Existing 1.7 exact-segment records are not matched to a current 1.8 PER-vs-EXACT/HYBRID candidate/protocol.",
+      "id": "RQ6",
+      "status": "INCONCLUSIVE"
+    },
+    {
+      "evidence": "Checked-in agent-named kernels are human-authored examples; no LLM-generated paired normalization experiment.",
+      "id": "RQ7",
+      "status": "OPEN"
+    },
+    {
+      "evidence": "Reference/loop facts are IR-level and target-neutral, but no second-backend semantic execution probe was run.",
+      "id": "RQ8",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": "Existing deterministic seeded O0/O1 differential cases passed; no new broad fuzz campaign or failure discovery.",
+      "id": "RQ9",
+      "status": "PARTIAL"
+    },
+    {
+      "evidence": "Static unknown code regions are large, but static counters do not identify a runtime bottleneck.",
+      "id": "RQ10",
+      "status": "OPEN"
+    }
+  ],
+  "runtime_performance_claims": false,
+  "schema_version": "1.0.0",
+  "strict_fp_preserved": true
+}

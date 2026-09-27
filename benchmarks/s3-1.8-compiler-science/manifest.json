@@ -1,0 +1,141 @@
+{
+  "campaign_id": "S3_1_8_MACHINE_INTELLIGENCE_VERIFIED_OPTIMIZATION_PORTABLE_COMPUTE_AND_COMPILER_SCIENCE_LAB",
+  "evidence_artifacts": [
+    {
+      "bytes": 338047,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/codegen/energy.pv-timeseries-aggregation.v1.codegen.json",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "3482a36623c66a993f8edb12a095f903bc5285344ecf89a77841e7698df1b671",
+      "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+      "workload_id": "energy.pv-timeseries-aggregation.v1"
+    },
+    {
+      "bytes": 514805,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/codegen/engineering.point-cloud-summary.v1.codegen.json",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "82f788ee0a42de4032e0642da24fec1865c9e18ef68ab4b4c9243479f1d5202a",
+      "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+      "workload_id": "engineering.point-cloud-summary.v1"
+    },
+    {
+      "bytes": 721417,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/codegen/geospatial.raster-window-statistics.v1.codegen.json",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "6d9c0bf467a6e8e94becaa60003acd5b2b4d28a1a7a878d922ebaa9d21f7647a",
+      "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+      "workload_id": "geospatial.raster-window-statistics.v1"
+    },
+    {
+      "bytes": 7384,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/references/energy.pv-timeseries-aggregation.v1.references.json",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "0988d12365f294e558f216e9a9d7bb283229a5c68dfd59dc7a5538a4fde95489",
+      "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+      "workload_id": "energy.pv-timeseries-aggregation.v1"
+    },
+    {
+      "bytes": 6688,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/references/engineering.point-cloud-summary.v1.references.json",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "31df007fd7af517d42cc94ab678b66eb222f7b35e5857244f5053511755a0d49",
+      "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+      "workload_id": "engineering.point-cloud-summary.v1"
+    },
+    {
+      "bytes": 13466,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/references/geospatial.raster-window-statistics.v1.references.json",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "f312c430a272cb2400afd5fcc52f1ab254b85d6799c18601bd3e0aa9e4502be2",
+      "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+      "workload_id": "geospatial.raster-window-statistics.v1"
+    },
+    {
+      "bytes": 3676,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/vector-legality/energy.pv-timeseries-aggregation.v1.json",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "5ffb0774122238c892d42c4cf732929244c33b33d52adb1ddb0454ed2d40c12c",
+      "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+      "workload_id": "energy.pv-timeseries-aggregation.v1"
+    },
+    {
+      "bytes": 4925,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/vector-legality/engineering.point-cloud-summary.v1.json",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "45d4b427ff4bc7cb57ae4c24b996f5549d357e3b4dc01ead747a73b538b480d9",
+      "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+      "workload_id": "engineering.point-cloud-summary.v1"
+    },
+    {
+      "bytes": 7535,
+      "git_worktree_dirty": true,
+      "path": "evidence/s3-1.8-baseline/vector-legality/geospatial.raster-window-statistics.v1.json",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH",
+      "s3_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "sha256": "2ed2db591dbe25bccd0aba6156b6249c668a791a567fdb3c3dfd8783c6379793",
+      "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+      "workload_id": "geospatial.raster-window-statistics.v1"
+    }
+  ],
+  "historical_artifacts": [
+    {
+      "bytes": 33485,
+      "classification": "HISTORICAL_EXACT_SEGMENT_VALIDATION",
+      "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL",
+      "experiment_id": "EXP-S3-17-LOWERING-002",
+      "path": "results/EXP-S3-17-LOWERING-002.json",
+      "sha256": "571275d03083baa600008916a3d9e7ee4b501b1cdfbfc99f32812963c89ee8cb",
+      "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/24"
+    },
+    {
+      "bytes": 32549,
+      "classification": "SAFE_BUT_NOT_SELECTED_AFTER_MATERIAL_RECOVERY_GATE_FAILED",
+      "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL",
+      "experiment_id": "S3-BENCH-2.2.4-P1",
+      "path": "results/EXP-S3-17-LOWERING-001.json",
+      "sha256": "13881ae714af83cb56d1d1abba5b1b8a642494ecaf7c52aac6aa21687bb2dad5",
+      "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/23"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "benchmarks/s3-1.8-compiler-science/artifact-index.json",
+      "sha256": "7d25e93fd539ee42a7b3e8a0bf3b42be5e8e474b4e5863b076712074f537849d"
+    },
+    {
+      "path": "benchmarks/s3-1.8-compiler-science/pattern-corpus.json",
+      "sha256": "acecece3381c0d6985f67fb36be92589787ac98d09e190964a15c73aac118ffa"
+    },
+    {
+      "path": "benchmarks/s3-1.8-compiler-science/schemas/result-v1.schema.json",
+      "sha256": "0eccf2b981cdb2dd4d1146148c1d7a8e26ba16361e7f3517d9e3c6d94b6354ec"
+    }
+  ],
+  "repositories": {
+    "benchmarks": {
+      "campaign_base": "2ca7b7802c630fec655e7826462e319fb773014c",
+      "name": "SamDevlab/S3-Benchmarks"
+    },
+    "s3": {
+      "campaign_base": "f1342592aef1be7cc9fe0d390e0f3c6fc266af5a",
+      "candidate_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+      "name": "SamDevlab/S3"
+    }
+  },
+  "schema_version": "1.0.0"
+}
