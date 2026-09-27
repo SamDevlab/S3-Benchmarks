@@ -1,0 +1,8 @@
+BENCH_HEAD=adc5e5b9c15c4b5603d1b5473a1378761e53e39b
+S3_REVISION=856bf0cd60c3da6ba701adec73c7858d063739a7
+START=2026-09-27T22:09:12.410426+00:00
+END=2026-09-27T22:09:27.062626+00:00
+TERMINAL=YES
+EXIT=0
+OUTPUT_DIR=/tmp/s3-bench-1.10-adc5e5b/reports/s3-1.10-memory-intelligence-lab/evidence/replay-1.10-candidate-v1
+TRANSCRIPT=/tmp/s3-bench-1.10-adc5e5b/reports/s3-1.10-memory-intelligence-lab/evidence/replay-1.10-candidate-v1-launch.txt
