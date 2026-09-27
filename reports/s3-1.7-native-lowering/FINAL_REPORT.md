@@ -73,3 +73,14 @@ show reduced static instruction, memory-operand, or branch counts and does
 not establish a material runtime improvement. This is a bounded negative or
 inconclusive result, not evidence that the transformation cannot help other
 program shapes. No C-relative speedup claim is made.
+
+## S3 Campaign Cross-Reference
+
+- S3 repository: `SamDevlab/S3`
+- S3 source freeze: `39dfbb5d19ecefc7df78da7dc8d3ea8e31d81df4`
+- S3 campaign report:
+  `reports/s3-1.7-native-lowering-codegen-expansion/FINAL_REPORT.md`
+- S3 review PR: #321, Draft, base `main`:
+  https://github.com/SamDevlab/S3/pull/321
+- This report and experiment are published in S3-Benchmarks PR #25, Draft,
+  base `main`.
