@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_id": "s3-1.8-compiler-patterns-v1",
+  "authorship_note": "This corpus is derived from checked-in qualification workloads. Existing agent-kernel files are deterministic human-authored examples; no online LLM generation is claimed.",
+  "patterns": [
+    {
+      "pattern_id": "REFERENCE_HEAVY_LOOP",
+      "origin_question": "RQ1/RQ5: can ref origin, effects, escape and loop legality be distinguished without weakening safety?",
+      "workloads": [
+        "engineering.point-cloud-summary.v1",
+        "geospatial.raster-window-statistics.v1",
+        "energy.pv-timeseries-aggregation.v1"
+      ],
+      "semantic_contract": "bounded scalar iteration over borrowed vector inputs with output reductions",
+      "expected_facts": ["reference origin is explicit or UNKNOWN", "unknown inter-iteration dependence fails closed", "strict floating-point reductions remain ordered"],
+      "structural_expectations": ["report unknown coverage", "do not require exact native instruction snapshots"]
+    },
+    {
+      "pattern_id": "MASKED_RASTER_SCAN",
+      "origin_question": "RQ5: what proof is missing before masked multidimensional scans can be vectorized?",
+      "workloads": ["geospatial.raster-window-statistics.v1"],
+      "semantic_contract": "bounded raster values are conditionally consumed under a valid-data mask and neighboring-cell predicates",
+      "expected_facts": ["mask and bounds conditions remain observable", "no vector legality claim without affine and dependence proofs"],
+      "structural_expectations": ["report memory pattern UNKNOWN when not proven"]
+    },
+    {
+      "pattern_id": "AGENT_QUALIFICATION_KERNELS",
+      "origin_question": "RQ7: can task-oriented kernels be analyzed and compared semantically without style scoring?",
+      "workloads": ["agent.compute.point-cloud-summary.v1", "agent.compute.raster-window-statistics.v1", "agent.compute.energy-series-aggregation.v1"],
+      "source_manifest": "benchmarks/workloads/real_world/agent-kernel-tasks-v2.json in SamDevlab/S3",
+      "semantic_contract": "each task source is compiled and checked against its independent expected result and declared input bounds",
+      "expected_facts": ["authorship is reported honestly", "normalization claims require paired semantic-equivalence programs"],
+      "structural_expectations": ["no stylistic scoring", "no online-model provenance claim"]
+    }
+  ]
+}

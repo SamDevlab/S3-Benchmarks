@@ -1,0 +1,217 @@
+{
+  "campaign_id": "S3_1_8_MACHINE_INTELLIGENCE_VERIFIED_OPTIMIZATION_PORTABLE_COMPUTE_AND_COMPILER_SCIENCE_LAB",
+  "comparability_policy": "Only compare metrics with the same measurement unit, artifact scope, target, and extraction protocol; otherwise retain side-by-side records without delta.",
+  "direct_delta_reason": "The 1.7 records count disassembled ELF instructions, while 1.8 records emitter text and Assembly-origin spans; no common object extraction protocol was run for both candidate lines.",
+  "direct_delta_supported": false,
+  "schema_version": "1.0.0",
+  "versions": [
+    {
+      "benchmark_experiment_id": "EXP-S3-17-LOWERING-002",
+      "benchmark_result_path": "results/EXP-S3-17-LOWERING-002.json",
+      "benchmark_result_sha256": "571275d03083baa600008916a3d9e7ee4b501b1cdfbfc99f32812963c89ee8cb",
+      "metric_family": "ELF_DISASSEMBLY_STATIC_COUNTS",
+      "s3_candidate_sha": "39dfbb5d19ecefc7df78da7dc8d3ea8e31d81df4",
+      "s3_line": "1.7",
+      "workloads": [
+        {
+          "candidate_branches": 789,
+          "candidate_machine_instructions": 2763,
+          "candidate_memory_operands": 953,
+          "control_branches": 789,
+          "control_machine_instructions": 2763,
+          "control_memory_operands": 953,
+          "correctness": "PASS",
+          "metric_family": "ELF_DISASSEMBLY_STATIC_COUNTS",
+          "timing_classification": "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+          "workload_id": "energy.pv-timeseries-aggregation.v1"
+        },
+        {
+          "candidate_branches": 1367,
+          "candidate_machine_instructions": 4746,
+          "candidate_memory_operands": 1601,
+          "control_branches": 1367,
+          "control_machine_instructions": 4746,
+          "control_memory_operands": 1601,
+          "correctness": "PASS",
+          "metric_family": "ELF_DISASSEMBLY_STATIC_COUNTS",
+          "timing_classification": "INCONCLUSIVE",
+          "workload_id": "engineering.point-cloud-summary.v1"
+        },
+        {
+          "candidate_branches": 1715,
+          "candidate_machine_instructions": 5688,
+          "candidate_memory_operands": 1898,
+          "control_branches": 1715,
+          "control_machine_instructions": 5688,
+          "control_memory_operands": 1898,
+          "correctness": "PASS",
+          "metric_family": "ELF_DISASSEMBLY_STATIC_COUNTS",
+          "timing_classification": "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+          "workload_id": "geospatial.raster-window-statistics.v1"
+        }
+      ]
+    },
+    {
+      "evidence_artifacts": [
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/energy.pv-timeseries-aggregation.v1.codegen.json",
+          "sha256": "3482a36623c66a993f8edb12a095f903bc5285344ecf89a77841e7698df1b671"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/engineering.point-cloud-summary.v1.codegen.json",
+          "sha256": "82f788ee0a42de4032e0642da24fec1865c9e18ef68ab4b4c9243479f1d5202a"
+        },
+        {
+          "path": "evidence/s3-1.8-baseline/codegen/geospatial.raster-window-statistics.v1.codegen.json",
+          "sha256": "6d9c0bf467a6e8e94becaa60003acd5b2b4d28a1a7a878d922ebaa9d21f7647a"
+        }
+      ],
+      "experiment_id": "EXP-S3-18-CODEGEN-001",
+      "metric_family": "GENERATED_ASSEMBLY_TEXT_AND_ASSEMBLY_TO_LINE_SPANS",
+      "s3_campaign_base": "f1342592aef1be7cc9fe0d390e0f3c6fc266af5a",
+      "s3_line": "1.8-baseline",
+      "workloads": [
+        {
+          "assembly_instruction_count": 318,
+          "compact_ea": {
+            "compact_ea_sites_applied": 0,
+            "compact_ea_sites_considered": 89,
+            "effective_policy": "baseline",
+            "fallback_reason_counts": {
+              "no_indexed_memory_operations": 2,
+              "reference_operations_present": 1
+            },
+            "function_decisions": {
+              "absolute_f64": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                "requested_policy": "compact-ea",
+                "sites_considered": 0
+              },
+              "energy_series_aggregation": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:reference_operations_present",
+                "requested_policy": "compact-ea",
+                "sites_considered": 89
+              },
+              "main": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                "requested_policy": "compact-ea",
+                "sites_considered": 0
+              }
+            },
+            "functions_considered": 3,
+            "functions_fallback": 3,
+            "functions_optimized": 0,
+            "requested_policy": "compact-ea"
+          },
+          "generated_assembly_text_bytes": 368721,
+          "machine_text_bytes": null,
+          "native_assembly_instruction_count": 7239,
+          "native_speedup_claim": false,
+          "no_op_move_candidates": 0,
+          "origin_attributed_native_instructions": 2506,
+          "origin_attribution_fraction": 0.34618,
+          "origin_unknown_native_instructions": 4733,
+          "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+          "workload_id": "energy.pv-timeseries-aggregation.v1"
+        },
+        {
+          "assembly_instruction_count": 519,
+          "compact_ea": {
+            "compact_ea_sites_applied": 0,
+            "compact_ea_sites_considered": 163,
+            "effective_policy": "baseline",
+            "fallback_reason_counts": {
+              "index_initialization_not_proven": 1,
+              "no_indexed_memory_operations": 1
+            },
+            "function_decisions": {
+              "main": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                "requested_policy": "compact-ea",
+                "sites_considered": 0
+              },
+              "point_cloud_summary": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:index_initialization_not_proven",
+                "requested_policy": "compact-ea",
+                "sites_considered": 163
+              }
+            },
+            "functions_considered": 2,
+            "functions_fallback": 2,
+            "functions_optimized": 0,
+            "requested_policy": "compact-ea"
+          },
+          "generated_assembly_text_bytes": 595343,
+          "machine_text_bytes": null,
+          "native_assembly_instruction_count": 11151,
+          "native_speedup_claim": false,
+          "no_op_move_candidates": 0,
+          "origin_attributed_native_instructions": 4216,
+          "origin_attribution_fraction": 0.378083,
+          "origin_unknown_native_instructions": 6935,
+          "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+          "workload_id": "engineering.point-cloud-summary.v1"
+        },
+        {
+          "assembly_instruction_count": 675,
+          "compact_ea": {
+            "compact_ea_sites_applied": 0,
+            "compact_ea_sites_considered": 187,
+            "effective_policy": "baseline",
+            "fallback_reason_counts": {
+              "index_initialization_not_proven": 1,
+              "no_indexed_memory_operations": 2
+            },
+            "function_decisions": {
+              "absolute_f64": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                "requested_policy": "compact-ea",
+                "sites_considered": 0
+              },
+              "main": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:no_indexed_memory_operations",
+                "requested_policy": "compact-ea",
+                "sites_considered": 0
+              },
+              "raster_window_statistics": {
+                "applied": false,
+                "effective_policy": "baseline",
+                "reason": "compact_ea_fallback:index_initialization_not_proven",
+                "requested_policy": "compact-ea",
+                "sites_considered": 187
+              }
+            },
+            "functions_considered": 3,
+            "functions_fallback": 3,
+            "functions_optimized": 0,
+            "requested_policy": "compact-ea"
+          },
+          "generated_assembly_text_bytes": 718517,
+          "machine_text_bytes": null,
+          "native_assembly_instruction_count": 13034,
+          "native_speedup_claim": false,
+          "no_op_move_candidates": 0,
+          "origin_attributed_native_instructions": 5125,
+          "origin_attribution_fraction": 0.393202,
+          "origin_unknown_native_instructions": 7909,
+          "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+          "workload_id": "geospatial.raster-window-statistics.v1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "campaign_id": "S3_1_8_MACHINE_INTELLIGENCE_VERIFIED_OPTIMIZATION_PORTABLE_COMPUTE_AND_COMPILER_SCIENCE_LAB",
+  "repositories": {
+    "s3": {
+      "name": "SamDevlab/S3",
+      "campaign_base": "f1342592aef1be7cc9fe0d390e0f3c6fc266af5a",
+      "candidate_head": "b8f446a5ea2b24b948a263cb955f426c5d0f48ce"
+    },
+    "benchmarks": {
+      "name": "SamDevlab/S3-Benchmarks",
+      "campaign_base": "2ca7b7802c630fec655e7826462e319fb773014c"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "evidence/s3-1.8-baseline/codegen/engineering.point-cloud-summary.v1.codegen.json",
+      "workload_id": "engineering.point-cloud-summary.v1",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/references/engineering.point-cloud-summary.v1.references.json",
+      "workload_id": "engineering.point-cloud-summary.v1",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/vector-legality/engineering.point-cloud-summary.v1.json",
+      "workload_id": "engineering.point-cloud-summary.v1",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/codegen/geospatial.raster-window-statistics.v1.codegen.json",
+      "workload_id": "geospatial.raster-window-statistics.v1",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/references/geospatial.raster-window-statistics.v1.references.json",
+      "workload_id": "geospatial.raster-window-statistics.v1",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/vector-legality/geospatial.raster-window-statistics.v1.json",
+      "workload_id": "geospatial.raster-window-statistics.v1",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/codegen/energy.pv-timeseries-aggregation.v1.codegen.json",
+      "workload_id": "energy.pv-timeseries-aggregation.v1",
+      "report_kind": "S3_X86_64_CODEGEN_ATTRIBUTION_EXPERIMENTAL"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/references/energy.pv-timeseries-aggregation.v1.references.json",
+      "workload_id": "energy.pv-timeseries-aggregation.v1",
+      "report_kind": "S3_REFERENCE_DATAFLOW_RESEARCH"
+    },
+    {
+      "path": "evidence/s3-1.8-baseline/vector-legality/energy.pv-timeseries-aggregation.v1.json",
+      "workload_id": "energy.pv-timeseries-aggregation.v1",
+      "report_kind": "S3_VECTOR_LEGALITY_RESEARCH"
+    }
+  ],
+  "historical_budget_evidence": [
+    {
+      "experiment_id": "EXP-S3-17-LOWERING-002",
+      "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/24",
+      "classification": "HISTORICAL_EXACT_SEGMENT_VALIDATION",
+      "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL"
+    },
+    {
+      "experiment_id": "S3-BENCH-2.2.4-P1",
+      "source": "https://github.com/SamDevlab/S3-Benchmarks/pull/23",
+      "classification": "SAFE_BUT_NOT_SELECTED_AFTER_MATERIAL_RECOVERY_GATE_FAILED",
+      "current_1_8_recharacterization": "NOT_COMPARABLE_WITHOUT_MATCHED_ARTIFACT_AND_PROTOCOL"
+    }
+  ]
+}
