@@ -1,0 +1,2 @@
+COMMAND=/home/vboxuser/projects/S3/.venv/bin/python tools/s3_19_executor.py --s3-url https://github.com/SamDevlab/S3.git --source-revisions 856bf0cd60c3da6ba701adec73c7858d063739a7 --work-root /tmp/s3-bench-1.10-work-856bf0cd --output-dir /tmp/s3-bench-1.10-adc5e5b/reports/s3-1.10-memory-intelligence-lab/evidence/replay-1.10-candidate-v1
+S3_MULTI_SHA_EXECUTOR=PASS revisions=1

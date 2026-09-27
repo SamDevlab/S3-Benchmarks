@@ -1,0 +1,4 @@
+BENCHMARK_JSON=/tmp/s3-bench-1.10-adc5e5b/reports/s3-1.10-memory-intelligence-lab/evidence/replay-1.10-candidate-v1/856bf0cd60c3da6ba701adec73c7858d063739a7/native-workload-benchmark-v1.json
+engineering.point-cloud-summary.v1 S3_O1/C_O1=8.8447x PER/EXACT=1.1274x PER/HYBRID=1.1222x compact_applied=False
+geospatial.raster-window-statistics.v1 S3_O1/C_O1=4.7349x PER/EXACT=1.0715x PER/HYBRID=1.0524x compact_applied=False
+energy.pv-timeseries-aggregation.v1 S3_O1/C_O1=8.2958x PER/EXACT=1.1300x PER/HYBRID=1.1391x compact_applied=False
