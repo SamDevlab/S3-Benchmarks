@@ -135,5 +135,12 @@ winner or promote production policy.
 
 ## Publication boundary
 
-This report is for the S3-Benchmarks 1.8 Draft PR. No merge, release, tag,
+```text
+BENCH_PR=26
+BENCH_PR_BASE=main
+BENCH_PR_STATE=DRAFT
+```
+
+This report is for [S3-Benchmarks PR #26](https://github.com/SamDevlab/S3-Benchmarks/pull/26).
+No merge, release, tag,
 PyPI publish, default-policy promotion or S3 1.9 campaign is authorized.
