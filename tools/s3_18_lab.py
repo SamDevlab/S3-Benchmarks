@@ -22,8 +22,12 @@ CAMPAIGN_ID = "S3_1_8_MACHINE_INTELLIGENCE_VERIFIED_OPTIMIZATION_PORTABLE_COMPUT
 _SHA256 = re.compile(r"^[0-9a-f]{64}$")
 
 
+def _canonical_artifact_bytes(data: bytes) -> bytes:
+    return data.replace(b"\r\n", b"\n")
+
+
 def _sha(data: bytes) -> str:
-    return hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest()
+    return hashlib.sha256(_canonical_artifact_bytes(data)).hexdigest()
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -69,11 +73,12 @@ def _input_artifacts() -> list[dict[str, object]]:
         provenance = payload.get("provenance", payload.get("input", {}))
         if not isinstance(provenance, dict):
             raise ValueError(f"artifact provenance is malformed: {path_text}")
+        artifact_bytes = _canonical_artifact_bytes(path.read_bytes())
         output.append(
             {
                 **item,
-                "sha256": _sha(path.read_bytes()),
-                "bytes": path.stat().st_size,
+                "sha256": hashlib.sha256(artifact_bytes).hexdigest(),
+                "bytes": len(artifact_bytes),
                 "s3_head": provenance.get("git_head"),
                 "source_sha256": provenance.get("source_sha256"),
                 "git_worktree_dirty": provenance.get("git_worktree_dirty"),
@@ -99,12 +104,13 @@ def _historical_artifacts(index: dict[str, Any]) -> list[dict[str, object]]:
                 result_path = ROOT / "results/EXP-S3-17-LOWERING-001.json"
             else:
                 raise ValueError(f"historical result is missing for {experiment_id}")
+        result_bytes = _canonical_artifact_bytes(result_path.read_bytes())
         output.append(
             {
                 "experiment_id": experiment_id,
                 "path": result_path.relative_to(ROOT).as_posix(),
-                "sha256": _sha(result_path.read_bytes()),
-                "bytes": result_path.stat().st_size,
+                "sha256": hashlib.sha256(result_bytes).hexdigest(),
+                "bytes": len(result_bytes),
                 "source": item["source"],
                 "classification": item["classification"],
                 "current_1_8_recharacterization": item["current_1_8_recharacterization"],

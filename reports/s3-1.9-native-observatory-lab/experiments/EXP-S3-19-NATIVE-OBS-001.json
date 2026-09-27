@@ -1,0 +1,217 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-S3-19-NATIVE-OBS-001",
+  "title": "Pinned native workload recharacterization and machine-code attribution",
+  "research_question_ids": [
+    "RQ2",
+    "RQ6"
+  ],
+  "s3_source": {
+    "repository": "SamDevlab/S3",
+    "commit": "211b1aecec756be42516322429720018f54001e7",
+    "tree": "08289d214832e856d46e14ef941239649e9f4063",
+    "worktree_clean_for_independent_run": true
+  },
+  "lab_executor": {
+    "repository": "SamDevlab/S3-Benchmarks",
+    "base_commit": "e5ff385d26ea6ec89d13cf1955bfa5438e56a266",
+    "base_tree": "c06ac7b063f27144fa19ddc84dc33c082fcc134a",
+    "executor_sha256": "d7d2654aeca43470da31be3a6e9fc48f0e0820b932e290190b4bddc41288dee1",
+    "worktree_clean_during_run": false
+  },
+  "host": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "kernel": "7.0.0-31-generic",
+    "python": "3.14.4",
+    "perf_event_paranoid": 4,
+    "pmu": "UNAVAILABLE_BY_POLICY"
+  },
+  "protocol": {
+    "iterations_per_sample": 1000,
+    "warmups": 3,
+    "samples": 21,
+    "paired_order_seed": 1501,
+    "paired_bootstrap_resamples": 10000,
+    "material_change_threshold": 0.05,
+    "timing_scope": "same-process scalar C ABI calls; compile and setup excluded; ctypes dispatch included equally",
+    "correctness_gate": "PASS_ALL_BUILDS before timing",
+    "timing_class": "CHARACTERIZATION_ONLY",
+    "native_speedup_claim": false,
+    "default_instruction_budget_mode": "per-instruction"
+  },
+  "runs": [
+    {
+      "run_id": "direct-baseline-20260927",
+      "executor": "S3 tools/s3_15_native_workload_benchmark.py directly from pinned clean checkout",
+      "started_at_utc": "2026-09-27T11:33:19.607379+00:00",
+      "ended_at_utc": "2026-09-27T11:33:32.503009+00:00",
+      "raw_result": "S3:reports/s3-1.9-native-observatory-optimization-discovery/evidence/baseline/native-workload-benchmark-v1.json",
+      "raw_result_sha256": "6ddd6fb9a8fd6a3c656b6ac0970d1e5ba5f44e05cea59da8aaefd888cb15deaa"
+    },
+    {
+      "run_id": "lab-executor-replication-20260927",
+      "executor": "S3-Benchmarks tools/s3_19_executor.py cloned and verified exact S3 commit",
+      "started_at_utc": "2026-09-27T12:14:27.176672+00:00",
+      "ended_at_utc": "2026-09-27T12:14:39.453943+00:00",
+      "elapsed_seconds": 12.277268,
+      "raw_result": "evidence/confirmation-v1/native-workload-benchmark-v1.json",
+      "raw_result_sha256": "897fade8e52d459bf505c89d52a3f307196757d0ea1ea99e993914e968a9e721",
+      "executor_report": "evidence/confirmation-v1/executor-result-v1.json",
+      "executor_report_sha256": "362ae31e343230be83a2375b31a714da6814d4f1c6aeb1cca3c2463e03694bc6",
+      "correctness": "PASS_ALL_BUILDS for all three workloads",
+      "verified_compiler_source_hashes": 5,
+      "native_artifact_hashes": 31
+    }
+  ],
+  "workload_recharacterization": {
+    "engineering.point-cloud-summary.v1": {
+      "per_median_ns_per_call": [
+        13371.121,
+        13584.001
+      ],
+      "per_vs_exact_segment": [
+        {
+          "paired_median_ratio": 1.080611976,
+          "ci95": [
+            1.064067224,
+            1.091387401
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        },
+        {
+          "paired_median_ratio": 1.083463222,
+          "ci95": [
+            1.078650711,
+            1.094813562
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        }
+      ],
+      "per_vs_loop_hybrid": [
+        {
+          "paired_median_ratio": 1.085998762,
+          "ci95": [
+            1.073859462,
+            1.093432270
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        },
+        {
+          "paired_median_ratio": 1.085676978,
+          "ci95": [
+            1.067863422,
+            1.091424118
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        }
+      ],
+      "per_vs_compact_ea": [
+        "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+        "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT"
+      ],
+      "cross_run_conclusion": "EXACT and HYBRID classifications replicated as material improvement; compact-EA did not show a material change."
+    },
+    "geospatial.raster-window-statistics.v1": {
+      "per_median_ns_per_call": [
+        12813.622,
+        11501.891
+      ],
+      "per_vs_exact_segment": [
+        {
+          "paired_median_ratio": 1.095841695,
+          "ci95": [
+            1.063010596,
+            1.139415322
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        },
+        {
+          "paired_median_ratio": 1.083705954,
+          "ci95": [
+            1.065214876,
+            1.194869630
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        }
+      ],
+      "per_vs_loop_hybrid": [
+        {
+          "paired_median_ratio": 1.053016343,
+          "ci95": [
+            1.043026690,
+            1.128075702
+          ],
+          "classification": "INCONCLUSIVE"
+        },
+        {
+          "paired_median_ratio": 1.053388768,
+          "ci95": [
+            1.034262481,
+            1.160834575
+          ],
+          "classification": "INCONCLUSIVE"
+        }
+      ],
+      "per_vs_compact_ea": [
+        "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+        "INCONCLUSIVE"
+      ],
+      "cross_run_conclusion": "EXACT classification replicated as material improvement; HYBRID remains inconclusive; compact-EA is not established."
+    },
+    "energy.pv-timeseries-aggregation.v1": {
+      "per_median_ns_per_call": [
+        19056.135,
+        17128.823
+      ],
+      "per_vs_exact_segment": [
+        {
+          "paired_median_ratio": 1.022903742,
+          "ci95": [
+            0.999854930,
+            1.078316668
+          ],
+          "classification": "INCONCLUSIVE"
+        },
+        {
+          "paired_median_ratio": 1.095640465,
+          "ci95": [
+            1.087574954,
+            1.105895069
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        }
+      ],
+      "per_vs_loop_hybrid": [
+        {
+          "paired_median_ratio": 1.086833665,
+          "ci95": [
+            1.026845645,
+            1.123804847
+          ],
+          "classification": "INCONCLUSIVE"
+        },
+        {
+          "paired_median_ratio": 1.119717058,
+          "ci95": [
+            1.114036021,
+            1.130438688
+          ],
+          "classification": "MATERIAL_IMPROVEMENT"
+        }
+      ],
+      "per_vs_compact_ea": [
+        "INCONCLUSIVE",
+        "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT"
+      ],
+      "cross_run_conclusion": "EXACT and HYBRID classifications did not replicate; retain INCONCLUSIVE for this workload and investigate run-level variance before claiming a stable effect."
+    }
+  },
+  "decisions": {
+    "historical_exact_hybrid_recharacterization": "PARTIAL",
+    "compact_ea_material_effect": "NOT_ESTABLISHED",
+    "per_instruction_default_preserved": true,
+    "default_promotion": false,
+    "performance_claim_scope": "Only the repeated per-workload paired classifications above; no universal claim."
+  }
+}

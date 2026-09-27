@@ -41,7 +41,10 @@ def test_snapshot_is_deterministic_and_artifacts_are_hash_pinned() -> None:
     assert all(item["experiment_id"] in experiment_ids for item in results["negative_results"])
     for item in manifest["evidence_artifacts"]:
         artifact = ROOT / item["path"]
-        assert hashlib.sha256(artifact.read_bytes()).hexdigest() == item["sha256"]
+        raw = artifact.read_bytes()
+        canonical = raw.replace(b"\r\n", b"\n")
+        assert hashlib.sha256(canonical).hexdigest() == item["sha256"]
+        assert len(canonical) == item["bytes"]
     assert cross_version["direct_delta_supported"] is False
     assert results["default_policy"] == {"instruction_budget": "PER_INSTRUCTION", "changed": False}
     assert results["strict_fp_preserved"] is True

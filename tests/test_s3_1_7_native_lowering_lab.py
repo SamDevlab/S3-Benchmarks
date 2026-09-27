@@ -11,6 +11,7 @@ from tools.s3_17_native_lowering_lab import (
     MANIFEST_PATH,
     CONTROL_ADAPTER_PATH,
     _build_command,
+    _text_artifact_sha256,
     load_contract,
 )
 
@@ -21,8 +22,8 @@ def test_manifest_pins_sources_and_external_reference_fixture() -> None:
     assert manifest["s3_control_sha"] == "4ddc7a64a4c395460181db0e8957f085d8bb12a9"
     assert len(manifest["workloads"]) == 3
     assert len(fixture["workloads"]) == 3
-    assert hashlib.sha256(FIXTURE_PATH.read_bytes()).hexdigest() == manifest["reference_fixture"]["sha256"]
-    assert hashlib.sha256(DATASET_PATH.read_bytes()).hexdigest() == manifest["dataset_manifest"]["sha256"]
+    assert _text_artifact_sha256(FIXTURE_PATH.read_bytes()) == manifest["reference_fixture"]["sha256"]
+    assert _text_artifact_sha256(DATASET_PATH.read_bytes()) == manifest["dataset_manifest"]["sha256"]
     assert manifest["reference_fixture"]["upstream_revision"] == manifest["s3_control_sha"]
     assert manifest["protocol"]["max_instructions"] == 1_000_000_000
     assert manifest["protocol"]["optimization"] == "O1"
@@ -99,3 +100,9 @@ def test_candidate_sha_is_required_before_running_measurements(tmp_path: Path) -
         assert "exact S3 candidate commit SHA" in str(exc)
     else:
         raise AssertionError("un-pinned S3 candidate was accepted")
+
+
+def test_pinned_text_artifact_hash_ignores_checkout_line_endings() -> None:
+    lf = b"first\nsecond\n"
+    crlf = lf.replace(b"\n", b"\r\n")
+    assert _text_artifact_sha256(lf) == _text_artifact_sha256(crlf)
