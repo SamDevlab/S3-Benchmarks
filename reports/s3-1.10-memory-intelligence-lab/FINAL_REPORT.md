@@ -124,3 +124,20 @@ The corresponding compiler campaign report is in the S3 repository at
 `reports/s3-1.10-memory-intelligence-value-locality/FINAL_REPORT.md`. The two
 repositories are independently reviewable; neither is a stacked dependency
 for the other.
+
+```text
+BENCH_PR=28
+BENCH_PR_BASE=main
+BENCH_PR_STATE=DRAFT
+S3_PR=324
+S3_PR_BASE=main
+S3_PR_STATE=DRAFT
+MERGE=NOT_AUTHORIZED
+RELEASE=NOT_AUTHORIZED
+TAG=NOT_AUTHORIZED
+PYPI=NOT_AUTHORIZED
+S3_1_11_STARTED=NO
+```
+
+Review requests: [S3-Benchmarks #28](https://github.com/SamDevlab/S3-Benchmarks/pull/28)
+and [S3 #324](https://github.com/SamDevlab/S3/pull/324).
