@@ -132,12 +132,14 @@ def _validate_benchmark_result(
     samples: int,
 ) -> dict[str, object]:
     identity = result.get("source_revision")
-    if not isinstance(identity, dict) or identity != {
-        "git_commit": revision,
-        "git_tree": tree,
-        "worktree_clean": True,
-        "identity_source": "explicit_source_checkout_provenance",
-    }:
+    if (
+        not isinstance(identity, dict)
+        or identity.get("git_commit") != revision
+        or identity.get("git_tree") != tree
+        or identity.get("worktree_clean") is not True
+        or identity.get("identity_source")
+        not in {"explicit_source_checkout_provenance", "local_git_checkout"}
+    ):
         raise ValueError("raw benchmark source identity does not match the verified pinned checkout")
 
     source_hashes = result.get("compiler_source_sha256")
@@ -393,10 +395,79 @@ def execute(
     return report
 
 
+def execute_matrix(
+    *,
+    source_url: str,
+    revisions: list[str],
+    work_root: Path,
+    output_dir: Path,
+    iterations: int = 1000,
+    warmups: int = 3,
+    samples: int = 21,
+    timeout_seconds: int = 3600,
+) -> dict[str, object]:
+    """Run the qualified single-SHA protocol serially for exact revisions."""
+    if not revisions:
+        raise ValueError("at least one source revision is required")
+    if any(not isinstance(revision, str) or not _SHA1.fullmatch(revision) for revision in revisions):
+        raise ValueError("every source revision must be a full lowercase 40-character Git SHA")
+    if len(set(revisions)) != len(revisions):
+        raise ValueError("source revision list contains duplicates")
+    source_identity = _safe_source_identity(source_url)
+
+    output_dir = output_dir.resolve()
+    work_root = work_root.resolve()
+    if output_dir.exists() or work_root.exists():
+        raise FileExistsError("matrix output and work roots must both be new directories")
+    if output_dir == work_root or work_root in output_dir.parents or output_dir in work_root.parents:
+        raise ValueError("matrix work root and output directory must be disjoint")
+
+    output_dir.mkdir(parents=True)
+    rows: list[dict[str, object]] = []
+    for revision in sorted(revisions):
+        try:
+            report = execute(
+                source_url=source_url,
+                revision=revision,
+                work_root=work_root / revision,
+                output_dir=output_dir / revision,
+                iterations=iterations,
+                warmups=warmups,
+                samples=samples,
+                timeout_seconds=timeout_seconds,
+            )
+            rows.append({"source_revision": revision, "status": report["status"], "result": report})
+        except Exception as exc:
+            rows.append(
+                {
+                    "source_revision": revision,
+                    "status": "FAIL",
+                    "error": f"{type(exc).__name__}: {exc}",
+                    "result_path": (
+                        output_dir / revision / "executor-result-v1.json"
+                    ).as_posix(),
+                }
+            )
+
+    report: dict[str, object] = {
+        "schema_version": "1.0.0",
+        "report_kind": "S3_BENCHMARKS_MULTI_SHA_EXECUTION_MATRIX",
+        "source_repository": source_identity,
+        "revision_order": sorted(revisions),
+        "execution_order": "serial_ascending_sha",
+        "status": "PASS" if all(row["status"] == "PASS" for row in rows) else "FAIL",
+        "runs": rows,
+    }
+    (output_dir / "multi-sha-result-v1.json").write_bytes(_json_bytes(report))
+    return report
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--s3-url", required=True, help="Git URL or local Git repository for the S3 source")
-    parser.add_argument("--source-revision", required=True)
+    revisions = parser.add_mutually_exclusive_group(required=True)
+    revisions.add_argument("--source-revision", help="one exact full Git SHA")
+    revisions.add_argument("--source-revisions", nargs="+", help="serial matrix of exact full Git SHAs")
     parser.add_argument("--work-root", type=Path, required=True, help="new directory for the detached S3 clone")
     parser.add_argument("--output-dir", type=Path, required=True, help="new directory for immutable run evidence")
     parser.add_argument("--iterations", type=int, default=1000)
@@ -404,6 +475,20 @@ def main() -> int:
     parser.add_argument("--samples", type=int, default=21)
     parser.add_argument("--timeout-seconds", type=int, default=3600)
     args = parser.parse_args()
+    if args.source_revisions:
+        report = execute_matrix(
+            source_url=args.s3_url,
+            revisions=args.source_revisions,
+            work_root=args.work_root,
+            output_dir=args.output_dir,
+            iterations=args.iterations,
+            warmups=args.warmups,
+            samples=args.samples,
+            timeout_seconds=args.timeout_seconds,
+        )
+        print(f"S3_MULTI_SHA_EXECUTOR={report['status']} revisions={len(report['runs'])}")
+        return 0 if report["status"] == "PASS" else 1
+
     report = execute(
         source_url=args.s3_url,
         revision=args.source_revision,

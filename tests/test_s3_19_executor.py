@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+import tools.s3_19_executor as executor
 from tools.s3_19_executor import (
     BINARY_VARIANTS,
     COMPILER_SOURCE_FILES,
@@ -148,6 +149,18 @@ def test_executor_validates_source_hashes_and_correctness_before_accepting_resul
     assert set(verified["verified_compiler_source_sha256"]) == set(COMPILER_SOURCE_FILES)
     assert set(verified["workloads"]) == set(WORKLOADS)
 
+    legacy_identity_result = json.loads(json.dumps(result))
+    legacy_identity_result["source_revision"]["identity_source"] = "local_git_checkout"
+    _validate_benchmark_result(
+        legacy_identity_result,
+        checkout=checkout,
+        revision=revision,
+        tree=tree,
+        iterations=10,
+        warmups=1,
+        samples=3,
+    )
+
 
 def test_executor_fails_closed_on_identity_source_hash_or_correctness_mismatch(tmp_path: Path) -> None:
     result, checkout, revision, tree = _valid_result(tmp_path)
@@ -165,6 +178,11 @@ def test_executor_fails_closed_on_identity_source_hash_or_correctness_mismatch(t
     with pytest.raises(ValueError, match="source identity"):
         _validate_benchmark_result(bad_identity, **arguments)
 
+    unknown_identity_source = json.loads(json.dumps(result))
+    unknown_identity_source["source_revision"]["identity_source"] = "unverified_external_claim"
+    with pytest.raises(ValueError, match="source identity"):
+        _validate_benchmark_result(unknown_identity_source, **arguments)
+
     bad_hash = json.loads(json.dumps(result))
     bad_hash["compiler_source_sha256"][COMPILER_SOURCE_FILES[0]] = "e" * 64
     with pytest.raises(ValueError, match="source hash mismatch"):
@@ -174,3 +192,86 @@ def test_executor_fails_closed_on_identity_source_hash_or_correctness_mismatch(t
     bad_correctness["workloads"][WORKLOADS[0]]["correctness"] = "FAIL"
     with pytest.raises(ValueError, match="correctness did not pass"):
         _validate_benchmark_result(bad_correctness, **arguments)
+
+
+def test_multi_sha_executor_runs_exact_revisions_in_deterministic_isolated_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    revisions = ["b" * 40, "a" * 40]
+    calls: list[tuple[str, Path, Path]] = []
+
+    def fake_execute(**kwargs: object) -> dict[str, object]:
+        revision = str(kwargs["revision"])
+        calls.append((revision, kwargs["work_root"], kwargs["output_dir"]))
+        return {"status": "PASS", "s3_commit": revision}
+
+    monkeypatch.setattr(executor, "execute", fake_execute)
+    output = tmp_path / "matrix-output"
+    work = tmp_path / "matrix-work"
+
+    report = executor.execute_matrix(
+        source_url="https://github.com/SamDevlab/S3.git",
+        revisions=revisions,
+        work_root=work,
+        output_dir=output,
+    )
+
+    assert report["status"] == "PASS"
+    assert report["revision_order"] == ["a" * 40, "b" * 40]
+    assert report["execution_order"] == "serial_ascending_sha"
+    assert [call[0] for call in calls] == ["a" * 40, "b" * 40]
+    assert calls[0][1] == work / ("a" * 40)
+    assert calls[0][2] == output / ("a" * 40)
+    assert json.loads((output / "multi-sha-result-v1.json").read_text())["status"] == "PASS"
+
+
+@pytest.mark.parametrize(
+    "revisions, message",
+    [
+        (["a" * 40, "a" * 40], "contains duplicates"),
+        (["not-a-full-sha"], "full lowercase 40-character Git SHA"),
+    ],
+)
+def test_multi_sha_executor_rejects_ambiguous_revision_sets_before_side_effects(
+    tmp_path: Path, revisions: list[str], message: str
+) -> None:
+    output = tmp_path / "matrix-output"
+    work = tmp_path / "matrix-work"
+
+    with pytest.raises(ValueError, match=message):
+        executor.execute_matrix(
+            source_url="https://github.com/SamDevlab/S3.git",
+            revisions=revisions,
+            work_root=work,
+            output_dir=output,
+        )
+
+    assert not output.exists()
+    assert not work.exists()
+
+
+def test_multi_sha_executor_records_one_failure_and_continues_to_next_revision(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    revisions = ["a" * 40, "b" * 40]
+    calls: list[str] = []
+
+    def fake_execute(**kwargs: object) -> dict[str, object]:
+        revision = str(kwargs["revision"])
+        calls.append(revision)
+        if revision == "a" * 40:
+            raise RuntimeError("incompatible benchmark protocol")
+        return {"status": "PASS", "s3_commit": revision}
+
+    monkeypatch.setattr(executor, "execute", fake_execute)
+    report = executor.execute_matrix(
+        source_url="https://github.com/SamDevlab/S3.git",
+        revisions=revisions,
+        work_root=tmp_path / "matrix-work",
+        output_dir=tmp_path / "matrix-output",
+    )
+
+    assert calls == revisions
+    assert report["status"] == "FAIL"
+    assert [row["status"] for row in report["runs"]] == ["FAIL", "PASS"]
+    assert "incompatible benchmark protocol" in report["runs"][0]["error"]
