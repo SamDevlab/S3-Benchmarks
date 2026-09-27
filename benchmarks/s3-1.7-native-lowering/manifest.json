@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0.0",
+  "experiment_id": "EXP-S3-17-LOWERING-002",
+  "question": "Does proof-gated native register-initialization marker elision reduce static code and runtime for unchanged real-world workloads?",
+  "s3_control_sha": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+  "reference_fixture": {
+    "path": "benchmarks/s3-1.7-native-lowering/fixtures/s3-1.5-reference-results-v1.json",
+    "sha256": "07174cf606de3524b76f4d2c9a43edda1fc499a43e88763e3c73c4c8035aa201",
+    "upstream_repository": "SamDevlab/S3",
+    "upstream_revision": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+    "upstream_path": "benchmarks/references/s3-1.5/reference-results-v1.json"
+  },
+  "dataset_manifest": {
+    "path": "benchmarks/s3-1.7-native-lowering/fixtures/datasets-v1.json",
+    "sha256": "ba0204f30be6fdcfcd7e644c76ec142bb815c1d31af0d2e66ed165f12d5f1d83",
+    "upstream_repository": "SamDevlab/S3",
+    "upstream_revision": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+    "upstream_path": "benchmarks/workloads/real_world/datasets-v1.json"
+  },
+  "control_build_adapter": {
+    "path": "benchmarks/s3-1.7-native-lowering/control-ffi-budget-cli.patch",
+    "sha256": "ff926c2a1a6b8e238272fe38e7c7183b0d05b6ab7b15169daa2b2689aaf4aa90",
+    "reason": "The pinned control backend already supports O1 code generation and max_instructions, but ffi-build recompiles with defaults and its CLI does not forward the runtime budget. Apply this two-file CLI/API adapter to a temporary bootstrap copy so control and candidate both build with the declared optimization, syntax mode, and runtime budget; backend/compiler sources remain untouched.",
+    "files": ["bootstrap/s3/cli.py", "bootstrap/s3/ffi.py"]
+  },
+  "budget_provenance": {
+    "source_repository": "SamDevlab/S3",
+    "source_revision": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+    "source_path": "reports/s3-1.7-native-lowering-codegen-expansion/evidence/control-4ddc7a6/native-workload-benchmark-v1.json",
+    "source_sha256": "f1ba247af3e38b9bcc2559c6f298b0116ad345b2f55842758c87b09f119ab06e",
+    "protocol_field": "protocol.max_s3_instructions",
+    "value": 1000000000
+  },
+  "s3_candidate_sha": "39dfbb5d19ecefc7df78da7dc8d3ea8e31d81df4",
+  "workloads": [
+    {
+      "workload_id": "engineering.point-cloud-summary.v1",
+      "source_path": "benchmarks/workloads/real_world/point_cloud_summary.s3",
+      "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+      "native_symbol": "point_cloud_summary",
+      "output_fields": [
+        "centroid_x",
+        "centroid_y",
+        "centroid_z",
+        "minimum_x",
+        "minimum_y",
+        "minimum_z",
+        "maximum_x",
+        "maximum_y",
+        "maximum_z",
+        "radius_of_gyration"
+      ]
+    },
+    {
+      "workload_id": "geospatial.raster-window-statistics.v1",
+      "source_path": "benchmarks/workloads/real_world/raster_window_statistics.s3",
+      "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+      "native_symbol": "raster_window_statistics",
+      "output_fields": [
+        "valid_sum",
+        "valid_mean",
+        "valid_minimum",
+        "valid_maximum",
+        "threshold_count",
+        "horizontal_abs_gradient_mean"
+      ]
+    },
+    {
+      "workload_id": "energy.pv-timeseries-aggregation.v1",
+      "source_path": "benchmarks/workloads/real_world/energy_series_aggregation.s3",
+      "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+      "native_symbol": "energy_series_aggregation",
+      "output_fields": [
+        "ac_energy_wh",
+        "ac_peak_w",
+        "net_energy_wh",
+        "capacity_factor",
+        "mean_absolute_balance_w"
+      ]
+    }
+  ],
+  "protocol": {
+    "optimization": "O1",
+    "source_syntax": "0.6",
+    "native_policy": "baseline",
+    "max_instructions": 1000000000,
+    "warmups": 3,
+    "samples": 21,
+    "iterations_per_sample": 1000,
+    "paired_order_seed": 1701,
+    "bootstrap_resamples": 10000,
+    "material_change_threshold": 0.05,
+    "timing_scope": "same-process scalar C ABI calls; setup and compilation excluded; ctypes dispatch included equally"
+  }
+}

@@ -1,0 +1,1071 @@
+{
+  "benchmark_lab_source_sha": "88de274ebbf461d9d4c50d72121df82f1e95032e40b75e5ee254d05dc5a1072f",
+  "budget_provenance": {
+    "protocol_field": "protocol.max_s3_instructions",
+    "source_path": "reports/s3-1.7-native-lowering-codegen-expansion/evidence/control-4ddc7a6/native-workload-benchmark-v1.json",
+    "source_repository": "SamDevlab/S3",
+    "source_revision": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+    "source_sha256": "f1ba247af3e38b9bcc2559c6f298b0116ad345b2f55842758c87b09f119ab06e",
+    "value": 1000000000
+  },
+  "correctness_before_timing": true,
+  "dataset_manifest_sha256": "ba0204f30be6fdcfcd7e644c76ec142bb815c1d31af0d2e66ed165f12d5f1d83",
+  "experiment_id": "EXP-S3-17-LOWERING-002",
+  "generated_at_utc": "2026-09-26T23:34:22.667942+00:00",
+  "host": {
+    "machine": "x86_64",
+    "processor": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "python": "3.13.15",
+    "release": "7.0.0-31-generic",
+    "system": "Linux"
+  },
+  "manifest_sha256": "83136fd2610c8d04e57a97a491395f26b10e47654f98334a878e232a88255d11",
+  "performance_claim_scope": "paired native execution characterization; no claim against C or other compilers",
+  "protocol": {
+    "bootstrap_resamples": 10000,
+    "iterations_per_sample": 1000,
+    "material_change_threshold": 0.05,
+    "max_instructions": 1000000000,
+    "native_policy": "baseline",
+    "optimization": "O1",
+    "paired_order_seed": 1701,
+    "samples": 21,
+    "source_syntax": "0.6",
+    "timing_scope": "same-process scalar C ABI calls; setup and compilation excluded; ctypes dispatch included equally",
+    "warmups": 3
+  },
+  "reference_fixture_sha256": "07174cf606de3524b76f4d2c9a43edda1fc499a43e88763e3c73c4c8035aa201",
+  "s3_candidate_repo": "/tmp/S3-1.7-candidate-39dfbb5d",
+  "s3_candidate_sha": "39dfbb5d19ecefc7df78da7dc8d3ea8e31d81df4",
+  "s3_checkouts_clean_and_exact": true,
+  "s3_control_build_adapter": {
+    "backend_sources_modified": false,
+    "files": {
+      "bootstrap/s3/cli.py": "a26ecab276b2f785006f7edff51ab5ef0a67808d759f061f989a743d26e0b275",
+      "bootstrap/s3/ffi.py": "edf977eb8d7c8d62da175dcdf78e1b3e5f038222bec37f61930bc01363d42dca"
+    },
+    "overlay_path": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-control-cli-eqtjc8xw",
+    "patch_path": "benchmarks/s3-1.7-native-lowering/control-ffi-budget-cli.patch",
+    "patch_sha256": "ff926c2a1a6b8e238272fe38e7c7183b0d05b6ab7b15169daa2b2689aaf4aa90",
+    "reason": "The pinned control backend already supports O1 code generation and max_instructions, but ffi-build recompiles with defaults and its CLI does not forward the runtime budget. Apply this two-file CLI/API adapter to a temporary bootstrap copy so control and candidate both build with the declared optimization, syntax mode, and runtime budget; backend/compiler sources remain untouched.",
+    "status": "APPLIED_TO_TEMPORARY_BOOTSTRAP_COPY"
+  },
+  "s3_control_repo": "/tmp/S3-1.7-control-clean",
+  "s3_control_sha": "4ddc7a64a4c395460181db0e8957f085d8bb12a9",
+  "schema_version": "1.0.0",
+  "toolchain": {
+    "cc": "cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+    "linker": "GNU ld (GNU Binutils for Ubuntu) 2.46",
+    "objdump": "GNU objdump (GNU Binutils for Ubuntu) 2.46"
+  },
+  "workloads": {
+    "energy.pv-timeseries-aggregation.v1": {
+      "builds": {
+        "candidate": {
+          "assembly_sha256": "08cbb0d4f17c898b22da46901320f57c0392c35a499473f739431b9fb0082130",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-candidate-39dfbb5d/benchmarks/workloads/real_world/energy_series_aggregation.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/candidate-energy.pv-timeseries-aggregation.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/candidate-energy.pv-timeseries-aggregation.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "6b4b944c54cc5ee6bf05b40f2c44e870626f8856fdb8169884a9634f44c0b2e8",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/candidate-energy.pv-timeseries-aggregation.v1.so\n"
+        },
+        "control": {
+          "assembly_sha256": "97fb2503f7c21a543daadc05588f4489fc3040a7cbf7998ee15fa287577e22bf",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-control-clean/benchmarks/workloads/real_world/energy_series_aggregation.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/control-energy.pv-timeseries-aggregation.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/control-energy.pv-timeseries-aggregation.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "d5b163400be9d0cd44dbb90aae72219236620cde5119c79d0f2770077d036074",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-zyoz8ioe/control-energy.pv-timeseries-aggregation.v1.so\n"
+        }
+      },
+      "control_candidate_output_equal": true,
+      "correctness": {
+        "candidate": {
+          "comparisons": [
+            {
+              "absolute_error": 3.2014213502407074e-10,
+              "actual": 183250.39367548373,
+              "allowed_error": 0.00018325039367548342,
+              "expected": 183250.3936754834,
+              "field": "ac_energy_wh"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 4436.3555385522,
+              "allowed_error": 4.436355538552201e-06,
+              "expected": 4436.3555385522,
+              "field": "ac_peak_w"
+            },
+            {
+              "absolute_error": 3.2014213502407074e-10,
+              "actual": -196429.60632451627,
+              "allowed_error": 0.0001964296063245166,
+              "expected": -196429.6063245166,
+              "field": "net_energy_wh"
+            },
+            {
+              "absolute_error": 3.394792780220257e-11,
+              "actual": 0.21815523056605207,
+              "allowed_error": 1e-06,
+              "expected": 0.2181552306,
+              "field": "capacity_factor"
+            },
+            {
+              "absolute_error": 2.091837814077735e-11,
+              "actual": 1516.023863195179,
+              "allowed_error": 1.5160238631952e-06,
+              "expected": 1516.0238631952,
+              "field": "mean_absolute_balance_w"
+            }
+          ],
+          "status": "PASS"
+        },
+        "control": {
+          "comparisons": [
+            {
+              "absolute_error": 3.2014213502407074e-10,
+              "actual": 183250.39367548373,
+              "allowed_error": 0.00018325039367548342,
+              "expected": 183250.3936754834,
+              "field": "ac_energy_wh"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 4436.3555385522,
+              "allowed_error": 4.436355538552201e-06,
+              "expected": 4436.3555385522,
+              "field": "ac_peak_w"
+            },
+            {
+              "absolute_error": 3.2014213502407074e-10,
+              "actual": -196429.60632451627,
+              "allowed_error": 0.0001964296063245166,
+              "expected": -196429.6063245166,
+              "field": "net_energy_wh"
+            },
+            {
+              "absolute_error": 3.394792780220257e-11,
+              "actual": 0.21815523056605207,
+              "allowed_error": 1e-06,
+              "expected": 0.2181552306,
+              "field": "capacity_factor"
+            },
+            {
+              "absolute_error": 2.091837814077735e-11,
+              "actual": 1516.023863195179,
+              "allowed_error": 1.5160238631952e-06,
+              "expected": 1516.0238631952,
+              "field": "mean_absolute_balance_w"
+            }
+          ],
+          "status": "PASS"
+        }
+      },
+      "input_fixture_sha256": "5317a0082a2130fcc1e70462bc3382c853fb792830a69440562074902b82b086",
+      "reference_engine": "pvlib",
+      "reference_engine_version": "0.15.2",
+      "reference_output_sha256": "fcf43e0a094641708be98a8a81329639b5279b5b7015d1c7d31a0380e9e2de79",
+      "static_metrics": {
+        "candidate": {
+          "disassembly_sha256": "75af4504337d89e081726ec55c1e835ca8eb86a8dd2a696b396c89d0f6b4bf05",
+          "static_branches": 789,
+          "static_machine_instructions": 2763,
+          "static_memory_operand_instructions": 953,
+          "symbol": "energy_series_aggregation"
+        },
+        "control": {
+          "disassembly_sha256": "bfe067eadd4e8df525a4b9b93cba0daa051f03e1d5bf8ff191d0a855eb1eb071",
+          "static_branches": 789,
+          "static_machine_instructions": 2763,
+          "static_memory_operand_instructions": 953,
+          "symbol": "energy_series_aggregation"
+        }
+      },
+      "timing": {
+        "candidate_coefficient_of_variation": 0.044549202307623326,
+        "candidate_median_ns_per_call": 20296.314,
+        "candidate_ns_per_call": [
+          20284.554,
+          20080.958,
+          20326.544,
+          19104.343,
+          19642.235,
+          18433.603,
+          20296.314,
+          20470.371,
+          19899.702,
+          21189.73,
+          18862.236,
+          20996.944,
+          20327.934,
+          20913.564,
+          20197.756,
+          20825.816,
+          22607.618,
+          19981.089,
+          21331.728,
+          20953.794,
+          19489.401
+        ],
+        "control_coefficient_of_variation": 0.04598406330365493,
+        "control_median_ns_per_call": 19982.579,
+        "control_ns_per_call": [
+          19536.646,
+          19700.844,
+          20282.824,
+          18767.007,
+          19982.579,
+          22556.78,
+          19417.717,
+          19355.979,
+          20794.295,
+          20342.979,
+          20438.327,
+          19209.102,
+          20136.187,
+          19801.692,
+          19011.144,
+          21119.602,
+          21671.823,
+          19106.638,
+          19255.805,
+          20799.937,
+          20469.157
+        ],
+        "paired_comparison": {
+          "bootstrap_resamples": 10000,
+          "bootstrap_seed": 1701,
+          "classification": "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+          "control_over_candidate_median_ratio": 0.9810709230107449,
+          "material_change_threshold": 0.05,
+          "paired_bootstrap_95_percentile_interval": [
+            0.9567114994377798,
+            0.9978491178825086
+          ]
+        },
+        "paired_order": [
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ]
+        ]
+      }
+    },
+    "engineering.point-cloud-summary.v1": {
+      "builds": {
+        "candidate": {
+          "assembly_sha256": "a5161190f38d1d3ef05c224d05c8d4fee56d84e0890be7e280c36c5ab7b216c0",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-candidate-39dfbb5d/benchmarks/workloads/real_world/point_cloud_summary.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/candidate-engineering.point-cloud-summary.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/candidate-engineering.point-cloud-summary.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "fc640b39ef8c97304a45800bd48a7b5a779c046858f41988b6b87fff142bbd07",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/candidate-engineering.point-cloud-summary.v1.so\n"
+        },
+        "control": {
+          "assembly_sha256": "16e46ca433bf52984c5099899e28e804a00ea1ecb70a14a441d949157c98c2da",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-control-clean/benchmarks/workloads/real_world/point_cloud_summary.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/control-engineering.point-cloud-summary.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/control-engineering.point-cloud-summary.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "e7c985fc8ea3788f0610f81bee9b80d591bd0b5cd6f6bee64d5925aeed82a332",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-jmynqtiz/control-engineering.point-cloud-summary.v1.so\n"
+        }
+      },
+      "control_candidate_output_equal": true,
+      "correctness": {
+        "candidate": {
+          "comparisons": [
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_z"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": -3.5,
+              "field": "minimum_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": -3.5,
+              "field": "minimum_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -6.0,
+              "allowed_error": 6.000000000000001e-09,
+              "expected": -6.0,
+              "field": "minimum_z"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": 3.5,
+              "field": "maximum_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": 3.5,
+              "field": "maximum_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 6.0,
+              "allowed_error": 6.000000000000001e-09,
+              "expected": 6.0,
+              "field": "maximum_z"
+            },
+            {
+              "absolute_error": 3.7835512500805635e-11,
+              "actual": 4.971795450337836,
+              "allowed_error": 4.9717954503e-09,
+              "expected": 4.9717954503,
+              "field": "radius_of_gyration"
+            }
+          ],
+          "status": "PASS"
+        },
+        "control": {
+          "comparisons": [
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 0.0,
+              "allowed_error": 1e-09,
+              "expected": 0.0,
+              "field": "centroid_z"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": -3.5,
+              "field": "minimum_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": -3.5,
+              "field": "minimum_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -6.0,
+              "allowed_error": 6.000000000000001e-09,
+              "expected": -6.0,
+              "field": "minimum_z"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": 3.5,
+              "field": "maximum_x"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 3.5,
+              "allowed_error": 3.5000000000000003e-09,
+              "expected": 3.5,
+              "field": "maximum_y"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 6.0,
+              "allowed_error": 6.000000000000001e-09,
+              "expected": 6.0,
+              "field": "maximum_z"
+            },
+            {
+              "absolute_error": 3.7835512500805635e-11,
+              "actual": 4.971795450337836,
+              "allowed_error": 4.9717954503e-09,
+              "expected": 4.9717954503,
+              "field": "radius_of_gyration"
+            }
+          ],
+          "status": "PASS"
+        }
+      },
+      "input_fixture_sha256": "094950329d17865235e944ef637410f7d4968fe6c6ab532dae5df9c342c5cc32",
+      "reference_engine": "Open3D",
+      "reference_engine_version": "0.20.0",
+      "reference_output_sha256": "1c691995fe68ccfb436ae2b328f8773da2d6b5d6c88211fee2976f8bcb18208b",
+      "static_metrics": {
+        "candidate": {
+          "disassembly_sha256": "32552e0cea8c1a6621cf0c0c0cf15ca1f8a10f312a6f6ef9571bd574e9538a08",
+          "static_branches": 1367,
+          "static_machine_instructions": 4746,
+          "static_memory_operand_instructions": 1601,
+          "symbol": "point_cloud_summary"
+        },
+        "control": {
+          "disassembly_sha256": "0d62bd5f04228f101a6f165ac6a317631cd6b6957672798985162c5e752cd5c5",
+          "static_branches": 1367,
+          "static_machine_instructions": 4746,
+          "static_memory_operand_instructions": 1601,
+          "symbol": "point_cloud_summary"
+        }
+      },
+      "timing": {
+        "candidate_coefficient_of_variation": 0.11855789119114135,
+        "candidate_median_ns_per_call": 19314.02,
+        "candidate_ns_per_call": [
+          16677.736,
+          15609.948,
+          16312.652,
+          19165.982,
+          18544.086,
+          19923.575,
+          19658.969,
+          19310.6,
+          19314.02,
+          23036.787,
+          16784.839,
+          20840.286,
+          19493.266,
+          17102.475,
+          22835.445,
+          21492.021,
+          25028.701,
+          19159.031,
+          21400.927,
+          18619.06,
+          20414.078
+        ],
+        "control_coefficient_of_variation": 0.09413416063051908,
+        "control_median_ns_per_call": 19065.913,
+        "control_ns_per_call": [
+          16712.57,
+          15013.371,
+          15828.144,
+          20941.019,
+          18605.921,
+          18627.23,
+          20095.072,
+          18143.268,
+          19099.248,
+          19065.913,
+          17549.767,
+          17509.297,
+          19248.79,
+          21249.23,
+          19728.002,
+          20317.228,
+          18010.44,
+          20837.236,
+          20447.592,
+          18138.188,
+          22266.163
+        ],
+        "paired_comparison": {
+          "bootstrap_resamples": 10000,
+          "bootstrap_seed": 1701,
+          "classification": "INCONCLUSIVE",
+          "control_over_candidate_median_ratio": 0.9741731322633902,
+          "material_change_threshold": 0.05,
+          "paired_bootstrap_95_percentile_interval": [
+            0.9453381792247457,
+            1.0033344862615499
+          ]
+        },
+        "paired_order": [
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ]
+        ]
+      }
+    },
+    "geospatial.raster-window-statistics.v1": {
+      "builds": {
+        "candidate": {
+          "assembly_sha256": "73ae26b6c3e4a6d03a7951834f4a2e1b291a737bb73a89d9ccb650c15f2ce9ed",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-candidate-39dfbb5d/benchmarks/workloads/real_world/raster_window_statistics.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/candidate-geospatial.raster-window-statistics.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/candidate-geospatial.raster-window-statistics.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "685fd61b36e7ded2301d63fa6af36bc8752c33618d9c1035d20089eafeab2262",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/candidate-geospatial.raster-window-statistics.v1.so\n"
+        },
+        "control": {
+          "assembly_sha256": "dfc2ac9d88a57465942f7d483fe383cadba0c7b237696a0318cf60390b5847fe",
+          "command": [
+            "/home/vboxuser/.stage1-qualification-py313/bin/python",
+            "-m",
+            "bootstrap.s3.cli",
+            "ffi-build",
+            "/tmp/S3-1.7-control-clean/benchmarks/workloads/real_world/raster_window_statistics.s3",
+            "-O",
+            "1",
+            "--source-syntax",
+            "0.6",
+            "--max-instructions",
+            "1000000000",
+            "--native-policy",
+            "baseline",
+            "-o",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/control-geospatial.raster-window-statistics.v1.so",
+            "--keep-assembly",
+            "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/control-geospatial.raster-window-statistics.v1.s"
+          ],
+          "exit_code": 0,
+          "library_sha256": "f3c083c3dd548d115a5fd43673855d3c31cda495493dcac3a9e5dfb10853d2ee",
+          "stderr": "",
+          "stdout": "/tmp/S3-1.7-lab/scratch/EXP-S3-17-LOWERING-002/s3-17-01yfc265/control-geospatial.raster-window-statistics.v1.so\n"
+        }
+      },
+      "control_candidate_output_equal": true,
+      "correctness": {
+        "candidate": {
+          "comparisons": [
+            {
+              "absolute_error": 0.0,
+              "actual": 1640.0,
+              "allowed_error": 1.6400000000000002e-06,
+              "expected": 1640.0,
+              "field": "valid_sum"
+            },
+            {
+              "absolute_error": 3.448263896643766e-11,
+              "actual": 28.275862068965516,
+              "allowed_error": 2.8275862069e-08,
+              "expected": 28.275862069,
+              "field": "valid_mean"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -16.0,
+              "allowed_error": 1.6e-08,
+              "expected": -16.0,
+              "field": "valid_minimum"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 74.0,
+              "allowed_error": 7.4e-08,
+              "expected": 74.0,
+              "field": "valid_maximum"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 31.0,
+              "allowed_error": 3.1e-08,
+              "expected": 31.0,
+              "field": "threshold_count"
+            },
+            {
+              "absolute_error": 1.3042011914876639e-11,
+              "actual": 30.304347826086957,
+              "allowed_error": 3.03043478261e-08,
+              "expected": 30.3043478261,
+              "field": "horizontal_abs_gradient_mean"
+            }
+          ],
+          "status": "PASS"
+        },
+        "control": {
+          "comparisons": [
+            {
+              "absolute_error": 0.0,
+              "actual": 1640.0,
+              "allowed_error": 1.6400000000000002e-06,
+              "expected": 1640.0,
+              "field": "valid_sum"
+            },
+            {
+              "absolute_error": 3.448263896643766e-11,
+              "actual": 28.275862068965516,
+              "allowed_error": 2.8275862069e-08,
+              "expected": 28.275862069,
+              "field": "valid_mean"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": -16.0,
+              "allowed_error": 1.6e-08,
+              "expected": -16.0,
+              "field": "valid_minimum"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 74.0,
+              "allowed_error": 7.4e-08,
+              "expected": 74.0,
+              "field": "valid_maximum"
+            },
+            {
+              "absolute_error": 0.0,
+              "actual": 31.0,
+              "allowed_error": 3.1e-08,
+              "expected": 31.0,
+              "field": "threshold_count"
+            },
+            {
+              "absolute_error": 1.3042011914876639e-11,
+              "actual": 30.304347826086957,
+              "allowed_error": 3.03043478261e-08,
+              "expected": 30.3043478261,
+              "field": "horizontal_abs_gradient_mean"
+            }
+          ],
+          "status": "PASS"
+        }
+      },
+      "input_fixture_sha256": "527dd7fc157145cda4e6f6542c472f5f9b01aef3e95feb1e78a925cd2cc0eb5e",
+      "reference_engine": "Rasterio",
+      "reference_engine_version": "1.4.4",
+      "reference_output_sha256": "ed1cf70e041bbd6cdfa61956a938d8ed1dac3379b42e8240cfbb5ecae8cc4608",
+      "static_metrics": {
+        "candidate": {
+          "disassembly_sha256": "5a67122e15e028777a7f40be1b675a22da6e0accd0e73b807e54cd103ce198dd",
+          "static_branches": 1715,
+          "static_machine_instructions": 5688,
+          "static_memory_operand_instructions": 1898,
+          "symbol": "raster_window_statistics"
+        },
+        "control": {
+          "disassembly_sha256": "3051d37f3b67a257fd78a45baf1e01fc449964332de990bb171f369c0217c9cc",
+          "static_branches": 1715,
+          "static_machine_instructions": 5688,
+          "static_memory_operand_instructions": 1898,
+          "symbol": "raster_window_statistics"
+        }
+      },
+      "timing": {
+        "candidate_coefficient_of_variation": 0.051335028597025274,
+        "candidate_median_ns_per_call": 13637.392,
+        "candidate_ns_per_call": [
+          15057.666,
+          14854.389,
+          12334.898,
+          13220.864,
+          14374.997,
+          13160.615,
+          13038.737,
+          13990.777,
+          13152.966,
+          13336.522,
+          13247.455,
+          13637.392,
+          13840.675,
+          14190.439,
+          13715.996,
+          14023.911,
+          12788.611,
+          12673.853,
+          13838.875,
+          14367.091,
+          12972.518
+        ],
+        "control_coefficient_of_variation": 0.08150403769427465,
+        "control_median_ns_per_call": 13351.102,
+        "control_ns_per_call": [
+          17592.576,
+          14384.997,
+          12850.59,
+          12879.699,
+          13750.747,
+          12763.747,
+          13282.818,
+          13427.932,
+          13446.395,
+          13558.719,
+          13351.102,
+          12698.028,
+          13348.462,
+          14894.758,
+          13559.979,
+          13094.677,
+          13031.337,
+          11692.968,
+          13118.687,
+          13675.112,
+          13847.215
+        ],
+        "paired_comparison": {
+          "bootstrap_resamples": 10000,
+          "bootstrap_seed": 1701,
+          "classification": "NO_MATERIAL_CHANGE_WITHIN_5_PERCENT",
+          "control_over_candidate_median_ratio": 0.9741949542783286,
+          "material_change_threshold": 0.05,
+          "paired_bootstrap_95_percentile_interval": [
+            0.9597702829514044,
+            1.018719681208387
+          ]
+        },
+        "paired_order": [
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "control",
+            "candidate"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "candidate",
+            "control"
+          ],
+          [
+            "control",
+            "candidate"
+          ]
+        ]
+      }
+    }
+  }
+}
