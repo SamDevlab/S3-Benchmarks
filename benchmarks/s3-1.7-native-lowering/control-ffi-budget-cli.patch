@@ -1,0 +1,73 @@
+diff --git a/bootstrap/s3/cli.py b/bootstrap/s3/cli.py
+index b4de4802..aeb1e51c 100644
+--- a/bootstrap/s3/cli.py
++++ b/bootstrap/s3/cli.py
+@@ -222,7 +222,7 @@ def _parser() -> argparse.ArgumentParser:
+             p.add_argument("--write", action="store_true", help="write canonical source in place")
+         if cmd == "docs":
+             p.add_argument("--json", action="store_true", help="emit machine-readable documentation")
+-        if cmd in ("run", "native-asm", "build", "run-native"):
++        if cmd in ("run", "native-asm", "build", "run-native", "ffi-build"):
+             p.add_argument(
+                 "--max-instructions",
+                 type=int,
+@@ -415,7 +415,7 @@ def main(argv: Sequence[str] | None = None) -> int:
+         return 2
+ 
+ 
+-    if args.command in ("run", "native-asm", "build", "run-native") and args.max_instructions < 1:
++    if args.command in ("run", "native-asm", "build", "run-native", "ffi-build") and args.max_instructions < 1:
+         _usage_error = _CLIUsageError("--max-instructions must be at least 1")
+         if args.diagnostic_format == "json":
+             _emit_error(_usage_error, args.diagnostic_format)
+@@ -583,6 +583,9 @@ def main(argv: Sequence[str] | None = None) -> int:
+                 source,
+                 output,
+                 keep_assembly=args.keep_assembly,
++                max_instructions=args.max_instructions,
+                 native_policy=args.native_policy,
++                optimization=optimization,
++                mode=mode,
+             )
+             print(output)
+diff --git a/bootstrap/s3/ffi.py b/bootstrap/s3/ffi.py
+index 1481b235..53d344e8 100644
+--- a/bootstrap/s3/ffi.py
++++ b/bootstrap/s3/ffi.py
+@@ -8,6 +8,10 @@ from dataclasses import dataclass
+ from enum import Enum
+ from threading import Lock
+ 
++from .emulator import DEFAULT_MAX_INSTRUCTIONS
++from .lexer import SyntaxMode
++from .optimizer import OptimizationLevel
++
+ 
+ class FFIError(ValueError):
+     """Raised when an external signature is outside the supported contract."""
+@@ -126,16 +126,23 @@ def build_shared_library(
+     *,
+     extra_objects: tuple[Path, ...] = (),
+     keep_assembly: Path | None = None,
++    max_instructions: int = DEFAULT_MAX_INSTRUCTIONS,
+     native_policy: str | None = None,
++    optimization: OptimizationLevel | str = OptimizationLevel.O0,
++    mode: SyntaxMode = SyntaxMode.V0_6,
+ ) -> Path:
+     """Compile ordinary S3 source into a real Linux FFI shared object."""
+ 
+     from .backends.x86_64 import NativeToolchain, generate_ffi_assembly
+     from .pipeline import compile_source
+ 
+-    result = compile_source(source)
++    result = compile_source(source, optimization, mode=mode)
+     _, ordinary_assembly = result.require_ordinary_artifacts()
+-    assembly = generate_ffi_assembly(ordinary_assembly, native_policy=native_policy)
++    assembly = generate_ffi_assembly(
++        ordinary_assembly,
++        max_instructions=max_instructions,
++        native_policy=native_policy,
++    )
+     return NativeToolchain.detect().build_shared(
+         assembly,
+         output,
