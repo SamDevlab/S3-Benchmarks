@@ -1,0 +1,36 @@
+fn direct_ssd(left: &f64_vector, right: &f64_vector) -> f64:
+    mut length: i64 = f64_vector_len(left)
+    match length == f64_vector_len(right):
+        -1:
+            mut index: i64 = 0
+            mut total: f64 = 0.0
+            while index < length:
+                mut delta: f64 = f64_vector_get(left, index) - f64_vector_get(right, index)
+                total = total + delta * delta
+                index = index + 1
+            return total
+        0:
+            return -1.0
+        1:
+            return -1.0
+
+fn rmsd(left: &f64_vector, right: &f64_vector) -> f64:
+    mut length: i64 = f64_vector_len(left)
+    match length == 0:
+        -1:
+            return -1.0
+        0:
+            return sqrt(direct_ssd(left, right) / to_f64(length))
+        1:
+            return -1.0
+
+fn main() -> f64:
+    mut left: f64_vector = f64_vector_new(3)
+    mut right: f64_vector = f64_vector_new(3)
+    discard f64_vector_push(&mut left, 1.0)
+    discard f64_vector_push(&mut left, 2.0)
+    discard f64_vector_push(&mut left, 3.0)
+    discard f64_vector_push(&mut right, 2.0)
+    discard f64_vector_push(&mut right, 4.0)
+    discard f64_vector_push(&mut right, 6.0)
+    return rmsd(&left, &right)

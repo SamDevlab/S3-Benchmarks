@@ -1,0 +1,23 @@
+{
+  "id": "numerical.polybench.initial",
+  "family": "numerical",
+  "description": "Initial algorithm-faithful PolyBench/C kernel audit.",
+  "upstream_reference": "matthiasjreisinger.polybench-c-4.2.1",
+  "upstream_sha": "3e872547cef7e5c9909422ef1e6af03cf4e56072",
+  "work_unit": "one output element",
+  "input_sizes": ["mini", "small", "medium"],
+  "reference_variants": ["upstream-c"],
+  "s3_variants": [],
+  "correctness_contract": {
+    "kernels": ["atax", "mvt", "gemm", "2mm", "jacobi-1d"],
+    "anti_dce": "checksum of live-out values",
+    "first_missing_capability": "multidimensional-data",
+    "evidence": "The current candidate has no registered algorithm-faithful PolyBench adapter.",
+    "minimum_required_capability": "deterministic nested flat-storage indexing"
+  },
+  "build_recipe": {"reference": "external-pinned-checkout", "s3": "deferred"},
+  "run_recipe": {"mode": "not_supported_yet", "network": false, "kernels": ["atax", "mvt", "gemm", "2mm", "jacobi-1d"]},
+  "measurement_protocol": {"timing_scope": "KERNEL", "warmups": 0, "repetitions": 1, "interleaved": true, "synthetic_timing": false},
+  "capability_requirements": ["multidimensional-data", "nested-loop-indexing"],
+  "status": "NOT_SUPPORTED_YET"
+}

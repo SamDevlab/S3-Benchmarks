@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "policy": "candidate-only-until-pinned-and-audited",
+  "candidates": [
+    {"id": "embench.embench-iot", "repository": "https://github.com/embench/embench-iot", "status": "CANDIDATE"},
+    {"id": "eembc.coremark", "repository": "https://github.com/eembc/coremark", "status": "CANDIDATE"},
+    {"id": "eembc.coremark-pro", "repository": "https://github.com/eembc/coremark-pro", "status": "CANDIDATE"},
+    {"id": "anl-cesar.xsbench", "repository": "https://github.com/ANL-CESAR/XSBench", "status": "CANDIDATE"},
+    {"id": "uob-hpc.minibude", "repository": "https://github.com/UoB-HPC/miniBUDE", "status": "CANDIDATE"},
+    {"id": "mantevo.minimd", "repository": "https://github.com/Mantevo/miniMD", "status": "CANDIDATE"},
+    {"id": "mageec.beebs", "repository": "https://github.com/mageec/beebs", "status": "CANDIDATE"},
+    {"id": "sbeamer.gapbs", "repository": "https://github.com/sbeamer/gapbs", "status": "CANDIDATE"},
+    {"id": "cmuparlay.pbbsbench", "repository": "https://github.com/cmuparlay/pbbsbench", "status": "CANDIDATE"},
+    {"id": "llvm.llvm-test-suite", "repository": "https://github.com/llvm/llvm-test-suite", "status": "CANDIDATE"},
+    {"id": "hpcg.hpcg", "repository": "https://github.com/hpcg-benchmark/hpcg", "status": "CANDIDATE"},
+    {"id": "llnl.npb", "repository": "https://github.com/LLNL/NPB", "status": "CANDIDATE"},
+    {"id": "llnl.rajaperf", "repository": "https://github.com/LLNL/RAJAPerf", "status": "CANDIDATE"},
+    {"id": "kostya.langarena", "repository": "https://github.com/kostya/LangArena", "status": "CANDIDATE"},
+    {"id": "hanabi.programming-language-benchmarks", "repository": "https://github.com/hanabi1224/Programming-Language-Benchmarks", "status": "CANDIDATE"}
+  ]
+}

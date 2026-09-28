@@ -68,6 +68,25 @@ python tools/runner.py --full
 
 At present these commands execute the **JSMN campaign**. Candidate campaigns are not benchmark results until they have their own correctness and structural-equivalence harnesses.
 
+## Evidence Lab 2.0 foundation
+
+The generic contracts live under [`protocol/`](protocol/) and are validated by
+[`tools/evidence_lab.py`](tools/evidence_lab.py). The registry is deterministic
+and fail-closed on malformed manifests or floating upstream identities:
+
+```bash
+python tools/evidence_lab.py --check
+```
+
+This command only validates manifests and writes capability coverage views; it
+does not compile S3 or execute a benchmark. The legacy JSMN runner remains
+available, including `python tools/runner.py --workload jsmn --verify-only`.
+
+`NOT_SUPPORTED_YET` is an evidence result, not a correctness failure. It
+records the first missing capability and the minimum capability required for a
+future independent adapter. The benchmark repository does not modify S3 in
+response to a capability gap.
+
 ## Result validity
 
 A result should be treated as valid only when all applicable checks pass:

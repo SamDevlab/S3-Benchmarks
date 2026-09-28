@@ -1,0 +1,23 @@
+{
+  "id": "compiler.tsvc.initial",
+  "family": "compiler",
+  "description": "Initial capability audit for a bounded TSVC_2 loop subset.",
+  "upstream_reference": "uob-hpc.tsvc-2",
+  "upstream_sha": "badf9adb2974867ac0937718d85a44dec6dec95a",
+  "work_unit": "one loop iteration",
+  "input_sizes": ["mini", "small"],
+  "reference_variants": ["upstream-c"],
+  "s3_variants": [],
+  "correctness_contract": {
+    "subset_selection": "audit-required",
+    "initial_compatible_subset_target": "10-20",
+    "first_missing_capability": "corpus-audit",
+    "evidence": "The TSVC corpus has not yet been independently audited and selected.",
+    "minimum_required_capability": "named loop subset with live-out parity"
+  },
+  "build_recipe": {"reference": "external-pinned-checkout", "s3": "deferred"},
+  "run_recipe": {"mode": "not_supported_yet", "network": false},
+  "measurement_protocol": {"timing_scope": "KERNEL", "warmups": 0, "repetitions": 1, "interleaved": true, "synthetic_timing": false},
+  "capability_requirements": ["corpus-audit", "loop-subset-selection"],
+  "status": "NOT_SUPPORTED_YET"
+}

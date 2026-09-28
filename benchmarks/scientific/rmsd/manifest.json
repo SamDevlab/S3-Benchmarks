@@ -1,0 +1,31 @@
+{
+  "id": "scientific.rmsd.single",
+  "family": "scientific",
+  "description": "Root mean square deviation over two equal-length scalar vectors.",
+  "upstream_reference": "charnley.rmsd",
+  "upstream_sha": "1ad8ecee48d95ab43b49bd9f2fe4f8f07d9106bd",
+  "work_unit": "one scalar coordinate comparison",
+  "input_sizes": ["tiny", "small", "medium", "large"],
+  "reference_variants": ["python-oracle"],
+  "s3_variants": ["S3-O0", "S3-O1"],
+  "correctness_contract": {
+    "formula": "sqrt(sum((A[i]-B[i])**2)/N)",
+    "empty_input": "reject",
+    "length_mismatch": "reject",
+    "absolute_tolerance": 1e-12,
+    "relative_tolerance": 1e-12,
+    "anti_dce": "observable scalar result"
+  },
+  "build_recipe": {"s3_source": "rmsd.s3", "reference": "reference.py"},
+  "run_recipe": {"mode": "bounded_native_or_hosted", "network": false},
+  "measurement_protocol": {
+    "timing_scope": "KERNEL",
+    "warmups": 1,
+    "repetitions": 5,
+    "target_sample_duration_ns": null,
+    "interleaved": true,
+    "synthetic_timing": false
+  },
+  "capability_requirements": ["f64", "f64_vector", "while", "dynamic_call", "native_sse2_sqrt"],
+  "status": "CORRECTNESS_PASS"
+}

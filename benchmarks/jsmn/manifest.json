@@ -1,0 +1,21 @@
+{
+  "id": "realworld.jsmn",
+  "family": "realworld",
+  "description": "Legacy JSMN parser comparison retained as a first-class workload.",
+  "upstream_reference": "zserge.jsmn",
+  "upstream_sha": "25647e692c7906b96ffd2b05ca54c097948e879c",
+  "work_unit": "one input byte parsed",
+  "input_sizes": ["tiny", "small"],
+  "reference_variants": ["C-GCC-O2"],
+  "s3_variants": ["S3-O0", "S3-O1"],
+  "correctness_contract": {
+    "adapter": "benchmarks/jsmn/harness/correctness.py",
+    "anti_dce": "observable token/status result",
+    "historical_compatibility": true
+  },
+  "build_recipe": {"runner": "tools/runner.py", "mode": "legacy-compatible"},
+  "run_recipe": {"mode": "native_process_with_internal_parse_loop", "network": false},
+  "measurement_protocol": {"timing_scope": "PROCESS_E2E", "warmups": 1, "repetitions": 5, "interleaved": false, "synthetic_timing": false},
+  "capability_requirements": ["fixed-buffer-parser-kernel"],
+  "status": "CORRECTNESS_PASS"
+}

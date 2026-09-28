@@ -1,0 +1,24 @@
+{
+  "id": "scientific.rmsd.batch",
+  "family": "scientific",
+  "description": "Deterministic batch of independent RMSD vector pairs.",
+  "upstream_reference": "charnley.rmsd",
+  "upstream_sha": "1ad8ecee48d95ab43b49bd9f2fe4f8f07d9106bd",
+  "work_unit": "one scalar coordinate comparison",
+  "input_sizes": ["tiny", "small", "medium"],
+  "reference_variants": ["python-oracle"],
+  "s3_variants": [],
+  "correctness_contract": {
+    "formula": "sqrt(sum((A[i]-B[i])**2)/N) per pair",
+    "empty_input": "reject",
+    "length_mismatch": "reject",
+    "first_missing_capability": "whole-program-batch-composition",
+    "evidence": "No independent bounded S3 batch driver is present in the pinned candidate.",
+    "minimum_required_capability": "repeatable collection of vector-pair results"
+  },
+  "build_recipe": {"reference": "reference.py"},
+  "run_recipe": {"mode": "not_supported_yet", "network": false},
+  "measurement_protocol": {"timing_scope": "KERNEL", "warmups": 0, "repetitions": 1, "synthetic_timing": false},
+  "capability_requirements": ["whole_program_batch_composition"],
+  "status": "NOT_SUPPORTED_YET"
+}
