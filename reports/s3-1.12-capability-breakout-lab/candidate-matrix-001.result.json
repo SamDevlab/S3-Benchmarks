@@ -1,0 +1,607 @@
+{
+  "classification": "INDEPENDENT_BUILD_CORRECTNESS_STRUCTURE_AND_PAIRED_TIMING_CHARACTERIZATION",
+  "elapsed_seconds": 18.1971,
+  "experiment_id": "EXP-S3-112-CANDIDATE-MATRIX-001",
+  "protocol": {
+    "bootstrap_resamples": 5000,
+    "iterations_per_sample": 1000,
+    "native_speedup_claim": false,
+    "samples": 15,
+    "seed": 11212,
+    "timed_region": "same-process scalar C ABI; compilation/setup excluded; ctypes dispatch included equally",
+    "timing_class": "CHARACTERIZATION_ONLY",
+    "warmups": 5
+  },
+  "provenance": {
+    "lab_head": "751c7a15d54bc9a8662f66f970af3726db994d16",
+    "lab_tree": "8e13593ec910fa20d8b3a336fb3cab6b87105d3d",
+    "lab_worktree_clean": true,
+    "source_repository": "https://github.com/SamDevlab/S3.git",
+    "spec_sha256": "ee41ff5ee335b8a92217915a3b8349fecb6549d775ccb69b9e03a2af62a6417d",
+    "target": "Linux x86-64",
+    "variants": {
+      "BASE": {
+        "binary_artifacts": {
+          "energy.pv-timeseries-aggregation.v1": {
+            "bytes": 160584,
+            "path": "14e538c665e40df0.so",
+            "sha256": "6b4b944c54cc5ee6bf05b40f2c44e870626f8856fdb8169884a9634f44c0b2e8"
+          },
+          "engineering.point-cloud-summary.v1": {
+            "bytes": 258832,
+            "path": "aab3b809c5a91d2e.so",
+            "sha256": "fc640b39ef8c97304a45800bd48a7b5a779c046858f41988b6b87fff142bbd07"
+          },
+          "geospatial.raster-window-statistics.v1": {
+            "bytes": 312136,
+            "path": "cb0fd8fb7e14decd.so",
+            "sha256": "685fd61b36e7ded2301d63fa6af36bc8752c33618d9c1035d20089eafeab2262"
+          }
+        },
+        "configuration": {
+          "id": "BASE",
+          "instruction_budget_mode": "per-instruction",
+          "native_policy": "baseline",
+          "optimization": "O1",
+          "revision": "a1ecc29908dfb42480376961927fd6c50552ecf3"
+        },
+        "revision": "a1ecc29908dfb42480376961927fd6c50552ecf3",
+        "tree": "a7b03f8e0b7299910723a69298867894908bcf75"
+      },
+      "CANDIDATE": {
+        "binary_artifacts": {
+          "energy.pv-timeseries-aggregation.v1": {
+            "bytes": 160584,
+            "path": "14e538c665e40df0.so",
+            "sha256": "6b4b944c54cc5ee6bf05b40f2c44e870626f8856fdb8169884a9634f44c0b2e8"
+          },
+          "engineering.point-cloud-summary.v1": {
+            "bytes": 258832,
+            "path": "aab3b809c5a91d2e.so",
+            "sha256": "fc640b39ef8c97304a45800bd48a7b5a779c046858f41988b6b87fff142bbd07"
+          },
+          "geospatial.raster-window-statistics.v1": {
+            "bytes": 312136,
+            "path": "cb0fd8fb7e14decd.so",
+            "sha256": "685fd61b36e7ded2301d63fa6af36bc8752c33618d9c1035d20089eafeab2262"
+          }
+        },
+        "configuration": {
+          "id": "CANDIDATE",
+          "instruction_budget_mode": "per-instruction",
+          "native_policy": "baseline",
+          "optimization": "O1",
+          "revision": "c89daae65aca69be775a395e971f3223ae3a21ce"
+        },
+        "revision": "c89daae65aca69be775a395e971f3223ae3a21ce",
+        "tree": "47e50dd14a5de0c8d329b1cd9b5e0a639bd0f6be"
+      }
+    }
+  },
+  "schema_version": "s3.candidate-matrix-result.v1",
+  "status": "PASS",
+  "workloads": {
+    "energy.pv-timeseries-aggregation.v1": {
+      "correctness": {
+        "exact_cross_variant_output_equal": true,
+        "output_sha256": {
+          "BASE": "5f8ea95fcf8bc698b46f47801ea8e429c41f207813de7942d40c1f186f766a74",
+          "CANDIDATE": "5f8ea95fcf8bc698b46f47801ea8e429c41f207813de7942d40c1f186f766a74"
+        },
+        "reference": {
+          "BASE": "PASS",
+          "CANDIDATE": "PASS"
+        }
+      },
+      "input": {
+        "dataset_sha256": "dcf7e356a75be9597f2732c1739a2f93f73d657bfdaa4207634aff2e5481afca",
+        "expected_output_sha256": "fcf43e0a094641708be98a8a81329639b5279b5b7015d1c7d31a0380e9e2de79",
+        "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84"
+      },
+      "native_metrics": {
+        "BASE": {
+          "elf_file_bytes": 160584,
+          "exported_function_bytes": 15179,
+          "stack_frame_bytes": 2144,
+          "static_branches": 789,
+          "static_calls": 1,
+          "static_machine_instructions": 2754,
+          "static_memory_references": 953,
+          "static_stack_references": 907,
+          "text_section_bytes": 36304
+        },
+        "CANDIDATE": {
+          "elf_file_bytes": 160584,
+          "exported_function_bytes": 15179,
+          "stack_frame_bytes": 2144,
+          "static_branches": 789,
+          "static_calls": 1,
+          "static_machine_instructions": 2754,
+          "static_memory_references": 953,
+          "static_stack_references": 907,
+          "text_section_bytes": 36304
+        }
+      },
+      "timing": {
+        "class": "CHARACTERIZATION_ONLY",
+        "control_over_candidate": {
+          "CANDIDATE": {
+            "baseline_over_candidate_median_ratio": 1.0355960503119686,
+            "classification": "INCONCLUSIVE",
+            "material_change_threshold": 0.05,
+            "paired_bootstrap_95_percentile_interval": [
+              0.9650332633112054,
+              1.1849120054960194
+            ],
+            "resamples": 5000,
+            "seed": 11415
+          }
+        },
+        "native_speedup_claim": false,
+        "protocol": {
+          "bootstrap_resamples": 5000,
+          "iterations_per_sample": 1000,
+          "samples": 15,
+          "seed": 11212,
+          "warmups": 5
+        },
+        "sample_order": [
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ]
+        ],
+        "variants": {
+          "BASE": {
+            "mean_ns_per_call": 23728.94473333333,
+            "median_ns_per_call": 23008.254,
+            "raw_ns_per_call": [
+              23008.254,
+              27691.899,
+              31416.75,
+              26581.807,
+              18699.402,
+              18710.864,
+              22676.189,
+              25791.429,
+              30606.932,
+              19199.955,
+              30304.707,
+              25263.657,
+              19698.594,
+              18192.32,
+              18091.412
+            ],
+            "sample_count": 15
+          },
+          "CANDIDATE": {
+            "mean_ns_per_call": 22980.386466666667,
+            "median_ns_per_call": 22252.945,
+            "raw_ns_per_call": [
+              19417.69,
+              24450.11,
+              30336.877,
+              22388.104,
+              19469.998,
+              18611.853,
+              29744.516,
+              22687.949,
+              22252.945,
+              30109.57,
+              30198.376,
+              19443.663,
+              18609.386,
+              18237.829,
+              18746.931
+            ],
+            "sample_count": 15
+          }
+        }
+      }
+    },
+    "engineering.point-cloud-summary.v1": {
+      "correctness": {
+        "exact_cross_variant_output_equal": true,
+        "output_sha256": {
+          "BASE": "6bdc5b40a566f1b9487ff18c96ceb2a7ab53c740c666b4f8bf10de84bee6dc07",
+          "CANDIDATE": "6bdc5b40a566f1b9487ff18c96ceb2a7ab53c740c666b4f8bf10de84bee6dc07"
+        },
+        "reference": {
+          "BASE": "PASS",
+          "CANDIDATE": "PASS"
+        }
+      },
+      "input": {
+        "dataset_sha256": "346178eab37077a8bd7989d60836a2b54fb27948c36dabd18e7a58b2e41042f8",
+        "expected_output_sha256": "1c691995fe68ccfb436ae2b328f8773da2d6b5d6c88211fee2976f8bcb18208b",
+        "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9"
+      },
+      "native_metrics": {
+        "BASE": {
+          "elf_file_bytes": 258832,
+          "exported_function_bytes": 26063,
+          "stack_frame_bytes": 3648,
+          "static_branches": 1367,
+          "static_calls": 1,
+          "static_machine_instructions": 4732,
+          "static_memory_references": 1601,
+          "static_stack_references": 1536,
+          "text_section_bytes": 58112
+        },
+        "CANDIDATE": {
+          "elf_file_bytes": 258832,
+          "exported_function_bytes": 26063,
+          "stack_frame_bytes": 3648,
+          "static_branches": 1367,
+          "static_calls": 1,
+          "static_machine_instructions": 4732,
+          "static_memory_references": 1601,
+          "static_stack_references": 1536,
+          "text_section_bytes": 58112
+        }
+      },
+      "timing": {
+        "class": "CHARACTERIZATION_ONLY",
+        "control_over_candidate": {
+          "CANDIDATE": {
+            "baseline_over_candidate_median_ratio": 0.9829345125919224,
+            "classification": "INCONCLUSIVE",
+            "material_change_threshold": 0.05,
+            "paired_bootstrap_95_percentile_interval": [
+              0.9400745491420555,
+              1.1470594304116353
+            ],
+            "resamples": 5000,
+            "seed": 11213
+          }
+        },
+        "native_speedup_claim": false,
+        "protocol": {
+          "bootstrap_resamples": 5000,
+          "iterations_per_sample": 1000,
+          "samples": 15,
+          "seed": 11212,
+          "warmups": 5
+        },
+        "sample_order": [
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ]
+        ],
+        "variants": {
+          "BASE": {
+            "mean_ns_per_call": 21713.947333333334,
+            "median_ns_per_call": 21655.381,
+            "raw_ns_per_call": [
+              25698.11,
+              25609.182,
+              21655.381,
+              25830.039,
+              20509.142,
+              16574.407,
+              20045.441,
+              25901.327,
+              26739.154,
+              17114.91,
+              22758.007,
+              14786.914,
+              17213.786,
+              25359.985,
+              19913.425
+            ],
+            "sample_count": 15
+          },
+          "CANDIDATE": {
+            "mean_ns_per_call": 22222.662399999997,
+            "median_ns_per_call": 23311.045,
+            "raw_ns_per_call": [
+              26093.274,
+              19858.833,
+              22786.601,
+              25711.57,
+              14996.471,
+              15734.37,
+              25883.597,
+              26351.02,
+              23311.045,
+              20300.646,
+              16636.135,
+              25826.559,
+              18111.201,
+              26976.568,
+              24762.046
+            ],
+            "sample_count": 15
+          }
+        }
+      }
+    },
+    "geospatial.raster-window-statistics.v1": {
+      "correctness": {
+        "exact_cross_variant_output_equal": true,
+        "output_sha256": {
+          "BASE": "60587afe0ddedafe7e443b119731361cf64228c4ebf13759e7ced80f5e9174dc",
+          "CANDIDATE": "60587afe0ddedafe7e443b119731361cf64228c4ebf13759e7ced80f5e9174dc"
+        },
+        "reference": {
+          "BASE": "PASS",
+          "CANDIDATE": "PASS"
+        }
+      },
+      "input": {
+        "dataset_sha256": "3a182a6f587c30c9f38c0c25dba394729ea4563568dc00e9c3999091a4593f3c",
+        "expected_output_sha256": "ed1cf70e041bbd6cdfa61956a938d8ed1dac3379b42e8240cfbb5ecae8cc4608",
+        "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e"
+      },
+      "native_metrics": {
+        "BASE": {
+          "elf_file_bytes": 312136,
+          "exported_function_bytes": 31216,
+          "stack_frame_bytes": 4192,
+          "static_branches": 1715,
+          "static_calls": 1,
+          "static_machine_instructions": 5666,
+          "static_memory_references": 1898,
+          "static_stack_references": 1821,
+          "text_section_bytes": 68491
+        },
+        "CANDIDATE": {
+          "elf_file_bytes": 312136,
+          "exported_function_bytes": 31216,
+          "stack_frame_bytes": 4192,
+          "static_branches": 1715,
+          "static_calls": 1,
+          "static_machine_instructions": 5666,
+          "static_memory_references": 1898,
+          "static_stack_references": 1821,
+          "text_section_bytes": 68491
+        }
+      },
+      "timing": {
+        "class": "CHARACTERIZATION_ONLY",
+        "control_over_candidate": {
+          "CANDIDATE": {
+            "baseline_over_candidate_median_ratio": 1.0051606987043806,
+            "classification": "INCONCLUSIVE",
+            "material_change_threshold": 0.05,
+            "paired_bootstrap_95_percentile_interval": [
+              0.9225316655689751,
+              1.148302224250467
+            ],
+            "resamples": 5000,
+            "seed": 11314
+          }
+        },
+        "native_speedup_claim": false,
+        "protocol": {
+          "bootstrap_resamples": 5000,
+          "iterations_per_sample": 1000,
+          "samples": 15,
+          "seed": 11212,
+          "warmups": 5
+        },
+        "sample_order": [
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ],
+          [
+            "BASE",
+            "CANDIDATE"
+          ]
+        ],
+        "variants": {
+          "BASE": {
+            "mean_ns_per_call": 17623.063133333333,
+            "median_ns_per_call": 19292.044,
+            "raw_ns_per_call": [
+              14431.3,
+              21226.933,
+              17653.688,
+              12529.368,
+              21106.833,
+              21351.72,
+              12596.331,
+              19292.044,
+              21416.979,
+              12279.464,
+              20859.367,
+              21664.214,
+              20097.819,
+              13024.223,
+              14815.664
+            ],
+            "sample_count": 15
+          },
+          "CANDIDATE": {
+            "mean_ns_per_call": 17061.7218,
+            "median_ns_per_call": 15383.375,
+            "raw_ns_per_call": [
+              19545.656,
+              20376.106,
+              15382.535,
+              14906.604,
+              21122.793,
+              15117.317,
+              12573.447,
+              20912.067,
+              15383.375,
+              20845.697,
+              21631.015,
+              14671.607,
+              17598.02,
+              12957.354,
+              12902.234
+            ],
+            "sample_count": 15
+          }
+        }
+      }
+    }
+  }
+}

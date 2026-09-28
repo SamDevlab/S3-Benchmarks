@@ -1,0 +1,33 @@
+{
+  "schema_version": "s3.candidate-matrix.v1",
+  "experiment_id": "EXP-S3-112-CANDIDATE-MATRIX-001",
+  "source_url": "https://github.com/SamDevlab/S3.git",
+  "control": {
+    "id": "BASE",
+    "revision": "a1ecc29908dfb42480376961927fd6c50552ecf3",
+    "optimization": "O1",
+    "native_policy": "baseline",
+    "instruction_budget_mode": "per-instruction"
+  },
+  "candidates": [
+    {
+      "id": "CANDIDATE",
+      "revision": "c89daae65aca69be775a395e971f3223ae3a21ce",
+      "optimization": "O1",
+      "native_policy": "baseline",
+      "instruction_budget_mode": "per-instruction"
+    }
+  ],
+  "workloads": [
+    "engineering.point-cloud-summary.v1",
+    "geospatial.raster-window-statistics.v1",
+    "energy.pv-timeseries-aggregation.v1"
+  ],
+  "protocol": {
+    "iterations_per_sample": 1000,
+    "warmups": 5,
+    "samples": 15,
+    "bootstrap_resamples": 5000,
+    "seed": 11212
+  }
+}

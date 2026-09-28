@@ -68,6 +68,43 @@ python tools/runner.py --full
 
 At present these commands execute the **JSMN campaign**. Candidate campaigns are not benchmark results until they have their own correctness and structural-equivalence harnesses.
 
+## Pinned S3 candidate matrices
+
+`tools/s3_112_candidate_matrix.py` accepts a JSON specification with an exact
+control revision, one or more exact candidate revisions/configurations, and a
+workload/protocol selection. Each variant is checked out and compiled in a
+separate clean source tree. The runner verifies source/reference identity,
+native output equality, independently inspected ELF structure, and paired
+interleaved timing. It refuses to reuse evidence directories. Timing output is
+always `CHARACTERIZATION_ONLY`; it does not make a speedup claim.
+
+The `control` object and each entry in `candidates` use this shape:
+
+```json
+{
+  "id": "BASE",
+  "revision": "<full lowercase Git SHA>",
+  "optimization": "O1",
+  "native_policy": "baseline",
+  "instruction_budget_mode": "per-instruction"
+}
+```
+
+The schema identifier is `s3.candidate-matrix.v1`; supported workload IDs,
+compiler options and timing fields are validated fail-closed by the runner.
+Run it on Linux x86-64 with new, disjoint work/evidence paths:
+
+```bash
+python tools/s3_112_candidate_matrix.py \
+  --spec path/to/matrix.json \
+  --work-root /tmp/s3-matrix-work-<id> \
+  --output-dir /tmp/s3-matrix-evidence-<id>
+```
+
+The matrix can represent `BASE`, `A`, `B`, and `A+B` as separately pinned
+source revisions or supported compiler configurations. Build and timing
+execution are intentionally separate from the unit tests for the spec parser.
+
 ## Result validity
 
 A result should be treated as valid only when all applicable checks pass:
