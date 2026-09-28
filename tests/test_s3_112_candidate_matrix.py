@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from tools import s3_112_candidate_matrix as matrix
 from tools.s3_112_candidate_matrix import (
     _disjoint_new_paths,
     _paired_summary,
@@ -139,3 +140,45 @@ def test_documented_script_entrypoint_loads_project_tools_package() -> None:
 
     assert result.returncode == 0, result.stderr
     assert "explicit matrix" in result.stdout
+
+
+def test_internal_worker_dispatch_uses_parsed_private_arguments(monkeypatch, tmp_path) -> None:
+    result_path = tmp_path / "worker-result.json"
+    calls = {}
+
+    def fake_build(checkout, variant, workloads, output):
+        calls["build"] = (checkout, variant, workloads, output)
+        return {"status": "PASS"}
+
+    def capture_write_once(path, payload):
+        calls["write"] = (path, payload)
+
+    monkeypatch.setattr(matrix, "_worker_build", fake_build)
+    monkeypatch.setattr(matrix, "_write_once", capture_write_once)
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "s3_112_candidate_matrix.py",
+            "--_worker-checkout",
+            str(tmp_path),
+            "--_worker-variant-json",
+            '{"id":"BASE"}',
+            "--_worker-workloads-json",
+            '["workload"]',
+            "--_worker-output",
+            str(tmp_path / "artifacts"),
+            "--_worker-result",
+            str(result_path),
+        ],
+    )
+
+    assert matrix.main() == 0
+    assert calls["build"] == (
+        tmp_path,
+        {"id": "BASE"},
+        ["workload"],
+        tmp_path / "artifacts",
+    )
+    assert calls["write"][0] == result_path
+    assert calls["write"][1] == b'{\n  "status": "PASS"\n}\n'

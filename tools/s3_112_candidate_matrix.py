@@ -220,10 +220,10 @@ def _worker_build(checkout: Path, variant: dict[str, str], workloads: list[str],
 
 
 def _worker_main(args: argparse.Namespace) -> int:
-    variant = json.loads(args.worker_variant_json)
-    workloads = json.loads(args.worker_workloads_json)
-    result = _worker_build(args.worker_checkout, variant, workloads, args.worker_output)
-    _write_once(args.worker_result, _json_bytes(result))
+    variant = json.loads(args._worker_variant_json)
+    workloads = json.loads(args._worker_workloads_json)
+    result = _worker_build(args._worker_checkout, variant, workloads, args._worker_output)
+    _write_once(args._worker_result, _json_bytes(result))
     return 0
 
 
