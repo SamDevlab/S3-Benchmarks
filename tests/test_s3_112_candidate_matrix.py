@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import subprocess
+import sys
+from pathlib import Path
+
 import pytest
 
 from tools.s3_112_candidate_matrix import (
@@ -122,3 +126,16 @@ def test_evidence_writer_refuses_to_overwrite_existing_file(tmp_path) -> None:
         _write_once(path, b"replacement\n")
 
     assert path.read_bytes() == b"first\n"
+
+
+def test_documented_script_entrypoint_loads_project_tools_package() -> None:
+    script = Path(__file__).resolve().parents[1] / "tools" / "s3_112_candidate_matrix.py"
+    result = subprocess.run(
+        [sys.executable, script, "--help"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "explicit matrix" in result.stdout

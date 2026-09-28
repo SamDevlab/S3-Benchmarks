@@ -19,6 +19,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from tools.s3_19_executor import (
     BENCHMARK_SCRIPT,
     _checkout_source,
@@ -26,7 +30,6 @@ from tools.s3_19_executor import (
 )
 
 
-ROOT = Path(__file__).resolve().parents[1]
 SHA1 = re.compile(r"^[0-9a-f]{40}$")
 VARIANT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.+-]{0,63}$")
 WORKLOADS = {
