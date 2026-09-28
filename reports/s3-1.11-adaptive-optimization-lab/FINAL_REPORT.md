@@ -72,6 +72,12 @@ evidence debt, not implied passes.
 ```text
 BENCH_BRANCH=research/s3-1.11-adaptive-optimization-lab
 BENCH_PR_BASE=main
-BENCH_PR_STATE=NOT_YET_PUBLISHED
+BENCH_PR_NUMBER=29
+BENCH_PR_URL=https://github.com/SamDevlab/S3-Benchmarks/pull/29
+BENCH_PR_STATE=OPEN_DRAFT
+BENCH_INITIAL_PUBLICATION_COMMIT=fb8b5dc10fdcec0de363d15845b9953a72a38c32
+BENCH_EVIDENCE_FILE_COUNT=24
+BENCH_EVIDENCE_TOTAL_BYTES=300107 (all 24 published blobs, including tools/tests)
+BENCH_LARGEST_COMMITTED_ARTIFACT=reports/s3-1.11-adaptive-optimization-lab/evidence/control-832b/native-workload-benchmark-v1.json,70695
 STOP_HUMAN_GATE=REVIEW_S3_1_11
 ```
