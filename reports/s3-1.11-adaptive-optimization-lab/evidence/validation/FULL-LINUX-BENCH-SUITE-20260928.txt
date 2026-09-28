@@ -1,0 +1,21 @@
+FULL_BENCH_SUITE_START_UTC=2026-09-28T05:20:12.0055719Z
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_native_artifacts.py ________________
+ImportError while importing test module '/tmp/s3-bench-1.11-lab-b3ec/tests/test_native_artifacts.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_native_artifacts.py:8: in <module>
+    from benchmarks.jsmn.harness import correctness
+benchmarks/jsmn/harness/correctness.py:15: in <module>
+    from bootstrap.s3.pipeline import run_source_with_buffer_capture
+E   ModuleNotFoundError: No module named 'bootstrap'
+=========================== short test summary info ============================
+ERROR tests/test_native_artifacts.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.59s
+FULL_BENCH_SUITE_END_UTC=2026-09-28T05:20:13.5076954Z
+FULL_LINUX_BENCH_SUITE_EXIT=2
