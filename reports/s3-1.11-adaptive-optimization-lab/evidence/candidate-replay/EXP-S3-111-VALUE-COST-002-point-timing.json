@@ -1,0 +1,206 @@
+{
+  "artifacts": {
+    "baseline": {
+      "bytes": 258832,
+      "file_name": "engineering.point-cloud-summary.v1-baseline.so",
+      "sha256": "fc640b39ef8c97304a45800bd48a7b5a779c046858f41988b6b87fff142bbd07"
+    },
+    "candidate": {
+      "bytes": 246544,
+      "file_name": "engineering.point-cloud-summary.v1-store_to_load.so",
+      "sha256": "5557cc8de4c9d065ade26a11449bc8961a2059d10a4266809a63938b4194a714"
+    }
+  },
+  "classification": "CHARACTERIZATION_ONLY_NO_PROMOTION",
+  "correctness": {
+    "baseline_output_sha256": "6bdc5b40a566f1b9487ff18c96ceb2a7ab53c740c666b4f8bf10de84bee6dc07",
+    "baseline_reference": "PASS",
+    "candidate_output_sha256": "6bdc5b40a566f1b9487ff18c96ceb2a7ab53c740c666b4f8bf10de84bee6dc07",
+    "candidate_reference": "PASS",
+    "outputs_equal": true
+  },
+  "experiment_id": "EXP-S3-111-VALUE-COST-002",
+  "protocol": {
+    "iterations_per_sample": 1000,
+    "native_speedup_claim": false,
+    "paired_order": [
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ],
+      [
+        "candidate",
+        "baseline"
+      ],
+      [
+        "baseline",
+        "candidate"
+      ]
+    ],
+    "samples": 21,
+    "timing_class": "CHARACTERIZATION_ONLY",
+    "warmups": 3
+  },
+  "provenance": {
+    "bench_commit": "b3ecb9b2269b583cba0706fd7ed13956a9641512",
+    "bench_tree": "06316635dfc1830d3ec3955803acb0d168b77a7e",
+    "bench_worktree_dirty": true,
+    "experiment_sha256": "c65304d9bfec1bdca20f4092322bdafc20ff2bc8150b33f22e69094bfb868330",
+    "hardware_counters": "UNAVAILABLE_BY_POLICY_NOT_PROBED_AGAIN",
+    "s3_commit": "832b1cc04fe1f6174e482eb3a245e08af3d53211",
+    "s3_tree": "dc1138890655169088f9371ce32a9050cfc3af8d",
+    "s3_worktree_clean": true,
+    "target": "Linux x86-64",
+    "timing_helper": "pinned S3 benchmark _measure; candidate order alternates per sample"
+  },
+  "report_kind": "S3_BENCHMARKS_PINNED_CANDIDATE_TIMING_CONFIRMATION",
+  "schema_version": "1.0.0",
+  "static_tradeoff": {
+    "adaptive_candidate_selected": false,
+    "native_binary_deltas": {
+      "stack_frame_bytes": 80,
+      "static_branches": -62,
+      "static_machine_instructions": -123,
+      "static_memory_references": 3,
+      "static_stack_references": 3,
+      "text_section_bytes": -3007
+    },
+    "peak_live_delta": 5,
+    "stack_resident_virtual_delta": 30
+  },
+  "status": "PASS",
+  "timing": {
+    "baseline": [
+      15691.429,
+      21150.901,
+      20582.952,
+      19853.265,
+      19290.494,
+      15039.751,
+      16984.286,
+      19880.164,
+      17926.19,
+      15691.719,
+      21816.279,
+      19967.644,
+      19854.094,
+      20310.576,
+      17929.709,
+      18875.922,
+      14498.63,
+      13760.329,
+      13690.93,
+      13116.08,
+      13218.979
+    ],
+    "baseline_median_ns_per_call": 17929.709,
+    "candidate": [
+      12179.93,
+      16945.644,
+      17465.37,
+      16110.143,
+      15293.966,
+      18059.575,
+      20202.939,
+      18231.354,
+      14843.105,
+      13297.203,
+      19676.858,
+      16834.066,
+      19031.156,
+      18749.608,
+      18401.671,
+      20197.738,
+      13655.883,
+      12299.026,
+      12711.208,
+      12767.327,
+      12354.785
+    ],
+    "candidate_median_ns_per_call": 16834.066,
+    "paired_baseline_over_candidate": {
+      "baseline_over_candidate_median_ratio": 1.0904381539626733,
+      "classification": "MATERIAL_IMPROVEMENT",
+      "material_change_threshold": 0.05,
+      "paired_bootstrap_95_percentile_interval": [
+        1.0617131092877699,
+        1.1800766672510001
+      ],
+      "resamples": 10000,
+      "seed": 111121
+    }
+  },
+  "workload_id": "engineering.point-cloud-summary.v1"
+}

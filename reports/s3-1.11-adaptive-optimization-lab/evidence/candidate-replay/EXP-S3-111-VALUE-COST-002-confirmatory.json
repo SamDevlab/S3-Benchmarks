@@ -1,0 +1,65 @@
+{
+  "candidate_label": "store_to_load",
+  "classification": "INDEPENDENT_CORRECTNESS_REPLAY_NO_TIMING_CLAIM",
+  "experiment_id": "EXP-S3-111-VALUE-COST-002",
+  "native_speedup_claim": false,
+  "provenance": {
+    "bench_commit": "b3ecb9b2269b583cba0706fd7ed13956a9641512",
+    "bench_tree": "06316635dfc1830d3ec3955803acb0d168b77a7e",
+    "bench_worktree_dirty": true,
+    "experiment_json_sha256": "c65304d9bfec1bdca20f4092322bdafc20ff2bc8150b33f22e69094bfb868330",
+    "replay_tool_sha256": "b163828224d67bc7404726f165804dc846fd8d0d9fe26119598e25d568d79116",
+    "s3_commit": "832b1cc04fe1f6174e482eb3a245e08af3d53211",
+    "s3_tree": "dc1138890655169088f9371ce32a9050cfc3af8d",
+    "s3_worktree_clean": true,
+    "target": "Linux x86-64"
+  },
+  "report_kind": "S3_BENCHMARKS_INDEPENDENT_NATIVE_CANDIDATE_REPLAY",
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "timing_class": "NOT_MEASURED",
+  "workloads": [
+    {
+      "baseline_output_digest_equal": true,
+      "candidate_artifact": {
+        "bytes": 156488,
+        "file_name": "energy.pv-timeseries-aggregation.v1-store_to_load.so",
+        "sha256": "eb7e91ef3acc0b2b98ca38558767ccc9a40898f792f3315117a6d7d53bedcf22"
+      },
+      "candidate_recorded_values_equal": true,
+      "native_status": 0,
+      "output_sha256": "5f8ea95fcf8bc698b46f47801ea8e429c41f207813de7942d40c1f186f766a74",
+      "reference_correctness": "PASS",
+      "source_sha256": "a146f2ec7bd7f9bf72ea35c04026174874012acdb31541d805bf5f0a4a613c84",
+      "workload_id": "energy.pv-timeseries-aggregation.v1"
+    },
+    {
+      "baseline_output_digest_equal": true,
+      "candidate_artifact": {
+        "bytes": 246544,
+        "file_name": "engineering.point-cloud-summary.v1-store_to_load.so",
+        "sha256": "5557cc8de4c9d065ade26a11449bc8961a2059d10a4266809a63938b4194a714"
+      },
+      "candidate_recorded_values_equal": true,
+      "native_status": 0,
+      "output_sha256": "6bdc5b40a566f1b9487ff18c96ceb2a7ab53c740c666b4f8bf10de84bee6dc07",
+      "reference_correctness": "PASS",
+      "source_sha256": "59e752e91159ece4e3a813bc8586f338544ddac52e4b5e755a219d85779238e9",
+      "workload_id": "engineering.point-cloud-summary.v1"
+    },
+    {
+      "baseline_output_digest_equal": true,
+      "candidate_artifact": {
+        "bytes": 308040,
+        "file_name": "geospatial.raster-window-statistics.v1-store_to_load.so",
+        "sha256": "343016417fd1f008d46161c285c7bf10c96ef271d0746288d63a39c55808f158"
+      },
+      "candidate_recorded_values_equal": true,
+      "native_status": 0,
+      "output_sha256": "60587afe0ddedafe7e443b119731361cf64228c4ebf13759e7ced80f5e9174dc",
+      "reference_correctness": "PASS",
+      "source_sha256": "6d5d8081991d05e7f89ebe6965bb6664b8f11c33595e062c1b165b0a44c9763e",
+      "workload_id": "geospatial.raster-window-statistics.v1"
+    }
+  ]
+}

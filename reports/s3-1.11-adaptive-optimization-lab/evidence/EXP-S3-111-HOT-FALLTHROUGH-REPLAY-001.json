@@ -1,0 +1,65 @@
+{
+  "artifacts": {
+    "baseline": {
+      "bytes": 160584,
+      "file_name": "energy.pv-timeseries-aggregation.v1.baseline.so",
+      "sha256": "6b4b944c54cc5ee6bf05b40f2c44e870626f8856fdb8169884a9634f44c0b2e8"
+    },
+    "candidate": {
+      "bytes": 160584,
+      "file_name": "energy.pv-timeseries-aggregation.v1.hot-fallthrough.so",
+      "sha256": "46c04d2fe7029429c7ced601fd98b6bca7d4eb85a53e627c8bd84b7858fe8a7f"
+    }
+  },
+  "classification": "INDEPENDENT_CORRECTNESS_AND_STRUCTURE_REPLAY_NO_TIMING",
+  "correctness": {
+    "baseline_output_sha256": "5f8ea95fcf8bc698b46f47801ea8e429c41f207813de7942d40c1f186f766a74",
+    "baseline_reference": "PASS",
+    "candidate_output_sha256": "5f8ea95fcf8bc698b46f47801ea8e429c41f207813de7942d40c1f186f766a74",
+    "candidate_reference": "PASS",
+    "outputs_exactly_equal": true
+  },
+  "experiment_id": "EXP-S3-111-HOT-FALLTHROUGH-001",
+  "independent_native_structure": {
+    "baseline": {
+      "exported_function_bytes": 15179,
+      "static_branches": 789,
+      "static_machine_instructions": 2754,
+      "static_memory_references": 953,
+      "text_section_bytes": 36304
+    },
+    "candidate": {
+      "exported_function_bytes": 15177,
+      "static_branches": 788,
+      "static_machine_instructions": 2753,
+      "static_memory_references": 953,
+      "text_section_bytes": 36302
+    },
+    "candidate_minus_baseline": {
+      "exported_function_bytes": -2,
+      "static_branches": -1,
+      "static_machine_instructions": -1,
+      "static_memory_references": 0,
+      "text_section_bytes": -2
+    },
+    "matches_s3_experiment_metrics": true
+  },
+  "native_speedup_claim": false,
+  "provenance": {
+    "bench_commit": "b3ecb9b2269b583cba0706fd7ed13956a9641512",
+    "bench_tool_sha256": "e707362f23e60d535ca5bbd9a4721a5906bbdcfbbc6e181986f0773972890df1",
+    "bench_tracked_tree_clean": true,
+    "bench_tree": "06316635dfc1830d3ec3955803acb0d168b77a7e",
+    "experiment_sha256": "f1f03405e1ebdb5e79c69f57e736a518cfa15d639c6fc9dd27182b088c3e748a",
+    "pinned_workload_helper_sha256": "c3473b1d54a007c688f1e96fd25c7a6911a8bd4e6c4f970294c2feb8448b25bd",
+    "s3_commit": "832b1cc04fe1f6174e482eb3a245e08af3d53211",
+    "s3_tracked_compiler_clean": true,
+    "s3_tree": "dc1138890655169088f9371ce32a9050cfc3af8d",
+    "target": "Linux x86-64"
+  },
+  "report_kind": "S3_BENCHMARKS_INDEPENDENT_HOT_FALLTHROUGH_REPLAY",
+  "schema_version": "1.0.0",
+  "status": "PASS",
+  "timing_class": "NOT_MEASURED_IN_LAB_REPLAY",
+  "workload_id": "energy.pv-timeseries-aggregation.v1"
+}
