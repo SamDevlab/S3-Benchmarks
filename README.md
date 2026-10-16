@@ -105,6 +105,23 @@ The matrix can represent `BASE`, `A`, `B`, and `A+B` as separately pinned
 source revisions or supported compiler configurations. Build and timing
 execution are intentionally separate from the unit tests for the spec parser.
 
+## Independent pre-V8 longitudinal preparation
+
+[`reports/pre-v8-independent-lab-preparation-20261015.md`](reports/pre-v8-independent-lab-preparation-20261015.md)
+records the current experiment states and historic workload evidence without
+rewriting prior reports. The prepared result contract and machine-readable
+three-group plan are under `protocol/`; the groups are planned only and contain
+no S3 execution profiles. `tools/pre_v8_longitudinal.py` validates pinned
+records and keeps correctness, compilation, execution, and binary-size
+observations separate. It does not launch compiler or benchmark workloads.
+
+```bash
+python tools/pre_v8_longitudinal.py check-plan
+python tools/pre_v8_longitudinal.py validate path/to/record.json
+python tools/pre_v8_longitudinal.py compare --mode revision base.json candidate.json
+python tools/pre_v8_longitudinal.py compare --mode language s3.json c.json rust.json zig.json
+```
+
 ## Result validity
 
 A result should be treated as valid only when all applicable checks pass:
