@@ -1,0 +1,53 @@
+{
+  "schema_version": "s3.pre-v8-experiment-groups.v1",
+  "campaign": "S3_BENCHMARKS_INDEPENDENT_PRE_V8_PREPARATION_V1",
+  "status": "PREPARATION_ONLY",
+  "ready_to_measure_v8": false,
+  "baseline_dependency": {
+    "repository": "https://github.com/SamDevlab/S3.git",
+    "required_reference": "qualified V7 HEAD as a full immutable Git commit SHA",
+    "qualified_v7_commit": null,
+    "accept_moving_refs": false,
+    "gate": "WAIT_FOR_QUALIFIED_V7_HEAD"
+  },
+  "languages": ["S3", "C", "Rust", "Zig"],
+  "comparison_stages": [
+    "correctness",
+    "compilation",
+    "execution",
+    "binary_size"
+  ],
+  "groups": [
+    {
+      "id": "PURE PERFORMANCE",
+      "status": "PLANNED_NOT_IMPLEMENTED",
+      "purpose": "Compare correctness-qualified implementations under one declared, fixed build configuration per toolchain.",
+      "comparison_axes": ["language", "compiler_revision", "workload", "fixture", "protocol"],
+      "profiles": [],
+      "profile_implementation_claimed": false
+    },
+    {
+      "id": "CONTROLLED EFFICIENCY",
+      "status": "PLANNED_NOT_IMPLEMENTED",
+      "purpose": "Future controlled cost-per-work comparison with separately specified observables and controlled variables.",
+      "comparison_axes": ["language", "compiler_revision", "workload", "fixture", "controlled_variables"],
+      "profiles": [],
+      "profile_implementation_claimed": false
+    },
+    {
+      "id": "PROFILE DIFFERENTIAL",
+      "status": "PLANNED_NOT_IMPLEMENTED",
+      "purpose": "Future paired comparison of explicitly defined profile variants at the same compiler revision and workload.",
+      "comparison_axes": ["compiler_revision", "workload", "fixture", "paired_profile_variant"],
+      "profiles": [],
+      "profile_implementation_claimed": false
+    }
+  ],
+  "measurement_policy": {
+    "historical_results_are_rewritten": false,
+    "moving_compiler_refs_are_accepted": false,
+    "performance_is_eligible_only_after_correctness_pass": true,
+    "stage_metrics_are_reported_separately": true,
+    "cross_language_results_are_descriptive_not_speedup_claims": true
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SamDevlab/S3-Benchmarks/blob/main/protocol/pre-v8-longitudinal-result-v1.schema.json",
+  "title": "S3 pre-V8 longitudinal benchmark observation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "campaign_group",
+    "benchmark_repo_revision",
+    "compiler",
+    "implementation",
+    "workload",
+    "environment",
+    "protocol",
+    "stages"
+  ],
+  "properties": {
+    "schema_version": {"const": "s3.pre-v8-longitudinal-result.v1"},
+    "run_id": {"type": "string", "minLength": 1},
+    "campaign_group": {
+      "enum": ["PURE PERFORMANCE", "CONTROLLED EFFICIENCY", "PROFILE DIFFERENTIAL"]
+    },
+    "benchmark_repo_revision": {"$ref": "#/$defs/gitSha"},
+    "compiler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["language", "name", "version", "executable_sha256"],
+      "properties": {
+        "language": {"enum": ["S3", "C", "Rust", "Zig"]},
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "repository": {"type": ["string", "null"], "format": "uri"},
+        "source_revision": {"oneOf": [{"$ref": "#/$defs/gitSha"}, {"type": "null"}]},
+        "working_tree_clean": {"type": ["boolean", "null"]},
+        "executable_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"language": {"const": "S3"}}, "required": ["language"]},
+          "then": {
+            "required": ["repository", "source_revision", "working_tree_clean"],
+            "properties": {
+              "repository": {"const": "https://github.com/SamDevlab/S3.git"},
+              "working_tree_clean": {"const": true}
+            }
+          }
+        }
+      ]
+    },
+    "implementation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "revision", "source_sha256", "build_recipe_sha256"],
+      "properties": {
+        "repository": {"type": "string", "minLength": 1},
+        "revision": {"$ref": "#/$defs/gitSha"},
+        "source_sha256": {"$ref": "#/$defs/sha256"},
+        "build_recipe_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "fixture_id", "dataset_sha256", "work_units"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "fixture_id": {"type": "string", "minLength": 1},
+        "dataset_sha256": {"$ref": "#/$defs/sha256"},
+        "work_units": {"type": "integer", "minimum": 1}
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["os", "architecture", "fingerprint_sha256"],
+      "properties": {
+        "os": {"type": "string", "minLength": 1},
+        "architecture": {"type": "string", "minLength": 1},
+        "fingerprint_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "sha256", "warmups", "samples", "iterations_per_sample", "ordering"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "warmups": {"type": "integer", "minimum": 0},
+        "samples": {"type": "integer", "minimum": 3},
+        "iterations_per_sample": {"type": "integer", "minimum": 1},
+        "ordering": {"enum": ["interleaved", "paired", "serial"]}
+      }
+    },
+    "stages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["correctness", "compilation", "execution", "binary_size"],
+      "properties": {
+        "correctness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "oracle", "output_sha256"],
+          "properties": {
+            "status": {"$ref": "#/$defs/stageStatus"},
+            "oracle": {"type": ["string", "null"]},
+            "output_sha256": {"oneOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]}
+          }
+        },
+        "compilation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "elapsed_ns", "exit_code"],
+          "properties": {
+            "status": {"$ref": "#/$defs/stageStatus"},
+            "elapsed_ns": {"type": ["integer", "null"], "minimum": 1},
+            "exit_code": {"type": ["integer", "null"]}
+          }
+        },
+        "execution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "scope", "samples_ns"],
+          "properties": {
+            "status": {"$ref": "#/$defs/stageStatus"},
+            "scope": {"enum": ["process_e2e", "direct_kernel", "in_process_ffi"]},
+            "samples_ns": {
+              "type": "array",
+              "items": {"type": "integer", "minimum": 1}
+            }
+          }
+        },
+        "binary_size": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "bytes", "format"],
+          "properties": {
+            "status": {"$ref": "#/$defs/stageStatus"},
+            "bytes": {"type": ["integer", "null"], "minimum": 1},
+            "format": {"enum": ["ELF", "PE", "Mach-O", "WASM", "OTHER"]}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gitSha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "stageStatus": {"enum": ["PASS", "FAIL", "BLOCKED", "NOT_RUN"]}
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "schema_version": "s3.pre-v8-historical-evidence-index.v1",
+  "as_of_date": "2026-10-15",
+  "repository": "https://github.com/SamDevlab/S3-Benchmarks",
+  "policy": {
+    "source_links_are_commit_pinned": true,
+    "historical_results_are_rewritten": false,
+    "moving_s3_refs_are_used_as_baselines": false,
+    "unmerged_branch_evidence_is_marked_pending": true
+  },
+  "experiments": [
+    {
+      "id": "jsmn-pre-p8-legacy-baseline",
+      "integration_status": "INTEGRATED_HISTORY_PERFORMANCE_INVALIDATED",
+      "evidence_class": "REJECTED_FOR_COMPARATIVE_PERFORMANCE",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/1",
+      "source_revision": "043061928d583c5281f1ea1c534fb565e09c5549",
+      "compiler_revisions": ["85541b782571c80d4857d013d1fb25b4997c1eb9"],
+      "summary": "Preserved historical report explicitly invalidates its old performance evidence; no native S3 runner and unavailable GCC are recorded.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/043061928d583c5281f1ea1c534fb565e09c5549/reports/jsmn-baseline.md",
+          "blob_sha": "e3d6824ac6c32eaab8f90353633af28633c40868"
+        }
+      ]
+    },
+    {
+      "id": "jsmn-post-p8-external-rebase",
+      "integration_status": "INTEGRATED_HISTORICAL_CHARACTERIZATION",
+      "evidence_class": "QUALIFIED_WITH_LIMITS",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/3",
+      "source_revision": "043061928d583c5281f1ea1c534fb565e09c5549",
+      "compiler_revisions": [
+        "85541b782571c80d4857d013d1fb25b4997c1eb9",
+        "631b51e70562a33183ac14d0be5bbe2ddd140779",
+        "5dd6844607ba3a2d5830ed836fb9026eed86d0fb"
+      ],
+      "summary": "Six tiny fixtures, 10,000 parses per process, five warmups and 30 samples; process startup remains included. Post-P8 S3 O1 / GCC O2 geometric mean is 39.88x, characterization only.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/043061928d583c5281f1ea1c534fb565e09c5549/reports/jsmn-post-p8-20260814.md",
+          "blob_sha": "fb29e5d606a89b872d5be796552d142f10327f53"
+        }
+      ]
+    },
+    {
+      "id": "s3-1.10-pinned-historical-replay",
+      "integration_status": "INTEGRATED_MAIN",
+      "evidence_class": "CHARACTERIZATION_ONLY_NOT_INTERLEAVED_ACROSS_VERSION_GROUPS",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/28",
+      "source_revision": "043061928d583c5281f1ea1c534fb565e09c5549",
+      "compiler_revisions": [
+        "c924148c6d95948778351c7dd1362259caff670c",
+        "cb88a8036af1bcdc026db193590cb961bee4737d",
+        "39dfbb5d19ecefc7df78da7dc8d3ea8e31d81df4",
+        "b8f446a5ea2b24b948a263cb955f426c5d0f48ce",
+        "211b1aecec756be42516322429720018f54001e7",
+        "856bf0cd60c3da6ba701adec73c7858d063739a7"
+      ],
+      "summary": "Exact commits replayed with correctness and artifact checks. 1.5-1.9 and 1.10 ran in serial groups, not interleaved; cross-version timing deltas are unsupported.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/043061928d583c5281f1ea1c534fb565e09c5549/reports/s3-1.10-memory-intelligence-lab/FINAL_REPORT.md",
+          "blob_sha": "0f035e79414fbd06b0b72bb2c44cf30cc0f68c38"
+        }
+      ]
+    },
+    {
+      "id": "s3-1.12-pinned-candidate-matrix",
+      "integration_status": "INTEGRATED_MAIN",
+      "evidence_class": "CORRECTNESS_PASS_TIMING_INCONCLUSIVE",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/30",
+      "source_revision": "043061928d583c5281f1ea1c534fb565e09c5549",
+      "compiler_revisions": [
+        "a1ecc29908dfb42480376961927fd6c50552ecf3",
+        "c89daae65aca69be775a395e971f3223ae3a21ce"
+      ],
+      "summary": "Three workload correctness/output-equivalence checks passed; no eligible TMOV sites were present, paired timing intervals included 1, and no speedup was claimed.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/043061928d583c5281f1ea1c534fb565e09c5549/reports/s3-1.12-capability-breakout-lab/FINAL_REPORT.md",
+          "blob_sha": "3d509e6c518aa27eda9e8f3be3b996b05bc7e85f"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.0-evidence-foundation",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_15",
+      "evidence_class": "FOUNDATION_CORRECTNESS_ONLY",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/15",
+      "source_revision": "2891ae5a2a8ee558267aeaa54c7cbc42156e2373",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "JSMN and single-vector RMSD correctness pass; batch/matrix RMSD, XSBench and most PolyBench entries were initially unsupported or registered only. No performance results.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/2891ae5a2a8ee558267aeaa54c7cbc42156e2373/reports/benchmarks-2.0-foundation/FINAL_REPORT.md",
+          "blob_sha": "aaaec9b8af5a7afc5462fec2dc053a5a693781f6"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.0.1-candidate-activation",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_16",
+      "evidence_class": "CORRECTNESS_AND_NATIVE_CANARY_NOT_PERFORMANCE",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/16",
+      "source_revision": "bc20f45255fdf4732cbbe6e6b281bdac8659f3b7",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "32/32 native canary cases passed after requalification. RMSD batch/matrix and selected PolyBench, PRK, BabelStream and PLB2 adapters were promoted to correctness/native-canary coverage; report explicitly says no new performance results.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/bc20f45255fdf4732cbbe6e6b281bdac8659f3b7/reports/benchmarks-2.0.1-candidate-activation/FINAL_REPORT.md",
+          "blob_sha": "89dbbade6213dbc8e49d16e400022ff3824d9df0"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.1-process-e2e-measurement",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_17",
+      "evidence_class": "NATIVE_CHARACTERIZATION_HIGH_VARIABILITY",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/17",
+      "source_revision": "2ee8caf95f9a9607153681496a15f911c2b6d0e0",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Fixed compiler SHA and native workload matrix; process-level medians often sub-millisecond and coefficients of variation were commonly about 0.2-0.5, including 2.413 for medium PolyBench MVT O1. Treat as measurement-method evidence, not robust ranking.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/2ee8caf95f9a9607153681496a15f911c2b6d0e0/reports/benchmarks-2.1-native-measurement/FINAL_REPORT.md",
+          "blob_sha": "6e89987d2697ed0d8306d2087184ed81d6c2e237"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.1.1-direct-kernel-replay",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_18",
+      "evidence_class": "METHODOLOGY_REFINEMENT_REQUIRED",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/18",
+      "source_revision": "b6a82865d276732ab6ff480a15fa1c012c148822",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Native correctness and matched GCC/Clang checks passed, but same-machine slope reproducibility failed; Jacobi correctness remained open and no speedup was claimed.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/b6a82865d276732ab6ff480a15fa1c012c148822/reports/benchmarks-2.1.1-direct-kernel-methodology/FINAL_REPORT.md",
+          "blob_sha": "f320d242e32469af91f61dc578be12028c5a091a"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.1.2-fixed-work-stability",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_18",
+      "evidence_class": "NO_COMMON_FIXED_WORK_WINDOW_NO_TIMINGS",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/18",
+      "source_revision": "b6a82865d276732ab6ff480a15fa1c012c148822",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Calibration found no common work multiplier across all four variants; no official frozen-binary A/B or performance timing was started. Jacobi remained a harness gap.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/b6a82865d276732ab6ff480a15fa1c012c148822/reports/benchmarks-2.1.2-fixed-work-native-stability/FIXED_WORK_NATIVE_REPORT.md",
+          "blob_sha": "4c3bcea8ad1abbd40d7db53e17804318b5bc7e0c"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.1.3-xsbench-ffi-initial",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_18",
+      "evidence_class": "INITIAL_REPRODUCIBILITY_FAILED_SUPERSEDED",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/18",
+      "source_revision": "b6a82865d276732ab6ff480a15fa1c012c148822",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Initial FFI run had correctness 12/12 but reproducibility failed; it is not merged into later XSBench timing aggregates.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/b6a82865d276732ab6ff480a15fa1c012c148822/reports/benchmarks-2.1.3-ffi-direct-kernel/FFI_DIRECT_KERNEL_REPORT.md",
+          "blob_sha": "19f788e37bf7b427c72c2e76036b51323a221af2"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2-scientific-miniapps",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_19",
+      "evidence_class": "CORRECTNESS_QUALIFIED_TIMING_NOT_RUN",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/19",
+      "source_revision": "e0cd722bac3ef12b68eb3c7010a558671b608094",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "RMSD expansion and hosted/native scientific correctness passed; timing was not run and synthetic timing is absent.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/e0cd722bac3ef12b68eb3c7010a558671b608094/reports/benchmarks-2.2-scientific-miniapps/SCIENTIFIC_MINIAPPS_REPORT.md",
+          "blob_sha": "c0c890c480e574c357ae755afd64940d18134da1"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2.1-xsbench-qualified-closure",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_20",
+      "evidence_class": "QUALIFIED_CHARACTERIZATION_NO_SPEEDUP_CLAIM",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/20",
+      "source_revision": "7b84d90ff915fd67c4609d72476cc12bab68406d",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "V2 uses a common 100ms work window, K=750000, five warmups, 30 balanced/interleaved repetitions, and passes reproducibility. Hardware counters remained unavailable; report still disclaims speedup.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/7b84d90ff915fd67c4609d72476cc12bab68406d/reports/benchmarks-2.2.1-xsbench/XSBENCH_MEASUREMENT_CLOSURE_V2.md",
+          "blob_sha": "8c4ed9518d884d54e679698dd372123b91976e3b"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2.2-runtime-attribution",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_21",
+      "evidence_class": "CAUSAL_RUNTIME_DIAGNOSTIC_PINNED_WORKLOADS",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/21",
+      "source_revision": "f2b4acb510b5f0e6a9e04287d3061194094d1417",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "On selected XSBench work, the no-budget diagnostic reduced S3 O0/O1 medians by roughly 2.31x/2.11x; conditional frame attribution remained unconfirmed, no hardware counters, and no production change.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/f2b4acb510b5f0e6a9e04287d3061194094d1417/reports/benchmarks-2.2.2-runtime-attribution/FINAL_REPORT.md",
+          "blob_sha": "d801f64db6c36d3660f74c0fdcca06a63f637b7f"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2.3-budget-generalization",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_22",
+      "evidence_class": "CAUSAL_DIAGNOSTIC_GENERALIZATION_CHARACTERIZATION",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/22",
+      "source_revision": "e8463adc7284e2120dd1c205f92e6a901b813891",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Budget diagnostic shares are reported between 51.78% and 61.98% on selected workloads with correctness and paired-session reproducibility gates; process-e2e/parser scope, not pure-kernel cost.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/e8463adc7284e2120dd1c205f92e6a901b813891/reports/benchmarks-2.2.3-budget-generalization/FINAL_REPORT.md",
+          "blob_sha": "4e4c972533c4375442926e8101904e977ba6a3d7"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2.4-safe-budget-p1",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_23",
+      "evidence_class": "EXPERIMENTAL_NOT_PROMOTED_MATERIAL_GATE_FAILED",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/23",
+      "source_revision": "8fc0aba50ca48d3f7171bdf49395df3cd880626a",
+      "compiler_revisions": ["e07d0b5464bf472b2ca18993f3e196a234ff0fc5"],
+      "summary": "Exact safety/correctness passed, but P1 did not meet material cross-workload recovery; reported recovery was small or negative on selected RMSD, XSBench, and JSMN cells. No compiler change.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/8fc0aba50ca48d3f7171bdf49395df3cd880626a/reports/benchmarks-2.2.4-safe-budget-architecture/FINAL_REPORT.md",
+          "blob_sha": "b7d5130ca3532d4c30db9de4375240ab440c21bc"
+        }
+      ]
+    },
+    {
+      "id": "benchmarks-2.2.5-exact-segment-budget-p2",
+      "integration_status": "PENDING_OPEN_DRAFT_PR_24",
+      "evidence_class": "EXPERIMENTAL_STRONG_BENCHMARK_RESULT_HARDENING_ONLY",
+      "pull_request": "https://github.com/SamDevlab/S3-Benchmarks/pull/24",
+      "source_revision": "6c946d1915d8230a2e9a9bdfb3d46e38315b0b64",
+      "compiler_revisions": [
+        "e07d0b5464bf472b2ca18993f3e196a234ff0fc5",
+        "1a76e341098b54a639fec22eecea362cc243c46f"
+      ],
+      "summary": "P2 passed correctness and paired-session gates; reported recovery of removable budget excess was 92.14%-104.56% across RMSD, XSBench, JSMN O0/O1. This is experimental benchmark-side evidence; production readiness is explicitly NO and hardening remains.",
+      "sources": [
+        {
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/blob/6c946d1915d8230a2e9a9bdfb3d46e38315b0b64/reports/s3-experimental-segment-budget/FINAL_REPORT.md",
+          "blob_sha": "24c9234f214e5b71c3382e48a4058165c389182a"
+        }
+      ]
+    }
+  ]
+}
