@@ -68,6 +68,36 @@ python tools/runner.py --full
 
 At present these commands execute the **JSMN campaign**. Candidate campaigns are not benchmark results until they have their own correctness and structural-equivalence harnesses.
 
+## Pinned S3-TISA V3 characterization
+
+`tools/s3_tisa_v3_benchmark.py` characterizes one fixed arithmetic fixture
+using the clean compiler and CPU V3 pins. It reports compile-only,
+hosted-compile-and-execute, S3-to-TISA compile/lower/execute, and already-lowered
+TISA-emulator-only samples as separate distributions, with raw nanosecond
+samples, median, nearest-rank p95, result checks, source/artifact hashes, and
+instruction/cycle counts. The report is `CHARACTERIZATION_ONLY`; it does not
+claim a general speedup or compare unrelated targets. RTL, WASI, and native
+measurements are explicitly marked as not run in this increment.
+
+The saved 30-repeat run is
+[`arithmetic-add-20261016.json`](reports/s3-tisa-v3/arithmetic-add-20261016.json)
+(3 warmups, result 42, 22 instructions, 122 TISA bytes). On its recorded host,
+median compile-only time was 2.458 ms, hosted compile+execute 3.013 ms,
+S3-to-TISA compile/lower/execute 306.376 ms, and already-lowered emulator-only
+execution 1.035 ms. These phases have different scope; the numbers are not a
+speedup comparison. The full suite passes with 59 tests, one optional skip, and
+three subtests. Two Windows-only historical replay hash failures exposed by the
+initial run are fixed by normalizing only CRLF-to-LF when validating raw JSON;
+the archived experiment files themselves remain unchanged.
+
+```powershell
+python tools/s3_tisa_v3_benchmark.py `
+  --compiler-root C:\path\to\clean-compiler-2eab8a43 `
+  --cpu-v3-root C:\path\to\clean-cpu-v3 `
+  --report reports\s3-tisa-v3\run.json `
+  --warmups 3 --repetitions 30
+```
+
 ## Pinned S3 candidate matrices
 
 `tools/s3_112_candidate_matrix.py` accepts a JSON specification with an exact

@@ -32,6 +32,11 @@ def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _normalized_json_sha256(data: bytes) -> str:
+    """Hash JSON content independently of Git checkout LF/CRLF conversion."""
+    return _sha256(data.replace(b"\r\n", b"\n"))
+
+
 def _read_json(path: Path) -> tuple[dict[str, Any], bytes]:
     raw = path.read_bytes()
     value = json.loads(raw)
@@ -158,7 +163,10 @@ def build_index(
         if not raw_path.is_file():
             raise ValueError(f"raw result evidence is missing for {version}: {raw_path}")
         raw_result, raw_bytes = _read_json(raw_path)
-        raw_hash = _sha256(raw_bytes)
+        # Historical executor hashes were produced on Linux with LF endings.
+        # Git may materialize the same JSON with CRLF on Windows; normalize only
+        # line endings so values and all other bytes remain hash-significant.
+        raw_hash = _normalized_json_sha256(raw_bytes)
         if raw_hash != provenance.get("raw_result_sha256"):
             raise ValueError(f"raw result SHA-256 mismatch for {version}")
         source = raw_result.get("source_revision")
@@ -245,6 +253,7 @@ def build_index(
                 "correctness": "PASS_ALL_BUILDS",
                 "raw_result_path": raw_path.resolve().relative_to(ROOT).as_posix(),
                 "raw_result_sha256": raw_hash,
+                "raw_result_hash_mode": "UTF8_JSON_LF_NORMALIZED",
                 "raw_result_bytes": len(raw_bytes),
                 "compiler_source_sha256": raw_result.get("compiler_source_sha256"),
                 "native_artifact_count": len(artifacts),
