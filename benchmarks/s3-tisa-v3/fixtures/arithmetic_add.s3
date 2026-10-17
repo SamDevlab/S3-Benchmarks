@@ -1,0 +1,6 @@
+fn main() -> tryte:
+    mut a: tryte = 10
+    mut b: tryte = 20
+    mut c: tryte = a + b
+    c = c + 12
+    return c
