@@ -1,0 +1,114 @@
+{
+  "baseline": {
+    "archive_sha256": "e54dbf67212dd7dcff0f1da820db5b7174dc9e02dababe06cb7e82c2aa5b1cbd",
+    "parent": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
+    "revision": "87c0a5be070210f158313a4d272fbdd795536232",
+    "source_tree_sha256": "7e75b14d41ba35f5a45032c99a5d084b7a6e47715c7900ac45334375cfda0f37"
+  },
+  "campaign": "S3_NATIVE_PERFORMANCE_R2_CODEGEN_ROOT_CAUSE_AND_OPTIMIZATION",
+  "candidate": {
+    "archive_sha256": "20a7e2e5bd1221a29684d203b9729882cbfa54feb8a1f70d858afbf9dff75fc2",
+    "parent": "6e3881d6ff6066e6828d143e08adbf030542dd16",
+    "revision": "94ef25f2fca720931df0f7bb97ff0b26e0d4bab7",
+    "source_tree_sha256": "07fa3cbe3af7f14f9d2e98ffecaabb4e3d54d8ed5ea24c515d3342fbcc8d8994"
+  },
+  "dynamic_pmu": {
+    "perf_event_paranoid": 4,
+    "reason": "permission_or_event_denied",
+    "status": "UNAVAILABLE"
+  },
+  "expected_sha256": "21493a3b33621da631a5724bd7a7063a2937330231722aa159aa5629b655141b",
+  "fixture_sha256": "870150e16732b81a733af584cb68b1ddddfb47fa06ee7f8a9d6248a99b099a8d",
+  "host": {
+    "affinity_cpus": [
+      0,
+      1,
+      2
+    ],
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "disk": {
+      "/": {
+        "free_bytes": 0,
+        "total_bytes": 26238750720,
+        "used_bytes": 24932438016
+      },
+      "/dev/shm": {
+        "free_bytes": 4294422528,
+        "total_bytes": 4317216768,
+        "used_bytes": 22794240
+      }
+    },
+    "frequency_governor": null,
+    "kernel_runner_affinity": [
+      0,
+      1,
+      2
+    ],
+    "load_average": [
+      1.064453125,
+      0.64404296875,
+      0.48291015625
+    ],
+    "logical_cpus": 3,
+    "machine": "x86_64",
+    "memory": {
+      "MemAvailable": "7806560 kB",
+      "MemTotal": "8432068 kB",
+      "SwapTotal": "0 kB"
+    },
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "tool_versions": {
+      "binutils_objdump": "GNU objdump (GNU Binutils for Ubuntu) 2.46",
+      "clang": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+      "rustc": "rustc 1.93.1 (01f6ddf75 2026-02-11) (built from a source tarball)",
+      "zig": "0.14.1"
+    },
+    "uname": [
+      "Linux",
+      "Ubuntuserve",
+      "7.0.0-31-generic",
+      "#31-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 04:26:38 UTC 2026",
+      "x86_64",
+      ""
+    ]
+  },
+  "input_sizes": [
+    "small",
+    "medium",
+    "full"
+  ],
+  "iterations_per_sample_by_size": {
+    "full": 1,
+    "medium": 2,
+    "small": 8
+  },
+  "kernel_runner_build_seconds": 0.174561335,
+  "kernel_runner_sha256": "03a57c218e76b24763795236dcf86f562a07dba5c4de2f537dbcc8a6264e6037",
+  "measured_paired_rounds": 81,
+  "measurement_scope": "paired BASE/CANDIDATE only; reuses V1 sources, fixture and C runner; no external-language matrix rerun",
+  "no_production_or_default_changes": true,
+  "optimization": "O1",
+  "pinning_cpu": 0,
+  "profiles": [
+    "PURE_EXPERIMENTAL",
+    "PER_INSTRUCTION"
+  ],
+  "schema": "s3-native-codegen-r2-paired/v1",
+  "seed": 20261017,
+  "source_hashes": {
+    "sources/agent_energy_residual.s3": "379cced3c82df97bf892ff0295eca6635a2605f072076ef125edc86390acaa85",
+    "sources/agent_point_bounds.s3": "977ab82dd3ff62b2081dde115ef5a7c2f6e4c29de83e14fc0d8b4254e52a805c",
+    "sources/agent_raster_threshold_count.s3": "b53ea2026d7cdfb5a1d2ed5c3747e2c72fce23e702f25960135382ceb11638aa",
+    "sources/agent_raster_valid_mean.s3": "adf63350d85c4311a244d055b08e8f0c94a5d7918d9d32d56cdc27ebb2e23ffc",
+    "sources/energy_series_aggregation.s3": "58b81c4858e5859c7ef6092e913146624972a8dced8fdb9f5085ab545796cddb",
+    "sources/point_cloud_summary.s3": "0e1db00d18bd3a9653274e67dad6e89b1432ebdd989eca2ca26c6b392a4f00b1"
+  },
+  "timer": "CLOCK_MONOTONIC_RAW; kernel loop only; process startup retained separately",
+  "warmups": 10,
+  "workloads": [
+    "energy_series_aggregation",
+    "agent_energy_residual"
+  ]
+}

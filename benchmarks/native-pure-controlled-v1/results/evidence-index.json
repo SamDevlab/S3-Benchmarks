@@ -1,0 +1,41 @@
+{
+  "files": {
+    "builds.jsonl": {
+      "bytes": 61031,
+      "sha256": "2b686612ace081eec9eef0d2f913608d9bff0a1f3409a63085fc563e19fcbb00"
+    },
+    "expected-v1.json": {
+      "bytes": 2390,
+      "sha256": "21493a3b33621da631a5724bd7a7063a2937330231722aa159aa5629b655141b"
+    },
+    "invalid_cases.jsonl": {
+      "bytes": 30288,
+      "sha256": "9afaff2e986714d769d2f64f604bf43c10a883dcaef1ba9ff36a2544b6671773"
+    },
+    "raw_samples.jsonl": {
+      "bytes": 4113348,
+      "sha256": "de47becbcf28cafff86342f93e0bea3311effc5da4cc6f0923b8e98438d23acc"
+    },
+    "report.md": {
+      "bytes": 68445,
+      "sha256": "fb8ebcf0bfead3baea23bb84dd8d1048cd14db6a5c44201db48e871b4a5abec6"
+    },
+    "run-manifest.json": {
+      "bytes": 3866,
+      "sha256": "0539839066ef925ee2e5e47342bea619d432466f73fb5e5eca1b0ae902ab233d"
+    },
+    "runtime-fixture-v1.bin": {
+      "bytes": 14584,
+      "sha256": "870150e16732b81a733af584cb68b1ddddfb47fa06ee7f8a9d6248a99b099a8d"
+    },
+    "startup_samples.jsonl": {
+      "bytes": 335562,
+      "sha256": "638e151c1342c8602849badad3f64eec5b53713bfdbc5dbce9c9aa93a3f2a674"
+    },
+    "summary.json": {
+      "bytes": 419952,
+      "sha256": "c6e74207b4eadf59997a941c61104003e5294c321bc6932130764ddf8f627803"
+    }
+  },
+  "schema": "s3-native-pure-controlled-evidence-index/v1"
+}

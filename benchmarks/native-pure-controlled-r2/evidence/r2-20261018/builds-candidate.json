@@ -1,0 +1,192 @@
+[
+  {
+    "artifact_id": "candidate-s3-pure_experimental-o1-energy_series_aggregation",
+    "assembler_seconds": 0.018941168,
+    "assembly_bytes": 253609,
+    "assembly_sha256": "6a759561a9e66e267bd3f6f79fab32c8519998ca0bc97cddcfddaf7ea84b9c11",
+    "backend_assembly_seconds": 0.022072774,
+    "binary_bytes": 103112,
+    "budget_mode": "pure-experimental",
+    "compile_seconds": 0.08283126900000001,
+    "compiler_commit": "6e3881d6ff6066e6828d143e08adbf030542dd16",
+    "flags": [
+      "compiler=6e3881d6ff6066e6828d143e08adbf030542dd16",
+      "optimization=O1",
+      "budget_mode=pure-experimental"
+    ],
+    "frontend_optimizer_seconds": 0.041817327,
+    "language": "S3",
+    "link_seconds": 0.007907686,
+    "native_function_shape": {
+      "resident_register_scaled_qword_loads": 2,
+      "scaled_qword_load_examples": [
+        "    mov rdx, qword ptr [r14 + rdx * 8]",
+        "    mov rdx, qword ptr [rdi + rdx * 8]"
+      ],
+      "scaled_qword_loads": 2,
+      "scratch_scaled_qword_loads": 0,
+      "static_assembly_instruction_lines": 2116
+    },
+    "object_sha256": "305e4d5ce8c72b6768a8896b3cad361946b7a82e3a54e4636712af4061fb32b3",
+    "path": "/dev/shm/s3-r2-paired-81-20261018/build/candidate/s3-pure_experimental-o1-energy_series_aggregation.so",
+    "profile": "PURE_EXPERIMENTAL/O1",
+    "revision_label": "CANDIDATE",
+    "sha256": "203e75122c55b1bb0519ca37ac559745f194780c138d37cabf1bc331cfbceca3",
+    "source_sha256": "58b81c4858e5859c7ef6092e913146624972a8dced8fdb9f5085ab545796cddb",
+    "static_disassembly": {
+      "static_branch_instruction_count": 1229,
+      "static_call_instruction_count": 54,
+      "static_instruction_count": 5607,
+      "static_memory_operand_instruction_count": 1895
+    },
+    "text_bytes": 27767,
+    "tsload_sites_by_function": {
+      "absolute_f64": 0,
+      "energy_series_aggregation": 2,
+      "main": 0
+    },
+    "workload": "energy_series_aggregation"
+  },
+  {
+    "artifact_id": "candidate-s3-per_instruction-o1-energy_series_aggregation",
+    "assembler_seconds": 0.023239325,
+    "assembly_bytes": 367964,
+    "assembly_sha256": "c4f687e43b5f982fd59ffb9f1ca9e25a4c6f28f06ecfd22d9dc96616fd1decdc",
+    "backend_assembly_seconds": 0.024643271,
+    "binary_bytes": 160584,
+    "budget_mode": "per-instruction",
+    "compile_seconds": 0.09307960500000001,
+    "compiler_commit": "6e3881d6ff6066e6828d143e08adbf030542dd16",
+    "flags": [
+      "compiler=6e3881d6ff6066e6828d143e08adbf030542dd16",
+      "optimization=O1",
+      "budget_mode=per-instruction"
+    ],
+    "frontend_optimizer_seconds": 0.045197009,
+    "language": "S3",
+    "link_seconds": 0.006619787,
+    "native_function_shape": {
+      "resident_register_scaled_qword_loads": 2,
+      "scaled_qword_load_examples": [
+        "    mov rcx, qword ptr [r14 + rcx * 8]",
+        "    mov rcx, qword ptr [rsi + rcx * 8]"
+      ],
+      "scaled_qword_loads": 2,
+      "scratch_scaled_qword_loads": 0,
+      "static_assembly_instruction_lines": 2746
+    },
+    "object_sha256": "7806092bed662704d4e15aa3e314e4105392d06b2250c0ee0c51456c3ee30251",
+    "path": "/dev/shm/s3-r2-paired-81-20261018/build/candidate/s3-per_instruction-o1-energy_series_aggregation.so",
+    "profile": "PER_INSTRUCTION/O1",
+    "revision_label": "CANDIDATE",
+    "sha256": "dfc10772c9a09b4d39120effed554dc72882aaa32b995a03f0d9adf0d38c64e0",
+    "source_sha256": "58b81c4858e5859c7ef6092e913146624972a8dced8fdb9f5085ab545796cddb",
+    "static_disassembly": {
+      "static_branch_instruction_count": 1865,
+      "static_call_instruction_count": 54,
+      "static_instruction_count": 7223,
+      "static_memory_operand_instruction_count": 2239
+    },
+    "text_bytes": 36231,
+    "tsload_sites_by_function": {
+      "absolute_f64": 0,
+      "energy_series_aggregation": 2,
+      "main": 0
+    },
+    "workload": "energy_series_aggregation"
+  },
+  {
+    "artifact_id": "candidate-s3-pure_experimental-o1-agent_energy_residual",
+    "assembler_seconds": 0.020893824,
+    "assembly_bytes": 321207,
+    "assembly_sha256": "14c316bd34c7db340b289fbb6a4bad71e74e5666ef4938c8a6660f2f51d3dab7",
+    "backend_assembly_seconds": 0.035740823,
+    "binary_bytes": 127376,
+    "budget_mode": "pure-experimental",
+    "compile_seconds": 0.15072316,
+    "compiler_commit": "6e3881d6ff6066e6828d143e08adbf030542dd16",
+    "flags": [
+      "compiler=6e3881d6ff6066e6828d143e08adbf030542dd16",
+      "optimization=O1",
+      "budget_mode=pure-experimental"
+    ],
+    "frontend_optimizer_seconds": 0.094088513,
+    "language": "S3",
+    "link_seconds": 0.006921718,
+    "native_function_shape": {
+      "resident_register_scaled_qword_loads": 2,
+      "scaled_qword_load_examples": [
+        "    mov r12, qword ptr [rcx + r12 * 8]",
+        "    mov r13, qword ptr [r9 + r13 * 8]"
+      ],
+      "scaled_qword_loads": 2,
+      "scratch_scaled_qword_loads": 0,
+      "static_assembly_instruction_lines": 2766
+    },
+    "object_sha256": "4bf5e587f30565fdb20e4a75c598e5e20c1eaac8fdff62614ed366e464a60ce3",
+    "path": "/dev/shm/s3-r2-paired-81-20261018/build/candidate/s3-pure_experimental-o1-agent_energy_residual.so",
+    "profile": "PURE_EXPERIMENTAL/O1",
+    "revision_label": "CANDIDATE",
+    "sha256": "8ba9a4e3dbfae1006b764712143244832e1c79a321b8b1886abebb386d5fc817",
+    "source_sha256": "379cced3c82df97bf892ff0295eca6635a2605f072076ef125edc86390acaa85",
+    "static_disassembly": {
+      "static_branch_instruction_count": 1573,
+      "static_call_instruction_count": 53,
+      "static_instruction_count": 6799,
+      "static_memory_operand_instruction_count": 2322
+    },
+    "text_bytes": 34695,
+    "tsload_sites_by_function": {
+      "agent_energy_residual": 2,
+      "main": 0
+    },
+    "workload": "agent_energy_residual"
+  },
+  {
+    "artifact_id": "candidate-s3-per_instruction-o1-agent_energy_residual",
+    "assembler_seconds": 0.023899072,
+    "assembly_bytes": 481201,
+    "assembly_sha256": "440def67de2c73b6ad8484599328755fdb1a98f778b3ca05859ed78ff3a152ad",
+    "backend_assembly_seconds": 0.037050116,
+    "binary_bytes": 209424,
+    "budget_mode": "per-instruction",
+    "compile_seconds": 0.145424732,
+    "compiler_commit": "6e3881d6ff6066e6828d143e08adbf030542dd16",
+    "flags": [
+      "compiler=6e3881d6ff6066e6828d143e08adbf030542dd16",
+      "optimization=O1",
+      "budget_mode=per-instruction"
+    ],
+    "frontend_optimizer_seconds": 0.084475544,
+    "language": "S3",
+    "link_seconds": 0.007290264,
+    "native_function_shape": {
+      "resident_register_scaled_qword_loads": 2,
+      "scaled_qword_load_examples": [
+        "    mov r12, qword ptr [rcx + r12 * 8]",
+        "    mov r13, qword ptr [r9 + r13 * 8]"
+      ],
+      "scaled_qword_loads": 2,
+      "scratch_scaled_qword_loads": 0,
+      "static_assembly_instruction_lines": 3674
+    },
+    "object_sha256": "7e7360b85cd68e8d495717da4b072339e18d6aaa576b0bbbc5fcf52065ff35d9",
+    "path": "/dev/shm/s3-r2-paired-81-20261018/build/candidate/s3-per_instruction-o1-agent_energy_residual.so",
+    "profile": "PER_INSTRUCTION/O1",
+    "revision_label": "CANDIDATE",
+    "sha256": "6be019cb4f2b930be7ebc02bb9a0a87d19b70e86fb1520f30d979dca220d8584",
+    "source_sha256": "379cced3c82df97bf892ff0295eca6635a2605f072076ef125edc86390acaa85",
+    "static_disassembly": {
+      "static_branch_instruction_count": 2477,
+      "static_call_instruction_count": 53,
+      "static_instruction_count": 9071,
+      "static_memory_operand_instruction_count": 2786
+    },
+    "text_bytes": 46595,
+    "tsload_sites_by_function": {
+      "agent_energy_residual": 2,
+      "main": 0
+    },
+    "workload": "agent_energy_residual"
+  }
+]

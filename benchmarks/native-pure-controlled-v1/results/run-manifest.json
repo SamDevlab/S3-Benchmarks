@@ -1,0 +1,120 @@
+{
+  "base_iterations_per_full_input": 1,
+  "baseline_compiler_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
+  "campaign": "S3_NATIVE_PURE_VS_CONTROLLED_CROSS_LANGUAGE_BENCHMARK_V1",
+  "compiler_archive_sha256": "9d5159268e0a6f1f388ff33ec1f611dffff73f3c5989c8cbdda22a9e21b84e86",
+  "compiler_git_metadata_present": false,
+  "expected_sha256": "21493a3b33621da631a5724bd7a7063a2937330231722aa159aa5629b655141b",
+  "experimental_parent_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
+  "experimental_pure_compiler_commit": "87c0a5be070210f158313a4d272fbdd795536232",
+  "external_process_limits": {
+    "address_space_bytes": 1073741824,
+    "cpu_seconds_soft_hard": [
+      12,
+      13
+    ]
+  },
+  "fixed_point_dependency": "NONE",
+  "fixture_sha256": "870150e16732b81a733af584cb68b1ddddfb47fa06ee7f8a9d6248a99b099a8d",
+  "host": {
+    "affinity_cpus": [
+      0,
+      1,
+      2
+    ],
+    "cpu_model": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "disk": {
+      "/": {
+        "free_bytes": 0,
+        "total_bytes": 26238750720,
+        "used_bytes": 24932421632
+      },
+      "/dev/shm": {
+        "free_bytes": 3685724160,
+        "total_bytes": 4317216768,
+        "used_bytes": 631492608
+      }
+    },
+    "frequency_governor": null,
+    "kernel_runner_affinity": [
+      0,
+      1,
+      2
+    ],
+    "load_average": [
+      1.673828125,
+      1.806640625,
+      1.7236328125
+    ],
+    "logical_cpus": 3,
+    "machine": "x86_64",
+    "memory": {
+      "MemAvailable": "2913760 kB",
+      "MemTotal": "8432068 kB",
+      "SwapTotal": "0 kB"
+    },
+    "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.43",
+    "tool_versions": {
+      "binutils_objdump": "GNU objdump (GNU Binutils for Ubuntu) 2.46",
+      "clang": "Ubuntu clang version 21.1.8 (6ubuntu1)",
+      "gcc": "gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+      "rustc": "rustc 1.93.1 (01f6ddf75 2026-02-11) (built from a source tarball)",
+      "zig": "0.14.1"
+    },
+    "uname": [
+      "Linux",
+      "Ubuntuserve",
+      "7.0.0-31-generic",
+      "#31-Ubuntu SMP PREEMPT_DYNAMIC Sat Aug  1 04:26:38 UTC 2026",
+      "x86_64",
+      ""
+    ]
+  },
+  "input_sizes": [
+    "small",
+    "medium",
+    "full"
+  ],
+  "invalid_input_probe": "short output slices must return S3 status 2; probes run outside performance timing",
+  "iterations_per_sample_by_size": {
+    "full": 1,
+    "medium": 2,
+    "small": 8
+  },
+  "kernel_runner_build_seconds": 0.32104762,
+  "kernel_runner_sha256": "03a57c218e76b24763795236dcf86f562a07dba5c4de2f537dbcc8a6264e6037",
+  "languages": [
+    "Clang",
+    "GCC",
+    "Python",
+    "Rust",
+    "S3",
+    "Zig"
+  ],
+  "measured_samples": 15,
+  "pinning_cpu": 0,
+  "reused_builds_from": "/dev/shm/s3-native-pure-profile-87c0a5be/full-results",
+  "schema": "s3-native-pure-controlled-run/v1",
+  "source_hashes": {
+    "agent_energy_residual": "379cced3c82df97bf892ff0295eca6635a2605f072076ef125edc86390acaa85",
+    "agent_point_bounds": "977ab82dd3ff62b2081dde115ef5a7c2f6e4c29de83e14fc0d8b4254e52a805c",
+    "agent_raster_threshold_count": "b53ea2026d7cdfb5a1d2ed5c3747e2c72fce23e702f25960135382ceb11638aa",
+    "agent_raster_valid_mean": "adf63350d85c4311a244d055b08e8f0c94a5d7918d9d32d56cdc27ebb2e23ffc",
+    "energy_series_aggregation": "58b81c4858e5859c7ef6092e913146624972a8dced8fdb9f5085ab545796cddb",
+    "point_cloud_summary": "0e1db00d18bd3a9653274e67dad6e89b1432ebdd989eca2ca26c6b392a4f00b1"
+  },
+  "started_utc_epoch_ns": 1792289197406927637,
+  "timer_native": "CLOCK_MONOTONIC_RAW",
+  "timer_python": "perf_counter_ns",
+  "v7_dependency": "NONE",
+  "warmups": 3,
+  "workloads": [
+    "agent_energy_residual",
+    "agent_point_bounds",
+    "agent_raster_threshold_count",
+    "agent_raster_valid_mean",
+    "energy_series_aggregation",
+    "point_cloud_summary"
+  ]
+}

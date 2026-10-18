@@ -1,0 +1,42 @@
+[
+  {
+    "artifact_id": "baseline-s3-pure_experimental-o1-energy_series_aggregation",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "baseline-s3-per_instruction-o1-energy_series_aggregation",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "baseline-s3-pure_experimental-o1-agent_energy_residual",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "baseline-s3-per_instruction-o1-agent_energy_residual",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "candidate-s3-pure_experimental-o1-energy_series_aggregation",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "candidate-s3-per_instruction-o1-energy_series_aggregation",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "candidate-s3-pure_experimental-o1-agent_energy_residual",
+    "result": "PASS",
+    "short_output_status": 2
+  },
+  {
+    "artifact_id": "candidate-s3-per_instruction-o1-agent_energy_residual",
+    "result": "PASS",
+    "short_output_status": 2
+  }
+]
