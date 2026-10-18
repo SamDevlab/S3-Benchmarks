@@ -1,0 +1,46 @@
+{
+  "schema": "s3-native-pure-controlled-campaign/v1",
+  "campaign": "S3_NATIVE_PURE_VS_CONTROLLED_CROSS_LANGUAGE_BENCHMARK_V1",
+  "status": "prepared",
+  "baseline_compiler_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
+  "experimental_pure_compiler_commit": "87c0a5be070210f158313a4d272fbdd795536232",
+  "experimental_parent_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
+  "python_interpreter_in_native_kernel_region": false,
+  "profiles": {
+    "S3_PURE": "pure-experimental; omits only dynamic instruction-budget instrumentation; bounds, overflow and other language checks remain",
+    "S3_CONTROLLED": "per-instruction budget instrumentation",
+    "S3_EXACT_SEGMENT": "exact-segment instruction budget policy",
+    "S3_LOOP_HYBRID": "loop-hybrid instruction budget policy"
+  },
+  "workloads": [
+    {"id":"agent_energy_residual","category":["A_ARITHMETIC","B_CONTROL_FLOW","C_MEMORY","E_SCIENTIFIC"],"source":"sources/agent_energy_residual.s3","sha256":"379cced3c82df97bf892ff0295eca6635a2605f072076ef125edc86390acaa85","input_count":364,"output_count":3},
+    {"id":"agent_point_bounds","category":["B_CONTROL_FLOW","C_MEMORY","E_GEOMETRY"],"source":"sources/agent_point_bounds.s3","sha256":"977ab82dd3ff62b2081dde115ef5a7c2f6e4c29de83e14fc0d8b4254e52a805c","input_count":121,"output_count":6},
+    {"id":"agent_raster_threshold_count","category":["B_CONTROL_FLOW","C_MEMORY"],"source":"sources/agent_raster_threshold_count.s3","sha256":"b53ea2026d7cdfb5a1d2ed5c3747e2c72fce23e702f25960135382ceb11638aa","input_count":364,"output_count":1},
+    {"id":"agent_raster_valid_mean","category":["A_ARITHMETIC","C_MEMORY","E_SCIENTIFIC"],"source":"sources/agent_raster_valid_mean.s3","sha256":"adf63350d85c4311a244d055b08e8f0c94a5d7918d9d32d56cdc27ebb2e23ffc","input_count":364,"output_count":1},
+    {"id":"energy_series_aggregation","category":["A_ARITHMETIC","B_CONTROL_FLOW","C_MEMORY","E_SCIENTIFIC","F_APPLICATION"],"source":"sources/energy_series_aggregation.s3","sha256":"58b81c4858e5859c7ef6092e913146624972a8dced8fdb9f5085ab545796cddb","input_count":364,"output_count":5},
+    {"id":"point_cloud_summary","category":["A_ARITHMETIC","B_CONTROL_FLOW","C_MEMORY","E_GEOMETRY","F_APPLICATION"],"source":"sources/point_cloud_summary.s3","sha256":"0e1db00d18bd3a9653274e67dad6e89b1432ebdd989eca2ca26c6b392a4f00b1","input_count":121,"output_count":10}
+  ],
+  "input_size_scales": {
+    "small": {"array_items": 32, "geometry_points": 16},
+    "medium": {"array_items": 128, "geometry_points": 64},
+    "full": {"array_items": 364, "geometry_points": 121},
+    "timed_calls": "base_iterations multiplied by 8, 2, and 1 for small, medium, and full respectively"
+  },
+  "fixture": {
+    "generator": "fixture.py",
+    "seed": 20261017,
+    "format": "little-endian: 8-byte magic, uint32 count, uint32 reserved, f64[364] actual, f64[364] load, f64[364] raster, i64[364] valid_mask, f64[363] xyz, f64 threshold, f64 capacity",
+    "runtime_inputs": true,
+    "correctness_tolerance": {"absolute": 1e-10, "relative": 1e-10}
+  },
+  "sampling": {"warmups":3,"measured_samples":15,"order":"seeded balanced shuffle per round","timer":"CLOCK_MONOTONIC_RAW in native runner; perf_counter_ns for interpreted Python","pinning":"taskset CPU 0 when allowed","outliers":"retained"},
+  "host_limitations": ["KVM guest on a Ryzen 5 3400G host; guest reports 3 vCPUs", "frequency governor unavailable in the guest", "root filesystem is full; generated artifacts are confined to /dev/shm", "rankings are descriptive, not claims about bare-metal performance"],
+  "external_flags": {
+    "S3":"reference compiler O0/O1; profile is separately recorded",
+    "C":"gcc -O0 and gcc -O2 -fno-fast-math -ffp-contract=off",
+    "Rust":"rustc edition 2021 opt-level 0/2",
+    "Zig":"0.14.1 Debug/ReleaseFast",
+    "Python":"CPython interpreter; interpreted results kept separate"
+  },
+  "historical_results_mixed": false
+}
