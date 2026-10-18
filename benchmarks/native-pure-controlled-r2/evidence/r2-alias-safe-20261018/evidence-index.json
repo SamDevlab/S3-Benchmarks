@@ -1,0 +1,57 @@
+[
+  {
+    "bytes": 7624,
+    "path": "builds-baseline.json",
+    "sha256": "93667a603e97042bf560707309bcac1c36940ce33a735561933f5131ab2b593d"
+  },
+  {
+    "bytes": 7632,
+    "path": "builds-candidate.json",
+    "sha256": "620f1afd213cd555ddacbfe16132fb7823c9682b8267870d971631a22c1978cd"
+  },
+  {
+    "bytes": 14925,
+    "path": "builds.json",
+    "sha256": "23df626b6fb5c8fc336b6d9b188ff99afb519d9dd056ae0dbde2dba8e8516872"
+  },
+  {
+    "bytes": 2390,
+    "path": "expected-v1.json",
+    "sha256": "21493a3b33621da631a5724bd7a7063a2937330231722aa159aa5629b655141b"
+  },
+  {
+    "bytes": 1111,
+    "path": "invalid-probes.json",
+    "sha256": "17fab226ed6863072bfde49aa8c351ebda8ae0ef67d389a03cf5e03e7eae6f1a"
+  },
+  {
+    "bytes": 1960752,
+    "path": "raw_samples.jsonl",
+    "sha256": "a093c522ede1cc110230b28336dbb0c3b71c44b5d0ad7d4ac7bbb65f7a996aea"
+  },
+  {
+    "bytes": 5887,
+    "path": "report.md",
+    "sha256": "e2cc3ac5a97f2d4b53c365b660c3643e85539c5e9b21658d7561832668dc2750"
+  },
+  {
+    "bytes": 3955,
+    "path": "run-manifest.json",
+    "sha256": "445d24b6c7d38c2dc8c0a9c1f8ddd070b339d96820c803916be85a5853e83b06"
+  },
+  {
+    "bytes": 14584,
+    "path": "runtime-fixture-v1.bin",
+    "sha256": "870150e16732b81a733af584cb68b1ddddfb47fa06ee7f8a9d6248a99b099a8d"
+  },
+  {
+    "bytes": 63698,
+    "path": "summary.json",
+    "sha256": "755933a9ee7f06d6913de97c3f182b669033799e323a17570636a4beaf3872e1"
+  },
+  {
+    "bytes": 242005,
+    "path": "warmups.jsonl",
+    "sha256": "9547220fc23c497f2099ac80aabff66a3dc0e012a9e59d7d21203312a75dd394"
+  }
+]
