@@ -1,7 +1,7 @@
 {
   "schema": "s3-native-pure-controlled-campaign/v1",
   "campaign": "S3_NATIVE_PURE_VS_CONTROLLED_CROSS_LANGUAGE_BENCHMARK_V1",
-  "status": "prepared",
+  "status": "complete",
   "baseline_compiler_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",
   "experimental_pure_compiler_commit": "87c0a5be070210f158313a4d272fbdd795536232",
   "experimental_parent_commit": "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c",

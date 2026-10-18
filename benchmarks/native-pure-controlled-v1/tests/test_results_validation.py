@@ -35,6 +35,7 @@ def test_final_run_cardinality_and_baseline_pins() -> None:
     campaign_manifest = json.loads((CAMPAIGN / "manifest.json").read_text(encoding="utf-8"))
     workloads = {item["id"]: item["sha256"] for item in campaign_manifest["workloads"]}
 
+    assert campaign_manifest["status"] == "complete"
     assert manifest["baseline_compiler_commit"] == "2eab8a43f07b7fc842c4036ea0fb0203a9d41d6c"
     assert manifest["experimental_parent_commit"] == manifest["baseline_compiler_commit"]
     assert manifest["v7_dependency"] == "NONE"
