@@ -1,0 +1,288 @@
+{
+  "phase_p6_s3_compute": {
+    "exact_instruction_budget_N_8x8_stencil": 3901,
+    "boundary_checks": {
+      "N_minus_1": {
+        "budget": 3900,
+        "per_instruction_returncode": 1,
+        "exact_segment_returncode": 1,
+        "per_instruction_stdout": "",
+        "exact_segment_stdout": "",
+        "per_instruction_trapped": true,
+        "exact_segment_trapped": true,
+        "parity_match": true
+      },
+      "N_exact": {
+        "budget": 3901,
+        "per_instruction_returncode": 0,
+        "exact_segment_returncode": 0,
+        "per_instruction_stdout": "program returned: 220",
+        "exact_segment_stdout": "program returned: 220",
+        "per_instruction_trapped": false,
+        "exact_segment_trapped": false,
+        "parity_match": true
+      },
+      "N_plus_1": {
+        "budget": 3902,
+        "per_instruction_returncode": 0,
+        "exact_segment_returncode": 0,
+        "per_instruction_stdout": "program returned: 220",
+        "exact_segment_stdout": "program returned: 220",
+        "per_instruction_trapped": false,
+        "exact_segment_trapped": false,
+        "parity_match": true
+      }
+    },
+    "multi_scale_stencil_10gens": {
+      "64x40": {
+        "cells": 2560,
+        "O0_per-instruction_median_ns": 1463400.0,
+        "O0_exact-segment_median_ns": 1427500.0,
+        "O1_P4_per-instruction_median_ns": 1323100.0,
+        "O1_P4_exact-segment_median_ns": 1190100.0,
+        "o1_exact_vs_o1_per_speedup": 1.112,
+        "o1_exact_vs_o0_per_speedup": 1.23
+      },
+      "128x80": {
+        "cells": 10240,
+        "O0_per-instruction_median_ns": 6013500.0,
+        "O0_exact-segment_median_ns": 4935000.0,
+        "O1_P4_per-instruction_median_ns": 4920900.0,
+        "O1_P4_exact-segment_median_ns": 4744600.0,
+        "o1_exact_vs_o1_per_speedup": 1.037,
+        "o1_exact_vs_o0_per_speedup": 1.267
+      },
+      "256x160": {
+        "cells": 40960,
+        "O0_per-instruction_median_ns": 22926600.0,
+        "O0_exact-segment_median_ns": 19624000.0,
+        "O1_P4_per-instruction_median_ns": 20439100.0,
+        "O1_P4_exact-segment_median_ns": 20236500.0,
+        "o1_exact_vs_o1_per_speedup": 1.01,
+        "o1_exact_vs_o0_per_speedup": 1.133
+      }
+    },
+    "decision": "GO_QUALIFIED_FOR_FULL_STENCIL"
+  },
+  "phase_p7_s3_compact": {
+    "static_find_match_codegen": {
+      "v18_control_o0_per_inst": {
+        "find_match_bytes": 25808,
+        "find_match_x86_instructions": 4715,
+        "find_match_conditional_branches": 1373,
+        "find_match_memory_instructions": 1514
+      },
+      "v18_p4_o1_exact_seg": {
+        "find_match_bytes": 35090,
+        "find_match_x86_instructions": 5593,
+        "find_match_conditional_branches": 1435,
+        "find_match_memory_instructions": 2617
+      },
+      "v19_prefilter_o1_exact_seg": {
+        "find_match_bytes": 36216,
+        "find_match_x86_instructions": 5775,
+        "find_match_conditional_branches": 1486,
+        "find_match_memory_instructions": 2696
+      }
+    },
+    "corpora": {
+      "json_telemetry": {
+        "original_size_bytes": 23095,
+        "original_sha256": "10126b9bad02a8d390d93bad61f41140b388834e9f350cf89973441b7cd08700",
+        "variants": {
+          "v18_control_o0_per_inst": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1478,
+            "compression_ratio": 15.626,
+            "space_savings_pct": 93.6,
+            "encode_median_ns": 7820500.0,
+            "decode_median_ns": 619700.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v18_p4_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1478,
+            "compression_ratio": 15.626,
+            "space_savings_pct": 93.6,
+            "encode_median_ns": 6212900.0,
+            "decode_median_ns": 495200.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v19_prefilter_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1478,
+            "compression_ratio": 15.626,
+            "space_savings_pct": 93.6,
+            "encode_median_ns": 6825900.0,
+            "decode_median_ns": 603600.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          }
+        },
+        "v18_p4_encode_speedup_vs_v18_ctrl": 1.259,
+        "v19_encode_speedup_vs_v18_ctrl": 1.146,
+        "v19_encode_speedup_vs_v18_p4": 0.91
+      },
+      "csv_tabular": {
+        "original_size_bytes": 22564,
+        "original_sha256": "939ed9521bef2f94973b9848c88c77a7c7123539c3c8e3f98043d00c4e9b033f",
+        "variants": {
+          "v18_control_o0_per_inst": {
+            "codec_id": 3,
+            "compressed_size_bytes": 2265,
+            "compression_ratio": 9.962,
+            "space_savings_pct": 89.96,
+            "encode_median_ns": 8730900.0,
+            "decode_median_ns": 644200.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v18_p4_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 2265,
+            "compression_ratio": 9.962,
+            "space_savings_pct": 89.96,
+            "encode_median_ns": 6972500.0,
+            "decode_median_ns": 573000.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v19_prefilter_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 2265,
+            "compression_ratio": 9.962,
+            "space_savings_pct": 89.96,
+            "encode_median_ns": 7230400.0,
+            "decode_median_ns": 627200.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          }
+        },
+        "v18_p4_encode_speedup_vs_v18_ctrl": 1.252,
+        "v19_encode_speedup_vs_v18_ctrl": 1.208,
+        "v19_encode_speedup_vs_v18_p4": 0.964
+      },
+      "s3_source_code": {
+        "original_size_bytes": 28480,
+        "original_sha256": "88042006c5f3dec7cef271690c408568f87881594f54ca565fd7dd7bcc993a10",
+        "variants": {
+          "v18_control_o0_per_inst": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1628,
+            "compression_ratio": 17.494,
+            "space_savings_pct": 94.28,
+            "encode_median_ns": 9838700.0,
+            "decode_median_ns": 709800.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v18_p4_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1628,
+            "compression_ratio": 17.494,
+            "space_savings_pct": 94.28,
+            "encode_median_ns": 6692100.0,
+            "decode_median_ns": 529200.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v19_prefilter_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 1628,
+            "compression_ratio": 17.494,
+            "space_savings_pct": 94.28,
+            "encode_median_ns": 6954700.0,
+            "decode_median_ns": 613800.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          }
+        },
+        "v18_p4_encode_speedup_vs_v18_ctrl": 1.47,
+        "v19_encode_speedup_vs_v18_ctrl": 1.415,
+        "v19_encode_speedup_vs_v18_p4": 0.962
+      },
+      "repetitive_log": {
+        "original_size_bytes": 26400,
+        "original_sha256": "d4affc5a7878234cb3696d98c4f77fa83d5fd80ab08a0d5238702c069e1af34c",
+        "variants": {
+          "v18_control_o0_per_inst": {
+            "codec_id": 3,
+            "compressed_size_bytes": 700,
+            "compression_ratio": 37.714,
+            "space_savings_pct": 97.35,
+            "encode_median_ns": 6839500.0,
+            "decode_median_ns": 622400.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v18_p4_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 700,
+            "compression_ratio": 37.714,
+            "space_savings_pct": 97.35,
+            "encode_median_ns": 5359300.0,
+            "decode_median_ns": 451800.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v19_prefilter_o1_exact_seg": {
+            "codec_id": 3,
+            "compressed_size_bytes": 700,
+            "compression_ratio": 37.714,
+            "space_savings_pct": 97.35,
+            "encode_median_ns": 5193400.0,
+            "decode_median_ns": 599200.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          }
+        },
+        "v18_p4_encode_speedup_vs_v18_ctrl": 1.276,
+        "v19_encode_speedup_vs_v18_ctrl": 1.317,
+        "v19_encode_speedup_vs_v18_p4": 1.032
+      },
+      "high_entropy_binary": {
+        "original_size_bytes": 8192,
+        "original_sha256": "af6911bd9ecbbf5c6514403187de66dcce9eb113846e0324af3f275fb1cf7e68",
+        "variants": {
+          "v18_control_o0_per_inst": {
+            "codec_id": 0,
+            "compressed_size_bytes": 8193,
+            "compression_ratio": 1.0,
+            "space_savings_pct": -0.01,
+            "encode_median_ns": 6512000.0,
+            "decode_median_ns": 247300.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v18_p4_o1_exact_seg": {
+            "codec_id": 0,
+            "compressed_size_bytes": 8193,
+            "compression_ratio": 1.0,
+            "space_savings_pct": -0.01,
+            "encode_median_ns": 5701200.0,
+            "decode_median_ns": 197700.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          },
+          "v19_prefilter_o1_exact_seg": {
+            "codec_id": 0,
+            "compressed_size_bytes": 8193,
+            "compression_ratio": 1.0,
+            "space_savings_pct": -0.01,
+            "encode_median_ns": 4869500.0,
+            "decode_median_ns": 196900.0,
+            "roundtrip_sha256_match": true,
+            "payload_identical_to_v18": true
+          }
+        },
+        "v18_p4_encode_speedup_vs_v18_ctrl": 1.142,
+        "v19_encode_speedup_vs_v18_ctrl": 1.337,
+        "v19_encode_speedup_vs_v18_p4": 1.171
+      }
+    },
+    "peak_rss_kib": 47740,
+    "decision": "GO_V19_FAST_PREFILTER_AND_P4_O1_EXACT_SEGMENT"
+  }
+}
