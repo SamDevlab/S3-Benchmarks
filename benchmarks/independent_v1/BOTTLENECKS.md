@@ -1,80 +1,86 @@
-# S3 Architectural Bottleneck Diagnostic Report
+# S3 Architectural Bottleneck Diagnostic Report (V1.1)
 
-**Campaign**: `SAMDEV_UNIFIED_V3`  
+**Campaign**: `SAMDEV_UNIFIED_V3_1`  
 **Workstream**: `FRENTE B — S3 BENCHMARKS`  
-**Investigation**: Identification and evidence-based diagnosis of the top 5 performance bottlenecks in the S3 compilation and runtime stack.
+**S3 SHA**: `7d625ee98364cad3d4034714e78783e7a7cdfd97` | **Historical Baseline SHA**: `0430619 (PR #33)`  
+**Investigation**: Identification and evidence-based diagnosis of performance bottlenecks in the S3 compilation and runtime stack.
 
 ---
 
-## Executive Summary
+## Methodological Ground Rules for Bottleneck Claims
 
-Through empirical profiling of the S3 compiler across microbenchmarks (JSMN), scientific kernels (RMSD / Similarity Distance), and geospatial kernels (STENCIL 2D), compared against C (GCC, Clang) and Rust, we identify five primary architectural bottlenecks impeding S3's runtime performance and binary efficiency.
+Every claim in this diagnostic report conforms to the following strict criteria:
+1. **Workload Identified**: Exact workload kernel and input size specified.
+2. **Code SHA**: Pinned repository commit SHA.
+3. **Configuration**: Compiler flags and runtime modes stated explicitly.
+4. **Observed Metric**: Measured time, ratio, or instruction counts from verifiable data.
+5. **Evidence Source**: Pinned file or historical dataset citation.
+6. **Causal Hypothesis**: Technical explanation grounded in compiler semantics.
+7. **Confidence Degree**: Explicitly graded as `CONFIRMED_BY_MEASUREMENT`, `HIGH_CONFIDENCE_HYPOTHESIS`, or `THEORETICAL_HYPOTHESIS`.
+8. **Required Experiment**: Precise future experiment required to validate or refute the hypothesis.
 
 ---
 
 ## Bottleneck 1: Dynamic Instruction Budget Instrumentation Penalty
 
-### Empirical Evidence
-- **Controlled Mode (`PER_INSTRUCTION`)**: Median execution time = **16,420 ns** (4.23x of GCC -O2).
-- **Pure Experimental Mode (`PURE_EXPERIMENTAL`)**: Median execution time = **5,120 ns** (1.32x of GCC -O2).
-- **Instrumentation Penalty**: **3.21x slowdown** attributable solely to dynamic budget enforcement.
-
-### Technical Mechanism
-In `PER_INSTRUCTION` mode, the x86-64 backend emits an instruction counter decrement, condition test, and conditional branch (`dec %r15`, `js .Lbudget_exhausted`) on every basic block and loop header. This introduces high branch misprediction rates in tight scientific loops and invalidates superscalar instruction pipelining.
-
-### Remediation Recommendation
-Promote `LOOP_HYBRID` and static basic block cost pre-aggregation into production. Compute static block budgets at compile-time and decrement by chunk `K` once per loop iteration or outer loop entry.
+- **Workload Identified**: `agent_energy_residual` (full input size: 364 items).
+- **Code SHA**: `0430619` (PR #33 / PR #31).
+- **Configuration**: `s3-pure_experimental-o1` vs `s3-per_instruction-o1`.
+- **Observed Metric**: Median execution time = **39,040 ns** (Pure O1) vs **42,550 ns** (Per-Instruction O1). Delta = **+3,510 ns (+8.99%)**.
+- **Evidence Source**: `benchmarks/native-pure-controlled-v1/results/summary.json` (PR #33).
+- **Causal Hypothesis**: In `PER_INSTRUCTION` mode, the backend emits `dec %r15; js .Lbudget_exhausted` on each basic block. In memory-bound or reduction loops with array accesses, memory latency partially amortizes instruction budget checks to ~9%. In contrast, on instruction-dense microbenchmarks without memory operations, overhead scales up to ~3.2x.
+- **Correction regarding `LOOP_HYBRID`**: In the same dataset, `s3-loop_hybrid-o1` recorded **46,330 ns**, performing slower than `s3-per_instruction-o1` (42,550 ns). **Recommending `LOOP_HYBRID` as production default is unsupported by evidence and is hereby revoked.**
+- **Confidence Degree**: `CONFIRMED_BY_MEASUREMENT` for the 8.99% penalty on `agent_energy_residual`; `THEORETICAL_HYPOTHESIS` for the microbenchmark scaling limit.
+- **Required Experiment**: Implement a paired micro-experiment isolating arithmetic-only loops vs memory-bound loops under both budget modes.
 
 ---
 
 ## Bottleneck 2: Lack of Global Loop-Invariant Code Motion (LICM) and Bounds Check Hoisting
 
-### Empirical Evidence
-In Workload C (`raster_window_statistics.s3`) and Workload B (`similarity_distance.s3`), inner loops execute bounds checks (`width > 364`, `to_tryte(row * bounded_width + column)`) repeatedly on every iteration. Assembly inspection reveals 4 redundant compare/jump instructions per cell traversal.
-
-### Technical Mechanism
-The S3 mid-end IR optimizer currently operates with basic block locality. It lacks a dominator-tree based loop analyzer to prove that array dimensions (`width`, `height`, `cell_count`) and base slice pointers remain constant throughout loop execution.
-
-### Remediation Recommendation
-Implement a static loop optimization pass with Dominance Frontiers. Hoist invariant conditional guards and tryte conversions to loop pre-headers.
-
----
-
-## Bottleneck 3: Ternary Match Branch Scaffolding & Dead Fallback Emission
-
-### Empirical Evidence
-Workload A (`jsmn_demo.s3`) and Workload C (`raster_window_statistics.s3`) rely heavily on balanced ternary `match` expressions with arms `[-1, 0, 1]`. The resulting x86-64 assembly emits 3 separate test/jump sequences even for binary conditions (e.g. `match phase == 0`).
-
-### Technical Mechanism
-Because S3 semantics preserve three-valued logic (`true = -1`, `false = 0`, `unknown/error = 1`), comparison operators return ternary trytes. When expressions have provably binary boolean domain (e.g. integer equality), the compiler still emits full ternary cascade handlers.
-
-### Remediation Recommendation
-Introduce Boolean Type Specialization in semantic analysis. When a condition is statically guaranteed to yield only `{0, -1}`, emit a single binary conditional jump (`je` / `jne`) and prune the third unreachable branch target.
+- **Workload Identified**: `raster_window_statistics.s3` (Workload C) and `similarity_distance.s3` (Workload B).
+- **Code SHA**: `7d625ee98364cad3d4034714e78783e7a7cdfd97`.
+- **Configuration**: S3 Compiler `O1` optimization.
+- **Observed Metric**: Assembly emits 4 redundant bounds checks per inner loop iteration (`width > 364`, `height > 364`, `to_tryte(row * bounded_width + column)`).
+- **Evidence Source**: Structural inspection of generated IR blocks in `bootstrap/s3/pipeline.py` and x86-64 assembly.
+- **Causal Hypothesis**: The current mid-end optimization pass performs intra-block constant folding but lacks dominator-tree loop analysis to prove that array dimensions and slice bounds remain invariant throughout loop execution.
+- **Confidence Degree**: `HIGH_CONFIDENCE_HYPOTHESIS` (structural redundancy is confirmed; runtime speedup from hoisting remains to be measured).
+- **Required Experiment**: Construct a prototype LICM pass in `bootstrap/s3/analysis/` and compare cycle counts on `raster_window_statistics.s3` before and after hoisting.
 
 ---
 
-## Bottleneck 4: Register Spilling & Absence of SIMD Vectorization
+## Bottleneck 3: Ternary Match Branch Scaffolding & Fallback Cascade
 
-### Empirical Evidence
-In Workload B (RMSD), GCC -O2 and Rust opt-level 2 vectorize vector loops using AVX2 `vmovupd`, `vmulpd`, and `vaddpd`, processing 4 double-precision floats per cycle. S3 Pure O1 executes scalar `mulsd` / `addsd` in a sequential loop.
-- S3 Pure O1 assembly size: **1,952 bytes text** (scalar unrolled).
-- Clang -O2 assembly size: **1,751 bytes text** (vectorized 256-bit SIMD).
-
-### Technical Mechanism
-The S3 x86-64 backend generates code strictly for the scalar x86-64 ABI (XMM0..XMM7). It possesses no auto-vectorization pass and does not construct vector IR representations (`<4 x f64>`).
-
-### Remediation Recommendation
-Develop an explicit Vector IR dialect or loop unroll-and-pack pass targeting AVX2 / SSE4.2 for vector array primitives (`f64_vector`, `i64_vector`).
+- **Workload Identified**: `jsmn_demo.s3` (Workload A) and `raster_window_statistics.s3` (Workload C).
+- **Code SHA**: `7d625ee98364cad3d4034714e78783e7a7cdfd97`.
+- **Configuration**: S3 Compiler `O1` optimization.
+- **Observed Metric**: Balanced ternary `match` expressions generate 3 arms (`-1, 0, 1`) with multiple conditional jumps even for binary integer equality tests.
+- **Evidence Source**: Assembly text generated by `bootstrap/s3/backends/x86_64/backend.py`.
+- **Causal Hypothesis**: Because S3 treats boolean values as balanced ternary trytes (`true = -1, false = 0`), equality expressions return trytes. When the condition has a provably binary domain, the compiler still emits full ternary dispatch scaffolding.
+- **Confidence Degree**: `HIGH_CONFIDENCE_HYPOTHESIS`.
+- **Required Experiment**: Introduce a boolean specialization flag during type inference and emit a single `je` / `jne` instruction for binary predicates.
 
 ---
 
-## Bottleneck 5: Tryte Memory Representation and Non-Power-of-Two Conversions
+## Bottleneck 4: Absence of SIMD Vectorization
 
-### Empirical Evidence
-In Workload A (JSMN), conversion between byte ASCII inputs and balanced ternary trytes (`tryte[96]`) requires runtime normalization routines that increase working set memory and instruction count.
+- **Workload Identified**: Scientific reductions in `similarity_distance.s3` vs `reference/kernels.c` (Workload B / PR #33).
+- **Code SHA**: `0430619` (PR #33).
+- **Configuration**: Native x86-64 Clang/GCC `-O2` vs S3 Pure `O1`.
+- **Observed Metric**: C Clang `-O2` (1,130 ns, 3.10 ns/item) and Rust `opt-level 2` (1,090 ns, 2.99 ns/item) vs S3 Pure `O1` (39,040 ns, 107.25 ns/item).
+- **Evidence Source**: Assembly inspection: GCC/Clang emit 256-bit AVX2 instructions (`vmovupd`, `vmulpd`, `vaddpd`), whereas S3 emits scalar x86-64 instructions (`mulsd`, `addsd`).
+- **Causal Hypothesis**: The S3 x86-64 backend generates code strictly for scalar floating-point registers and lacks loop vectorization or vector IR types.
+- **Confidence Degree**: `CONFIRMED_BY_MEASUREMENT` (presence of SIMD in C/Rust assembly vs strictly scalar in S3); `HIGH_CONFIDENCE_HYPOTHESIS` as the dominant factor in the 30x native speed gap.
+- **Required Experiment**: Hand-craft an AVX2-vectorized assembly variant of `similarity_distance` and benchmark against S3 scalar emission.
 
-### Technical Mechanism
-Trytes require specialized arithmetic emulation on binary host hardware. Arithmetic operations frequently need modulo 3 or balanced ternary balancing passes, adding 3-5 instructions per indexing operation.
+---
 
-### Remediation Recommendation
-Implement Native Byte/Word Lowering where trytes are mapped directly to binary byte/int storage when values fit within standard ranges `[-128, 127]`, bypassing normalization loops during indexing.
+## Bottleneck 5: Tryte Memory Representation and Normalization Overhead
+
+- **Workload Identified**: `jsmn_demo.s3` (Workload A).
+- **Code SHA**: `7d625ee98364cad3d4034714e78783e7a7cdfd97`.
+- **Configuration**: `tryte[96]` array indexing and ASCII byte-to-tryte conversion.
+- **Observed Metric**: Normalization loops required to convert standard 8-bit bytes to balanced ternary representation.
+- **Evidence Source**: Structural code analysis of `jsmn_demo.s3` and compiler runtime fixtures.
+- **Causal Hypothesis**: Balanced ternary memory layouts require non-power-of-two arithmetic or modular reductions that incur extra instruction cycles on standard binary CPU architectures.
+- **Confidence Degree**: `THEORETICAL_HYPOTHESIS`.
+- **Required Experiment**: Benchmark a native byte-array backend versus tryte-array backend on identical string parsing workloads.
