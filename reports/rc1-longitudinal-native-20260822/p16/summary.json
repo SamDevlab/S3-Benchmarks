@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_VS_C",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "e7e643fe053dc8e9d72850c80c5dee773c485d28cefd3330163f51d289cf459e",
+  "inputs_pinned": true,
+  "name": "FFI roundtrip",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "FFI workload is not certified by the current benchmark harness",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P16"
+}

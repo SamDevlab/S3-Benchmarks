@@ -1,0 +1,14 @@
+{
+  "schema": "s3.rc1.automation.preflight.v1",
+  "status": "NOT_RUN_REMOTE_CHECKOUT_INVALID",
+  "reason": "remote benchmark checkout is not the campaign HEAD and is not clean",
+  "expected_benchmark_sha": "675593cd5d57c885c430484ba1c68061bc82d904",
+  "observed_benchmark_sha": "6ae9e1f8bcff79557c02eb20c786e70d42eeda1d",
+  "observed_benchmark_untracked": [
+    "reports/rc1-longitudinal-native-20260822/p7-p9-v2-6ae9e1f/",
+    "reports/rc1-longitudinal-native-20260822/p7-p9-v2/"
+  ],
+  "control_drift_percent": null,
+  "performance_eligible": false,
+  "raw_samples_present": false
+}

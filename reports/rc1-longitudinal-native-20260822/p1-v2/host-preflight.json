@@ -1,0 +1,62 @@
+{
+  "host_ready": true,
+  "samples": [
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 1,
+      "timestamp": "2026-08-22T16:20:09.159696+00:00",
+      "uptime": "16:20:09 up  5:04,  2 users,  load average: 0.34, 0.25, 0.10"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 2,
+      "timestamp": "2026-08-22T16:20:14.198837+00:00",
+      "uptime": "16:20:14 up  5:04,  2 users,  load average: 0.32, 0.25, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 3,
+      "timestamp": "2026-08-22T16:20:19.214886+00:00",
+      "uptime": "16:20:19 up  5:04,  2 users,  load average: 0.29, 0.24, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 4,
+      "timestamp": "2026-08-22T16:20:24.237378+00:00",
+      "uptime": "16:20:24 up  5:04,  2 users,  load average: 0.27, 0.24, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 5,
+      "timestamp": "2026-08-22T16:20:29.253376+00:00",
+      "uptime": "16:20:29 up  5:04,  2 users,  load average: 0.25, 0.23, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 6,
+      "timestamp": "2026-08-22T16:20:34.268725+00:00",
+      "uptime": "16:20:34 up  5:04,  2 users,  load average: 0.23, 0.23, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 7,
+      "timestamp": "2026-08-22T16:20:39.283047+00:00",
+      "uptime": "16:20:39 up  5:05,  2 users,  load average: 0.21, 0.23, 0.09"
+    },
+    {
+      "active_benchmark_processes": [],
+      "free_m": "total        used        free      shared  buff/cache   available\nMem:            8234         575        5317           1        2649        7659\nSwap:              0           0           0",
+      "index": 8,
+      "timestamp": "2026-08-22T16:20:44.296192+00:00",
+      "uptime": "16:20:44 up  5:05,  2 users,  load average: 0.19, 0.22, 0.09"
+    }
+  ],
+  "taskset": "/usr/bin/taskset"
+}

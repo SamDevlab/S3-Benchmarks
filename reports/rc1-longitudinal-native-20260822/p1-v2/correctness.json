@@ -1,0 +1,158 @@
+[
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 103052829,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 99300808,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 105758839,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 94661870,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_04_arr"
+  },
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 71870075,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 71546609,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 72406735,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 70043462,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_03_pair"
+  },
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 42107216,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 43698592,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 46737645,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 45075960,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_02_empty_arr"
+  },
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 47367821,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 42595589,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 47000078,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 44380385,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_05_string"
+  },
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 144222950,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 133038684,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 132373455,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 138729346,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_06_bool_null"
+  },
+  {
+    "checkpoints": {
+      "H4": {
+        "O0": {
+          "elapsed_ns": 43801309,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 44311793,
+          "result": 0
+        }
+      },
+      "H5": {
+        "O0": {
+          "elapsed_ns": 43861649,
+          "result": 0
+        },
+        "O1": {
+          "elapsed_ns": 44977971,
+          "result": 0
+        }
+      }
+    },
+    "control_result": 0,
+    "fixture": "tiny_01_empty_obj"
+  }
+]

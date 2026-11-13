@@ -1,0 +1,69 @@
+{
+  "rows": [
+    {
+      "c_metric": 152.49613605950282,
+      "evidence_strength": "HIGH",
+      "hypothesis": "instruction and memory traffic expansion dominate the external gap",
+      "id": "B1",
+      "likely_layer": "native lowering/runtime representation",
+      "next_experiment": "promote P7-P9 paired native kernels and collect raw samples plus perf if permitted",
+      "observation": "RC1 S3-O1 remains 43.89x slower than the same-run C-O2 geomean",
+      "ratio": 43.89105442491642,
+      "s3_metric": 6693.216207377097,
+      "workload": "P1 JSMN"
+    },
+    {
+      "c_metric": "not captured by current runner",
+      "evidence_strength": "MEDIUM",
+      "hypothesis": "value and memory-state materialization remain broad",
+      "id": "B2",
+      "likely_layer": "code generation and frame materialization",
+      "next_experiment": "structural P8/P9 kernels with per-function metric attribution",
+      "observation": "S3-O1 assembly has 49,414 instructions, 24,745 loads/stores, and 7,560 stack operations",
+      "ratio": null,
+      "s3_metric": {
+        "instructions": 49414,
+        "loads_stores": 24745,
+        "stack_ops": 7560
+      },
+      "workload": "P1 JSMN"
+    },
+    {
+      "c_metric": 7083.780517575543,
+      "evidence_strength": "MEDIUM",
+      "hypothesis": "current optimizer reduces runtime on this workload but does not close the representation gap",
+      "id": "B3",
+      "likely_layer": "optimization coverage",
+      "next_experiment": "separate optimizer passes with paired native structural deltas",
+      "observation": "O1/O0 geomean ratio is 0.9449x on RC1",
+      "ratio": 0.9448649899260122,
+      "s3_metric": 6693.216207377097,
+      "workload": "P1 JSMN"
+    },
+    {
+      "c_metric": 0.05,
+      "evidence_strength": "HIGH",
+      "hypothesis": "host/control variability prevents a confident H4-H5 runtime classification",
+      "id": "B4",
+      "likely_layer": "measurement environment",
+      "next_experiment": "one bounded paired campaign after controlled cooldown",
+      "observation": "C-O2 control range is above the 5% predeclared threshold",
+      "ratio": 24.12241382334866,
+      "s3_metric": 1.206120691167433,
+      "workload": "P1 JSMN"
+    },
+    {
+      "c_metric": 0,
+      "evidence_strength": "HIGH",
+      "hypothesis": "the next bottleneck is evidence coverage before optimization claims",
+      "id": "B5",
+      "likely_layer": "benchmark coverage",
+      "next_experiment": "promote P7, P8, and P9 one at a time with correctness-first native harnesses",
+      "observation": "no promoted workload beyond P1 has a native timing result in this campaign",
+      "ratio": null,
+      "s3_metric": 0,
+      "workload": "P2-P18"
+    }
+  ],
+  "schema": "s3.rc1.bottlenecks.v1"
+}

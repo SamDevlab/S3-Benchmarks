@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "CURRENT_CAPABILITY",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "30eab4827b96bbdab1525334d95326e93d4ca156398cce7f512402dc3fe3d581",
+  "inputs_pinned": true,
+  "name": "async channels and select",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "current benchmark harness has no isolated async runner",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P10"
+}

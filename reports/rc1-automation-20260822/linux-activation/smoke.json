@@ -1,0 +1,9 @@
+{
+  "schema": "s3.rc1.automation.smoke.v1",
+  "status": "NOT_RUN_BY_ENVIRONMENT_GATE",
+  "reason": "preflight was not authorized because the remote benchmark checkout failed exact provenance and cleanliness validation",
+  "timing_smoke_class": "AUTOMATION_VALIDATION_ONLY",
+  "timing_smoke_promoted": false,
+  "raw_samples_present": false,
+  "statistics_generated": false
+}

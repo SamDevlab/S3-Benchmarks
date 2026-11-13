@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_VS_C",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "2b5d4bfb953e43fc2853e2005024a784f2dde0b2c5e8f07c108788996b6caca6",
+  "inputs_pinned": true,
+  "name": "native arithmetic control",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "a fair paired kernel corpus has not yet been promoted",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P7"
+}

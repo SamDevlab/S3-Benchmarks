@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "CURRENT_CAPABILITY",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "63c6231acbcb0653cc2091126257f3e3165c1469bcd048e9623dfe4f29d6ed46",
+  "inputs_pinned": true,
+  "name": "documentation generation",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "documentation generator is not available in RC1",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P17"
+}

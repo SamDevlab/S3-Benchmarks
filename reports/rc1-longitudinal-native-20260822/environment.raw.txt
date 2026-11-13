@@ -1,0 +1,115 @@
+CAPTURED_AT=2026-08-22T15:28:33+00:00
+HOST=Ubuntuserve
+--- uname -a ---
+Linux Ubuntuserve 7.0.0-29-generic #29-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 17 20:52:35 UTC 2026 x86_64 GNU/Linux
+--- uname -m ---
+x86_64
+--- os-release ---
+PRETTY_NAME="Ubuntu 26.04 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+--- python ---
+Python 3.14.4
+--- gcc ---
+gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+--- clang ---
+Ubuntu clang version 21.1.8 (6ubuntu1)
+Target: x86_64-pc-linux-gnu
+Thread model: posix
+InstalledDir: /usr/lib/llvm-21/bin
+--- ld ---
+GNU ld (GNU Binutils for Ubuntu) 2.46
+Copyright (C) 2026 Free Software Foundation, Inc.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License version 3 or (at your option) a later version.
+This program has absolutely no warranty.
+--- as ---
+GNU assembler (GNU Binutils for Ubuntu) 2.46
+Copyright (C) 2026 Free Software Foundation, Inc.
+This program is free software; you may redistribute it under the terms of
+the GNU General Public License version 3 or later.
+This program has absolutely no warranty.
+This assembler was configured for a target of `x86_64-linux-gnu'.
+--- lscpu ---
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           48 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  3
+On-line CPU(s) list:                     0-2
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 5 3400G with Radeon Vega Graphics
+CPU family:                              23
+Model:                                   24
+Thread(s) per core:                      1
+Core(s) per socket:                      3
+Socket(s):                               1
+Stepping:                                1
+BogoMIPS:                                7399.99
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall mmxext fxsr_opt rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch ssbd vmmcall fsgsbase bmi1 avx2 bmi2 rdseed adx clflushopt sha_ni arat
+Hypervisor vendor:                       KVM
+Virtualization type:                     full
+L1d cache:                               96 KiB (3 instances)
+L1i cache:                               192 KiB (3 instances)
+L2 cache:                                1.5 MiB (3 instances)
+L3 cache:                                12 MiB (3 instances)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-2
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Ghostwrite:                Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Old microcode:             Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled
+Vulnerability Spec rstack overflow:      Mitigation; SMT disabled
+Vulnerability Spec store bypass:         Not affected
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Retpolines; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Not affected
+--- nproc ---
+3
+--- free -m ---
+               total        used        free      shared  buff/cache   available
+Mem:            8234         573        5456           1        2512        7660
+Swap:              0           0           0
+--- df -h ---
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           1.7G  1.1M  1.7G   1% /run
+/dev/sda2        25G  9.2G   15G  40% /
+tmpfs           4.1G     0  4.1G   0% /dev/shm
+none            1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs           4.1G   92K  4.1G   1% /tmp
+none            1.0M     0  1.0M   0% /run/credentials/systemd-resolved.service
+none            1.0M     0  1.0M   0% /run/credentials/systemd-networkd.service
+none            1.0M     0  1.0M   0% /run/credentials/getty@tty1.service
+tmpfs           824M  8.0K  824M   1% /run/user/1000
+--- uptime ---
+ 15:28:33 up  4:12,  2 users,  load average: 0.04, 0.12, 0.26
+--- virtualization ---
+oracle
+--- governor ---
+--- tools ---
+/usr/bin/taskset
+/usr/bin/perf

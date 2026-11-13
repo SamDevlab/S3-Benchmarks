@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_LONGITUDINAL",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "fd025f8aa3c3794112ef4108194568d7170189813511f5f420417d493befe0d9",
+  "inputs_pinned": true,
+  "name": "generic specialization",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "specialization reporting is not available in RC1",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P6"
+}

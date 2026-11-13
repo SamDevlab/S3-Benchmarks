@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "CURRENT_CAPABILITY",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "34ef7c1caf0576d0e730a8f5d865bfb4833d5ceb57a169e2140bf1340f401f18",
+  "inputs_pinned": true,
+  "name": "HTTP/1 loopback",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "loopback benchmark adapter is not yet part of this benchmark repository",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P11"
+}

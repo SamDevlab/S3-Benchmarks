@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "CURRENT_CAPABILITY",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "11d8ff36c51b87348883905696afc960cf0b62234296b1deb041a4eba303e2c7",
+  "inputs_pinned": true,
+  "name": "package workspace resolver",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "package resolver runner is not available in RC1",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P13"
+}

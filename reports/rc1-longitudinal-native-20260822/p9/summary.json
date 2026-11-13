@@ -1,0 +1,16 @@
+{
+  "canonical_status": "EXPERIMENTAL_WORKLOAD",
+  "comparison_class": "S3_VS_C",
+  "contract_probe": "PASS",
+  "correctness_oracle_defined": true,
+  "expected_output_defined": true,
+  "input_sha256": "f06d4cbc76722ca77f96d175fd719efa43bed57c785b10a066660003c0ce7251",
+  "inputs_pinned": true,
+  "name": "arrays structs and memory",
+  "native_timing": "NOT_RUN",
+  "performance_status": "DEFERRED_BY_CAPABILITY",
+  "reason": "memory corpus requires a separately reviewed source contract",
+  "s3_vs_c_claim": "NO",
+  "timing_boundary_documented": true,
+  "workload": "P9"
+}
