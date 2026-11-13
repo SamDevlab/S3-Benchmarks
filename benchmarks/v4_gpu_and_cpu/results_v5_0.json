@@ -1,0 +1,1362 @@
+{
+  "cpu": [
+    {
+      "BENCHMARK_ID": "CPU_SIMPSON_2K_S3_O0",
+      "KERNEL": "simpson_integrate:S3_O0",
+      "REFERENCE": "analytical_2_over_pi",
+      "INPUT_SIZE": 1,
+      "PRECISION": "f64",
+      "ATOL": 1e-08,
+      "RTOL": 1e-08,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Simpson/Trapz quadrature convergence contract"
+      },
+      "TIMING": {
+        "median_ms": 53.979,
+        "q1_ms": 51.863,
+        "q3_ms": 61.9233,
+        "iqr_ms": 10.0603,
+        "min_ms": 49.0706,
+        "max_ms": 79.2202,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_SIMPSON_2K_S3_O1",
+      "KERNEL": "simpson_integrate:S3_O1",
+      "REFERENCE": "analytical_2_over_pi",
+      "INPUT_SIZE": 1,
+      "PRECISION": "f64",
+      "ATOL": 1e-08,
+      "RTOL": 1e-08,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Simpson/Trapz quadrature convergence contract"
+      },
+      "TIMING": {
+        "median_ms": 4.832,
+        "q1_ms": 4.6516,
+        "q3_ms": 5.2341,
+        "iqr_ms": 0.5825,
+        "min_ms": 4.4974,
+        "max_ms": 6.0763,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_SIMPSON_2K_S3_CostModel_V4_4",
+      "KERNEL": "simpson_integrate:S3_CostModel_V4_4",
+      "REFERENCE": "analytical_2_over_pi",
+      "INPUT_SIZE": 1,
+      "PRECISION": "f64",
+      "ATOL": 1e-08,
+      "RTOL": 1e-08,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Simpson/Trapz quadrature convergence contract"
+      },
+      "TIMING": {
+        "median_ms": 5.3894,
+        "q1_ms": 4.6586,
+        "q3_ms": 7.181,
+        "iqr_ms": 2.5224,
+        "min_ms": 4.5771,
+        "max_ms": 9.9666,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_SIMPSON_2K_GCC_O2",
+      "KERNEL": "c_simpson:GCC_O2",
+      "REFERENCE": "analytical_2_over_pi",
+      "INPUT_SIZE": 1,
+      "PRECISION": "f64",
+      "ATOL": 1e-08,
+      "RTOL": 1e-08,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Simpson/Trapz quadrature convergence contract"
+      },
+      "TIMING": {
+        "median_ms": 0.9156,
+        "q1_ms": 0.8397,
+        "q3_ms": 0.9364,
+        "iqr_ms": 0.0967,
+        "min_ms": 0.6406,
+        "max_ms": 1.0787,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_SIMPSON_2K_GCC_O3",
+      "KERNEL": "c_simpson:GCC_O3",
+      "REFERENCE": "analytical_2_over_pi",
+      "INPUT_SIZE": 1,
+      "PRECISION": "f64",
+      "ATOL": 1e-08,
+      "RTOL": 1e-08,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Simpson/Trapz quadrature convergence contract"
+      },
+      "TIMING": {
+        "median_ms": 0.6366,
+        "q1_ms": 0.6285,
+        "q3_ms": 0.8069,
+        "iqr_ms": 0.1784,
+        "min_ms": 0.6222,
+        "max_ms": 1.174,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_DENSE_12X12_S3_O0",
+      "KERNEL": "cg_solve_dense:S3_O0",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 46.2168,
+        "q1_ms": 43.4935,
+        "q3_ms": 50.5243,
+        "iqr_ms": 7.0308,
+        "min_ms": 42.1345,
+        "max_ms": 55.908,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_DENSE_12X12_S3_O1",
+      "KERNEL": "cg_solve_dense:S3_O1",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 5.4948,
+        "q1_ms": 5.2916,
+        "q3_ms": 5.8003,
+        "iqr_ms": 0.5087,
+        "min_ms": 5.2563,
+        "max_ms": 5.8744,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_DENSE_12X12_S3_CostModel_V4_4",
+      "KERNEL": "cg_solve_dense:S3_CostModel_V4_4",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 5.9928,
+        "q1_ms": 5.341,
+        "q3_ms": 6.4348,
+        "iqr_ms": 1.0938,
+        "min_ms": 5.2921,
+        "max_ms": 7.0339,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_DENSE_12X12_GCC_O2",
+      "KERNEL": "c_cg_dense:GCC_O2",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 1.0251,
+        "q1_ms": 1.023,
+        "q3_ms": 1.029,
+        "iqr_ms": 0.006,
+        "min_ms": 1.0209,
+        "max_ms": 2.4671,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_DENSE_12X12_GCC_O3",
+      "KERNEL": "c_cg_dense:GCC_O3",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 1.0571,
+        "q1_ms": 1.0216,
+        "q3_ms": 1.2788,
+        "iqr_ms": 0.2572,
+        "min_ms": 1.0205,
+        "max_ms": 1.2887,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_CSR_12X12_S3_CostModel_V4_4",
+      "KERNEL": "cg_solve_csr:S3_CostModel_V4_4",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 4.4217,
+        "q1_ms": 4.0562,
+        "q3_ms": 4.721,
+        "iqr_ms": 0.6648,
+        "min_ms": 4.029,
+        "max_ms": 5.1988,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "CPU_CG_CSR_JACOBI_12X12_S3_CostModel_V4_4",
+      "KERNEL": "cg_solve_csr_jacobi:S3_CostModel_V4_4",
+      "REFERENCE": "analytical_spd_solution",
+      "INPUT_SIZE": 12,
+      "PRECISION": "f64",
+      "ATOL": 1e-07,
+      "RTOL": 1e-06,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": null,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "PASS",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "DIAGNOSTICS": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "contract_rationale": "Conjugate Gradient iterative residual tolerance"
+      },
+      "TIMING": {
+        "median_ms": 5.2755,
+        "q1_ms": 5.1977,
+        "q3_ms": 5.515,
+        "iqr_ms": 0.3173,
+        "min_ms": 5.1807,
+        "max_ms": 6.6566,
+        "samples": 11,
+        "warmups": 3
+      }
+    },
+    {
+      "BENCHMARK_ID": "cpu_s3_autovec_axpy_n256",
+      "KERNEL": "axpy_autovec_sse2",
+      "REFERENCE": "gcc_o3_axpy",
+      "INPUT_SIZE": 256,
+      "PRECISION": "f64",
+      "ATOL": 1e-12,
+      "RTOL": 1e-12,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "ORIGIN": "S3_AUTO_VECTORIZED",
+      "S3_SCALAR_MS": 1.5494,
+      "S3_AUTOVEC_MS": 0.8712,
+      "GCC_O2_MS": 0.168,
+      "GCC_O3_MS": 0.0996,
+      "GCC_O3_NATIVE_MS": 0.0971,
+      "AUTOVEC_VS_SCALAR_SPEEDUP": 1.78
+    },
+    {
+      "BENCHMARK_ID": "cpu_s3_autovec_axpy_n1024",
+      "KERNEL": "axpy_autovec_sse2",
+      "REFERENCE": "gcc_o3_axpy",
+      "INPUT_SIZE": 1024,
+      "PRECISION": "f64",
+      "ATOL": 1e-12,
+      "RTOL": 1e-12,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "ORIGIN": "S3_AUTO_VECTORIZED",
+      "S3_SCALAR_MS": 1.5213,
+      "S3_AUTOVEC_MS": 0.8124,
+      "GCC_O2_MS": 0.1676,
+      "GCC_O3_MS": 0.0859,
+      "GCC_O3_NATIVE_MS": 0.0838,
+      "AUTOVEC_VS_SCALAR_SPEEDUP": 1.87
+    },
+    {
+      "BENCHMARK_ID": "cpu_s3_autovec_axpy_n4096",
+      "KERNEL": "axpy_autovec_sse2",
+      "REFERENCE": "gcc_o3_axpy",
+      "INPUT_SIZE": 4096,
+      "PRECISION": "f64",
+      "ATOL": 1e-12,
+      "RTOL": 1e-12,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "ORIGIN": "S3_AUTO_VECTORIZED",
+      "S3_SCALAR_MS": 3.2011,
+      "S3_AUTOVEC_MS": 1.6411,
+      "GCC_O2_MS": 0.4894,
+      "GCC_O3_MS": 0.2213,
+      "GCC_O3_NATIVE_MS": 0.2075,
+      "AUTOVEC_VS_SCALAR_SPEEDUP": 1.95
+    },
+    {
+      "BENCHMARK_ID": "cpu_s3_autovec_axpy_n16384",
+      "KERNEL": "axpy_autovec_sse2",
+      "REFERENCE": "gcc_o3_axpy",
+      "INPUT_SIZE": 16384,
+      "PRECISION": "f64",
+      "ATOL": 1e-12,
+      "RTOL": 1e-12,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 0.0,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "ORIGIN": "S3_AUTO_VECTORIZED",
+      "S3_SCALAR_MS": 12.5135,
+      "S3_AUTOVEC_MS": 6.5831,
+      "GCC_O2_MS": 1.5395,
+      "GCC_O3_MS": 1.3211,
+      "GCC_O3_NATIVE_MS": 0.8528,
+      "AUTOVEC_VS_SCALAR_SPEEDUP": 1.9
+    },
+    {
+      "BENCHMARK_ID": "cpu_poisson2d_chunked_16x16",
+      "KERNEL": "cg_solve_csr_jacobi_chunk",
+      "REFERENCE": "gcc_o3_csr_jacobi",
+      "INPUT_SIZE": 256,
+      "PRECISION": "f64",
+      "ATOL": 1e-10,
+      "RTOL": 1e-10,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 3.7969627442180354e-14,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "S3_ITERS": 58,
+      "GCC_ITERS": 58,
+      "S3_EXEC_MS": 3.4552,
+      "GCC_EXEC_MS": 0.1302
+    },
+    {
+      "BENCHMARK_ID": "cpu_poisson2d_chunked_24x24",
+      "KERNEL": "cg_solve_csr_jacobi_chunk",
+      "REFERENCE": "gcc_o3_csr_jacobi",
+      "INPUT_SIZE": 576,
+      "PRECISION": "f64",
+      "ATOL": 1e-10,
+      "RTOL": 1e-10,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 5.88418203051333e-14,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "S3_ITERS": 88,
+      "GCC_ITERS": 88,
+      "S3_EXEC_MS": 10.0903,
+      "GCC_EXEC_MS": 0.404
+    },
+    {
+      "BENCHMARK_ID": "cpu_poisson2d_chunked_32x32",
+      "KERNEL": "cg_solve_csr_jacobi_chunk",
+      "REFERENCE": "gcc_o3_csr_jacobi",
+      "INPUT_SIZE": 1024,
+      "PRECISION": "f64",
+      "ATOL": 1e-10,
+      "RTOL": 1e-10,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 4.8627768478581856e-14,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "S3_ITERS": 118,
+      "GCC_ITERS": 118,
+      "S3_EXEC_MS": 29.3089,
+      "GCC_EXEC_MS": 1.2874
+    },
+    {
+      "BENCHMARK_ID": "cpu_poisson2d_chunked_40x40",
+      "KERNEL": "cg_solve_csr_jacobi_chunk",
+      "REFERENCE": "gcc_o3_csr_jacobi",
+      "INPUT_SIZE": 1600,
+      "PRECISION": "f64",
+      "ATOL": 1e-10,
+      "RTOL": 1e-10,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 6.816769371198461e-14,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "S3_ITERS": 147,
+      "GCC_ITERS": 147,
+      "S3_EXEC_MS": 59.9873,
+      "GCC_EXEC_MS": 2.7816
+    },
+    {
+      "BENCHMARK_ID": "cpu_poisson2d_chunked_48x48",
+      "KERNEL": "cg_solve_csr_jacobi_chunk",
+      "REFERENCE": "gcc_o3_csr_jacobi",
+      "INPUT_SIZE": 2304,
+      "PRECISION": "f64",
+      "ATOL": 1e-10,
+      "RTOL": 1e-10,
+      "MAX_ABS_ERROR": 0.0,
+      "MAX_REL_ERROR": 0.0,
+      "RMS_ERROR": 6.394884621840902e-14,
+      "MISMATCH_COUNT": 0,
+      "FIRST_MISMATCH_INDEX": -1,
+      "NUMERICAL_VALIDITY": "VALID",
+      "DATA_INTEGRITY": "INTACT",
+      "PERFORMANCE_VALIDITY": "VALID",
+      "S3_ITERS": 176,
+      "GCC_ITERS": 176,
+      "S3_EXEC_MS": 102.3771,
+      "GCC_EXEC_MS": 5.8996
+    }
+  ],
+  "gpu": {
+    "device": "AMD Radeon RX 580 2048SP",
+    "backend": "Vulkan",
+    "records": [
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V1_naive_64",
+        "KERNEL": "matmul:V1_naive",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 4096,
+        "PRECISION": "f32",
+        "ATOL": 0.0001,
+        "RTOL": 0.00032,
+        "MAX_ABS_ERROR": 8.583e-06,
+        "MAX_REL_ERROR": 0.000520523,
+        "RMS_ERROR": 9.92e-07,
+        "MISMATCH_COUNT": 0,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "VALID",
+        "DATA_INTEGRITY": "PASS",
+        "PERFORMANCE_VALIDITY": "VALID",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 2909,
+          "max_ulp_diff": 4384,
+          "contract_rationale": "f32 MatMul with k=64 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 287.1268,
+          "h2d_ms": 342.0368,
+          "warm_dispatch": {
+            "median_ms": 0.7973,
+            "q1_ms": 0.7336,
+            "q3_ms": 0.9746,
+            "iqr_ms": 0.241,
+            "min_ms": 0.6812,
+            "max_ms": 1.9703,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 2.4049,
+          "end_to_end_cold_ms": 779.2834,
+          "numpy_cpu": {
+            "median_ms": 0.0167,
+            "q1_ms": 0.0166,
+            "q3_ms": 0.0262,
+            "iqr_ms": 0.0096,
+            "min_ms": 0.0166,
+            "max_ms": 0.106,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V2_tiled_64",
+        "KERNEL": "matmul:V2_tiled",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 4096,
+        "PRECISION": "f32",
+        "ATOL": 0.0001,
+        "RTOL": 0.00032,
+        "MAX_ABS_ERROR": 8.583e-06,
+        "MAX_REL_ERROR": 0.000520523,
+        "RMS_ERROR": 9.92e-07,
+        "MISMATCH_COUNT": 0,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "VALID",
+        "DATA_INTEGRITY": "PASS",
+        "PERFORMANCE_VALIDITY": "VALID",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 2909,
+          "max_ulp_diff": 4384,
+          "contract_rationale": "f32 MatMul with k=64 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 1.636,
+          "h2d_ms": 3.7776,
+          "warm_dispatch": {
+            "median_ms": 0.8155,
+            "q1_ms": 0.7678,
+            "q3_ms": 0.9202,
+            "iqr_ms": 0.1524,
+            "min_ms": 0.6623,
+            "max_ms": 2.081,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 0.6684,
+          "end_to_end_cold_ms": 6.9193,
+          "numpy_cpu": {
+            "median_ms": 0.0167,
+            "q1_ms": 0.0166,
+            "q3_ms": 0.0262,
+            "iqr_ms": 0.0096,
+            "min_ms": 0.0166,
+            "max_ms": 0.106,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V3_padded_fma_64",
+        "KERNEL": "matmul:V3_padded_fma",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 4096,
+        "PRECISION": "f32",
+        "ATOL": 0.0001,
+        "RTOL": 0.00032,
+        "MAX_ABS_ERROR": 0.000146627,
+        "MAX_REL_ERROR": 0.000520523,
+        "RMS_ERROR": 2.501e-06,
+        "MISMATCH_COUNT": 0,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "VALID",
+        "DATA_INTEGRITY": "PASS",
+        "PERFORMANCE_VALIDITY": "VALID",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 2909,
+          "max_ulp_diff": 4384,
+          "contract_rationale": "f32 MatMul with k=64 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 2.0711,
+          "h2d_ms": 5.2345,
+          "warm_dispatch": {
+            "median_ms": 0.7734,
+            "q1_ms": 0.6931,
+            "q3_ms": 0.9613,
+            "iqr_ms": 0.2682,
+            "min_ms": 0.5572,
+            "max_ms": 1.5392,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 0.8251,
+          "end_to_end_cold_ms": 8.9848,
+          "numpy_cpu": {
+            "median_ms": 0.0167,
+            "q1_ms": 0.0166,
+            "q3_ms": 0.0262,
+            "iqr_ms": 0.0096,
+            "min_ms": 0.0166,
+            "max_ms": 0.106,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V1_naive_128",
+        "KERNEL": "matmul:V1_naive",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 16384,
+        "PRECISION": "f32",
+        "ATOL": 0.000128,
+        "RTOL": 0.00064,
+        "MAX_ABS_ERROR": 8.44378376,
+        "MAX_REL_ERROR": 0.770201084,
+        "RMS_ERROR": 0.065967061,
+        "MISMATCH_COUNT": 1,
+        "FIRST_MISMATCH_INDEX": 10259,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:ISOLATED_LARGE_SPIKE",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 12822,
+          "max_ulp_diff": 17706113,
+          "contract_rationale": "f32 MatMul with k=128 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 0.0,
+          "h2d_ms": 3.8623,
+          "warm_dispatch": {
+            "median_ms": 1.0316,
+            "q1_ms": 0.8147,
+            "q3_ms": 1.9879,
+            "iqr_ms": 1.1732,
+            "min_ms": 0.6041,
+            "max_ms": 2.3317,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 0.8519,
+          "end_to_end_cold_ms": 5.7095,
+          "numpy_cpu": {
+            "median_ms": 0.1266,
+            "q1_ms": 0.1116,
+            "q3_ms": 0.2221,
+            "iqr_ms": 0.1104,
+            "min_ms": 0.1022,
+            "max_ms": 1.8706,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V2_tiled_128",
+        "KERNEL": "matmul:V2_tiled",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 16384,
+        "PRECISION": "f32",
+        "ATOL": 0.000128,
+        "RTOL": 0.00064,
+        "MAX_ABS_ERROR": 1.487987518,
+        "MAX_REL_ERROR": 0.221732978,
+        "RMS_ERROR": 0.018845833,
+        "MISMATCH_COUNT": 16,
+        "FIRST_MISMATCH_INDEX": 4131,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:SUSPECT_INDEX_STRIDE_MOD4_EQ_3",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 12826,
+          "max_ulp_diff": 2912178,
+          "contract_rationale": "f32 MatMul with k=128 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 0.0,
+          "h2d_ms": 3.8566,
+          "warm_dispatch": {
+            "median_ms": 0.5876,
+            "q1_ms": 0.3878,
+            "q3_ms": 0.7742,
+            "iqr_ms": 0.3864,
+            "min_ms": 0.323,
+            "max_ms": 1.1832,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 0.6012,
+          "end_to_end_cold_ms": 5.2927,
+          "numpy_cpu": {
+            "median_ms": 0.1266,
+            "q1_ms": 0.1116,
+            "q3_ms": 0.2221,
+            "iqr_ms": 0.1104,
+            "min_ms": 0.1022,
+            "max_ms": 1.8706,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V3_padded_fma_128",
+        "KERNEL": "matmul:V3_padded_fma",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 16384,
+        "PRECISION": "f32",
+        "ATOL": 0.000128,
+        "RTOL": 0.00064,
+        "MAX_ABS_ERROR": 0.030303836,
+        "MAX_REL_ERROR": 0.016064826,
+        "RMS_ERROR": 0.000237251,
+        "MISMATCH_COUNT": 3,
+        "FIRST_MISMATCH_INDEX": 4647,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:TOLERANCE_EXCEEDED",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 12822,
+          "max_ulp_diff": 254207,
+          "contract_rationale": "f32 MatMul with k=128 accumulations + FMA"
+        },
+        "TIMING": {
+          "cold_pipeline_ms": 0.0,
+          "h2d_ms": 2.4204,
+          "warm_dispatch": {
+            "median_ms": 0.5455,
+            "q1_ms": 0.4306,
+            "q3_ms": 0.6133,
+            "iqr_ms": 0.1827,
+            "min_ms": 0.3689,
+            "max_ms": 0.7156,
+            "samples": 11,
+            "warmups": 3
+          },
+          "readback_ms": 0.7689,
+          "end_to_end_cold_ms": 3.9479,
+          "numpy_cpu": {
+            "median_ms": 0.1266,
+            "q1_ms": 0.1116,
+            "q3_ms": 0.2221,
+            "iqr_ms": 0.1104,
+            "min_ms": 0.1022,
+            "max_ms": 1.8706,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V1_naive_256",
+        "KERNEL": "matmul:V1_naive",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 65536,
+        "PRECISION": "f32",
+        "ATOL": null,
+        "RTOL": null,
+        "MAX_ABS_ERROR": null,
+        "MAX_REL_ERROR": null,
+        "RMS_ERROR": null,
+        "MISMATCH_COUNT": null,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:RUNTIME_INTEGRITY_REJECTED:H2D buffer integrity verification failed on 'b' (262144 bytes)",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "TIMING": {
+          "numpy_cpu": {
+            "median_ms": 0.4111,
+            "q1_ms": 0.283,
+            "q3_ms": 0.5208,
+            "iqr_ms": 0.2378,
+            "min_ms": 0.2566,
+            "max_ms": 0.9515,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V2_tiled_256",
+        "KERNEL": "matmul:V2_tiled",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 65536,
+        "PRECISION": "f32",
+        "ATOL": null,
+        "RTOL": null,
+        "MAX_ABS_ERROR": null,
+        "MAX_REL_ERROR": null,
+        "RMS_ERROR": null,
+        "MISMATCH_COUNT": null,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:RUNTIME_INTEGRITY_REJECTED:H2D buffer integrity verification failed on 'a' (262144 bytes)",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "TIMING": {
+          "numpy_cpu": {
+            "median_ms": 0.4111,
+            "q1_ms": 0.283,
+            "q3_ms": 0.5208,
+            "iqr_ms": 0.2378,
+            "min_ms": 0.2566,
+            "max_ms": 0.9515,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_MATMUL_V3_padded_fma_256",
+        "KERNEL": "matmul:V3_padded_fma",
+        "REFERENCE": "numpy_f32_matmul",
+        "INPUT_SIZE": 65536,
+        "PRECISION": "f32",
+        "ATOL": null,
+        "RTOL": null,
+        "MAX_ABS_ERROR": null,
+        "MAX_REL_ERROR": null,
+        "RMS_ERROR": null,
+        "MISMATCH_COUNT": null,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "INVALID",
+        "DATA_INTEGRITY": "CORRUPTION_SUSPECTED:RUNTIME_INTEGRITY_REJECTED:H2D buffer integrity verification failed on 'b' (262144 bytes)",
+        "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+        "TIMING": {
+          "numpy_cpu": {
+            "median_ms": 0.4111,
+            "q1_ms": 0.283,
+            "q3_ms": 0.5208,
+            "iqr_ms": 0.2378,
+            "min_ms": 0.2566,
+            "max_ms": 0.9515,
+            "samples": 21,
+            "warmups": 5
+          }
+        }
+      },
+      {
+        "BENCHMARK_ID": "GPU_LAB_WAVE2D_32X32",
+        "KERNEL": "wave2d_gpu",
+        "REFERENCE": "numpy_wave2d_f32",
+        "INPUT_SIZE": 1024,
+        "PRECISION": "f32",
+        "ATOL": 0.0001,
+        "RTOL": 0.0001,
+        "MAX_ABS_ERROR": 0.0,
+        "MAX_REL_ERROR": 0.0,
+        "RMS_ERROR": 0.0,
+        "MISMATCH_COUNT": 0,
+        "FIRST_MISMATCH_INDEX": null,
+        "NUMERICAL_VALIDITY": "VALID",
+        "DATA_INTEGRITY": "PASS",
+        "PERFORMANCE_VALIDITY": "VALID",
+        "DIAGNOSTICS": {
+          "nan_count": 0,
+          "inf_count": 0,
+          "signed_zero_mismatches": 0,
+          "bit_mismatch_count": 0,
+          "max_ulp_diff": 0,
+          "contract_rationale": "f32 2D stencil over 1 time steps"
+        },
+        "TIMING": {
+          "end_to_end_ms": 4.5518,
+          "dispatch_ms": 0.5722
+        }
+      }
+    ]
+  },
+  "v5_0_study": {
+    "autovectorized_axpy": [
+      {
+        "n": 256,
+        "reps": 1562,
+        "S3_SCALAR_ORIGINAL": {
+          "median_ms": 1.5494,
+          "min_ms": 1.5388,
+          "max_ms": 1.5705,
+          "stdev_ms": 0.0119
+        },
+        "S3_AUTO_VECTORIZED": {
+          "median_ms": 0.8712,
+          "min_ms": 0.8656,
+          "max_ms": 0.9007,
+          "stdev_ms": 0.0121
+        },
+        "GCC_O2": {
+          "median_ms": 0.168,
+          "min_ms": 0.1679,
+          "max_ms": 0.17,
+          "stdev_ms": 0.0008
+        },
+        "GCC_O3": {
+          "median_ms": 0.0996,
+          "min_ms": 0.0991,
+          "max_ms": 0.1059,
+          "stdev_ms": 0.0024
+        },
+        "GCC_O3_NATIVE": {
+          "median_ms": 0.0971,
+          "min_ms": 0.0967,
+          "max_ms": 0.0975,
+          "stdev_ms": 0.0003
+        },
+        "autovec_vs_scalar_speedup": 1.78,
+        "autovec_vs_gcc_o3_ratio": 8.75,
+        "max_abs_diff_autovec_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 1024,
+        "reps": 390,
+        "S3_SCALAR_ORIGINAL": {
+          "median_ms": 1.5213,
+          "min_ms": 1.5114,
+          "max_ms": 1.544,
+          "stdev_ms": 0.0122
+        },
+        "S3_AUTO_VECTORIZED": {
+          "median_ms": 0.8124,
+          "min_ms": 0.81,
+          "max_ms": 0.8567,
+          "stdev_ms": 0.021
+        },
+        "GCC_O2": {
+          "median_ms": 0.1676,
+          "min_ms": 0.1674,
+          "max_ms": 0.2261,
+          "stdev_ms": 0.0216
+        },
+        "GCC_O3": {
+          "median_ms": 0.0859,
+          "min_ms": 0.0845,
+          "max_ms": 0.0899,
+          "stdev_ms": 0.0019
+        },
+        "GCC_O3_NATIVE": {
+          "median_ms": 0.0838,
+          "min_ms": 0.0838,
+          "max_ms": 0.0882,
+          "stdev_ms": 0.0016
+        },
+        "autovec_vs_scalar_speedup": 1.87,
+        "autovec_vs_gcc_o3_ratio": 9.46,
+        "max_abs_diff_autovec_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 4096,
+        "reps": 200,
+        "S3_SCALAR_ORIGINAL": {
+          "median_ms": 3.2011,
+          "min_ms": 3.0869,
+          "max_ms": 3.3858,
+          "stdev_ms": 0.1006
+        },
+        "S3_AUTO_VECTORIZED": {
+          "median_ms": 1.6411,
+          "min_ms": 1.6254,
+          "max_ms": 1.688,
+          "stdev_ms": 0.0241
+        },
+        "GCC_O2": {
+          "median_ms": 0.4894,
+          "min_ms": 0.483,
+          "max_ms": 0.6849,
+          "stdev_ms": 0.0734
+        },
+        "GCC_O3": {
+          "median_ms": 0.2213,
+          "min_ms": 0.2209,
+          "max_ms": 0.2419,
+          "stdev_ms": 0.0077
+        },
+        "GCC_O3_NATIVE": {
+          "median_ms": 0.2075,
+          "min_ms": 0.2072,
+          "max_ms": 0.2086,
+          "stdev_ms": 0.0005
+        },
+        "autovec_vs_scalar_speedup": 1.95,
+        "autovec_vs_gcc_o3_ratio": 7.42,
+        "max_abs_diff_autovec_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 16384,
+        "reps": 200,
+        "S3_SCALAR_ORIGINAL": {
+          "median_ms": 12.5135,
+          "min_ms": 12.3825,
+          "max_ms": 12.7373,
+          "stdev_ms": 0.121
+        },
+        "S3_AUTO_VECTORIZED": {
+          "median_ms": 6.5831,
+          "min_ms": 6.4622,
+          "max_ms": 8.2727,
+          "stdev_ms": 0.8278
+        },
+        "GCC_O2": {
+          "median_ms": 1.5395,
+          "min_ms": 1.5382,
+          "max_ms": 1.547,
+          "stdev_ms": 0.0035
+        },
+        "GCC_O3": {
+          "median_ms": 1.3211,
+          "min_ms": 0.8918,
+          "max_ms": 1.3629,
+          "stdev_ms": 0.2162
+        },
+        "GCC_O3_NATIVE": {
+          "median_ms": 0.8528,
+          "min_ms": 0.8437,
+          "max_ms": 0.9817,
+          "stdev_ms": 0.049
+        },
+        "autovec_vs_scalar_speedup": 1.9,
+        "autovec_vs_gcc_o3_ratio": 4.98,
+        "max_abs_diff_autovec_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      }
+    ],
+    "vector_builtin_dot": [
+      {
+        "n": 256,
+        "reps": 1562,
+        "s3_simd_origin": "S3_COMPILER_GENERATED",
+        "s3_scalar_origin": "S3_COMPILER_GENERATED",
+        "gcc_origin": "GCC_GENERATED",
+        "s3_simd_ms": 0.3469,
+        "s3_scalar_ms": 4.8311,
+        "gcc_o3_ms": 0.3168,
+        "simd_vs_scalar_speedup": 13.93,
+        "s3_simd_vs_gcc_o3_ratio": 1.1,
+        "max_abs_diff_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 1024,
+        "reps": 390,
+        "s3_simd_origin": "S3_COMPILER_GENERATED",
+        "s3_scalar_origin": "S3_COMPILER_GENERATED",
+        "gcc_origin": "GCC_GENERATED",
+        "s3_simd_ms": 0.2911,
+        "s3_scalar_ms": 6.499,
+        "gcc_o3_ms": 0.3256,
+        "simd_vs_scalar_speedup": 22.33,
+        "s3_simd_vs_gcc_o3_ratio": 0.89,
+        "max_abs_diff_vs_gcc": 0.0,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 4096,
+        "reps": 97,
+        "s3_simd_origin": "S3_COMPILER_GENERATED",
+        "s3_scalar_origin": "S3_COMPILER_GENERATED",
+        "gcc_origin": "GCC_GENERATED",
+        "s3_simd_ms": 0.3452,
+        "s3_scalar_ms": 4.8796,
+        "gcc_o3_ms": 0.3421,
+        "simd_vs_scalar_speedup": 14.14,
+        "s3_simd_vs_gcc_o3_ratio": 1.01,
+        "max_abs_diff_vs_gcc": 2.3874235921539366e-12,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      },
+      {
+        "n": 16384,
+        "reps": 24,
+        "s3_simd_origin": "S3_COMPILER_GENERATED",
+        "s3_scalar_origin": "S3_COMPILER_GENERATED",
+        "gcc_origin": "GCC_GENERATED",
+        "s3_simd_ms": 0.7593,
+        "s3_scalar_ms": 6.09,
+        "gcc_o3_ms": 0.3476,
+        "simd_vs_scalar_speedup": 8.02,
+        "s3_simd_vs_gcc_o3_ratio": 2.18,
+        "max_abs_diff_vs_gcc": 5.115907697472721e-13,
+        "max_abs_diff_scalar_vs_gcc": 0.0
+      }
+    ],
+    "poisson2d_large_chunked": [
+      {
+        "grid": "16x16",
+        "n_unknowns": 256,
+        "nnz": 1216,
+        "chunk_iter": 50,
+        "s3_iters": 58,
+        "gcc_iters": 58,
+        "s3_exec_ms": 3.4552,
+        "gcc_exec_ms": 0.1302,
+        "s3_max_err_vs_true": 3.7969627442180354e-14,
+        "s3_max_err_vs_gcc": 0.0,
+        "s3_final_res2": 4.747133293784247e-25
+      },
+      {
+        "grid": "24x24",
+        "n_unknowns": 576,
+        "nnz": 2784,
+        "chunk_iter": 50,
+        "s3_iters": 88,
+        "gcc_iters": 88,
+        "s3_exec_ms": 10.0903,
+        "gcc_exec_ms": 0.404,
+        "s3_max_err_vs_true": 5.88418203051333e-14,
+        "s3_max_err_vs_gcc": 0.0,
+        "s3_final_res2": 7.0314039105858835e-25
+      },
+      {
+        "grid": "32x32",
+        "n_unknowns": 1024,
+        "nnz": 4992,
+        "chunk_iter": 50,
+        "s3_iters": 118,
+        "gcc_iters": 118,
+        "s3_exec_ms": 29.3089,
+        "gcc_exec_ms": 1.2874,
+        "s3_max_err_vs_true": 4.8627768478581856e-14,
+        "s3_max_err_vs_gcc": 0.0,
+        "s3_final_res2": 4.131888954983021e-25
+      },
+      {
+        "grid": "40x40",
+        "n_unknowns": 1600,
+        "nnz": 7840,
+        "chunk_iter": 50,
+        "s3_iters": 147,
+        "gcc_iters": 147,
+        "s3_exec_ms": 59.9873,
+        "gcc_exec_ms": 2.7816,
+        "s3_max_err_vs_true": 6.816769371198461e-14,
+        "s3_max_err_vs_gcc": 0.0,
+        "s3_final_res2": 4.850743860777274e-25
+      },
+      {
+        "grid": "48x48",
+        "n_unknowns": 2304,
+        "nnz": 11328,
+        "chunk_iter": 50,
+        "s3_iters": 176,
+        "gcc_iters": 176,
+        "s3_exec_ms": 102.3771,
+        "gcc_exec_ms": 5.8996,
+        "s3_max_err_vs_true": 6.394884621840902e-14,
+        "s3_max_err_vs_gcc": 0.0,
+        "s3_final_res2": 5.304091047365088e-25
+      }
+    ],
+    "f64_codegen_profile": {
+      "O0_no_ra": {
+        "total_asm_lines": 102653,
+        "csr_matvec_f64": {
+          "lines": 1340,
+          "rbp_mem": 0,
+          "movsd": 0,
+          "movq": 6,
+          "fp_arith": 2
+        },
+        "cg_solve_csr_jacobi": {
+          "lines": 4943,
+          "rbp_mem": 0,
+          "movsd": 0,
+          "movq": 74,
+          "fp_arith": 21
+        }
+      },
+      "O1_no_ra": {
+        "total_asm_lines": 79584,
+        "csr_matvec_f64": {
+          "lines": 951,
+          "rbp_mem": 0,
+          "movsd": 0,
+          "movq": 6,
+          "fp_arith": 2
+        },
+        "cg_solve_csr_jacobi": {
+          "lines": 3752,
+          "rbp_mem": 0,
+          "movsd": 0,
+          "movq": 74,
+          "fp_arith": 21
+        }
+      },
+      "O1_ra": {
+        "total_asm_lines": 43968,
+        "csr_matvec_f64": {
+          "lines": 794,
+          "rbp_mem": 0,
+          "movsd": 2,
+          "movq": 7,
+          "fp_arith": 4
+        },
+        "cg_solve_csr_jacobi": {
+          "lines": 3297,
+          "rbp_mem": 0,
+          "movsd": 17,
+          "movq": 63,
+          "fp_arith": 42
+        }
+      }
+    },
+    "f64_xmm_regalloc_ablation": {
+      "v4_9_movq_gpr_xmm_before": 131,
+      "v5_0_movq_gpr_xmm_after": 60,
+      "v5_0_movsd_direct": 17,
+      "v5_0_movapd_direct": 151
+    }
+  },
+  "metadata": {
+    "campaign": "S3_V5_0",
+    "compiler_sha": "1daa7fc4",
+    "source_sha": "ebf2f6b"
+  }
+}
