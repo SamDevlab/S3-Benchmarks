@@ -1,0 +1,153 @@
+export fn dot_i64(a: &[i64], b: &[i64], n: i64) -> i64:
+    mut acc: i64 = 0
+    mut i: i64 = 0
+    mut one: i64 = 1
+    while i < n:
+        acc = acc + a[i] * b[i]
+        i = i + one
+    return acc
+
+export fn axpy_f64(a: f64, x: &[f64], y: &mut [f64], n: i64) -> i64:
+    mut i: i64 = 0
+    mut one: i64 = 1
+    while i < n:
+        y[i] = a * x[i] + y[i]
+        i = i + one
+    return 0
+
+export fn stencil_1d_f64(u_in: &[f64], buf_a: &mut [f64], buf_b: &mut [f64], n: i64, steps: i64, alpha: f64) -> i64:
+    mut one: i64 = 1
+    mut i: i64 = 0
+    while i < n:
+        buf_a[i] = u_in[i]
+        buf_b[i] = u_in[i]
+        i = i + one
+    mut s: i64 = 0
+    mut limit: i64 = n - one
+    while s < steps:
+        i = one
+        while i < limit:
+            mut im1: i64 = i - one
+            mut ip1: i64 = i + one
+            buf_b[i] = buf_a[i] + alpha * (buf_a[im1] - 2.0 * buf_a[i] + buf_a[ip1])
+            i = i + one
+        i = one
+        while i < limit:
+            buf_a[i] = buf_b[i]
+            i = i + one
+        s = s + one
+    return 0
+
+export fn stencil_2d_f64(a: &mut [f64], b: &mut [f64], rows: i64, cols: i64, steps: i64, alpha: f64) -> i64:
+    mut one: i64 = 1
+    mut r_lim: i64 = rows - one
+    mut c_lim: i64 = cols - one
+    mut s: i64 = 0
+    while s < steps:
+        mut r: i64 = 1
+        while r < r_lim:
+            mut c: i64 = 1
+            while c < c_lim:
+                mut idx: i64 = r * cols + c
+                mut im1: i64 = idx - one
+                mut ip1: i64 = idx + one
+                mut up: i64 = idx - cols
+                mut dn: i64 = idx + cols
+                b[idx] = a[idx] + alpha * (a[im1] + a[ip1] + a[up] + a[dn] - 4.0 * a[idx])
+                c = c + one
+            r = r + one
+        r = one
+        while r < r_lim:
+            mut c: i64 = 1
+            while c < c_lim:
+                mut idx: i64 = r * cols + c
+                a[idx] = b[idx]
+                c = c + one
+            r = r + one
+        s = s + one
+    return 0
+
+export fn matmul_f64(a: &[f64], b: &[f64], c: &mut [f64], n: i64) -> i64:
+    mut one: i64 = 1
+    mut i: i64 = 0
+    while i < n:
+        mut j: i64 = 0
+        while j < n:
+            mut acc: f64 = 0.0
+            mut k: i64 = 0
+            while k < n:
+                mut ik: i64 = i * n + k
+                mut kj: i64 = k * n + j
+                acc = acc + a[ik] * b[kj]
+                k = k + one
+            mut ij: i64 = i * n + j
+            c[ij] = acc
+            j = j + one
+        i = i + one
+    return 0
+
+export fn thomas_f64(
+    a: &[f64], b: &[f64], c: &[f64], d: &[f64],
+    cp: &mut [f64], dp: &mut [f64], x: &mut [f64], n: i64
+) -> i64:
+    mut zero: i64 = 0
+    mut one: i64 = 1
+    mut two: i64 = 2
+    cp[zero] = c[zero] / b[zero]
+    dp[zero] = d[zero] / b[zero]
+    mut i: i64 = 1
+    while i < n:
+        mut im1: i64 = i - one
+        mut denom: f64 = b[i] - a[i] * cp[im1]
+        cp[i] = c[i] / denom
+        dp[i] = (d[i] - a[i] * dp[im1]) / denom
+        i = i + one
+    mut last: i64 = n - one
+    x[last] = dp[last]
+    mut j: i64 = n - two
+    while j >= zero:
+        mut jp1: i64 = j + one
+        x[j] = dp[j] - cp[j] * x[jp1]
+        j = j - one
+    return 0
+
+export fn rk4_osc_f64(x0: f64, v0: f64, k: f64, dt: f64, steps: i64) -> f64:
+    mut x: f64 = x0
+    mut v: f64 = v0
+    mut i: i64 = 0
+    mut one: i64 = 1
+    mut half_dt: f64 = 0.5 * dt
+    mut sixth_dt: f64 = dt / 6.0
+    while i < steps:
+        mut k1x: f64 = v
+        mut k1v: f64 = -k * x
+        mut k2x: f64 = v + half_dt * k1v
+        mut k2v: f64 = -k * (x + half_dt * k1x)
+        mut k3x: f64 = v + half_dt * k2v
+        mut k3v: f64 = -k * (x + half_dt * k2x)
+        mut k4x: f64 = v + dt * k3v
+        mut k4v: f64 = -k * (x + dt * k3x)
+        x = x + sixth_dt * (k1x + 2.0 * k2x + 2.0 * k3x + k4x)
+        v = v + sixth_dt * (k1v + 2.0 * k2v + 2.0 * k3v + k4v)
+        i = i + one
+    return x
+
+export fn verlet_osc_f64(x0: f64, v0: f64, k: f64, dt: f64, steps: i64) -> f64:
+    mut x: f64 = x0
+    mut v: f64 = v0
+    mut a: f64 = -k * x
+    mut i: i64 = 0
+    mut one: i64 = 1
+    mut half_dt2: f64 = 0.5 * dt * dt
+    mut half_dt: f64 = 0.5 * dt
+    while i < steps:
+        mut x_next: f64 = x + v * dt + a * half_dt2
+        mut a_next: f64 = -k * x_next
+        v = v + half_dt * (a + a_next)
+        x = x_next
+        a = a_next
+        i = i + one
+    return x
+
+fn main() -> i64:
+    return 0

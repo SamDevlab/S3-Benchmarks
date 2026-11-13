@@ -1,0 +1,59 @@
+{
+  "conway": {
+    "status": "ok",
+    "path": "examples/compute/conway.s3",
+    "text_bytes": 21069,
+    "compile_s": 0.154121,
+    "emit_s": 0.095379,
+    "median_ms": 3.2092,
+    "returncode": 0,
+    "stdout_len": 20,
+    "stdout_head": "program returned: 0",
+    "elapsed_s": 1.0834
+  },
+  "stencil5point": {
+    "status": "ok",
+    "path": "examples/compute/stencil5point.s3",
+    "text_bytes": 16392,
+    "compile_s": 0.096049,
+    "emit_s": 0.079921,
+    "median_ms": 3.5736,
+    "returncode": 0,
+    "stdout_len": 20,
+    "stdout_head": "program returned: 0",
+    "elapsed_s": 1.0113
+  },
+  "s3_num_toolkit": {
+    "status": "ok",
+    "path": "examples/expansion_v2/s3_num_toolkit.s3",
+    "text_bytes": 29720,
+    "compile_s": 0.100107,
+    "emit_s": 0.120974,
+    "median_ms": 2.6977,
+    "returncode": 0,
+    "stdout_len": 22,
+    "stdout_head": "program returned: 257",
+    "elapsed_s": 1.045
+  },
+  "insertion_sort_search": {
+    "status": "error",
+    "path": "examples/language_maturity/insertion_sort_search.s3",
+    "elapsed_s": 0.7149,
+    "returncode": 1,
+    "error": "  File \"/mnt/c/Users/samue/Desktop/gemini/S3/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  },
+  "csv_integer_parser": {
+    "status": "error",
+    "path": "examples/language_maturity/csv_integer_parser.s3",
+    "elapsed_s": 0.6205,
+    "returncode": 1,
+    "error": "  File \"/mnt/c/Users/samue/Desktop/gemini/S3/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  },
+  "hex_encode": {
+    "status": "error",
+    "path": "examples/language_maturity/hex_encode.s3",
+    "elapsed_s": 0.6693,
+    "returncode": 1,
+    "error": "  File \"/mnt/c/Users/samue/Desktop/gemini/S3/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  }
+}
