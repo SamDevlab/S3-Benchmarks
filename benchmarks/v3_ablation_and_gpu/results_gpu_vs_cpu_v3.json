@@ -1,0 +1,269 @@
+{
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "is_physical": true
+  },
+  "axpy": [
+    {
+      "kernel": "axpy_gpu",
+      "n": 1024,
+      "wg": 64,
+      "cold_pipeline_ms": 277.91,
+      "warm_h2d_ms": 0.248,
+      "warm_kd2h_ms": 0.78,
+      "warm_total_ms": 1.049,
+      "cpu_numpy_ms": 0.0032,
+      "speedup_end_to_end": 0.003,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 16384,
+      "wg": 64,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 0.421,
+      "warm_kd2h_ms": 0.937,
+      "warm_total_ms": 1.375,
+      "cpu_numpy_ms": 0.0108,
+      "speedup_end_to_end": 0.008,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 65536,
+      "wg": 64,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 0.954,
+      "warm_kd2h_ms": 0.934,
+      "warm_total_ms": 1.96,
+      "cpu_numpy_ms": 0.0291,
+      "speedup_end_to_end": 0.015,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 1048576,
+      "wg": 64,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 3.484,
+      "warm_kd2h_ms": 3.366,
+      "warm_total_ms": 8.642,
+      "cpu_numpy_ms": 3.6361,
+      "speedup_end_to_end": 0.421,
+      "max_diff": 2.302255153656006
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 1024,
+      "wg": 128,
+      "cold_pipeline_ms": 0.88,
+      "warm_h2d_ms": 0.22,
+      "warm_kd2h_ms": 0.587,
+      "warm_total_ms": 0.818,
+      "cpu_numpy_ms": 0.0029,
+      "speedup_end_to_end": 0.004,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 16384,
+      "wg": 128,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 0.394,
+      "warm_kd2h_ms": 0.774,
+      "warm_total_ms": 1.204,
+      "cpu_numpy_ms": 0.0105,
+      "speedup_end_to_end": 0.009,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 65536,
+      "wg": 128,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 1.012,
+      "warm_kd2h_ms": 0.984,
+      "warm_total_ms": 1.997,
+      "cpu_numpy_ms": 0.0182,
+      "speedup_end_to_end": 0.009,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 1048576,
+      "wg": 128,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 3.481,
+      "warm_kd2h_ms": 3.09,
+      "warm_total_ms": 6.487,
+      "cpu_numpy_ms": 4.5601,
+      "speedup_end_to_end": 0.703,
+      "max_diff": 1.0815510749816895
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 1024,
+      "wg": 256,
+      "cold_pipeline_ms": 0.783,
+      "warm_h2d_ms": 0.214,
+      "warm_kd2h_ms": 0.57,
+      "warm_total_ms": 0.804,
+      "cpu_numpy_ms": 0.0036,
+      "speedup_end_to_end": 0.004,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 16384,
+      "wg": 256,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 0.381,
+      "warm_kd2h_ms": 0.649,
+      "warm_total_ms": 1.041,
+      "cpu_numpy_ms": 0.008,
+      "speedup_end_to_end": 0.008,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 65536,
+      "wg": 256,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 0.936,
+      "warm_kd2h_ms": 0.951,
+      "warm_total_ms": 1.875,
+      "cpu_numpy_ms": 0.0223,
+      "speedup_end_to_end": 0.012,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "axpy_gpu",
+      "n": 1048576,
+      "wg": 256,
+      "cold_pipeline_ms": 0.0,
+      "warm_h2d_ms": 3.464,
+      "warm_kd2h_ms": 3.286,
+      "warm_total_ms": 6.77,
+      "cpu_numpy_ms": 3.9323,
+      "speedup_end_to_end": 0.581,
+      "max_diff": 1.7363064289093018
+    }
+  ],
+  "stencil2d": [
+    {
+      "kernel": "stencil2d_gpu",
+      "size": "64x64",
+      "elements": 4096,
+      "warm_kd2h_ms": 0.644,
+      "warm_total_ms": 0.928,
+      "cpu_numpy_ms": 0.0307,
+      "speedup_end_to_end": 0.033,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "stencil2d_gpu",
+      "size": "128x128",
+      "elements": 16384,
+      "warm_kd2h_ms": 0.854,
+      "warm_total_ms": 1.238,
+      "cpu_numpy_ms": 0.0568,
+      "speedup_end_to_end": 0.046,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "stencil2d_gpu",
+      "size": "256x256",
+      "elements": 65536,
+      "warm_kd2h_ms": 1.069,
+      "warm_total_ms": 2.08,
+      "cpu_numpy_ms": 0.189,
+      "speedup_end_to_end": 0.091,
+      "max_diff": 0.0
+    },
+    {
+      "kernel": "stencil2d_gpu",
+      "size": "512x512",
+      "elements": 262144,
+      "warm_kd2h_ms": 1.535,
+      "warm_total_ms": 2.575,
+      "cpu_numpy_ms": 2.305,
+      "speedup_end_to_end": 0.895,
+      "max_diff": 0.0
+    }
+  ],
+  "matmul": [
+    {
+      "kernel": "matmul_gpu",
+      "size": "64x64",
+      "warm_kd2h_ms": 0.749,
+      "warm_total_ms": 1.058,
+      "cpu_numpy_blas_ms": 0.0191,
+      "speedup_vs_blas": 0.018,
+      "max_diff": 8.58306884765625e-06
+    },
+    {
+      "kernel": "matmul_gpu",
+      "size": "128x128",
+      "warm_kd2h_ms": 1.028,
+      "warm_total_ms": 1.51,
+      "cpu_numpy_blas_ms": 0.0813,
+      "speedup_vs_blas": 0.054,
+      "max_diff": 1.52587890625e-05
+    },
+    {
+      "kernel": "matmul_gpu",
+      "size": "256x256",
+      "warm_kd2h_ms": 2.038,
+      "warm_total_ms": 2.762,
+      "cpu_numpy_blas_ms": 0.4651,
+      "speedup_vs_blas": 0.168,
+      "max_diff": 0.0006418228149414062
+    },
+    {
+      "kernel": "matmul_gpu",
+      "size": "512x512",
+      "warm_kd2h_ms": 3.282,
+      "warm_total_ms": 4.726,
+      "cpu_numpy_blas_ms": 2.3842,
+      "speedup_vs_blas": 0.505,
+      "max_diff": 13.457186698913574
+    }
+  ],
+  "scientific_labs": [
+    {
+      "kernel": "wave2d_step",
+      "size": "256x256",
+      "total_ms": 3.534,
+      "s3_hash": "928c85e87c3e",
+      "wgsl_hash": "114456eb72b6"
+    },
+    {
+      "kernel": "sobel_gpu",
+      "size": "256x256",
+      "total_ms": 3.171,
+      "s3_hash": "e4e909603d13",
+      "wgsl_hash": "cd16618133ea"
+    },
+    {
+      "kernel": "stencil2d_pingpong_50steps",
+      "size": "512x512",
+      "gpu_total_ms": 12.771,
+      "cpu_numpy_ms": 57.242,
+      "speedup_vs_numpy": 4.482,
+      "max_diff": 1.88079096131566e-37
+    },
+    {
+      "kernel": "conway_pingpong_50steps",
+      "size": "512x512",
+      "gpu_total_ms": 14.382
+    },
+    {
+      "kernel": "particles_2d_gpu",
+      "size": "65536",
+      "gpu_total_ms": 5.652
+    }
+  ]
+}

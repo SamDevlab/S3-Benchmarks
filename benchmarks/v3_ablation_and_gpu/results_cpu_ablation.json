@@ -1,0 +1,245 @@
+{
+  "v1_baseline": {
+    "status": "ok",
+    "text_bytes": 259546,
+    "compile_s": 0.167919,
+    "emit_s": 0.125141,
+    "kernels": {
+      "dot_i64_50k": 0.4149,
+      "axpy_f64_50k": 0.3693,
+      "stencil_1d_4096x50": 5.1174,
+      "stencil_2d_64x64x20": 3.3396,
+      "matmul_f64_48": 1.581,
+      "thomas_f64_2048": 0.1479,
+      "rk4_osc_10k": 0.7137,
+      "verlet_osc_10k": 0.5509
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.129
+  },
+  "hp02_only": {
+    "status": "ok",
+    "text_bytes": 226251,
+    "compile_s": 0.181659,
+    "emit_s": 0.661611,
+    "kernels": {
+      "dot_i64_50k": 0.3859,
+      "axpy_f64_50k": 0.3455,
+      "stencil_1d_4096x50": 7.4116,
+      "stencil_2d_64x64x20": 3.5366,
+      "matmul_f64_48": 2.195,
+      "thomas_f64_2048": 0.1951,
+      "rk4_osc_10k": 0.7831,
+      "verlet_osc_10k": 0.2129
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.694
+  },
+  "hp03_only": {
+    "status": "ok",
+    "text_bytes": 301903,
+    "compile_s": 0.174591,
+    "emit_s": 0.156911,
+    "kernels": {
+      "dot_i64_50k": 0.3731,
+      "axpy_f64_50k": 0.4207,
+      "stencil_1d_4096x50": 5.4849,
+      "stencil_2d_64x64x20": 3.292,
+      "matmul_f64_48": 1.5695,
+      "thomas_f64_2048": 0.1442,
+      "rk4_osc_10k": 0.7076,
+      "verlet_osc_10k": 0.4404
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.165
+  },
+  "hp10_only": {
+    "status": "ok",
+    "text_bytes": 259057,
+    "compile_s": 0.173594,
+    "emit_s": 0.130216,
+    "kernels": {
+      "dot_i64_50k": 0.422,
+      "axpy_f64_50k": 0.4687,
+      "stencil_1d_4096x50": 5.2023,
+      "stencil_2d_64x64x20": 3.5177,
+      "matmul_f64_48": 1.5716,
+      "thomas_f64_2048": 0.1815,
+      "rk4_osc_10k": 0.7124,
+      "verlet_osc_10k": 0.4422
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.115
+  },
+  "hp02_hp03": {
+    "status": "ok",
+    "text_bytes": 264012,
+    "compile_s": 0.173757,
+    "emit_s": 0.719139,
+    "kernels": {
+      "dot_i64_50k": 0.3486,
+      "axpy_f64_50k": 0.3513,
+      "stencil_1d_4096x50": 5.0818,
+      "stencil_2d_64x64x20": 3.2443,
+      "matmul_f64_48": 1.5323,
+      "thomas_f64_2048": 0.144,
+      "rk4_osc_10k": 0.6684,
+      "verlet_osc_10k": 0.2126
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.78
+  },
+  "hp02_hp10": {
+    "status": "ok",
+    "text_bytes": 225778,
+    "compile_s": 0.237749,
+    "emit_s": 0.706736,
+    "kernels": {
+      "dot_i64_50k": 0.3886,
+      "axpy_f64_50k": 0.3495,
+      "stencil_1d_4096x50": 5.0867,
+      "stencil_2d_64x64x20": 3.3351,
+      "matmul_f64_48": 1.533,
+      "thomas_f64_2048": 0.1455,
+      "rk4_osc_10k": 0.6678,
+      "verlet_osc_10k": 0.2125
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.867
+  },
+  "hp03_hp10": {
+    "status": "ok",
+    "text_bytes": 301324,
+    "compile_s": 0.205879,
+    "emit_s": 0.235934,
+    "kernels": {
+      "dot_i64_50k": 0.3738,
+      "axpy_f64_50k": 0.3758,
+      "stencil_1d_4096x50": 6.4747,
+      "stencil_2d_64x64x20": 3.4807,
+      "matmul_f64_48": 1.5768,
+      "thomas_f64_2048": 0.1432,
+      "rk4_osc_10k": 0.7124,
+      "verlet_osc_10k": 0.4422
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.357
+  },
+  "hp02_hp03_hp10": {
+    "status": "ok",
+    "text_bytes": 263453,
+    "compile_s": 0.168773,
+    "emit_s": 0.700512,
+    "kernels": {
+      "dot_i64_50k": 0.3489,
+      "axpy_f64_50k": 0.3513,
+      "stencil_1d_4096x50": 5.0172,
+      "stencil_2d_64x64x20": 3.3011,
+      "matmul_f64_48": 1.5391,
+      "thomas_f64_2048": 0.143,
+      "rk4_osc_10k": 0.6713,
+      "verlet_osc_10k": 0.2126
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.703
+  },
+  "v3_selective": {
+    "status": "ok",
+    "text_bytes": 287310,
+    "compile_s": 0.181722,
+    "emit_s": 0.444352,
+    "kernels": {
+      "dot_i64_50k": 0.3503,
+      "axpy_f64_50k": 0.3472,
+      "stencil_1d_4096x50": 5.3803,
+      "stencil_2d_64x64x20": 3.4107,
+      "matmul_f64_48": 2.2247,
+      "thomas_f64_2048": 0.1996,
+      "rk4_osc_10k": 0.7143,
+      "verlet_osc_10k": 0.442
+    },
+    "checksum": {
+      "dot_i64_50k": 95.0,
+      "axpy_f64_50k": 64.503831,
+      "stencil_1d_4096x50": 1.546315,
+      "stencil_2d_64x64x20": 64.0,
+      "matmul_f64_48": 929.28,
+      "thomas_f64_2048": 31.816987,
+      "rk4_osc_10k": 0.408082,
+      "verlet_osc_10k": 0.408079
+    },
+    "elapsed_s": 1.47
+  }
+}
