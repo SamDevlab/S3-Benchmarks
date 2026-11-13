@@ -1,0 +1,10 @@
+{
+  "schema": "s3.benchmark.stage-comparison.v1",
+  "stage2_stage3_equivalence": "NOT_APPLICABLE",
+  "stage2_sha256": null,
+  "stage3_sha256": null,
+  "smoke": "DEFERRED",
+  "full_benchmark": "DEFERRED",
+  "performance_valid": false,
+  "reason": "Correctness gate requires real Stage2 and Stage3 artifacts"
+}

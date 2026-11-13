@@ -1,0 +1,9 @@
+{
+  "schema": "s3.benchmark.environment.v1",
+  "host_os": "Windows",
+  "native_timing": "NOT_RUN",
+  "network_required_during_benchmark": false,
+  "compiler_adapter_fail_closed": "PASS",
+  "stage2_artifact_present": false,
+  "stage3_artifact_present": false
+}
