@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 import json
+import math
+import struct
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Sequence
 
-import numpy as np
+try:
+    import numpy as np
+except ModuleNotFoundError:  # pragma: no cover - WSL pure-Python CPU fallback
+    np = None  # type: ignore[assignment]
 
 
 @dataclass(frozen=True)
@@ -115,14 +120,53 @@ def validate_array(
     benchmark_id: str,
     kernel: str,
     algorithm: str,
-    actual: Sequence[float] | np.ndarray,
-    reference: Sequence[float] | np.ndarray | None,
+    actual: Sequence[float] | Any,
+    reference: Sequence[float] | Any | None,
     reference_name: str = "numpy_reference",
     precision: str = "f32",
     k_dim: int = 1,
     steps: int = 1,
     check_signed_zero: bool = False,
 ) -> dict[str, Any]:
+    if np is None:
+        act_list = [float(x) for x in actual]
+        input_size = len(act_list)
+        contract = get_contract(algorithm, precision, k_dim=k_dim, steps=steps)
+        if reference is None:
+            return {
+                "BENCHMARK_ID": benchmark_id, "KERNEL": kernel, "REFERENCE": "NONE",
+                "INPUT_SIZE": input_size, "PRECISION": precision, "ATOL": contract.atol, "RTOL": contract.rtol,
+                "MAX_ABS_ERROR": None, "MAX_REL_ERROR": None, "RMS_ERROR": None, "MISMATCH_COUNT": None,
+                "FIRST_MISMATCH_INDEX": None, "NUMERICAL_VALIDITY": "NOT_VALIDATED",
+                "DATA_INTEGRITY": "NOT_VALIDATED", "PERFORMANCE_VALIDITY": "DIAGNOSTIC_ONLY",
+                "DIAGNOSTICS": {"reason": "No reference array provided"},
+            }
+        ref_list = [float(x) for x in reference]
+        nan_count = sum(1 for x in act_list if math.isnan(x))
+        inf_count = sum(1 for x in act_list if math.isinf(x))
+        abs_errs = [abs(a - r) for a, r in zip(act_list, ref_list)]
+        rel_errs = [ae / max(abs(r), 1e-12) for ae, r in zip(abs_errs, ref_list)]
+        mismatches = [
+            i for i, (a, r, ae) in enumerate(zip(act_list, ref_list, abs_errs))
+            if (not math.isfinite(a)) or ae > (contract.atol + contract.rtol * abs(r))
+        ]
+        max_abs = max((e for e in abs_errs if math.isfinite(e)), default=float("inf"))
+        max_rel = max((e for e in rel_errs if math.isfinite(e)), default=float("inf"))
+        rms = math.sqrt(sum(e * e for e in abs_errs) / max(1, len(abs_errs)))
+        ok = len(mismatches) == 0 and nan_count == 0 and inf_count == 0
+        return {
+            "BENCHMARK_ID": benchmark_id, "KERNEL": kernel, "REFERENCE": reference_name,
+            "INPUT_SIZE": input_size, "PRECISION": precision, "ATOL": contract.atol, "RTOL": contract.rtol,
+            "MAX_ABS_ERROR": round(max_abs, 9) if math.isfinite(max_abs) else "inf",
+            "MAX_REL_ERROR": round(max_rel, 9) if math.isfinite(max_rel) else "inf",
+            "RMS_ERROR": round(rms, 9) if math.isfinite(rms) else "inf",
+            "MISMATCH_COUNT": len(mismatches),
+            "FIRST_MISMATCH_INDEX": mismatches[0] if mismatches else None,
+            "NUMERICAL_VALIDITY": "VALID" if ok else "INVALID",
+            "DATA_INTEGRITY": "PASS" if ok else "CORRUPTION_SUSPECTED:TOLERANCE_EXCEEDED",
+            "PERFORMANCE_VALIDITY": "VALID" if ok else "DIAGNOSTIC_ONLY",
+            "DIAGNOSTICS": {"nan_count": nan_count, "inf_count": inf_count, "contract_rationale": contract.rationale},
+        }
     act = np.asarray(actual, dtype=np.float32 if precision == "f32" else np.float64).ravel()
     input_size = int(act.size)
     contract = get_contract(algorithm, precision, k_dim=k_dim, steps=steps)
