@@ -1,0 +1,59 @@
+{
+  "conway": {
+    "status": "ok",
+    "path": "examples/compute/conway.s3",
+    "text_bytes": 23234,
+    "compile_s": 0.536032,
+    "emit_s": 0.027007,
+    "median_ms": 2.4629,
+    "returncode": 0,
+    "stdout_len": 20,
+    "stdout_head": "program returned: 0",
+    "elapsed_s": 2.7344
+  },
+  "stencil5point": {
+    "status": "ok",
+    "path": "examples/compute/stencil5point.s3",
+    "text_bytes": 17788,
+    "compile_s": 0.084334,
+    "emit_s": 0.024631,
+    "median_ms": 3.6696,
+    "returncode": 0,
+    "stdout_len": 20,
+    "stdout_head": "program returned: 0",
+    "elapsed_s": 9.8434
+  },
+  "s3_num_toolkit": {
+    "status": "ok",
+    "path": "examples/expansion_v2/s3_num_toolkit.s3",
+    "text_bytes": 23579,
+    "compile_s": 0.08153,
+    "emit_s": 0.022192,
+    "median_ms": 3.6476,
+    "returncode": 0,
+    "stdout_len": 22,
+    "stdout_head": "program returned: 257",
+    "elapsed_s": 1.0594
+  },
+  "insertion_sort_search": {
+    "status": "error",
+    "path": "examples/language_maturity/insertion_sort_search.s3",
+    "elapsed_s": 0.8339,
+    "returncode": 1,
+    "error": "  File \"/tmp/s3_v1_base/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  },
+  "csv_integer_parser": {
+    "status": "error",
+    "path": "examples/language_maturity/csv_integer_parser.s3",
+    "elapsed_s": 0.6291,
+    "returncode": 1,
+    "error": "  File \"/tmp/s3_v1_base/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  },
+  "hex_encode": {
+    "status": "error",
+    "path": "examples/language_maturity/hex_encode.s3",
+    "elapsed_s": 0.5946,
+    "returncode": 1,
+    "error": "  File \"/tmp/s3_v1_base/bootstrap/s3/semantic.py\", line 803, in analyze |     raise SemanticError(\"program must declare a 'main' function\", program.location) | bootstrap.s3.diagnostics.SemanticError: 1:1: semantic error: program must declare a 'main' function"
+  }
+}
