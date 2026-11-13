@@ -398,3 +398,29 @@ def reclassify_v4_3_results(src_path: Path, dst_path: Path) -> dict[str, Any]:
     }
     dst_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
     return out
+
+
+def _cli_main() -> int:
+    import sys
+
+    if "--stdin-json" in sys.argv:
+        req = json.loads(sys.stdin.read())
+        res = validate_array(
+            benchmark_id=str(req.get("benchmark_id", "WORKBENCH_RUN")),
+            kernel=str(req.get("kernel", "unknown")),
+            algorithm=str(req.get("algorithm", "ode")),
+            actual=req.get("actual", []),
+            reference=req.get("reference"),
+            reference_name=str(req.get("reference_name", "analytical_or_conservation_oracle")),
+            precision=str(req.get("precision", "f64")),
+            k_dim=int(req.get("k_dim", 1)),
+            steps=int(req.get("steps", 1)),
+            check_signed_zero=bool(req.get("check_signed_zero", False)),
+        )
+        print(json.dumps(res, indent=2))
+        return 0
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(_cli_main())
