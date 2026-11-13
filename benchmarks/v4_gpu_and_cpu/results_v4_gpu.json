@@ -1,0 +1,103 @@
+{
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "backend": "Vulkan",
+    "driver": "26.1.1 (AMD proprietary shader compiler)"
+  },
+  "matmul_v1_vs_v2": [
+    {
+      "size": "32x32",
+      "v1_total_ms": 1.303,
+      "v1_dispatch_ms": 0.578,
+      "v1_max_diff": 2.86102294921875e-06,
+      "v2_tiled_total_ms": 1.025,
+      "v2_tiled_dispatch_ms": 0.422,
+      "v2_resident_dispatch_ms": 0.377,
+      "v2_max_diff": 2.86102294921875e-06,
+      "v2_bad_gt_1e2": 0,
+      "cpu_numpy_blas_ms": 0.0066
+    },
+    {
+      "size": "64x64",
+      "v1_total_ms": 1.339,
+      "v1_dispatch_ms": 0.562,
+      "v1_max_diff": 5.7220458984375e-06,
+      "v2_tiled_total_ms": 1.079,
+      "v2_tiled_dispatch_ms": 0.427,
+      "v2_resident_dispatch_ms": 0.347,
+      "v2_max_diff": 5.7220458984375e-06,
+      "v2_bad_gt_1e2": 0,
+      "cpu_numpy_blas_ms": 0.0175
+    },
+    {
+      "size": "128x128",
+      "v1_total_ms": 1.473,
+      "v1_dispatch_ms": 0.572,
+      "v1_max_diff": 1.52587890625e-05,
+      "v2_tiled_total_ms": 1.422,
+      "v2_tiled_dispatch_ms": 0.516,
+      "v2_resident_dispatch_ms": 0.493,
+      "v2_max_diff": 1.52587890625e-05,
+      "v2_bad_gt_1e2": 0,
+      "cpu_numpy_blas_ms": 0.0863
+    },
+    {
+      "size": "256x256",
+      "v1_total_ms": 2.975,
+      "v1_dispatch_ms": 1.742,
+      "v1_max_diff": 4.418855667114258,
+      "v2_tiled_total_ms": 1.558,
+      "v2_tiled_dispatch_ms": 0.604,
+      "v2_resident_dispatch_ms": 0.393,
+      "v2_max_diff": 16.043498992919922,
+      "v2_bad_gt_1e2": 78,
+      "cpu_numpy_blas_ms": 0.2984
+    },
+    {
+      "size": "512x512",
+      "v1_total_ms": 5.021,
+      "v1_dispatch_ms": 2.65,
+      "v1_max_diff": 25.90557098388672,
+      "v2_tiled_total_ms": 3.863,
+      "v2_tiled_dispatch_ms": 1.448,
+      "v2_resident_dispatch_ms": 1.262,
+      "v2_max_diff": 44.53569030761719,
+      "v2_bad_gt_1e2": 1,
+      "cpu_numpy_blas_ms": 2.0728
+    }
+  ],
+  "stencil_multi_step": [
+    {
+      "size": "512x512",
+      "steps": 1,
+      "gpu_total_ms": 4.473,
+      "cpu_numpy_ms": 2.471,
+      "speedup_vs_numpy": 0.552,
+      "max_diff": 0.0
+    },
+    {
+      "size": "512x512",
+      "steps": 10,
+      "gpu_total_ms": 3.855,
+      "cpu_numpy_ms": 14.333,
+      "speedup_vs_numpy": 3.718,
+      "max_diff": 0.0
+    },
+    {
+      "size": "512x512",
+      "steps": 50,
+      "gpu_total_ms": 12.741,
+      "cpu_numpy_ms": 76.714,
+      "speedup_vs_numpy": 6.021,
+      "max_diff": 1.88079096131566e-37
+    },
+    {
+      "size": "512x512",
+      "steps": 100,
+      "gpu_total_ms": 20.201,
+      "cpu_numpy_ms": 90.449,
+      "speedup_vs_numpy": 4.477,
+      "max_diff": 1.349148639674122e-18
+    }
+  ]
+}
