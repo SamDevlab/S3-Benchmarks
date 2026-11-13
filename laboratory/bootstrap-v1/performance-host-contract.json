@@ -1,0 +1,39 @@
+{
+  "schema": "s3.bootstrap-performance-host.v1",
+  "purpose": "Separate correctness-host eligibility from characterization and native comparative performance eligibility.",
+  "required_platform": {
+    "os": "linux",
+    "arch": "x86_64"
+  },
+  "thresholds": {
+    "characterization_control_drift_percent_max": 10.0,
+    "comparative_control_drift_percent_max": 2.0,
+    "comparative_normalized_load1_max": 0.25
+  },
+  "correctness_requires": [
+    "linux",
+    "x86_64",
+    "native_toolchain_ready",
+    "source_worktree_clean",
+    "benchmark_worktree_clean",
+    "no_competing_compiler_or_test_processes"
+  ],
+  "characterization_requires": [
+    "correctness_eligible",
+    "measured_control_drift_within_characterization_threshold"
+  ],
+  "comparative_performance_requires": [
+    "characterization_eligible",
+    "bare_metal_or_equivalent_dedicated_host",
+    "measured_control_drift_within_comparative_threshold",
+    "normalized_load_within_threshold",
+    "no_thermal_throttling"
+  ],
+  "policy": {
+    "virtual_machine_correctness_allowed": true,
+    "virtual_machine_characterization_allowed": true,
+    "virtual_machine_comparative_performance_allowed": false,
+    "unknown_control_drift_is_performance_eligible": false,
+    "ineligible_performance_is_correctness_failure": false
+  }
+}

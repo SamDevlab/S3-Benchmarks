@@ -1,0 +1,28 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage-gate.v1",
+  "stage_id": "07_SERIALIZATION_S5",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "required_pass_fields": [
+    "s1_typed_values",
+    "s2_def_use",
+    "s3_call_dataflow",
+    "s4_complete_terminators",
+    "s5_canonical_serialization",
+    "record_family_coverage",
+    "canonical_record_order",
+    "strict_parseability",
+    "focused_v2_conformance",
+    "deterministic_repeat",
+    "native_provenance_for_each_repeat"
+  ],
+  "required_invariants": {
+    "canonical_source_mutated": false,
+    "self_emit_authorized": false,
+    "stage2_authorized": false,
+    "z_mask_relation": "EQ",
+    "z_mask_value": 31
+  },
+  "next_stage_candidate": "08_CANONICAL_STAGE1_INPUT",
+  "promotion_effect": "NONE_LABORATORY_GATE_ONLY",
+  "rule": "Stage07 PASS requires Z 31 only after S1-S4 are already PASS, strict semantic conformance PASS, and at least three independently proven native repeats with byte-identical S3IR2 v2 streams."
+}

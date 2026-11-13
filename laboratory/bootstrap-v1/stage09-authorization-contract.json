@@ -1,0 +1,26 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage09-authorization.v1",
+  "stage_id": "09_CANONICAL_INTEGRATION",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "required_control": {
+    "active_stage": "09_CANONICAL_INTEGRATION",
+    "canonical_stage1_mutation_authorized": true,
+    "self_emit_authorized": false,
+    "stage2_authorized": false,
+    "stage3_authorized": false,
+    "t4_authorized": false
+  },
+  "required_prior_evidence": {
+    "stage08_status": "PASS"
+  },
+  "authorized_action_if_all_gates_pass": "HANDOFF_TO_S3_FOR_SMALLEST_REVIEWABLE_CANONICAL_INTEGRATION_PATCH",
+  "forbidden_actions": [
+    "SELF_EMIT",
+    "STAGE2",
+    "STAGE3",
+    "T4",
+    "S3IR2_PROTOCOL_REDESIGN"
+  ],
+  "mutation_performed_by_this_contract": false,
+  "promotion_effect": "NONE_AUTHORIZATION_FIREWALL_ONLY"
+}

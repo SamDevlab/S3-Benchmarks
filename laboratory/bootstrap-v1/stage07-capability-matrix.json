@@ -1,0 +1,40 @@
+{
+  "schema": "s3-benchmarks.bootstrap.stage07-capability-matrix.v1",
+  "stage_id": "07_SERIALIZATION_S5",
+  "activation_status": "PREPARED_NOT_ACTIVE",
+  "protocol": "S3IR2 v2",
+  "promotion_effect": "NONE_PLANNING_ONLY",
+  "capabilities": {
+    "record_family_coverage": {
+      "status": "PREPARED",
+      "required": ["F", "B", "V", "M", "I", "O", "R", "C", "A", "T", "Z"]
+    },
+    "canonical_record_order": {
+      "status": "PREPARED",
+      "requirement": "deterministic ordering for the same source/candidate"
+    },
+    "strict_parseability": {
+      "status": "PREPARED",
+      "requirement": "every focused stream parses under S3IR2 v2"
+    },
+    "strict_semantic_conformance": {
+      "status": "PREPARED",
+      "authority": "SamDevlab/S3/tools/verify_stage1_semantic_conformance_v2.py"
+    },
+    "complete_mask": {
+      "status": "PREPARED",
+      "required_value": 31,
+      "precondition": "S1-S4 all PASS"
+    },
+    "deterministic_repeat": {
+      "status": "PREPARED",
+      "minimum_runs": 3,
+      "requirement": "byte-identical output with independent native provenance for each run"
+    },
+    "source_binary_fixture_binding": {
+      "status": "PREPARED",
+      "requirement": "candidate Git SHA + source SHA256 + binary SHA256 + fixture SHA256 + stream SHA256"
+    }
+  },
+  "rule": "This matrix is not an activation signal and cannot promote S5. Stage07 remains inactive until the live control plane explicitly selects 07_SERIALIZATION_S5."
+}
