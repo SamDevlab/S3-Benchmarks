@@ -1,0 +1,10 @@
+benchmark_id,class,ca_or_kernel,steps,accelerated,method_used,soundness_class,fallback_reason,discovery_ms,verification_ms,predictive_median_ms,conventional_median_ms,speedup,exact_match
+conway_blinker_16x16_t2000,cycle_jump_brent,conway,2000,True,cycle_jump_brent,PROVED_EXACT,,0.5801,0.553,1.1577,138.0953,119.28,True
+highlife_blinker_16x16_t2000,cycle_jump_brent,highlife,2000,True,cycle_jump_brent,PROVED_EXACT,,0.4726,0.5372,1.022,124.3018,121.63,True
+rule110_w15_t2000,cycle_jump_brent,rule110,2000,True,cycle_jump_brent,PROVED_EXACT,,1.0476,1.2888,2.2951,34.2533,14.92,True
+cyclic_ternary_8x8_t1000,cycle_jump_brent,cyclic_ternary,1000,True,cycle_jump_brent,PROVED_EXACT,,0.5461,0.8821,1.3955,29.9529,21.46,True
+rule30_w31_t200_neg_control,cycle_jump_brent,rule30,200,False,conventional_fallback,CONVENTIONAL_FALLBACK,NO_CYCLE_WITHIN_BUDGET,1.3979,0.0,6.63,3.5959,0.54,True
+hashlife_conway_64x64_safe_t20,hashlife_quadtree,conway,20,True,hashlife_quadtree,PROVED_EXACT,,0.0,0.2683,1.8866,18.6901,9.91,True
+hashlife_unbounded_glider_t1024,hashlife_quadtree,conway_unbounded,1024,True,hashlife_quadtree,PROVED_EXACT,,0.0,0.0,4.5423,,,True
+linear_recurrence_fib_t10000,linear_recurrence_matmul,fibonacci,10000,True,linear_recurrence_matmul,PROVED_EXACT,,0.0,0.0,0.5243,1.5068,2.87,True
+nonlinear_mod97_neg_control,linear_recurrence_matmul,quadratic_mod97,150,False,conventional_fallback,CONVENTIONAL_FALLBACK,NO_VERIFIED_INTEGER_RECURRENCE,0.2591,0.0,0.2648,,1.0,True
