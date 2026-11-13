@@ -1,0 +1,215 @@
+{
+  "cpu": {
+    "compiler_comparison": {
+      "simpson_2k_x300": {
+        "S3_O0": {
+          "median_ms": 44.5213,
+          "iqr_ms": 1.4834,
+          "min_ms": 44.3586
+        },
+        "S3_O1": {
+          "median_ms": 5.4134,
+          "iqr_ms": 0.2245,
+          "min_ms": 5.1023
+        },
+        "S3_CostModel_V4_3": {
+          "median_ms": 5.3199,
+          "iqr_ms": 0.7014,
+          "min_ms": 5.0512
+        },
+        "GCC_O2": {
+          "median_ms": 0.8273,
+          "iqr_ms": 0.0351,
+          "min_ms": 0.8158
+        },
+        "GCC_O3": {
+          "median_ms": 0.9422,
+          "iqr_ms": 0.1706,
+          "min_ms": 0.8448
+        }
+      },
+      "cg_dense_12x12_x300": {
+        "S3_O0": {
+          "median_ms": 34.8233,
+          "iqr_ms": 0.877,
+          "min_ms": 34.2646
+        },
+        "S3_O1": {
+          "median_ms": 12.4118,
+          "iqr_ms": 1.3654,
+          "min_ms": 11.9643
+        },
+        "S3_CostModel_V4_3": {
+          "median_ms": 12.2701,
+          "iqr_ms": 0.7904,
+          "min_ms": 11.7486
+        },
+        "GCC_O2": {
+          "median_ms": 1.1541,
+          "iqr_ms": 0.0071,
+          "min_ms": 1.1462
+        },
+        "GCC_O3": {
+          "median_ms": 1.136,
+          "iqr_ms": 0.0404,
+          "min_ms": 1.1133
+        }
+      }
+    },
+    "lab_benchmarks": {
+      "mechanics_2dof_400steps": {
+        "median_ms": 0.1603,
+        "iqr_ms": 0.003,
+        "min_ms": 0.1599
+      },
+      "materials_cn_41x100": {
+        "median_ms": 1.0319,
+        "iqr_ms": 0.0219,
+        "min_ms": 0.9939
+      },
+      "bio_reaction_rk4_500steps": {
+        "median_ms": 0.1792,
+        "iqr_ms": 0.0255,
+        "min_ms": 0.1745
+      },
+      "fem_1d_128elem": {
+        "median_ms": 0.0254,
+        "iqr_ms": 0.0005,
+        "min_ms": 0.0253
+      },
+      "monte_carlo_pi_1k": {
+        "median_ms": 0.0774,
+        "iqr_ms": 0.0155,
+        "min_ms": 0.0772
+      }
+    }
+  },
+  "gpu": {
+    "device": "AMD Radeon RX 580 2048SP",
+    "backend": "Vulkan",
+    "matmul": [
+      {
+        "kernel": "V1_naive",
+        "n": 64,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 369.926,
+        "cold_total_ms": 887.3,
+        "warm_dispatch_ms": 0.6664,
+        "readback_ms": 0.5301,
+        "numpy_cpu_ms": 0.0362,
+        "max_abs_error": 9e-06,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V2_tiled",
+        "n": 64,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 112.463,
+        "cold_total_ms": 115.246,
+        "warm_dispatch_ms": 0.477,
+        "readback_ms": 0.6557,
+        "numpy_cpu_ms": 0.0362,
+        "max_abs_error": 9e-06,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V3_padded_fma",
+        "n": 64,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 88.143,
+        "cold_total_ms": 90.838,
+        "warm_dispatch_ms": 0.368,
+        "readback_ms": 0.6833,
+        "numpy_cpu_ms": 0.0362,
+        "max_abs_error": 9e-06,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V1_naive",
+        "n": 128,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 3.972,
+        "warm_dispatch_ms": 0.681,
+        "readback_ms": 0.4952,
+        "numpy_cpu_ms": 0.1508,
+        "max_abs_error": 1.5e-05,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V2_tiled",
+        "n": 128,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 4.57,
+        "warm_dispatch_ms": 0.5569,
+        "readback_ms": 0.943,
+        "numpy_cpu_ms": 0.1508,
+        "max_abs_error": 1.8e-05,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V3_padded_fma",
+        "n": 128,
+        "within_safe_bounds": true,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 3.7,
+        "warm_dispatch_ms": 0.4646,
+        "readback_ms": 0.6929,
+        "numpy_cpu_ms": 0.1508,
+        "max_abs_error": 0.009526,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "kernel": "V1_naive",
+        "n": 256,
+        "within_safe_bounds": false,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 234.584,
+        "warm_dispatch_ms": 1.6652,
+        "readback_ms": 0.4791,
+        "numpy_cpu_ms": 0.3879,
+        "max_abs_error": 30.267218,
+        "NUMERICALLY_VALID_RESULT": false
+      },
+      {
+        "kernel": "V2_tiled",
+        "n": 256,
+        "within_safe_bounds": false,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 1.636,
+        "warm_dispatch_ms": 0.4958,
+        "readback_ms": 0.4502,
+        "numpy_cpu_ms": 0.3879,
+        "max_abs_error": 20.795301,
+        "NUMERICALLY_VALID_RESULT": false
+      },
+      {
+        "kernel": "V3_padded_fma",
+        "n": 256,
+        "within_safe_bounds": false,
+        "cold_pipeline_ms": 0.0,
+        "cold_total_ms": 1.781,
+        "warm_dispatch_ms": 0.3867,
+        "readback_ms": 0.6353,
+        "numpy_cpu_ms": 0.3879,
+        "max_abs_error": 0.043991,
+        "NUMERICALLY_VALID_RESULT": false
+      }
+    ],
+    "gpu_labs": {
+      "wave2d_32x32": {
+        "total_ms": 3.777,
+        "dispatch_ms": 0.412
+      },
+      "particles_restitution_128": {
+        "total_ms": 5.335,
+        "dispatch_ms": 0.406
+      },
+      "signal_fir_generic_256": {
+        "total_ms": 3.529,
+        "dispatch_ms": 0.375
+      }
+    }
+  }
+}
