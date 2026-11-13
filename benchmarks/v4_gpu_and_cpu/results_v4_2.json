@@ -1,0 +1,170 @@
+{
+  "cpu": {
+    "toolchain": "/usr/bin/gcc",
+    "cost_model_decisions": {
+      "simpson_integrate": {
+        "hp02": true,
+        "hp03": true,
+        "hp10": false,
+        "metrics": {
+          "blocks": 19,
+          "regs": 100,
+          "spills": 0,
+          "loop_blocks": 6,
+          "scalar_mems": 7,
+          "loop_slice_loads": 2,
+          "loop_slice_stores": 0
+        }
+      },
+      "lerp_uniform": {
+        "hp02": true,
+        "hp03": false,
+        "hp10": false,
+        "metrics": {
+          "blocks": 21,
+          "regs": 116,
+          "spills": 0,
+          "loop_blocks": 5,
+          "scalar_mems": 9,
+          "loop_slice_loads": 0,
+          "loop_slice_stores": 0
+        }
+      },
+      "cg_solve_dense": {
+        "hp02": false,
+        "hp03": false,
+        "hp10": false,
+        "metrics": {
+          "blocks": 51,
+          "regs": 287,
+          "spills": 266,
+          "loop_blocks": 33,
+          "scalar_mems": 14,
+          "loop_slice_loads": 12,
+          "loop_slice_stores": 6
+        }
+      },
+      "_rk4_1d": {
+        "hp02": false,
+        "hp03": false,
+        "hp10": false,
+        "metrics": {
+          "blocks": 1
+        }
+      },
+      "rk4_adaptive_linear1d": {
+        "hp02": true,
+        "hp03": false,
+        "hp10": false,
+        "metrics": {
+          "blocks": 37,
+          "regs": 167,
+          "spills": 0,
+          "loop_blocks": 33,
+          "scalar_mems": 12,
+          "loop_slice_loads": 0,
+          "loop_slice_stores": 0
+        }
+      }
+    },
+    "kernels": {
+      "simpson_2k_x500": {
+        "S3_O1_Base": 8.5181,
+        "S3_V4_CostModel": 9.1578,
+        "C_GCC_O2": 1.2919,
+        "C_GCC_O3": 1.2879,
+        "speedup_cost_model_vs_base": 0.93
+      },
+      "cg_dense_12x12_x500": {
+        "S3_O1_Base": 23.9295,
+        "S3_V4_CostModel": 20.2554,
+        "C_GCC_O2": 1.9411,
+        "C_GCC_O3": 1.8981,
+        "speedup_cost_model_vs_base": 1.181
+      }
+    }
+  },
+  "gpu": {
+    "device": "AMD Radeon RX 580 2048SP",
+    "backend": "Vulkan",
+    "safe_buffer_bytes": 131072,
+    "matmul": [
+      {
+        "n": 64,
+        "buffer_bytes": 16384,
+        "within_safe_bounds": true,
+        "cpu_numpy_ms": 0.0179,
+        "gpu_total_ms": 726.645,
+        "gpu_dispatch_ms": 130.993,
+        "max_abs_error": 7.62939453125e-06,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "n": 128,
+        "buffer_bytes": 65536,
+        "within_safe_bounds": true,
+        "cpu_numpy_ms": 0.1546,
+        "gpu_total_ms": 4.066,
+        "gpu_dispatch_ms": 0.478,
+        "max_abs_error": 1.33514404296875e-05,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "n": 256,
+        "buffer_bytes": 262144,
+        "within_safe_bounds": false,
+        "cpu_numpy_ms": 0.2667,
+        "gpu_total_ms": 4.601,
+        "gpu_dispatch_ms": 1.323,
+        "max_abs_error": 5.967907428741455,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": false
+      }
+    ],
+    "stencil2d": [
+      {
+        "side": 64,
+        "steps": 1,
+        "cpu_numpy_ms": 0.0361,
+        "gpu_total_ms": 6.319,
+        "gpu_dispatch_ms": 0.0,
+        "max_abs_error": 0.0,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "side": 64,
+        "steps": 10,
+        "cpu_numpy_ms": 0.3108,
+        "gpu_total_ms": 2.316,
+        "gpu_dispatch_ms": 0.0,
+        "max_abs_error": 4.76837158203125e-07,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "side": 64,
+        "steps": 50,
+        "cpu_numpy_ms": 1.361,
+        "gpu_total_ms": 13.444,
+        "gpu_dispatch_ms": 0.0,
+        "max_abs_error": 2.384185791015625e-07,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      },
+      {
+        "side": 64,
+        "steps": 100,
+        "cpu_numpy_ms": 3.1889,
+        "gpu_total_ms": 31.308,
+        "gpu_dispatch_ms": 0.0,
+        "max_abs_error": 5.960464477539063e-08,
+        "PERFORMANCE_MEASURED": true,
+        "NUMERICALLY_VALID_RESULT": true
+      }
+    ],
+    "v4_2_labs": []
+  }
+}
