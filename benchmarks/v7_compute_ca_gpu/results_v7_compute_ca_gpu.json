@@ -1,0 +1,131 @@
+{
+  "campaign": "S3_V7_COMPUTE_CA_GPU",
+  "compute_7stage": {
+    "conway_64x64_100": {
+      "default": {
+        "symbol": "conway_step",
+        "budget_mode": "default",
+        "selective_hp": false,
+        "width": 64,
+        "height": 64,
+        "steps": 100,
+        "cache_hit": true,
+        "stages_ms": {
+          "1_COMPILATION": 87.6616,
+          "2_LINKING": 135.963,
+          "3_LOAD": 0.6215,
+          "4_DISPATCH": 0.7208,
+          "5_KERNEL": 42.0136,
+          "6_READBACK": 0.0278,
+          "7_TOTAL_EXEC_AND_READBACK": 43.4209
+        },
+        "checksum": 0
+      },
+      "v7_loop_hybrid_hp": {
+        "symbol": "conway_step",
+        "budget_mode": "loop-hybrid",
+        "selective_hp": true,
+        "width": 64,
+        "height": 64,
+        "steps": 100,
+        "cache_hit": true,
+        "stages_ms": {
+          "1_COMPILATION": 70.6964,
+          "2_LINKING": 3.8656,
+          "3_LOAD": 0.4759,
+          "4_DISPATCH": 0.5496,
+          "5_KERNEL": 27.0138,
+          "6_READBACK": 0.0261,
+          "7_TOTAL_EXEC_AND_READBACK": 28.1733
+        },
+        "checksum": 0
+      },
+      "kernel_speedup": 1.555264346371114
+    },
+    "stencil5point_64x64_100": {
+      "default": {
+        "symbol": "stencil5point_step",
+        "budget_mode": "default",
+        "selective_hp": false,
+        "width": 64,
+        "height": 64,
+        "steps": 100,
+        "cache_hit": true,
+        "stages_ms": {
+          "1_COMPILATION": 38.042,
+          "2_LINKING": 3.3756,
+          "3_LOAD": 0.6327,
+          "4_DISPATCH": 0.6052,
+          "5_KERNEL": 7.4725,
+          "6_READBACK": 0.0264,
+          "7_TOTAL_EXEC_AND_READBACK": 8.6547
+        },
+        "checksum": 364906
+      },
+      "v7_loop_hybrid_hp": {
+        "symbol": "stencil5point_step",
+        "budget_mode": "loop-hybrid",
+        "selective_hp": true,
+        "width": 64,
+        "height": 64,
+        "steps": 100,
+        "cache_hit": true,
+        "stages_ms": {
+          "1_COMPILATION": 36.835,
+          "2_LINKING": 4.5995,
+          "3_LOAD": 0.6063,
+          "4_DISPATCH": 0.5173,
+          "5_KERNEL": 5.7098,
+          "6_READBACK": 0.0266,
+          "7_TOTAL_EXEC_AND_READBACK": 6.7792
+        },
+        "checksum": 364906
+      },
+      "gcc_o3_native": {
+        "median_ms": 0.9874,
+        "checksum": 364906
+      },
+      "kernel_speedup_vs_default": 1.308714841150303,
+      "s3_v7_vs_gcc_o3_ratio": 5.782661535345351
+    }
+  },
+  "cellular_automata": {
+    "gf2_width128_rule90_2000_steps": {
+      "s3_fast_forward_ms": 0.0466,
+      "s3_conventional_ms": 0.1098,
+      "speedup": 2.356223175965665,
+      "parity_verified": true
+    },
+    "gf2_width128_rule90_1m_steps": {
+      "s3_fast_forward_ms": 0.0081,
+      "accelerated": true
+    },
+    "hashlife_v3_gliders_128x128_4096": {
+      "method": "hashlife_v2_wall_aware",
+      "accelerated": true,
+      "total_ms": 49.4157
+    },
+    "hashlife_v3_rpentomino_64x64_500_negative_result": {
+      "method": "hashlife_v3_chaotic_abort_c11_handoff",
+      "accelerated": false,
+      "fallback_reason": "CHAOTIC_NODE_MISS_EXPLOSION",
+      "steps_c11_handoff": 448,
+      "total_ms": 35.4771,
+      "parity_with_c11": true
+    }
+  },
+  "gpu_qualification": {
+    "wgpu_installed": false,
+    "physical_gpu_present": false,
+    "actual_backend": "cpu",
+    "fallback_used": true,
+    "fallback_reason": "no_physical_gpu_device",
+    "contract": {
+      "gpu_device_available": false,
+      "gpu_device_qualified": false,
+      "gpu_workload_qualified": false,
+      "gpu_fallback_available": true,
+      "reason": "no_physical_gpu_device"
+    }
+  }
+}

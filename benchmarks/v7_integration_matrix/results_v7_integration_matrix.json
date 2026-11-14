@@ -1,0 +1,40 @@
+{
+  "campaign": "S3_V7_WAVE19_INTEGRATION_MATRIX",
+  "defaults_and_invariants": {
+    "predictive_exact_default": false,
+    "experimental_hoist_constants_mode_default": "off",
+    "s3c_ng_default_provider": "python",
+    "passed": true
+  },
+  "disposable_worktree_s3_and_compact_v21": {
+    "passed": true,
+    "elapsed_sec": 7.325,
+    "compact_v21_32kib_compressed_bytes": 798,
+    "compact_v21_cold_compile_sec": 1.4443,
+    "disposable_worktree_cleaned": true
+  },
+  "doom_m55_spatial_and_wasm": {
+    "passed": true,
+    "evidence_path": "S3-Elite-Lab/docs/reports/evidence/v7/m55_benchmark.json",
+    "broadphase_candidate_prep_ms": 1.110124999999647,
+    "s3_wasm_composed_ms": 2.980562499999641,
+    "node_test_output_lines": 19
+  },
+  "s3c_ng_v7_corpus_parity": {
+    "passed": true,
+    "total_manifest_cases": 55,
+    "v7_cases_verified": 4
+  },
+  "benchmark_artifact_schemas": {
+    "passed": true,
+    "artifact_sha256_prefix16": {
+      "native_predictive": "fa1f04756ec0201b",
+      "gcc_reproducibility": "9b059a678ea7a06d",
+      "compute_ca_gpu": "582e396be420e960",
+      "unknown_dynamics": "1c99cfc8c8bf5486",
+      "compiler_research": "341fe6ae88899e9e"
+    }
+  },
+  "all_checks_passed": true,
+  "total_elapsed_sec": 9.394
+}
