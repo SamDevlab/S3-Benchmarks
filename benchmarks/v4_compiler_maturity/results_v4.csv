@@ -1,0 +1,73 @@
+suite,case,category,horizon,cold_ms,warm_median_ms,warm_iqr_ms,compile_cold_ms,speedup_warm_vs_cold,exact_match,accelerated,soundness_class,speedup_vs_s3_conv_native,speedup_vs_c11_conv_gcc_o3,notes
+compile_cache,compile_o1_conventional_6fn_cold,S3_CONVENTIONAL_NATIVE,6,66.169,66.169,,66.169,1.0,True,False,CONVENTIONAL_COMPILE,,,
+compile_cache,compile_o1_predictive_exact_6fn_cold,S3_PREDICTIVE_NATIVE,6,1375.422,0.0092,0.0028,1375.422,149502.39,True,True,STATIC_PRECONDITIONS_VERIFIED,,,warm_mem_compile_ms=0.0092; conv_compile_ms=66.169
+compile_cache,predictive_lowering_disk_cache_cold_vs_warm,S3_PREDICTIVE_PYTHON_WRAPPER,6,1213.629,114.49,,1213.629,10.6,True,True,SHA256_DISK_CACHE_VERIFIED,,,inmem_cache_warm_ms=13.0791 (iqr=0.3639); disk_warm_ms=114.49
+ir_native_v4,lcg_mod_T10,S3_CONVENTIONAL_NATIVE,10,0.002,0.0014,0.0001,202.507,1.43,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,lcg_mod_T10,C11_CONVENTIONAL_GCC_O3,10,0.0024,0.0014,0.0,,1.71,True,False,GCC_O3_REF,,,
+ir_native_v4,lcg_mod_T10,NEGATIVE_CONTROL,10,0.0406,0.0015,0.0002,4332.059,27.07,True,False,USE_CONVENTIONAL_SMALL_T,0.93,0.93,runtime_small_t_bypass
+ir_native_v4,lcg_mod_T1000,S3_CONVENTIONAL_NATIVE,1000,0.0076,0.0063,0.0001,202.507,1.21,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,lcg_mod_T1000,C11_CONVENTIONAL_GCC_O3,1000,0.0068,0.0057,0.0001,,1.19,True,False,GCC_O3_REF,,,
+ir_native_v4,lcg_mod_T1000,S3_PREDICTIVE_NATIVE,1000,0.0395,0.002,0.0001,4332.059,19.75,True,True,STATIC_PRECONDITIONS_VERIFIED,3.15,2.85,amortization_calls=304478
+ir_native_v4,lcg_mod_T1000,S3_PREDICTIVE_PYTHON_WRAPPER,1000,64.107,64.2071,0.1939,,1.0,True,True,STATIC_PRECONDITIONS_VERIFIED,,,
+ir_native_v4,lcg_mod_T1000000,S3_CONVENTIONAL_NATIVE,1000000,4.6931,4.6529,0.0109,202.507,1.01,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,lcg_mod_T1000000,C11_CONVENTIONAL_GCC_O3,1000000,4.3389,4.3353,0.0319,,1.0,True,False,GCC_O3_REF,,,
+ir_native_v4,lcg_mod_T1000000,S3_PREDICTIVE_NATIVE,1000000,0.0132,0.0026,0.0001,4332.059,5.08,True,True,STATIC_PRECONDITIONS_VERIFIED,1789.58,1667.42,amortization_calls=282
+ir_native_v4,lcg_mod_T1000000,S3_PREDICTIVE_PYTHON_WRAPPER,1000000,65.2678,68.8749,22.3759,,0.95,True,True,STATIC_PRECONDITIONS_VERIFIED,,,
+ir_native_v4,lcg_mod_T1000000000,S3_PREDICTIVE_NATIVE,1000000000,0.0137,0.003,0.0008,4332.059,4.57,True,True,STATIC_PRECONDITIONS_VERIFIED,,,value=241426611; O(log T) binary exp verified against Python closed form
+ir_native_v4,lcg_mod_T1000000000000,S3_PREDICTIVE_NATIVE,1000000000000,0.013,0.0027,0.0002,4332.059,4.81,True,True,STATIC_PRECONDITIONS_VERIFIED,,,value=416789240; O(log T) binary exp verified against Python closed form
+ir_native_v4,tribonacci_mod_k3_T100k,C11_CONVENTIONAL_GCC_O3,100000,0.3783,0.3788,0.0062,,1.0,True,False,GCC_O3_REF,,,
+ir_native_v4,tribonacci_mod_k3_T100k,S3_CONVENTIONAL_NATIVE,100000,0.3886,0.3796,0.0075,,1.02,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,tribonacci_mod_k3_T100k,S3_PREDICTIVE_NATIVE,100000,0.0509,0.009,0.0002,,5.66,True,True,STATIC_PRECONDITIONS_VERIFIED,42.18,42.09,
+ir_native_v4,tetranacci_mod_k4_T100k,C11_CONVENTIONAL_GCC_O3,100000,0.3896,0.3854,0.0002,,1.01,True,False,GCC_O3_REF,,,
+ir_native_v4,tetranacci_mod_k4_T100k,S3_CONVENTIONAL_NATIVE,100000,0.3858,0.3853,0.009,,1.0,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,tetranacci_mod_k4_T100k,S3_PREDICTIVE_NATIVE,100000,0.0395,0.0191,0.0003,,2.07,True,True,STATIC_PRECONDITIONS_VERIFIED,20.17,20.18,
+ir_native_v4,lcg_dyn_shifted_5param_T1M,S3_CONVENTIONAL_NATIVE,1000000,4.859,4.8381,0.0459,,1.0,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,lcg_dyn_shifted_5param_T1M,S3_PREDICTIVE_NATIVE,1000000,0.023,0.0023,0.0001,,10.0,True,True,STATIC_PRECONDITIONS_VERIFIED,2103.52,,
+ir_native_v4,sum_mod_ind_T100k,S3_CONVENTIONAL_NATIVE,100000,0.3789,0.3745,0.0021,,1.01,True,False,CONVENTIONAL_EXACT,,,
+ir_native_v4,sum_mod_ind_T100k,S3_PREDICTIVE_NATIVE,100000,0.0337,0.0075,0.0,,4.49,True,True,STATIC_PRECONDITIONS_VERIFIED,49.93,,
+ir_native_v4,tribonacci_mod_k3_T1e12,S3_PREDICTIVE_NATIVE,1000000000000,0.0226,0.0197,0.0002,,1.15,True,True,STATIC_PRECONDITIONS_VERIFIED,,,value=115825483
+simd_avx2_compiler,vec_scale_add_N16384_gcc_o3,C11_CONVENTIONAL_GCC_O3,16384,0.0092,0.0069,0.0001,,1.33,True,False,GCC_O3_REF,,,
+simd_avx2_compiler,vec_scale_add_N16384_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,16384,0.0346,0.0096,0.0003,157.509,3.6,True,False,BIT_EXACT_IEEE754_AVX2,,0.72,"compiler-emitted F64X4 vaddpd/vmulpd, max_err=0.0"
+simd_avx2_compiler,dot_f64_N16384_gcc_o3,C11_CONVENTIONAL_GCC_O3,16384,0.0187,0.0148,0.0,,1.26,True,False,GCC_O3_STRICT_FP,,,
+simd_avx2_compiler,dot_f64_N16384_s3_strict_fp,S3_CONVENTIONAL_NATIVE,16384,0.0211,0.0194,0.001,,1.09,True,False,STRICT_IEEE754_0ULP,,0.76,
+simd_avx2_compiler,dot_f64_N16384_s3_optin_avx2_fma,S3_PREDICTIVE_NATIVE,16384,0.0091,0.0076,0.0,,1.2,True,True,OPT_IN_FP_REASSOC_AVX2_FMA,2.55,1.95,abs_err=1.705e-13
+poisson2d_v4_csr,poisson_32x32_gcc_o3,C11_CONVENTIONAL_GCC_O3,1024,0.8599,0.8279,0.003,,1.04,True,False,GCC_O3_STRICT_FP,,,iters=109
+poisson2d_v4_csr,poisson_32x32_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,1024,1.6455,1.5755,0.0964,8610.928,1.04,True,False,STRICT_IEEE754_50M_BUDGET,,0.525,"iters=109, max_err=0.0e+00, ratio_vs_gcc=1.9x"
+poisson2d_v4_csr,poisson_32x32_s3_optin_fma,S3_PREDICTIVE_NATIVE,1024,1.4141,1.3881,0.037,,1.02,True,True,OPT_IN_FP_REASSOC_50M_BUDGET,1.135,0.596,"iters=109, max_err=2.89e-15"
+poisson2d_v4_csr,poisson_48x48_gcc_o3,C11_CONVENTIONAL_GCC_O3,2304,2.7453,2.7597,5.8404,,0.99,True,False,GCC_O3_STRICT_FP,,,iters=162
+poisson2d_v4_csr,poisson_48x48_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,2304,5.1015,5.2328,2.6216,8610.928,0.97,True,False,STRICT_IEEE754_50M_BUDGET,,0.527,"iters=162, max_err=0.0e+00, ratio_vs_gcc=1.9x"
+poisson2d_v4_csr,poisson_48x48_s3_optin_fma,S3_PREDICTIVE_NATIVE,2304,4.65,4.4749,0.0669,,1.04,True,True,OPT_IN_FP_REASSOC_50M_BUDGET,1.169,0.617,"iters=162, max_err=3.55e-15"
+poisson2d_v4_csr,poisson_64x64_gcc_o3,C11_CONVENTIONAL_GCC_O3,4096,8.2185,6.6475,0.697,,1.24,True,False,GCC_O3_STRICT_FP,,,iters=215
+poisson2d_v4_csr,poisson_64x64_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,4096,12.088,12.0438,0.0912,8610.928,1.0,True,False,STRICT_IEEE754_50M_BUDGET,,0.552,"iters=215, max_err=0.0e+00, ratio_vs_gcc=1.81x"
+poisson2d_v4_csr,poisson_64x64_s3_optin_fma,S3_PREDICTIVE_NATIVE,4096,10.3605,10.4588,1.2931,,0.99,True,True,OPT_IN_FP_REASSOC_50M_BUDGET,1.152,0.636,"iters=215, max_err=3.11e-15"
+poisson2d_v4_csr,poisson_96x96_gcc_o3,C11_CONVENTIONAL_GCC_O3,9216,23.231,23.904,1.416,,0.97,True,False,GCC_O3_STRICT_FP,,,iters=321
+poisson2d_v4_csr,poisson_96x96_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,9216,41.2868,41.1643,0.1574,8610.928,1.0,True,False,STRICT_IEEE754_50M_BUDGET,,0.581,"iters=321, max_err=0.0e+00, ratio_vs_gcc=1.72x"
+poisson2d_v4_csr,poisson_96x96_s3_optin_fma,S3_PREDICTIVE_NATIVE,9216,36.6094,38.0428,3.8874,,0.96,True,True,OPT_IN_FP_REASSOC_50M_BUDGET,1.082,0.628,"iters=321, max_err=9.77e-15"
+poisson2d_v4_csr,poisson_128x128_gcc_o3,C11_CONVENTIONAL_GCC_O3,16384,61.6375,62.78255,3.3311,,0.98,True,False,GCC_O3_STRICT_FP,,,iters=426
+poisson2d_v4_csr,poisson_128x128_s3_avx2_strict,S3_CONVENTIONAL_NATIVE,16384,131.9425,113.50445,24.9107,8610.928,1.16,True,False,STRICT_IEEE754_50M_BUDGET,,0.553,"iters=426, max_err=0.0e+00, ratio_vs_gcc=1.81x"
+poisson2d_v4_csr,poisson_128x128_s3_optin_fma,S3_PREDICTIVE_NATIVE,16384,90.3646,94.11765,8.6135,,0.96,True,True,OPT_IN_FP_REASSOC_50M_BUDGET,1.206,0.667,"iters=426, max_err=7.55e-15"
+gf2_s3_native,gf2_s3_conv_est_W64_T1M,S3_CONVENTIONAL_NATIVE,1000000,23.72,22.59,,0.0,1.05,True,False,CONVENTIONAL_S3_10K_SCALED,,,10k_measured_ms=0.2259
+gf2_s3_native,gf2_c11_circulant_W64_T1M,C11_PREDICTIVE_GCC_O3,1000000,0.0968,0.0259,0.0066,,3.74,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,c11_in_kernel_ms=0.0007
+gf2_s3_native,gf2_s3_circulant_native_W64_T1M,S3_PREDICTIVE_NATIVE,1000000,0.0349,0.0045,0.0001,0.0,7.76,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,5020.0,5.76,s3_wrapper_ms=0.0283; raw_s3_vs_c11_wrapper=0.17x
+gf2_s3_native,gf2_s3_conv_est_W128_T1M,S3_CONVENTIONAL_NATIVE,1000000,39.11,39.13,,0.0,1.0,True,False,CONVENTIONAL_S3_10K_SCALED,,,10k_measured_ms=0.3913
+gf2_s3_native,gf2_c11_circulant_W128_T1M,C11_PREDICTIVE_GCC_O3,1000000,0.0558,0.0453,0.0004,,1.23,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,c11_in_kernel_ms=0.0009
+gf2_s3_native,gf2_s3_circulant_native_W128_T1M,S3_PREDICTIVE_NATIVE,1000000,0.0107,0.0059,0.0001,0.0,1.81,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,6632.2,7.68,s3_wrapper_ms=0.0418; raw_s3_vs_c11_wrapper=0.13x
+gf2_s3_native,gf2_s3_conv_est_W256_T1M,S3_CONVENTIONAL_NATIVE,1000000,73.96,74.01,,0.0,1.0,True,False,CONVENTIONAL_S3_10K_SCALED,,,10k_measured_ms=0.7401
+gf2_s3_native,gf2_c11_circulant_W256_T1M,C11_PREDICTIVE_GCC_O3,1000000,0.0927,0.0795,0.0023,,1.17,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,c11_in_kernel_ms=0.0013
+gf2_s3_native,gf2_s3_circulant_native_W256_T1M,S3_PREDICTIVE_NATIVE,1000000,0.0128,0.0094,0.0,0.0,1.36,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,7873.4,8.46,s3_wrapper_ms=0.0657; raw_s3_vs_c11_wrapper=0.12x
+gf2_s3_native,gf2_s3_rule60_W256_T1e12,S3_PREDICTIVE_NATIVE,1000000000000,0.0122,0.0122,,,1.0,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,
+gf2_s3_native,gf2_s3_rule90_W256_T1e12,S3_PREDICTIVE_NATIVE,1000000000000,0.0097,0.0097,,,1.0,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,
+gf2_s3_native,gf2_s3_rule102_W256_T1e12,S3_PREDICTIVE_NATIVE,1000000000000,0.0095,0.0095,,,1.0,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,
+gf2_s3_native,gf2_s3_rule150_W256_T1e12,S3_PREDICTIVE_NATIVE,1000000000000,0.0105,0.0105,,,1.0,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,,
+hashlife_v4,conway_dense_chaotic_64x64_T500_c11,C11_CONVENTIONAL_GCC_O3,500,21.5721,21.7414,0.5057,,0.99,True,False,C11_CA_ORACLE,,,
+hashlife_v4,conway_dense_chaotic_64x64_T500_v4_prefilter,NEGATIVE_CONTROL,500,21.8537,21.9604,0.4957,,1.0,True,False,CHAOTIC_PREFILTER_C11_HANDOFF,,0.99,
+hashlife_v4,conway_tiled_gliders_128x128_T4096_c11,C11_CONVENTIONAL_GCC_O3,4096,691.4319,652.0115,,,1.06,True,False,C11_CA_ORACLE,,,
+hashlife_v4,conway_tiled_gliders_128x128_T4096_hl_v4,S3_PREDICTIVE_PYTHON_WRAPPER,4096,31.0927,29.989,3.0438,,1.04,True,True,MATHEMATICAL_PROOF_WITH_ASSUMPTIONS,,22.24,
+scev_and_negative_controls,scev_poly_deg3_and_cascaded_deg4_parity,S3_PREDICTIVE_PYTHON_WRAPPER,20,0.0,0.0,,,,True,True,CHAINS_OF_RECURRENCES_CR,,,
+scev_and_negative_controls,scev_negative_controls_impure_and_exp,NEGATIVE_CONTROL,0,0.0,0.0,,,,True,False,NEGATIVE_CONTROL_REJECTED,,,
+scev_and_negative_controls,workbench_v9_compiler_explain_poisson,S3_PREDICTIVE_PYTHON_WRAPPER,13,0.0,0.0,,,,True,False,TELEMETRY_VERIFIED,,,
+scev_and_negative_controls,default_predictive_exact_false_isolation,NEGATIVE_CONTROL,0,0.0,0.0,,,,True,False,DEFAULT_OPT_IN_ISOLATED,,,
+scev_and_negative_controls,fib92_overflow_and_small_t10_cutoff,NEGATIVE_CONTROL,92,0.0,0.0,,,,True,False,TRAP_AND_CUTOFF_PRESERVED,,,
+scev_and_negative_controls,proof_checker_tamper_detection,NEGATIVE_CONTROL,0,0.0,0.0,,,,True,False,TAMPER_REJECTED,,,
+scev_and_negative_controls,gf2_reject_nonlinear_rule30,NEGATIVE_CONTROL,1,0.0,0.0,,,,True,False,COUNTEREXAMPLE_FOUND,,,
+scev_and_negative_controls,gf2_reject_nonlinear_rule110,NEGATIVE_CONTROL,1,0.0,0.0,,,,True,False,COUNTEREXAMPLE_FOUND,,,
