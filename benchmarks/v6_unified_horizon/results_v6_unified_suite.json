@@ -1,0 +1,327 @@
+{
+  "campaign": "S3_V6_UNIFIED_MATHEMATICAL_INTELLIGENCE",
+  "codename": "OPERATION_NUMERICAL_HORIZON",
+  "timestamp_utc": "2026-11-14T13:14:00.501307+00:00",
+  "performance_panel": [
+    {
+      "WORKLOAD": "Poisson 2D CSR 32x32 (tol=1e-10, 109 iters, V4 vs V5 compiler)",
+      "BASELINE_COMMIT": "f33b5b3b",
+      "CANDIDATE_COMMIT": "9c1bec32",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "1.5801 ms",
+      "CANDIDATE_TIME": "1.1268 ms",
+      "SPEEDUP": "1.400x",
+      "CORRECTNESS": "PASS (max_err=0.0e+00)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Poisson 2D CSR 32x32 (tol=1e-12, 118 iters, GCC -O3 vs S3 V6)",
+      "BASELINE_COMMIT": "GCC-13.3-O3",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "1.3162 ms",
+      "CANDIDATE_TIME": "1.1975 ms",
+      "SPEEDUP": "1.099x (0.910x GCC)",
+      "CORRECTNESS": "PASS (max_err=0.0e+00)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Poisson 2D CSR 48x48 (tol=1e-10, 162 iters, GCC -O3 vs S3 V6)",
+      "BASELINE_COMMIT": "GCC-13.3-O3",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "3.8944 ms",
+      "CANDIDATE_TIME": "3.7999 ms",
+      "SPEEDUP": "1.025x (0.976x GCC)",
+      "CORRECTNESS": "PASS (max_err=0.0e+00)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Poisson 2D CSR 48x48 (tol=1e-12, 176 iters, V4 vs S3 V6)",
+      "BASELINE_COMMIT": "f33b5b3b",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "6.2005 ms",
+      "CANDIDATE_TIME": "4.9677 ms",
+      "SPEEDUP": "1.248x (1.137x GCC)",
+      "CORRECTNESS": "PASS (max_err=0.0e+00)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Poisson 2D CSR 64x64 (tol=1e-10, 215 iters, V4 vs S3 V6)",
+      "BASELINE_COMMIT": "f33b5b3b",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "13.1816 ms",
+      "CANDIDATE_TIME": "10.4088 ms",
+      "SPEEDUP": "1.266x",
+      "CORRECTNESS": "PASS (max_err=0.0e+00)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Collective Dynamics Independent (4096 agents x 120 steps)",
+      "BASELINE_COMMIT": "5a51667e",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "6.6188 ms",
+      "CANDIDATE_TIME": "4.5508 ms",
+      "SPEEDUP": "1.454x",
+      "CORRECTNESS": "PASS (exact i64 match)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Collective Dynamics Curie-Weiss (4096 agents x 120 steps)",
+      "BASELINE_COMMIT": "5a51667e",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "5.9293 ms",
+      "CANDIDATE_TIME": "4.6260 ms",
+      "SPEEDUP": "1.282x",
+      "CORRECTNESS": "PASS (exact i64 match)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "S3 Compact Encode head_s3_compact_1mib (1 MiB)",
+      "BASELINE_COMMIT": "26931af9",
+      "CANDIDATE_COMMIT": "exp/s3-v6-compact-performance",
+      "MEASUREMENT_SCOPE": "END_TO_END",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "1.296 MB/s",
+      "CANDIDATE_TIME": "11.181 MB/s",
+      "SPEEDUP": "8.631x (compiler=5.95x, kernel=1.37x)",
+      "CORRECTNESS": "PASS (SHA-256 bit-identical)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "S3 Compact Decode head_s3_compact_1mib (1 MiB)",
+      "BASELINE_COMMIT": "26931af9",
+      "CANDIDATE_COMMIT": "exp/s3-v6-compact-performance",
+      "MEASUREMENT_SCOPE": "END_TO_END",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "15.874 MB/s",
+      "CANDIDATE_TIME": "119.363 MB/s",
+      "SPEEDUP": "7.519x",
+      "CORRECTNESS": "PASS (SHA-256 bit-identical)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "S3 Compact Encode high_byte_wrap_512kib (192 KiB)",
+      "BASELINE_COMMIT": "26931af9",
+      "CANDIDATE_COMMIT": "exp/s3-v6-compact-performance",
+      "MEASUREMENT_SCOPE": "END_TO_END",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "1.964 MB/s",
+      "CANDIDATE_TIME": "26.530 MB/s",
+      "SPEEDUP": "13.511x",
+      "CORRECTNESS": "PASS (SHA-256 bit-identical)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "S3 Compact Encode repetitive_512kib (512 KiB)",
+      "BASELINE_COMMIT": "26931af9",
+      "CANDIDATE_COMMIT": "exp/s3-v6-compact-performance",
+      "MEASUREMENT_SCOPE": "END_TO_END",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "2.614 MB/s",
+      "CANDIDATE_TIME": "31.233 MB/s",
+      "SPEEDUP": "11.951x",
+      "CORRECTNESS": "PASS (SHA-256 bit-identical)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "DOOM M55 Freedoom E1M1+E1M2 (512 rays, 2875 lines/round)",
+      "BASELINE_COMMIT": "5c9c5b66",
+      "CANDIDATE_COMMIT": "feat/s3-v6-doom-wasm",
+      "MEASUREMENT_SCOPE": "END_TO_END (Multi-Ray Batched + Q10 MRU Cache)",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "YES",
+      "SAME_PRECISION": "YES",
+      "SAME_ITERATIONS": "YES",
+      "BASELINE_TIME": "1.2038 ms",
+      "CANDIDATE_TIME": "0.8758 ms (kernelOnly=0.8841 ms)",
+      "SPEEDUP": "1.375x",
+      "CORRECTNESS": "PASS (512/512 rays exact t & hit order)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP"
+    },
+    {
+      "WORKLOAD": "Quasi-Polynomial Parity Accumulator sum(3*floor(i^2/2)+5i+2, N=100k)",
+      "BASELINE_COMMIT": "5a51667e",
+      "CANDIDATE_COMMIT": "HEAD(exp/s3-v6-unified-numerical-intelligence)",
+      "MEASUREMENT_SCOPE": "KERNEL_ONLY (IR Execution)",
+      "SAME_INPUT": "YES",
+      "SAME_ALGORITHM": "NO (Proven O(1) Parity-Coset Algebraic Reduction)",
+      "SAME_PRECISION": "YES (Checked Exact i64)",
+      "SAME_ITERATIONS": "NO (100,000 -> O(1))",
+      "BASELINE_TIME": "1581.9922 ms",
+      "CANDIDATE_TIME": "10.6580 ms",
+      "SPEEDUP": "148.43x",
+      "CORRECTNESS": "PASS (exact=166716660005)",
+      "CONFIDENCE": "HIGH",
+      "DECISION": "KEEP (OPT-IN)"
+    }
+  ],
+  "numerical_discovery": {
+    "quasi_polynomial_parity_lowering": {
+      "n": 10000,
+      "exact_value": 166716660005,
+      "baseline_ir_loop_ms": 1581.9922,
+      "lowered_o1_ir_ms": 10.658,
+      "speedup": 148.43,
+      "pattern_class": "DISCOVERED_QUASI_POLYNOMIAL_PARITY",
+      "lowered_functions": [
+        "sum_quasi_parity"
+      ]
+    },
+    "sequence_discovery_corpus": [
+      {
+        "case": "cubic_polynomial_3k3_minus_2k_plus_7",
+        "length": 18,
+        "source_aware_verified": true,
+        "pattern_family": "POLYNOMIAL_FINITE_DIFFERENCE",
+        "confidence": "EXACT_PROVEN",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": [
+          17467.0,
+          20546.0,
+          23967.0,
+          27748.0
+        ]
+      },
+      {
+        "case": "cubic_polynomial_observation_only",
+        "length": 18,
+        "source_aware_verified": false,
+        "pattern_family": "POLYNOMIAL_FINITE_DIFFERENCE",
+        "confidence": "APPROXIMATE_FORECAST",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": [
+          17467.0,
+          20546.0,
+          23967.0,
+          27748.0
+        ]
+      },
+      {
+        "case": "quasi_poly_parity_floor_k2_div_2",
+        "length": 20,
+        "source_aware_verified": true,
+        "pattern_family": "QUASI_POLYNOMIAL_PARITY",
+        "confidence": "EXACT_PROVEN",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": [
+          279.0,
+          303.0,
+          329.0,
+          355.0
+        ]
+      },
+      {
+        "case": "linear_recurrence_pell_2a_plus_b",
+        "length": 14,
+        "source_aware_verified": false,
+        "pattern_family": "LINEAR_RECURRENCE",
+        "confidence": "APPROXIMATE_FORECAST",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": [
+          80782.0,
+          195025.0,
+          470832.0,
+          1136689.0
+        ]
+      },
+      {
+        "case": "periodic_orbit_period_5",
+        "length": 25,
+        "source_aware_verified": false,
+        "pattern_family": "PERIODIC_ORBIT",
+        "confidence": "APPROXIMATE_FORECAST",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": [
+          3.0,
+          -1.0,
+          4.0,
+          1.0
+        ]
+      },
+      {
+        "case": "adversarial_prefix_spoof_k2_break_at_14",
+        "length": 18,
+        "source_aware_verified": false,
+        "pattern_family": "FALSIFIED_POLYNOMIAL_PREFIX_SPOOF",
+        "confidence": "REJECTED",
+        "validation_max_abs_err": 17.0,
+        "forecast_horizon": []
+      },
+      {
+        "case": "short_ambiguous_prefix_len_4",
+        "length": 4,
+        "source_aware_verified": false,
+        "pattern_family": "INSUFFICIENT_SAMPLE_LENGTH",
+        "confidence": "INSUFFICIENT_EVIDENCE",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": []
+      },
+      {
+        "case": "logistic_chaotic_quantized_r4",
+        "length": 16,
+        "source_aware_verified": false,
+        "pattern_family": "CHAOTIC_OR_HIGH_ENTROPY",
+        "confidence": "UNIDENTIFIABLE",
+        "validation_max_abs_err": 0.0,
+        "forecast_horizon": []
+      }
+    ]
+  }
+}
