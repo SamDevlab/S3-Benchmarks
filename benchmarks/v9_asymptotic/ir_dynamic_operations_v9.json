@@ -1,0 +1,4404 @@
+{
+  "classification": "ACTUAL_S3_IR_DYNAMIC_OPCODE_COUNTS_FROM_EXISTING_EMULATOR_OBSERVER",
+  "native_machine_instruction_count": "NOT_MEASURED",
+  "formal_complexity_proof": false,
+  "global_worst_case_complexity": "NOT_PROVED",
+  "source_branch": "S3 V8 unchanged experimental compiler",
+  "methods": [
+    "CONVENTIONAL_OPTIMIZED_IR",
+    "PREDICTIVE_LOWERED_IR",
+    "PREDICTIVE_CLEANED_IR"
+  ],
+  "lowered_functions": [
+    "coupled_exchange",
+    "fib_mod",
+    "lcg_mod",
+    "sum_i2",
+    "sum_quasi_parity",
+    "triangular_cubic"
+  ],
+  "cleanup_stats": {
+    "instructions_before": 2343,
+    "instructions_after": 2054,
+    "blocks_before": 613,
+    "blocks_after": 532,
+    "promoted_memories": 6,
+    "folded_constants": 135,
+    "folded_branches": 20
+  },
+  "ir_count_growth_loglog_slopes_empirical_not_proof": {
+    "sum_quasi_parity": {
+      "CONVENTIONAL_OPTIMIZED_IR": 0.9271,
+      "PREDICTIVE_LOWERED_IR": 0.1679,
+      "PREDICTIVE_CLEANED_IR": 0.1556
+    },
+    "lcg_mod": {
+      "CONVENTIONAL_OPTIMIZED_IR": 0.925,
+      "PREDICTIVE_LOWERED_IR": 0.2324,
+      "PREDICTIVE_CLEANED_IR": 0.237
+    },
+    "fib_mod": {
+      "CONVENTIONAL_OPTIMIZED_IR": 0.9206,
+      "PREDICTIVE_LOWERED_IR": 0.3088,
+      "PREDICTIVE_CLEANED_IR": 0.3156
+    }
+  },
+  "rows": [
+    {
+      "function": "sum_quasi_parity",
+      "N": 1,
+      "expected": 5,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.7586,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 5,
+          "counts": {
+            "executed_ir_opcodes": 44,
+            "function_calls": 1,
+            "arithmetic_opcodes": 7,
+            "control_opcodes": 6,
+            "data_opcodes": 29,
+            "opcode_histogram": {
+              "ADD": 4,
+              "BRANCH3": 2,
+              "CONST": 17,
+              "DIVIDE": 1,
+              "JUMP": 3,
+              "LOAD": 8,
+              "MULTIPLY": 2,
+              "RELATE": 2,
+              "RETURN": 1,
+              "STORE": 4
+            },
+            "per_function": {
+              "sum_quasi_parity": 44
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.276
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 5,
+          "counts": {
+            "executed_ir_opcodes": 64,
+            "function_calls": 1,
+            "arithmetic_opcodes": 9,
+            "control_opcodes": 11,
+            "data_opcodes": 38,
+            "opcode_histogram": {
+              "ADD": 5,
+              "BRANCH3": 6,
+              "CONST": 23,
+              "DIVIDE": 1,
+              "JUMP": 4,
+              "LOAD": 9,
+              "MULTIPLY": 2,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 6,
+              "RETURN": 1,
+              "STORE": 6
+            },
+            "per_function": {
+              "sum_quasi_parity": 64
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.578
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 5,
+          "counts": {
+            "executed_ir_opcodes": 58,
+            "function_calls": 1,
+            "arithmetic_opcodes": 7,
+            "control_opcodes": 8,
+            "data_opcodes": 38,
+            "opcode_histogram": {
+              "ADD": 4,
+              "BRANCH3": 5,
+              "CONST": 22,
+              "DIVIDE": 1,
+              "JUMP": 2,
+              "LOAD": 9,
+              "MOVE": 1,
+              "MULTIPLY": 2,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 6
+            },
+            "per_function": {
+              "sum_quasi_parity": 58
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.509
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 4,
+      "expected": 21,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.875,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 98,
+            "function_calls": 1,
+            "arithmetic_opcodes": 28,
+            "control_opcodes": 12,
+            "data_opcodes": 53,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 5,
+              "CONST": 17,
+              "DIVIDE": 4,
+              "JUMP": 6,
+              "LOAD": 26,
+              "MULTIPLY": 8,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 10
+            },
+            "per_function": {
+              "sum_quasi_parity": 98
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.876
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 118,
+            "function_calls": 1,
+            "arithmetic_opcodes": 30,
+            "control_opcodes": 17,
+            "data_opcodes": 62,
+            "opcode_histogram": {
+              "ADD": 17,
+              "BRANCH3": 9,
+              "CONST": 23,
+              "DIVIDE": 4,
+              "JUMP": 7,
+              "LOAD": 27,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 9,
+              "RETURN": 1,
+              "STORE": 12
+            },
+            "per_function": {
+              "sum_quasi_parity": 118
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.911
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 112,
+            "function_calls": 1,
+            "arithmetic_opcodes": 28,
+            "control_opcodes": 14,
+            "data_opcodes": 62,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 8,
+              "CONST": 22,
+              "DIVIDE": 4,
+              "JUMP": 5,
+              "LOAD": 27,
+              "MOVE": 1,
+              "MULTIPLY": 8,
+              "RELATE": 8,
+              "RETURN": 1,
+              "STORE": 12
+            },
+            "per_function": {
+              "sum_quasi_parity": 112
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.898
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 8,
+      "expected": 117,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9239,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 117,
+          "counts": {
+            "executed_ir_opcodes": 170,
+            "function_calls": 1,
+            "arithmetic_opcodes": 56,
+            "control_opcodes": 20,
+            "data_opcodes": 85,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 9,
+              "CONST": 17,
+              "DIVIDE": 8,
+              "JUMP": 10,
+              "LOAD": 50,
+              "MULTIPLY": 16,
+              "RELATE": 9,
+              "RETURN": 1,
+              "STORE": 18
+            },
+            "per_function": {
+              "sum_quasi_parity": 170
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.541
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 117,
+          "counts": {
+            "executed_ir_opcodes": 190,
+            "function_calls": 1,
+            "arithmetic_opcodes": 58,
+            "control_opcodes": 25,
+            "data_opcodes": 94,
+            "opcode_histogram": {
+              "ADD": 33,
+              "BRANCH3": 13,
+              "CONST": 23,
+              "DIVIDE": 8,
+              "JUMP": 11,
+              "LOAD": 51,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 13,
+              "RETURN": 1,
+              "STORE": 20
+            },
+            "per_function": {
+              "sum_quasi_parity": 190
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.166
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 117,
+          "counts": {
+            "executed_ir_opcodes": 184,
+            "function_calls": 1,
+            "arithmetic_opcodes": 56,
+            "control_opcodes": 22,
+            "data_opcodes": 94,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 12,
+              "CONST": 22,
+              "DIVIDE": 8,
+              "JUMP": 9,
+              "LOAD": 51,
+              "MOVE": 1,
+              "MULTIPLY": 16,
+              "RELATE": 12,
+              "RETURN": 1,
+              "STORE": 20
+            },
+            "per_function": {
+              "sum_quasi_parity": 184
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.666
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 16,
+      "expected": 805,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9905,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 805,
+          "counts": {
+            "executed_ir_opcodes": 314,
+            "function_calls": 1,
+            "arithmetic_opcodes": 112,
+            "control_opcodes": 36,
+            "data_opcodes": 149,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 17,
+              "CONST": 17,
+              "DIVIDE": 16,
+              "JUMP": 18,
+              "LOAD": 98,
+              "MULTIPLY": 32,
+              "RELATE": 17,
+              "RETURN": 1,
+              "STORE": 34
+            },
+            "per_function": {
+              "sum_quasi_parity": 314
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.588
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 805,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.306
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 805,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.663
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 20,
+      "expected": 1525,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.2215,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 1525,
+          "counts": {
+            "executed_ir_opcodes": 386,
+            "function_calls": 1,
+            "arithmetic_opcodes": 140,
+            "control_opcodes": 44,
+            "data_opcodes": 181,
+            "opcode_histogram": {
+              "ADD": 80,
+              "BRANCH3": 21,
+              "CONST": 17,
+              "DIVIDE": 20,
+              "JUMP": 22,
+              "LOAD": 122,
+              "MULTIPLY": 40,
+              "RELATE": 21,
+              "RETURN": 1,
+              "STORE": 42
+            },
+            "per_function": {
+              "sum_quasi_parity": 386
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.555
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 1525,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.981
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 1525,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.467
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 24,
+      "expected": 2581,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.4494,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 2581,
+          "counts": {
+            "executed_ir_opcodes": 458,
+            "function_calls": 1,
+            "arithmetic_opcodes": 168,
+            "control_opcodes": 52,
+            "data_opcodes": 213,
+            "opcode_histogram": {
+              "ADD": 96,
+              "BRANCH3": 25,
+              "CONST": 17,
+              "DIVIDE": 24,
+              "JUMP": 26,
+              "LOAD": 146,
+              "MULTIPLY": 48,
+              "RELATE": 25,
+              "RETURN": 1,
+              "STORE": 50
+            },
+            "per_function": {
+              "sum_quasi_parity": 458
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.841
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 2581,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.434
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 2581,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.438
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 31,
+      "expected": 5430,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.8423,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 5430,
+          "counts": {
+            "executed_ir_opcodes": 584,
+            "function_calls": 1,
+            "arithmetic_opcodes": 217,
+            "control_opcodes": 66,
+            "data_opcodes": 269,
+            "opcode_histogram": {
+              "ADD": 124,
+              "BRANCH3": 32,
+              "CONST": 17,
+              "DIVIDE": 31,
+              "JUMP": 33,
+              "LOAD": 188,
+              "MULTIPLY": 62,
+              "RELATE": 32,
+              "RETURN": 1,
+              "STORE": 64
+            },
+            "per_function": {
+              "sum_quasi_parity": 584
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.001
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 5430,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.781
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 5430,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.187
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 32,
+      "expected": 5957,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.9051,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 5957,
+          "counts": {
+            "executed_ir_opcodes": 602,
+            "function_calls": 1,
+            "arithmetic_opcodes": 224,
+            "control_opcodes": 68,
+            "data_opcodes": 277,
+            "opcode_histogram": {
+              "ADD": 128,
+              "BRANCH3": 33,
+              "CONST": 17,
+              "DIVIDE": 32,
+              "JUMP": 34,
+              "LOAD": 194,
+              "MULTIPLY": 64,
+              "RELATE": 33,
+              "RETURN": 1,
+              "STORE": 66
+            },
+            "per_function": {
+              "sum_quasi_parity": 602
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.231
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 5957,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.38
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 5957,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.647
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 33,
+      "expected": 6517,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.962,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 6517,
+          "counts": {
+            "executed_ir_opcodes": 620,
+            "function_calls": 1,
+            "arithmetic_opcodes": 231,
+            "control_opcodes": 70,
+            "data_opcodes": 285,
+            "opcode_histogram": {
+              "ADD": 132,
+              "BRANCH3": 34,
+              "CONST": 17,
+              "DIVIDE": 33,
+              "JUMP": 35,
+              "LOAD": 200,
+              "MULTIPLY": 66,
+              "RELATE": 34,
+              "RETURN": 1,
+              "STORE": 68
+            },
+            "per_function": {
+              "sum_quasi_parity": 620
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.197
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 6517,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.795
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 6517,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.579
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 40,
+      "expected": 11445,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 2.3533,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 11445,
+          "counts": {
+            "executed_ir_opcodes": 746,
+            "function_calls": 1,
+            "arithmetic_opcodes": 280,
+            "control_opcodes": 84,
+            "data_opcodes": 341,
+            "opcode_histogram": {
+              "ADD": 160,
+              "BRANCH3": 41,
+              "CONST": 17,
+              "DIVIDE": 40,
+              "JUMP": 42,
+              "LOAD": 242,
+              "MULTIPLY": 80,
+              "RELATE": 41,
+              "RETURN": 1,
+              "STORE": 82
+            },
+            "per_function": {
+              "sum_quasi_parity": 746
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.042
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 11445,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.429
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 11445,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.215
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 64,
+      "expected": 45701,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 3.7161,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 45701,
+          "counts": {
+            "executed_ir_opcodes": 1178,
+            "function_calls": 1,
+            "arithmetic_opcodes": 448,
+            "control_opcodes": 132,
+            "data_opcodes": 533,
+            "opcode_histogram": {
+              "ADD": 256,
+              "BRANCH3": 65,
+              "CONST": 17,
+              "DIVIDE": 64,
+              "JUMP": 66,
+              "LOAD": 386,
+              "MULTIPLY": 128,
+              "RELATE": 65,
+              "RETURN": 1,
+              "STORE": 130
+            },
+            "per_function": {
+              "sum_quasi_parity": 1178
+            }
+          },
+          "interpreter_ms_not_benchmark": 9.794
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 45701,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.002
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 45701,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.227
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 128,
+      "expected": 357637,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 7.3734,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 357637,
+          "counts": {
+            "executed_ir_opcodes": 2330,
+            "function_calls": 1,
+            "arithmetic_opcodes": 896,
+            "control_opcodes": 260,
+            "data_opcodes": 1045,
+            "opcode_histogram": {
+              "ADD": 512,
+              "BRANCH3": 129,
+              "CONST": 17,
+              "DIVIDE": 128,
+              "JUMP": 130,
+              "LOAD": 770,
+              "MULTIPLY": 256,
+              "RELATE": 129,
+              "RETURN": 1,
+              "STORE": 258
+            },
+            "per_function": {
+              "sum_quasi_parity": 2330
+            }
+          },
+          "interpreter_ms_not_benchmark": 17.342
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 357637,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.087
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 357637,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.605
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 256,
+      "expected": 2828805,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 14.6183,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 2828805,
+          "counts": {
+            "executed_ir_opcodes": 4634,
+            "function_calls": 1,
+            "arithmetic_opcodes": 1792,
+            "control_opcodes": 516,
+            "data_opcodes": 2069,
+            "opcode_histogram": {
+              "ADD": 1024,
+              "BRANCH3": 257,
+              "CONST": 17,
+              "DIVIDE": 256,
+              "JUMP": 258,
+              "LOAD": 1538,
+              "MULTIPLY": 512,
+              "RELATE": 257,
+              "RETURN": 1,
+              "STORE": 514
+            },
+            "per_function": {
+              "sum_quasi_parity": 4634
+            }
+          },
+          "interpreter_ms_not_benchmark": 40.904
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 2828805,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.891
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 2828805,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.353
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 512,
+      "expected": 22500357,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 29.2468,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 22500357,
+          "counts": {
+            "executed_ir_opcodes": 9242,
+            "function_calls": 1,
+            "arithmetic_opcodes": 3584,
+            "control_opcodes": 1028,
+            "data_opcodes": 4117,
+            "opcode_histogram": {
+              "ADD": 2048,
+              "BRANCH3": 513,
+              "CONST": 17,
+              "DIVIDE": 512,
+              "JUMP": 514,
+              "LOAD": 3074,
+              "MULTIPLY": 1024,
+              "RELATE": 513,
+              "RETURN": 1,
+              "STORE": 1026
+            },
+            "per_function": {
+              "sum_quasi_parity": 9242
+            }
+          },
+          "interpreter_ms_not_benchmark": 72.163
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 22500357,
+          "counts": {
+            "executed_ir_opcodes": 374,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 194,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 32,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 374
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.544
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 22500357,
+          "counts": {
+            "executed_ir_opcodes": 316,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 21,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 316
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.402
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 1024,
+      "expected": 179480581,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 58.2271,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 179480581,
+          "counts": {
+            "executed_ir_opcodes": 18458,
+            "function_calls": 1,
+            "arithmetic_opcodes": 7168,
+            "control_opcodes": 2052,
+            "data_opcodes": 8213,
+            "opcode_histogram": {
+              "ADD": 4096,
+              "BRANCH3": 1025,
+              "CONST": 17,
+              "DIVIDE": 1024,
+              "JUMP": 1026,
+              "LOAD": 6146,
+              "MULTIPLY": 2048,
+              "RELATE": 1025,
+              "RETURN": 1,
+              "STORE": 2050
+            },
+            "per_function": {
+              "sum_quasi_parity": 18458
+            }
+          },
+          "interpreter_ms_not_benchmark": 143.183
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 179480581,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.367
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 179480581,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.723
+        }
+      }
+    },
+    {
+      "function": "sum_quasi_parity",
+      "N": 4096,
+      "expected": 11461632005,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 232.6625,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 11461632005,
+          "counts": {
+            "executed_ir_opcodes": 73754,
+            "function_calls": 1,
+            "arithmetic_opcodes": 28672,
+            "control_opcodes": 8196,
+            "data_opcodes": 32789,
+            "opcode_histogram": {
+              "ADD": 16384,
+              "BRANCH3": 4097,
+              "CONST": 17,
+              "DIVIDE": 4096,
+              "JUMP": 4098,
+              "LOAD": 24578,
+              "MULTIPLY": 8192,
+              "RELATE": 4097,
+              "RETURN": 1,
+              "STORE": 8194
+            },
+            "per_function": {
+              "sum_quasi_parity": 73754
+            }
+          },
+          "interpreter_ms_not_benchmark": 590.798
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 11461632005,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 83,
+            "control_opcodes": 53,
+            "data_opcodes": 195,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 44,
+              "CONST": 118,
+              "DIVIDE": 7,
+              "JUMP": 8,
+              "LOAD": 33,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.198
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 11461632005,
+          "counts": {
+            "executed_ir_opcodes": 317,
+            "function_calls": 1,
+            "arithmetic_opcodes": 63,
+            "control_opcodes": 44,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 18,
+              "BRANCH3": 38,
+              "CONST": 103,
+              "DIVIDE": 7,
+              "JUMP": 5,
+              "LOAD": 22,
+              "MOVE": 3,
+              "MULTIPLY": 25,
+              "NUMERIC_DIFFERENCE": 13,
+              "RELATE": 38,
+              "RETURN": 1,
+              "STORE": 44
+            },
+            "per_function": {
+              "sum_quasi_parity": 317
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.581
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 1,
+      "expected": 26,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.7143,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 26,
+          "counts": {
+            "executed_ir_opcodes": 35,
+            "function_calls": 1,
+            "arithmetic_opcodes": 6,
+            "control_opcodes": 6,
+            "data_opcodes": 21,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 2,
+              "CONST": 12,
+              "DIVIDE": 1,
+              "JUMP": 3,
+              "LOAD": 5,
+              "MULTIPLY": 2,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 2,
+              "RETURN": 1,
+              "STORE": 4
+            },
+            "per_function": {
+              "lcg_mod": 35
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.319
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 26,
+          "counts": {
+            "executed_ir_opcodes": 56,
+            "function_calls": 1,
+            "arithmetic_opcodes": 7,
+            "control_opcodes": 11,
+            "data_opcodes": 33,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 5,
+              "CONST": 18,
+              "DIVIDE": 1,
+              "JUMP": 5,
+              "LOAD": 7,
+              "MULTIPLY": 2,
+              "NUMERIC_DIFFERENCE": 2,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 8
+            },
+            "per_function": {
+              "lcg_mod": 56
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.782
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 26,
+          "counts": {
+            "executed_ir_opcodes": 49,
+            "function_calls": 1,
+            "arithmetic_opcodes": 6,
+            "control_opcodes": 7,
+            "data_opcodes": 32,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 4,
+              "CONST": 16,
+              "DIVIDE": 1,
+              "JUMP": 2,
+              "LOAD": 7,
+              "MOVE": 1,
+              "MULTIPLY": 2,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 4,
+              "RETURN": 1,
+              "STORE": 8
+            },
+            "per_function": {
+              "lcg_mod": 49
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.506
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 4,
+      "expected": 767,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.8462,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 767,
+          "counts": {
+            "executed_ir_opcodes": 77,
+            "function_calls": 1,
+            "arithmetic_opcodes": 24,
+            "control_opcodes": 12,
+            "data_opcodes": 36,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 5,
+              "CONST": 12,
+              "DIVIDE": 4,
+              "JUMP": 6,
+              "LOAD": 14,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 4,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 10
+            },
+            "per_function": {
+              "lcg_mod": 77
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.773
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 767,
+          "counts": {
+            "executed_ir_opcodes": 98,
+            "function_calls": 1,
+            "arithmetic_opcodes": 25,
+            "control_opcodes": 17,
+            "data_opcodes": 48,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 8,
+              "CONST": 18,
+              "DIVIDE": 4,
+              "JUMP": 8,
+              "LOAD": 16,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 5,
+              "RELATE": 8,
+              "RETURN": 1,
+              "STORE": 14
+            },
+            "per_function": {
+              "lcg_mod": 98
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.173
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 767,
+          "counts": {
+            "executed_ir_opcodes": 91,
+            "function_calls": 1,
+            "arithmetic_opcodes": 24,
+            "control_opcodes": 13,
+            "data_opcodes": 47,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 7,
+              "CONST": 16,
+              "DIVIDE": 4,
+              "JUMP": 5,
+              "LOAD": 16,
+              "MOVE": 1,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 4,
+              "RELATE": 7,
+              "RETURN": 1,
+              "STORE": 14
+            },
+            "per_function": {
+              "lcg_mod": 91
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.187
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 8,
+      "expected": 62327,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9048,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 62327,
+          "counts": {
+            "executed_ir_opcodes": 133,
+            "function_calls": 1,
+            "arithmetic_opcodes": 48,
+            "control_opcodes": 20,
+            "data_opcodes": 56,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 9,
+              "CONST": 12,
+              "DIVIDE": 8,
+              "JUMP": 10,
+              "LOAD": 26,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 8,
+              "RELATE": 9,
+              "RETURN": 1,
+              "STORE": 18
+            },
+            "per_function": {
+              "lcg_mod": 133
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.113
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 62327,
+          "counts": {
+            "executed_ir_opcodes": 154,
+            "function_calls": 1,
+            "arithmetic_opcodes": 49,
+            "control_opcodes": 25,
+            "data_opcodes": 68,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 12,
+              "CONST": 18,
+              "DIVIDE": 8,
+              "JUMP": 12,
+              "LOAD": 28,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 9,
+              "RELATE": 12,
+              "RETURN": 1,
+              "STORE": 22
+            },
+            "per_function": {
+              "lcg_mod": 154
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.959
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 62327,
+          "counts": {
+            "executed_ir_opcodes": 147,
+            "function_calls": 1,
+            "arithmetic_opcodes": 48,
+            "control_opcodes": 21,
+            "data_opcodes": 67,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 11,
+              "CONST": 16,
+              "DIVIDE": 8,
+              "JUMP": 9,
+              "LOAD": 28,
+              "MOVE": 1,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 8,
+              "RELATE": 11,
+              "RETURN": 1,
+              "STORE": 22
+            },
+            "per_function": {
+              "lcg_mod": 147
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.885
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 16,
+      "expected": 408943847,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9459,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 408943847,
+          "counts": {
+            "executed_ir_opcodes": 245,
+            "function_calls": 1,
+            "arithmetic_opcodes": 96,
+            "control_opcodes": 36,
+            "data_opcodes": 96,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 17,
+              "CONST": 12,
+              "DIVIDE": 16,
+              "JUMP": 18,
+              "LOAD": 50,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 16,
+              "RELATE": 17,
+              "RETURN": 1,
+              "STORE": 34
+            },
+            "per_function": {
+              "lcg_mod": 245
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.462
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 408943847,
+          "counts": {
+            "executed_ir_opcodes": 266,
+            "function_calls": 1,
+            "arithmetic_opcodes": 97,
+            "control_opcodes": 41,
+            "data_opcodes": 108,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 20,
+              "CONST": 18,
+              "DIVIDE": 16,
+              "JUMP": 20,
+              "LOAD": 52,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 17,
+              "RELATE": 20,
+              "RETURN": 1,
+              "STORE": 38
+            },
+            "per_function": {
+              "lcg_mod": 266
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.061
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 408943847,
+          "counts": {
+            "executed_ir_opcodes": 259,
+            "function_calls": 1,
+            "arithmetic_opcodes": 96,
+            "control_opcodes": 37,
+            "data_opcodes": 107,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 19,
+              "CONST": 16,
+              "DIVIDE": 16,
+              "JUMP": 17,
+              "LOAD": 52,
+              "MOVE": 1,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 16,
+              "RELATE": 19,
+              "RETURN": 1,
+              "STORE": 38
+            },
+            "per_function": {
+              "lcg_mod": 259
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.858
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 20,
+      "expected": 124451576,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9556,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 124451576,
+          "counts": {
+            "executed_ir_opcodes": 301,
+            "function_calls": 1,
+            "arithmetic_opcodes": 120,
+            "control_opcodes": 44,
+            "data_opcodes": 116,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 21,
+              "CONST": 12,
+              "DIVIDE": 20,
+              "JUMP": 22,
+              "LOAD": 62,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 20,
+              "RELATE": 21,
+              "RETURN": 1,
+              "STORE": 42
+            },
+            "per_function": {
+              "lcg_mod": 301
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.76
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 124451576,
+          "counts": {
+            "executed_ir_opcodes": 322,
+            "function_calls": 1,
+            "arithmetic_opcodes": 121,
+            "control_opcodes": 49,
+            "data_opcodes": 128,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 24,
+              "CONST": 18,
+              "DIVIDE": 20,
+              "JUMP": 24,
+              "LOAD": 64,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 21,
+              "RELATE": 24,
+              "RETURN": 1,
+              "STORE": 46
+            },
+            "per_function": {
+              "lcg_mod": 322
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.325
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 124451576,
+          "counts": {
+            "executed_ir_opcodes": 315,
+            "function_calls": 1,
+            "arithmetic_opcodes": 120,
+            "control_opcodes": 45,
+            "data_opcodes": 127,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 23,
+              "CONST": 16,
+              "DIVIDE": 20,
+              "JUMP": 21,
+              "LOAD": 64,
+              "MOVE": 1,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 20,
+              "RELATE": 23,
+              "RETURN": 1,
+              "STORE": 46
+            },
+            "per_function": {
+              "lcg_mod": 315
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.881
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 24,
+      "expected": 80577786,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9623,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 80577786,
+          "counts": {
+            "executed_ir_opcodes": 357,
+            "function_calls": 1,
+            "arithmetic_opcodes": 144,
+            "control_opcodes": 52,
+            "data_opcodes": 136,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 25,
+              "CONST": 12,
+              "DIVIDE": 24,
+              "JUMP": 26,
+              "LOAD": 74,
+              "MULTIPLY": 48,
+              "NUMERIC_DIFFERENCE": 24,
+              "RELATE": 25,
+              "RETURN": 1,
+              "STORE": 50
+            },
+            "per_function": {
+              "lcg_mod": 357
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.784
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 80577786,
+          "counts": {
+            "executed_ir_opcodes": 378,
+            "function_calls": 1,
+            "arithmetic_opcodes": 145,
+            "control_opcodes": 57,
+            "data_opcodes": 148,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 28,
+              "CONST": 18,
+              "DIVIDE": 24,
+              "JUMP": 28,
+              "LOAD": 76,
+              "MULTIPLY": 48,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 28,
+              "RETURN": 1,
+              "STORE": 54
+            },
+            "per_function": {
+              "lcg_mod": 378
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.228
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 80577786,
+          "counts": {
+            "executed_ir_opcodes": 371,
+            "function_calls": 1,
+            "arithmetic_opcodes": 144,
+            "control_opcodes": 53,
+            "data_opcodes": 147,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 27,
+              "CONST": 16,
+              "DIVIDE": 24,
+              "JUMP": 25,
+              "LOAD": 76,
+              "MOVE": 1,
+              "MULTIPLY": 48,
+              "NUMERIC_DIFFERENCE": 24,
+              "RELATE": 27,
+              "RETURN": 1,
+              "STORE": 54
+            },
+            "per_function": {
+              "lcg_mod": 371
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.072
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 31,
+      "expected": 223622215,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9701,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 223622215,
+          "counts": {
+            "executed_ir_opcodes": 455,
+            "function_calls": 1,
+            "arithmetic_opcodes": 186,
+            "control_opcodes": 66,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 32,
+              "CONST": 12,
+              "DIVIDE": 31,
+              "JUMP": 33,
+              "LOAD": 95,
+              "MULTIPLY": 62,
+              "NUMERIC_DIFFERENCE": 31,
+              "RELATE": 32,
+              "RETURN": 1,
+              "STORE": 64
+            },
+            "per_function": {
+              "lcg_mod": 455
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.571
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 223622215,
+          "counts": {
+            "executed_ir_opcodes": 476,
+            "function_calls": 1,
+            "arithmetic_opcodes": 187,
+            "control_opcodes": 71,
+            "data_opcodes": 183,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 35,
+              "CONST": 18,
+              "DIVIDE": 31,
+              "JUMP": 35,
+              "LOAD": 97,
+              "MULTIPLY": 62,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 35,
+              "RETURN": 1,
+              "STORE": 68
+            },
+            "per_function": {
+              "lcg_mod": 476
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.124
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 223622215,
+          "counts": {
+            "executed_ir_opcodes": 469,
+            "function_calls": 1,
+            "arithmetic_opcodes": 186,
+            "control_opcodes": 67,
+            "data_opcodes": 182,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 34,
+              "CONST": 16,
+              "DIVIDE": 31,
+              "JUMP": 32,
+              "LOAD": 97,
+              "MOVE": 1,
+              "MULTIPLY": 62,
+              "NUMERIC_DIFFERENCE": 31,
+              "RELATE": 34,
+              "RETURN": 1,
+              "STORE": 68
+            },
+            "per_function": {
+              "lcg_mod": 469
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.106
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 32,
+      "expected": 670866650,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.971,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 670866650,
+          "counts": {
+            "executed_ir_opcodes": 469,
+            "function_calls": 1,
+            "arithmetic_opcodes": 192,
+            "control_opcodes": 68,
+            "data_opcodes": 176,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 33,
+              "CONST": 12,
+              "DIVIDE": 32,
+              "JUMP": 34,
+              "LOAD": 98,
+              "MULTIPLY": 64,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 33,
+              "RETURN": 1,
+              "STORE": 66
+            },
+            "per_function": {
+              "lcg_mod": 469
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.797
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 670866650,
+          "counts": {
+            "executed_ir_opcodes": 490,
+            "function_calls": 1,
+            "arithmetic_opcodes": 193,
+            "control_opcodes": 73,
+            "data_opcodes": 188,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 36,
+              "CONST": 18,
+              "DIVIDE": 32,
+              "JUMP": 36,
+              "LOAD": 100,
+              "MULTIPLY": 64,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 36,
+              "RETURN": 1,
+              "STORE": 70
+            },
+            "per_function": {
+              "lcg_mod": 490
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.321
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 670866650,
+          "counts": {
+            "executed_ir_opcodes": 483,
+            "function_calls": 1,
+            "arithmetic_opcodes": 192,
+            "control_opcodes": 69,
+            "data_opcodes": 187,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 35,
+              "CONST": 16,
+              "DIVIDE": 32,
+              "JUMP": 33,
+              "LOAD": 100,
+              "MOVE": 1,
+              "MULTIPLY": 64,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 35,
+              "RETURN": 1,
+              "STORE": 70
+            },
+            "per_function": {
+              "lcg_mod": 483
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.089
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 33,
+      "expected": 12599941,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9718,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 12599941,
+          "counts": {
+            "executed_ir_opcodes": 483,
+            "function_calls": 1,
+            "arithmetic_opcodes": 198,
+            "control_opcodes": 70,
+            "data_opcodes": 181,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 34,
+              "CONST": 12,
+              "DIVIDE": 33,
+              "JUMP": 35,
+              "LOAD": 101,
+              "MULTIPLY": 66,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 34,
+              "RETURN": 1,
+              "STORE": 68
+            },
+            "per_function": {
+              "lcg_mod": 483
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.992
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 12599941,
+          "counts": {
+            "executed_ir_opcodes": 504,
+            "function_calls": 1,
+            "arithmetic_opcodes": 199,
+            "control_opcodes": 75,
+            "data_opcodes": 193,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 37,
+              "CONST": 18,
+              "DIVIDE": 33,
+              "JUMP": 37,
+              "LOAD": 103,
+              "MULTIPLY": 66,
+              "NUMERIC_DIFFERENCE": 34,
+              "RELATE": 37,
+              "RETURN": 1,
+              "STORE": 72
+            },
+            "per_function": {
+              "lcg_mod": 504
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.278
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 12599941,
+          "counts": {
+            "executed_ir_opcodes": 497,
+            "function_calls": 1,
+            "arithmetic_opcodes": 198,
+            "control_opcodes": 71,
+            "data_opcodes": 192,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 36,
+              "CONST": 16,
+              "DIVIDE": 33,
+              "JUMP": 34,
+              "LOAD": 103,
+              "MOVE": 1,
+              "MULTIPLY": 66,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 36,
+              "RETURN": 1,
+              "STORE": 72
+            },
+            "per_function": {
+              "lcg_mod": 497
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.439
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 40,
+      "expected": 556076243,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 1.8864,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 556076243,
+          "counts": {
+            "executed_ir_opcodes": 581,
+            "function_calls": 1,
+            "arithmetic_opcodes": 240,
+            "control_opcodes": 84,
+            "data_opcodes": 216,
+            "opcode_histogram": {
+              "ADD": 80,
+              "BRANCH3": 41,
+              "CONST": 12,
+              "DIVIDE": 40,
+              "JUMP": 42,
+              "LOAD": 122,
+              "MULTIPLY": 80,
+              "NUMERIC_DIFFERENCE": 40,
+              "RELATE": 41,
+              "RETURN": 1,
+              "STORE": 82
+            },
+            "per_function": {
+              "lcg_mod": 581
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.154
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 556076243,
+          "counts": {
+            "executed_ir_opcodes": 329,
+            "function_calls": 1,
+            "arithmetic_opcodes": 104,
+            "control_opcodes": 56,
+            "data_opcodes": 128,
+            "opcode_histogram": {
+              "ADD": 9,
+              "BRANCH3": 41,
+              "CONST": 29,
+              "DIVIDE": 26,
+              "JUMP": 14,
+              "LOAD": 54,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 29,
+              "RELATE": 41,
+              "RETURN": 1,
+              "STORE": 45
+            },
+            "per_function": {
+              "lcg_mod": 329
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.486
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 556076243,
+          "counts": {
+            "executed_ir_opcodes": 308,
+            "function_calls": 1,
+            "arithmetic_opcodes": 97,
+            "control_opcodes": 48,
+            "data_opcodes": 127,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 36,
+              "CONST": 25,
+              "DIVIDE": 24,
+              "JUMP": 11,
+              "LOAD": 54,
+              "MOVE": 3,
+              "MULTIPLY": 39,
+              "NUMERIC_DIFFERENCE": 26,
+              "RELATE": 36,
+              "RETURN": 1,
+              "STORE": 45
+            },
+            "per_function": {
+              "lcg_mod": 308
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.396
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 64,
+      "expected": 293275928,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 2.8746,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 293275928,
+          "counts": {
+            "executed_ir_opcodes": 917,
+            "function_calls": 1,
+            "arithmetic_opcodes": 384,
+            "control_opcodes": 132,
+            "data_opcodes": 336,
+            "opcode_histogram": {
+              "ADD": 128,
+              "BRANCH3": 65,
+              "CONST": 12,
+              "DIVIDE": 64,
+              "JUMP": 66,
+              "LOAD": 194,
+              "MULTIPLY": 128,
+              "NUMERIC_DIFFERENCE": 64,
+              "RELATE": 65,
+              "RETURN": 1,
+              "STORE": 130
+            },
+            "per_function": {
+              "lcg_mod": 917
+            }
+          },
+          "interpreter_ms_not_benchmark": 6.668
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 293275928,
+          "counts": {
+            "executed_ir_opcodes": 340,
+            "function_calls": 1,
+            "arithmetic_opcodes": 107,
+            "control_opcodes": 59,
+            "data_opcodes": 130,
+            "opcode_histogram": {
+              "ADD": 9,
+              "BRANCH3": 44,
+              "CONST": 29,
+              "DIVIDE": 27,
+              "JUMP": 14,
+              "LOAD": 55,
+              "MULTIPLY": 41,
+              "NUMERIC_DIFFERENCE": 30,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 46
+            },
+            "per_function": {
+              "lcg_mod": 340
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.338
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 293275928,
+          "counts": {
+            "executed_ir_opcodes": 319,
+            "function_calls": 1,
+            "arithmetic_opcodes": 100,
+            "control_opcodes": 51,
+            "data_opcodes": 129,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 39,
+              "CONST": 25,
+              "DIVIDE": 25,
+              "JUMP": 11,
+              "LOAD": 55,
+              "MOVE": 3,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 27,
+              "RELATE": 39,
+              "RETURN": 1,
+              "STORE": 46
+            },
+            "per_function": {
+              "lcg_mod": 319
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.859
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 128,
+      "expected": 400901625,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 5.1215,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 400901625,
+          "counts": {
+            "executed_ir_opcodes": 1813,
+            "function_calls": 1,
+            "arithmetic_opcodes": 768,
+            "control_opcodes": 260,
+            "data_opcodes": 656,
+            "opcode_histogram": {
+              "ADD": 256,
+              "BRANCH3": 129,
+              "CONST": 12,
+              "DIVIDE": 128,
+              "JUMP": 130,
+              "LOAD": 386,
+              "MULTIPLY": 256,
+              "NUMERIC_DIFFERENCE": 128,
+              "RELATE": 129,
+              "RETURN": 1,
+              "STORE": 258
+            },
+            "per_function": {
+              "lcg_mod": 1813
+            }
+          },
+          "interpreter_ms_not_benchmark": 10.928
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 400901625,
+          "counts": {
+            "executed_ir_opcodes": 375,
+            "function_calls": 1,
+            "arithmetic_opcodes": 120,
+            "control_opcodes": 65,
+            "data_opcodes": 142,
+            "opcode_histogram": {
+              "ADD": 10,
+              "BRANCH3": 48,
+              "CONST": 29,
+              "DIVIDE": 30,
+              "JUMP": 16,
+              "LOAD": 62,
+              "MULTIPLY": 46,
+              "NUMERIC_DIFFERENCE": 34,
+              "RELATE": 48,
+              "RETURN": 1,
+              "STORE": 51
+            },
+            "per_function": {
+              "lcg_mod": 375
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.891
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 400901625,
+          "counts": {
+            "executed_ir_opcodes": 354,
+            "function_calls": 1,
+            "arithmetic_opcodes": 113,
+            "control_opcodes": 57,
+            "data_opcodes": 141,
+            "opcode_histogram": {
+              "ADD": 9,
+              "BRANCH3": 43,
+              "CONST": 25,
+              "DIVIDE": 28,
+              "JUMP": 13,
+              "LOAD": 62,
+              "MOVE": 3,
+              "MULTIPLY": 45,
+              "NUMERIC_DIFFERENCE": 31,
+              "RELATE": 43,
+              "RETURN": 1,
+              "STORE": 51
+            },
+            "per_function": {
+              "lcg_mod": 354
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.643
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 256,
+      "expected": 84957257,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 9.2674,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 84957257,
+          "counts": {
+            "executed_ir_opcodes": 3605,
+            "function_calls": 1,
+            "arithmetic_opcodes": 1536,
+            "control_opcodes": 516,
+            "data_opcodes": 1296,
+            "opcode_histogram": {
+              "ADD": 512,
+              "BRANCH3": 257,
+              "CONST": 12,
+              "DIVIDE": 256,
+              "JUMP": 258,
+              "LOAD": 770,
+              "MULTIPLY": 512,
+              "NUMERIC_DIFFERENCE": 256,
+              "RELATE": 257,
+              "RETURN": 1,
+              "STORE": 514
+            },
+            "per_function": {
+              "lcg_mod": 3605
+            }
+          },
+          "interpreter_ms_not_benchmark": 23.071
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 84957257,
+          "counts": {
+            "executed_ir_opcodes": 410,
+            "function_calls": 1,
+            "arithmetic_opcodes": 133,
+            "control_opcodes": 71,
+            "data_opcodes": 154,
+            "opcode_histogram": {
+              "ADD": 11,
+              "BRANCH3": 52,
+              "CONST": 29,
+              "DIVIDE": 33,
+              "JUMP": 18,
+              "LOAD": 69,
+              "MULTIPLY": 51,
+              "NUMERIC_DIFFERENCE": 38,
+              "RELATE": 52,
+              "RETURN": 1,
+              "STORE": 56
+            },
+            "per_function": {
+              "lcg_mod": 410
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.225
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 84957257,
+          "counts": {
+            "executed_ir_opcodes": 389,
+            "function_calls": 1,
+            "arithmetic_opcodes": 126,
+            "control_opcodes": 63,
+            "data_opcodes": 153,
+            "opcode_histogram": {
+              "ADD": 10,
+              "BRANCH3": 47,
+              "CONST": 25,
+              "DIVIDE": 31,
+              "JUMP": 15,
+              "LOAD": 69,
+              "MOVE": 3,
+              "MULTIPLY": 50,
+              "NUMERIC_DIFFERENCE": 35,
+              "RELATE": 47,
+              "RETURN": 1,
+              "STORE": 56
+            },
+            "per_function": {
+              "lcg_mod": 389
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.137
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 512,
+      "expected": 725392233,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 17.2812,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 725392233,
+          "counts": {
+            "executed_ir_opcodes": 7189,
+            "function_calls": 1,
+            "arithmetic_opcodes": 3072,
+            "control_opcodes": 1028,
+            "data_opcodes": 2576,
+            "opcode_histogram": {
+              "ADD": 1024,
+              "BRANCH3": 513,
+              "CONST": 12,
+              "DIVIDE": 512,
+              "JUMP": 514,
+              "LOAD": 1538,
+              "MULTIPLY": 1024,
+              "NUMERIC_DIFFERENCE": 512,
+              "RELATE": 513,
+              "RETURN": 1,
+              "STORE": 1026
+            },
+            "per_function": {
+              "lcg_mod": 7189
+            }
+          },
+          "interpreter_ms_not_benchmark": 51.755
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 725392233,
+          "counts": {
+            "executed_ir_opcodes": 437,
+            "function_calls": 1,
+            "arithmetic_opcodes": 144,
+            "control_opcodes": 75,
+            "data_opcodes": 162,
+            "opcode_histogram": {
+              "ADD": 12,
+              "BRANCH3": 56,
+              "CONST": 29,
+              "DIVIDE": 36,
+              "JUMP": 18,
+              "LOAD": 74,
+              "MULTIPLY": 56,
+              "NUMERIC_DIFFERENCE": 40,
+              "RELATE": 56,
+              "RETURN": 1,
+              "STORE": 59
+            },
+            "per_function": {
+              "lcg_mod": 437
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.284
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 725392233,
+          "counts": {
+            "executed_ir_opcodes": 416,
+            "function_calls": 1,
+            "arithmetic_opcodes": 137,
+            "control_opcodes": 67,
+            "data_opcodes": 161,
+            "opcode_histogram": {
+              "ADD": 11,
+              "BRANCH3": 51,
+              "CONST": 25,
+              "DIVIDE": 34,
+              "JUMP": 15,
+              "LOAD": 74,
+              "MOVE": 3,
+              "MULTIPLY": 55,
+              "NUMERIC_DIFFERENCE": 37,
+              "RELATE": 51,
+              "RETURN": 1,
+              "STORE": 59
+            },
+            "per_function": {
+              "lcg_mod": 416
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.581
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 1024,
+      "expected": 751613710,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 32.1186,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 751613710,
+          "counts": {
+            "executed_ir_opcodes": 14357,
+            "function_calls": 1,
+            "arithmetic_opcodes": 6144,
+            "control_opcodes": 2052,
+            "data_opcodes": 5136,
+            "opcode_histogram": {
+              "ADD": 2048,
+              "BRANCH3": 1025,
+              "CONST": 12,
+              "DIVIDE": 1024,
+              "JUMP": 1026,
+              "LOAD": 3074,
+              "MULTIPLY": 2048,
+              "NUMERIC_DIFFERENCE": 1024,
+              "RELATE": 1025,
+              "RETURN": 1,
+              "STORE": 2050
+            },
+            "per_function": {
+              "lcg_mod": 14357
+            }
+          },
+          "interpreter_ms_not_benchmark": 111.281
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 751613710,
+          "counts": {
+            "executed_ir_opcodes": 468,
+            "function_calls": 1,
+            "arithmetic_opcodes": 156,
+            "control_opcodes": 80,
+            "data_opcodes": 172,
+            "opcode_histogram": {
+              "ADD": 13,
+              "BRANCH3": 60,
+              "CONST": 29,
+              "DIVIDE": 39,
+              "JUMP": 19,
+              "LOAD": 80,
+              "MULTIPLY": 61,
+              "NUMERIC_DIFFERENCE": 43,
+              "RELATE": 60,
+              "RETURN": 1,
+              "STORE": 63
+            },
+            "per_function": {
+              "lcg_mod": 468
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.776
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 751613710,
+          "counts": {
+            "executed_ir_opcodes": 447,
+            "function_calls": 1,
+            "arithmetic_opcodes": 149,
+            "control_opcodes": 72,
+            "data_opcodes": 171,
+            "opcode_histogram": {
+              "ADD": 12,
+              "BRANCH3": 55,
+              "CONST": 25,
+              "DIVIDE": 37,
+              "JUMP": 16,
+              "LOAD": 80,
+              "MOVE": 3,
+              "MULTIPLY": 60,
+              "NUMERIC_DIFFERENCE": 40,
+              "RELATE": 55,
+              "RETURN": 1,
+              "STORE": 63
+            },
+            "per_function": {
+              "lcg_mod": 447
+            }
+          },
+          "interpreter_ms_not_benchmark": 6.462
+        }
+      }
+    },
+    {
+      "function": "lcg_mod",
+      "N": 4096,
+      "expected": 791093676,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 112.7014,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 791093676,
+          "counts": {
+            "executed_ir_opcodes": 57365,
+            "function_calls": 1,
+            "arithmetic_opcodes": 24576,
+            "control_opcodes": 8196,
+            "data_opcodes": 20496,
+            "opcode_histogram": {
+              "ADD": 8192,
+              "BRANCH3": 4097,
+              "CONST": 12,
+              "DIVIDE": 4096,
+              "JUMP": 4098,
+              "LOAD": 12290,
+              "MULTIPLY": 8192,
+              "NUMERIC_DIFFERENCE": 4096,
+              "RELATE": 4097,
+              "RETURN": 1,
+              "STORE": 8194
+            },
+            "per_function": {
+              "lcg_mod": 57365
+            }
+          },
+          "interpreter_ms_not_benchmark": 550.916
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 791093676,
+          "counts": {
+            "executed_ir_opcodes": 530,
+            "function_calls": 1,
+            "arithmetic_opcodes": 180,
+            "control_opcodes": 90,
+            "data_opcodes": 192,
+            "opcode_histogram": {
+              "ADD": 15,
+              "BRANCH3": 68,
+              "CONST": 29,
+              "DIVIDE": 45,
+              "JUMP": 21,
+              "LOAD": 92,
+              "MULTIPLY": 71,
+              "NUMERIC_DIFFERENCE": 49,
+              "RELATE": 68,
+              "RETURN": 1,
+              "STORE": 71
+            },
+            "per_function": {
+              "lcg_mod": 530
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.749
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 791093676,
+          "counts": {
+            "executed_ir_opcodes": 509,
+            "function_calls": 1,
+            "arithmetic_opcodes": 173,
+            "control_opcodes": 82,
+            "data_opcodes": 191,
+            "opcode_histogram": {
+              "ADD": 14,
+              "BRANCH3": 63,
+              "CONST": 25,
+              "DIVIDE": 43,
+              "JUMP": 18,
+              "LOAD": 92,
+              "MOVE": 3,
+              "MULTIPLY": 70,
+              "NUMERIC_DIFFERENCE": 46,
+              "RELATE": 63,
+              "RETURN": 1,
+              "STORE": 71
+            },
+            "per_function": {
+              "lcg_mod": 509
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.164
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 1,
+      "expected": 1,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.75,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 1,
+          "counts": {
+            "executed_ir_opcodes": 42,
+            "function_calls": 1,
+            "arithmetic_opcodes": 5,
+            "control_opcodes": 6,
+            "data_opcodes": 29,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 2,
+              "CONST": 16,
+              "DIVIDE": 1,
+              "JUMP": 3,
+              "LOAD": 7,
+              "MULTIPLY": 1,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 2,
+              "RETURN": 1,
+              "STORE": 6
+            },
+            "per_function": {
+              "fib_mod": 42
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.342
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 1,
+          "counts": {
+            "executed_ir_opcodes": 63,
+            "function_calls": 1,
+            "arithmetic_opcodes": 6,
+            "control_opcodes": 11,
+            "data_opcodes": 41,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 5,
+              "CONST": 22,
+              "DIVIDE": 1,
+              "JUMP": 5,
+              "LOAD": 9,
+              "MULTIPLY": 1,
+              "NUMERIC_DIFFERENCE": 2,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 10
+            },
+            "per_function": {
+              "fib_mod": 63
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.677
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 1,
+          "counts": {
+            "executed_ir_opcodes": 56,
+            "function_calls": 1,
+            "arithmetic_opcodes": 5,
+            "control_opcodes": 7,
+            "data_opcodes": 40,
+            "opcode_histogram": {
+              "ADD": 2,
+              "BRANCH3": 4,
+              "CONST": 20,
+              "DIVIDE": 1,
+              "JUMP": 2,
+              "LOAD": 9,
+              "MOVE": 1,
+              "MULTIPLY": 1,
+              "NUMERIC_DIFFERENCE": 1,
+              "RELATE": 4,
+              "RETURN": 1,
+              "STORE": 10
+            },
+            "per_function": {
+              "fib_mod": 56
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.462
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 4,
+      "expected": 3,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.8654,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 3,
+          "counts": {
+            "executed_ir_opcodes": 90,
+            "function_calls": 1,
+            "arithmetic_opcodes": 20,
+            "control_opcodes": 12,
+            "data_opcodes": 53,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 5,
+              "CONST": 16,
+              "DIVIDE": 4,
+              "JUMP": 6,
+              "LOAD": 22,
+              "MULTIPLY": 4,
+              "NUMERIC_DIFFERENCE": 4,
+              "RELATE": 5,
+              "RETURN": 1,
+              "STORE": 15
+            },
+            "per_function": {
+              "fib_mod": 90
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.691
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 3,
+          "counts": {
+            "executed_ir_opcodes": 111,
+            "function_calls": 1,
+            "arithmetic_opcodes": 21,
+            "control_opcodes": 17,
+            "data_opcodes": 65,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 8,
+              "CONST": 22,
+              "DIVIDE": 4,
+              "JUMP": 8,
+              "LOAD": 24,
+              "MULTIPLY": 4,
+              "NUMERIC_DIFFERENCE": 5,
+              "RELATE": 8,
+              "RETURN": 1,
+              "STORE": 19
+            },
+            "per_function": {
+              "fib_mod": 111
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.474
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 3,
+          "counts": {
+            "executed_ir_opcodes": 104,
+            "function_calls": 1,
+            "arithmetic_opcodes": 20,
+            "control_opcodes": 13,
+            "data_opcodes": 64,
+            "opcode_histogram": {
+              "ADD": 8,
+              "BRANCH3": 7,
+              "CONST": 20,
+              "DIVIDE": 4,
+              "JUMP": 5,
+              "LOAD": 24,
+              "MOVE": 1,
+              "MULTIPLY": 4,
+              "NUMERIC_DIFFERENCE": 4,
+              "RELATE": 7,
+              "RETURN": 1,
+              "STORE": 19
+            },
+            "per_function": {
+              "fib_mod": 104
+            }
+          },
+          "interpreter_ms_not_benchmark": 0.896
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 8,
+      "expected": 21,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9167,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 154,
+            "function_calls": 1,
+            "arithmetic_opcodes": 40,
+            "control_opcodes": 20,
+            "data_opcodes": 85,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 9,
+              "CONST": 16,
+              "DIVIDE": 8,
+              "JUMP": 10,
+              "LOAD": 42,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 8,
+              "RELATE": 9,
+              "RETURN": 1,
+              "STORE": 27
+            },
+            "per_function": {
+              "fib_mod": 154
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.56
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 175,
+            "function_calls": 1,
+            "arithmetic_opcodes": 41,
+            "control_opcodes": 25,
+            "data_opcodes": 97,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 12,
+              "CONST": 22,
+              "DIVIDE": 8,
+              "JUMP": 12,
+              "LOAD": 44,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 9,
+              "RELATE": 12,
+              "RETURN": 1,
+              "STORE": 31
+            },
+            "per_function": {
+              "fib_mod": 175
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.218
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 21,
+          "counts": {
+            "executed_ir_opcodes": 168,
+            "function_calls": 1,
+            "arithmetic_opcodes": 40,
+            "control_opcodes": 21,
+            "data_opcodes": 96,
+            "opcode_histogram": {
+              "ADD": 16,
+              "BRANCH3": 11,
+              "CONST": 20,
+              "DIVIDE": 8,
+              "JUMP": 9,
+              "LOAD": 44,
+              "MOVE": 1,
+              "MULTIPLY": 8,
+              "NUMERIC_DIFFERENCE": 8,
+              "RELATE": 11,
+              "RETURN": 1,
+              "STORE": 31
+            },
+            "per_function": {
+              "fib_mod": 168
+            }
+          },
+          "interpreter_ms_not_benchmark": 1.5
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 16,
+      "expected": 987,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9527,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 987,
+          "counts": {
+            "executed_ir_opcodes": 282,
+            "function_calls": 1,
+            "arithmetic_opcodes": 80,
+            "control_opcodes": 36,
+            "data_opcodes": 149,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 17,
+              "CONST": 16,
+              "DIVIDE": 16,
+              "JUMP": 18,
+              "LOAD": 82,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 16,
+              "RELATE": 17,
+              "RETURN": 1,
+              "STORE": 51
+            },
+            "per_function": {
+              "fib_mod": 282
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.638
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 987,
+          "counts": {
+            "executed_ir_opcodes": 303,
+            "function_calls": 1,
+            "arithmetic_opcodes": 81,
+            "control_opcodes": 41,
+            "data_opcodes": 161,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 20,
+              "CONST": 22,
+              "DIVIDE": 16,
+              "JUMP": 20,
+              "LOAD": 84,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 17,
+              "RELATE": 20,
+              "RETURN": 1,
+              "STORE": 55
+            },
+            "per_function": {
+              "fib_mod": 303
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.713
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 987,
+          "counts": {
+            "executed_ir_opcodes": 296,
+            "function_calls": 1,
+            "arithmetic_opcodes": 80,
+            "control_opcodes": 37,
+            "data_opcodes": 160,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 19,
+              "CONST": 20,
+              "DIVIDE": 16,
+              "JUMP": 17,
+              "LOAD": 84,
+              "MOVE": 1,
+              "MULTIPLY": 16,
+              "NUMERIC_DIFFERENCE": 16,
+              "RELATE": 19,
+              "RETURN": 1,
+              "STORE": 55
+            },
+            "per_function": {
+              "fib_mod": 296
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.348
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 20,
+      "expected": 6765,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9611,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 6765,
+          "counts": {
+            "executed_ir_opcodes": 346,
+            "function_calls": 1,
+            "arithmetic_opcodes": 100,
+            "control_opcodes": 44,
+            "data_opcodes": 181,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 21,
+              "CONST": 16,
+              "DIVIDE": 20,
+              "JUMP": 22,
+              "LOAD": 102,
+              "MULTIPLY": 20,
+              "NUMERIC_DIFFERENCE": 20,
+              "RELATE": 21,
+              "RETURN": 1,
+              "STORE": 63
+            },
+            "per_function": {
+              "fib_mod": 346
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.434
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 6765,
+          "counts": {
+            "executed_ir_opcodes": 367,
+            "function_calls": 1,
+            "arithmetic_opcodes": 101,
+            "control_opcodes": 49,
+            "data_opcodes": 193,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 24,
+              "CONST": 22,
+              "DIVIDE": 20,
+              "JUMP": 24,
+              "LOAD": 104,
+              "MULTIPLY": 20,
+              "NUMERIC_DIFFERENCE": 21,
+              "RELATE": 24,
+              "RETURN": 1,
+              "STORE": 67
+            },
+            "per_function": {
+              "fib_mod": 367
+            }
+          },
+          "interpreter_ms_not_benchmark": 2.45
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 6765,
+          "counts": {
+            "executed_ir_opcodes": 360,
+            "function_calls": 1,
+            "arithmetic_opcodes": 100,
+            "control_opcodes": 45,
+            "data_opcodes": 192,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 23,
+              "CONST": 20,
+              "DIVIDE": 20,
+              "JUMP": 21,
+              "LOAD": 104,
+              "MOVE": 1,
+              "MULTIPLY": 20,
+              "NUMERIC_DIFFERENCE": 20,
+              "RELATE": 23,
+              "RETURN": 1,
+              "STORE": 67
+            },
+            "per_function": {
+              "fib_mod": 360
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.241
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 24,
+      "expected": 46368,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.967,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 46368,
+          "counts": {
+            "executed_ir_opcodes": 410,
+            "function_calls": 1,
+            "arithmetic_opcodes": 120,
+            "control_opcodes": 52,
+            "data_opcodes": 213,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 25,
+              "CONST": 16,
+              "DIVIDE": 24,
+              "JUMP": 26,
+              "LOAD": 122,
+              "MULTIPLY": 24,
+              "NUMERIC_DIFFERENCE": 24,
+              "RELATE": 25,
+              "RETURN": 1,
+              "STORE": 75
+            },
+            "per_function": {
+              "fib_mod": 410
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.211
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 46368,
+          "counts": {
+            "executed_ir_opcodes": 431,
+            "function_calls": 1,
+            "arithmetic_opcodes": 121,
+            "control_opcodes": 57,
+            "data_opcodes": 225,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 28,
+              "CONST": 22,
+              "DIVIDE": 24,
+              "JUMP": 28,
+              "LOAD": 124,
+              "MULTIPLY": 24,
+              "NUMERIC_DIFFERENCE": 25,
+              "RELATE": 28,
+              "RETURN": 1,
+              "STORE": 79
+            },
+            "per_function": {
+              "fib_mod": 431
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.928
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 46368,
+          "counts": {
+            "executed_ir_opcodes": 424,
+            "function_calls": 1,
+            "arithmetic_opcodes": 120,
+            "control_opcodes": 53,
+            "data_opcodes": 224,
+            "opcode_histogram": {
+              "ADD": 48,
+              "BRANCH3": 27,
+              "CONST": 20,
+              "DIVIDE": 24,
+              "JUMP": 25,
+              "LOAD": 124,
+              "MOVE": 1,
+              "MULTIPLY": 24,
+              "NUMERIC_DIFFERENCE": 24,
+              "RELATE": 27,
+              "RETURN": 1,
+              "STORE": 79
+            },
+            "per_function": {
+              "fib_mod": 424
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.826
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 31,
+      "expected": 1346269,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9739,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 1346269,
+          "counts": {
+            "executed_ir_opcodes": 522,
+            "function_calls": 1,
+            "arithmetic_opcodes": 155,
+            "control_opcodes": 66,
+            "data_opcodes": 269,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 32,
+              "CONST": 16,
+              "DIVIDE": 31,
+              "JUMP": 33,
+              "LOAD": 157,
+              "MULTIPLY": 31,
+              "NUMERIC_DIFFERENCE": 31,
+              "RELATE": 32,
+              "RETURN": 1,
+              "STORE": 96
+            },
+            "per_function": {
+              "fib_mod": 522
+            }
+          },
+          "interpreter_ms_not_benchmark": 3.828
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 1346269,
+          "counts": {
+            "executed_ir_opcodes": 543,
+            "function_calls": 1,
+            "arithmetic_opcodes": 156,
+            "control_opcodes": 71,
+            "data_opcodes": 281,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 35,
+              "CONST": 22,
+              "DIVIDE": 31,
+              "JUMP": 35,
+              "LOAD": 159,
+              "MULTIPLY": 31,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 35,
+              "RETURN": 1,
+              "STORE": 100
+            },
+            "per_function": {
+              "fib_mod": 543
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.542
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 1346269,
+          "counts": {
+            "executed_ir_opcodes": 536,
+            "function_calls": 1,
+            "arithmetic_opcodes": 155,
+            "control_opcodes": 67,
+            "data_opcodes": 280,
+            "opcode_histogram": {
+              "ADD": 62,
+              "BRANCH3": 34,
+              "CONST": 20,
+              "DIVIDE": 31,
+              "JUMP": 32,
+              "LOAD": 159,
+              "MOVE": 1,
+              "MULTIPLY": 31,
+              "NUMERIC_DIFFERENCE": 31,
+              "RELATE": 34,
+              "RETURN": 1,
+              "STORE": 100
+            },
+            "per_function": {
+              "fib_mod": 536
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.759
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 32,
+      "expected": 2178309,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9746,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 2178309,
+          "counts": {
+            "executed_ir_opcodes": 538,
+            "function_calls": 1,
+            "arithmetic_opcodes": 160,
+            "control_opcodes": 68,
+            "data_opcodes": 277,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 33,
+              "CONST": 16,
+              "DIVIDE": 32,
+              "JUMP": 34,
+              "LOAD": 162,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 33,
+              "RETURN": 1,
+              "STORE": 99
+            },
+            "per_function": {
+              "fib_mod": 538
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.059
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 2178309,
+          "counts": {
+            "executed_ir_opcodes": 559,
+            "function_calls": 1,
+            "arithmetic_opcodes": 161,
+            "control_opcodes": 73,
+            "data_opcodes": 289,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 36,
+              "CONST": 22,
+              "DIVIDE": 32,
+              "JUMP": 36,
+              "LOAD": 164,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 36,
+              "RETURN": 1,
+              "STORE": 103
+            },
+            "per_function": {
+              "fib_mod": 559
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.499
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 2178309,
+          "counts": {
+            "executed_ir_opcodes": 552,
+            "function_calls": 1,
+            "arithmetic_opcodes": 160,
+            "control_opcodes": 69,
+            "data_opcodes": 288,
+            "opcode_histogram": {
+              "ADD": 64,
+              "BRANCH3": 35,
+              "CONST": 20,
+              "DIVIDE": 32,
+              "JUMP": 33,
+              "LOAD": 164,
+              "MOVE": 1,
+              "MULTIPLY": 32,
+              "NUMERIC_DIFFERENCE": 32,
+              "RELATE": 35,
+              "RETURN": 1,
+              "STORE": 103
+            },
+            "per_function": {
+              "fib_mod": 552
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.905
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 33,
+      "expected": 3524578,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9754,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 3524578,
+          "counts": {
+            "executed_ir_opcodes": 554,
+            "function_calls": 1,
+            "arithmetic_opcodes": 165,
+            "control_opcodes": 70,
+            "data_opcodes": 285,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 34,
+              "CONST": 16,
+              "DIVIDE": 33,
+              "JUMP": 35,
+              "LOAD": 167,
+              "MULTIPLY": 33,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 34,
+              "RETURN": 1,
+              "STORE": 102
+            },
+            "per_function": {
+              "fib_mod": 554
+            }
+          },
+          "interpreter_ms_not_benchmark": 6.204
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 3524578,
+          "counts": {
+            "executed_ir_opcodes": 575,
+            "function_calls": 1,
+            "arithmetic_opcodes": 166,
+            "control_opcodes": 75,
+            "data_opcodes": 297,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 37,
+              "CONST": 22,
+              "DIVIDE": 33,
+              "JUMP": 37,
+              "LOAD": 169,
+              "MULTIPLY": 33,
+              "NUMERIC_DIFFERENCE": 34,
+              "RELATE": 37,
+              "RETURN": 1,
+              "STORE": 106
+            },
+            "per_function": {
+              "fib_mod": 575
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.313
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 3524578,
+          "counts": {
+            "executed_ir_opcodes": 568,
+            "function_calls": 1,
+            "arithmetic_opcodes": 165,
+            "control_opcodes": 71,
+            "data_opcodes": 296,
+            "opcode_histogram": {
+              "ADD": 66,
+              "BRANCH3": 36,
+              "CONST": 20,
+              "DIVIDE": 33,
+              "JUMP": 34,
+              "LOAD": 169,
+              "MOVE": 1,
+              "MULTIPLY": 33,
+              "NUMERIC_DIFFERENCE": 33,
+              "RELATE": 36,
+              "RETURN": 1,
+              "STORE": 106
+            },
+            "per_function": {
+              "fib_mod": 568
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.056
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 40,
+      "expected": 102334155,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 0.9794,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 102334155,
+          "counts": {
+            "executed_ir_opcodes": 666,
+            "function_calls": 1,
+            "arithmetic_opcodes": 200,
+            "control_opcodes": 84,
+            "data_opcodes": 341,
+            "opcode_histogram": {
+              "ADD": 80,
+              "BRANCH3": 41,
+              "CONST": 16,
+              "DIVIDE": 40,
+              "JUMP": 42,
+              "LOAD": 202,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 40,
+              "RELATE": 41,
+              "RETURN": 1,
+              "STORE": 123
+            },
+            "per_function": {
+              "fib_mod": 666
+            }
+          },
+          "interpreter_ms_not_benchmark": 6.56
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 102334155,
+          "counts": {
+            "executed_ir_opcodes": 687,
+            "function_calls": 1,
+            "arithmetic_opcodes": 201,
+            "control_opcodes": 89,
+            "data_opcodes": 353,
+            "opcode_histogram": {
+              "ADD": 80,
+              "BRANCH3": 44,
+              "CONST": 22,
+              "DIVIDE": 40,
+              "JUMP": 44,
+              "LOAD": 204,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 41,
+              "RELATE": 44,
+              "RETURN": 1,
+              "STORE": 127
+            },
+            "per_function": {
+              "fib_mod": 687
+            }
+          },
+          "interpreter_ms_not_benchmark": 8.812
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 102334155,
+          "counts": {
+            "executed_ir_opcodes": 680,
+            "function_calls": 1,
+            "arithmetic_opcodes": 200,
+            "control_opcodes": 85,
+            "data_opcodes": 352,
+            "opcode_histogram": {
+              "ADD": 80,
+              "BRANCH3": 43,
+              "CONST": 20,
+              "DIVIDE": 40,
+              "JUMP": 41,
+              "LOAD": 204,
+              "MOVE": 1,
+              "MULTIPLY": 40,
+              "NUMERIC_DIFFERENCE": 40,
+              "RELATE": 43,
+              "RETURN": 1,
+              "STORE": 127
+            },
+            "per_function": {
+              "fib_mod": 680
+            }
+          },
+          "interpreter_ms_not_benchmark": 7.176
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 64,
+      "expected": 209783453,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 2.0192,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 209783453,
+          "counts": {
+            "executed_ir_opcodes": 1050,
+            "function_calls": 1,
+            "arithmetic_opcodes": 320,
+            "control_opcodes": 132,
+            "data_opcodes": 533,
+            "opcode_histogram": {
+              "ADD": 128,
+              "BRANCH3": 65,
+              "CONST": 16,
+              "DIVIDE": 64,
+              "JUMP": 66,
+              "LOAD": 322,
+              "MULTIPLY": 64,
+              "NUMERIC_DIFFERENCE": 64,
+              "RELATE": 65,
+              "RETURN": 1,
+              "STORE": 195
+            },
+            "per_function": {
+              "fib_mod": 1050
+            }
+          },
+          "interpreter_ms_not_benchmark": 10.491
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 209783453,
+          "counts": {
+            "executed_ir_opcodes": 540,
+            "function_calls": 1,
+            "arithmetic_opcodes": 143,
+            "control_opcodes": 100,
+            "data_opcodes": 237,
+            "opcode_histogram": {
+              "ADD": 23,
+              "BRANCH3": 60,
+              "CONST": 33,
+              "DIVIDE": 31,
+              "JUMP": 39,
+              "LOAD": 105,
+              "MULTIPLY": 50,
+              "NUMERIC_DIFFERENCE": 39,
+              "RELATE": 60,
+              "RETURN": 1,
+              "STORE": 99
+            },
+            "per_function": {
+              "fib_mod": 540
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.031
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 209783453,
+          "counts": {
+            "executed_ir_opcodes": 520,
+            "function_calls": 1,
+            "arithmetic_opcodes": 138,
+            "control_opcodes": 93,
+            "data_opcodes": 233,
+            "opcode_histogram": {
+              "ADD": 22,
+              "BRANCH3": 56,
+              "CONST": 26,
+              "DIVIDE": 30,
+              "JUMP": 36,
+              "LOAD": 105,
+              "MOVE": 3,
+              "MULTIPLY": 49,
+              "NUMERIC_DIFFERENCE": 37,
+              "RELATE": 56,
+              "RETURN": 1,
+              "STORE": 99
+            },
+            "per_function": {
+              "fib_mod": 520
+            }
+          },
+          "interpreter_ms_not_benchmark": 4.926
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 128,
+      "expected": 700290221,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 3.5034,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 700290221,
+          "counts": {
+            "executed_ir_opcodes": 2074,
+            "function_calls": 1,
+            "arithmetic_opcodes": 640,
+            "control_opcodes": 260,
+            "data_opcodes": 1045,
+            "opcode_histogram": {
+              "ADD": 256,
+              "BRANCH3": 129,
+              "CONST": 16,
+              "DIVIDE": 128,
+              "JUMP": 130,
+              "LOAD": 642,
+              "MULTIPLY": 128,
+              "NUMERIC_DIFFERENCE": 128,
+              "RELATE": 129,
+              "RETURN": 1,
+              "STORE": 387
+            },
+            "per_function": {
+              "fib_mod": 2074
+            }
+          },
+          "interpreter_ms_not_benchmark": 18.845
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 700290221,
+          "counts": {
+            "executed_ir_opcodes": 612,
+            "function_calls": 1,
+            "arithmetic_opcodes": 164,
+            "control_opcodes": 114,
+            "data_opcodes": 267,
+            "opcode_histogram": {
+              "ADD": 26,
+              "BRANCH3": 67,
+              "CONST": 33,
+              "DIVIDE": 35,
+              "JUMP": 46,
+              "LOAD": 121,
+              "MULTIPLY": 57,
+              "NUMERIC_DIFFERENCE": 46,
+              "RELATE": 67,
+              "RETURN": 1,
+              "STORE": 113
+            },
+            "per_function": {
+              "fib_mod": 612
+            }
+          },
+          "interpreter_ms_not_benchmark": 7.032
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 700290221,
+          "counts": {
+            "executed_ir_opcodes": 592,
+            "function_calls": 1,
+            "arithmetic_opcodes": 159,
+            "control_opcodes": 107,
+            "data_opcodes": 263,
+            "opcode_histogram": {
+              "ADD": 25,
+              "BRANCH3": 63,
+              "CONST": 26,
+              "DIVIDE": 34,
+              "JUMP": 43,
+              "LOAD": 121,
+              "MOVE": 3,
+              "MULTIPLY": 56,
+              "NUMERIC_DIFFERENCE": 44,
+              "RELATE": 63,
+              "RETURN": 1,
+              "STORE": 113
+            },
+            "per_function": {
+              "fib_mod": 592
+            }
+          },
+          "interpreter_ms_not_benchmark": 5.781
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 256,
+      "expected": 745621702,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 6.2835,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 745621702,
+          "counts": {
+            "executed_ir_opcodes": 4122,
+            "function_calls": 1,
+            "arithmetic_opcodes": 1280,
+            "control_opcodes": 516,
+            "data_opcodes": 2069,
+            "opcode_histogram": {
+              "ADD": 512,
+              "BRANCH3": 257,
+              "CONST": 16,
+              "DIVIDE": 256,
+              "JUMP": 258,
+              "LOAD": 1282,
+              "MULTIPLY": 256,
+              "NUMERIC_DIFFERENCE": 256,
+              "RELATE": 257,
+              "RETURN": 1,
+              "STORE": 771
+            },
+            "per_function": {
+              "fib_mod": 4122
+            }
+          },
+          "interpreter_ms_not_benchmark": 46.221
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 745621702,
+          "counts": {
+            "executed_ir_opcodes": 676,
+            "function_calls": 1,
+            "arithmetic_opcodes": 183,
+            "control_opcodes": 126,
+            "data_opcodes": 293,
+            "opcode_histogram": {
+              "ADD": 29,
+              "BRANCH3": 74,
+              "CONST": 33,
+              "DIVIDE": 39,
+              "JUMP": 51,
+              "LOAD": 135,
+              "MULTIPLY": 64,
+              "NUMERIC_DIFFERENCE": 51,
+              "RELATE": 74,
+              "RETURN": 1,
+              "STORE": 125
+            },
+            "per_function": {
+              "fib_mod": 676
+            }
+          },
+          "interpreter_ms_not_benchmark": 8.961
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 745621702,
+          "counts": {
+            "executed_ir_opcodes": 656,
+            "function_calls": 1,
+            "arithmetic_opcodes": 178,
+            "control_opcodes": 119,
+            "data_opcodes": 289,
+            "opcode_histogram": {
+              "ADD": 28,
+              "BRANCH3": 70,
+              "CONST": 26,
+              "DIVIDE": 38,
+              "JUMP": 48,
+              "LOAD": 135,
+              "MOVE": 3,
+              "MULTIPLY": 63,
+              "NUMERIC_DIFFERENCE": 49,
+              "RELATE": 70,
+              "RETURN": 1,
+              "STORE": 125
+            },
+            "per_function": {
+              "fib_mod": 656
+            }
+          },
+          "interpreter_ms_not_benchmark": 8.011
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 512,
+      "expected": 330235873,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 11.4139,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 330235873,
+          "counts": {
+            "executed_ir_opcodes": 8218,
+            "function_calls": 1,
+            "arithmetic_opcodes": 2560,
+            "control_opcodes": 1028,
+            "data_opcodes": 4117,
+            "opcode_histogram": {
+              "ADD": 1024,
+              "BRANCH3": 513,
+              "CONST": 16,
+              "DIVIDE": 512,
+              "JUMP": 514,
+              "LOAD": 2562,
+              "MULTIPLY": 512,
+              "NUMERIC_DIFFERENCE": 512,
+              "RELATE": 513,
+              "RETURN": 1,
+              "STORE": 1539
+            },
+            "per_function": {
+              "fib_mod": 8218
+            }
+          },
+          "interpreter_ms_not_benchmark": 78.131
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 330235873,
+          "counts": {
+            "executed_ir_opcodes": 740,
+            "function_calls": 1,
+            "arithmetic_opcodes": 202,
+            "control_opcodes": 138,
+            "data_opcodes": 319,
+            "opcode_histogram": {
+              "ADD": 32,
+              "BRANCH3": 81,
+              "CONST": 33,
+              "DIVIDE": 43,
+              "JUMP": 56,
+              "LOAD": 149,
+              "MULTIPLY": 71,
+              "NUMERIC_DIFFERENCE": 56,
+              "RELATE": 81,
+              "RETURN": 1,
+              "STORE": 137
+            },
+            "per_function": {
+              "fib_mod": 740
+            }
+          },
+          "interpreter_ms_not_benchmark": 8.987
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 330235873,
+          "counts": {
+            "executed_ir_opcodes": 720,
+            "function_calls": 1,
+            "arithmetic_opcodes": 197,
+            "control_opcodes": 131,
+            "data_opcodes": 315,
+            "opcode_histogram": {
+              "ADD": 31,
+              "BRANCH3": 77,
+              "CONST": 26,
+              "DIVIDE": 42,
+              "JUMP": 53,
+              "LOAD": 149,
+              "MOVE": 3,
+              "MULTIPLY": 70,
+              "NUMERIC_DIFFERENCE": 54,
+              "RELATE": 77,
+              "RETURN": 1,
+              "STORE": 137
+            },
+            "per_function": {
+              "fib_mod": 720
+            }
+          },
+          "interpreter_ms_not_benchmark": 9.225
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 1024,
+      "expected": 754854590,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 20.9311,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 754854590,
+          "counts": {
+            "executed_ir_opcodes": 16410,
+            "function_calls": 1,
+            "arithmetic_opcodes": 5120,
+            "control_opcodes": 2052,
+            "data_opcodes": 8213,
+            "opcode_histogram": {
+              "ADD": 2048,
+              "BRANCH3": 1025,
+              "CONST": 16,
+              "DIVIDE": 1024,
+              "JUMP": 1026,
+              "LOAD": 5122,
+              "MULTIPLY": 1024,
+              "NUMERIC_DIFFERENCE": 1024,
+              "RELATE": 1025,
+              "RETURN": 1,
+              "STORE": 3075
+            },
+            "per_function": {
+              "fib_mod": 16410
+            }
+          },
+          "interpreter_ms_not_benchmark": 151.888
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 754854590,
+          "counts": {
+            "executed_ir_opcodes": 804,
+            "function_calls": 1,
+            "arithmetic_opcodes": 221,
+            "control_opcodes": 150,
+            "data_opcodes": 345,
+            "opcode_histogram": {
+              "ADD": 35,
+              "BRANCH3": 88,
+              "CONST": 33,
+              "DIVIDE": 47,
+              "JUMP": 61,
+              "LOAD": 163,
+              "MULTIPLY": 78,
+              "NUMERIC_DIFFERENCE": 61,
+              "RELATE": 88,
+              "RETURN": 1,
+              "STORE": 149
+            },
+            "per_function": {
+              "fib_mod": 804
+            }
+          },
+          "interpreter_ms_not_benchmark": 11.674
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 754854590,
+          "counts": {
+            "executed_ir_opcodes": 784,
+            "function_calls": 1,
+            "arithmetic_opcodes": 216,
+            "control_opcodes": 143,
+            "data_opcodes": 341,
+            "opcode_histogram": {
+              "ADD": 34,
+              "BRANCH3": 84,
+              "CONST": 26,
+              "DIVIDE": 46,
+              "JUMP": 58,
+              "LOAD": 163,
+              "MOVE": 3,
+              "MULTIPLY": 77,
+              "NUMERIC_DIFFERENCE": 59,
+              "RELATE": 84,
+              "RETURN": 1,
+              "STORE": 149
+            },
+            "per_function": {
+              "fib_mod": 784
+            }
+          },
+          "interpreter_ms_not_benchmark": 10.608
+        }
+      }
+    },
+    {
+      "function": "fib_mod",
+      "N": 4096,
+      "expected": 124518512,
+      "results_match_independent_reference": true,
+      "ir_opcode_count_ratio_conventional_over_cleaned": 71.8882,
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 124518512,
+          "counts": {
+            "executed_ir_opcodes": 65562,
+            "function_calls": 1,
+            "arithmetic_opcodes": 20480,
+            "control_opcodes": 8196,
+            "data_opcodes": 32789,
+            "opcode_histogram": {
+              "ADD": 8192,
+              "BRANCH3": 4097,
+              "CONST": 16,
+              "DIVIDE": 4096,
+              "JUMP": 4098,
+              "LOAD": 20482,
+              "MULTIPLY": 4096,
+              "NUMERIC_DIFFERENCE": 4096,
+              "RELATE": 4097,
+              "RETURN": 1,
+              "STORE": 12291
+            },
+            "per_function": {
+              "fib_mod": 65562
+            }
+          },
+          "interpreter_ms_not_benchmark": 673.661
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 124518512,
+          "counts": {
+            "executed_ir_opcodes": 932,
+            "function_calls": 1,
+            "arithmetic_opcodes": 259,
+            "control_opcodes": 174,
+            "data_opcodes": 397,
+            "opcode_histogram": {
+              "ADD": 41,
+              "BRANCH3": 102,
+              "CONST": 33,
+              "DIVIDE": 55,
+              "JUMP": 71,
+              "LOAD": 191,
+              "MULTIPLY": 92,
+              "NUMERIC_DIFFERENCE": 71,
+              "RELATE": 102,
+              "RETURN": 1,
+              "STORE": 173
+            },
+            "per_function": {
+              "fib_mod": 932
+            }
+          },
+          "interpreter_ms_not_benchmark": 12.117
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 124518512,
+          "counts": {
+            "executed_ir_opcodes": 912,
+            "function_calls": 1,
+            "arithmetic_opcodes": 254,
+            "control_opcodes": 167,
+            "data_opcodes": 393,
+            "opcode_histogram": {
+              "ADD": 40,
+              "BRANCH3": 98,
+              "CONST": 26,
+              "DIVIDE": 54,
+              "JUMP": 68,
+              "LOAD": 191,
+              "MOVE": 3,
+              "MULTIPLY": 91,
+              "NUMERIC_DIFFERENCE": 69,
+              "RELATE": 98,
+              "RETURN": 1,
+              "STORE": 173
+            },
+            "per_function": {
+              "fib_mod": 912
+            }
+          },
+          "interpreter_ms_not_benchmark": 10.676
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Counts executed S3 IR opcodes, not machine instructions, CPU cycles or external host operations.",
+    "Only selected in-domain inputs are observed; error/fallback paths could have different complexity.",
+    "Emulator interpreter time is diagnostic only and should not be reported as native speed.",
+    "IR verifier checks structural correctness; no formal proof of complete fast-path/fallback complexity.",
+    "Output size and input bit-cost are not included in this word-cost IR-opcode model."
+  ]
+}

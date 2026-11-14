@@ -1,0 +1,410 @@
+{
+  "status": "BOUNDED_IR_ADVERSARIAL_PROBES_NOT_PROOF",
+  "cases": [
+    {
+      "N": 16,
+      "case": "eligible_positive",
+      "arguments": [
+        16,
+        7,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 408943847,
+          "ir_ops": 245
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 408943847,
+          "ir_ops": 266
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 408943847,
+          "ir_ops": 259
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.946
+    },
+    {
+      "N": 16,
+      "case": "negative_seed",
+      "arguments": [
+        16,
+        -1,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 64570079,
+          "ir_ops": 245
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 64570079,
+          "ir_ops": 266
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 64570079,
+          "ir_ops": 259
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.946
+    },
+    {
+      "N": 16,
+      "case": "modulus_one",
+      "arguments": [
+        16,
+        7,
+        1
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 0,
+          "ir_ops": 245
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 0,
+          "ir_ops": 266
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 0,
+          "ir_ops": 259
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.946
+    },
+    {
+      "N": 16,
+      "case": "negative_modulus",
+      "arguments": [
+        16,
+        7,
+        -1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 408943847,
+          "ir_ops": 245
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 408943847,
+          "ir_ops": 266
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 408943847,
+          "ir_ops": 259
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.946
+    },
+    {
+      "N": 64,
+      "case": "eligible_positive",
+      "arguments": [
+        64,
+        7,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 293275928,
+          "ir_ops": 917
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 293275928,
+          "ir_ops": 340
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 293275928,
+          "ir_ops": 319
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 2.875
+    },
+    {
+      "N": 64,
+      "case": "negative_seed",
+      "arguments": [
+        64,
+        -1,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 151569882,
+          "ir_ops": 917
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 151569882,
+          "ir_ops": 956
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 151569882,
+          "ir_ops": 944
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.971
+    },
+    {
+      "N": 64,
+      "case": "modulus_one",
+      "arguments": [
+        64,
+        7,
+        1
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 0,
+          "ir_ops": 917
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 0,
+          "ir_ops": 338
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 0,
+          "ir_ops": 317
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 2.893
+    },
+    {
+      "N": 64,
+      "case": "negative_modulus",
+      "arguments": [
+        64,
+        7,
+        -1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 293275928,
+          "ir_ops": 917
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 293275928,
+          "ir_ops": 948
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 293275928,
+          "ir_ops": 940
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.976
+    },
+    {
+      "N": 256,
+      "case": "eligible_positive",
+      "arguments": [
+        256,
+        7,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 84957257,
+          "ir_ops": 3605
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 84957257,
+          "ir_ops": 410
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 84957257,
+          "ir_ops": 389
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 9.267
+    },
+    {
+      "N": 256,
+      "case": "negative_seed",
+      "arguments": [
+        256,
+        -1,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 908151150,
+          "ir_ops": 3605
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 908151150,
+          "ir_ops": 3644
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 908151150,
+          "ir_ops": 3632
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.993
+    },
+    {
+      "N": 256,
+      "case": "modulus_one",
+      "arguments": [
+        256,
+        7,
+        1
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 0,
+          "ir_ops": 3605
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 0,
+          "ir_ops": 400
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 0,
+          "ir_ops": 379
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 9.512
+    },
+    {
+      "N": 256,
+      "case": "negative_modulus",
+      "arguments": [
+        256,
+        7,
+        -1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 84957257,
+          "ir_ops": 3605
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 84957257,
+          "ir_ops": 3636
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 84957257,
+          "ir_ops": 3628
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.994
+    },
+    {
+      "N": 1024,
+      "case": "eligible_positive",
+      "arguments": [
+        1024,
+        7,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 751613710,
+          "ir_ops": 14357
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 751613710,
+          "ir_ops": 468
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 751613710,
+          "ir_ops": 447
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 32.119
+    },
+    {
+      "N": 1024,
+      "case": "negative_seed",
+      "arguments": [
+        1024,
+        -1,
+        1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 644991640,
+          "ir_ops": 14357
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 644991640,
+          "ir_ops": 14396
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 644991640,
+          "ir_ops": 14384
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.998
+    },
+    {
+      "N": 1024,
+      "case": "modulus_one",
+      "arguments": [
+        1024,
+        7,
+        1
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 0,
+          "ir_ops": 14357
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 0,
+          "ir_ops": 462
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 0,
+          "ir_ops": 441
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 32.556
+    },
+    {
+      "N": 1024,
+      "case": "negative_modulus",
+      "arguments": [
+        1024,
+        7,
+        -1000000007
+      ],
+      "modes": {
+        "CONVENTIONAL_OPTIMIZED_IR": {
+          "result": 751613710,
+          "ir_ops": 14357
+        },
+        "PREDICTIVE_LOWERED_IR": {
+          "result": 751613710,
+          "ir_ops": 14388
+        },
+        "PREDICTIVE_CLEANED_IR": {
+          "result": 751613710,
+          "ir_ops": 14380
+        }
+      },
+      "parity": true,
+      "ratio_conventional_over_cleaned": 0.998
+    }
+  ],
+  "limitations": [
+    "Finite selected cases only, not a proof of complete semantics or worst case.",
+    "Exceptions matched by occurrence, not exact trap semantics or messages.",
+    "S3 IR emulator opcode counts are not native CPU instructions."
+  ]
+}
