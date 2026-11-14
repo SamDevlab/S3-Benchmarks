@@ -1,0 +1,359 @@
+{
+  "campaign": "S3_V8_MATHEMATICAL_COMPILER_FUSION",
+  "suite": "UNKNOWN_NUMERICAL_DYNAMICS_V4",
+  "timestamp_utc": "2026-11-14T21:54:16.485206+00:00",
+  "summary": {
+    "total_cases": 18,
+    "recoverable_total": 11,
+    "recoverable_matched": 11,
+    "negative_control_total": 7,
+    "false_positive_discoveries": 0,
+    "epistemic_proof_leaks": 0,
+    "by_split": {
+      "DESIGN": {
+        "total": 3,
+        "passed": 3
+      },
+      "VALIDATION": {
+        "total": 4,
+        "passed": 4
+      },
+      "HIDDEN_TEST": {
+        "total": 4,
+        "passed": 4
+      },
+      "ADVERSARIAL_TEST": {
+        "total": 7,
+        "passed": 7
+      }
+    },
+    "all_assertions_passed": true
+  },
+  "cases": [
+    {
+      "sequence_name": "design_cubic_poly",
+      "length": 20,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "POLYNOMIAL_FINITE_DIFFERENCE",
+      "formula_description": "P(k) = 7*C(k,0) + 1*C(k,1) + 18*C(k,2) + 18*C(k,3)",
+      "forecast_horizon": [
+        23967.0,
+        27748.0,
+        31907.0,
+        36462.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "DESIGN",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.1474
+    },
+    {
+      "sequence_name": "design_quasi_m7_source_verified",
+      "length": 56,
+      "confidence_class": "EXACT_PROVEN",
+      "discovered_family": "QUASI_POLYNOMIAL_MOD_7",
+      "formula_description": "Q_mod7(q,r) coset Newton bases=[[0, 7, 14], [0, 9, 14], [0, 11, 14], [1, 13, 14], [2, 15, 14], [3, 17, 14], [5, 19, 14]]",
+      "forecast_horizon": [
+        448.0,
+        464.0,
+        480.0,
+        497.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": true,
+      "rejection_reason": null,
+      "split": "DESIGN",
+      "category": "RECOVERABLE_SOURCE_PROVED",
+      "elapsed_ms": 0.4298
+    },
+    {
+      "sequence_name": "design_pell_recurrence",
+      "length": 18,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "LINEAR_RECURRENCE",
+      "formula_description": "order-2 linear recurrence coeffs=[2, 1]",
+      "forecast_horizon": [
+        2744210.0,
+        6625109.0,
+        15994428.0,
+        38613965.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "DESIGN",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.3385
+    },
+    {
+      "sequence_name": "val_quasi_m6_obs",
+      "length": 48,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "QUASI_POLYNOMIAL_MOD_6",
+      "formula_description": "Q_mod6(q,r) coset Newton bases=[[0, 6, 12], [0, 8, 12], [0, 10, 12], [1, 12, 12], [2, 14, 12], [4, 16, 12]]",
+      "forecast_horizon": [
+        384.0,
+        400.0,
+        416.0,
+        433.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "VALIDATION",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.1976
+    },
+    {
+      "sequence_name": "val_quasi_m9_obs",
+      "length": 72,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "QUASI_POLYNOMIAL_MOD_9",
+      "formula_description": "Q_mod9(q,r) coset Newton bases=[[0, 10, 18], [0, 12, 18], [0, 14, 18], [1, 16, 18], [2, 18, 18], [3, 20, 18], [4, 22, 18], [6, 24, 18], [8, 26, 18]]",
+      "forecast_horizon": [
+        584.0,
+        600.0,
+        616.0,
+        633.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "VALIDATION",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.3528
+    },
+    {
+      "sequence_name": "val_quasi_m12_obs",
+      "length": 96,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "QUASI_POLYNOMIAL_MOD_12",
+      "formula_description": "Q_mod12(q,r) coset Newton bases=[[0, 13, 24], [0, 15, 24], [0, 17, 24], [1, 19, 24], [1, 21, 24], [2, 23, 24], [3, 25, 24], [4, 27, 24], [6, 29, 24], [7, 31, 24], [9, 33, 24], [11, 35, 24]]",
+      "forecast_horizon": [
+        776.0,
+        792.0,
+        808.0,
+        825.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "VALIDATION",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.6065
+    },
+    {
+      "sequence_name": "val_continuous_poisson_relaxation",
+      "length": 20,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "CONTINUOUS_GEOMETRIC_RELAXATION",
+      "formula_description": "x(k) = 1.25 + (8.5) * (0.68)^k",
+      "forecast_horizon": [
+        1.253798369236153,
+        1.252582891080587,
+        1.2517563659348019,
+        1.2511943288356682
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "VALIDATION",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.0644
+    },
+    {
+      "sequence_name": "hidden_quasi_m15_obs",
+      "length": 120,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "QUASI_POLYNOMIAL_MOD_15",
+      "formula_description": "Q_mod15(q,r) coset Newton bases=[[0, 16, 30], [0, 18, 30], [0, 20, 30], [0, 22, 30], [1, 24, 30], [2, 26, 30], [2, 28, 30], [3, 30, 30], [4, 32, 30], [6, 34, 30], [7, 36, 30], [8, 38, 30], [10, 40, 30], [12, 42, 30], [14, 44, 30]]",
+      "forecast_horizon": [
+        968.0,
+        984.0,
+        1000.0,
+        1016.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "HIDDEN_TEST",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.8962
+    },
+    {
+      "sequence_name": "hidden_chebyshev_recurrence",
+      "length": 18,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "LINEAR_RECURRENCE",
+      "formula_description": "order-2 linear recurrence coeffs=[3, -1]",
+      "forecast_horizon": [
+        24157817.0,
+        63245986.0,
+        165580141.0,
+        433494437.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "HIDDEN_TEST",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.297
+    },
+    {
+      "sequence_name": "hidden_periodic_orbit_7",
+      "length": 35,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "PERIODIC_ORBIT",
+      "formula_description": "s[k + 7] = s[k]",
+      "forecast_horizon": [
+        5.0,
+        -1.0,
+        8.0,
+        2.0
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "HIDDEN_TEST",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.1772
+    },
+    {
+      "sequence_name": "hidden_damped_oscillator",
+      "length": 24,
+      "confidence_class": "APPROXIMATE_FORECAST",
+      "discovered_family": "CONTINUOUS_LINEAR_RECURRENCE_O2",
+      "formula_description": "x(k) = 1.6408961*x(k-1) + (-0.7744)*x(k-2)",
+      "forecast_horizon": [
+        -0.039780784594226674,
+        -0.04030876432807282,
+        -0.03533625573137728,
+        -0.02676801812139661
+      ],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": null,
+      "split": "HIDDEN_TEST",
+      "category": "RECOVERABLE",
+      "elapsed_ms": 0.0706
+    },
+    {
+      "sequence_name": "adv_spoof_polynomial_prefix",
+      "length": 20,
+      "confidence_class": "REJECTED",
+      "discovered_family": "FALSIFIED_POLYNOMIAL_PREFIX_SPOOF",
+      "formula_description": "prefix polynomial falsified on late training/validation tail",
+      "forecast_horizon": [],
+      "validation_mae": 63.0,
+      "validation_max_abs_err": 216.0,
+      "source_aware_verified": false,
+      "rejection_reason": "FALSIFIED_ON_HELD_OUT_VALIDATION_PREFIX_SPOOF",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.0489
+    },
+    {
+      "sequence_name": "adv_spoof_geometric_regime_shift",
+      "length": 22,
+      "confidence_class": "REJECTED",
+      "discovered_family": "FALSIFIED_GEOMETRIC_PREFIX_SPOOF",
+      "formula_description": "continuous geometric law falsified on held-out validation tail",
+      "forecast_horizon": [],
+      "validation_mae": 0.00734909,
+      "validation_max_abs_err": 0.01116321,
+      "source_aware_verified": false,
+      "rejection_reason": "FALSIFIED_ON_HELD_OUT_VALIDATION_PREFIX_SPOOF",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.0433
+    },
+    {
+      "sequence_name": "adv_collatz_hailstone_27",
+      "length": 32,
+      "confidence_class": "UNIDENTIFIABLE",
+      "discovered_family": "CHAOTIC_OR_HIGH_ENTROPY",
+      "formula_description": "no closed-form algebraic or periodic structure generalized to validation split",
+      "forecast_horizon": [],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": "NO_VALIDATED_ALGEBRAIC_OR_PERIODIC_LAW",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.4469
+    },
+    {
+      "sequence_name": "adv_chaotic_logistic_r3_99",
+      "length": 28,
+      "confidence_class": "UNIDENTIFIABLE",
+      "discovered_family": "CHAOTIC_OR_HIGH_ENTROPY",
+      "formula_description": "no closed-form algebraic or periodic structure generalized to validation split",
+      "forecast_horizon": [],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": "NO_VALIDATED_ALGEBRAIC_OR_PERIODIC_LAW",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.0531
+    },
+    {
+      "sequence_name": "adv_xorshift32_prng",
+      "length": 24,
+      "confidence_class": "UNIDENTIFIABLE",
+      "discovered_family": "CHAOTIC_OR_HIGH_ENTROPY",
+      "formula_description": "no closed-form algebraic or periodic structure generalized to validation split",
+      "forecast_horizon": [],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": "NO_VALIDATED_ALGEBRAIC_OR_PERIODIC_LAW",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.5031
+    },
+    {
+      "sequence_name": "adv_noisy_continuous_decay",
+      "length": 24,
+      "confidence_class": "UNIDENTIFIABLE",
+      "discovered_family": "CHAOTIC_OR_HIGH_ENTROPY",
+      "formula_description": "no closed-form algebraic or periodic structure generalized to validation split",
+      "forecast_horizon": [],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": "NO_VALIDATED_ALGEBRAIC_OR_PERIODIC_LAW",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.052
+    },
+    {
+      "sequence_name": "adv_short_ambiguous_len5",
+      "length": 5,
+      "confidence_class": "INSUFFICIENT_EVIDENCE",
+      "discovered_family": "INSUFFICIENT_SAMPLE_LENGTH",
+      "formula_description": "none (L < 8)",
+      "forecast_horizon": [],
+      "validation_mae": 0.0,
+      "validation_max_abs_err": 0.0,
+      "source_aware_verified": false,
+      "rejection_reason": "SAMPLE_LENGTH_BELOW_MINIMUM_IDENTIFIABILITY_THRESHOLD",
+      "split": "ADVERSARIAL_TEST",
+      "category": "NEGATIVE_CONTROL",
+      "elapsed_ms": 0.0055
+    }
+  ]
+}

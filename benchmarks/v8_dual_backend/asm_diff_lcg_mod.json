@@ -1,0 +1,331 @@
+{
+ "A_S3_CONV": {
+  "symbol_size_bytes": 425,
+  "instructions": 95,
+  "calls": 0,
+  "branches": 34,
+  "overflow_branches": 4,
+  "div_instructions": 1,
+  "mul_instructions": 2,
+  "memory_operand_movs": 11,
+  "stack_memory_refs": 8,
+  "distinct_gprs": 12,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    22
+   ],
+   [
+    "dec",
+    18
+   ],
+   [
+    "js",
+    18
+   ],
+   [
+    "jmp",
+    6
+   ],
+   [
+    "cmp",
+    4
+   ],
+   [
+    "jo",
+    4
+   ],
+   [
+    "cmpq",
+    2
+   ],
+   [
+    "jne",
+    2
+   ]
+  ]
+ },
+ "B_S3_PRED": {
+  "symbol_size_bytes": 5178,
+  "instructions": 1149,
+  "calls": 5,
+  "branches": 448,
+  "overflow_branches": 55,
+  "div_instructions": 12,
+  "mul_instructions": 22,
+  "memory_operand_movs": 114,
+  "stack_memory_refs": 101,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    271
+   ],
+   [
+    "dec",
+    242
+   ],
+   [
+    "js",
+    242
+   ],
+   [
+    "jmp",
+    83
+   ],
+   [
+    "cmp",
+    66
+   ],
+   [
+    "jo",
+    55
+   ],
+   [
+    "sub",
+    26
+   ],
+   [
+    "je",
+    24
+   ]
+  ]
+ },
+ "G_S3_PRED_CLEAN_EXACT": {
+  "symbol_size_bytes": 10195,
+  "instructions": 1723,
+  "calls": 6,
+  "branches": 558,
+  "overflow_branches": 297,
+  "div_instructions": 24,
+  "mul_instructions": 40,
+  "memory_operand_movs": 103,
+  "stack_memory_refs": 102,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    362
+   ],
+   [
+    "cmpq",
+    243
+   ],
+   [
+    "incq",
+    202
+   ],
+   [
+    "jae",
+    201
+   ],
+   [
+    "cmp",
+    116
+   ],
+   [
+    "jmp",
+    103
+   ],
+   [
+    "jo",
+    96
+   ],
+   [
+    "je",
+    48
+   ]
+  ]
+ },
+ "C_GCC_CONV_MANUAL": {
+  "symbol_size_bytes": 42,
+  "instructions": 16,
+  "calls": 0,
+  "branches": 2,
+  "overflow_branches": 0,
+  "div_instructions": 1,
+  "mul_instructions": 0,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 7,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    3
+   ],
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "test",
+    1
+   ],
+   [
+    "jle",
+    1
+   ],
+   [
+    "xor",
+    1
+   ],
+   [
+    "xchg",
+    1
+   ],
+   [
+    "lea",
+    1
+   ],
+   [
+    "add",
+    1
+   ]
+  ]
+ },
+ "D_GCC_MANUAL_MATH": {
+  "symbol_size_bytes": 375,
+  "instructions": 115,
+  "calls": 5,
+  "branches": 8,
+  "overflow_branches": 0,
+  "div_instructions": 7,
+  "mul_instructions": 5,
+  "memory_operand_movs": 12,
+  "stack_memory_refs": 12,
+  "distinct_gprs": 15,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    44
+   ],
+   [
+    "cqto",
+    7
+   ],
+   [
+    "idiv",
+    7
+   ],
+   [
+    "push",
+    6
+   ],
+   [
+    "pop",
+    6
+   ],
+   [
+    "imul",
+    5
+   ],
+   [
+    "call",
+    5
+   ],
+   [
+    "add",
+    5
+   ]
+  ]
+ },
+ "E_GCC_AUTO_MATH": {
+  "symbol_size_bytes": 1049,
+  "instructions": 273,
+  "calls": 5,
+  "branches": 63,
+  "overflow_branches": 34,
+  "div_instructions": 11,
+  "mul_instructions": 17,
+  "memory_operand_movs": 8,
+  "stack_memory_refs": 8,
+  "distinct_gprs": 23,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    64
+   ],
+   [
+    "jo",
+    33
+   ],
+   [
+    "sub",
+    17
+   ],
+   [
+    "cmp",
+    17
+   ],
+   [
+    "imul",
+    17
+   ],
+   [
+    "add",
+    11
+   ],
+   [
+    "cqto",
+    11
+   ],
+   [
+    "idiv",
+    11
+   ]
+  ]
+ },
+ "F_GCC_CONV_FROM_S3_IR": {
+  "symbol_size_bytes": 249,
+  "instructions": 62,
+  "calls": 0,
+  "branches": 18,
+  "overflow_branches": 7,
+  "div_instructions": 2,
+  "mul_instructions": 4,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 12,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "jo",
+    7
+   ],
+   [
+    "mov",
+    6
+   ],
+   [
+    "test",
+    5
+   ],
+   [
+    "sub",
+    4
+   ],
+   [
+    "imul",
+    4
+   ],
+   [
+    "add",
+    4
+   ],
+   [
+    "cmp",
+    4
+   ],
+   [
+    "jne",
+    4
+   ]
+  ]
+ }
+}

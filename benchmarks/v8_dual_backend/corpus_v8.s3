@@ -1,0 +1,66 @@
+export fn lcg_mod(n: i64, x0: i64, m: i64) -> i64:
+    mut i: i64 = 0
+    mut x: i64 = x0
+    while i < n:
+        nxt: i64 = 3 * x + 5
+        q: i64 = nxt / m
+        x = nxt - q * m
+        i = i + 1
+    return x
+
+export fn fib_mod(n: i64, m: i64) -> i64:
+    mut a: i64 = 0
+    mut b: i64 = 1
+    mut i: i64 = 0
+    while i < n:
+        s: i64 = a + b
+        q: i64 = s / m
+        nb: i64 = s - q * m
+        a = b
+        b = nb
+        i = i + 1
+    return a
+
+export fn sum_i2(n: i64) -> i64:
+    mut i: i64 = 0
+    mut acc: i64 = 0
+    while i < n:
+        acc = acc + i * i
+        i = i + 1
+    return acc
+
+export fn triangular_cubic(n: i64, acc0: i64, s0: i64) -> i64:
+    mut i: i64 = 0
+    mut s1: i64 = s0
+    mut s2: i64 = acc0
+    while i < n:
+        s1 = s1 + i * i
+        s2 = s2 + s1
+        i = i + 1
+    return s2
+
+export fn sum_quasi_parity(n: i64) -> i64:
+    mut i: i64 = 0
+    mut acc: i64 = 5
+    while i < n:
+        num: i64 = i * i + 3 * i + 1
+        acc = acc + (num / 2)
+        i = i + 1
+    return acc
+
+export fn coupled_exchange(n: i64, x0: i64, y0: i64) -> i64:
+    mut i: i64 = 0
+    mut x: i64 = x0
+    mut y: i64 = y0
+    mut total: i64 = 0
+    while i < n:
+        flux: i64 = x - y + i
+        x = x - flux
+        y = y + flux
+        total = total + x + y
+        i = i + 1
+    return total
+
+fn main() -> i64:
+    return sum_quasi_parity(10000)
+

@@ -1,0 +1,331 @@
+{
+ "A_S3_CONV": {
+  "symbol_size_bytes": 457,
+  "instructions": 102,
+  "calls": 0,
+  "branches": 36,
+  "overflow_branches": 6,
+  "div_instructions": 0,
+  "mul_instructions": 0,
+  "memory_operand_movs": 13,
+  "stack_memory_refs": 10,
+  "distinct_gprs": 14,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    28
+   ],
+   [
+    "dec",
+    21
+   ],
+   [
+    "js",
+    21
+   ],
+   [
+    "jmp",
+    6
+   ],
+   [
+    "jo",
+    6
+   ],
+   [
+    "add",
+    5
+   ],
+   [
+    "sub",
+    3
+   ],
+   [
+    "cmpq",
+    2
+   ]
+  ]
+ },
+ "B_S3_PRED": {
+  "symbol_size_bytes": 4462,
+  "instructions": 982,
+  "calls": 0,
+  "branches": 414,
+  "overflow_branches": 39,
+  "div_instructions": 2,
+  "mul_instructions": 8,
+  "memory_operand_movs": 71,
+  "stack_memory_refs": 68,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "dec",
+    249
+   ],
+   [
+    "js",
+    249
+   ],
+   [
+    "mov",
+    193
+   ],
+   [
+    "jmp",
+    85
+   ],
+   [
+    "cmp",
+    39
+   ],
+   [
+    "jo",
+    39
+   ],
+   [
+    "movabs",
+    25
+   ],
+   [
+    "sub",
+    18
+   ]
+  ]
+ },
+ "G_S3_PRED_CLEAN_EXACT": {
+  "symbol_size_bytes": 9544,
+  "instructions": 1507,
+  "calls": 0,
+  "branches": 516,
+  "overflow_branches": 272,
+  "div_instructions": 4,
+  "mul_instructions": 16,
+  "memory_operand_movs": 29,
+  "stack_memory_refs": 28,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "cmpq",
+    265
+   ],
+   [
+    "mov",
+    254
+   ],
+   [
+    "incq",
+    219
+   ],
+   [
+    "jae",
+    218
+   ],
+   [
+    "jmp",
+    123
+   ],
+   [
+    "cmp",
+    74
+   ],
+   [
+    "jo",
+    54
+   ],
+   [
+    "movabs",
+    46
+   ]
+  ]
+ },
+ "C_GCC_CONV_MANUAL": {
+  "symbol_size_bytes": 49,
+  "instructions": 19,
+  "calls": 0,
+  "branches": 2,
+  "overflow_branches": 0,
+  "div_instructions": 0,
+  "mul_instructions": 0,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 8,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "add",
+    5
+   ],
+   [
+    "xor",
+    2
+   ],
+   [
+    "sub",
+    2
+   ],
+   [
+    "ret",
+    2
+   ],
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "test",
+    1
+   ],
+   [
+    "jle",
+    1
+   ],
+   [
+    "xchg",
+    1
+   ]
+  ]
+ },
+ "D_GCC_MANUAL_MATH": {
+  "symbol_size_bytes": 20,
+  "instructions": 9,
+  "calls": 0,
+  "branches": 1,
+  "overflow_branches": 0,
+  "div_instructions": 0,
+  "mul_instructions": 1,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 5,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "xor",
+    1
+   ],
+   [
+    "test",
+    1
+   ],
+   [
+    "jle",
+    1
+   ],
+   [
+    "lea",
+    1
+   ],
+   [
+    "imul",
+    1
+   ],
+   [
+    "ret",
+    1
+   ],
+   [
+    "cs",
+    1
+   ]
+  ]
+ },
+ "E_GCC_AUTO_MATH": {
+  "symbol_size_bytes": 532,
+  "instructions": 127,
+  "calls": 0,
+  "branches": 36,
+  "overflow_branches": 19,
+  "div_instructions": 2,
+  "mul_instructions": 5,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 13,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "jo",
+    16
+   ],
+   [
+    "mov",
+    15
+   ],
+   [
+    "cmp",
+    12
+   ],
+   [
+    "add",
+    12
+   ],
+   [
+    "sub",
+    9
+   ],
+   [
+    "movabs",
+    6
+   ],
+   [
+    "imul",
+    5
+   ],
+   [
+    "jg",
+    4
+   ]
+  ]
+ },
+ "F_GCC_CONV_FROM_S3_IR": {
+  "symbol_size_bytes": 157,
+  "instructions": 41,
+  "calls": 0,
+  "branches": 15,
+  "overflow_branches": 10,
+  "div_instructions": 0,
+  "mul_instructions": 0,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 10,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "jo",
+    9
+   ],
+   [
+    "add",
+    8
+   ],
+   [
+    "sub",
+    5
+   ],
+   [
+    "mov",
+    4
+   ],
+   [
+    "jmp",
+    3
+   ],
+   [
+    "xor",
+    2
+   ],
+   [
+    "ret",
+    2
+   ],
+   [
+    "endbr64",
+    1
+   ]
+  ]
+ }
+}

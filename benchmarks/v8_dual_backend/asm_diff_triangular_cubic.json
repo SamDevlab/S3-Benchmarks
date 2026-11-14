@@ -1,0 +1,331 @@
+{
+ "A_S3_CONV": {
+  "symbol_size_bytes": 338,
+  "instructions": 76,
+  "calls": 0,
+  "branches": 28,
+  "overflow_branches": 3,
+  "div_instructions": 0,
+  "mul_instructions": 1,
+  "memory_operand_movs": 11,
+  "stack_memory_refs": 8,
+  "distinct_gprs": 12,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    18
+   ],
+   [
+    "dec",
+    16
+   ],
+   [
+    "js",
+    16
+   ],
+   [
+    "jmp",
+    6
+   ],
+   [
+    "jo",
+    3
+   ],
+   [
+    "add",
+    3
+   ],
+   [
+    "cmpq",
+    2
+   ],
+   [
+    "incq",
+    1
+   ]
+  ]
+ },
+ "B_S3_PRED": {
+  "symbol_size_bytes": 11267,
+  "instructions": 2371,
+  "calls": 0,
+  "branches": 959,
+  "overflow_branches": 100,
+  "div_instructions": 5,
+  "mul_instructions": 26,
+  "memory_operand_movs": 314,
+  "stack_memory_refs": 311,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "dec",
+    581
+   ],
+   [
+    "js",
+    581
+   ],
+   [
+    "mov",
+    504
+   ],
+   [
+    "jmp",
+    186
+   ],
+   [
+    "jo",
+    100
+   ],
+   [
+    "cmp",
+    90
+   ],
+   [
+    "movabs",
+    63
+   ],
+   [
+    "add",
+    49
+   ]
+  ]
+ },
+ "G_S3_PRED_CLEAN_EXACT": {
+  "symbol_size_bytes": 24422,
+  "instructions": 3815,
+  "calls": 0,
+  "branches": 1260,
+  "overflow_branches": 701,
+  "div_instructions": 10,
+  "mul_instructions": 52,
+  "memory_operand_movs": 233,
+  "stack_memory_refs": 232,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    710
+   ],
+   [
+    "cmpq",
+    644
+   ],
+   [
+    "incq",
+    540
+   ],
+   [
+    "jae",
+    539
+   ],
+   [
+    "jmp",
+    280
+   ],
+   [
+    "cmp",
+    174
+   ],
+   [
+    "jo",
+    162
+   ],
+   [
+    "movabs",
+    120
+   ]
+  ]
+ },
+ "C_GCC_CONV_MANUAL": {
+  "symbol_size_bytes": 39,
+  "instructions": 15,
+  "calls": 0,
+  "branches": 2,
+  "overflow_branches": 0,
+  "div_instructions": 0,
+  "mul_instructions": 1,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 6,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "add",
+    3
+   ],
+   [
+    "mov",
+    2
+   ],
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "test",
+    1
+   ],
+   [
+    "jle",
+    1
+   ],
+   [
+    "xor",
+    1
+   ],
+   [
+    "xchg",
+    1
+   ],
+   [
+    "imul",
+    1
+   ]
+  ]
+ },
+ "D_GCC_MANUAL_MATH": {
+  "symbol_size_bytes": 516,
+  "instructions": 155,
+  "calls": 0,
+  "branches": 1,
+  "overflow_branches": 0,
+  "div_instructions": 0,
+  "mul_instructions": 18,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    46
+   ],
+   [
+    "add",
+    25
+   ],
+   [
+    "imul",
+    11
+   ],
+   [
+    "and",
+    11
+   ],
+   [
+    "mul",
+    7
+   ],
+   [
+    "push",
+    5
+   ],
+   [
+    "sar",
+    5
+   ],
+   [
+    "adc",
+    5
+   ]
+  ]
+ },
+ "E_GCC_AUTO_MATH": {
+  "symbol_size_bytes": 1393,
+  "instructions": 327,
+  "calls": 0,
+  "branches": 98,
+  "overflow_branches": 47,
+  "div_instructions": 4,
+  "mul_instructions": 16,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 20,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "jo",
+    46
+   ],
+   [
+    "mov",
+    43
+   ],
+   [
+    "cmp",
+    35
+   ],
+   [
+    "add",
+    26
+   ],
+   [
+    "jg",
+    24
+   ],
+   [
+    "movabs",
+    19
+   ],
+   [
+    "sub",
+    18
+   ],
+   [
+    "imul",
+    15
+   ]
+  ]
+ },
+ "F_GCC_CONV_FROM_S3_IR": {
+  "symbol_size_bytes": 103,
+  "instructions": 31,
+  "calls": 1,
+  "branches": 9,
+  "overflow_branches": 4,
+  "div_instructions": 0,
+  "mul_instructions": 1,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 9,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "add",
+    5
+   ],
+   [
+    "mov",
+    3
+   ],
+   [
+    "jmp",
+    3
+   ],
+   [
+    "jo",
+    3
+   ],
+   [
+    "nopl",
+    2
+   ],
+   [
+    "ret",
+    2
+   ],
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "test",
+    1
+   ]
+  ]
+ }
+}

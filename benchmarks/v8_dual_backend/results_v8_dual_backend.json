@@ -1,0 +1,3495 @@
+{
+  "environment": {
+    "cpu": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+    "platform": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "gcc_flags": [
+      "-O3",
+      "-fPIC",
+      "-shared"
+    ],
+    "s3_commit": "bad9d962eb3cf016aa06c9d3c90612923d0a1967",
+    "rounds": 7,
+    "batches_per_round": 15,
+    "inputs": "T + (i & 15) cycled at run time; xor-folded into volatile sink"
+  },
+  "clock": {
+    "clock_getres_ns": 100.0,
+    "back_to_back_median_ns": 300.0,
+    "back_to_back_p99_ns": 600.0,
+    "min_positive_delta_ns": 300.0
+  },
+  "stage_timings_ms": {
+    "FRONTEND_IR_OPT_MS": 58.633,
+    "DISCOVERY_ONLY_MS": 2.837,
+    "DISCOVERY_PLUS_CERT_LOWERING_MS": 139.782,
+    "PROOF_CHECK_MS_ESTIMATE": 124.329,
+    "IR_CLEANUP_MS": 68.851,
+    "IR_CLEANUP_STATS": {
+      "instructions_before": 2343,
+      "instructions_after": 2054,
+      "blocks_before": 613,
+      "blocks_after": 532,
+      "promoted_memories": 6,
+      "folded_constants": 135,
+      "folded_branches": 20
+    },
+    "S3_CODEGEN_A_MS": 45.873,
+    "S3_ASM_LINK_A_MS": 3.202,
+    "S3_CODEGEN_B_MS": 589.044,
+    "S3_ASM_LINK_B_MS": 4.41,
+    "S3_CODEGEN_G_MS": 645.678,
+    "S3_ASM_LINK_G_MS": 4.548,
+    "C_TRANSLATION_E_MS": 12.106,
+    "GCC_COMPILE_E_MS": 516.856,
+    "GCC_BUILD_ELF_MS": 669.611,
+    "C_TRANSLATION_F_MS": 1.598,
+    "GCC_COMPILE_F_MS": 220.761,
+    "GCC_COMPILE_C_MS": 164.952,
+    "GCC_COMPILE_D_MS": 189.888,
+    "PEAK_RSS_KB_BUILD_PROCESS": 39328
+  },
+  "artifact_dir": "/tmp/s3v8_xfclnw5n",
+  "independent_differential_checks": {
+    "sum_quasi_parity": true,
+    "sum_i2": true,
+    "triangular_cubic": true,
+    "coupled_exchange": true,
+    "lcg_mod": true,
+    "fib_mod": true,
+    "lcg_mod_div0_traps": true,
+    "triangular_cubic_overflow_traps": true
+  },
+  "direct_vs_ffi_overhead_ns": {
+    "noop_direct_ns": 1.364,
+    "sum_quasi_parity_direct_ns": 22.019,
+    "sum_i2_direct_ns": 20.873,
+    "triangular_cubic_direct_ns": 41.75
+  },
+  "provenance": {
+    "SOURCE_SHA256": "4249c82466dd3affd6544d897138a8846cf3a6107d638324d64f08c824c2a977",
+    "COMPILER_FLAGS": {
+      "PREDICTIVE_EXACT_DEFAULT": false,
+      "FP_REASSOCIATION_DEFAULT": false,
+      "S3C_NG_DEFAULT": false,
+      "EXPERIMENTAL_LICM_DEFAULT": false,
+      "SCIENTIFIC_INSTRUCTION_BUDGET": 50000000,
+      "ALLOW_QUASI_POLYNOMIAL_PARITY": true,
+      "IR_CLEANUP_MODE": "G_OPT_IN_EXACT_SEGMENT"
+    },
+    "CERTIFICATES": [
+      {
+        "PROOF_CERTIFICATE_ID": "ffc17ee3756f6e3c",
+        "TRANSFORMATION_ID": "predictive_native_ir_lcg_mod_v3",
+        "SOURCE_IR_HASH": "30307ecc5f93a41b6ca3ec5201684f4f4fb36ef87408b1b4792616b7fd49bda0",
+        "TARGET_IR_HASH": "361982859d0a345d8056234c2a406cc40f506c2b410f1c6295ffff70255d20c0",
+        "ARITHMETIC_DOMAIN": "MODULAR",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      },
+      {
+        "PROOF_CERTIFICATE_ID": "17aacdfbcbbc5312",
+        "TRANSFORMATION_ID": "predictive_native_ir_fib_mod_v3",
+        "SOURCE_IR_HASH": "b41b1fb21044a67aeb2b34463344c9242f466df40635d42ebf5b0b8848af017a",
+        "TARGET_IR_HASH": "4606a30c7d4a7178d06563bfb18f7c8f7cd99248d7f4df2845d04b5d5ab3e51a",
+        "ARITHMETIC_DOMAIN": "MODULAR",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      },
+      {
+        "PROOF_CERTIFICATE_ID": "2ef9c18ba8085c7e",
+        "TRANSFORMATION_ID": "predictive_native_ir_sum_i2_scev_v5",
+        "SOURCE_IR_HASH": "419e9a20bf0c43c9c2a17704b3dc00a1a24d78c97159c6d217849995afab8896",
+        "TARGET_IR_HASH": "b260a4cf03b3baee8afc65cb53f5efaf6bff60dc2067e82d60077ad945550900",
+        "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      },
+      {
+        "PROOF_CERTIFICATE_ID": "f759fa8615f90310",
+        "TRANSFORMATION_ID": "predictive_native_ir_triangular_cubic_scev_v5",
+        "SOURCE_IR_HASH": "c424aaf6d553f644491a7b5e0ebdddc14c4b45a1392654490f36e9cbc69cf90e",
+        "TARGET_IR_HASH": "5dcee2049f0df5be77d69c635ec13f71dcee59ed115a79301254612bc6fab0e1",
+        "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      },
+      {
+        "PROOF_CERTIFICATE_ID": "4a1608fd3bb63b03",
+        "TRANSFORMATION_ID": "predictive_native_ir_sum_quasi_parity_discovery_v55",
+        "SOURCE_IR_HASH": "ea3b080d3ad1bcb7a1c1c844d7f7dc424861a0d785f50eb2fe68795a6b08d052",
+        "TARGET_IR_HASH": "28c8723e42aa80c68eb14058551d56fd5752d3842afecd84ee4f2c75ce5e1909",
+        "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      },
+      {
+        "PROOF_CERTIFICATE_ID": "e2fdf27f9760036c",
+        "TRANSFORMATION_ID": "predictive_native_ir_coupled_exchange_discovery_v55",
+        "SOURCE_IR_HASH": "921e719e15f472e1eb25d281f126b11f45da6d4cbe3873da0f09378ca8567710",
+        "TARGET_IR_HASH": "fa9285989f40309d9d27caceafe2c715520ab24aedb0969006e78ffc7a7704ec",
+        "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+        "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+        "VERIFICATION_STATUS": "STATIC_GUARDED",
+        "CHECKER_VERSION": "s3-proof-checker-v3.0",
+        "ACCEPTED": true
+      }
+    ],
+    "LOWERED_FUNCTIONS": [
+      "lcg_mod",
+      "fib_mod",
+      "sum_i2",
+      "triangular_cubic",
+      "sum_quasi_parity",
+      "coupled_exchange"
+    ],
+    "SKIPPED_PREDICTIVE_FUNCTIONS": {
+      "main": "NO_LOOPS"
+    },
+    "S3_COMPILER_COMMIT": "bad9d962eb3cf016aa06c9d3c90612923d0a1967",
+    "GCC_VERSION": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "GCC_FLAGS": [
+      "-O3",
+      "-fPIC",
+      "-shared"
+    ],
+    "BACKEND_VERSION": "s3-c-emitter-v8.0",
+    "CORRECTNESS_STATUS": "VERIFIED_DIFFERENTIAL_PARITY"
+  },
+  "transformed_ir_hashes": {
+    "lcg_mod": "361982859d0a345d8056234c2a406cc40f506c2b410f1c6295ffff70255d20c0",
+    "fib_mod": "4606a30c7d4a7178d06563bfb18f7c8f7cd99248d7f4df2845d04b5d5ab3e51a",
+    "sum_i2": "b260a4cf03b3baee8afc65cb53f5efaf6bff60dc2067e82d60077ad945550900",
+    "triangular_cubic": "5dcee2049f0df5be77d69c635ec13f71dcee59ed115a79301254612bc6fab0e1",
+    "sum_quasi_parity": "28c8723e42aa80c68eb14058551d56fd5752d3842afecd84ee4f2c75ce5e1909",
+    "coupled_exchange": "fa9285989f40309d9d27caceafe2c715520ab24aedb0969006e78ffc7a7704ec",
+    "main": "bc46ae4b15576020ca20593f47d7578b4c699ed5e9a83a6fad692da2045d576f",
+    "__s3_pred_mulmod_i64": "da78352c463c7d5347822966c2568cee5c63c845b66df1db88a5675874ac017e"
+  },
+  "source_ir_hashes": {
+    "lcg_mod": "30307ecc5f93a41b6ca3ec5201684f4f4fb36ef87408b1b4792616b7fd49bda0",
+    "fib_mod": "b41b1fb21044a67aeb2b34463344c9242f466df40635d42ebf5b0b8848af017a",
+    "sum_i2": "419e9a20bf0c43c9c2a17704b3dc00a1a24d78c97159c6d217849995afab8896",
+    "triangular_cubic": "c424aaf6d553f644491a7b5e0ebdddc14c4b45a1392654490f36e9cbc69cf90e",
+    "sum_quasi_parity": "ea3b080d3ad1bcb7a1c1c844d7f7dc424861a0d785f50eb2fe68795a6b08d052",
+    "coupled_exchange": "921e719e15f472e1eb25d281f126b11f45da6d4cbe3873da0f09378ca8567710",
+    "main": "bc46ae4b15576020ca20593f47d7578b4c699ed5e9a83a6fad692da2045d576f"
+  },
+  "artifact_sizes_bytes": {
+    "S3_CONVENTIONAL_NATIVE": 50184,
+    "S3_PREDICTIVE_NATIVE": 468032,
+    "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": 381888,
+    "GCC_CONVENTIONAL_C": 15304,
+    "GCC_MANUAL_MATHEMATICAL": 15336,
+    "GCC_S3_AUTOMATIC_MATHEMATICAL": 20424,
+    "GCC_S3_IR_CONVENTIONAL (extra)": 16224,
+    "ELF_EXECUTABLE": 21256
+  },
+  "results": [
+    {
+      "function": "sum_quasi_parity",
+      "T": 1000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3209.5624,
+          "mean_ns": 3391.0859,
+          "stdev_ns": 385.2852,
+          "min_ns": 3194.4895,
+          "max_ns": 4320.4214,
+          "ci95_ns": [
+            3201.7828,
+            3397.731
+          ],
+          "batch_calls": 617,
+          "round_medians_ns": [
+            3211.8314,
+            3201.7828,
+            4320.4214,
+            3397.731,
+            3209.5624,
+            3201.7828,
+            3194.4895
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 118.8739,
+          "mean_ns": 123.8502,
+          "stdev_ns": 8.2816,
+          "min_ns": 117.9551,
+          "max_ns": 140.6484,
+          "ci95_ns": [
+            118.3489,
+            132.104
+          ],
+          "batch_calls": 7619,
+          "round_medians_ns": [
+            120.5933,
+            118.3489,
+            140.6484,
+            117.9551,
+            118.8739,
+            118.4276,
+            132.104
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 77.8069,
+          "mean_ns": 82.6113,
+          "stdev_ns": 7.9972,
+          "min_ns": 77.4244,
+          "max_ns": 98.3875,
+          "ci95_ns": [
+            77.6419,
+            91.4273
+          ],
+          "batch_calls": 13333,
+          "round_medians_ns": [
+            77.8669,
+            77.7244,
+            77.4244,
+            77.6419,
+            77.8069,
+            98.3875,
+            91.4273
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 741.5891,
+          "mean_ns": 742.9125,
+          "stdev_ns": 5.7672,
+          "min_ns": 734.186,
+          "max_ns": 752.6744,
+          "ci95_ns": [
+            739.3023,
+            748.6822
+          ],
+          "batch_calls": 2580,
+          "round_medians_ns": [
+            739.3023,
+            741.5891,
+            739.5736,
+            744.3798,
+            734.186,
+            752.6744,
+            748.6822
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 11.7281,
+          "mean_ns": 12.4518,
+          "stdev_ns": 1.1707,
+          "min_ns": 11.6937,
+          "max_ns": 14.5906,
+          "ci95_ns": [
+            11.7094,
+            13.9781
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            14.5906,
+            11.7281,
+            11.7531,
+            11.6937,
+            13.9781,
+            11.7094,
+            11.7094
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 22.2831,
+          "mean_ns": 23.7269,
+          "stdev_ns": 2.3855,
+          "min_ns": 22.1781,
+          "max_ns": 28.4182,
+          "ci95_ns": [
+            22.2343,
+            26.3782
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            22.2831,
+            22.2343,
+            28.4182,
+            22.1781,
+            22.3281,
+            26.3782,
+            22.2681
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 1420.9217,
+          "mean_ns": 1423.921,
+          "stdev_ns": 6.7531,
+          "min_ns": 1413.9722,
+          "max_ns": 1432.041,
+          "ci95_ns": [
+            1419.0198,
+            1431.602
+          ],
+          "batch_calls": 1367,
+          "round_medians_ns": [
+            1420.9217,
+            1431.602,
+            1430.4316,
+            1419.0198,
+            1419.4587,
+            1432.041,
+            1413.9722
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 167166005,
+        "sum": 10941596080,
+        "mix": 3456
+      },
+      "call_overhead_noop_median_ns": 2.1725,
+      "call_overhead_noop_round_medians_ns": [
+        2.1725,
+        2.695,
+        2.155,
+        2.695,
+        2.695,
+        2.1575,
+        2.155
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "T": 10000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 31908.1967,
+          "mean_ns": 32392.0375,
+          "stdev_ns": 781.9048,
+          "min_ns": 31711.4754,
+          "max_ns": 33709.8361,
+          "ci95_ns": [
+            31759.0164,
+            33478.6885
+          ],
+          "batch_calls": 61,
+          "round_medians_ns": [
+            33478.6885,
+            31888.5246,
+            31759.0164,
+            33709.8361,
+            31908.1967,
+            31711.4754,
+            32288.5246
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 120.3263,
+          "mean_ns": 120.3544,
+          "stdev_ns": 1.6101,
+          "min_ns": 118.573,
+          "max_ns": 123.514,
+          "ci95_ns": [
+            118.8262,
+            121.592
+          ],
+          "batch_calls": 10666,
+          "round_medians_ns": [
+            118.573,
+            119.295,
+            121.592,
+            118.8262,
+            120.3263,
+            123.514,
+            120.3544
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 78.0187,
+          "mean_ns": 84.9009,
+          "stdev_ns": 9.0081,
+          "min_ns": 76.7875,
+          "max_ns": 100.4875,
+          "ci95_ns": [
+            77.0438,
+            92.2062
+          ],
+          "batch_calls": 16000,
+          "round_medians_ns": [
+            91.8375,
+            78.0187,
+            77.925,
+            76.7875,
+            77.0438,
+            92.2062,
+            100.4875
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 7284.7584,
+          "mean_ns": 7363.675,
+          "stdev_ns": 153.3551,
+          "min_ns": 7274.7212,
+          "max_ns": 7721.9331,
+          "ci95_ns": [
+            7275.4647,
+            7414.4981
+          ],
+          "batch_calls": 269,
+          "round_medians_ns": [
+            7292.9368,
+            7281.4126,
+            7275.4647,
+            7284.7584,
+            7274.7212,
+            7414.4981,
+            7721.9331
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 13.2153,
+          "mean_ns": 12.9925,
+          "stdev_ns": 1.1468,
+          "min_ns": 11.7115,
+          "max_ns": 14.5429,
+          "ci95_ns": [
+            11.7303,
+            14.0704
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            11.7303,
+            13.9128,
+            11.764,
+            14.5429,
+            11.7115,
+            13.2153,
+            14.0704
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 21.26,
+          "mean_ns": 22.1957,
+          "stdev_ns": 1.5757,
+          "min_ns": 21.135,
+          "max_ns": 25.295,
+          "ci95_ns": [
+            21.205,
+            23.945
+          ],
+          "batch_calls": 20000,
+          "round_medians_ns": [
+            23.945,
+            21.205,
+            21.26,
+            21.26,
+            21.27,
+            21.135,
+            25.295
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 14159.1241,
+          "mean_ns": 14150.0521,
+          "stdev_ns": 55.4482,
+          "min_ns": 14073.7226,
+          "max_ns": 14221.8978,
+          "ci95_ns": [
+            14075.9124,
+            14213.8686
+          ],
+          "batch_calls": 137,
+          "round_medians_ns": [
+            14221.8978,
+            14213.8686,
+            14173.7226,
+            14132.1168,
+            14073.7226,
+            14075.9124,
+            14159.1241
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 166716660005,
+        "sum": 10693895852080,
+        "mix": 640
+      },
+      "call_overhead_noop_median_ns": 2.1719,
+      "call_overhead_noop_round_medians_ns": [
+        2.175,
+        2.175,
+        2.1594,
+        2.1719,
+        2.7,
+        2.1594,
+        2.1594
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "T": 1000000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3248125.0,
+          "mean_ns": 3299989.2857,
+          "stdev_ns": 130108.7235,
+          "min_ns": 3238837.5,
+          "max_ns": 3618487.5,
+          "ci95_ns": [
+            3243737.5,
+            3255162.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            3238837.5,
+            3255162.5,
+            3618487.5,
+            3249137.5,
+            3243737.5,
+            3248125.0,
+            3246437.5
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 120.0829,
+          "mean_ns": 124.901,
+          "stdev_ns": 13.4039,
+          "min_ns": 118.1065,
+          "max_ns": 157.6453,
+          "ci95_ns": [
+            118.1065,
+            120.8586
+          ],
+          "batch_calls": 9411,
+          "round_medians_ns": [
+            118.1065,
+            119.2116,
+            157.6453,
+            118.1065,
+            120.0829,
+            120.2954,
+            120.8586
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 77.8412,
+          "mean_ns": 80.0344,
+          "stdev_ns": 4.9822,
+          "min_ns": 77.4355,
+          "max_ns": 92.1348,
+          "ci95_ns": [
+            77.5112,
+            79.4775
+          ],
+          "batch_calls": 14545,
+          "round_medians_ns": [
+            77.4355,
+            79.4775,
+            78.1987,
+            77.8412,
+            92.1348,
+            77.5112,
+            77.6418
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 732487.5,
+          "mean_ns": 745167.8571,
+          "stdev_ns": 28342.7624,
+          "min_ns": 727587.5,
+          "max_ns": 813637.5,
+          "ci95_ns": [
+            729787.5,
+            742250.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            732487.5,
+            813637.5,
+            738525.0,
+            742250.0,
+            731900.0,
+            729787.5,
+            727587.5
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 14.0656,
+          "mean_ns": 13.433,
+          "stdev_ns": 1.0075,
+          "min_ns": 11.7937,
+          "max_ns": 14.0875,
+          "ci95_ns": [
+            11.8875,
+            14.0719
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            11.7937,
+            14.0719,
+            14.0719,
+            14.0875,
+            14.0531,
+            11.8875,
+            14.0656
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 19.4937,
+          "mean_ns": 21.2902,
+          "stdev_ns": 2.0845,
+          "min_ns": 19.4812,
+          "max_ns": 23.8125,
+          "ci95_ns": [
+            19.4812,
+            23.7188
+          ],
+          "batch_calls": 16000,
+          "round_medians_ns": [
+            19.4812,
+            23.8125,
+            23.7188,
+            23.5562,
+            19.4875,
+            19.4812,
+            19.4937
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 1418762.5,
+          "mean_ns": 1428203.5714,
+          "stdev_ns": 23484.9465,
+          "min_ns": 1412125.0,
+          "max_ns": 1483612.5,
+          "ci95_ns": [
+            1412962.5,
+            1431137.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            1483612.5,
+            1431137.5,
+            1412962.5,
+            1424287.5,
+            1418762.5,
+            1414537.5,
+            1412125.0
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 166667166666000005,
+        "sum": 10666938669584012080,
+        "mix": 1536
+      },
+      "call_overhead_noop_median_ns": 2.1725,
+      "call_overhead_noop_round_medians_ns": [
+        2.1725,
+        2.18,
+        2.1725,
+        2.1725,
+        2.1575,
+        2.1575,
+        2.17
+      ]
+    },
+    {
+      "function": "sum_i2",
+      "T": 1000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 1775.8497,
+          "mean_ns": 1779.1209,
+          "stdev_ns": 17.7151,
+          "min_ns": 1755.4562,
+          "max_ns": 1803.6673,
+          "ci95_ns": [
+            1762.5224,
+            1798.5689
+          ],
+          "batch_calls": 1118,
+          "round_medians_ns": [
+            1762.5224,
+            1798.5689,
+            1792.4866,
+            1755.4562,
+            1765.2952,
+            1803.6673,
+            1775.8497
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 61.5125,
+          "mean_ns": 67.8875,
+          "stdev_ns": 11.7226,
+          "min_ns": 60.8438,
+          "max_ns": 94.9125,
+          "ci95_ns": [
+            60.9188,
+            72.7562
+          ],
+          "batch_calls": 16000,
+          "round_medians_ns": [
+            61.5125,
+            72.7562,
+            60.8438,
+            60.9188,
+            94.9125,
+            63.3312,
+            60.9375
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 50.1716,
+          "mean_ns": 51.3119,
+          "stdev_ns": 2.187,
+          "min_ns": 49.7216,
+          "max_ns": 55.8587,
+          "ci95_ns": [
+            49.7272,
+            53.2711
+          ],
+          "batch_calls": 17777,
+          "round_medians_ns": [
+            49.7272,
+            49.8791,
+            50.5541,
+            49.7216,
+            55.8587,
+            53.2711,
+            50.1716
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 288.8945,
+          "mean_ns": 342.6088,
+          "stdev_ns": 106.4852,
+          "min_ns": 287.5612,
+          "max_ns": 597.0127,
+          "ci95_ns": [
+            287.9156,
+            356.8776
+          ],
+          "batch_calls": 5925,
+          "round_medians_ns": [
+            288.8945,
+            291.8143,
+            287.5612,
+            287.9156,
+            597.0127,
+            288.1857,
+            356.8776
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 6.7,
+          "mean_ns": 7.5214,
+          "stdev_ns": 1.085,
+          "min_ns": 6.6844,
+          "max_ns": 9.6906,
+          "ci95_ns": [
+            6.6937,
+            8.3594
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            6.7,
+            6.6937,
+            6.6844,
+            7.825,
+            6.6969,
+            9.6906,
+            8.3594
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 21.9343,
+          "mean_ns": 21.9391,
+          "stdev_ns": 0.0493,
+          "min_ns": 21.878,
+          "max_ns": 22.0468,
+          "ci95_ns": [
+            21.9118,
+            21.953
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            21.9118,
+            21.9343,
+            21.9118,
+            21.953,
+            21.878,
+            22.0468,
+            21.938
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 562.3162,
+          "mean_ns": 590.4324,
+          "stdev_ns": 70.1012,
+          "min_ns": 558.2108,
+          "max_ns": 762.0711,
+          "ci95_ns": [
+            560.6618,
+            565.5637
+          ],
+          "batch_calls": 1632,
+          "round_medians_ns": [
+            558.2108,
+            565.5637,
+            562.3162,
+            561.5196,
+            562.6838,
+            762.0711,
+            560.6618
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 332833500,
+        "sum": 21785840800,
+        "mix": 256
+      },
+      "call_overhead_noop_median_ns": 2.17,
+      "call_overhead_noop_round_medians_ns": [
+        2.1575,
+        2.695,
+        2.1575,
+        2.175,
+        2.17,
+        2.1725,
+        2.1575
+      ]
+    },
+    {
+      "function": "sum_i2",
+      "T": 10000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 17792.1053,
+          "mean_ns": 18132.3308,
+          "stdev_ns": 1099.6103,
+          "min_ns": 17381.5789,
+          "max_ns": 20727.193,
+          "ci95_ns": [
+            17407.8947,
+            18256.1404
+          ],
+          "batch_calls": 114,
+          "round_medians_ns": [
+            18256.1404,
+            17907.8947,
+            20727.193,
+            17453.5088,
+            17381.5789,
+            17792.1053,
+            17407.8947
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 63.2726,
+          "mean_ns": 70.6075,
+          "stdev_ns": 15.1722,
+          "min_ns": 62.7226,
+          "max_ns": 107.2396,
+          "ci95_ns": [
+            63.0526,
+            70.6085
+          ],
+          "batch_calls": 14545,
+          "round_medians_ns": [
+            62.7226,
+            63.0526,
+            107.2396,
+            63.2726,
+            63.2451,
+            70.6085,
+            64.1114
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 50.0084,
+          "mean_ns": 50.0052,
+          "stdev_ns": 0.1503,
+          "min_ns": 49.8003,
+          "max_ns": 50.1828,
+          "ci95_ns": [
+            49.8228,
+            50.1716
+          ],
+          "batch_calls": 17777,
+          "round_medians_ns": [
+            49.8228,
+            50.1828,
+            49.8003,
+            50.1322,
+            49.9184,
+            50.0084,
+            50.1716
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 2762.7235,
+          "mean_ns": 3014.3643,
+          "stdev_ns": 434.3866,
+          "min_ns": 2733.425,
+          "max_ns": 3906.4649,
+          "ci95_ns": [
+            2739.6149,
+            3436.7263
+          ],
+          "batch_calls": 727,
+          "round_medians_ns": [
+            2733.425,
+            2748.9684,
+            3906.4649,
+            3436.7263,
+            2762.7235,
+            2739.6149,
+            2772.6272
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 6.7313,
+          "mean_ns": 7.3638,
+          "stdev_ns": 0.775,
+          "min_ns": 6.65,
+          "max_ns": 8.3656,
+          "ci95_ns": [
+            6.6906,
+            8.3187
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            6.7313,
+            6.7156,
+            6.65,
+            8.075,
+            6.6906,
+            8.3187,
+            8.3656
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 20.828,
+          "mean_ns": 21.3809,
+          "stdev_ns": 0.9371,
+          "min_ns": 20.7793,
+          "max_ns": 23.2656,
+          "ci95_ns": [
+            20.798,
+            22.3581
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            20.8355,
+            20.8018,
+            20.798,
+            20.828,
+            22.3581,
+            23.2656,
+            20.7793
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 5758.2418,
+          "mean_ns": 6904.6703,
+          "stdev_ns": 2169.2938,
+          "min_ns": 5444.2308,
+          "max_ns": 11892.5824,
+          "ci95_ns": [
+            5448.0769,
+            7546.7033
+          ],
+          "batch_calls": 364,
+          "round_medians_ns": [
+            5444.2308,
+            5758.2418,
+            5468.1319,
+            7546.7033,
+            5448.0769,
+            11892.5824,
+            6774.7253
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 333283335000,
+        "sum": 21378178256800,
+        "mix": 3264
+      },
+      "call_overhead_noop_median_ns": 2.1751,
+      "call_overhead_noop_round_medians_ns": [
+        2.1751,
+        2.1751,
+        2.7376,
+        3.1913,
+        2.1751,
+        2.4976,
+        2.1751
+      ]
+    },
+    {
+      "function": "sum_i2",
+      "T": 1000000,
+      "extra_args": [],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 1767275.0,
+          "mean_ns": 1839485.7143,
+          "stdev_ns": 125738.4432,
+          "min_ns": 1745037.5,
+          "max_ns": 2041812.5,
+          "ci95_ns": [
+            1748412.5,
+            2032937.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            1767275.0,
+            2032937.5,
+            1748412.5,
+            1757162.5,
+            1745037.5,
+            2041812.5,
+            1783762.5
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 63.3965,
+          "mean_ns": 67.916,
+          "stdev_ns": 8.5019,
+          "min_ns": 61.2589,
+          "max_ns": 87.2251,
+          "ci95_ns": [
+            61.6583,
+            69.8037
+          ],
+          "batch_calls": 17777,
+          "round_medians_ns": [
+            61.6583,
+            63.3965,
+            62.9859,
+            61.2589,
+            69.0836,
+            87.2251,
+            69.8037
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 64.5241,
+          "mean_ns": 59.6158,
+          "stdev_ns": 8.4708,
+          "min_ns": 49.9212,
+          "max_ns": 70.6518,
+          "ci95_ns": [
+            49.9737,
+            67.0292
+          ],
+          "batch_calls": 13333,
+          "round_medians_ns": [
+            49.9212,
+            64.8991,
+            64.5241,
+            50.3113,
+            49.9737,
+            70.6518,
+            67.0292
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 296000.0,
+          "mean_ns": 316151.7857,
+          "stdev_ns": 50597.9599,
+          "min_ns": 271387.5,
+          "max_ns": 405387.5,
+          "ci95_ns": [
+            276425.0,
+            382875.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            271387.5,
+            300525.0,
+            382875.0,
+            276425.0,
+            280462.5,
+            405387.5,
+            296000.0
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 6.6969,
+          "mean_ns": 6.9134,
+          "stdev_ns": 0.463,
+          "min_ns": 6.6937,
+          "max_ns": 8.0375,
+          "ci95_ns": [
+            6.6937,
+            6.875
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            6.6969,
+            6.6937,
+            6.6937,
+            6.875,
+            6.6969,
+            8.0375,
+            6.7
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 19.2117,
+          "mean_ns": 19.7673,
+          "stdev_ns": 1.3828,
+          "min_ns": 19.1555,
+          "max_ns": 23.1531,
+          "ci95_ns": [
+            19.1555,
+            19.2792
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            19.1555,
+            23.1531,
+            19.2267,
+            19.1892,
+            19.1555,
+            19.2792,
+            19.2117
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 552412.5,
+          "mean_ns": 699192.8571,
+          "stdev_ns": 176756.7811,
+          "min_ns": 544800.0,
+          "max_ns": 960937.5,
+          "ci95_ns": [
+            548512.5,
+            900600.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            549537.5,
+            960937.5,
+            552412.5,
+            548512.5,
+            544800.0,
+            837550.0,
+            900600.0
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 333332833333500000,
+        "sum": 2887037264114465184,
+        "mix": 1920
+      },
+      "call_overhead_noop_median_ns": 2.1751,
+      "call_overhead_noop_round_medians_ns": [
+        2.1751,
+        2.1751,
+        2.1788,
+        2.1638,
+        2.1676,
+        2.7001,
+        2.1751
+      ]
+    },
+    {
+      "function": "triangular_cubic",
+      "T": 1000,
+      "extra_args": [
+        13,
+        -7
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 2285.2326,
+          "mean_ns": 2287.309,
+          "stdev_ns": 6.9291,
+          "min_ns": 2279.6512,
+          "max_ns": 2302.5581,
+          "ci95_ns": [
+            2281.9767,
+            2289.8837
+          ],
+          "batch_calls": 860,
+          "round_medians_ns": [
+            2302.5581,
+            2279.6512,
+            2285.2326,
+            2289.8837,
+            2281.9767,
+            2285.0,
+            2286.8605
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 190.9862,
+          "mean_ns": 193.6602,
+          "stdev_ns": 6.4515,
+          "min_ns": 187.9672,
+          "max_ns": 204.9454,
+          "ci95_ns": [
+            188.6717,
+            202.3577
+          ],
+          "batch_calls": 6956,
+          "round_medians_ns": [
+            204.9454,
+            202.3577,
+            191.3312,
+            189.3617,
+            190.9862,
+            187.9672,
+            188.6717
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 173.5,
+          "mean_ns": 175.3911,
+          "stdev_ns": 4.8614,
+          "min_ns": 171.55,
+          "max_ns": 186.8875,
+          "ci95_ns": [
+            172.875,
+            176.125
+          ],
+          "batch_calls": 8000,
+          "round_medians_ns": [
+            173.5,
+            186.8875,
+            173.6625,
+            176.125,
+            172.875,
+            173.1375,
+            171.55
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 568.3768,
+          "mean_ns": 591.2777,
+          "stdev_ns": 46.786,
+          "min_ns": 562.8263,
+          "max_ns": 700.45,
+          "ci95_ns": [
+            565.2865,
+            607.1407
+          ],
+          "batch_calls": 3333,
+          "round_medians_ns": [
+            607.1407,
+            568.3768,
+            569.0969,
+            565.2865,
+            700.45,
+            562.8263,
+            565.7666
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 15.7195,
+          "mean_ns": 16.4907,
+          "stdev_ns": 1.5951,
+          "min_ns": 15.6276,
+          "max_ns": 20.2914,
+          "ci95_ns": [
+            15.6276,
+            16.7432
+          ],
+          "batch_calls": 22857,
+          "round_medians_ns": [
+            20.2914,
+            15.7676,
+            16.7432,
+            15.6276,
+            15.6582,
+            15.6276,
+            15.7195
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 43.775,
+          "mean_ns": 43.8043,
+          "stdev_ns": 0.1354,
+          "min_ns": 43.66,
+          "max_ns": 44.095,
+          "ci95_ns": [
+            43.68,
+            43.845
+          ],
+          "batch_calls": 20000,
+          "round_medians_ns": [
+            43.66,
+            44.095,
+            43.74,
+            43.68,
+            43.775,
+            43.835,
+            43.845
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 557.9173,
+          "mean_ns": 592.6274,
+          "stdev_ns": 82.2574,
+          "min_ns": 554.977,
+          "max_ns": 793.9051,
+          "ci95_ns": [
+            555.5283,
+            566.7994
+          ],
+          "batch_calls": 3265,
+          "round_medians_ns": [
+            566.7994,
+            554.977,
+            561.6539,
+            793.9051,
+            557.9173,
+            557.611,
+            555.5283
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 83333243013,
+        "sum": 5495826728496,
+        "mix": 576
+      },
+      "call_overhead_noop_median_ns": 1.9031,
+      "call_overhead_noop_round_medians_ns": [
+        1.9031,
+        1.9062,
+        1.9031,
+        1.8906,
+        2.3625,
+        1.8906,
+        1.8906
+      ]
+    },
+    {
+      "function": "triangular_cubic",
+      "T": 10000,
+      "extra_args": [
+        13,
+        -7
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 22473.0337,
+          "mean_ns": 22832.4238,
+          "stdev_ns": 706.233,
+          "min_ns": 22451.6854,
+          "max_ns": 24531.4607,
+          "ci95_ns": [
+            22456.1798,
+            22852.809
+          ],
+          "batch_calls": 89,
+          "round_medians_ns": [
+            22451.6854,
+            22456.1798,
+            24531.4607,
+            22852.809,
+            22588.764,
+            22473.0337,
+            22473.0337
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 191.7049,
+          "mean_ns": 200.1369,
+          "stdev_ns": 15.9331,
+          "min_ns": 188.2268,
+          "max_ns": 235.2802,
+          "ci95_ns": [
+            190.4974,
+            210.6838
+          ],
+          "batch_calls": 7619,
+          "round_medians_ns": [
+            235.2802,
+            191.7049,
+            191.4162,
+            210.6838,
+            188.2268,
+            193.1487,
+            190.4974
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 172.9723,
+          "mean_ns": 173.0775,
+          "stdev_ns": 0.38,
+          "min_ns": 172.6517,
+          "max_ns": 173.7442,
+          "ci95_ns": [
+            172.7348,
+            173.5423
+          ],
+          "batch_calls": 8421,
+          "round_medians_ns": [
+            172.8892,
+            173.5423,
+            172.9723,
+            172.7348,
+            173.008,
+            173.7442,
+            172.6517
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 5460.8815,
+          "mean_ns": 5548.4848,
+          "stdev_ns": 212.7426,
+          "min_ns": 5436.3636,
+          "max_ns": 6066.3912,
+          "ci95_ns": [
+            5443.5262,
+            5512.6722
+          ],
+          "batch_calls": 363,
+          "round_medians_ns": [
+            5436.3636,
+            5443.5262,
+            6066.3912,
+            5460.8815,
+            5472.1763,
+            5512.6722,
+            5447.3829
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 15.6875,
+          "mean_ns": 16.225,
+          "stdev_ns": 1.3369,
+          "min_ns": 15.625,
+          "max_ns": 19.4969,
+          "ci95_ns": [
+            15.625,
+            15.775
+          ],
+          "batch_calls": 32000,
+          "round_medians_ns": [
+            15.6281,
+            15.625,
+            15.775,
+            15.7375,
+            15.625,
+            15.6875,
+            19.4969
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 41.659,
+          "mean_ns": 41.7334,
+          "stdev_ns": 0.2525,
+          "min_ns": 41.5059,
+          "max_ns": 42.3109,
+          "ci95_ns": [
+            41.5628,
+            41.7728
+          ],
+          "batch_calls": 22857,
+          "round_medians_ns": [
+            41.5628,
+            42.3109,
+            41.7728,
+            41.5059,
+            41.7465,
+            41.659,
+            41.5759
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 5443.2877,
+          "mean_ns": 5452.1331,
+          "stdev_ns": 23.4086,
+          "min_ns": 5430.411,
+          "max_ns": 5503.2877,
+          "ci95_ns": [
+            5431.5068,
+            5463.8356
+          ],
+          "batch_calls": 365,
+          "round_medians_ns": [
+            5441.9178,
+            5503.2877,
+            5430.411,
+            5431.5068,
+            5443.2877,
+            5450.6849,
+            5463.8356
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 833333324930013,
+        "sum": 53493580986776496,
+        "mix": 64
+      },
+      "call_overhead_noop_median_ns": 1.9031,
+      "call_overhead_noop_round_medians_ns": [
+        1.9031,
+        1.8906,
+        1.9031,
+        1.9031,
+        2.3781,
+        1.9031,
+        1.9031
+      ]
+    },
+    {
+      "function": "coupled_exchange",
+      "T": 1000,
+      "extra_args": [
+        10,
+        -3
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3519.115,
+          "mean_ns": 3525.7901,
+          "stdev_ns": 23.903,
+          "min_ns": 3494.6903,
+          "max_ns": 3559.469,
+          "ci95_ns": [
+            3504.7788,
+            3558.7611
+          ],
+          "batch_calls": 565,
+          "round_medians_ns": [
+            3504.7788,
+            3494.6903,
+            3558.7611,
+            3533.9823,
+            3509.7345,
+            3519.115,
+            3559.469
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 61.0688,
+          "mean_ns": 73.0224,
+          "stdev_ns": 22.4962,
+          "min_ns": 60.9688,
+          "max_ns": 127.2938,
+          "ci95_ns": [
+            60.9813,
+            69.9875
+          ],
+          "batch_calls": 16000,
+          "round_medians_ns": [
+            127.2938,
+            60.9875,
+            69.8688,
+            60.9813,
+            60.9688,
+            61.0688,
+            69.9875
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 59.363,
+          "mean_ns": 64.4457,
+          "stdev_ns": 8.7093,
+          "min_ns": 58.3392,
+          "max_ns": 80.3728,
+          "ci95_ns": [
+            58.3742,
+            75.7
+          ],
+          "batch_calls": 11428,
+          "round_medians_ns": [
+            59.363,
+            58.6367,
+            75.7,
+            58.3392,
+            80.3728,
+            58.3742,
+            60.3343
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 933.5446,
+          "mean_ns": 933.5725,
+          "stdev_ns": 3.2337,
+          "min_ns": 929.4003,
+          "max_ns": 938.2253,
+          "ci95_ns": [
+            930.5217,
+            937.2501
+          ],
+          "batch_calls": 2051,
+          "round_medians_ns": [
+            938.2253,
+            937.2501,
+            930.7167,
+            935.3486,
+            933.5446,
+            930.5217,
+            929.4003
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 2.17,
+          "mean_ns": 2.2425,
+          "stdev_ns": 0.192,
+          "min_ns": 2.1575,
+          "max_ns": 2.7125,
+          "ci95_ns": [
+            2.1575,
+            2.1725
+          ],
+          "batch_calls": 40000,
+          "round_medians_ns": [
+            2.1575,
+            2.1575,
+            2.1575,
+            2.17,
+            2.1725,
+            2.7125,
+            2.17
+          ],
+          "above_noise_floor": false
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 21.8314,
+          "mean_ns": 21.8795,
+          "stdev_ns": 0.1015,
+          "min_ns": 21.7745,
+          "max_ns": 22.0589,
+          "ci95_ns": [
+            21.8095,
+            22.0108
+          ],
+          "batch_calls": 22857,
+          "round_medians_ns": [
+            22.0108,
+            21.7745,
+            21.8314,
+            21.8183,
+            21.8095,
+            22.0589,
+            21.8533
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 966.0174,
+          "mean_ns": 966.4421,
+          "stdev_ns": 2.4636,
+          "min_ns": 963.9159,
+          "max_ns": 971.1943,
+          "ci95_ns": [
+            963.9672,
+            968.0677
+          ],
+          "batch_calls": 1951,
+          "round_medians_ns": [
+            963.9672,
+            967.4013,
+            966.0174,
+            968.0677,
+            964.531,
+            971.1943,
+            963.9159
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 7000,
+        "sum": 451360,
+        "mix": 1664
+      },
+      "call_overhead_noop_median_ns": 1.9062,
+      "call_overhead_noop_round_medians_ns": [
+        1.9031,
+        2.3625,
+        2.3781,
+        1.9062,
+        1.9031,
+        1.9469,
+        1.8906
+      ]
+    },
+    {
+      "function": "coupled_exchange",
+      "T": 10000,
+      "extra_args": [
+        10,
+        -3
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 35212.2807,
+          "mean_ns": 35051.8797,
+          "stdev_ns": 251.667,
+          "min_ns": 34622.807,
+          "max_ns": 35307.0175,
+          "ci95_ns": [
+            34831.5789,
+            35298.2456
+          ],
+          "batch_calls": 57,
+          "round_medians_ns": [
+            35298.2456,
+            35217.5439,
+            35307.0175,
+            35212.2807,
+            34873.6842,
+            34831.5789,
+            34622.807
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 68.7875,
+          "mean_ns": 67.0187,
+          "stdev_ns": 3.8185,
+          "min_ns": 61.2125,
+          "max_ns": 71.35,
+          "ci95_ns": [
+            61.3937,
+            70.3125
+          ],
+          "batch_calls": 16000,
+          "round_medians_ns": [
+            61.2125,
+            71.35,
+            70.3125,
+            69.0125,
+            68.7875,
+            67.0625,
+            61.3937
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 59.7176,
+          "mean_ns": 67.0529,
+          "stdev_ns": 9.4264,
+          "min_ns": 58.6601,
+          "max_ns": 80.2723,
+          "ci95_ns": [
+            58.7107,
+            77.7128
+          ],
+          "batch_calls": 17777,
+          "round_medians_ns": [
+            58.6601,
+            58.7894,
+            80.2723,
+            75.5077,
+            58.7107,
+            59.7176,
+            77.7128
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 9225.9259,
+          "mean_ns": 9563.0291,
+          "stdev_ns": 509.0811,
+          "min_ns": 9185.6481,
+          "max_ns": 10631.4815,
+          "ci95_ns": [
+            9209.2593,
+            9969.9074
+          ],
+          "batch_calls": 216,
+          "round_medians_ns": [
+            9225.9259,
+            9212.963,
+            9506.0185,
+            10631.4815,
+            9209.2593,
+            9185.6481,
+            9969.9074
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 2.1788,
+          "mean_ns": 2.3417,
+          "stdev_ns": 0.2371,
+          "min_ns": 2.1638,
+          "max_ns": 2.7188,
+          "ci95_ns": [
+            2.1638,
+            2.7001
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            2.7001,
+            2.7188,
+            2.1638,
+            2.1788,
+            2.1638,
+            2.3026,
+            2.1638
+          ],
+          "above_noise_floor": false
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 20.7643,
+          "mean_ns": 20.9384,
+          "stdev_ns": 0.297,
+          "min_ns": 20.7343,
+          "max_ns": 21.533,
+          "ci95_ns": [
+            20.753,
+            21.2518
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            20.7343,
+            20.7568,
+            21.2518,
+            20.7755,
+            20.753,
+            20.7643,
+            21.533
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 9525.5924,
+          "mean_ns": 9524.4414,
+          "stdev_ns": 20.5771,
+          "min_ns": 9485.3081,
+          "max_ns": 9562.0853,
+          "ci95_ns": [
+            9521.327,
+            9526.0664
+          ],
+          "batch_calls": 211,
+          "round_medians_ns": [
+            9526.0664,
+            9525.5924,
+            9562.0853,
+            9521.327,
+            9485.3081,
+            9525.1185,
+            9525.5924
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 70000,
+        "sum": 4483360,
+        "mix": 1792
+      },
+      "call_overhead_noop_median_ns": 2.3625,
+      "call_overhead_noop_round_medians_ns": [
+        1.9031,
+        1.9031,
+        2.3625,
+        3.2406,
+        1.9031,
+        2.3781,
+        2.3625
+      ]
+    },
+    {
+      "function": "coupled_exchange",
+      "T": 1000000,
+      "extra_args": [
+        10,
+        -3
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3572175.0,
+          "mean_ns": 3630283.9286,
+          "stdev_ns": 103695.9609,
+          "min_ns": 3530512.5,
+          "max_ns": 3797225.0,
+          "ci95_ns": [
+            3538625.0,
+            3770337.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            3530512.5,
+            3797225.0,
+            3770337.5,
+            3554637.5,
+            3648475.0,
+            3572175.0,
+            3538625.0
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 65.9883,
+          "mean_ns": 75.0636,
+          "stdev_ns": 21.0666,
+          "min_ns": 64.1251,
+          "max_ns": 126.4352,
+          "ci95_ns": [
+            65.2458,
+            70.9247
+          ],
+          "batch_calls": 14545,
+          "round_medians_ns": [
+            66.9233,
+            65.9883,
+            65.8027,
+            70.9247,
+            126.4352,
+            64.1251,
+            65.2458
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 58.809,
+          "mean_ns": 61.2766,
+          "stdev_ns": 6.2407,
+          "min_ns": 58.4265,
+          "max_ns": 76.5544,
+          "ci95_ns": [
+            58.4565,
+            58.989
+          ],
+          "batch_calls": 13333,
+          "round_medians_ns": [
+            76.5544,
+            58.989,
+            58.4565,
+            58.809,
+            58.7115,
+            58.4265,
+            58.989
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 923187.5,
+          "mean_ns": 930541.0714,
+          "stdev_ns": 15205.5158,
+          "min_ns": 919237.5,
+          "max_ns": 963687.5,
+          "ci95_ns": [
+            919300.0,
+            941150.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            924837.5,
+            963687.5,
+            922387.5,
+            919237.5,
+            919300.0,
+            923187.5,
+            941150.0
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 2.2325,
+          "mean_ns": 2.4061,
+          "stdev_ns": 0.2621,
+          "min_ns": 2.1575,
+          "max_ns": 2.7125,
+          "ci95_ns": [
+            2.1575,
+            2.7125
+          ],
+          "batch_calls": 40000,
+          "round_medians_ns": [
+            2.1575,
+            2.2325,
+            2.7125,
+            2.6975,
+            2.1725,
+            2.7125,
+            2.1575
+          ],
+          "above_noise_floor": false
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 19.1292,
+          "mean_ns": 19.1555,
+          "stdev_ns": 0.063,
+          "min_ns": 19.0955,
+          "max_ns": 19.253,
+          "ci95_ns": [
+            19.0955,
+            19.2305
+          ],
+          "batch_calls": 26666,
+          "round_medians_ns": [
+            19.0955,
+            19.2305,
+            19.1292,
+            19.0955,
+            19.0955,
+            19.1892,
+            19.253
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 956862.5,
+          "mean_ns": 956521.4286,
+          "stdev_ns": 2738.5126,
+          "min_ns": 952637.5,
+          "max_ns": 961925.0,
+          "ci95_ns": [
+            954025.0,
+            957337.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            957200.0,
+            961925.0,
+            956862.5,
+            952637.5,
+            954025.0,
+            957337.5,
+            955662.5
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 7000000,
+        "sum": 448003360,
+        "mix": 1536
+      },
+      "call_overhead_noop_median_ns": 1.9182,
+      "call_overhead_noop_round_medians_ns": [
+        2.3907,
+        2.3907,
+        2.3739,
+        1.9013,
+        1.9013,
+        1.9182,
+        1.9126
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "T": 1000,
+      "extra_args": [
+        7,
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 4738.0615,
+          "mean_ns": 4739.3111,
+          "stdev_ns": 4.726,
+          "min_ns": 4734.0426,
+          "max_ns": 4748.6998,
+          "ci95_ns": [
+            4735.461,
+            4743.2624
+          ],
+          "batch_calls": 423,
+          "round_medians_ns": [
+            4748.6998,
+            4734.0426,
+            4736.4066,
+            4735.461,
+            4739.2435,
+            4743.2624,
+            4738.0615
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 255.3125,
+          "mean_ns": 255.7165,
+          "stdev_ns": 1.4782,
+          "min_ns": 254.4531,
+          "max_ns": 259.1719,
+          "ci95_ns": [
+            254.6719,
+            255.8438
+          ],
+          "batch_calls": 6400,
+          "round_medians_ns": [
+            254.4531,
+            255.0469,
+            255.3125,
+            255.5156,
+            259.1719,
+            254.6719,
+            255.8438
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 238.1277,
+          "mean_ns": 244.083,
+          "stdev_ns": 11.6838,
+          "min_ns": 235.8524,
+          "max_ns": 271.3961,
+          "ci95_ns": [
+            236.5675,
+            245.9288
+          ],
+          "batch_calls": 6153,
+          "round_medians_ns": [
+            245.9288,
+            235.8524,
+            243.4097,
+            236.5675,
+            238.1277,
+            237.2989,
+            271.3961
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 3901.5717,
+          "mean_ns": 3918.0747,
+          "stdev_ns": 28.6512,
+          "min_ns": 3895.6778,
+          "max_ns": 3963.2613,
+          "ci95_ns": [
+            3896.8566,
+            3962.8684
+          ],
+          "batch_calls": 509,
+          "round_medians_ns": [
+            3901.5717,
+            3895.6778,
+            3906.8762,
+            3896.8566,
+            3963.2613,
+            3899.4106,
+            3962.8684
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 297.4974,
+          "mean_ns": 297.9799,
+          "stdev_ns": 1.734,
+          "min_ns": 296.6748,
+          "max_ns": 302.1176,
+          "ci95_ns": [
+            296.7623,
+            297.8299
+          ],
+          "batch_calls": 5714,
+          "round_medians_ns": [
+            297.4449,
+            296.6748,
+            296.7623,
+            297.8299,
+            302.1176,
+            297.5324,
+            297.4974
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 217.7688,
+          "mean_ns": 217.7976,
+          "stdev_ns": 0.4057,
+          "min_ns": 217.28,
+          "max_ns": 218.4445,
+          "ci95_ns": [
+            217.3807,
+            218.2145
+          ],
+          "batch_calls": 6956,
+          "round_medians_ns": [
+            217.3807,
+            217.7688,
+            218.4445,
+            217.5101,
+            217.9845,
+            217.28,
+            218.2145
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 4733.6516,
+          "mean_ns": 4769.3147,
+          "stdev_ns": 75.5684,
+          "min_ns": 4711.4558,
+          "max_ns": 4935.7995,
+          "ci95_ns": [
+            4718.8544,
+            4819.0931
+          ],
+          "batch_calls": 419,
+          "round_medians_ns": [
+            4819.0931,
+            4711.4558,
+            4718.8544,
+            4733.8902,
+            4733.6516,
+            4732.4582,
+            4935.7995
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 540437831,
+        "sum": 39866465296,
+        "mix": 320
+      },
+      "call_overhead_noop_median_ns": 1.9075,
+      "call_overhead_noop_round_medians_ns": [
+        1.9075,
+        1.8944,
+        1.8944,
+        2.3669,
+        2.3844,
+        2.3669,
+        1.9075
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "T": 10000,
+      "extra_args": [
+        7,
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 47150.0,
+          "mean_ns": 47137.2181,
+          "stdev_ns": 42.9066,
+          "min_ns": 47068.4211,
+          "max_ns": 47205.2632,
+          "ci95_ns": [
+            47092.1053,
+            47165.7895
+          ],
+          "batch_calls": 38,
+          "round_medians_ns": [
+            47123.6842,
+            47068.4211,
+            47092.1053,
+            47205.2632,
+            47165.7895,
+            47150.0,
+            47155.2632
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 307.9717,
+          "mean_ns": 309.1697,
+          "stdev_ns": 2.3627,
+          "min_ns": 305.7777,
+          "max_ns": 312.4086,
+          "ci95_ns": [
+            307.5085,
+            311.726
+          ],
+          "batch_calls": 4102,
+          "round_medians_ns": [
+            311.726,
+            307.5085,
+            312.4086,
+            311.1653,
+            305.7777,
+            307.9717,
+            307.6304
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 290.2121,
+          "mean_ns": 297.1905,
+          "stdev_ns": 12.04,
+          "min_ns": 288.762,
+          "max_ns": 324.7055,
+          "ci95_ns": [
+            288.8708,
+            300.29
+          ],
+          "batch_calls": 5517,
+          "round_medians_ns": [
+            324.7055,
+            288.762,
+            289.5414,
+            297.9518,
+            288.8708,
+            300.29,
+            290.2121
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 38859.0909,
+          "mean_ns": 38860.7143,
+          "stdev_ns": 117.0759,
+          "min_ns": 38729.5455,
+          "max_ns": 39086.3636,
+          "ci95_ns": [
+            38743.1818,
+            38954.5455
+          ],
+          "batch_calls": 44,
+          "round_medians_ns": [
+            38863.6364,
+            38954.5455,
+            38859.0909,
+            38788.6364,
+            38743.1818,
+            39086.3636,
+            38729.5455
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 361.2511,
+          "mean_ns": 361.1675,
+          "stdev_ns": 0.8058,
+          "min_ns": 359.4734,
+          "max_ns": 362.3537,
+          "ci95_ns": [
+            361.0036,
+            361.5662
+          ],
+          "batch_calls": 4444,
+          "round_medians_ns": [
+            361.0036,
+            361.4311,
+            361.5662,
+            361.0936,
+            361.2511,
+            359.4734,
+            362.3537
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 271.5261,
+          "mean_ns": 271.4147,
+          "stdev_ns": 0.815,
+          "min_ns": 270.3722,
+          "max_ns": 272.9888,
+          "ci95_ns": [
+            270.5022,
+            271.8024
+          ],
+          "batch_calls": 6153,
+          "round_medians_ns": [
+            271.5261,
+            270.5022,
+            272.9888,
+            271.5586,
+            271.8024,
+            271.1523,
+            270.3722
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 47123.8095,
+          "mean_ns": 47565.6463,
+          "stdev_ns": 1107.8042,
+          "min_ns": 46997.619,
+          "max_ns": 50269.0476,
+          "ci95_ns": [
+            47035.7143,
+            47321.4286
+          ],
+          "batch_calls": 42,
+          "round_medians_ns": [
+            47321.4286,
+            47123.8095,
+            47130.9524,
+            47080.9524,
+            47035.7143,
+            46997.619,
+            50269.0476
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 508479726,
+        "sum": 32690393728,
+        "mix": 64
+      },
+      "call_overhead_noop_median_ns": 1.905,
+      "call_overhead_noop_round_medians_ns": [
+        2.7263,
+        1.9088,
+        1.905,
+        1.905,
+        1.905,
+        1.905,
+        2.3663
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "T": 1000000,
+      "extra_args": [
+        7,
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 4872662.5,
+          "mean_ns": 4886814.2857,
+          "stdev_ns": 117432.5949,
+          "min_ns": 4728062.5,
+          "max_ns": 5054875.0,
+          "ci95_ns": [
+            4761625.0,
+            5026600.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            4728062.5,
+            4943687.5,
+            4872662.5,
+            5054875.0,
+            5026600.0,
+            4820187.5,
+            4761625.0
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 430.3434,
+          "mean_ns": 449.8609,
+          "stdev_ns": 34.188,
+          "min_ns": 426.653,
+          "max_ns": 514.0185,
+          "ci95_ns": [
+            427.2424,
+            492.1322
+          ],
+          "batch_calls": 3902,
+          "round_medians_ns": [
+            427.9856,
+            430.6509,
+            430.3434,
+            492.1322,
+            514.0185,
+            427.2424,
+            426.653
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 421.9893,
+          "mean_ns": 429.0102,
+          "stdev_ns": 21.2308,
+          "min_ns": 413.9444,
+          "max_ns": 477.7182,
+          "ci95_ns": [
+            414.3832,
+            436.7869
+          ],
+          "batch_calls": 4102,
+          "round_medians_ns": [
+            421.9893,
+            414.3832,
+            413.9444,
+            436.7869,
+            477.7182,
+            414.8464,
+            423.4032
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 3986400.0,
+          "mean_ns": 3981850.0,
+          "stdev_ns": 29902.5187,
+          "min_ns": 3933750.0,
+          "max_ns": 4031037.5,
+          "ci95_ns": [
+            3960750.0,
+            4002287.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            3997112.5,
+            4002287.5,
+            3960750.0,
+            3986400.0,
+            4031037.5,
+            3961612.5,
+            3933750.0
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 508.2508,
+          "mean_ns": 514.8711,
+          "stdev_ns": 10.5789,
+          "min_ns": 506.7657,
+          "max_ns": 536.1936,
+          "ci95_ns": [
+            506.8207,
+            524.9725
+          ],
+          "batch_calls": 3636,
+          "round_medians_ns": [
+            506.7657,
+            507.8108,
+            513.2838,
+            524.9725,
+            536.1936,
+            506.8207,
+            508.2508
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 392.8462,
+          "mean_ns": 401.2845,
+          "stdev_ns": 12.0289,
+          "min_ns": 390.4397,
+          "max_ns": 421.8989,
+          "ci95_ns": [
+            390.4616,
+            414.6576
+          ],
+          "batch_calls": 4571,
+          "round_medians_ns": [
+            390.4616,
+            390.4397,
+            421.8989,
+            414.6576,
+            406.2568,
+            392.8462,
+            392.4305
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 4861962.5,
+          "mean_ns": 4920341.0714,
+          "stdev_ns": 130999.6634,
+          "min_ns": 4786312.5,
+          "max_ns": 5207775.0,
+          "ci95_ns": [
+            4843175.0,
+            4988562.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            4786312.5,
+            4861962.5,
+            4988562.5,
+            4843175.0,
+            5207775.0,
+            4907487.5,
+            4847112.5
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 116886427,
+        "sum": 22734530396,
+        "mix": 448
+      },
+      "call_overhead_noop_median_ns": 1.9062,
+      "call_overhead_noop_round_medians_ns": [
+        1.9031,
+        1.8906,
+        2.3813,
+        1.8938,
+        1.9156,
+        1.9062,
+        1.9062
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "T": 1000,
+      "extra_args": [
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3867.2481,
+          "mean_ns": 3955.3987,
+          "stdev_ns": 205.527,
+          "min_ns": 3853.2946,
+          "max_ns": 4456.2016,
+          "ci95_ns": [
+            3853.6822,
+            3913.5659
+          ],
+          "batch_calls": 516,
+          "round_medians_ns": [
+            3913.5659,
+            3853.876,
+            3853.6822,
+            3853.2946,
+            3867.2481,
+            3889.9225,
+            4456.2016
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 240.8191,
+          "mean_ns": 262.3655,
+          "stdev_ns": 41.5573,
+          "min_ns": 240.459,
+          "max_ns": 360.7111,
+          "ci95_ns": [
+            240.6241,
+            271.8722
+          ],
+          "batch_calls": 6666,
+          "round_medians_ns": [
+            241.3141,
+            240.459,
+            240.6241,
+            240.8191,
+            240.7591,
+            271.8722,
+            360.7111
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 270.8523,
+          "mean_ns": 281.7432,
+          "stdev_ns": 14.7147,
+          "min_ns": 269.9747,
+          "max_ns": 310.0084,
+          "ci95_ns": [
+            269.9747,
+            294.6667
+          ],
+          "batch_calls": 5925,
+          "round_medians_ns": [
+            269.9747,
+            294.6667,
+            269.9747,
+            270.8523,
+            270.2616,
+            286.4641,
+            310.0084
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 3831.7919,
+          "mean_ns": 3842.8296,
+          "stdev_ns": 23.936,
+          "min_ns": 3820.8092,
+          "max_ns": 3897.3025,
+          "ci95_ns": [
+            3828.3237,
+            3851.2524
+          ],
+          "batch_calls": 519,
+          "round_medians_ns": [
+            3820.8092,
+            3830.8285,
+            3828.3237,
+            3831.7919,
+            3839.499,
+            3897.3025,
+            3851.2524
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 314.6456,
+          "mean_ns": 316.7249,
+          "stdev_ns": 5.3484,
+          "min_ns": 313.5762,
+          "max_ns": 329.7807,
+          "ci95_ns": [
+            314.5913,
+            315.1713
+          ],
+          "batch_calls": 5517,
+          "round_medians_ns": [
+            314.5913,
+            314.7181,
+            315.1713,
+            314.6456,
+            314.5913,
+            313.5762,
+            329.7807
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 180.8168,
+          "mean_ns": 180.8227,
+          "stdev_ns": 0.6588,
+          "min_ns": 180.0055,
+          "max_ns": 182.2332,
+          "ci95_ns": [
+            180.3905,
+            181.0231
+          ],
+          "batch_calls": 7272,
+          "round_medians_ns": [
+            180.8581,
+            181.0231,
+            180.3905,
+            180.0055,
+            180.4318,
+            180.8168,
+            182.2332
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 4300.0,
+          "mean_ns": 4255.1064,
+          "stdev_ns": 102.3778,
+          "min_ns": 4030.6695,
+          "max_ns": 4347.9482,
+          "ci95_ns": [
+            4188.5529,
+            4313.8229
+          ],
+          "batch_calls": 463,
+          "round_medians_ns": [
+            4305.1836,
+            4299.568,
+            4188.5529,
+            4300.0,
+            4347.9482,
+            4030.6695,
+            4313.8229
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 517691607,
+        "sum": 30636776112,
+        "mix": 6272
+      },
+      "call_overhead_noop_median_ns": 2.1719,
+      "call_overhead_noop_round_medians_ns": [
+        2.1719,
+        2.1594,
+        2.175,
+        2.1719,
+        2.7156,
+        2.175,
+        2.1719
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "T": 10000,
+      "extra_args": [
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 38130.7692,
+          "mean_ns": 40521.7033,
+          "stdev_ns": 5789.6594,
+          "min_ns": 37957.6923,
+          "max_ns": 54696.1538,
+          "ci95_ns": [
+            38048.0769,
+            38582.6923
+          ],
+          "batch_calls": 52,
+          "round_medians_ns": [
+            54696.1538,
+            38048.0769,
+            38130.7692,
+            38075.0,
+            38161.5385,
+            37957.6923,
+            38582.6923
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 334.7885,
+          "mean_ns": 334.5988,
+          "stdev_ns": 0.9799,
+          "min_ns": 333.2358,
+          "max_ns": 336.2961,
+          "ci95_ns": [
+            333.5059,
+            335.261
+          ],
+          "batch_calls": 4444,
+          "round_medians_ns": [
+            334.946,
+            336.2961,
+            334.7885,
+            335.261,
+            333.2358,
+            334.1584,
+            333.5059
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 378.2178,
+          "mean_ns": 394.1012,
+          "stdev_ns": 23.3871,
+          "min_ns": 377.2502,
+          "max_ns": 445.117,
+          "ci95_ns": [
+            377.6328,
+            406.5482
+          ],
+          "batch_calls": 4444,
+          "round_medians_ns": [
+            445.117,
+            378.2178,
+            406.5482,
+            395.9721,
+            377.9703,
+            377.2502,
+            377.6328
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 38107.6923,
+          "mean_ns": 38285.989,
+          "stdev_ns": 409.8465,
+          "min_ns": 38030.7692,
+          "max_ns": 39261.5385,
+          "ci95_ns": [
+            38053.8462,
+            38348.0769
+          ],
+          "batch_calls": 52,
+          "round_medians_ns": [
+            38107.6923,
+            38053.8462,
+            38030.7692,
+            38088.4615,
+            38111.5385,
+            38348.0769,
+            39261.5385
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 429.8635,
+          "mean_ns": 430.5182,
+          "stdev_ns": 1.2704,
+          "min_ns": 429.449,
+          "max_ns": 433.3983,
+          "ci95_ns": [
+            429.7172,
+            431.0336
+          ],
+          "batch_calls": 4102,
+          "round_medians_ns": [
+            433.3983,
+            429.449,
+            429.8635,
+            429.8147,
+            431.0336,
+            429.7172,
+            430.351
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 266.1954,
+          "mean_ns": 266.9801,
+          "stdev_ns": 2.5311,
+          "min_ns": 265.399,
+          "max_ns": 273.1026,
+          "ci95_ns": [
+            265.464,
+            266.5366
+          ],
+          "batch_calls": 6153,
+          "round_medians_ns": [
+            266.3416,
+            273.1026,
+            265.399,
+            265.464,
+            266.5366,
+            266.1954,
+            265.8216
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 42875.5102,
+          "mean_ns": 42888.9213,
+          "stdev_ns": 93.1577,
+          "min_ns": 42708.1633,
+          "max_ns": 43004.0816,
+          "ci95_ns": [
+            42836.7347,
+            42983.6735
+          ],
+          "batch_calls": 49,
+          "round_medians_ns": [
+            43004.0816,
+            42873.4694,
+            42983.6735,
+            42836.7347,
+            42940.8163,
+            42708.1633,
+            42875.5102
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 271496360,
+        "sum": 26509985232,
+        "mix": 3584
+      },
+      "call_overhead_noop_median_ns": 2.1725,
+      "call_overhead_noop_round_medians_ns": [
+        2.9975,
+        2.17,
+        2.16,
+        2.1725,
+        2.1725,
+        2.17,
+        2.715
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "T": 1000000,
+      "extra_args": [
+        1000000007
+      ],
+      "modes": {
+        "A": {
+          "name": "S3_CONVENTIONAL_NATIVE",
+          "median_ns": 3963112.5,
+          "mean_ns": 4045144.6429,
+          "stdev_ns": 237537.2344,
+          "min_ns": 3842087.5,
+          "max_ns": 4579875.0,
+          "ci95_ns": [
+            3844700.0,
+            4124462.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            4579875.0,
+            3924575.0,
+            3963112.5,
+            4124462.5,
+            3844700.0,
+            4037200.0,
+            3842087.5
+          ],
+          "above_noise_floor": true
+        },
+        "B": {
+          "name": "S3_PREDICTIVE_NATIVE",
+          "median_ns": 579.7872,
+          "mean_ns": 569.6911,
+          "stdev_ns": 60.9205,
+          "min_ns": 491.4031,
+          "max_ns": 664.6636,
+          "ci95_ns": [
+            507.073,
+            638.6429
+          ],
+          "batch_calls": 3478,
+          "round_medians_ns": [
+            507.073,
+            638.6429,
+            525.7044,
+            580.5635,
+            491.4031,
+            664.6636,
+            579.7872
+          ],
+          "above_noise_floor": true
+        },
+        "G": {
+          "name": "S3_PREDICTIVE_NATIVE_CLEANED_EXACT",
+          "median_ns": 581.7582,
+          "mean_ns": 568.4668,
+          "stdev_ns": 21.9376,
+          "min_ns": 542.0042,
+          "max_ns": 598.2898,
+          "ci95_ns": [
+            542.7243,
+            585.2685
+          ],
+          "batch_calls": 3333,
+          "round_medians_ns": [
+            582.3282,
+            542.7243,
+            585.2685,
+            581.7582,
+            542.0042,
+            546.8947,
+            598.2898
+          ],
+          "above_noise_floor": true
+        },
+        "C": {
+          "name": "GCC_CONVENTIONAL_C",
+          "median_ns": 3882250.0,
+          "mean_ns": 3872544.6429,
+          "stdev_ns": 35009.8895,
+          "min_ns": 3828675.0,
+          "max_ns": 3930887.5,
+          "ci95_ns": [
+            3837825.0,
+            3901462.5
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            3930887.5,
+            3885112.5,
+            3841600.0,
+            3837825.0,
+            3828675.0,
+            3901462.5,
+            3882250.0
+          ],
+          "above_noise_floor": true
+        },
+        "D": {
+          "name": "GCC_MANUAL_MATHEMATICAL",
+          "median_ns": 623.0611,
+          "mean_ns": 636.062,
+          "stdev_ns": 22.5344,
+          "min_ns": 619.6782,
+          "max_ns": 673.5149,
+          "ci95_ns": [
+            619.8845,
+            669.4719
+          ],
+          "batch_calls": 2424,
+          "round_medians_ns": [
+            669.4719,
+            673.5149,
+            619.8845,
+            626.2789,
+            620.5446,
+            619.6782,
+            623.0611
+          ],
+          "above_noise_floor": true
+        },
+        "E": {
+          "name": "GCC_S3_AUTOMATIC_MATHEMATICAL",
+          "median_ns": 425.2804,
+          "mean_ns": 432.1585,
+          "stdev_ns": 19.1593,
+          "min_ns": 416.1385,
+          "max_ns": 470.0634,
+          "ci95_ns": [
+            417.3086,
+            451.7309
+          ],
+          "batch_calls": 4102,
+          "round_medians_ns": [
+            425.2804,
+            451.7309,
+            418.3813,
+            470.0634,
+            426.2067,
+            417.3086,
+            416.1385
+          ],
+          "above_noise_floor": true
+        },
+        "F": {
+          "name": "GCC_S3_IR_CONVENTIONAL (extra)",
+          "median_ns": 4305862.5,
+          "mean_ns": 4303169.6429,
+          "stdev_ns": 72193.4999,
+          "min_ns": 4152887.5,
+          "max_ns": 4409625.0,
+          "ci95_ns": [
+            4289962.5,
+            4351550.0
+          ],
+          "batch_calls": 8,
+          "round_medians_ns": [
+            4289962.5,
+            4152887.5,
+            4409625.0,
+            4302562.5,
+            4305862.5,
+            4351550.0,
+            4309737.5
+          ],
+          "above_noise_floor": true
+        }
+      },
+      "correctness": {
+        "S3_CONVENTIONAL_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE": true,
+        "S3_PREDICTIVE_NATIVE_CLEANED_EXACT": true,
+        "GCC_CONVENTIONAL_C": true,
+        "GCC_MANUAL_MATHEMATICAL": true,
+        "GCC_S3_AUTOMATIC_MATHEMATICAL": true,
+        "GCC_S3_IR_CONVENTIONAL (extra)": true
+      },
+      "checksum_reference_mode_A": {
+        "first": 918091266,
+        "sum": 32238101732,
+        "mix": 960
+      },
+      "call_overhead_noop_median_ns": 2.175,
+      "call_overhead_noop_round_medians_ns": [
+        2.7156,
+        2.1719,
+        2.7188,
+        2.1719,
+        2.175,
+        2.175,
+        2.1719
+      ]
+    }
+  ]
+}
