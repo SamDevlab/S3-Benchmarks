@@ -1,0 +1,848 @@
+{
+  "classification": "INDEPENDENT_ALGORITHMIC_REFERENCE_OPERATION_COUNTERS",
+  "formal_S3_complexity_proof": false,
+  "compiled_S3_instruction_count": "NOT_MEASURED",
+  "model": "Unit-cost fixed-width word-RAM for in-domain N; Python reference arithmetic uses arbitrary precision.",
+  "scope": "Optimized reference fast paths only; guards/overflows/fallbacks in compiled S3 may change global worst-case.",
+  "families": {
+    "sum_quasi_parity": {
+      "iterative": "Theta(N) counted loop iterations",
+      "closed_form": "Theta(1) count of polynomial arithmetic ops (within word-RAM model)",
+      "big_O_claim": "CONDITIONAL_REFERENCE_ALGORITHM_ONLY"
+    },
+    "lcg_mod": {
+      "iterative": "Theta(N) modular updates",
+      "binary": "Theta(log(N)) binary affine compositions for N>=2",
+      "exact_fast_loop_iterations": "N.bit_length()",
+      "exact_affine_compositions": "N.bit_length() + N.bit_count()",
+      "exact_modular_multiplications": "2*N.bit_length() + 2*N.bit_count() + 1 for N>0",
+      "big_O_claim": "CONDITIONAL_REFERENCE_ALGORITHM_ONLY"
+    },
+    "fib_mod": {
+      "iterative": "Theta(N) recurrence steps",
+      "fast_doubling": "Theta(log(N)) bit steps for N>=2",
+      "exact_fast_loop_iterations": "N.bit_length()",
+      "exact_modular_multiplications": "3*N.bit_length() for N>0",
+      "big_O_claim": "CONDITIONAL_REFERENCE_ALGORITHM_ONLY"
+    }
+  },
+  "rows": [
+    {
+      "N": 0,
+      "N_bit_length": 0,
+      "N_popcount": 0,
+      "models": {
+        "quasi_closed": {
+          "value": 5,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 7,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 0,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 0,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 1,
+      "N_bit_length": 1,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 5,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 26,
+          "operations": {
+            "iterations": 1,
+            "modular_multiplications": 5,
+            "bit_tests": 1,
+            "affine_compositions": 2,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 1,
+          "operations": {
+            "iterations": 1,
+            "modular_multiplications": 3,
+            "bit_tests": 1,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 1,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 2,
+      "N_bit_length": 2,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 7,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 83,
+          "operations": {
+            "iterations": 2,
+            "modular_multiplications": 7,
+            "bit_tests": 2,
+            "affine_compositions": 3,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 1,
+          "operations": {
+            "iterations": 2,
+            "modular_multiplications": 6,
+            "bit_tests": 2,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 2,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 3,
+      "N_bit_length": 2,
+      "N_popcount": 2,
+      "models": {
+        "quasi_closed": {
+          "value": 12,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 254,
+          "operations": {
+            "iterations": 2,
+            "modular_multiplications": 9,
+            "bit_tests": 2,
+            "affine_compositions": 4,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 2,
+          "operations": {
+            "iterations": 2,
+            "modular_multiplications": 6,
+            "bit_tests": 2,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 3,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 4,
+      "N_bit_length": 3,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 21,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 767,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 9,
+            "bit_tests": 3,
+            "affine_compositions": 4,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 3,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 9,
+            "bit_tests": 3,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 4,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 5,
+      "N_bit_length": 3,
+      "N_popcount": 2,
+      "models": {
+        "quasi_closed": {
+          "value": 35,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 2306,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 11,
+            "bit_tests": 3,
+            "affine_compositions": 5,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 5,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 9,
+            "bit_tests": 3,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 5,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 7,
+      "N_bit_length": 3,
+      "N_popcount": 3,
+      "models": {
+        "quasi_closed": {
+          "value": 82,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 20774,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 13,
+            "bit_tests": 3,
+            "affine_compositions": 6,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 13,
+          "operations": {
+            "iterations": 3,
+            "modular_multiplications": 9,
+            "bit_tests": 3,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 7,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 8,
+      "N_bit_length": 4,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 117,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 62327,
+          "operations": {
+            "iterations": 4,
+            "modular_multiplications": 11,
+            "bit_tests": 4,
+            "affine_compositions": 5,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 21,
+          "operations": {
+            "iterations": 4,
+            "modular_multiplications": 12,
+            "bit_tests": 4,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 8,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 15,
+      "N_bit_length": 4,
+      "N_popcount": 4,
+      "models": {
+        "quasi_closed": {
+          "value": 670,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 136314614,
+          "operations": {
+            "iterations": 4,
+            "modular_multiplications": 17,
+            "bit_tests": 4,
+            "affine_compositions": 8,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 610,
+          "operations": {
+            "iterations": 4,
+            "modular_multiplications": 12,
+            "bit_tests": 4,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 15,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 16,
+      "N_bit_length": 5,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 805,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 408943847,
+          "operations": {
+            "iterations": 5,
+            "modular_multiplications": 13,
+            "bit_tests": 5,
+            "affine_compositions": 6,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 987,
+          "operations": {
+            "iterations": 5,
+            "modular_multiplications": 15,
+            "bit_tests": 5,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 16,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 31,
+      "N_bit_length": 5,
+      "N_popcount": 5,
+      "models": {
+        "quasi_closed": {
+          "value": 5430,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 223622215,
+          "operations": {
+            "iterations": 5,
+            "modular_multiplications": 21,
+            "bit_tests": 5,
+            "affine_compositions": 10,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 1346269,
+          "operations": {
+            "iterations": 5,
+            "modular_multiplications": 15,
+            "bit_tests": 5,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 31,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 32,
+      "N_bit_length": 6,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 5957,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 670866650,
+          "operations": {
+            "iterations": 6,
+            "modular_multiplications": 15,
+            "bit_tests": 6,
+            "affine_compositions": 7,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 2178309,
+          "operations": {
+            "iterations": 6,
+            "modular_multiplications": 18,
+            "bit_tests": 6,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 32,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 63,
+      "N_bit_length": 6,
+      "N_popcount": 6,
+      "models": {
+        "quasi_closed": {
+          "value": 43622,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 97758641,
+          "operations": {
+            "iterations": 6,
+            "modular_multiplications": 25,
+            "bit_tests": 6,
+            "affine_compositions": 12,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 470273943,
+          "operations": {
+            "iterations": 6,
+            "modular_multiplications": 18,
+            "bit_tests": 6,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 63,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 64,
+      "N_bit_length": 7,
+      "N_popcount": 1,
+      "models": {
+        "quasi_closed": {
+          "value": 45701,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 293275928,
+          "operations": {
+            "iterations": 7,
+            "modular_multiplications": 17,
+            "bit_tests": 7,
+            "affine_compositions": 8,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 209783453,
+          "operations": {
+            "iterations": 7,
+            "modular_multiplications": 21,
+            "bit_tests": 7,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 64,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 100,
+      "N_bit_length": 7,
+      "N_popcount": 3,
+      "models": {
+        "quasi_closed": {
+          "value": 171605,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 417396196,
+          "operations": {
+            "iterations": 7,
+            "modular_multiplications": 21,
+            "bit_tests": 7,
+            "affine_compositions": 10,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 687995182,
+          "operations": {
+            "iterations": 7,
+            "modular_multiplications": 21,
+            "bit_tests": 7,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 100,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 1000,
+      "N_bit_length": 10,
+      "N_popcount": 6,
+      "models": {
+        "quasi_closed": {
+          "value": 167166005,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 540437831,
+          "operations": {
+            "iterations": 10,
+            "modular_multiplications": 33,
+            "bit_tests": 10,
+            "affine_compositions": 16,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 517691607,
+          "operations": {
+            "iterations": 10,
+            "modular_multiplications": 30,
+            "bit_tests": 10,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 1000,
+      "direct_reference_comparison": "PASS"
+    },
+    {
+      "N": 10000,
+      "N_bit_length": 14,
+      "N_popcount": 5,
+      "models": {
+        "quasi_closed": {
+          "value": 166716660005,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 508479726,
+          "operations": {
+            "iterations": 14,
+            "modular_multiplications": 39,
+            "bit_tests": 14,
+            "affine_compositions": 19,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 271496360,
+          "operations": {
+            "iterations": 14,
+            "modular_multiplications": 42,
+            "bit_tests": 14,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 10000,
+      "direct_reference_comparison": "NOT_RUN"
+    },
+    {
+      "N": 1000000,
+      "N_bit_length": 20,
+      "N_popcount": 7,
+      "models": {
+        "quasi_closed": {
+          "value": 166667166666000005,
+          "operations": {
+            "iterations": 0,
+            "modular_multiplications": 0,
+            "bit_tests": 0,
+            "affine_compositions": 0,
+            "divisions": 1,
+            "polynomial_arithmetic_ops": 20
+          },
+          "expected_step_bound": "constant"
+        },
+        "lcg_binary": {
+          "value": 116886427,
+          "operations": {
+            "iterations": 20,
+            "modular_multiplications": 55,
+            "bit_tests": 20,
+            "affine_compositions": 27,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        },
+        "fib_doubling": {
+          "value": 918091266,
+          "operations": {
+            "iterations": 20,
+            "modular_multiplications": 60,
+            "bit_tests": 20,
+            "affine_compositions": 0,
+            "divisions": 0,
+            "polynomial_arithmetic_ops": 0
+          },
+          "expected_step_bound": "bit_length(N)"
+        }
+      },
+      "analytical_naive_iteration_count": 1000000,
+      "direct_reference_comparison": "NOT_RUN"
+    }
+  ],
+  "notes": [
+    "Big O is not derived from timing, nor can constant factors establish new asymptotic classes.",
+    "Modular multiplication may be superconstant for arbitrary precision; bit complexity must be specified separately.",
+    "The fast path may contain a checked overflow guard with fallback Theta(N).",
+    "Symbolic arithmetic count is not an instruction count, and a theoretical upper bound is not a compiler correctness proof.",
+    "Comparisons against independent conventional algorithms are finite-domain samples, not formal proofs."
+  ]
+}
