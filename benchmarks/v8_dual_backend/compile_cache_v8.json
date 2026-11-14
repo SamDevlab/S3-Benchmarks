@@ -1,0 +1,67 @@
+{
+  "stages_ms": {
+    "tokenize": 2.386,
+    "parse": 2.213,
+    "semantic": 3.784,
+    "ir_lowering": 3.788,
+    "ir_optimize_o1": 45.735,
+    "predictive_cold_miss": 325.262,
+    "predictive_disk_hit": 105.317,
+    "predictive_mem_hit": 14.405,
+    "ir_cleanup": 63.961,
+    "codegen_asm_ir": 79.031,
+    "x86_emitter_exact_seg": 564.857,
+    "toolchain_gcc_assemble_link": 142.138,
+    "c_backend_emit": 16.667,
+    "gcc_O3_c_compile": 503.056
+  },
+  "end_to_end_ms": {
+    "compile_source_cold": 459.205,
+    "compile_source_inmem_hit": 190.06,
+    "build_shared_library_cold": 1580.464,
+    "build_shared_library_l3_disk_hit": 5.226
+  },
+  "cache_stats": {
+    "pcache_cold": {
+      "hits": 7,
+      "misses": 7,
+      "stores": 7,
+      "corruptions": 0,
+      "entries": 7
+    },
+    "pcache2_disk": {
+      "hits": 7,
+      "misses": 0,
+      "stores": 0,
+      "corruptions": 0,
+      "entries": 7
+    }
+  },
+  "break_even_calls": {
+    "notes": "Calls required on sum_quasi_parity to amortize extra compilation cost vs conventional execution",
+    "COLD_COMPILE_BREAK_EVEN": {
+      "vs_A_at_T1000_S3_G": 298272,
+      "vs_A_at_T1M_S3_G": 288,
+      "vs_C_at_T1000_E_gcc": 954746,
+      "vs_C_at_T1M_E_gcc": 938,
+      "cold_totals_ms": {
+        "S3_A": 107.708,
+        "S3_G": 1041.821,
+        "GCC_E": 851.706,
+        "GCC_C": 164.952
+      }
+    },
+    "WARM_EXECUTION_BREAK_EVEN": {
+      "calls_at_already_compiled_zero_delta": 1,
+      "B_vs_E_gap_ns_sqp_T1M": 100.589,
+      "G_vs_E_gap_ns_sqp_T1M": 58.347,
+      "E_extra_gcc_ms_over_S3_B": -64.492
+    },
+    "CACHE_HIT_BREAK_EVEN": {
+      "l3_disk_hit_ms": 5.226,
+      "calls_vs_A_at_T1000": 1669,
+      "calls_vs_A_at_T1M": 2,
+      "calls_vs_C_at_T1M_pred_disk_hit": 144
+    }
+  }
+}

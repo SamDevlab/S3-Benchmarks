@@ -1,0 +1,331 @@
+{
+ "A_S3_CONV": {
+  "symbol_size_bytes": 426,
+  "instructions": 95,
+  "calls": 0,
+  "branches": 33,
+  "overflow_branches": 3,
+  "div_instructions": 1,
+  "mul_instructions": 1,
+  "memory_operand_movs": 9,
+  "stack_memory_refs": 6,
+  "distinct_gprs": 13,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    24
+   ],
+   [
+    "dec",
+    18
+   ],
+   [
+    "js",
+    18
+   ],
+   [
+    "jmp",
+    6
+   ],
+   [
+    "cmp",
+    4
+   ],
+   [
+    "jo",
+    3
+   ],
+   [
+    "cmpq",
+    2
+   ],
+   [
+    "jne",
+    2
+   ]
+  ]
+ },
+ "B_S3_PRED": {
+  "symbol_size_bytes": 3579,
+  "instructions": 793,
+  "calls": 3,
+  "branches": 319,
+  "overflow_branches": 33,
+  "div_instructions": 5,
+  "mul_instructions": 10,
+  "memory_operand_movs": 77,
+  "stack_memory_refs": 68,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "dec",
+    183
+   ],
+   [
+    "js",
+    183
+   ],
+   [
+    "mov",
+    182
+   ],
+   [
+    "jmp",
+    64
+   ],
+   [
+    "cmp",
+    37
+   ],
+   [
+    "jo",
+    33
+   ],
+   [
+    "sub",
+    16
+   ],
+   [
+    "je",
+    12
+   ]
+  ]
+ },
+ "G_S3_PRED_CLEAN_EXACT": {
+  "symbol_size_bytes": 6852,
+  "instructions": 1131,
+  "calls": 3,
+  "branches": 365,
+  "overflow_branches": 199,
+  "div_instructions": 10,
+  "mul_instructions": 18,
+  "memory_operand_movs": 64,
+  "stack_memory_refs": 63,
+  "distinct_gprs": 17,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    242
+   ],
+   [
+    "cmpq",
+    176
+   ],
+   [
+    "incq",
+    146
+   ],
+   [
+    "jae",
+    145
+   ],
+   [
+    "jmp",
+    75
+   ],
+   [
+    "cmp",
+    60
+   ],
+   [
+    "jo",
+    54
+   ],
+   [
+    "ja",
+    29
+   ]
+  ]
+ },
+ "C_GCC_CONV_MANUAL": {
+  "symbol_size_bytes": 63,
+  "instructions": 21,
+  "calls": 0,
+  "branches": 2,
+  "overflow_branches": 0,
+  "div_instructions": 1,
+  "mul_instructions": 0,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 9,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    4
+   ],
+   [
+    "xor",
+    3
+   ],
+   [
+    "nopl",
+    2
+   ],
+   [
+    "ret",
+    2
+   ],
+   [
+    "endbr64",
+    1
+   ],
+   [
+    "test",
+    1
+   ],
+   [
+    "jle",
+    1
+   ],
+   [
+    "lea",
+    1
+   ]
+  ]
+ },
+ "D_GCC_MANUAL_MATH": {
+  "symbol_size_bytes": 309,
+  "instructions": 96,
+  "calls": 3,
+  "branches": 9,
+  "overflow_branches": 1,
+  "div_instructions": 4,
+  "mul_instructions": 3,
+  "memory_operand_movs": 6,
+  "stack_memory_refs": 7,
+  "distinct_gprs": 20,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    34
+   ],
+   [
+    "push",
+    6
+   ],
+   [
+    "pop",
+    6
+   ],
+   [
+    "xor",
+    4
+   ],
+   [
+    "add",
+    4
+   ],
+   [
+    "cqto",
+    4
+   ],
+   [
+    "idiv",
+    4
+   ],
+   [
+    "sub",
+    3
+   ]
+  ]
+ },
+ "E_GCC_AUTO_MATH": {
+  "symbol_size_bytes": 779,
+  "instructions": 213,
+  "calls": 3,
+  "branches": 50,
+  "overflow_branches": 25,
+  "div_instructions": 4,
+  "mul_instructions": 9,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 24,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    50
+   ],
+   [
+    "jo",
+    24
+   ],
+   [
+    "sub",
+    18
+   ],
+   [
+    "cmp",
+    18
+   ],
+   [
+    "add",
+    11
+   ],
+   [
+    "jmp",
+    10
+   ],
+   [
+    "imul",
+    9
+   ],
+   [
+    "push",
+    6
+   ]
+  ]
+ },
+ "F_GCC_CONV_FROM_S3_IR": {
+  "symbol_size_bytes": 201,
+  "instructions": 55,
+  "calls": 1,
+  "branches": 13,
+  "overflow_branches": 4,
+  "div_instructions": 1,
+  "mul_instructions": 2,
+  "memory_operand_movs": 0,
+  "stack_memory_refs": 0,
+  "distinct_gprs": 16,
+  "xmm_ymm_uses": 0,
+  "top_mnemonics": [
+   [
+    "mov",
+    8
+   ],
+   [
+    "test",
+    4
+   ],
+   [
+    "sub",
+    4
+   ],
+   [
+    "cmp",
+    4
+   ],
+   [
+    "jo",
+    4
+   ],
+   [
+    "jne",
+    4
+   ],
+   [
+    "jmp",
+    3
+   ],
+   [
+    "add",
+    3
+   ]
+  ]
+ }
+}

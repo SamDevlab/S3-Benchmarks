@@ -1,0 +1,161 @@
+{
+  "ARITHMETIC_DOMAIN": "I64_CHECKED_TWOS_COMPLEMENT",
+  "BACKEND_TYPE": "GCC_C_EMITTER",
+  "BACKEND_VERSION": "s3-c-emitter-v8.0",
+  "CERTIFICATES": [
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "MODULAR",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "ffc17ee3756f6e3c",
+      "SOURCE_IR_HASH": "30307ecc5f93a41b6ca3ec5201684f4f4fb36ef87408b1b4792616b7fd49bda0",
+      "TARGET_IR_HASH": "361982859d0a345d8056234c2a406cc40f506c2b410f1c6295ffff70255d20c0",
+      "TRANSFORMATION_ID": "predictive_native_ir_lcg_mod_v3",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    },
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "MODULAR",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "17aacdfbcbbc5312",
+      "SOURCE_IR_HASH": "b41b1fb21044a67aeb2b34463344c9242f466df40635d42ebf5b0b8848af017a",
+      "TARGET_IR_HASH": "4606a30c7d4a7178d06563bfb18f7c8f7cd99248d7f4df2845d04b5d5ab3e51a",
+      "TRANSFORMATION_ID": "predictive_native_ir_fib_mod_v3",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    },
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "2ef9c18ba8085c7e",
+      "SOURCE_IR_HASH": "419e9a20bf0c43c9c2a17704b3dc00a1a24d78c97159c6d217849995afab8896",
+      "TARGET_IR_HASH": "b260a4cf03b3baee8afc65cb53f5efaf6bff60dc2067e82d60077ad945550900",
+      "TRANSFORMATION_ID": "predictive_native_ir_sum_i2_scev_v5",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    },
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "f759fa8615f90310",
+      "SOURCE_IR_HASH": "c424aaf6d553f644491a7b5e0ebdddc14c4b45a1392654490f36e9cbc69cf90e",
+      "TARGET_IR_HASH": "5dcee2049f0df5be77d69c635ec13f71dcee59ed115a79301254612bc6fab0e1",
+      "TRANSFORMATION_ID": "predictive_native_ir_triangular_cubic_scev_v5",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    },
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "4a1608fd3bb63b03",
+      "SOURCE_IR_HASH": "ea3b080d3ad1bcb7a1c1c844d7f7dc424861a0d785f50eb2fe68795a6b08d052",
+      "TARGET_IR_HASH": "28c8723e42aa80c68eb14058551d56fd5752d3842afecd84ee4f2c75ce5e1909",
+      "TRANSFORMATION_ID": "predictive_native_ir_sum_quasi_parity_discovery_v55",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    },
+    {
+      "ACCEPTED": true,
+      "ARITHMETIC_DOMAIN": "SIGNED_I64_CHECKED",
+      "CHECKER_VERSION": "s3-proof-checker-v3.0",
+      "CORRECTNESS_CLASS": "STATIC_PRECONDITIONS_VERIFIED",
+      "PROOF_CERTIFICATE_ID": "e2fdf27f9760036c",
+      "SOURCE_IR_HASH": "921e719e15f472e1eb25d281f126b11f45da6d4cbe3873da0f09378ca8567710",
+      "TARGET_IR_HASH": "fa9285989f40309d9d27caceafe2c715520ab24aedb0969006e78ffc7a7704ec",
+      "TRANSFORMATION_ID": "predictive_native_ir_coupled_exchange_discovery_v55",
+      "VERIFICATION_STATUS": "STATIC_GUARDED"
+    }
+  ],
+  "COMPILER_FLAGS": {
+    "ALLOW_QUASI_POLYNOMIAL_PARITY": true,
+    "EXPERIMENTAL_LICM_DEFAULT": false,
+    "FP_REASSOCIATION_DEFAULT": false,
+    "IR_CLEANUP_MODE": "G_OPT_IN_EXACT_SEGMENT",
+    "PREDICTIVE_EXACT_DEFAULT": false,
+    "S3C_NG_DEFAULT": false,
+    "SCIENTIFIC_INSTRUCTION_BUDGET": 50000000
+  },
+  "CORRECTNESS_STATUS": "VERIFIED_DIFFERENTIAL_PARITY",
+  "C_EMITTER_VERSION": "s3-c-emitter-v8.0",
+  "C_HEADER_SHA256": "0b780ca8045fbfb78d9980e50387dc7b59a617bb02c0bcbbeebdaf255001b414",
+  "C_SHARED_OBJECT_SHA256": "ce93fb09cabe62c7c51d4229b8f6da9a8aa5cf601f5f345f835aac19af1a436b",
+  "C_SOURCE_SHA256": "3f4b9054a0fb4a333200d9416b3ac27e822d9319144e2b0067102d4d1887adc3",
+  "ELF_BUILD_FLAGS": [
+    "gcc -O3 -c (module)",
+    "gcc -O2 -c (harness, separate TU)"
+  ],
+  "ELF_EXECUTABLE_SHA256": "10d1a16a7f1e885de1fa08f0767be3f7a8bc85596c13c2578925cdba9e75ecb8",
+  "EXPORTED_FUNCTIONS": [
+    "lcg_mod",
+    "fib_mod",
+    "sum_i2",
+    "triangular_cubic",
+    "sum_quasi_parity",
+    "coupled_exchange"
+  ],
+  "GCC_FLAGS": [
+    "-O3",
+    "-fPIC",
+    "-shared"
+  ],
+  "GCC_VERSION": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+  "GNU_EXTENSIONS_USED": [
+    "__builtin_add_overflow",
+    "__builtin_sub_overflow",
+    "__builtin_mul_overflow",
+    "__builtin_expect",
+    "__attribute__((noreturn,cold,noinline))"
+  ],
+  "INTERNAL_FUNCTIONS": [
+    "__s3_pred_mulmod_i64"
+  ],
+  "LOWERED_FUNCTIONS": [
+    "lcg_mod",
+    "fib_mod",
+    "sum_i2",
+    "triangular_cubic",
+    "sum_quasi_parity",
+    "coupled_exchange"
+  ],
+  "MODE": "E",
+  "NOT_TRAPPED": [
+    "read_of_unwritten_scalar_memory_cell (zero-initialised; IR verifier relied upon)"
+  ],
+  "OVERFLOW_POLICY": "TRAP_ON_I64_OVERFLOW_VIA_GNU_BUILTINS",
+  "S3_COMPILER_COMMIT": "bad9d962eb3cf016aa06c9d3c90612923d0a1967",
+  "SKIPPED_FUNCTIONS": {},
+  "SKIPPED_PREDICTIVE_FUNCTIONS": {
+    "main": "NO_LOOPS"
+  },
+  "SOURCE_IR_HASHES": {
+    "coupled_exchange": "921e719e15f472e1eb25d281f126b11f45da6d4cbe3873da0f09378ca8567710",
+    "fib_mod": "b41b1fb21044a67aeb2b34463344c9242f466df40635d42ebf5b0b8848af017a",
+    "lcg_mod": "30307ecc5f93a41b6ca3ec5201684f4f4fb36ef87408b1b4792616b7fd49bda0",
+    "main": "bc46ae4b15576020ca20593f47d7578b4c699ed5e9a83a6fad692da2045d576f",
+    "sum_i2": "419e9a20bf0c43c9c2a17704b3dc00a1a24d78c97159c6d217849995afab8896",
+    "sum_quasi_parity": "ea3b080d3ad1bcb7a1c1c844d7f7dc424861a0d785f50eb2fe68795a6b08d052",
+    "triangular_cubic": "c424aaf6d553f644491a7b5e0ebdddc14c4b45a1392654490f36e9cbc69cf90e"
+  },
+  "SOURCE_SHA256": "4249c82466dd3affd6544d897138a8846cf3a6107d638324d64f08c824c2a977",
+  "TRANSFORMED_IR_HASHES": {
+    "__s3_pred_mulmod_i64": "da78352c463c7d5347822966c2568cee5c63c845b66df1db88a5675874ac017e",
+    "coupled_exchange": "fa9285989f40309d9d27caceafe2c715520ab24aedb0969006e78ffc7a7704ec",
+    "fib_mod": "4606a30c7d4a7178d06563bfb18f7c8f7cd99248d7f4df2845d04b5d5ab3e51a",
+    "lcg_mod": "361982859d0a345d8056234c2a406cc40f506c2b410f1c6295ffff70255d20c0",
+    "main": "bc46ae4b15576020ca20593f47d7578b4c699ed5e9a83a6fad692da2045d576f",
+    "sum_i2": "b260a4cf03b3baee8afc65cb53f5efaf6bff60dc2067e82d60077ad945550900",
+    "sum_quasi_parity": "28c8723e42aa80c68eb14058551d56fd5752d3842afecd84ee4f2c75ce5e1909",
+    "triangular_cubic": "5dcee2049f0df5be77d69c635ec13f71dcee59ed115a79301254612bc6fab0e1"
+  },
+  "UNSUPPORTED_BY_DESIGN": [
+    "F64",
+    "ternary arithmetic",
+    "references/slices/vectors",
+    "strings",
+    "multi-result calls"
+  ]
+}
