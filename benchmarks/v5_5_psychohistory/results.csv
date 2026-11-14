@@ -1,0 +1,30 @@
+section,name,metric_or_n,value_1,value_2,value_3,notes
+discovery,sum_triangular,T=10,0.001100,0.001000,1.10x,DISCOVERED_EXACT_DIVISIBLE_POLYNOMIAL
+discovery,sum_triangular,T=100,0.001500,0.001100,1.36x,DISCOVERED_EXACT_DIVISIBLE_POLYNOMIAL
+discovery,sum_triangular,T=10000,0.066900,0.001100,60.82x,DISCOVERED_EXACT_DIVISIBLE_POLYNOMIAL
+discovery,sum_triangular,T=100000,0.746700,0.001100,678.82x,DISCOVERED_EXACT_DIVISIBLE_POLYNOMIAL
+discovery,coupled_exchange_sum,T=6,0.001400,0.001400,1.00x,DISCOVERED_CONSERVED_AFFINE_SYSTEM
+discovery,coupled_exchange_sum,T=100,0.001700,0.001500,1.13x,DISCOVERED_CONSERVED_AFFINE_SYSTEM
+discovery,coupled_exchange_sum,T=10000,0.034900,0.001500,23.27x,DISCOVERED_CONSERVED_AFFINE_SYSTEM
+discovery,coupled_exchange_sum,T=100000,0.336200,0.001500,224.13x,DISCOVERED_CONSERVED_AFFINE_SYSTEM
+scaling,independent,N=100,0.3306,0.1156,2.860,py_ms=1.9228999999998386;err=0.0
+scaling,independent,N=1000,0.5773,0.2824,2.044,py_ms=20.394000000000023;err=0.0
+scaling,independent,N=10000,4.0733,1.2172,3.346,py_ms=188.71269999999996;err=0.0
+scaling,independent,N=100000,40.7687,11.3931,3.578,py_ms=1922.2432000000001;err=0.0
+scaling,independent,N=1000000,123.0627,33.3679,3.688,py_ms=None;err=0.0
+scaling,curie_weiss,N=100,0.2318,0.1355,1.711,py_ms=1.9768999999998371;err=0.0
+scaling,curie_weiss,N=1000,0.5322,0.2487,2.140,py_ms=18.790400000000318;err=0.0
+scaling,curie_weiss,N=10000,4.2840,1.3966,3.067,py_ms=188.62130000000033;err=0.0
+scaling,curie_weiss,N=100000,41.5252,12.9345,3.210,py_ms=1906.033;err=0.0
+scaling,curie_weiss,N=1000000,122.6127,41.6307,2.945,py_ms=None;err=0.0
+scaling,ring_k4,N=100,0.2373,0.1225,1.937,py_ms=3.054799999999247;err=0.0
+scaling,ring_k4,N=1000,1.1182,0.2442,4.579,py_ms=29.798800000000014;err=0.0
+scaling,ring_k4,N=10000,7.8567,1.6996,4.623,py_ms=294.03579999999965;err=0.0
+scaling,ring_k4,N=100000,78.6264,17.9069,4.391,py_ms=3020.5084000000006;err=0.0
+scaling,ring_k4,N=1000000,240.6399,47.0769,5.112,py_ms=None;err=0.0
+hypothesis,H1_LLN_INDEPENDENT_SCALING,CONFIRMED,"{""ns"": [100, 1000, 10000, 100000], ""mean_within_stds"": [0.09818561921032236, 0.030189934858813758, 0.010037821863151606, 0.00302032614491644], ""alpha"": 0.5014204815656012}",,,Reject if alpha < 0.35 or alpha > 0.65.
+hypothesis,H2_SUBCRITICAL_MACRO_PREDICTABILITY,CONFIRMED,"{""weak_stds"": [0.11175742023586677, 0.03627740343188154, 0.01595364789307845, 0.0028725748125564368], ""alpha"": 0.5126791251999929, ""kalman_rmse"": 0.008860836147836882, ""ar_rmse"": 0.01376549427993818, ""mean_field_rmse"": 0.011207702072425782, ""naive_rmse"": 0.008908109709958175, ""best_rmse_model"": ""kalman_state_space""}",,,"Reject if min(kalman, ar_3, mean_field) >= naive_rmse or alpha < 0.35."
+hypothesis,H3_CRITICAL_AMPLIFICATION_NC,CONFIRMED,"{""crit_total_stds"": [0.45913949781340646, 0.09491996449867557, 0.04625007623015222, 0.03699984973604219], ""weak_stds"": [0.11175742023586677, 0.03627740343188154, 0.01595364789307845, 0.0028725748125564368], ""alpha_critical"": 0.35934791979179176, ""amplification_ratio_at_max_n"": 12.880378110366538}",,,Reject if amplification_ratio < 2.5.
+hypothesis,H4_SHOCK_REGIME_LLN_BREAKDOWN_NC,CONFIRMED,"{""shock_stds"": [0.34311151406313195, 0.3311192980244954, 0.32879144387606885, 0.3300940406711026], ""alpha_shock"": 0.005345681039156226}",,,Reject if alpha_shock >= 0.20.
+hypothesis,H5_CHAOS_HORIZON_COLLAPSE_NC,CONFIRMED,"{""strategy_decision"": ""CONVENTIONAL_SIMULATION"", ""ar_rmse_h1"": 0.2301636379211068, ""ar_rmse_h5"": 0.299164780285593, ""quad_nmse"": 1.7496137913732153e-17, ""lin_nmse"": 0.7031969511661278}",,,Reject if strategy != CONVENTIONAL_SIMULATION or ar_h1 < 0.10.
+hypothesis,H6_TOPOLOGY_ORDERING_SENSITIVITY,CONFIRMED,"{""mean_field_abs_m"": 0.7798333333333334, ""erdos_renyi_abs_m"": 0.1965, ""ring_k4_abs_m"": 0.08516666666666667}",,,Reject if mean_field |M| <= ring_k4 |M| + 0.05.
