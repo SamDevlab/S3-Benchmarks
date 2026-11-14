@@ -42,3 +42,4 @@ Every measurement in `results.json` / `results.csv` (`84` total records, `all_ex
    - Compares `dot_f64` (`N=16384`) under `C11 GCC -O3` (strict IEEE-754), `S3_CONVENTIONAL_NATIVE` (`allow_fp_reassociation=False`, `max_instructions=SCIENTIFIC_MAX_INSTRUCTIONS`), and opt-in `S3_PREDICTIVE_NATIVE` (`AVX2+FMA`).
 6. **`negative_controls`**:
    - Verifies strict rejection, selector cutoff enforcement, default `predictive_exact=False` isolation, and runtime signed-integer overflow trap parity (`fib(92)`).
+

@@ -74,3 +74,4 @@ def test_all_12_contracts_exist_and_v4_3_reclassification(tmp_path: Path) -> Non
     v3_128 = [r for r in out["RECORDS"] if r["BENCHMARK_ID"] == "V4_3_GPU_MATMUL_V3_padded_fma_128"][0]
     assert v3_128["NUMERICAL_VALIDITY"] == "INVALID"
     assert v3_128["PERFORMANCE_VALIDITY"] == "DIAGNOSTIC_ONLY"
+
