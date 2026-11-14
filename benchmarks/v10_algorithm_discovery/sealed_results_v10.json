@@ -1,0 +1,343 @@
+{
+  "campaign": "S3_V10_GENERIC_Gf2_ALGORITHM_DISCOVERY_CHALLENGE",
+  "classification": "PYTHON_BLACK_BOX_DISCOVERY_EXPERIMENT_NOT_INTEGRATED_WITH_S3_COMPILER",
+  "frozen_engine_commit": "ab0b252",
+  "discovery_rule_hardcoding": false,
+  "source_proof": "NOT_AVAILABLE_FOR_OPAQUE_ORACLES",
+  "oracle_linearity_certification": "EXHAUSTIVE_ONLY_FOR_SMALL_WIDTH_OTHERS_PROBABILISTIC",
+  "out_of_sample_protocol": "engine committed before separate sealed challenge cases",
+  "rows": [
+    {
+      "case": "sealed_rule90_8",
+      "width": 8,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "cyclic",
+      "discovery_ms": 0.6887,
+      "inference_result": "EXHAUSTIVE_ORACLE_EQUIVALENCE",
+      "exhaustive": true,
+      "oracle_calls": 265,
+      "verification_checks": 256,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "high_N_independent_polynomial_checks": 4,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 55400,
+          "inferred_matrix_python_ns": 16100,
+          "known_cyclic_polynomial_python_ns": 4300,
+          "speedup_vs_direct_only": 3.441
+        },
+        "1000": {
+          "direct_iterative_python_ns": 503100,
+          "inferred_matrix_python_ns": 19200,
+          "known_cyclic_polynomial_python_ns": 4700,
+          "speedup_vs_direct_only": 26.203
+        },
+        "10000": {
+          "direct_iterative_python_ns": 6595900,
+          "inferred_matrix_python_ns": 30900,
+          "known_cyclic_polynomial_python_ns": 5300,
+          "speedup_vs_direct_only": 213.46
+        },
+        "100000": {
+          "direct_iterative_python_ns": 71458500,
+          "inferred_matrix_python_ns": 34200,
+          "known_cyclic_polynomial_python_ns": 5900,
+          "speedup_vs_direct_only": 2089.43
+        }
+      }
+    },
+    {
+      "case": "sealed_rule90_24",
+      "width": 24,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "cyclic",
+      "discovery_ms": 0.8277,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 413,
+      "verification_checks": 132,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "high_N_independent_polynomial_checks": 4,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 65200,
+          "inferred_matrix_python_ns": 62800,
+          "known_cyclic_polynomial_python_ns": 12300,
+          "speedup_vs_direct_only": 1.038
+        },
+        "1000": {
+          "direct_iterative_python_ns": 1355700,
+          "inferred_matrix_python_ns": 217200,
+          "known_cyclic_polynomial_python_ns": 37600,
+          "speedup_vs_direct_only": 6.242
+        },
+        "10000": {
+          "direct_iterative_python_ns": 12357000,
+          "inferred_matrix_python_ns": 302800,
+          "known_cyclic_polynomial_python_ns": 44900,
+          "speedup_vs_direct_only": 40.809
+        },
+        "100000": {
+          "direct_iterative_python_ns": 123751200,
+          "inferred_matrix_python_ns": 186500,
+          "known_cyclic_polynomial_python_ns": 26000,
+          "speedup_vs_direct_only": 663.545
+        }
+      }
+    },
+    {
+      "case": "sealed_rule150_32",
+      "width": 32,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "cyclic",
+      "discovery_ms": 2.5557,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 421,
+      "verification_checks": 132,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "high_N_independent_polynomial_checks": 4,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 164300,
+          "inferred_matrix_python_ns": 148000,
+          "known_cyclic_polynomial_python_ns": 18700,
+          "speedup_vs_direct_only": 1.11
+        },
+        "1000": {
+          "direct_iterative_python_ns": 1726700,
+          "inferred_matrix_python_ns": 187700,
+          "known_cyclic_polynomial_python_ns": 20300,
+          "speedup_vs_direct_only": 9.199
+        },
+        "10000": {
+          "direct_iterative_python_ns": 16914000,
+          "inferred_matrix_python_ns": 303700,
+          "known_cyclic_polynomial_python_ns": 16400,
+          "speedup_vs_direct_only": 55.693
+        },
+        "100000": {
+          "direct_iterative_python_ns": 186891800,
+          "inferred_matrix_python_ns": 630900,
+          "known_cyclic_polynomial_python_ns": 38300,
+          "speedup_vs_direct_only": 296.23
+        }
+      }
+    },
+    {
+      "case": "sealed_hybrid_24",
+      "width": 24,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "cyclic",
+      "discovery_ms": 1.8633,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 413,
+      "verification_checks": 132,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "high_N_independent_polynomial_checks": 4,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 242400,
+          "inferred_matrix_python_ns": 144700,
+          "known_cyclic_polynomial_python_ns": 28000,
+          "speedup_vs_direct_only": 1.675
+        },
+        "1000": {
+          "direct_iterative_python_ns": 2857900,
+          "inferred_matrix_python_ns": 217300,
+          "known_cyclic_polynomial_python_ns": 33300,
+          "speedup_vs_direct_only": 13.152
+        },
+        "10000": {
+          "direct_iterative_python_ns": 28509300,
+          "inferred_matrix_python_ns": 371600,
+          "known_cyclic_polynomial_python_ns": 61800,
+          "speedup_vs_direct_only": 76.72
+        },
+        "100000": {
+          "direct_iterative_python_ns": 338302800,
+          "inferred_matrix_python_ns": 278300,
+          "known_cyclic_polynomial_python_ns": 20900,
+          "speedup_vs_direct_only": 1215.605
+        }
+      }
+    },
+    {
+      "case": "sealed_dense_linear_16",
+      "width": 16,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "matrix",
+      "discovery_ms": 1.1371,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 405,
+      "verification_checks": 132,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 332500,
+          "inferred_matrix_python_ns": 388800,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 0.855
+        },
+        "1000": {
+          "direct_iterative_python_ns": 4028500,
+          "inferred_matrix_python_ns": 547900,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 7.353
+        },
+        "10000": {
+          "direct_iterative_python_ns": 39037400,
+          "inferred_matrix_python_ns": 914000,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 42.711
+        },
+        "100000": {
+          "direct_iterative_python_ns": 345933100,
+          "inferred_matrix_python_ns": 883000,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 391.77
+        }
+      }
+    },
+    {
+      "case": "sealed_dense_linear_32",
+      "width": 32,
+      "heldout_expected_linear": true,
+      "family_for_independent_evaluation_only": "matrix",
+      "discovery_ms": 6.7081,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 421,
+      "verification_checks": 132,
+      "holdout_checks": 315,
+      "holdout_errors_first_five": [],
+      "holdout_parity": true,
+      "outcome": "PASS_POST_FREEZE_HOLDOUT",
+      "timings": {
+        "100": {
+          "direct_iterative_python_ns": 1447100,
+          "inferred_matrix_python_ns": 1535700,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 0.942
+        },
+        "1000": {
+          "direct_iterative_python_ns": 9602500,
+          "inferred_matrix_python_ns": 3082200,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 3.115
+        },
+        "10000": {
+          "direct_iterative_python_ns": 99087900,
+          "inferred_matrix_python_ns": 2885400,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 34.341
+        },
+        "100000": {
+          "direct_iterative_python_ns": 720173000,
+          "inferred_matrix_python_ns": 4603000,
+          "known_cyclic_polynomial_python_ns": null,
+          "speedup_vs_direct_only": 156.457
+        }
+      }
+    },
+    {
+      "case": "sealed_affine_16",
+      "width": 16,
+      "heldout_expected_linear": false,
+      "family_for_independent_evaluation_only": "affine",
+      "inference_result": "REJECTED",
+      "rejection": "GF(2) linear map requires f(0)=0",
+      "discovery_ms": 0.0494,
+      "outcome": "CORRECT_REJECTION"
+    },
+    {
+      "case": "sealed_nonlinear_rule30_24",
+      "width": 24,
+      "heldout_expected_linear": false,
+      "family_for_independent_evaluation_only": "nonlinear",
+      "inference_result": "REJECTED",
+      "rejection": "structured linearity counterexample: x=16777215",
+      "discovery_ms": 0.12,
+      "outcome": "CORRECT_REJECTION"
+    },
+    {
+      "case": "sealed_rare_trigger_24",
+      "width": 24,
+      "heldout_expected_linear": false,
+      "family_for_independent_evaluation_only": "adversarial_rare",
+      "discovery_ms": 1.9514,
+      "inference_result": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "exhaustive": false,
+      "oracle_calls": 413,
+      "verification_checks": 132,
+      "holdout_checks": 321,
+      "holdout_errors_first_five": [
+        {
+          "state": 2875169,
+          "N": 1,
+          "oracle": 492871,
+          "candidate": 492870
+        },
+        {
+          "state": 2875169,
+          "N": 2,
+          "oracle": 16262953,
+          "candidate": 16262922
+        },
+        {
+          "state": 2875169,
+          "N": 3,
+          "oracle": 822341,
+          "candidate": 821312
+        },
+        {
+          "state": 2875169,
+          "N": 7,
+          "oracle": 9732305,
+          "candidate": 12895428
+        },
+        {
+          "state": 2875169,
+          "N": 17,
+          "oracle": 12961221,
+          "candidate": 12895428
+        }
+      ],
+      "holdout_parity": false,
+      "outcome": "HOLDOUT_DETECTED_UNSAFE_CANDIDATE"
+    }
+  ],
+  "score": {
+    "heldout_linear_passes": 6,
+    "heldout_linear_total": 6,
+    "nonlinear_rejected_pre_holdout": 2,
+    "nonlinear_total": 3,
+    "unsafe_or_incorrect_acceptance_count": 1,
+    "safe_for_compiler_promotion": false
+  },
+  "caveats": [
+    "Finite oracle tests do not prove a function globally linear; a rare nonlinear counterexample can evade BLR sampling.",
+    "The inferred GF(2) matrix and repeated-squaring algorithm are known mathematics, not a novel asymptotic algorithm.",
+    "Python blackbox prototype only; not a S3 compiler pass, S3 IR or native x86-64 output.",
+    "For cyclic oracles an independent specialized polynomial algorithm may be faster than generic matrix powers.",
+    "Discovery, training, proof and first-execution costs must be amortized; isolated warm runtime speedups are insufficient.",
+    "Never deploy a probabilistically accepted candidate without source-derived proof or complete domain certification."
+  ]
+}

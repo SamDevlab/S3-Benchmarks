@@ -1,0 +1,335 @@
+{
+  "status": "EXPLORATORY_GCC_NATIVE_FROM_BLACKBOX_GF2",
+  "backend": "GCC_NATIVE_NOT_S3_NATIVE",
+  "blackbox_linearity_proof": false,
+  "new_algorithm_claim": false,
+  "samples": [
+    {
+      "case": "sealed_rule90_8",
+      "width": 8,
+      "family": "cyclic",
+      "oracle_preflight_status": "EXHAUSTIVE_ORACLE_EQUIVALENCE",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 141.6667,
+          "native_inferred_ns": 88.0,
+          "native_specialist_ns": 20.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 1.61,
+          "specialist_over_inferred": 0.227
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 1290.8333,
+          "native_inferred_ns": 168.3333,
+          "native_specialist_ns": 34.1667,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 7.668,
+          "specialist_over_inferred": 0.203
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 11008.3333,
+          "native_inferred_ns": 195.8333,
+          "native_specialist_ns": 45.8333,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 56.213,
+          "specialist_over_inferred": 0.234
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 167300.0,
+          "native_inferred_ns": 420.0,
+          "native_specialist_ns": 140.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 398.333,
+          "specialist_over_inferred": 0.333
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 1794600.0,
+          "native_inferred_ns": 900.0,
+          "native_specialist_ns": 500.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 1994.0,
+          "specialist_over_inferred": 0.556
+        }
+      ]
+    },
+    {
+      "case": "sealed_rule90_24",
+      "width": 24,
+      "family": "cyclic",
+      "oracle_preflight_status": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 1652.3333,
+          "native_inferred_ns": 713.3333,
+          "native_specialist_ns": 67.6667,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 2.316,
+          "specialist_over_inferred": 0.095
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 16277.5,
+          "native_inferred_ns": 565.8333,
+          "native_specialist_ns": 73.3333,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 28.767,
+          "specialist_over_inferred": 0.13
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 190366.6667,
+          "native_inferred_ns": 1379.1667,
+          "native_specialist_ns": 137.5,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 138.03,
+          "specialist_over_inferred": 0.1
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 1541740.0,
+          "native_inferred_ns": 1040.0,
+          "native_specialist_ns": 200.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 1482.442,
+          "specialist_over_inferred": 0.192
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 14819500.0,
+          "native_inferred_ns": 2500.0,
+          "native_specialist_ns": 800.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 5927.8,
+          "specialist_over_inferred": 0.32
+        }
+      ]
+    },
+    {
+      "case": "sealed_rule150_32",
+      "width": 32,
+      "family": "cyclic",
+      "oracle_preflight_status": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 2679.6667,
+          "native_inferred_ns": 1275.6667,
+          "native_specialist_ns": 51.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 2.101,
+          "specialist_over_inferred": 0.04
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 30070.0,
+          "native_inferred_ns": 730.0,
+          "native_specialist_ns": 50.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 41.192,
+          "specialist_over_inferred": 0.068
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 408829.1667,
+          "native_inferred_ns": 1562.5,
+          "native_specialist_ns": 104.1667,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 261.651,
+          "specialist_over_inferred": 0.067
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 3790260.0,
+          "native_inferred_ns": 2420.0,
+          "native_specialist_ns": 220.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 1566.223,
+          "specialist_over_inferred": 0.091
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 24495000.0,
+          "native_inferred_ns": 2000.0,
+          "native_specialist_ns": 600.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 12247.5,
+          "specialist_over_inferred": 0.3
+        }
+      ]
+    },
+    {
+      "case": "sealed_hybrid_24",
+      "width": 24,
+      "family": "cyclic",
+      "oracle_preflight_status": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 1720.6667,
+          "native_inferred_ns": 547.3333,
+          "native_specialist_ns": 71.3333,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 3.144,
+          "specialist_over_inferred": 0.13
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 25098.3333,
+          "native_inferred_ns": 765.8333,
+          "native_specialist_ns": 91.6667,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 32.773,
+          "specialist_over_inferred": 0.12
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 236825.0,
+          "native_inferred_ns": 920.8333,
+          "native_specialist_ns": 125.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 257.186,
+          "specialist_over_inferred": 0.136
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 1975900.0,
+          "native_inferred_ns": 940.0,
+          "native_specialist_ns": 180.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 2102.021,
+          "specialist_over_inferred": 0.191
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 21831500.0,
+          "native_inferred_ns": 2200.0,
+          "native_specialist_ns": 600.0,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 9923.409,
+          "specialist_over_inferred": 0.273
+        }
+      ]
+    },
+    {
+      "case": "sealed_dense_linear_16",
+      "width": 16,
+      "family": "matrix",
+      "oracle_preflight_status": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 2409.6667,
+          "native_inferred_ns": 1598.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 1.508
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 17085.0,
+          "native_inferred_ns": 1756.6667,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 9.726
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 237975.0,
+          "native_inferred_ns": 3179.1667,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 74.855
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 2201720.0,
+          "native_inferred_ns": 4000.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 550.43
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 18249700.0,
+          "native_inferred_ns": 3800.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 4802.553
+        }
+      ]
+    },
+    {
+      "case": "sealed_dense_linear_32",
+      "width": 32,
+      "family": "matrix",
+      "oracle_preflight_status": "PROVISIONAL_RANDOMIZED_LINEARITY",
+      "compiler": "GCC -O3 -std=c11 generated from inferred GF2 transition matrix",
+      "result": "NATIVE_DIFFERENTIAL_PARITY_PASS",
+      "rows": [
+        {
+          "N": 100,
+          "native_iterative_ns": 2602.6667,
+          "native_inferred_ns": 4396.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 0.592
+        },
+        {
+          "N": 1000,
+          "native_iterative_ns": 30743.3333,
+          "native_inferred_ns": 8600.8333,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 3.574
+        },
+        {
+          "N": 10000,
+          "native_iterative_ns": 276037.5,
+          "native_inferred_ns": 9791.6667,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 28.191
+        },
+        {
+          "N": 100000,
+          "native_iterative_ns": 2857580.0,
+          "native_inferred_ns": 17200.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 166.138
+        },
+        {
+          "N": 1000000,
+          "native_iterative_ns": 33905700.0,
+          "native_inferred_ns": 16600.0,
+          "native_specialist_ns": null,
+          "checksum_valid": true,
+          "speedup_direct_over_inferred": 2042.512
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Both C iterative and inferred modes use the inferred column representation; specialist reference is provided for cyclic cases.",
+    "Single host/session, 5 rounds; very short kernels and nanosecond results can be noisy.",
+    "Discovery and compiling costs excluded from warm kernel timings; compare break-even separately.",
+    "This proves C code generation for a subset of the inferred GF2 maps, NOT S3 compiler integration.",
+    "Probabilistic oracle linearity preflight is not a universal certificate. Do not deploy without source proof."
+  ]
+}
