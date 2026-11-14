@@ -1,0 +1,1544 @@
+{
+  "status": "EMPIRICAL_SCALING_AUDIT_ONLY",
+  "complexity_certification": "NOT_PROVED",
+  "sources": [
+    {
+      "file": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json",
+      "accepted": 189,
+      "skipped": 0,
+      "environment": {
+        "cpu": "AMD Ryzen 5 3400G with Radeon Vega Graphics",
+        "platform": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+        "python": "3.12.3",
+        "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+        "gcc_flags": [
+          "-O3",
+          "-fPIC",
+          "-shared"
+        ],
+        "s3_commit": "45483e76e523b2d758f28fb6d49c3c354cab7ee1",
+        "rounds": 3,
+        "batches_per_round": 3,
+        "inputs": "T + (i & 15) cycled at run time; xor-folded into volatile sink"
+      }
+    }
+  ],
+  "warnings": [
+    "Big O CANNOT be inferred or formally proved from runtime measurements alone.",
+    "All complexity hypotheses assume unit-cost fixed-width integer arithmetic and valid in-domain N.",
+    "With finite i64 inputs, these are idealized algorithm families, not a literal N -> infinity claim.",
+    "For arbitrary-precision inputs, bit complexity must also account for operand widths and multiplication.",
+    "A measured effective exponent is not an asymptotic proof, especially with 3 data points.",
+    "Constant-time or logarithmic kernels can be dominated by invocation overhead in this range.",
+    "C handwritten formulas (D) can have different checked-overflow semantics from S3/GCC auto code (E).",
+    "Only comparable inputs, correctness status, CPU, compiler flags and measurement scopes may be compared.",
+    "Predictive fast-path O(1)/O(log N) estimates are CONDITIONAL; a guarded fallback can remain O(N).",
+    "Global worst-case complexity across all valid inputs has NOT been established."
+  ],
+  "rows": [
+    {
+      "function": "fib_mod",
+      "mode": "A",
+      "mode_description": "S3 native loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9749,
+      "observed_loglog_slope_high_window": 1.0452,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 6590.9936,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 758.702,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 1217.0732,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 4608.6957,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 16416.3743,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 70437.2549,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 154990.9091,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 452750.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 1220375.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 5000600.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "B",
+      "mode_description": "S3 native predictive (original)",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.1113,
+      "observed_loglog_slope_high_window": 0.0803,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.4685,
+      "sample_count": 9,
+      "flags": [
+        "SLOW_GROWTH_AMBIGUOUS_CONSTANT_VS_LOG"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 313.0897,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 301.3501,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 338.3422,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 415.7279,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 779.4052,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 782.4419,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 644.9471,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 616.2025,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 772.8736,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "C",
+      "mode_description": "GCC C conventional loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9801,
+      "observed_loglog_slope_high_window": 1.0447,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 8198.4498,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 530.7665,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 1335.7258,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 4076.6208,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 15689.7059,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 46956.8627,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 120312.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 392600.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 1233312.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 4351462.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "D",
+      "mode_description": "GCC C handwritten formula",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.105,
+      "observed_loglog_slope_high_window": -0.0073,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.3422,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 292.6293,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 305.7318,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 328.5022,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 514.3929,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 605.1344,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 613.5429,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 699.0099,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 629.703,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 685.3876,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "E",
+      "mode_description": "GCC C auto-emitted from S3 IR",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.1268,
+      "observed_loglog_slope_high_window": 0.0989,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.8574,
+      "sample_count": 9,
+      "flags": [
+        "SLOW_GROWTH_AMBIGUOUS_CONSTANT_VS_LOG"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 169.4731,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 156.3627,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 215.0312,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 378.6424,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 386.5654,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 427.5664,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 384.6741,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 467.375,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 484.2478,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "F",
+      "mode_description": "GCC C auto-emitted conventional IR",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9783,
+      "observed_loglog_slope_high_window": 1.0578,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 8746.7539,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 561.7484,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 1635.5044,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 5069.0832,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 15908.2707,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 53963.2653,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 150820.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 430425.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 1346337.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 4913475.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "fib_mod",
+      "mode": "G",
+      "mode_description": "S3 native predictive (cleaned)",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.0728,
+      "observed_loglog_slope_high_window": 0.0377,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 1.7408,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 346.5139,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 340.6668,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 353.0734,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 483.4644,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 578.0945,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 709.0909,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 553.2853,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 569.3027,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 603.197,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "A",
+      "mode_description": "S3 native loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9626,
+      "observed_loglog_slope_high_window": 1.0899,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 6862.6001,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 1065.7768,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 3250.3886,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 5834.7015,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 22436.4583,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 84386.3636,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 270912.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 593237.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 2119350.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 7314000.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "B",
+      "mode_description": "S3 native predictive (original)",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.003,
+      "observed_loglog_slope_high_window": 0.0625,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 1.0201,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 574.0143,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 687.2886,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 486.0974,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 477.1516,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 561.2754,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 654.8992,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 504.7412,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 631.9323,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 585.5657,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "C",
+      "mode_description": "GCC C conventional loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9736,
+      "observed_loglog_slope_high_window": 0.9551,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 5961.6345,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 800.85,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 1524.7449,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 5265.0407,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 17194.7761,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 60643.75,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 178446.1538,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 528237.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 1628975.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 4774375.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "D",
+      "mode_description": "GCC C handwritten formula",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.1067,
+      "observed_loglog_slope_high_window": 0.0336,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.7969,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 254.8127,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 360.9283,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 591.35,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 446.4138,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 654.5555,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 613.4369,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 654.0276,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 899.1147,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 712.6915,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "E",
+      "mode_description": "GCC C auto-emitted from S3 IR",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.1048,
+      "observed_loglog_slope_high_window": 0.0133,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.4855,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 203.275,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 252.8033,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 315.4634,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 430.5779,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 511.0484,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 490.8825,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 487.0835,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 603.1505,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 505.2374,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "F",
+      "mode_description": "GCC C auto-emitted conventional IR",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9712,
+      "observed_loglog_slope_high_window": 0.9538,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 6605.0025,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 956.12,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 2403.0815,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 7226.8212,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 19381.5534,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 87420.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 223800.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 701550.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 2089350.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 6315175.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "lcg_mod",
+      "mode": "G",
+      "mode_description": "S3 native predictive (cleaned)",
+      "algorithmic_hypothesis_not_proof": "O(log N)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.0905,
+      "observed_loglog_slope_high_window": 0.0412,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 2.0609,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 283.374,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 304.175,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 475.6601,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 497.2042,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 539.894,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 513.4487,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 523.9247,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 867.3818,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 584.0052,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "A",
+      "mode_description": "S3 native loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9932,
+      "observed_loglog_slope_high_window": 1.2315,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 15692.5044,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 657.6882,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 3107.9958,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 9542.0168,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 30273.9583,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 63791.6667,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 236812.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 607250.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 2149600.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 10320775.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "B",
+      "mode_description": "S3 native predictive (original)",
+      "algorithmic_hypothesis_not_proof": "O(1)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.0179,
+      "observed_loglog_slope_high_window": 0.2164,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 1.6612,
+      "sample_count": 9,
+      "flags": [
+        "SLOW_GROWTH_AMBIGUOUS_CONSTANT_VS_LOG"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 195.3273,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 328.1465,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 208.6259,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 245.3594,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 249.7,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 269.5865,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 197.0297,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 254.8447,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 324.4746,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "C",
+      "mode_description": "GCC C conventional loop",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 0.9571,
+      "observed_loglog_slope_high_window": 1.1851,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 7683.0559,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 226.1714,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 588.4118,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 1548.087,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 4988.3227,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 15503.937,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 54562.2222,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 113875.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 370812.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 1737687.5,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "D",
+      "mode_description": "GCC C handwritten formula",
+      "algorithmic_hypothesis_not_proof": "O(1)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": 0.0313,
+      "observed_loglog_slope_high_window": 0.1685,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 1.4828,
+      "sample_count": 9,
+      "flags": [
+        "VERY_SHORT_KERNEL_OVERHEAD_DOMINANCE_POSSIBLE",
+        "SLOW_GROWTH_AMBIGUOUS_CONSTANT_VS_LOG"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 20.5153,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 20.9357,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 19.1821,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 28.08,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 27.1,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 40.6878,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 20.7304,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 21.48,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 30.42,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "E",
+      "mode_description": "GCC C auto-emitted from S3 IR",
+      "algorithmic_hypothesis_not_proof": "O(1)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": -0.0344,
+      "observed_loglog_slope_high_window": -0.0202,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 0.7739,
+      "sample_count": 9,
+      "flags": [
+        "VERY_SHORT_KERNEL_OVERHEAD_DOMINANCE_POSSIBLE"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 43.7936,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 47.7592,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 44.0936,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 46.2789,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 37.7454,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 51.3472,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 35.5241,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 34.1259,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 33.8937,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "F",
+      "mode_description": "GCC C auto-emitted conventional IR",
+      "algorithmic_hypothesis_not_proof": "O(N)",
+      "complexity_scope": "ITERATIVE_REFERENCE",
+      "observed_loglog_slope_all": 1.036,
+      "observed_loglog_slope_high_window": 1.1823,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 17178.6038,
+      "sample_count": 9,
+      "flags": [],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 268.4444,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 1018.6676,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 3137.0712,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 9123.8938,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 24197.4359,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 200664.7059,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 305125.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 894800.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 4611500.0,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    },
+    {
+      "function": "sum_quasi_parity",
+      "mode": "G",
+      "mode_description": "S3 native predictive (cleaned)",
+      "algorithmic_hypothesis_not_proof": "O(1)",
+      "complexity_scope": "CONDITIONAL_OPTIMIZED_FAST_PATH_NOT_WORST_CASE_PROOF",
+      "observed_loglog_slope_all": -0.0106,
+      "observed_loglog_slope_high_window": 0.1328,
+      "N_first": 100,
+      "N_last": 1000000,
+      "N_factor": 10000.0,
+      "runtime_growth_factor": 0.9735,
+      "sample_count": 9,
+      "flags": [
+        "SLOW_GROWTH_AMBIGUOUS_CONSTANT_VS_LOG"
+      ],
+      "samples": [
+        {
+          "N": 100,
+          "median_ns": 164.0302,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300,
+          "median_ns": 144.4374,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000,
+          "median_ns": 155.9653,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 3000,
+          "median_ns": 157.4531,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 10000,
+          "median_ns": 164.0114,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 30000,
+          "median_ns": 227.689,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 100000,
+          "median_ns": 117.9167,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 300000,
+          "median_ns": 125.1875,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        },
+        {
+          "N": 1000000,
+          "median_ns": 159.685,
+          "above_noise_floor": true,
+          "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v9_asymptotic/results_v9_dense_scaling.json"
+        }
+      ]
+    }
+  ]
+}
