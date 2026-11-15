@@ -67,3 +67,19 @@ archive or version the old evidence first.
 See `baseline_20261115.json`, `pr_stack_20261115.json`
 and `DEPENDENCIES_20261115.md` for exact commands,
 SHAs, test logs, PR URLs and conservative integration gates.
+
+## V12 #409 and #410 — verified experimental coexistence
+
+On the same WSL host, PR #409 was applied as a local-only
+test overlay to both PR #410 and the later V18 line.
+Results: **93/93 and 159/159 test runs passed**, with no
+Git conflicts. The repeated cases are **252 test
+executions, not 252 unique tests**. Direct cross-family
+checks verify the two different candidate eligibility
+and opt-in contracts. No physical GPU validation or
+production integration of #409 was attempted.
+
+Read [V12_COEXISTENCE_REVIEW_20261115.md](V12_COEXISTENCE_REVIEW_20261115.md),
+`v12_coexistence_20261115.json`, the raw logs and the
+local overlay commit manifest. The integration decision
+remains **GO_EXPERIMENTAL**, not approval to merge.

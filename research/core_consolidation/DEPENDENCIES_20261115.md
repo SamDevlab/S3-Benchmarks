@@ -74,3 +74,23 @@ Evidence date: 2026-11-15. Source: saved authenticated GitHub CLI snapshots.
 Kanban canonical branch: `feat/native-kanban-flow-v1-20261111`, PR #38 in Relat-rio.
 Agent WIP maximum 2, one per owner. Existing non-S3 priorities are not silently overwritten.
 All development/research tasks must have done_when, stop_when, next_action and dated review.
+
+## Update — local semantic V12 coexistence, 15 November 2026
+
+The initial PR-file fork audit has now been tested.
+PR #409 adds nine files to either PR #410 or the
+full V18 candidate with zero Git conflicts.
+
+**93 tests** passed on V12 B+A and **159 tests**
+on V18+A, including independent cross-family
+eligibility tests and real native i64 tests
+(**252 executions; some tests repeated**).
+This is compatibility evidence for opt-in experiments,
+not approval for production or automatic compiler
+routing. The #409 registry remains disconnected
+from production code generation.
+
+Full methodology, negatives and local-only SHA:
+`V12_COEXISTENCE_REVIEW_20261115.md`,
+`v12_coexistence_20261115.json`,
+`v12_overlay_local_refs_20261115.json`.

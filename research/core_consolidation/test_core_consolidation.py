@@ -87,3 +87,32 @@ def test_v12_parallel_prs_disjoint_files_but_not_automatically_compatible():
     assert record["overlap_file_count"]==0
     assert record["decision"]=="REVIEW_REQUIRED_DO_NOT_MERGE_SIBLINGS_AUTOMATICALLY"
     assert load("pr_stack_20261115.json")["v12_fork"]["overlap_file_count"]==0
+
+
+def test_v12_both_overlay_runs_pass_with_exact_collect_counts():
+    data=load("v12_coexistence_20261115.json")
+    assert data["decision"]=="GO_EXPERIMENTAL_COMPATIBLE_SUBSET"
+    assert data["file_level_conflicts"]==0
+    assert data["no_original_branch_modified"]
+    assert data["no_merge_no_remote_push_no_actions"]
+    rows=data["tests"]
+    assert len(rows)==2
+    assert [r["number_collected"] for r in rows]==[93,159]
+    assert [r["collect_files"] for r in rows]==[9,15]
+    assert data["total_overlay_tests_passed"]==252
+    assert all(r["exit_code"]==0 and r["collect_exit_code"]==0
+               and not r["timed_out"] for r in rows)
+    assert all((ROOT/r["log"]).exists() and
+               (ROOT/r["collect_log"]).exists() for r in rows)
+    assert any("physical RX580" in claim for claim in data["not_proved"])
+
+
+def test_v12_local_review_branches_record_no_upstream_push():
+    ref=load("v12_overlay_local_refs_20261115.json")
+    assert set(ref)=={"S3-V12-Combined","S3-V18-Combined"}
+    for entry in ref.values():
+        assert entry["local_only"] is True
+        assert len(entry["changed_files"])==9
+        assert entry["overlay_head"]!=entry["base"]
+    assert ref["S3-V12-Combined"]["base"].startswith("02f0a3f7")
+    assert ref["S3-V18-Combined"]["base"].startswith("1a323a03")

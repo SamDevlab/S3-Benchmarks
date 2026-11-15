@@ -1,0 +1,17 @@
+: 4
+tests/test_optimizer.py: 22
+tests/test_s3_v11_auto_algorithm_selection.py: 11
+tests/test_s3_v12_empirical_gpu_dispatch.py: 4
+tests/test_s3_v12_gpu_cost_dispatch.py: 7
+tests/test_s3_v12_sparse_codegen.py: 9
+tests/test_s3_v12_verified_candidates.py: 10
+tests/test_s3_v12_verified_i64_native.py: 6
+tests/test_s3_v12_verified_i64_progression.py: 19
+tests/test_s3_v12_verified_strategy_registry.py: 5
+tests/test_s3_v13_native_ctz.py: 13
+tests/test_s3_v14_x86_asm_peephole.py: 4
+tests/test_s3_v15_slice_bounds_reuse.py: 8
+tests/test_s3_v16_interval_bounds.py: 15
+tests/test_s3_v17_dynamic_intervals.py: 13
+tests/test_s3_v18_auto_guard.py: 13
+

@@ -1,0 +1,91 @@
+{
+  "campaign": "S3_CORE_V12_SEMANTIC_COHABITATION_20261115",
+  "observed_at_utc": "2026-11-15T05:36:01.125122+00:00",
+  "methods": "Windows Git cherry-pick --no-commit into two isolated worktrees; Linux WSL native test",
+  "hardware": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+  "source_branches": {
+    "A": "PR #409 a271bbfdf8f9a4d2f1c1cff5fcb27fd973e0cfa0",
+    "B": "PR #410 02f0a3f76b138b5495362fe9161058cdee00f3f7",
+    "stack": "V18 1a323a033c361d904aa6b9ce747364f7ee05255e"
+  },
+  "no_original_branch_modified": true,
+  "no_merge_no_remote_push_no_actions": true,
+  "file_level_conflicts": 0,
+  "semantic_contracts": {
+    "a_i64_progression_verified": true,
+    "b_i64_identity_verified": true,
+    "a_not_wired_production": true,
+    "independent_optin_gates": true
+  },
+  "tests": [
+    {
+      "name": "b_plus_a_original_v12",
+      "cwd": "S3-V12-Combined",
+      "exit_code": 0,
+      "passed_reported": 93,
+      "elapsed_seconds": 11.92,
+      "timed_out": false,
+      "log": "b_plus_a_original_v12.log",
+      "tests": [
+        "tests/test_s3_v12_empirical_gpu_dispatch.py",
+        "tests/test_s3_v12_verified_i64_native.py",
+        "tests/test_s3_v12_verified_i64_progression.py",
+        "tests/test_s3_v12_verified_strategy_registry.py",
+        "tests/test_s3_v12_gpu_cost_dispatch.py",
+        "tests/test_s3_v12_sparse_codegen.py",
+        "tests/test_s3_v12_verified_candidates.py",
+        "tests/test_s3_v11_auto_algorithm_selection.py",
+        "tests/test_optimizer.py",
+        "test_v12_cross_family.py"
+      ],
+      "stdout_tail": "........................................................................ [ 74%]\n.........................                                                [100%]",
+      "number_collected": 93,
+      "collect_files": 9,
+      "collect_exit_code": 0,
+      "collect_log": "b_plus_a_original_v12_collect.log",
+      "count_source": "pytest --collect-only -q plus actual suite exit=0"
+    },
+    {
+      "name": "v18_plus_a_regression",
+      "cwd": "S3-V18-Combined",
+      "exit_code": 0,
+      "passed_reported": 159,
+      "elapsed_seconds": 41.919,
+      "timed_out": false,
+      "log": "v18_plus_a_regression.log",
+      "tests": [
+        "tests/test_s3_v12_empirical_gpu_dispatch.py",
+        "tests/test_s3_v12_verified_i64_native.py",
+        "tests/test_s3_v12_verified_i64_progression.py",
+        "tests/test_s3_v12_verified_strategy_registry.py",
+        "tests/test_s3_v12_gpu_cost_dispatch.py",
+        "tests/test_s3_v12_sparse_codegen.py",
+        "tests/test_s3_v12_verified_candidates.py",
+        "tests/test_s3_v11_auto_algorithm_selection.py",
+        "tests/test_optimizer.py",
+        "tests/test_s3_v13_native_ctz.py",
+        "tests/test_s3_v14_x86_asm_peephole.py",
+        "tests/test_s3_v15_slice_bounds_reuse.py",
+        "tests/test_s3_v16_interval_bounds.py",
+        "tests/test_s3_v17_dynamic_intervals.py",
+        "tests/test_s3_v18_auto_guard.py",
+        "test_v12_cross_family.py"
+      ],
+      "stdout_tail": "........................................................................ [ 44%]\n........................................................................ [ 88%]\n...................                                                      [100%]",
+      "number_collected": 159,
+      "collect_files": 15,
+      "collect_exit_code": 0,
+      "collect_log": "v18_plus_a_regression_collect.log",
+      "count_source": "pytest --collect-only -q plus actual suite exit=0"
+    }
+  ],
+  "all_selected_tests_pass": true,
+  "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+  "not_proved": [
+    "No universal source-language compatibility proof.",
+    "Does not verify PR #409 runtime GPU dispatch on physical RX580.",
+    "Passing B+A and V18+A does not authorize merge of stacked PRs.",
+    "Selection cost metrics require real host measurements, not fixture samples."
+  ],
+  "total_overlay_tests_passed": 252
+}

@@ -1,0 +1,36 @@
+{
+    "S3-V12-Combined":  {
+                            "branch":  "research/s3-v12-combined-local-review-20261115",
+                            "local_only":  true,
+                            "changed_files":  [
+                                                  "bootstrap/s3/gpu/empirical_dispatch.py",
+                                                  "bootstrap/s3/verified_i64_native.py",
+                                                  "bootstrap/s3/verified_i64_progression.py",
+                                                  "bootstrap/s3/verified_strategy_registry.py",
+                                                  "docs/S3_V12_VERIFIED_STRATEGY_REGISTRY.md",
+                                                  "tests/test_s3_v12_empirical_gpu_dispatch.py",
+                                                  "tests/test_s3_v12_verified_i64_native.py",
+                                                  "tests/test_s3_v12_verified_i64_progression.py",
+                                                  "tests/test_s3_v12_verified_strategy_registry.py"
+                                              ],
+                            "overlay_head":  "3555bc017da087377092351468504c975ca9b21f",
+                            "base":  "02f0a3f76b138b5495362fe9161058cdee00f3f7"
+                        },
+    "S3-V18-Combined":  {
+                            "branch":  "research/s3-v18-plus-v12a-local-review-20261115",
+                            "local_only":  true,
+                            "changed_files":  [
+                                                  "bootstrap/s3/gpu/empirical_dispatch.py",
+                                                  "bootstrap/s3/verified_i64_native.py",
+                                                  "bootstrap/s3/verified_i64_progression.py",
+                                                  "bootstrap/s3/verified_strategy_registry.py",
+                                                  "docs/S3_V12_VERIFIED_STRATEGY_REGISTRY.md",
+                                                  "tests/test_s3_v12_empirical_gpu_dispatch.py",
+                                                  "tests/test_s3_v12_verified_i64_native.py",
+                                                  "tests/test_s3_v12_verified_i64_progression.py",
+                                                  "tests/test_s3_v12_verified_strategy_registry.py"
+                                              ],
+                            "overlay_head":  "92973e3fd89b82c3e18c7efa300f438a3fd7dc74",
+                            "base":  "1a323a033c361d904aa6b9ce747364f7ee05255e"
+                        }
+}
