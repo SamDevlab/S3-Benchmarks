@@ -1,0 +1,188 @@
+{
+  "campaign": "S3_V12_CORE_NATIVE_CODEGEN_QUALIFICATION",
+  "scientific_status": "EXPERIMENTAL_NOT_PRODUCTION",
+  "algorithmic_novelty": false,
+  "s3_native_assembly": true,
+  "gcc_role_for_s3": "ASSEMBLE_AND_LINK_ONLY",
+  "compiler_levels": {
+    "s3": "O1",
+    "c_reference": "GCC -O3"
+  },
+  "measurement_scope": "native execution only; certificate validation and cold build separately recorded",
+  "machine_session": "one Windows/WSL GCC x86-64 host",
+  "rounds": 9,
+  "cases": [
+    {
+      "family": "rule90",
+      "width": 8,
+      "polynomial": 130,
+      "source_ir_sha256": "3ba6a0e12480a7f3fa016ee95b4f27af37ae952a744f159a84517fd0caa6326d",
+      "certificate_sha256": "4fd1ec0d3dc9517c28c865dd6a46c50b70b40c8308638a7c660a8529b3ee0130",
+      "nonzero_output_at_large_horizon": false,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3398,
+          "static_branch_instructions": 295,
+          "static_call_instructions": 0,
+          "assembly_lines": 3739,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 298.1742,
+        "s3_v11": 282.6393,
+        "s3_v12": 357.7598
+      },
+      "samples": [
+        {
+          "W": 8,
+          "P": 130,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 315.0,
+            "s3_v11": 305.0,
+            "s3_v12": 91.2,
+            "gcc_matched_scan": 94.4,
+            "gcc_sparse": 12.2
+          },
+          "v12_over_v11": 0.299016,
+          "v12_over_gcc_matched": 0.966102,
+          "v12_over_gcc_sparse": 7.47541,
+          "sink": 228
+        },
+        {
+          "W": 8,
+          "P": 130,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 4243.333,
+            "s3_v11": 2924.2,
+            "s3_v12": 549.4,
+            "gcc_matched_scan": 1282.267,
+            "gcc_sparse": 61.275
+          },
+          "v12_over_v11": 0.18788,
+          "v12_over_gcc_matched": 0.42846,
+          "v12_over_gcc_sparse": 8.966136,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "family": "invertible",
+      "width": 31,
+      "polynomial": 11,
+      "source_ir_sha256": "66fbae27bef0bf22aca5acc01dbed0727f60111b009fcd204b18fd5677eabf02",
+      "certificate_sha256": "4578f9670a54d1b4ebbec84ae6fdd52502ea9ef9fa557dd4b2af8ade05e666a3",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 4186,
+          "static_branch_instructions": 390,
+          "static_call_instructions": 0,
+          "assembly_lines": 4527,
+          "shared_library_bytes": 67920,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 512.6596,
+        "s3_v11": 490.3686,
+        "s3_v12": 462.7708
+      },
+      "samples": [
+        {
+          "W": 31,
+          "P": 11,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1684.667,
+            "s3_v11": 853.2,
+            "s3_v12": 76.4,
+            "gcc_matched_scan": 363.267,
+            "gcc_sparse": 15.35
+          },
+          "v12_over_v11": 0.089545,
+          "v12_over_gcc_matched": 0.210314,
+          "v12_over_gcc_sparse": 4.977199,
+          "sink": 9091320
+        },
+        {
+          "W": 31,
+          "P": 11,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 33269.0,
+            "s3_v11": 11490.8,
+            "s3_v12": 2831.8,
+            "gcc_matched_scan": 5145.0,
+            "gcc_sparse": 516.2
+          },
+          "v12_over_v11": 0.246441,
+          "v12_over_gcc_matched": 0.550398,
+          "v12_over_gcc_sparse": 5.485858,
+          "sink": 598652777
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "S3 O1 vs C GCC O3: comparison does not isolate only register allocation.",
+    "Instruction counts describe disassembled shared libraries, not dynamic PMU counts.",
+    "C algorithm-matched scan and C sparse reference separate algorithm/codegen factors.",
+    "Rule90 on power-of-two widths is nilpotent in W/2 steps.",
+    "Power-of-two cyclic GF2 operators have special periodicity; include W31 holdout.",
+    "Submicrosecond GCC timings may be noisy: no universal GPU/CPU or codegen speed claims."
+  ]
+}
