@@ -1,0 +1,339 @@
+{
+  "campaign": "S3_V18_COMPILER_AUTOGUARD_SELECTIVE_LOOP_SUMMARY",
+  "decision": "GO_EXPERIMENTAL_NOT_PRODUCTION",
+  "physical_machines": 1,
+  "process_sessions": 3,
+  "rounds_per_case_session": 9,
+  "total_case_session_ratios": 63,
+  "favorable_observations": 57,
+  "regression_observations": 6,
+  "median_of_all_ratios": 1.069535,
+  "negative_observations": [
+    {
+      "session": "s3",
+      "width": 31,
+      "height": 64,
+      "speedup": 0.979121
+    },
+    {
+      "session": "s3",
+      "width": 31,
+      "height": 256,
+      "speedup": 0.947066
+    },
+    {
+      "session": "s3",
+      "width": 64,
+      "height": 64,
+      "speedup": 0.953608
+    },
+    {
+      "session": "s1",
+      "width": 64,
+      "height": 256,
+      "speedup": 0.926666
+    },
+    {
+      "session": "s1",
+      "width": 64,
+      "height": 1024,
+      "speedup": 0.976847
+    },
+    {
+      "session": "s3",
+      "width": 64,
+      "height": 1024,
+      "speedup": 0.860465
+    }
+  ],
+  "cases": [
+    {
+      "width": 3,
+      "height": 64,
+      "median_session_speedup": 1.092664,
+      "min_session_speedup": 1.073786,
+      "max_session_speedup": 1.103448,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.103448,
+        1.073786,
+        1.092664
+      ]
+    },
+    {
+      "width": 3,
+      "height": 256,
+      "median_session_speedup": 1.078374,
+      "min_session_speedup": 1.078042,
+      "max_session_speedup": 1.078896,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.078042,
+        1.078896,
+        1.078374
+      ]
+    },
+    {
+      "width": 3,
+      "height": 1024,
+      "median_session_speedup": 1.0706,
+      "min_session_speedup": 1.067464,
+      "max_session_speedup": 1.080348,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.080348,
+        1.0706,
+        1.067464
+      ]
+    },
+    {
+      "width": 5,
+      "height": 64,
+      "median_session_speedup": 1.08727,
+      "min_session_speedup": 1.083401,
+      "max_session_speedup": 1.096484,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.096484,
+        1.083401,
+        1.08727
+      ]
+    },
+    {
+      "width": 5,
+      "height": 256,
+      "median_session_speedup": 1.088638,
+      "min_session_speedup": 1.057878,
+      "max_session_speedup": 1.091424,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.091424,
+        1.057878,
+        1.088638
+      ]
+    },
+    {
+      "width": 5,
+      "height": 1024,
+      "median_session_speedup": 1.089214,
+      "min_session_speedup": 1.087621,
+      "max_session_speedup": 1.096053,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.096053,
+        1.087621,
+        1.089214
+      ]
+    },
+    {
+      "width": 8,
+      "height": 64,
+      "median_session_speedup": 1.068742,
+      "min_session_speedup": 1.035074,
+      "max_session_speedup": 1.075375,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.068742,
+        1.035074,
+        1.075375
+      ]
+    },
+    {
+      "width": 8,
+      "height": 256,
+      "median_session_speedup": 1.072727,
+      "min_session_speedup": 1.027324,
+      "max_session_speedup": 1.075712,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.075712,
+        1.027324,
+        1.072727
+      ]
+    },
+    {
+      "width": 8,
+      "height": 1024,
+      "median_session_speedup": 1.067614,
+      "min_session_speedup": 1.059838,
+      "max_session_speedup": 1.187092,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.067614,
+        1.059838,
+        1.187092
+      ]
+    },
+    {
+      "width": 16,
+      "height": 64,
+      "median_session_speedup": 1.066103,
+      "min_session_speedup": 1.064615,
+      "max_session_speedup": 1.069284,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.064615,
+        1.069284,
+        1.066103
+      ]
+    },
+    {
+      "width": 16,
+      "height": 256,
+      "median_session_speedup": 1.077227,
+      "min_session_speedup": 1.054738,
+      "max_session_speedup": 1.078808,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.054738,
+        1.077227,
+        1.078808
+      ]
+    },
+    {
+      "width": 16,
+      "height": 1024,
+      "median_session_speedup": 1.022678,
+      "min_session_speedup": 1.020023,
+      "max_session_speedup": 1.070704,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.070704,
+        1.022678,
+        1.020023
+      ]
+    },
+    {
+      "width": 31,
+      "height": 64,
+      "median_session_speedup": 1.070668,
+      "min_session_speedup": 0.979121,
+      "max_session_speedup": 1.092082,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.070668,
+        1.092082,
+        0.979121
+      ]
+    },
+    {
+      "width": 31,
+      "height": 256,
+      "median_session_speedup": 1.028162,
+      "min_session_speedup": 0.947066,
+      "max_session_speedup": 1.049324,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.028162,
+        1.049324,
+        0.947066
+      ]
+    },
+    {
+      "width": 31,
+      "height": 1024,
+      "median_session_speedup": 1.057091,
+      "min_session_speedup": 1.021982,
+      "max_session_speedup": 1.069535,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.069535,
+        1.021982,
+        1.057091
+      ]
+    },
+    {
+      "width": 48,
+      "height": 64,
+      "median_session_speedup": 1.043933,
+      "min_session_speedup": 1.037659,
+      "max_session_speedup": 1.067135,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.067135,
+        1.043933,
+        1.037659
+      ]
+    },
+    {
+      "width": 48,
+      "height": 256,
+      "median_session_speedup": 1.03761,
+      "min_session_speedup": 1.017285,
+      "max_session_speedup": 1.097329,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.097329,
+        1.03761,
+        1.017285
+      ]
+    },
+    {
+      "width": 48,
+      "height": 1024,
+      "median_session_speedup": 1.069802,
+      "min_session_speedup": 1.063674,
+      "max_session_speedup": 1.07131,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.063674,
+        1.07131,
+        1.069802
+      ]
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "median_session_speedup": 1.035256,
+      "min_session_speedup": 0.953608,
+      "max_session_speedup": 1.161526,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        1.035256,
+        1.161526,
+        0.953608
+      ]
+    },
+    {
+      "width": 64,
+      "height": 256,
+      "median_session_speedup": 1.174678,
+      "min_session_speedup": 0.926666,
+      "max_session_speedup": 1.179788,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        0.926666,
+        1.174678,
+        1.179788
+      ]
+    },
+    {
+      "width": 64,
+      "height": 1024,
+      "median_session_speedup": 0.976847,
+      "min_session_speedup": 0.860465,
+      "max_session_speedup": 1.063306,
+      "all_independent_reference_parity": true,
+      "by_session": [
+        0.976847,
+        1.063306,
+        0.860465
+      ]
+    }
+  ],
+  "source_sha256": "d19b3fc38f041c1754ce88792b0fe5a1ab59c4df58331b890d42cba8449eb5cf",
+  "baseline_assembly_bytes": 125953,
+  "initial_whole_function_assembly_bytes": 203450,
+  "final_selective_loop_assembly_bytes": 140302,
+  "initial_whole_function_vs_baseline_percent": 61.529,
+  "selective_loop_vs_baseline_percent": 11.392,
+  "selective_loop_vs_whole_function_percent": -31.039,
+  "hp03_one_session_parity": true,
+  "hp03_is_multi_host_qualification": false,
+  "limitations": [
+    "Only one WSL Linux x86-64 machine. Timings sensitive to host load.",
+    "V18 clones outer loop rather than whole function when safe; still larger than baseline.",
+    "No real CPU PMU or production auto-enable based on these numbers.",
+    "Initial whole-function baseline preserved for negative design evidence."
+  ]
+}

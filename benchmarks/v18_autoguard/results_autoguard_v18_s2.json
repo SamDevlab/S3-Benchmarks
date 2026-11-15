@@ -1,0 +1,569 @@
+{
+  "campaign": "S3_V18_COMPILER_GENERATED_GUARD_FAST_SLOW_NATIVE_AB",
+  "decision": "GO_EXPERIMENTAL_NOT_PRODUCTION",
+  "session": "s2",
+  "host_os": "Linux",
+  "host_arch": "x86_64",
+  "same_assembly_ir": true,
+  "source_sha256": "d19b3fc38f041c1754ce88792b0fe5a1ab59c4df58331b890d42cba8449eb5cf",
+  "original_source_contains_user_width_guard": false,
+  "compiler_generated_guard": true,
+  "compiler_slow_fallback_original_cfg": true,
+  "experimental_v18_default": false,
+  "hp03_enabled": false,
+  "c_role": "INDEPENDENT_CORRECTNESS_ORACLE_AND_TIMING_DRIVER",
+  "gcc_role": "ASSEMBLY_LINK_ONLY",
+  "backend_baseline": "S3 O1 native x86 V18 OFF",
+  "backend_candidate": "S3 O1 native x86 V18 ON",
+  "proofs": {
+    "auto_neighbor": {
+      "generated_guard": true,
+      "cloned_fast_blocks": 1,
+      "retained_slow_blocks": 1,
+      "eliminated_fast_bounds": 6,
+      "fallback_bounds_eliminated": 0,
+      "guarded_width_register": 2,
+      "witness_records": [
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 24,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 27,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 30,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 33,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 36,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "entry__v18_autoguard_fast",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 39,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_entry",
+            "entry__v18_autoguard_fast"
+          ]
+        }
+      ],
+      "refusal_reason": ""
+    },
+    "auto_stencil": {
+      "generated_guard": true,
+      "cloned_fast_blocks": 7,
+      "retained_slow_blocks": 11,
+      "eliminated_fast_bounds": 6,
+      "fallback_bounds_eliminated": 0,
+      "guarded_width_register": 2,
+      "witness_records": [
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 28,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 30,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 32,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 34,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 36,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        },
+        {
+          "block": "while_body_10__v18_autoguard_fast",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 38,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "__v18_autoguard_preheader",
+            "while_condition_0__v18_autoguard_fast"
+          ]
+        }
+      ],
+      "refusal_reason": ""
+    }
+  },
+  "cold_compile_ms": {
+    "frontend": 35.426,
+    "baseline_native_codegen": 34.658,
+    "v18_native_codegen": 53.048,
+    "gcc_baseline": 91.743,
+    "gcc_v18": 94.771
+  },
+  "assembly_bytes": {
+    "baseline": 125953,
+    "v18": 140302
+  },
+  "asm_hashes": {
+    "baseline": "8999cd653296d6c66c876a53ec8177d7baf263910ff67af24f5350b25198cf13",
+    "v18": "db06a5796b07ab6e414548fd3211fce034db6d466c95a862d2e0301a6d6ab105"
+  },
+  "native_static_profile": {
+    "baseline": {
+      "library_bytes": 59584,
+      "hot": {
+        "auto_neighbor": {
+          "static_instructions": 191,
+          "static_conditional_branches": 68,
+          "static_calls": 0
+        },
+        "auto_stencil": {
+          "static_instructions": 517,
+          "static_conditional_branches": 162,
+          "static_calls": 0
+        }
+      },
+      "static_not_cpu_pmu": true
+    },
+    "v18": {
+      "library_bytes": 59584,
+      "hot": {
+        "auto_neighbor": {
+          "static_instructions": 342,
+          "static_conditional_branches": 129,
+          "static_calls": 0
+        },
+        "auto_stencil": {
+          "static_instructions": 918,
+          "static_conditional_branches": 292,
+          "static_calls": 0
+        }
+      },
+      "static_not_cpu_pmu": true
+    }
+  },
+  "benchmark": {
+    "cases": [
+      {
+        "width": 3,
+        "height": 64,
+        "expected": 2970,
+        "parity": true,
+        "baseline_ns": 553.0,
+        "v18_ns": 515.0,
+        "speedup": 1.073786
+      },
+      {
+        "width": 3,
+        "height": 256,
+        "expected": 12186,
+        "parity": true,
+        "baseline_ns": 2229.0,
+        "v18_ns": 2066.0,
+        "speedup": 1.078896
+      },
+      {
+        "width": 3,
+        "height": 1024,
+        "expected": 49058,
+        "parity": true,
+        "baseline_ns": 8856.0,
+        "v18_ns": 8272.0,
+        "speedup": 1.0706
+      },
+      {
+        "width": 5,
+        "height": 64,
+        "expected": 8912,
+        "parity": true,
+        "baseline_ns": 1325.0,
+        "v18_ns": 1223.0,
+        "speedup": 1.083401
+      },
+      {
+        "width": 5,
+        "height": 256,
+        "expected": 36561,
+        "parity": true,
+        "baseline_ns": 5264.0,
+        "v18_ns": 4976.0,
+        "speedup": 1.057878
+      },
+      {
+        "width": 5,
+        "height": 1024,
+        "expected": 147158,
+        "parity": true,
+        "baseline_ns": 21648.0,
+        "v18_ns": 19904.0,
+        "speedup": 1.087621
+      },
+      {
+        "width": 8,
+        "height": 64,
+        "expected": 17856,
+        "parity": true,
+        "baseline_ns": 2656.0,
+        "v18_ns": 2566.0,
+        "speedup": 1.035074
+      },
+      {
+        "width": 8,
+        "height": 256,
+        "expected": 73157,
+        "parity": true,
+        "baseline_ns": 10828.0,
+        "v18_ns": 10540.0,
+        "speedup": 1.027324
+      },
+      {
+        "width": 8,
+        "height": 1024,
+        "expected": 294346,
+        "parity": true,
+        "baseline_ns": 40560.0,
+        "v18_ns": 38270.0,
+        "speedup": 1.059838
+      },
+      {
+        "width": 16,
+        "height": 64,
+        "expected": 41658,
+        "parity": true,
+        "baseline_ns": 5556.0,
+        "v18_ns": 5196.0,
+        "speedup": 1.069284
+      },
+      {
+        "width": 16,
+        "height": 256,
+        "expected": 170682,
+        "parity": true,
+        "baseline_ns": 22876.0,
+        "v18_ns": 21236.0,
+        "speedup": 1.077227
+      },
+      {
+        "width": 16,
+        "height": 1024,
+        "expected": 686786,
+        "parity": true,
+        "baseline_ns": 98310.0,
+        "v18_ns": 96130.0,
+        "speedup": 1.022678
+      },
+      {
+        "width": 31,
+        "height": 64,
+        "expected": 86288,
+        "parity": true,
+        "baseline_ns": 12524.0,
+        "v18_ns": 11468.0,
+        "speedup": 1.092082
+      },
+      {
+        "width": 31,
+        "height": 256,
+        "expected": 353553,
+        "parity": true,
+        "baseline_ns": 49016.0,
+        "v18_ns": 46712.0,
+        "speedup": 1.049324
+      },
+      {
+        "width": 31,
+        "height": 1024,
+        "expected": 1422614,
+        "parity": true,
+        "baseline_ns": 210766.667,
+        "v18_ns": 206233.333,
+        "speedup": 1.021982
+      },
+      {
+        "width": 48,
+        "height": 64,
+        "expected": 136881,
+        "parity": true,
+        "baseline_ns": 19960.0,
+        "v18_ns": 19120.0,
+        "speedup": 1.043933
+      },
+      {
+        "width": 48,
+        "height": 256,
+        "expected": 560811,
+        "parity": true,
+        "baseline_ns": 81110.0,
+        "v18_ns": 78170.0,
+        "speedup": 1.03761
+      },
+      {
+        "width": 48,
+        "height": 1024,
+        "expected": 2256556,
+        "parity": true,
+        "baseline_ns": 300466.667,
+        "v18_ns": 280466.667,
+        "speedup": 1.07131
+      },
+      {
+        "width": 64,
+        "height": 64,
+        "expected": 184560,
+        "parity": true,
+        "baseline_ns": 29224.0,
+        "v18_ns": 25160.0,
+        "speedup": 1.161526
+      },
+      {
+        "width": 64,
+        "height": 256,
+        "expected": 755928,
+        "parity": true,
+        "baseline_ns": 109480.0,
+        "v18_ns": 93200.0,
+        "speedup": 1.174678
+      },
+      {
+        "width": 64,
+        "height": 1024,
+        "expected": 3041512,
+        "parity": true,
+        "baseline_ns": 404233.333,
+        "v18_ns": 380166.667,
+        "speedup": 1.063306
+      }
+    ],
+    "rounds": 9,
+    "sink": 0
+  },
+  "limitations": [
+    "One physical host with WSL x86-64. Three process sessions do not mean three machines.",
+    "GCC only assembles and links S3-produced code, it does not implement the stencil.",
+    "Original slow CFG retained in compiler IR. Auto guard is cheap nontrapping >=3.",
+    "V18 duplicates whole CFG, not just loop; code size may increase considerably.",
+    "No universal speed gain, green GitHub CI or production dispatch claim."
+  ]
+}
