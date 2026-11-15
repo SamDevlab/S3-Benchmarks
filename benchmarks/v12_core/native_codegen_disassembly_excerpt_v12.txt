@@ -1,0 +1,1458 @@
+### W=16 / S3 backend generated assembly
+FUNCTION s3_gf2_rotl_w / 100 assembly lines
+    1129:	48 ff 05 00 7f 00 00 	inc    QWORD PTR [rip+0x7f00]        # 9030 <__s3_frame_count>
+    1130:	48 81 3d f5 7e 00 00 	cmp    QWORD PTR [rip+0x7ef5],0x400        # 9030 <__s3_frame_count>
+    1137:	00 04 00 00
+    113b:	0f 8f c6 0a 00 00    	jg     1c07 <main+0x78>
+    1141:	55                   	push   rbp
+    1142:	48 89 e5             	mov    rbp,rsp
+    1145:	48 81 ec c0 00 00 00 	sub    rsp,0xc0
+    114c:	4c 89 bd 60 ff ff ff 	mov    QWORD PTR [rbp-0xa0],r15
+    1153:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1157:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    115b:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+    115f:	48 8b 75 f0          	mov    rsi,QWORD PTR [rbp-0x10]
+    1163:	31 c0                	xor    eax,eax
+    1165:	66 89 85 6e ff ff ff 	mov    WORD PTR [rbp-0x92],ax
+    116c:	4c 8b 3d ad 7e 00 00 	mov    r15,QWORD PTR [rip+0x7ead]        # 9020 <__s3_instruction_remaining>
+    1173:	eb 00                	jmp    1175 <s3_gf2_rotl_w+0x4c>
+    1175:	49 ff cf             	dec    r15
+    1178:	0f 88 ae 0a 00 00    	js     1c2c <main+0x9d>
+    117e:	48 89 f8             	mov    rax,rdi
+    1181:	49 89 f2             	mov    r10,rsi
+    1184:	49 89 cb             	mov    r11,rcx
+    1187:	4c 89 d1             	mov    rcx,r10
+    118a:	48 d3 e0             	shl    rax,cl
+    118d:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1194:	41 ba 00 00 00 00    	mov    r10d,0x0
+    119a:	49 0f 45 c2          	cmovne rax,r10
+    119e:	4c 89 d9             	mov    rcx,r11
+    11a1:	48 89 c2             	mov    rdx,rax
+    11a4:	49 ff cf             	dec    r15
+    11a7:	0f 88 90 0a 00 00    	js     1c3d <main+0xae>
+    11ad:	48 c7 c1 00 00 00 00 	mov    rcx,0x0
+    11b4:	49 ff cf             	dec    r15
+    11b7:	0f 88 91 0a 00 00    	js     1c4e <main+0xbf>
+    11bd:	49 89 d2             	mov    r10,rdx
+    11c0:	4c 89 95 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],r10
+    11c7:	c6 85 6f ff ff ff 01 	mov    BYTE PTR [rbp-0x91],0x1
+    11ce:	49 ff cf             	dec    r15
+    11d1:	0f 88 88 0a 00 00    	js     1c5f <main+0xd0>
+    11d7:	48 c7 c2 10 00 00 00 	mov    rdx,0x10
+    11de:	49 ff cf             	dec    r15
+    11e1:	0f 88 89 0a 00 00    	js     1c70 <main+0xe1>
+    11e7:	48 89 d0             	mov    rax,rdx
+    11ea:	49 89 f2             	mov    r10,rsi
+    11ed:	4c 29 d0             	sub    rax,r10
+    11f0:	0f 80 8b 0a 00 00    	jo     1c81 <main+0xf2>
+    11f6:	48 89 c6             	mov    rsi,rax
+    11f9:	49 ff cf             	dec    r15
+    11fc:	0f 88 90 0a 00 00    	js     1c92 <main+0x103>
+    1202:	48 89 f8             	mov    rax,rdi
+    1205:	49 89 f2             	mov    r10,rsi
+    1208:	49 89 cb             	mov    r11,rcx
+    120b:	4c 89 d1             	mov    rcx,r10
+    120e:	48 d3 e8             	shr    rax,cl
+    1211:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1218:	41 ba 00 00 00 00    	mov    r10d,0x0
+    121e:	49 0f 45 c2          	cmovne rax,r10
+    1222:	4c 89 d9             	mov    rcx,r11
+    1225:	48 89 c7             	mov    rdi,rax
+    1228:	49 ff cf             	dec    r15
+    122b:	0f 88 72 0a 00 00    	js     1ca3 <main+0x114>
+    1231:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1238:	49 ff cf             	dec    r15
+    123b:	0f 88 73 0a 00 00    	js     1cb4 <main+0x125>
+    1241:	49 89 fa             	mov    r10,rdi
+    1244:	4c 89 95 70 ff ff ff 	mov    QWORD PTR [rbp-0x90],r10
+    124b:	c6 85 6e ff ff ff 01 	mov    BYTE PTR [rbp-0x92],0x1
+    1252:	49 ff cf             	dec    r15
+    1255:	0f 88 6a 0a 00 00    	js     1cc5 <main+0x136>
+    125b:	48 c7 c7 00 00 00 00 	mov    rdi,0x0
+    1262:	49 ff cf             	dec    r15
+    1265:	0f 88 6b 0a 00 00    	js     1cd6 <main+0x147>
+    126b:	80 bd 6f ff ff ff 00 	cmp    BYTE PTR [rbp-0x91],0x0
+    1272:	0f 84 6f 0a 00 00    	je     1ce7 <main+0x158>
+    1278:	48 8b 85 78 ff ff ff 	mov    rax,QWORD PTR [rbp-0x88]
+    127f:	48 89 c7             	mov    rdi,rax
+    1282:	49 ff cf             	dec    r15
+    1285:	0f 88 6d 0a 00 00    	js     1cf8 <main+0x169>
+    128b:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1292:	49 ff cf             	dec    r15
+    1295:	0f 88 6e 0a 00 00    	js     1d09 <main+0x17a>
+    129b:	80 bd 6e ff ff ff 00 	cmp    BYTE PTR [rbp-0x92],0x0
+    12a2:	0f 84 72 0a 00 00    	je     1d1a <main+0x18b>
+    12a8:	48 8b 85 70 ff ff ff 	mov    rax,QWORD PTR [rbp-0x90]
+    12af:	48 89 c6             	mov    rsi,rax
+    12b2:	49 ff cf             	dec    r15
+    12b5:	0f 88 70 0a 00 00    	js     1d2b <main+0x19c>
+    12bb:	48 31 f7             	xor    rdi,rsi
+    12be:	49 ff cf             	dec    r15
+    12c1:	0f 88 75 0a 00 00    	js     1d3c <main+0x1ad>
+    12c7:	49 ff cf             	dec    r15
+    12ca:	0f 88 7d 0a 00 00    	js     1d4d <main+0x1be>
+    12d0:	48 81 e7 ff ff 00 00 	and    rdi,0xffff
+    12d7:	49 ff cf             	dec    r15
+    12da:	0f 88 7e 0a 00 00    	js     1d5e <main+0x1cf>
+    12e0:	48 89 f8             	mov    rax,rdi
+    12e3:	4c 89 3d 36 7d 00 00 	mov    QWORD PTR [rip+0x7d36],r15        # 9020 <__s3_instruction_remaining>
+    12ea:	4c 8b bd 60 ff ff ff 	mov    r15,QWORD PTR [rbp-0xa0]
+    12f1:	48 ff 0d 38 7d 00 00 	dec    QWORD PTR [rip+0x7d38]        # 9030 <__s3_frame_count>
+    12f8:	c9                   	leave
+    12f9:	c3                   	ret
+FUNCTION s3_gf2_mul_cyclic / 145 assembly lines
+    12fa:	48 ff 05 2f 7d 00 00 	inc    QWORD PTR [rip+0x7d2f]        # 9030 <__s3_frame_count>
+    1301:	48 81 3d 24 7d 00 00 	cmp    QWORD PTR [rip+0x7d24],0x400        # 9030 <__s3_frame_count>
+    1308:	00 04 00 00
+    130c:	0f 8f 5d 0a 00 00    	jg     1d6f <main+0x1e0>
+    1312:	55                   	push   rbp
+    1313:	48 89 e5             	mov    rbp,rsp
+    1316:	48 81 ec 90 01 00 00 	sub    rsp,0x190
+    131d:	48 89 9d a0 fe ff ff 	mov    QWORD PTR [rbp-0x160],rbx
+    1324:	4c 89 a5 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r12
+    132b:	4c 89 ad 90 fe ff ff 	mov    QWORD PTR [rbp-0x170],r13
+    1332:	4c 89 b5 88 fe ff ff 	mov    QWORD PTR [rbp-0x178],r14
+    1339:	4c 89 bd 80 fe ff ff 	mov    QWORD PTR [rbp-0x180],r15
+    1340:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1344:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    1348:	48 8b 5d f8          	mov    rbx,QWORD PTR [rbp-0x8]
+    134c:	4c 8b 65 f0          	mov    r12,QWORD PTR [rbp-0x10]
+    1350:	4c 8b 3d c9 7c 00 00 	mov    r15,QWORD PTR [rip+0x7cc9]        # 9020 <__s3_instruction_remaining>
+    1357:	eb 00                	jmp    1359 <s3_gf2_mul_cyclic+0x5f>
+    1359:	49 ff cf             	dec    r15
+    135c:	0f 88 32 0a 00 00    	js     1d94 <main+0x205>
+    1362:	49 c7 c6 00 00 00 00 	mov    r14,0x0
+    1369:	49 ff cf             	dec    r15
+    136c:	0f 88 33 0a 00 00    	js     1da5 <main+0x216>
+    1372:	49 c7 c5 00 00 00 00 	mov    r13,0x0
+    1379:	49 ff cf             	dec    r15
+    137c:	0f 88 34 0a 00 00    	js     1db6 <main+0x227>
+    1382:	49 ff cf             	dec    r15
+    1385:	0f 88 3c 0a 00 00    	js     1dc7 <main+0x238>
+    138b:	49 ff cf             	dec    r15
+    138e:	0f 88 44 0a 00 00    	js     1dd8 <main+0x249>
+    1394:	49 ff cf             	dec    r15
+    1397:	0f 88 4c 0a 00 00    	js     1de9 <main+0x25a>
+    139d:	eb 00                	jmp    139f <s3_gf2_mul_cyclic+0xa5>
+    139f:	49 83 ff 02          	cmp    r15,0x2
+    13a3:	0f 8c 16 01 00 00    	jl     14bf <s3_gf2_mul_cyclic+0x1c5>
+    13a9:	49 83 ef 02          	sub    r15,0x2
+    13ad:	49 83 fd 10          	cmp    r13,0x10
+    13b1:	7c 05                	jl     13b8 <s3_gf2_mul_cyclic+0xbe>
+    13b3:	e9 96 00 00 00       	jmp    144e <s3_gf2_mul_cyclic+0x154>
+    13b8:	49 83 ff 03          	cmp    r15,0x3
+    13bc:	0f 8c 1e 01 00 00    	jl     14e0 <s3_gf2_mul_cyclic+0x1e6>
+    13c2:	49 83 ef 03          	sub    r15,0x3
+    13c6:	48 89 d8             	mov    rax,rbx
+    13c9:	4d 89 ea             	mov    r10,r13
+    13cc:	49 89 cb             	mov    r11,rcx
+    13cf:	4c 89 d1             	mov    rcx,r10
+    13d2:	48 d3 e8             	shr    rax,cl
+    13d5:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    13dc:	41 ba 00 00 00 00    	mov    r10d,0x0
+    13e2:	49 0f 45 c2          	cmovne rax,r10
+    13e6:	4c 89 d9             	mov    rcx,r11
+    13e9:	48 89 c7             	mov    rdi,rax
+    13ec:	48 83 e7 01          	and    rdi,0x1
+    13f0:	4c 89 3d 29 7c 00 00 	mov    QWORD PTR [rip+0x7c29],r15        # 9020 <__s3_instruction_remaining>
+    13f7:	4c 89 65 f0          	mov    QWORD PTR [rbp-0x10],r12
+    13fb:	4c 89 ad e0 fe ff ff 	mov    QWORD PTR [rbp-0x120],r13
+    1402:	48 89 bd 78 fe ff ff 	mov    QWORD PTR [rbp-0x188],rdi
+    1409:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+    140d:	48 8b b5 e0 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x120]
+    1414:	e8 37 fc ff ff       	call   1050 <s3_gf2_rotl_w@plt>
+    1419:	48 8b bd 78 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x188]
+    1420:	48 89 c6             	mov    rsi,rax
+    1423:	4c 8b 3d f6 7b 00 00 	mov    r15,QWORD PTR [rip+0x7bf6]        # 9020 <__s3_instruction_remaining>
+    142a:	49 83 ff 05          	cmp    r15,0x5
+    142e:	0f 8c 30 01 00 00    	jl     1564 <s3_gf2_mul_cyclic+0x26a>
+    1434:	49 83 ef 05          	sub    r15,0x5
+    1438:	48 0f af fe          	imul   rdi,rsi
+    143c:	0f 80 0d 0a 00 00    	jo     1e4f <main+0x2c0>
+    1442:	49 31 fe             	xor    r14,rdi
+    1445:	49 83 c5 01          	add    r13,0x1
+    1449:	e9 51 ff ff ff       	jmp    139f <s3_gf2_mul_cyclic+0xa5>
+    144e:	49 ff cf             	dec    r15
+    1451:	0f 88 6f 0a 00 00    	js     1ec6 <main+0x337>
+    1457:	eb 0b                	jmp    1464 <s3_gf2_mul_cyclic+0x16a>
+    1459:	49 ff cf             	dec    r15
+    145c:	0f 88 75 0a 00 00    	js     1ed7 <main+0x348>
+    1462:	eb 00                	jmp    1464 <s3_gf2_mul_cyclic+0x16a>
+    1464:	49 ff cf             	dec    r15
+    1467:	0f 88 7b 0a 00 00    	js     1ee8 <main+0x359>
+    146d:	49 ff cf             	dec    r15
+    1470:	0f 88 83 0a 00 00    	js     1ef9 <main+0x36a>
+    1476:	4c 89 f7             	mov    rdi,r14
+    1479:	48 81 e7 ff ff 00 00 	and    rdi,0xffff
+    1480:	49 ff cf             	dec    r15
+    1483:	0f 88 81 0a 00 00    	js     1f0a <main+0x37b>
+    1489:	48 89 f8             	mov    rax,rdi
+    148c:	4c 89 3d 8d 7b 00 00 	mov    QWORD PTR [rip+0x7b8d],r15        # 9020 <__s3_instruction_remaining>
+    1493:	48 8b 9d a0 fe ff ff 	mov    rbx,QWORD PTR [rbp-0x160]
+    149a:	4c 8b a5 98 fe ff ff 	mov    r12,QWORD PTR [rbp-0x168]
+    14a1:	4c 8b ad 90 fe ff ff 	mov    r13,QWORD PTR [rbp-0x170]
+    14a8:	4c 8b b5 88 fe ff ff 	mov    r14,QWORD PTR [rbp-0x178]
+    14af:	4c 8b bd 80 fe ff ff 	mov    r15,QWORD PTR [rbp-0x180]
+    14b6:	48 ff 0d 73 7b 00 00 	dec    QWORD PTR [rip+0x7b73]        # 9030 <__s3_frame_count>
+    14bd:	c9                   	leave
+    14be:	c3                   	ret
+    14bf:	49 ff cf             	dec    r15
+    14c2:	0f 88 32 09 00 00    	js     1dfa <main+0x26b>
+    14c8:	49 ff cf             	dec    r15
+    14cb:	0f 88 3a 09 00 00    	js     1e0b <main+0x27c>
+    14d1:	49 83 fd 10          	cmp    r13,0x10
+    14d5:	0f 8c dd fe ff ff    	jl     13b8 <s3_gf2_mul_cyclic+0xbe>
+    14db:	e9 6e ff ff ff       	jmp    144e <s3_gf2_mul_cyclic+0x154>
+    14e0:	49 ff cf             	dec    r15
+    14e3:	0f 88 33 09 00 00    	js     1e1c <main+0x28d>
+    14e9:	48 89 d8             	mov    rax,rbx
+    14ec:	4d 89 ea             	mov    r10,r13
+    14ef:	49 89 cb             	mov    r11,rcx
+    14f2:	4c 89 d1             	mov    rcx,r10
+    14f5:	48 d3 e8             	shr    rax,cl
+    14f8:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    14ff:	41 ba 00 00 00 00    	mov    r10d,0x0
+    1505:	49 0f 45 c2          	cmovne rax,r10
+    1509:	4c 89 d9             	mov    rcx,r11
+    150c:	48 89 c7             	mov    rdi,rax
+    150f:	49 ff cf             	dec    r15
+    1512:	0f 88 15 09 00 00    	js     1e2d <main+0x29e>
+    1518:	48 83 e7 01          	and    rdi,0x1
+    151c:	49 ff cf             	dec    r15
+    151f:	0f 88 19 09 00 00    	js     1e3e <main+0x2af>
+    1525:	4c 89 3d f4 7a 00 00 	mov    QWORD PTR [rip+0x7af4],r15        # 9020 <__s3_instruction_remaining>
+    152c:	4c 89 65 f0          	mov    QWORD PTR [rbp-0x10],r12
+    1530:	4c 89 ad e0 fe ff ff 	mov    QWORD PTR [rbp-0x120],r13
+    1537:	48 89 bd 78 fe ff ff 	mov    QWORD PTR [rbp-0x188],rdi
+    153e:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+    1542:	48 8b b5 e0 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x120]
+    1549:	e8 02 fb ff ff       	call   1050 <s3_gf2_rotl_w@plt>
+    154e:	48 8b bd 78 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x188]
+    1555:	48 89 c6             	mov    rsi,rax
+    1558:	4c 8b 3d c1 7a 00 00 	mov    r15,QWORD PTR [rip+0x7ac1]        # 9020 <__s3_instruction_remaining>
+    155f:	e9 c6 fe ff ff       	jmp    142a <s3_gf2_mul_cyclic+0x130>
+    1564:	49 ff cf             	dec    r15
+    1567:	0f 88 04 09 00 00    	js     1e71 <main+0x2e2>
+    156d:	48 0f af fe          	imul   rdi,rsi
+    1571:	0f 80 d8 08 00 00    	jo     1e4f <main+0x2c0>
+    1577:	49 ff cf             	dec    r15
+    157a:	0f 88 02 09 00 00    	js     1e82 <main+0x2f3>
+    1580:	49 31 fe             	xor    r14,rdi
+    1583:	49 ff cf             	dec    r15
+    1586:	0f 88 07 09 00 00    	js     1e93 <main+0x304>
+    158c:	49 ff cf             	dec    r15
+    158f:	0f 88 0f 09 00 00    	js     1ea4 <main+0x315>
+    1595:	49 83 c5 01          	add    r13,0x1
+    1599:	49 ff cf             	dec    r15
+    159c:	0f 88 13 09 00 00    	js     1eb5 <main+0x326>
+    15a2:	e9 f8 fd ff ff       	jmp    139f <s3_gf2_mul_cyclic+0xa5>
+FUNCTION s3_gf2_square_cyclic / 182 assembly lines
+    15a7:	48 ff 05 82 7a 00 00 	inc    QWORD PTR [rip+0x7a82]        # 9030 <__s3_frame_count>
+    15ae:	48 81 3d 77 7a 00 00 	cmp    QWORD PTR [rip+0x7a77],0x400        # 9030 <__s3_frame_count>
+    15b5:	00 04 00 00
+    15b9:	0f 8f 5c 09 00 00    	jg     1f1b <main+0x38c>
+    15bf:	55                   	push   rbp
+    15c0:	48 89 e5             	mov    rbp,rsp
+    15c3:	48 81 ec e0 01 00 00 	sub    rsp,0x1e0
+    15ca:	4c 89 bd 58 fe ff ff 	mov    QWORD PTR [rbp-0x1a8],r15
+    15d1:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    15d5:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+    15d9:	4c 8b 3d 40 7a 00 00 	mov    r15,QWORD PTR [rip+0x7a40]        # 9020 <__s3_instruction_remaining>
+    15e0:	eb 00                	jmp    15e2 <s3_gf2_square_cyclic+0x3b>
+    15e2:	49 ff cf             	dec    r15
+    15e5:	0f 88 55 09 00 00    	js     1f40 <main+0x3b1>
+    15eb:	48 c7 c2 00 00 00 00 	mov    rdx,0x0
+    15f2:	49 ff cf             	dec    r15
+    15f5:	0f 88 56 09 00 00    	js     1f51 <main+0x3c2>
+    15fb:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1602:	49 ff cf             	dec    r15
+    1605:	0f 88 57 09 00 00    	js     1f62 <main+0x3d3>
+    160b:	49 ff cf             	dec    r15
+    160e:	0f 88 5f 09 00 00    	js     1f73 <main+0x3e4>
+    1614:	49 ff cf             	dec    r15
+    1617:	0f 88 67 09 00 00    	js     1f84 <main+0x3f5>
+    161d:	49 ff cf             	dec    r15
+    1620:	0f 88 6f 09 00 00    	js     1f95 <main+0x406>
+    1626:	49 ff cf             	dec    r15
+    1629:	0f 88 77 09 00 00    	js     1fa6 <main+0x417>
+    162f:	49 ff cf             	dec    r15
+    1632:	0f 88 7f 09 00 00    	js     1fb7 <main+0x428>
+    1638:	eb 00                	jmp    163a <s3_gf2_square_cyclic+0x93>
+    163a:	49 83 ff 02          	cmp    r15,0x2
+    163e:	0f 8c 3b 01 00 00    	jl     177f <s3_gf2_square_cyclic+0x1d8>
+    1644:	49 83 ef 02          	sub    r15,0x2
+    1648:	48 83 fe 10          	cmp    rsi,0x10
+    164c:	7c 02                	jl     1650 <s3_gf2_square_cyclic+0xa9>
+    164e:	eb 4c                	jmp    169c <s3_gf2_square_cyclic+0xf5>
+    1650:	49 83 ff 04          	cmp    r15,0x4
+    1654:	0f 8c 46 01 00 00    	jl     17a0 <s3_gf2_square_cyclic+0x1f9>
+    165a:	49 83 ef 04          	sub    r15,0x4
+    165e:	48 89 f8             	mov    rax,rdi
+    1661:	49 89 f2             	mov    r10,rsi
+    1664:	49 89 cb             	mov    r11,rcx
+    1667:	4c 89 d1             	mov    rcx,r10
+    166a:	48 d3 e8             	shr    rax,cl
+    166d:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1674:	41 ba 00 00 00 00    	mov    r10d,0x0
+    167a:	49 0f 45 c2          	cmovne rax,r10
+    167e:	4c 89 d9             	mov    rcx,r11
+    1681:	48 89 c1             	mov    rcx,rax
+    1684:	48 83 e1 01          	and    rcx,0x1
+    1688:	48 89 f0             	mov    rax,rsi
+    168b:	49 89 f2             	mov    r10,rsi
+    168e:	4c 01 d0             	add    rax,r10
+    1691:	0f 80 53 09 00 00    	jo     1fea <main+0x45b>
+    1697:	49 89 c1             	mov    r9,rax
+    169a:	eb 55                	jmp    16f1 <s3_gf2_square_cyclic+0x14a>
+    169c:	49 ff cf             	dec    r15
+    169f:	0f 88 9a 09 00 00    	js     203f <main+0x4b0>
+    16a5:	eb 0b                	jmp    16b2 <s3_gf2_square_cyclic+0x10b>
+    16a7:	49 ff cf             	dec    r15
+    16aa:	0f 88 a0 09 00 00    	js     2050 <main+0x4c1>
+    16b0:	eb 00                	jmp    16b2 <s3_gf2_square_cyclic+0x10b>
+    16b2:	49 ff cf             	dec    r15
+    16b5:	0f 88 a6 09 00 00    	js     2061 <main+0x4d2>
+    16bb:	49 ff cf             	dec    r15
+    16be:	0f 88 ae 09 00 00    	js     2072 <main+0x4e3>
+    16c4:	48 89 d7             	mov    rdi,rdx
+    16c7:	48 81 e7 ff ff 00 00 	and    rdi,0xffff
+    16ce:	49 ff cf             	dec    r15
+    16d1:	0f 88 ac 09 00 00    	js     2083 <main+0x4f4>
+    16d7:	48 89 f8             	mov    rax,rdi
+    16da:	4c 89 3d 3f 79 00 00 	mov    QWORD PTR [rip+0x793f],r15        # 9020 <__s3_instruction_remaining>
+    16e1:	4c 8b bd 58 fe ff ff 	mov    r15,QWORD PTR [rbp-0x1a8]
+    16e8:	48 ff 0d 41 79 00 00 	dec    QWORD PTR [rip+0x7941]        # 9030 <__s3_frame_count>
+    16ef:	c9                   	leave
+    16f0:	c3                   	ret
+    16f1:	49 83 ff 02          	cmp    r15,0x2
+    16f5:	0f 8c 0a 01 00 00    	jl     1805 <s3_gf2_square_cyclic+0x25e>
+    16fb:	49 83 ef 02          	sub    r15,0x2
+    16ff:	49 83 f9 10          	cmp    r9,0x10
+    1703:	7c 1e                	jl     1723 <s3_gf2_square_cyclic+0x17c>
+    1705:	49 83 ff 04          	cmp    r15,0x4
+    1709:	0f 8c 17 01 00 00    	jl     1826 <s3_gf2_square_cyclic+0x27f>
+    170f:	49 83 ef 04          	sub    r15,0x4
+    1713:	49 83 e9 10          	sub    r9,0x10
+    1717:	0f 80 99 09 00 00    	jo     20b6 <main+0x527>
+    171d:	49 83 f9 10          	cmp    r9,0x10
+    1721:	7d e2                	jge    1705 <s3_gf2_square_cyclic+0x15e>
+    1723:	49 ff cf             	dec    r15
+    1726:	0f 88 bd 09 00 00    	js     20e9 <main+0x55a>
+    172c:	eb 0b                	jmp    1739 <s3_gf2_square_cyclic+0x192>
+    172e:	49 ff cf             	dec    r15
+    1731:	0f 88 c3 09 00 00    	js     20fa <main+0x56b>
+    1737:	eb 00                	jmp    1739 <s3_gf2_square_cyclic+0x192>
+    1739:	49 83 ff 05          	cmp    r15,0x5
+    173d:	0f 8c 04 01 00 00    	jl     1847 <s3_gf2_square_cyclic+0x2a0>
+    1743:	49 83 ef 05          	sub    r15,0x5
+    1747:	48 89 c8             	mov    rax,rcx
+    174a:	4d 89 ca             	mov    r10,r9
+    174d:	49 89 cb             	mov    r11,rcx
+    1750:	4c 89 d1             	mov    rcx,r10
+    1753:	48 d3 e0             	shl    rax,cl
+    1756:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    175d:	41 ba 00 00 00 00    	mov    r10d,0x0
+    1763:	49 0f 45 c2          	cmovne rax,r10
+    1767:	4c 89 d9             	mov    rcx,r11
+    176a:	48 89 c1             	mov    rcx,rax
+    176d:	48 31 ca             	xor    rdx,rcx
+    1770:	48 83 c6 01          	add    rsi,0x1
+    1774:	0f 80 91 09 00 00    	jo     210b <main+0x57c>
+    177a:	e9 bb fe ff ff       	jmp    163a <s3_gf2_square_cyclic+0x93>
+    177f:	49 ff cf             	dec    r15
+    1782:	0f 88 40 08 00 00    	js     1fc8 <main+0x439>
+    1788:	49 ff cf             	dec    r15
+    178b:	0f 88 48 08 00 00    	js     1fd9 <main+0x44a>
+    1791:	48 83 fe 10          	cmp    rsi,0x10
+    1795:	0f 8c b5 fe ff ff    	jl     1650 <s3_gf2_square_cyclic+0xa9>
+    179b:	e9 fc fe ff ff       	jmp    169c <s3_gf2_square_cyclic+0xf5>
+    17a0:	49 ff cf             	dec    r15
+    17a3:	0f 88 52 08 00 00    	js     1ffb <main+0x46c>
+    17a9:	48 89 f8             	mov    rax,rdi
+    17ac:	49 89 f2             	mov    r10,rsi
+    17af:	49 89 cb             	mov    r11,rcx
+    17b2:	4c 89 d1             	mov    rcx,r10
+    17b5:	48 d3 e8             	shr    rax,cl
+    17b8:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    17bf:	41 ba 00 00 00 00    	mov    r10d,0x0
+    17c5:	49 0f 45 c2          	cmovne rax,r10
+    17c9:	4c 89 d9             	mov    rcx,r11
+    17cc:	48 89 c1             	mov    rcx,rax
+    17cf:	49 ff cf             	dec    r15
+    17d2:	0f 88 34 08 00 00    	js     200c <main+0x47d>
+    17d8:	48 83 e1 01          	and    rcx,0x1
+    17dc:	49 ff cf             	dec    r15
+    17df:	0f 88 38 08 00 00    	js     201d <main+0x48e>
+    17e5:	48 89 f0             	mov    rax,rsi
+    17e8:	49 89 f2             	mov    r10,rsi
+    17eb:	4c 01 d0             	add    rax,r10
+    17ee:	0f 80 f6 07 00 00    	jo     1fea <main+0x45b>
+    17f4:	49 89 c1             	mov    r9,rax
+    17f7:	49 ff cf             	dec    r15
+    17fa:	0f 88 2e 08 00 00    	js     202e <main+0x49f>
+    1800:	e9 ec fe ff ff       	jmp    16f1 <s3_gf2_square_cyclic+0x14a>
+    1805:	49 ff cf             	dec    r15
+    1808:	0f 88 86 08 00 00    	js     2094 <main+0x505>
+    180e:	49 ff cf             	dec    r15
+    1811:	0f 88 8e 08 00 00    	js     20a5 <main+0x516>
+    1817:	49 83 f9 10          	cmp    r9,0x10
+    181b:	0f 8d e4 fe ff ff    	jge    1705 <s3_gf2_square_cyclic+0x15e>
+    1821:	e9 fd fe ff ff       	jmp    1723 <s3_gf2_square_cyclic+0x17c>
+    1826:	49 ff cf             	dec    r15
+    1829:	0f 88 98 08 00 00    	js     20c7 <main+0x538>
+    182f:	49 83 e9 10          	sub    r9,0x10
+    1833:	0f 80 7d 08 00 00    	jo     20b6 <main+0x527>
+    1839:	49 ff cf             	dec    r15
+    183c:	0f 88 96 08 00 00    	js     20d8 <main+0x549>
+    1842:	e9 aa fe ff ff       	jmp    16f1 <s3_gf2_square_cyclic+0x14a>
+    1847:	49 ff cf             	dec    r15
+    184a:	0f 88 cc 08 00 00    	js     211c <main+0x58d>
+    1850:	48 89 c8             	mov    rax,rcx
+    1853:	4d 89 ca             	mov    r10,r9
+    1856:	49 89 cb             	mov    r11,rcx
+    1859:	4c 89 d1             	mov    rcx,r10
+    185c:	48 d3 e0             	shl    rax,cl
+    185f:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1866:	41 ba 00 00 00 00    	mov    r10d,0x0
+    186c:	49 0f 45 c2          	cmovne rax,r10
+    1870:	4c 89 d9             	mov    rcx,r11
+    1873:	48 89 c1             	mov    rcx,rax
+    1876:	49 ff cf             	dec    r15
+    1879:	0f 88 ae 08 00 00    	js     212d <main+0x59e>
+    187f:	48 31 ca             	xor    rdx,rcx
+    1882:	49 ff cf             	dec    r15
+    1885:	0f 88 b3 08 00 00    	js     213e <main+0x5af>
+    188b:	49 ff cf             	dec    r15
+    188e:	0f 88 bb 08 00 00    	js     214f <main+0x5c0>
+    1894:	48 83 c6 01          	add    rsi,0x1
+    1898:	0f 80 6d 08 00 00    	jo     210b <main+0x57c>
+    189e:	49 ff cf             	dec    r15
+    18a1:	0f 88 b9 08 00 00    	js     2160 <main+0x5d1>
+    18a7:	e9 8e fd ff ff       	jmp    163a <s3_gf2_square_cyclic+0x93>
+FUNCTION certified_step_dynamic / 152 assembly lines
+    18ac:	48 ff 05 7d 77 00 00 	inc    QWORD PTR [rip+0x777d]        # 9030 <__s3_frame_count>
+    18b3:	48 81 3d 72 77 00 00 	cmp    QWORD PTR [rip+0x7772],0x400        # 9030 <__s3_frame_count>
+    18ba:	00 04 00 00
+    18be:	0f 8f ad 08 00 00    	jg     2171 <main+0x5e2>
+    18c4:	48 83 3d 64 77 00 00 	cmp    QWORD PTR [rip+0x7764],0x1        # 9030 <__s3_frame_count>
+    18cc:	75 11                	jne    18df <certified_step_dynamic+0x33>
+    18ce:	49 bb 40 4b 4c 00 00 	movabs r11,0x4c4b40
+    18d5:	00 00 00
+    18d8:	4c 89 1d 41 77 00 00 	mov    QWORD PTR [rip+0x7741],r11        # 9020 <__s3_instruction_remaining>
+    18df:	55                   	push   rbp
+    18e0:	48 89 e5             	mov    rbp,rsp
+    18e3:	48 81 ec f0 01 00 00 	sub    rsp,0x1f0
+    18ea:	48 89 9d 48 fe ff ff 	mov    QWORD PTR [rbp-0x1b8],rbx
+    18f1:	4c 89 a5 40 fe ff ff 	mov    QWORD PTR [rbp-0x1c0],r12
+    18f8:	4c 89 ad 38 fe ff ff 	mov    QWORD PTR [rbp-0x1c8],r13
+    18ff:	4c 89 b5 30 fe ff ff 	mov    QWORD PTR [rbp-0x1d0],r14
+    1906:	4c 89 bd 28 fe ff ff 	mov    QWORD PTR [rbp-0x1d8],r15
+    190d:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1911:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    1915:	48 8b 5d f8          	mov    rbx,QWORD PTR [rbp-0x8]
+    1919:	4c 8b 75 f0          	mov    r14,QWORD PTR [rbp-0x10]
+    191d:	4c 8b 3d fc 76 00 00 	mov    r15,QWORD PTR [rip+0x76fc]        # 9020 <__s3_instruction_remaining>
+    1924:	eb 00                	jmp    1926 <certified_step_dynamic+0x7a>
+    1926:	49 ff cf             	dec    r15
+    1929:	0f 88 67 08 00 00    	js     2196 <main+0x607>
+    192f:	49 c7 c4 01 00 00 00 	mov    r12,0x1
+    1936:	49 ff cf             	dec    r15
+    1939:	0f 88 68 08 00 00    	js     21a7 <main+0x618>
+    193f:	49 c7 c5 02 80 00 00 	mov    r13,0x8002
+    1946:	49 ff cf             	dec    r15
+    1949:	0f 88 69 08 00 00    	js     21b8 <main+0x629>
+    194f:	49 ff cf             	dec    r15
+    1952:	0f 88 71 08 00 00    	js     21c9 <main+0x63a>
+    1958:	49 ff cf             	dec    r15
+    195b:	0f 88 79 08 00 00    	js     21da <main+0x64b>
+    1961:	49 ff cf             	dec    r15
+    1964:	0f 88 81 08 00 00    	js     21eb <main+0x65c>
+    196a:	49 ff cf             	dec    r15
+    196d:	0f 88 89 08 00 00    	js     21fc <main+0x66d>
+    1973:	eb 00                	jmp    1975 <certified_step_dynamic+0xc9>
+    1975:	49 83 ff 02          	cmp    r15,0x2
+    1979:	0f 8c 49 01 00 00    	jl     1ac8 <certified_step_dynamic+0x21c>
+    197f:	49 83 ef 02          	sub    r15,0x2
+    1983:	49 83 fe 00          	cmp    r14,0x0
+    1987:	7f 05                	jg     198e <certified_step_dynamic+0xe2>
+    1989:	e9 b0 00 00 00       	jmp    1a3e <certified_step_dynamic+0x192>
+    198e:	49 ff cf             	dec    r15
+    1991:	0f 88 98 08 00 00    	js     222f <main+0x6a0>
+    1997:	4c 89 3d 82 76 00 00 	mov    QWORD PTR [rip+0x7682],r15        # 9020 <__s3_instruction_remaining>
+    199e:	4c 89 a5 a0 fe ff ff 	mov    QWORD PTR [rbp-0x160],r12
+    19a5:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    19ac:	48 8b bd a0 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x160]
+    19b3:	48 8b b5 98 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x168]
+    19ba:	e8 81 f6 ff ff       	call   1040 <s3_gf2_mul_cyclic@plt>
+    19bf:	48 89 c6             	mov    rsi,rax
+    19c2:	4c 8b 3d 57 76 00 00 	mov    r15,QWORD PTR [rip+0x7657]        # 9020 <__s3_instruction_remaining>
+    19c9:	49 83 ff 06          	cmp    r15,0x6
+    19cd:	0f 8c 16 01 00 00    	jl     1ae9 <certified_step_dynamic+0x23d>
+    19d3:	49 83 ef 06          	sub    r15,0x6
+    19d7:	4c 89 f7             	mov    rdi,r14
+    19da:	48 83 e7 01          	and    rdi,0x1
+    19de:	4c 29 e6             	sub    rsi,r12
+    19e1:	0f 80 59 08 00 00    	jo     2240 <main+0x6b1>
+    19e7:	48 0f af fe          	imul   rdi,rsi
+    19eb:	0f 80 60 08 00 00    	jo     2251 <main+0x6c2>
+    19f1:	49 01 fc             	add    r12,rdi
+    19f4:	0f 80 68 08 00 00    	jo     2262 <main+0x6d3>
+    19fa:	4d 89 f2             	mov    r10,r14
+    19fd:	49 c1 ea 3f          	shr    r10,0x3f
+    1a01:	4d 01 d6             	add    r14,r10
+    1a04:	49 d1 fe             	sar    r14,1
+    1a07:	4c 89 3d 12 76 00 00 	mov    QWORD PTR [rip+0x7612],r15        # 9020 <__s3_instruction_remaining>
+    1a0e:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    1a15:	48 8b bd 98 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x168]
+    1a1c:	e8 0f f6 ff ff       	call   1030 <s3_gf2_square_cyclic@plt>
+    1a21:	49 89 c5             	mov    r13,rax
+    1a24:	4c 8b 3d f5 75 00 00 	mov    r15,QWORD PTR [rip+0x75f5]        # 9020 <__s3_instruction_remaining>
+    1a2b:	49 83 ff 02          	cmp    r15,0x2
+    1a2f:	0f 8c 43 01 00 00    	jl     1b78 <certified_step_dynamic+0x2cc>
+    1a35:	49 83 ef 02          	sub    r15,0x2
+    1a39:	e9 37 ff ff ff       	jmp    1975 <certified_step_dynamic+0xc9>
+    1a3e:	49 ff cf             	dec    r15
+    1a41:	0f 88 b4 08 00 00    	js     22fb <main+0x76c>
+    1a47:	eb 0b                	jmp    1a54 <certified_step_dynamic+0x1a8>
+    1a49:	49 ff cf             	dec    r15
+    1a4c:	0f 88 ba 08 00 00    	js     230c <main+0x77d>
+    1a52:	eb 00                	jmp    1a54 <certified_step_dynamic+0x1a8>
+    1a54:	49 ff cf             	dec    r15
+    1a57:	0f 88 c0 08 00 00    	js     231d <main+0x78e>
+    1a5d:	4c 89 3d bc 75 00 00 	mov    QWORD PTR [rip+0x75bc],r15        # 9020 <__s3_instruction_remaining>
+    1a64:	4c 89 a5 a0 fe ff ff 	mov    QWORD PTR [rbp-0x160],r12
+    1a6b:	48 89 5d f8          	mov    QWORD PTR [rbp-0x8],rbx
+    1a6f:	48 8b bd a0 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x160]
+    1a76:	48 8b 75 f8          	mov    rsi,QWORD PTR [rbp-0x8]
+    1a7a:	e8 c1 f5 ff ff       	call   1040 <s3_gf2_mul_cyclic@plt>
+    1a7f:	48 89 c7             	mov    rdi,rax
+    1a82:	4c 8b 3d 97 75 00 00 	mov    r15,QWORD PTR [rip+0x7597]        # 9020 <__s3_instruction_remaining>
+    1a89:	49 ff cf             	dec    r15
+    1a8c:	0f 88 9c 08 00 00    	js     232e <main+0x79f>
+    1a92:	48 89 f8             	mov    rax,rdi
+    1a95:	4c 89 3d 84 75 00 00 	mov    QWORD PTR [rip+0x7584],r15        # 9020 <__s3_instruction_remaining>
+    1a9c:	48 8b 9d 48 fe ff ff 	mov    rbx,QWORD PTR [rbp-0x1b8]
+    1aa3:	4c 8b a5 40 fe ff ff 	mov    r12,QWORD PTR [rbp-0x1c0]
+    1aaa:	4c 8b ad 38 fe ff ff 	mov    r13,QWORD PTR [rbp-0x1c8]
+    1ab1:	4c 8b b5 30 fe ff ff 	mov    r14,QWORD PTR [rbp-0x1d0]
+    1ab8:	4c 8b bd 28 fe ff ff 	mov    r15,QWORD PTR [rbp-0x1d8]
+    1abf:	48 ff 0d 6a 75 00 00 	dec    QWORD PTR [rip+0x756a]        # 9030 <__s3_frame_count>
+    1ac6:	c9                   	leave
+    1ac7:	c3                   	ret
+    1ac8:	49 ff cf             	dec    r15
+    1acb:	0f 88 3c 07 00 00    	js     220d <main+0x67e>
+    1ad1:	49 ff cf             	dec    r15
+    1ad4:	0f 88 44 07 00 00    	js     221e <main+0x68f>
+    1ada:	49 83 fe 00          	cmp    r14,0x0
+    1ade:	0f 8f aa fe ff ff    	jg     198e <certified_step_dynamic+0xe2>
+    1ae4:	e9 55 ff ff ff       	jmp    1a3e <certified_step_dynamic+0x192>
+    1ae9:	49 ff cf             	dec    r15
+    1aec:	0f 88 81 07 00 00    	js     2273 <main+0x6e4>
+    1af2:	4c 89 f7             	mov    rdi,r14
+    1af5:	48 83 e7 01          	and    rdi,0x1
+    1af9:	49 ff cf             	dec    r15
+    1afc:	0f 88 82 07 00 00    	js     2284 <main+0x6f5>
+    1b02:	4c 29 e6             	sub    rsi,r12
+    1b05:	0f 80 35 07 00 00    	jo     2240 <main+0x6b1>
+    1b0b:	49 ff cf             	dec    r15
+    1b0e:	0f 88 81 07 00 00    	js     2295 <main+0x706>
+    1b14:	48 0f af fe          	imul   rdi,rsi
+    1b18:	0f 80 33 07 00 00    	jo     2251 <main+0x6c2>
+    1b1e:	49 ff cf             	dec    r15
+    1b21:	0f 88 7f 07 00 00    	js     22a6 <main+0x717>
+    1b27:	49 01 fc             	add    r12,rdi
+    1b2a:	0f 80 32 07 00 00    	jo     2262 <main+0x6d3>
+    1b30:	49 ff cf             	dec    r15
+    1b33:	0f 88 7e 07 00 00    	js     22b7 <main+0x728>
+    1b39:	4d 89 f2             	mov    r10,r14
+    1b3c:	49 c1 ea 3f          	shr    r10,0x3f
+    1b40:	4d 01 d6             	add    r14,r10
+    1b43:	49 d1 fe             	sar    r14,1
+    1b46:	49 ff cf             	dec    r15
+    1b49:	0f 88 79 07 00 00    	js     22c8 <main+0x739>
+    1b4f:	4c 89 3d ca 74 00 00 	mov    QWORD PTR [rip+0x74ca],r15        # 9020 <__s3_instruction_remaining>
+    1b56:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    1b5d:	48 8b bd 98 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x168]
+    1b64:	e8 c7 f4 ff ff       	call   1030 <s3_gf2_square_cyclic@plt>
+    1b69:	49 89 c5             	mov    r13,rax
+    1b6c:	4c 8b 3d ad 74 00 00 	mov    r15,QWORD PTR [rip+0x74ad]        # 9020 <__s3_instruction_remaining>
+    1b73:	e9 b3 fe ff ff       	jmp    1a2b <certified_step_dynamic+0x17f>
+    1b78:	49 ff cf             	dec    r15
+    1b7b:	0f 88 58 07 00 00    	js     22d9 <main+0x74a>
+    1b81:	49 ff cf             	dec    r15
+    1b84:	0f 88 60 07 00 00    	js     22ea <main+0x75b>
+    1b8a:	e9 e6 fd ff ff       	jmp    1975 <certified_step_dynamic+0xc9>
+### W=16 / GCC specialist generated assembly
+FUNCTION cyclic_reference / 134 assembly lines
+    1c40:	49 89 fb             	mov    r11,rdi
+    1c43:	8b 3d f7 23 00 00    	mov    edi,DWORD PTR [rip+0x23f7]        # 4040 <W>
+    1c49:	41 56                	push   r14
+    1c4b:	41 b9 01 00 00 00    	mov    r9d,0x1
+    1c51:	41 54                	push   r12
+    1c53:	4c 8b 15 de 23 00 00 	mov    r10,QWORD PTR [rip+0x23de]        # 4038 <MASK>
+    1c5a:	8d 4f ff             	lea    ecx,[rdi-0x1]
+    1c5d:	55                   	push   rbp
+    1c5e:	49 d3 e1             	shl    r9,cl
+    1c61:	53                   	push   rbx
+    1c62:	49 83 f1 02          	xor    r9,0x2
+    1c66:	48 85 f6             	test   rsi,rsi
+    1c69:	0f 84 58 01 00 00    	je     1dc7 <cyclic_reference+0x187>
+    1c6f:	48 89 f3             	mov    rbx,rsi
+    1c72:	be 01 00 00 00       	mov    esi,0x1
+    1c77:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+    1c7e:	00 00
+    1c80:	f6 c3 01             	test   bl,0x1
+    1c83:	74 4f                	je     1cd4 <cyclic_reference+0x94>
+    1c85:	48 85 f6             	test   rsi,rsi
+    1c88:	74 4a                	je     1cd4 <cyclic_reference+0x94>
+    1c8a:	4c 89 cd             	mov    rbp,r9
+    1c8d:	45 31 c0             	xor    r8d,r8d
+    1c90:	4c 21 d5             	and    rbp,r10
+    1c93:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+    1c98:	31 c0                	xor    eax,eax
+    1c9a:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1c9f:	99                   	cdq
+    1ca0:	f7 ff                	idiv   edi
+    1ca2:	85 d2                	test   edx,edx
+    1ca4:	0f 84 96 00 00 00    	je     1d40 <cyclic_reference+0x100>
+    1caa:	89 f9                	mov    ecx,edi
+    1cac:	4c 89 c8             	mov    rax,r9
+    1caf:	4d 89 cc             	mov    r12,r9
+    1cb2:	29 d1                	sub    ecx,edx
+    1cb4:	48 d3 e8             	shr    rax,cl
+    1cb7:	89 d1                	mov    ecx,edx
+    1cb9:	49 d3 e4             	shl    r12,cl
+    1cbc:	4c 09 e0             	or     rax,r12
+    1cbf:	4c 21 d0             	and    rax,r10
+    1cc2:	49 31 c0             	xor    r8,rax
+    1cc5:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1cc9:	48 21 c6             	and    rsi,rax
+    1ccc:	75 ca                	jne    1c98 <cyclic_reference+0x58>
+    1cce:	4c 89 c6             	mov    rsi,r8
+    1cd1:	4c 21 d6             	and    rsi,r10
+    1cd4:	48 d1 eb             	shr    rbx,1
+    1cd7:	75 7f                	jne    1d58 <cyclic_reference+0x118>
+    1cd9:	48 85 f6             	test   rsi,rsi
+    1cdc:	74 56                	je     1d34 <cyclic_reference+0xf4>
+    1cde:	31 c0                	xor    eax,eax
+    1ce0:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1ce5:	4d 89 d9             	mov    r9,r11
+    1ce8:	45 31 c0             	xor    r8d,r8d
+    1ceb:	4d 21 d1             	and    r9,r10
+    1cee:	eb 2b                	jmp    1d1b <cyclic_reference+0xdb>
+    1cf0:	89 f9                	mov    ecx,edi
+    1cf2:	4c 89 d8             	mov    rax,r11
+    1cf5:	4c 89 db             	mov    rbx,r11
+    1cf8:	29 d1                	sub    ecx,edx
+    1cfa:	48 d3 e8             	shr    rax,cl
+    1cfd:	89 d1                	mov    ecx,edx
+    1cff:	48 d3 e3             	shl    rbx,cl
+    1d02:	48 09 d8             	or     rax,rbx
+    1d05:	4c 21 d0             	and    rax,r10
+    1d08:	49 31 c0             	xor    r8,rax
+    1d0b:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d0f:	48 21 c6             	and    rsi,rax
+    1d12:	74 1a                	je     1d2e <cyclic_reference+0xee>
+    1d14:	31 c0                	xor    eax,eax
+    1d16:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1d1b:	99                   	cdq
+    1d1c:	f7 ff                	idiv   edi
+    1d1e:	85 d2                	test   edx,edx
+    1d20:	75 ce                	jne    1cf0 <cyclic_reference+0xb0>
+    1d22:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d26:	4d 31 c8             	xor    r8,r9
+    1d29:	48 21 c6             	and    rsi,rax
+    1d2c:	75 e6                	jne    1d14 <cyclic_reference+0xd4>
+    1d2e:	4c 89 c6             	mov    rsi,r8
+    1d31:	4c 21 d6             	and    rsi,r10
+    1d34:	5b                   	pop    rbx
+    1d35:	48 89 f0             	mov    rax,rsi
+    1d38:	5d                   	pop    rbp
+    1d39:	41 5c                	pop    r12
+    1d3b:	41 5e                	pop    r14
+    1d3d:	c3                   	ret
+    1d3e:	66 90                	xchg   ax,ax
+    1d40:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d44:	49 31 e8             	xor    r8,rbp
+    1d47:	48 21 c6             	and    rsi,rax
+    1d4a:	0f 85 48 ff ff ff    	jne    1c98 <cyclic_reference+0x58>
+    1d50:	e9 79 ff ff ff       	jmp    1cce <cyclic_reference+0x8e>
+    1d55:	0f 1f 00             	nop    DWORD PTR [rax]
+    1d58:	4d 85 c9             	test   r9,r9
+    1d5b:	0f 84 1f ff ff ff    	je     1c80 <cyclic_reference+0x40>
+    1d61:	4d 89 cc             	mov    r12,r9
+    1d64:	4d 89 c8             	mov    r8,r9
+    1d67:	31 ed                	xor    ebp,ebp
+    1d69:	4d 21 d4             	and    r12,r10
+    1d6c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+    1d70:	31 c0                	xor    eax,eax
+    1d72:	f3 49 0f bc c0       	tzcnt  rax,r8
+    1d77:	99                   	cdq
+    1d78:	f7 ff                	idiv   edi
+    1d7a:	85 d2                	test   edx,edx
+    1d7c:	74 32                	je     1db0 <cyclic_reference+0x170>
+    1d7e:	89 f9                	mov    ecx,edi
+    1d80:	4c 89 c8             	mov    rax,r9
+    1d83:	4d 89 ce             	mov    r14,r9
+    1d86:	29 d1                	sub    ecx,edx
+    1d88:	48 d3 e8             	shr    rax,cl
+    1d8b:	89 d1                	mov    ecx,edx
+    1d8d:	49 d3 e6             	shl    r14,cl
+    1d90:	4c 09 f0             	or     rax,r14
+    1d93:	4c 21 d0             	and    rax,r10
+    1d96:	48 31 c5             	xor    rbp,rax
+    1d99:	49 8d 40 ff          	lea    rax,[r8-0x1]
+    1d9d:	49 21 c0             	and    r8,rax
+    1da0:	75 ce                	jne    1d70 <cyclic_reference+0x130>
+    1da2:	49 89 e9             	mov    r9,rbp
+    1da5:	4d 21 d1             	and    r9,r10
+    1da8:	e9 d3 fe ff ff       	jmp    1c80 <cyclic_reference+0x40>
+    1dad:	0f 1f 00             	nop    DWORD PTR [rax]
+    1db0:	49 8d 40 ff          	lea    rax,[r8-0x1]
+    1db4:	4c 31 e5             	xor    rbp,r12
+    1db7:	49 21 c0             	and    r8,rax
+    1dba:	75 b4                	jne    1d70 <cyclic_reference+0x130>
+    1dbc:	49 89 e9             	mov    r9,rbp
+    1dbf:	4d 21 d1             	and    r9,r10
+    1dc2:	e9 b9 fe ff ff       	jmp    1c80 <cyclic_reference+0x40>
+    1dc7:	31 c0                	xor    eax,eax
+    1dc9:	be 01 00 00 00       	mov    esi,0x1
+    1dce:	e9 12 ff ff ff       	jmp    1ce5 <cyclic_reference+0xa5>
+### W=32 / S3 backend generated assembly
+FUNCTION s3_gf2_rotl_w / 106 assembly lines
+    1129:	48 ff 05 00 7f 00 00 	inc    QWORD PTR [rip+0x7f00]        # 9030 <__s3_frame_count>
+    1130:	48 81 3d f5 7e 00 00 	cmp    QWORD PTR [rip+0x7ef5],0x400        # 9030 <__s3_frame_count>
+    1137:	00 04 00 00
+    113b:	0f 8f fc 0a 00 00    	jg     1c3d <main+0x78>
+    1141:	55                   	push   rbp
+    1142:	48 89 e5             	mov    rbp,rsp
+    1145:	48 81 ec d0 00 00 00 	sub    rsp,0xd0
+    114c:	4c 89 bd 58 ff ff ff 	mov    QWORD PTR [rbp-0xa8],r15
+    1153:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1157:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    115b:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+    115f:	48 8b 75 f0          	mov    rsi,QWORD PTR [rbp-0x10]
+    1163:	31 c0                	xor    eax,eax
+    1165:	66 89 85 66 ff ff ff 	mov    WORD PTR [rbp-0x9a],ax
+    116c:	4c 8b 3d ad 7e 00 00 	mov    r15,QWORD PTR [rip+0x7ead]        # 9020 <__s3_instruction_remaining>
+    1173:	eb 00                	jmp    1175 <s3_gf2_rotl_w+0x4c>
+    1175:	49 ff cf             	dec    r15
+    1178:	0f 88 e4 0a 00 00    	js     1c62 <main+0x9d>
+    117e:	48 89 f8             	mov    rax,rdi
+    1181:	49 89 f2             	mov    r10,rsi
+    1184:	49 89 cb             	mov    r11,rcx
+    1187:	4c 89 d1             	mov    rcx,r10
+    118a:	48 d3 e0             	shl    rax,cl
+    118d:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1194:	41 ba 00 00 00 00    	mov    r10d,0x0
+    119a:	49 0f 45 c2          	cmovne rax,r10
+    119e:	4c 89 d9             	mov    rcx,r11
+    11a1:	48 89 c2             	mov    rdx,rax
+    11a4:	49 ff cf             	dec    r15
+    11a7:	0f 88 c6 0a 00 00    	js     1c73 <main+0xae>
+    11ad:	48 c7 c1 00 00 00 00 	mov    rcx,0x0
+    11b4:	49 ff cf             	dec    r15
+    11b7:	0f 88 c7 0a 00 00    	js     1c84 <main+0xbf>
+    11bd:	49 89 d2             	mov    r10,rdx
+    11c0:	4c 89 95 70 ff ff ff 	mov    QWORD PTR [rbp-0x90],r10
+    11c7:	c6 85 67 ff ff ff 01 	mov    BYTE PTR [rbp-0x99],0x1
+    11ce:	49 ff cf             	dec    r15
+    11d1:	0f 88 be 0a 00 00    	js     1c95 <main+0xd0>
+    11d7:	48 c7 c2 20 00 00 00 	mov    rdx,0x20
+    11de:	49 ff cf             	dec    r15
+    11e1:	0f 88 bf 0a 00 00    	js     1ca6 <main+0xe1>
+    11e7:	48 89 d0             	mov    rax,rdx
+    11ea:	49 89 f2             	mov    r10,rsi
+    11ed:	4c 29 d0             	sub    rax,r10
+    11f0:	0f 80 c1 0a 00 00    	jo     1cb7 <main+0xf2>
+    11f6:	48 89 c6             	mov    rsi,rax
+    11f9:	49 ff cf             	dec    r15
+    11fc:	0f 88 c6 0a 00 00    	js     1cc8 <main+0x103>
+    1202:	48 89 f8             	mov    rax,rdi
+    1205:	49 89 f2             	mov    r10,rsi
+    1208:	49 89 cb             	mov    r11,rcx
+    120b:	4c 89 d1             	mov    rcx,r10
+    120e:	48 d3 e8             	shr    rax,cl
+    1211:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1218:	41 ba 00 00 00 00    	mov    r10d,0x0
+    121e:	49 0f 45 c2          	cmovne rax,r10
+    1222:	4c 89 d9             	mov    rcx,r11
+    1225:	48 89 c7             	mov    rdi,rax
+    1228:	49 ff cf             	dec    r15
+    122b:	0f 88 a8 0a 00 00    	js     1cd9 <main+0x114>
+    1231:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1238:	49 ff cf             	dec    r15
+    123b:	0f 88 a9 0a 00 00    	js     1cea <main+0x125>
+    1241:	49 89 fa             	mov    r10,rdi
+    1244:	4c 89 95 68 ff ff ff 	mov    QWORD PTR [rbp-0x98],r10
+    124b:	c6 85 66 ff ff ff 01 	mov    BYTE PTR [rbp-0x9a],0x1
+    1252:	49 ff cf             	dec    r15
+    1255:	0f 88 a0 0a 00 00    	js     1cfb <main+0x136>
+    125b:	48 c7 c7 00 00 00 00 	mov    rdi,0x0
+    1262:	49 ff cf             	dec    r15
+    1265:	0f 88 a1 0a 00 00    	js     1d0c <main+0x147>
+    126b:	80 bd 67 ff ff ff 00 	cmp    BYTE PTR [rbp-0x99],0x0
+    1272:	0f 84 a5 0a 00 00    	je     1d1d <main+0x158>
+    1278:	48 8b 85 70 ff ff ff 	mov    rax,QWORD PTR [rbp-0x90]
+    127f:	48 89 c7             	mov    rdi,rax
+    1282:	49 ff cf             	dec    r15
+    1285:	0f 88 a3 0a 00 00    	js     1d2e <main+0x169>
+    128b:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1292:	49 ff cf             	dec    r15
+    1295:	0f 88 a4 0a 00 00    	js     1d3f <main+0x17a>
+    129b:	80 bd 66 ff ff ff 00 	cmp    BYTE PTR [rbp-0x9a],0x0
+    12a2:	0f 84 a8 0a 00 00    	je     1d50 <main+0x18b>
+    12a8:	48 8b 85 68 ff ff ff 	mov    rax,QWORD PTR [rbp-0x98]
+    12af:	48 89 c6             	mov    rsi,rax
+    12b2:	49 ff cf             	dec    r15
+    12b5:	0f 88 a6 0a 00 00    	js     1d61 <main+0x19c>
+    12bb:	48 31 f7             	xor    rdi,rsi
+    12be:	49 ff cf             	dec    r15
+    12c1:	0f 88 ab 0a 00 00    	js     1d72 <main+0x1ad>
+    12c7:	48 b8 ff ff ff ff 00 	movabs rax,0xffffffff
+    12ce:	00 00 00
+    12d1:	48 89 c6             	mov    rsi,rax
+    12d4:	49 ff cf             	dec    r15
+    12d7:	0f 88 a6 0a 00 00    	js     1d83 <main+0x1be>
+    12dd:	48 89 f8             	mov    rax,rdi
+    12e0:	49 89 f2             	mov    r10,rsi
+    12e3:	4c 21 d0             	and    rax,r10
+    12e6:	48 89 c7             	mov    rdi,rax
+    12e9:	49 ff cf             	dec    r15
+    12ec:	0f 88 a2 0a 00 00    	js     1d94 <main+0x1cf>
+    12f2:	48 89 f8             	mov    rax,rdi
+    12f5:	4c 89 3d 24 7d 00 00 	mov    QWORD PTR [rip+0x7d24],r15        # 9020 <__s3_instruction_remaining>
+    12fc:	4c 8b bd 58 ff ff ff 	mov    r15,QWORD PTR [rbp-0xa8]
+    1303:	48 ff 0d 26 7d 00 00 	dec    QWORD PTR [rip+0x7d26]        # 9030 <__s3_frame_count>
+    130a:	c9                   	leave
+    130b:	c3                   	ret
+FUNCTION s3_gf2_mul_cyclic / 150 assembly lines
+    130c:	48 ff 05 1d 7d 00 00 	inc    QWORD PTR [rip+0x7d1d]        # 9030 <__s3_frame_count>
+    1313:	48 81 3d 12 7d 00 00 	cmp    QWORD PTR [rip+0x7d12],0x400        # 9030 <__s3_frame_count>
+    131a:	00 04 00 00
+    131e:	0f 8f 81 0a 00 00    	jg     1da5 <main+0x1e0>
+    1324:	55                   	push   rbp
+    1325:	48 89 e5             	mov    rbp,rsp
+    1328:	48 81 ec a0 01 00 00 	sub    rsp,0x1a0
+    132f:	48 89 9d 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],rbx
+    1336:	4c 89 a5 90 fe ff ff 	mov    QWORD PTR [rbp-0x170],r12
+    133d:	4c 89 ad 88 fe ff ff 	mov    QWORD PTR [rbp-0x178],r13
+    1344:	4c 89 b5 80 fe ff ff 	mov    QWORD PTR [rbp-0x180],r14
+    134b:	4c 89 bd 78 fe ff ff 	mov    QWORD PTR [rbp-0x188],r15
+    1352:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1356:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    135a:	48 8b 5d f8          	mov    rbx,QWORD PTR [rbp-0x8]
+    135e:	4c 8b 65 f0          	mov    r12,QWORD PTR [rbp-0x10]
+    1362:	4c 8b 3d b7 7c 00 00 	mov    r15,QWORD PTR [rip+0x7cb7]        # 9020 <__s3_instruction_remaining>
+    1369:	eb 00                	jmp    136b <s3_gf2_mul_cyclic+0x5f>
+    136b:	49 ff cf             	dec    r15
+    136e:	0f 88 56 0a 00 00    	js     1dca <main+0x205>
+    1374:	49 c7 c5 00 00 00 00 	mov    r13,0x0
+    137b:	49 ff cf             	dec    r15
+    137e:	0f 88 57 0a 00 00    	js     1ddb <main+0x216>
+    1384:	49 c7 c6 00 00 00 00 	mov    r14,0x0
+    138b:	49 ff cf             	dec    r15
+    138e:	0f 88 58 0a 00 00    	js     1dec <main+0x227>
+    1394:	49 ff cf             	dec    r15
+    1397:	0f 88 60 0a 00 00    	js     1dfd <main+0x238>
+    139d:	49 ff cf             	dec    r15
+    13a0:	0f 88 68 0a 00 00    	js     1e0e <main+0x249>
+    13a6:	49 ff cf             	dec    r15
+    13a9:	0f 88 70 0a 00 00    	js     1e1f <main+0x25a>
+    13af:	eb 00                	jmp    13b1 <s3_gf2_mul_cyclic+0xa5>
+    13b1:	49 83 ff 02          	cmp    r15,0x2
+    13b5:	0f 8c 25 01 00 00    	jl     14e0 <s3_gf2_mul_cyclic+0x1d4>
+    13bb:	49 83 ef 02          	sub    r15,0x2
+    13bf:	49 83 fe 20          	cmp    r14,0x20
+    13c3:	7c 05                	jl     13ca <s3_gf2_mul_cyclic+0xbe>
+    13c5:	e9 96 00 00 00       	jmp    1460 <s3_gf2_mul_cyclic+0x154>
+    13ca:	49 83 ff 03          	cmp    r15,0x3
+    13ce:	0f 8c 2d 01 00 00    	jl     1501 <s3_gf2_mul_cyclic+0x1f5>
+    13d4:	49 83 ef 03          	sub    r15,0x3
+    13d8:	48 89 d8             	mov    rax,rbx
+    13db:	4d 89 f2             	mov    r10,r14
+    13de:	49 89 cb             	mov    r11,rcx
+    13e1:	4c 89 d1             	mov    rcx,r10
+    13e4:	48 d3 e8             	shr    rax,cl
+    13e7:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    13ee:	41 ba 00 00 00 00    	mov    r10d,0x0
+    13f4:	49 0f 45 c2          	cmovne rax,r10
+    13f8:	4c 89 d9             	mov    rcx,r11
+    13fb:	48 89 c7             	mov    rdi,rax
+    13fe:	48 83 e7 01          	and    rdi,0x1
+    1402:	4c 89 3d 17 7c 00 00 	mov    QWORD PTR [rip+0x7c17],r15        # 9020 <__s3_instruction_remaining>
+    1409:	4c 89 65 f0          	mov    QWORD PTR [rbp-0x10],r12
+    140d:	4c 89 b5 d8 fe ff ff 	mov    QWORD PTR [rbp-0x128],r14
+    1414:	48 89 bd 70 fe ff ff 	mov    QWORD PTR [rbp-0x190],rdi
+    141b:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+    141f:	48 8b b5 d8 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x128]
+    1426:	e8 25 fc ff ff       	call   1050 <s3_gf2_rotl_w@plt>
+    142b:	48 8b bd 70 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x190]
+    1432:	48 89 c6             	mov    rsi,rax
+    1435:	4c 8b 3d e4 7b 00 00 	mov    r15,QWORD PTR [rip+0x7be4]        # 9020 <__s3_instruction_remaining>
+    143c:	49 83 ff 05          	cmp    r15,0x5
+    1440:	0f 8c 3f 01 00 00    	jl     1585 <s3_gf2_mul_cyclic+0x279>
+    1446:	49 83 ef 05          	sub    r15,0x5
+    144a:	48 0f af fe          	imul   rdi,rsi
+    144e:	0f 80 31 0a 00 00    	jo     1e85 <main+0x2c0>
+    1454:	49 31 fd             	xor    r13,rdi
+    1457:	49 83 c6 01          	add    r14,0x1
+    145b:	e9 51 ff ff ff       	jmp    13b1 <s3_gf2_mul_cyclic+0xa5>
+    1460:	49 ff cf             	dec    r15
+    1463:	0f 88 93 0a 00 00    	js     1efc <main+0x337>
+    1469:	eb 0b                	jmp    1476 <s3_gf2_mul_cyclic+0x16a>
+    146b:	49 ff cf             	dec    r15
+    146e:	0f 88 99 0a 00 00    	js     1f0d <main+0x348>
+    1474:	eb 00                	jmp    1476 <s3_gf2_mul_cyclic+0x16a>
+    1476:	49 ff cf             	dec    r15
+    1479:	0f 88 9f 0a 00 00    	js     1f1e <main+0x359>
+    147f:	48 b8 ff ff ff ff 00 	movabs rax,0xffffffff
+    1486:	00 00 00
+    1489:	48 89 c7             	mov    rdi,rax
+    148c:	49 ff cf             	dec    r15
+    148f:	0f 88 9a 0a 00 00    	js     1f2f <main+0x36a>
+    1495:	4c 89 e8             	mov    rax,r13
+    1498:	49 89 fa             	mov    r10,rdi
+    149b:	4c 21 d0             	and    rax,r10
+    149e:	48 89 c7             	mov    rdi,rax
+    14a1:	49 ff cf             	dec    r15
+    14a4:	0f 88 96 0a 00 00    	js     1f40 <main+0x37b>
+    14aa:	48 89 f8             	mov    rax,rdi
+    14ad:	4c 89 3d 6c 7b 00 00 	mov    QWORD PTR [rip+0x7b6c],r15        # 9020 <__s3_instruction_remaining>
+    14b4:	48 8b 9d 98 fe ff ff 	mov    rbx,QWORD PTR [rbp-0x168]
+    14bb:	4c 8b a5 90 fe ff ff 	mov    r12,QWORD PTR [rbp-0x170]
+    14c2:	4c 8b ad 88 fe ff ff 	mov    r13,QWORD PTR [rbp-0x178]
+    14c9:	4c 8b b5 80 fe ff ff 	mov    r14,QWORD PTR [rbp-0x180]
+    14d0:	4c 8b bd 78 fe ff ff 	mov    r15,QWORD PTR [rbp-0x188]
+    14d7:	48 ff 0d 52 7b 00 00 	dec    QWORD PTR [rip+0x7b52]        # 9030 <__s3_frame_count>
+    14de:	c9                   	leave
+    14df:	c3                   	ret
+    14e0:	49 ff cf             	dec    r15
+    14e3:	0f 88 47 09 00 00    	js     1e30 <main+0x26b>
+    14e9:	49 ff cf             	dec    r15
+    14ec:	0f 88 4f 09 00 00    	js     1e41 <main+0x27c>
+    14f2:	49 83 fe 20          	cmp    r14,0x20
+    14f6:	0f 8c ce fe ff ff    	jl     13ca <s3_gf2_mul_cyclic+0xbe>
+    14fc:	e9 5f ff ff ff       	jmp    1460 <s3_gf2_mul_cyclic+0x154>
+    1501:	49 ff cf             	dec    r15
+    1504:	0f 88 48 09 00 00    	js     1e52 <main+0x28d>
+    150a:	48 89 d8             	mov    rax,rbx
+    150d:	4d 89 f2             	mov    r10,r14
+    1510:	49 89 cb             	mov    r11,rcx
+    1513:	4c 89 d1             	mov    rcx,r10
+    1516:	48 d3 e8             	shr    rax,cl
+    1519:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1520:	41 ba 00 00 00 00    	mov    r10d,0x0
+    1526:	49 0f 45 c2          	cmovne rax,r10
+    152a:	4c 89 d9             	mov    rcx,r11
+    152d:	48 89 c7             	mov    rdi,rax
+    1530:	49 ff cf             	dec    r15
+    1533:	0f 88 2a 09 00 00    	js     1e63 <main+0x29e>
+    1539:	48 83 e7 01          	and    rdi,0x1
+    153d:	49 ff cf             	dec    r15
+    1540:	0f 88 2e 09 00 00    	js     1e74 <main+0x2af>
+    1546:	4c 89 3d d3 7a 00 00 	mov    QWORD PTR [rip+0x7ad3],r15        # 9020 <__s3_instruction_remaining>
+    154d:	4c 89 65 f0          	mov    QWORD PTR [rbp-0x10],r12
+    1551:	4c 89 b5 d8 fe ff ff 	mov    QWORD PTR [rbp-0x128],r14
+    1558:	48 89 bd 70 fe ff ff 	mov    QWORD PTR [rbp-0x190],rdi
+    155f:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+    1563:	48 8b b5 d8 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x128]
+    156a:	e8 e1 fa ff ff       	call   1050 <s3_gf2_rotl_w@plt>
+    156f:	48 8b bd 70 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x190]
+    1576:	48 89 c6             	mov    rsi,rax
+    1579:	4c 8b 3d a0 7a 00 00 	mov    r15,QWORD PTR [rip+0x7aa0]        # 9020 <__s3_instruction_remaining>
+    1580:	e9 b7 fe ff ff       	jmp    143c <s3_gf2_mul_cyclic+0x130>
+    1585:	49 ff cf             	dec    r15
+    1588:	0f 88 19 09 00 00    	js     1ea7 <main+0x2e2>
+    158e:	48 0f af fe          	imul   rdi,rsi
+    1592:	0f 80 ed 08 00 00    	jo     1e85 <main+0x2c0>
+    1598:	49 ff cf             	dec    r15
+    159b:	0f 88 17 09 00 00    	js     1eb8 <main+0x2f3>
+    15a1:	49 31 fd             	xor    r13,rdi
+    15a4:	49 ff cf             	dec    r15
+    15a7:	0f 88 1c 09 00 00    	js     1ec9 <main+0x304>
+    15ad:	49 ff cf             	dec    r15
+    15b0:	0f 88 24 09 00 00    	js     1eda <main+0x315>
+    15b6:	49 83 c6 01          	add    r14,0x1
+    15ba:	49 ff cf             	dec    r15
+    15bd:	0f 88 28 09 00 00    	js     1eeb <main+0x326>
+    15c3:	e9 e9 fd ff ff       	jmp    13b1 <s3_gf2_mul_cyclic+0xa5>
+FUNCTION s3_gf2_square_cyclic / 187 assembly lines
+    15c8:	48 ff 05 61 7a 00 00 	inc    QWORD PTR [rip+0x7a61]        # 9030 <__s3_frame_count>
+    15cf:	48 81 3d 56 7a 00 00 	cmp    QWORD PTR [rip+0x7a56],0x400        # 9030 <__s3_frame_count>
+    15d6:	00 04 00 00
+    15da:	0f 8f 71 09 00 00    	jg     1f51 <main+0x38c>
+    15e0:	55                   	push   rbp
+    15e1:	48 89 e5             	mov    rbp,rsp
+    15e4:	48 81 ec e0 01 00 00 	sub    rsp,0x1e0
+    15eb:	4c 89 bd 50 fe ff ff 	mov    QWORD PTR [rbp-0x1b0],r15
+    15f2:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    15f6:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+    15fa:	4c 8b 3d 1f 7a 00 00 	mov    r15,QWORD PTR [rip+0x7a1f]        # 9020 <__s3_instruction_remaining>
+    1601:	eb 00                	jmp    1603 <s3_gf2_square_cyclic+0x3b>
+    1603:	49 ff cf             	dec    r15
+    1606:	0f 88 6a 09 00 00    	js     1f76 <main+0x3b1>
+    160c:	48 c7 c6 00 00 00 00 	mov    rsi,0x0
+    1613:	49 ff cf             	dec    r15
+    1616:	0f 88 6b 09 00 00    	js     1f87 <main+0x3c2>
+    161c:	48 c7 c2 00 00 00 00 	mov    rdx,0x0
+    1623:	49 ff cf             	dec    r15
+    1626:	0f 88 6c 09 00 00    	js     1f98 <main+0x3d3>
+    162c:	49 ff cf             	dec    r15
+    162f:	0f 88 74 09 00 00    	js     1fa9 <main+0x3e4>
+    1635:	49 ff cf             	dec    r15
+    1638:	0f 88 7c 09 00 00    	js     1fba <main+0x3f5>
+    163e:	49 ff cf             	dec    r15
+    1641:	0f 88 84 09 00 00    	js     1fcb <main+0x406>
+    1647:	49 ff cf             	dec    r15
+    164a:	0f 88 8c 09 00 00    	js     1fdc <main+0x417>
+    1650:	49 ff cf             	dec    r15
+    1653:	0f 88 94 09 00 00    	js     1fed <main+0x428>
+    1659:	eb 00                	jmp    165b <s3_gf2_square_cyclic+0x93>
+    165b:	49 83 ff 02          	cmp    r15,0x2
+    165f:	0f 8c 4a 01 00 00    	jl     17af <s3_gf2_square_cyclic+0x1e7>
+    1665:	49 83 ef 02          	sub    r15,0x2
+    1669:	48 83 fa 20          	cmp    rdx,0x20
+    166d:	7c 02                	jl     1671 <s3_gf2_square_cyclic+0xa9>
+    166f:	eb 4c                	jmp    16bd <s3_gf2_square_cyclic+0xf5>
+    1671:	49 83 ff 04          	cmp    r15,0x4
+    1675:	0f 8c 55 01 00 00    	jl     17d0 <s3_gf2_square_cyclic+0x208>
+    167b:	49 83 ef 04          	sub    r15,0x4
+    167f:	48 89 f8             	mov    rax,rdi
+    1682:	49 89 d2             	mov    r10,rdx
+    1685:	49 89 cb             	mov    r11,rcx
+    1688:	4c 89 d1             	mov    rcx,r10
+    168b:	48 d3 e8             	shr    rax,cl
+    168e:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1695:	41 ba 00 00 00 00    	mov    r10d,0x0
+    169b:	49 0f 45 c2          	cmovne rax,r10
+    169f:	4c 89 d9             	mov    rcx,r11
+    16a2:	48 89 c1             	mov    rcx,rax
+    16a5:	48 83 e1 01          	and    rcx,0x1
+    16a9:	48 89 d0             	mov    rax,rdx
+    16ac:	49 89 d2             	mov    r10,rdx
+    16af:	4c 01 d0             	add    rax,r10
+    16b2:	0f 80 68 09 00 00    	jo     2020 <main+0x45b>
+    16b8:	49 89 c1             	mov    r9,rax
+    16bb:	eb 64                	jmp    1721 <s3_gf2_square_cyclic+0x159>
+    16bd:	49 ff cf             	dec    r15
+    16c0:	0f 88 af 09 00 00    	js     2075 <main+0x4b0>
+    16c6:	eb 0b                	jmp    16d3 <s3_gf2_square_cyclic+0x10b>
+    16c8:	49 ff cf             	dec    r15
+    16cb:	0f 88 b5 09 00 00    	js     2086 <main+0x4c1>
+    16d1:	eb 00                	jmp    16d3 <s3_gf2_square_cyclic+0x10b>
+    16d3:	49 ff cf             	dec    r15
+    16d6:	0f 88 bb 09 00 00    	js     2097 <main+0x4d2>
+    16dc:	48 b8 ff ff ff ff 00 	movabs rax,0xffffffff
+    16e3:	00 00 00
+    16e6:	48 89 c7             	mov    rdi,rax
+    16e9:	49 ff cf             	dec    r15
+    16ec:	0f 88 b6 09 00 00    	js     20a8 <main+0x4e3>
+    16f2:	48 89 f0             	mov    rax,rsi
+    16f5:	49 89 fa             	mov    r10,rdi
+    16f8:	4c 21 d0             	and    rax,r10
+    16fb:	48 89 c7             	mov    rdi,rax
+    16fe:	49 ff cf             	dec    r15
+    1701:	0f 88 b2 09 00 00    	js     20b9 <main+0x4f4>
+    1707:	48 89 f8             	mov    rax,rdi
+    170a:	4c 89 3d 0f 79 00 00 	mov    QWORD PTR [rip+0x790f],r15        # 9020 <__s3_instruction_remaining>
+    1711:	4c 8b bd 50 fe ff ff 	mov    r15,QWORD PTR [rbp-0x1b0]
+    1718:	48 ff 0d 11 79 00 00 	dec    QWORD PTR [rip+0x7911]        # 9030 <__s3_frame_count>
+    171f:	c9                   	leave
+    1720:	c3                   	ret
+    1721:	49 83 ff 02          	cmp    r15,0x2
+    1725:	0f 8c 0a 01 00 00    	jl     1835 <s3_gf2_square_cyclic+0x26d>
+    172b:	49 83 ef 02          	sub    r15,0x2
+    172f:	49 83 f9 20          	cmp    r9,0x20
+    1733:	7c 1e                	jl     1753 <s3_gf2_square_cyclic+0x18b>
+    1735:	49 83 ff 04          	cmp    r15,0x4
+    1739:	0f 8c 17 01 00 00    	jl     1856 <s3_gf2_square_cyclic+0x28e>
+    173f:	49 83 ef 04          	sub    r15,0x4
+    1743:	49 83 e9 20          	sub    r9,0x20
+    1747:	0f 80 9f 09 00 00    	jo     20ec <main+0x527>
+    174d:	49 83 f9 20          	cmp    r9,0x20
+    1751:	7d e2                	jge    1735 <s3_gf2_square_cyclic+0x16d>
+    1753:	49 ff cf             	dec    r15
+    1756:	0f 88 c3 09 00 00    	js     211f <main+0x55a>
+    175c:	eb 0b                	jmp    1769 <s3_gf2_square_cyclic+0x1a1>
+    175e:	49 ff cf             	dec    r15
+    1761:	0f 88 c9 09 00 00    	js     2130 <main+0x56b>
+    1767:	eb 00                	jmp    1769 <s3_gf2_square_cyclic+0x1a1>
+    1769:	49 83 ff 05          	cmp    r15,0x5
+    176d:	0f 8c 04 01 00 00    	jl     1877 <s3_gf2_square_cyclic+0x2af>
+    1773:	49 83 ef 05          	sub    r15,0x5
+    1777:	48 89 c8             	mov    rax,rcx
+    177a:	4d 89 ca             	mov    r10,r9
+    177d:	49 89 cb             	mov    r11,rcx
+    1780:	4c 89 d1             	mov    rcx,r10
+    1783:	48 d3 e0             	shl    rax,cl
+    1786:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    178d:	41 ba 00 00 00 00    	mov    r10d,0x0
+    1793:	49 0f 45 c2          	cmovne rax,r10
+    1797:	4c 89 d9             	mov    rcx,r11
+    179a:	48 89 c1             	mov    rcx,rax
+    179d:	48 31 ce             	xor    rsi,rcx
+    17a0:	48 83 c2 01          	add    rdx,0x1
+    17a4:	0f 80 97 09 00 00    	jo     2141 <main+0x57c>
+    17aa:	e9 ac fe ff ff       	jmp    165b <s3_gf2_square_cyclic+0x93>
+    17af:	49 ff cf             	dec    r15
+    17b2:	0f 88 46 08 00 00    	js     1ffe <main+0x439>
+    17b8:	49 ff cf             	dec    r15
+    17bb:	0f 88 4e 08 00 00    	js     200f <main+0x44a>
+    17c1:	48 83 fa 20          	cmp    rdx,0x20
+    17c5:	0f 8c a6 fe ff ff    	jl     1671 <s3_gf2_square_cyclic+0xa9>
+    17cb:	e9 ed fe ff ff       	jmp    16bd <s3_gf2_square_cyclic+0xf5>
+    17d0:	49 ff cf             	dec    r15
+    17d3:	0f 88 58 08 00 00    	js     2031 <main+0x46c>
+    17d9:	48 89 f8             	mov    rax,rdi
+    17dc:	49 89 d2             	mov    r10,rdx
+    17df:	49 89 cb             	mov    r11,rcx
+    17e2:	4c 89 d1             	mov    rcx,r10
+    17e5:	48 d3 e8             	shr    rax,cl
+    17e8:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    17ef:	41 ba 00 00 00 00    	mov    r10d,0x0
+    17f5:	49 0f 45 c2          	cmovne rax,r10
+    17f9:	4c 89 d9             	mov    rcx,r11
+    17fc:	48 89 c1             	mov    rcx,rax
+    17ff:	49 ff cf             	dec    r15
+    1802:	0f 88 3a 08 00 00    	js     2042 <main+0x47d>
+    1808:	48 83 e1 01          	and    rcx,0x1
+    180c:	49 ff cf             	dec    r15
+    180f:	0f 88 3e 08 00 00    	js     2053 <main+0x48e>
+    1815:	48 89 d0             	mov    rax,rdx
+    1818:	49 89 d2             	mov    r10,rdx
+    181b:	4c 01 d0             	add    rax,r10
+    181e:	0f 80 fc 07 00 00    	jo     2020 <main+0x45b>
+    1824:	49 89 c1             	mov    r9,rax
+    1827:	49 ff cf             	dec    r15
+    182a:	0f 88 34 08 00 00    	js     2064 <main+0x49f>
+    1830:	e9 ec fe ff ff       	jmp    1721 <s3_gf2_square_cyclic+0x159>
+    1835:	49 ff cf             	dec    r15
+    1838:	0f 88 8c 08 00 00    	js     20ca <main+0x505>
+    183e:	49 ff cf             	dec    r15
+    1841:	0f 88 94 08 00 00    	js     20db <main+0x516>
+    1847:	49 83 f9 20          	cmp    r9,0x20
+    184b:	0f 8d e4 fe ff ff    	jge    1735 <s3_gf2_square_cyclic+0x16d>
+    1851:	e9 fd fe ff ff       	jmp    1753 <s3_gf2_square_cyclic+0x18b>
+    1856:	49 ff cf             	dec    r15
+    1859:	0f 88 9e 08 00 00    	js     20fd <main+0x538>
+    185f:	49 83 e9 20          	sub    r9,0x20
+    1863:	0f 80 83 08 00 00    	jo     20ec <main+0x527>
+    1869:	49 ff cf             	dec    r15
+    186c:	0f 88 9c 08 00 00    	js     210e <main+0x549>
+    1872:	e9 aa fe ff ff       	jmp    1721 <s3_gf2_square_cyclic+0x159>
+    1877:	49 ff cf             	dec    r15
+    187a:	0f 88 d2 08 00 00    	js     2152 <main+0x58d>
+    1880:	48 89 c8             	mov    rax,rcx
+    1883:	4d 89 ca             	mov    r10,r9
+    1886:	49 89 cb             	mov    r11,rcx
+    1889:	4c 89 d1             	mov    rcx,r10
+    188c:	48 d3 e0             	shl    rax,cl
+    188f:	48 f7 c1 c0 ff ff ff 	test   rcx,0xffffffffffffffc0
+    1896:	41 ba 00 00 00 00    	mov    r10d,0x0
+    189c:	49 0f 45 c2          	cmovne rax,r10
+    18a0:	4c 89 d9             	mov    rcx,r11
+    18a3:	48 89 c1             	mov    rcx,rax
+    18a6:	49 ff cf             	dec    r15
+    18a9:	0f 88 b4 08 00 00    	js     2163 <main+0x59e>
+    18af:	48 31 ce             	xor    rsi,rcx
+    18b2:	49 ff cf             	dec    r15
+    18b5:	0f 88 b9 08 00 00    	js     2174 <main+0x5af>
+    18bb:	49 ff cf             	dec    r15
+    18be:	0f 88 c1 08 00 00    	js     2185 <main+0x5c0>
+    18c4:	48 83 c2 01          	add    rdx,0x1
+    18c8:	0f 80 73 08 00 00    	jo     2141 <main+0x57c>
+    18ce:	49 ff cf             	dec    r15
+    18d1:	0f 88 bf 08 00 00    	js     2196 <main+0x5d1>
+    18d7:	e9 7f fd ff ff       	jmp    165b <s3_gf2_square_cyclic+0x93>
+FUNCTION certified_step_dynamic / 154 assembly lines
+    18dc:	48 ff 05 4d 77 00 00 	inc    QWORD PTR [rip+0x774d]        # 9030 <__s3_frame_count>
+    18e3:	48 81 3d 42 77 00 00 	cmp    QWORD PTR [rip+0x7742],0x400        # 9030 <__s3_frame_count>
+    18ea:	00 04 00 00
+    18ee:	0f 8f b3 08 00 00    	jg     21a7 <main+0x5e2>
+    18f4:	48 83 3d 34 77 00 00 	cmp    QWORD PTR [rip+0x7734],0x1        # 9030 <__s3_frame_count>
+    18fc:	75 11                	jne    190f <certified_step_dynamic+0x33>
+    18fe:	49 bb 40 4b 4c 00 00 	movabs r11,0x4c4b40
+    1905:	00 00 00
+    1908:	4c 89 1d 11 77 00 00 	mov    QWORD PTR [rip+0x7711],r11        # 9020 <__s3_instruction_remaining>
+    190f:	55                   	push   rbp
+    1910:	48 89 e5             	mov    rbp,rsp
+    1913:	48 81 ec f0 01 00 00 	sub    rsp,0x1f0
+    191a:	48 89 9d 48 fe ff ff 	mov    QWORD PTR [rbp-0x1b8],rbx
+    1921:	4c 89 a5 40 fe ff ff 	mov    QWORD PTR [rbp-0x1c0],r12
+    1928:	4c 89 ad 38 fe ff ff 	mov    QWORD PTR [rbp-0x1c8],r13
+    192f:	4c 89 b5 30 fe ff ff 	mov    QWORD PTR [rbp-0x1d0],r14
+    1936:	4c 89 bd 28 fe ff ff 	mov    QWORD PTR [rbp-0x1d8],r15
+    193d:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+    1941:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+    1945:	48 8b 5d f8          	mov    rbx,QWORD PTR [rbp-0x8]
+    1949:	4c 8b 75 f0          	mov    r14,QWORD PTR [rbp-0x10]
+    194d:	4c 8b 3d cc 76 00 00 	mov    r15,QWORD PTR [rip+0x76cc]        # 9020 <__s3_instruction_remaining>
+    1954:	eb 00                	jmp    1956 <certified_step_dynamic+0x7a>
+    1956:	49 ff cf             	dec    r15
+    1959:	0f 88 6d 08 00 00    	js     21cc <main+0x607>
+    195f:	49 c7 c4 01 00 00 00 	mov    r12,0x1
+    1966:	49 ff cf             	dec    r15
+    1969:	0f 88 6e 08 00 00    	js     21dd <main+0x618>
+    196f:	48 b8 02 00 00 80 00 	movabs rax,0x80000002
+    1976:	00 00 00
+    1979:	49 89 c5             	mov    r13,rax
+    197c:	49 ff cf             	dec    r15
+    197f:	0f 88 69 08 00 00    	js     21ee <main+0x629>
+    1985:	49 ff cf             	dec    r15
+    1988:	0f 88 71 08 00 00    	js     21ff <main+0x63a>
+    198e:	49 ff cf             	dec    r15
+    1991:	0f 88 79 08 00 00    	js     2210 <main+0x64b>
+    1997:	49 ff cf             	dec    r15
+    199a:	0f 88 81 08 00 00    	js     2221 <main+0x65c>
+    19a0:	49 ff cf             	dec    r15
+    19a3:	0f 88 89 08 00 00    	js     2232 <main+0x66d>
+    19a9:	eb 00                	jmp    19ab <certified_step_dynamic+0xcf>
+    19ab:	49 83 ff 02          	cmp    r15,0x2
+    19af:	0f 8c 49 01 00 00    	jl     1afe <certified_step_dynamic+0x222>
+    19b5:	49 83 ef 02          	sub    r15,0x2
+    19b9:	49 83 fe 00          	cmp    r14,0x0
+    19bd:	7f 05                	jg     19c4 <certified_step_dynamic+0xe8>
+    19bf:	e9 b0 00 00 00       	jmp    1a74 <certified_step_dynamic+0x198>
+    19c4:	49 ff cf             	dec    r15
+    19c7:	0f 88 98 08 00 00    	js     2265 <main+0x6a0>
+    19cd:	4c 89 3d 4c 76 00 00 	mov    QWORD PTR [rip+0x764c],r15        # 9020 <__s3_instruction_remaining>
+    19d4:	4c 89 a5 a0 fe ff ff 	mov    QWORD PTR [rbp-0x160],r12
+    19db:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    19e2:	48 8b bd a0 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x160]
+    19e9:	48 8b b5 98 fe ff ff 	mov    rsi,QWORD PTR [rbp-0x168]
+    19f0:	e8 4b f6 ff ff       	call   1040 <s3_gf2_mul_cyclic@plt>
+    19f5:	48 89 c6             	mov    rsi,rax
+    19f8:	4c 8b 3d 21 76 00 00 	mov    r15,QWORD PTR [rip+0x7621]        # 9020 <__s3_instruction_remaining>
+    19ff:	49 83 ff 06          	cmp    r15,0x6
+    1a03:	0f 8c 16 01 00 00    	jl     1b1f <certified_step_dynamic+0x243>
+    1a09:	49 83 ef 06          	sub    r15,0x6
+    1a0d:	4c 89 f7             	mov    rdi,r14
+    1a10:	48 83 e7 01          	and    rdi,0x1
+    1a14:	4c 29 e6             	sub    rsi,r12
+    1a17:	0f 80 59 08 00 00    	jo     2276 <main+0x6b1>
+    1a1d:	48 0f af fe          	imul   rdi,rsi
+    1a21:	0f 80 60 08 00 00    	jo     2287 <main+0x6c2>
+    1a27:	49 01 fc             	add    r12,rdi
+    1a2a:	0f 80 68 08 00 00    	jo     2298 <main+0x6d3>
+    1a30:	4d 89 f2             	mov    r10,r14
+    1a33:	49 c1 ea 3f          	shr    r10,0x3f
+    1a37:	4d 01 d6             	add    r14,r10
+    1a3a:	49 d1 fe             	sar    r14,1
+    1a3d:	4c 89 3d dc 75 00 00 	mov    QWORD PTR [rip+0x75dc],r15        # 9020 <__s3_instruction_remaining>
+    1a44:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    1a4b:	48 8b bd 98 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x168]
+    1a52:	e8 d9 f5 ff ff       	call   1030 <s3_gf2_square_cyclic@plt>
+    1a57:	49 89 c5             	mov    r13,rax
+    1a5a:	4c 8b 3d bf 75 00 00 	mov    r15,QWORD PTR [rip+0x75bf]        # 9020 <__s3_instruction_remaining>
+    1a61:	49 83 ff 02          	cmp    r15,0x2
+    1a65:	0f 8c 43 01 00 00    	jl     1bae <certified_step_dynamic+0x2d2>
+    1a6b:	49 83 ef 02          	sub    r15,0x2
+    1a6f:	e9 37 ff ff ff       	jmp    19ab <certified_step_dynamic+0xcf>
+    1a74:	49 ff cf             	dec    r15
+    1a77:	0f 88 b4 08 00 00    	js     2331 <main+0x76c>
+    1a7d:	eb 0b                	jmp    1a8a <certified_step_dynamic+0x1ae>
+    1a7f:	49 ff cf             	dec    r15
+    1a82:	0f 88 ba 08 00 00    	js     2342 <main+0x77d>
+    1a88:	eb 00                	jmp    1a8a <certified_step_dynamic+0x1ae>
+    1a8a:	49 ff cf             	dec    r15
+    1a8d:	0f 88 c0 08 00 00    	js     2353 <main+0x78e>
+    1a93:	4c 89 3d 86 75 00 00 	mov    QWORD PTR [rip+0x7586],r15        # 9020 <__s3_instruction_remaining>
+    1a9a:	4c 89 a5 a0 fe ff ff 	mov    QWORD PTR [rbp-0x160],r12
+    1aa1:	48 89 5d f8          	mov    QWORD PTR [rbp-0x8],rbx
+    1aa5:	48 8b bd a0 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x160]
+    1aac:	48 8b 75 f8          	mov    rsi,QWORD PTR [rbp-0x8]
+    1ab0:	e8 8b f5 ff ff       	call   1040 <s3_gf2_mul_cyclic@plt>
+    1ab5:	48 89 c7             	mov    rdi,rax
+    1ab8:	4c 8b 3d 61 75 00 00 	mov    r15,QWORD PTR [rip+0x7561]        # 9020 <__s3_instruction_remaining>
+    1abf:	49 ff cf             	dec    r15
+    1ac2:	0f 88 9c 08 00 00    	js     2364 <main+0x79f>
+    1ac8:	48 89 f8             	mov    rax,rdi
+    1acb:	4c 89 3d 4e 75 00 00 	mov    QWORD PTR [rip+0x754e],r15        # 9020 <__s3_instruction_remaining>
+    1ad2:	48 8b 9d 48 fe ff ff 	mov    rbx,QWORD PTR [rbp-0x1b8]
+    1ad9:	4c 8b a5 40 fe ff ff 	mov    r12,QWORD PTR [rbp-0x1c0]
+    1ae0:	4c 8b ad 38 fe ff ff 	mov    r13,QWORD PTR [rbp-0x1c8]
+    1ae7:	4c 8b b5 30 fe ff ff 	mov    r14,QWORD PTR [rbp-0x1d0]
+    1aee:	4c 8b bd 28 fe ff ff 	mov    r15,QWORD PTR [rbp-0x1d8]
+    1af5:	48 ff 0d 34 75 00 00 	dec    QWORD PTR [rip+0x7534]        # 9030 <__s3_frame_count>
+    1afc:	c9                   	leave
+    1afd:	c3                   	ret
+    1afe:	49 ff cf             	dec    r15
+    1b01:	0f 88 3c 07 00 00    	js     2243 <main+0x67e>
+    1b07:	49 ff cf             	dec    r15
+    1b0a:	0f 88 44 07 00 00    	js     2254 <main+0x68f>
+    1b10:	49 83 fe 00          	cmp    r14,0x0
+    1b14:	0f 8f aa fe ff ff    	jg     19c4 <certified_step_dynamic+0xe8>
+    1b1a:	e9 55 ff ff ff       	jmp    1a74 <certified_step_dynamic+0x198>
+    1b1f:	49 ff cf             	dec    r15
+    1b22:	0f 88 81 07 00 00    	js     22a9 <main+0x6e4>
+    1b28:	4c 89 f7             	mov    rdi,r14
+    1b2b:	48 83 e7 01          	and    rdi,0x1
+    1b2f:	49 ff cf             	dec    r15
+    1b32:	0f 88 82 07 00 00    	js     22ba <main+0x6f5>
+    1b38:	4c 29 e6             	sub    rsi,r12
+    1b3b:	0f 80 35 07 00 00    	jo     2276 <main+0x6b1>
+    1b41:	49 ff cf             	dec    r15
+    1b44:	0f 88 81 07 00 00    	js     22cb <main+0x706>
+    1b4a:	48 0f af fe          	imul   rdi,rsi
+    1b4e:	0f 80 33 07 00 00    	jo     2287 <main+0x6c2>
+    1b54:	49 ff cf             	dec    r15
+    1b57:	0f 88 7f 07 00 00    	js     22dc <main+0x717>
+    1b5d:	49 01 fc             	add    r12,rdi
+    1b60:	0f 80 32 07 00 00    	jo     2298 <main+0x6d3>
+    1b66:	49 ff cf             	dec    r15
+    1b69:	0f 88 7e 07 00 00    	js     22ed <main+0x728>
+    1b6f:	4d 89 f2             	mov    r10,r14
+    1b72:	49 c1 ea 3f          	shr    r10,0x3f
+    1b76:	4d 01 d6             	add    r14,r10
+    1b79:	49 d1 fe             	sar    r14,1
+    1b7c:	49 ff cf             	dec    r15
+    1b7f:	0f 88 79 07 00 00    	js     22fe <main+0x739>
+    1b85:	4c 89 3d 94 74 00 00 	mov    QWORD PTR [rip+0x7494],r15        # 9020 <__s3_instruction_remaining>
+    1b8c:	4c 89 ad 98 fe ff ff 	mov    QWORD PTR [rbp-0x168],r13
+    1b93:	48 8b bd 98 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x168]
+    1b9a:	e8 91 f4 ff ff       	call   1030 <s3_gf2_square_cyclic@plt>
+    1b9f:	49 89 c5             	mov    r13,rax
+    1ba2:	4c 8b 3d 77 74 00 00 	mov    r15,QWORD PTR [rip+0x7477]        # 9020 <__s3_instruction_remaining>
+    1ba9:	e9 b3 fe ff ff       	jmp    1a61 <certified_step_dynamic+0x185>
+    1bae:	49 ff cf             	dec    r15
+    1bb1:	0f 88 58 07 00 00    	js     230f <main+0x74a>
+    1bb7:	49 ff cf             	dec    r15
+    1bba:	0f 88 60 07 00 00    	js     2320 <main+0x75b>
+    1bc0:	e9 e6 fd ff ff       	jmp    19ab <certified_step_dynamic+0xcf>
+### W=32 / GCC specialist generated assembly
+FUNCTION cyclic_reference / 134 assembly lines
+    1c40:	49 89 fb             	mov    r11,rdi
+    1c43:	8b 3d f7 23 00 00    	mov    edi,DWORD PTR [rip+0x23f7]        # 4040 <W>
+    1c49:	41 56                	push   r14
+    1c4b:	41 b9 01 00 00 00    	mov    r9d,0x1
+    1c51:	41 54                	push   r12
+    1c53:	4c 8b 15 de 23 00 00 	mov    r10,QWORD PTR [rip+0x23de]        # 4038 <MASK>
+    1c5a:	8d 4f ff             	lea    ecx,[rdi-0x1]
+    1c5d:	55                   	push   rbp
+    1c5e:	49 d3 e1             	shl    r9,cl
+    1c61:	53                   	push   rbx
+    1c62:	49 83 f1 02          	xor    r9,0x2
+    1c66:	48 85 f6             	test   rsi,rsi
+    1c69:	0f 84 58 01 00 00    	je     1dc7 <cyclic_reference+0x187>
+    1c6f:	48 89 f3             	mov    rbx,rsi
+    1c72:	be 01 00 00 00       	mov    esi,0x1
+    1c77:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+    1c7e:	00 00
+    1c80:	f6 c3 01             	test   bl,0x1
+    1c83:	74 4f                	je     1cd4 <cyclic_reference+0x94>
+    1c85:	48 85 f6             	test   rsi,rsi
+    1c88:	74 4a                	je     1cd4 <cyclic_reference+0x94>
+    1c8a:	4c 89 cd             	mov    rbp,r9
+    1c8d:	45 31 c0             	xor    r8d,r8d
+    1c90:	4c 21 d5             	and    rbp,r10
+    1c93:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+    1c98:	31 c0                	xor    eax,eax
+    1c9a:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1c9f:	99                   	cdq
+    1ca0:	f7 ff                	idiv   edi
+    1ca2:	85 d2                	test   edx,edx
+    1ca4:	0f 84 96 00 00 00    	je     1d40 <cyclic_reference+0x100>
+    1caa:	89 f9                	mov    ecx,edi
+    1cac:	4c 89 c8             	mov    rax,r9
+    1caf:	4d 89 cc             	mov    r12,r9
+    1cb2:	29 d1                	sub    ecx,edx
+    1cb4:	48 d3 e8             	shr    rax,cl
+    1cb7:	89 d1                	mov    ecx,edx
+    1cb9:	49 d3 e4             	shl    r12,cl
+    1cbc:	4c 09 e0             	or     rax,r12
+    1cbf:	4c 21 d0             	and    rax,r10
+    1cc2:	49 31 c0             	xor    r8,rax
+    1cc5:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1cc9:	48 21 c6             	and    rsi,rax
+    1ccc:	75 ca                	jne    1c98 <cyclic_reference+0x58>
+    1cce:	4c 89 c6             	mov    rsi,r8
+    1cd1:	4c 21 d6             	and    rsi,r10
+    1cd4:	48 d1 eb             	shr    rbx,1
+    1cd7:	75 7f                	jne    1d58 <cyclic_reference+0x118>
+    1cd9:	48 85 f6             	test   rsi,rsi
+    1cdc:	74 56                	je     1d34 <cyclic_reference+0xf4>
+    1cde:	31 c0                	xor    eax,eax
+    1ce0:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1ce5:	4d 89 d9             	mov    r9,r11
+    1ce8:	45 31 c0             	xor    r8d,r8d
+    1ceb:	4d 21 d1             	and    r9,r10
+    1cee:	eb 2b                	jmp    1d1b <cyclic_reference+0xdb>
+    1cf0:	89 f9                	mov    ecx,edi
+    1cf2:	4c 89 d8             	mov    rax,r11
+    1cf5:	4c 89 db             	mov    rbx,r11
+    1cf8:	29 d1                	sub    ecx,edx
+    1cfa:	48 d3 e8             	shr    rax,cl
+    1cfd:	89 d1                	mov    ecx,edx
+    1cff:	48 d3 e3             	shl    rbx,cl
+    1d02:	48 09 d8             	or     rax,rbx
+    1d05:	4c 21 d0             	and    rax,r10
+    1d08:	49 31 c0             	xor    r8,rax
+    1d0b:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d0f:	48 21 c6             	and    rsi,rax
+    1d12:	74 1a                	je     1d2e <cyclic_reference+0xee>
+    1d14:	31 c0                	xor    eax,eax
+    1d16:	f3 48 0f bc c6       	tzcnt  rax,rsi
+    1d1b:	99                   	cdq
+    1d1c:	f7 ff                	idiv   edi
+    1d1e:	85 d2                	test   edx,edx
+    1d20:	75 ce                	jne    1cf0 <cyclic_reference+0xb0>
+    1d22:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d26:	4d 31 c8             	xor    r8,r9
+    1d29:	48 21 c6             	and    rsi,rax
+    1d2c:	75 e6                	jne    1d14 <cyclic_reference+0xd4>
+    1d2e:	4c 89 c6             	mov    rsi,r8
+    1d31:	4c 21 d6             	and    rsi,r10
+    1d34:	5b                   	pop    rbx
+    1d35:	48 89 f0             	mov    rax,rsi
+    1d38:	5d                   	pop    rbp
+    1d39:	41 5c                	pop    r12
+    1d3b:	41 5e                	pop    r14
+    1d3d:	c3                   	ret
+    1d3e:	66 90                	xchg   ax,ax
+    1d40:	48 8d 46 ff          	lea    rax,[rsi-0x1]
+    1d44:	49 31 e8             	xor    r8,rbp
+    1d47:	48 21 c6             	and    rsi,rax
+    1d4a:	0f 85 48 ff ff ff    	jne    1c98 <cyclic_reference+0x58>
+    1d50:	e9 79 ff ff ff       	jmp    1cce <cyclic_reference+0x8e>
+    1d55:	0f 1f 00             	nop    DWORD PTR [rax]
+    1d58:	4d 85 c9             	test   r9,r9
+    1d5b:	0f 84 1f ff ff ff    	je     1c80 <cyclic_reference+0x40>
+    1d61:	4d 89 cc             	mov    r12,r9
+    1d64:	4d 89 c8             	mov    r8,r9
+    1d67:	31 ed                	xor    ebp,ebp
+    1d69:	4d 21 d4             	and    r12,r10
+    1d6c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+    1d70:	31 c0                	xor    eax,eax
+    1d72:	f3 49 0f bc c0       	tzcnt  rax,r8
+    1d77:	99                   	cdq
+    1d78:	f7 ff                	idiv   edi
+    1d7a:	85 d2                	test   edx,edx
+    1d7c:	74 32                	je     1db0 <cyclic_reference+0x170>
+    1d7e:	89 f9                	mov    ecx,edi
+    1d80:	4c 89 c8             	mov    rax,r9
+    1d83:	4d 89 ce             	mov    r14,r9
+    1d86:	29 d1                	sub    ecx,edx
+    1d88:	48 d3 e8             	shr    rax,cl
+    1d8b:	89 d1                	mov    ecx,edx
+    1d8d:	49 d3 e6             	shl    r14,cl
+    1d90:	4c 09 f0             	or     rax,r14
+    1d93:	4c 21 d0             	and    rax,r10
+    1d96:	48 31 c5             	xor    rbp,rax
+    1d99:	49 8d 40 ff          	lea    rax,[r8-0x1]
+    1d9d:	49 21 c0             	and    r8,rax
+    1da0:	75 ce                	jne    1d70 <cyclic_reference+0x130>
+    1da2:	49 89 e9             	mov    r9,rbp
+    1da5:	4d 21 d1             	and    r9,r10
+    1da8:	e9 d3 fe ff ff       	jmp    1c80 <cyclic_reference+0x40>
+    1dad:	0f 1f 00             	nop    DWORD PTR [rax]
+    1db0:	49 8d 40 ff          	lea    rax,[r8-0x1]
+    1db4:	4c 31 e5             	xor    rbp,r12
+    1db7:	49 21 c0             	and    r8,rax
+    1dba:	75 b4                	jne    1d70 <cyclic_reference+0x130>
+    1dbc:	49 89 e9             	mov    r9,rbp
+    1dbf:	4d 21 d1             	and    r9,r10
+    1dc2:	e9 b9 fe ff ff       	jmp    1c80 <cyclic_reference+0x40>
+    1dc7:	31 c0                	xor    eax,eax
+    1dc9:	be 01 00 00 00       	mov    esi,0x1
+    1dce:	e9 12 ff ff ff       	jmp    1ce5 <cyclic_reference+0xa5>

@@ -1,0 +1,99 @@
+{
+  "campaign": "S3_V12_VERIFIED_CHECKED_I64_NATIVE_PROGRESSIONS",
+  "status": "EXPERIMENTAL_S3_NATIVE_VERIFIED_NON_GF2_ALGORITHM",
+  "algorithm_family": "MONOTONIC_SIGNED_I64_ARITHMETIC_PROGRESSION",
+  "source_ir_proof": true,
+  "blackbox_inference_used": false,
+  "s3_native_backend_used": true,
+  "gcc_role": "ASSEMBLER_LINKER_AND_INDEPENDENT_C_REFERENCE",
+  "automatic_production_promotion": false,
+  "source_ir_sha256": "863beedd4f161f37ddb771448b848adff899c92c7a45ee6efab389f2d037bb75",
+  "certificate_sha256": "18cff726878b2fa4762431fb305815f28e8ffb14a8e33b847e16d3180327f3bd",
+  "delta": 7,
+  "original_compile_ms": 4.08,
+  "certificate_proof_ms": 0.2706,
+  "specialized_cold_build_ms": 98.6313,
+  "native_smoke_checks": 54,
+  "protected_python_api_median_ns": 132000,
+  "original_s3_assembly_sha256": "331d4e315fec8b86ba064fe303bf043862754ebcfdde0d3286dc8ab0052ccfaf",
+  "native_shortcut_assembly_sha256": "97673bccf17125bc64110f6b9815e32cbdf2854a786fbf6e839bc8671f68d415",
+  "samples": [
+    {
+      "N": 0,
+      "delta": 7,
+      "rounds": 9,
+      "differential_states": 64,
+      "parity": true,
+      "median_ns": {
+        "original_s3_n_steps": 4.0,
+        "verified_native_s3_formula": 5.44444,
+        "independent_gcc_formula": 0.80833
+      },
+      "native_speedup_over_original": 0.734694,
+      "sink": 8
+    },
+    {
+      "N": 1,
+      "delta": 7,
+      "rounds": 9,
+      "differential_states": 64,
+      "parity": true,
+      "median_ns": {
+        "original_s3_n_steps": 8.0,
+        "verified_native_s3_formula": 5.44444,
+        "independent_gcc_formula": 0.80833
+      },
+      "native_speedup_over_original": 1.469388,
+      "sink": 34320
+    },
+    {
+      "N": 100,
+      "delta": 7,
+      "rounds": 9,
+      "differential_states": 64,
+      "parity": true,
+      "median_ns": {
+        "original_s3_n_steps": 416.0,
+        "verified_native_s3_formula": 5.44444,
+        "independent_gcc_formula": 0.81667
+      },
+      "native_speedup_over_original": 76.408163,
+      "sink": 8
+    },
+    {
+      "N": 10000,
+      "delta": 7,
+      "rounds": 9,
+      "differential_states": 64,
+      "parity": true,
+      "median_ns": {
+        "original_s3_n_steps": 41453.0,
+        "verified_native_s3_formula": 5.44444,
+        "independent_gcc_formula": 1.06667
+      },
+      "native_speedup_over_original": 7613.816327,
+      "sink": 8
+    },
+    {
+      "N": 1000000,
+      "delta": 7,
+      "rounds": 9,
+      "differential_states": 64,
+      "parity": true,
+      "median_ns": {
+        "original_s3_n_steps": 4129100.0,
+        "verified_native_s3_formula": 5.44444,
+        "independent_gcc_formula": 0.80833
+      },
+      "native_speedup_over_original": 758406.122449,
+      "sink": 29
+    }
+  ],
+  "limitations": [
+    "Original i64 N-step S3 vs verified single-formula S3 changes O(N) to O(1) for this known progression; not a new algorithm.",
+    "Both native S3 symbols used direct C ABI benchmark without Python proof-check overhead; protected API reported separately.",
+    "No general checked-i64 affine optimization, only monotone same-sign progression and explicit overflow guards.",
+    "N=1e6 timing is not end-to-end cold-build amortized; cold/proof costs reported separately.",
+    "Single host, nine rotating native rounds, unusually small GCC formula times sensitive to noise."
+  ]
+}

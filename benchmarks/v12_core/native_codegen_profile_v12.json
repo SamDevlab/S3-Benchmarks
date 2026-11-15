@@ -1,0 +1,118 @@
+{
+  "campaign": "S3_V12_NATIVE_ASSEMBLY_RESEARCH",
+  "provenance": "real S3 x86-64 ELF and GCC -O3 C known specialist, same host",
+  "limitations": [
+    "Static assembly instruction counts are NOT dynamic executed instruction counts.",
+    "The GCC specialist C loops over set bits; S3 fixed-width polynomial loops have a different algorithmic operation count.",
+    "No CPU PMU hardware counters measured, no general backend speedup claim.",
+    "Only W16/W32 analyzed. Native codepaths and runtime wrappers differ."
+  ],
+  "cases": [
+    {
+      "width": 16,
+      "s3_source_ir_sha256": "fb5c4065846576a163c34ecce790f1cb78f398b4c2eeb99dbabc4637bee7791f",
+      "s3_assembly_sha256": "ca9aea89b13d2801ec178ced44539e213b4c4101d99694467d27b81a4c023f7f",
+      "s3_selected_algorithm": "GF2_CYCLIC_POLYNOMIAL",
+      "s3_functions": {
+        "s3_gf2_rotl_w": {
+          "static_instructions": 99,
+          "branch_instructions": 21,
+          "conditional_branches": 20,
+          "calls": 0,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 15
+        },
+        "s3_gf2_mul_cyclic": {
+          "static_instructions": 144,
+          "branch_instructions": 38,
+          "conditional_branches": 29,
+          "calls": 2,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 26
+        },
+        "s3_gf2_square_cyclic": {
+          "static_instructions": 181,
+          "branch_instructions": 61,
+          "conditional_branches": 47,
+          "calls": 0,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 4
+        },
+        "certified_step_dynamic": {
+          "static_instructions": 150,
+          "branch_instructions": 44,
+          "conditional_branches": 35,
+          "calls": 4,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 26
+        }
+      },
+      "gcc_specialist_functions": {
+        "cyclic_reference": {
+          "static_instructions": 133,
+          "branch_instructions": 20,
+          "conditional_branches": 15,
+          "calls": 0,
+          "stack_push_pop": 8,
+          "stack_memory_refs": 0
+        }
+      },
+      "s3_function_count": 4,
+      "gcc_specialist_function_count": 1,
+      "s3_native_smoke_checks": 180
+    },
+    {
+      "width": 32,
+      "s3_source_ir_sha256": "3e7bdeee66af55372894ba80e2abf70fffc44f7fb691e004beb66cd6413e3ae7",
+      "s3_assembly_sha256": "33e507fb6b682cb9c22369af14acc5ccb065c1b883202dc835213a8686210bde",
+      "s3_selected_algorithm": "GF2_CYCLIC_POLYNOMIAL",
+      "s3_functions": {
+        "s3_gf2_rotl_w": {
+          "static_instructions": 104,
+          "branch_instructions": 21,
+          "conditional_branches": 20,
+          "calls": 0,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 15
+        },
+        "s3_gf2_mul_cyclic": {
+          "static_instructions": 148,
+          "branch_instructions": 38,
+          "conditional_branches": 29,
+          "calls": 2,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 26
+        },
+        "s3_gf2_square_cyclic": {
+          "static_instructions": 185,
+          "branch_instructions": 61,
+          "conditional_branches": 47,
+          "calls": 0,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 4
+        },
+        "certified_step_dynamic": {
+          "static_instructions": 151,
+          "branch_instructions": 44,
+          "conditional_branches": 35,
+          "calls": 4,
+          "stack_push_pop": 1,
+          "stack_memory_refs": 26
+        }
+      },
+      "gcc_specialist_functions": {
+        "cyclic_reference": {
+          "static_instructions": 133,
+          "branch_instructions": 20,
+          "conditional_branches": 15,
+          "calls": 0,
+          "stack_push_pop": 8,
+          "stack_memory_refs": 0
+        }
+      },
+      "s3_function_count": 4,
+      "gcc_specialist_function_count": 1,
+      "s3_native_smoke_checks": 324
+    }
+  ]
+}
