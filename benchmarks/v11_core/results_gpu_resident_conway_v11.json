@@ -1,0 +1,56 @@
+{
+  "status": "REAL_S3_WGSL_PHYSICAL_GPU_RESIDENT_PINGPONG_PARITY",
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "adapter_type": "DiscreteGPU",
+    "is_physical": true,
+    "max_buffer_size": 268435456,
+    "max_compute_workgroup_size_x": 256,
+    "max_compute_workgroup_size_y": 256,
+    "max_compute_invocations_per_workgroup": 256,
+    "max_compute_workgroups_per_dimension": 65535
+  },
+  "s3_wgsl_lowering_ms": 15.7008,
+  "cases": [
+    {
+      "width": 64,
+      "height": 64,
+      "steps": 50,
+      "per_buffer_bytes": 16384,
+      "s3_gpu_conway_correct": true,
+      "gpu_physical": true,
+      "gpu_total_ms_median": 8.9494,
+      "gpu_dispatch_ms_median": 5.1748,
+      "cpu_numpy_total_ms_median": 3.4517,
+      "gpu_over_cpu_total_ratio": 2.5928,
+      "gpu_rounds": 7,
+      "cpu_rounds": 7
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 50,
+      "per_buffer_bytes": 65536,
+      "s3_gpu_conway_correct": true,
+      "gpu_physical": true,
+      "gpu_total_ms_median": 7.6872,
+      "gpu_dispatch_ms_median": 4.4788,
+      "cpu_numpy_total_ms_median": 12.4852,
+      "gpu_over_cpu_total_ratio": 0.6157,
+      "gpu_rounds": 7,
+      "cpu_rounds": 7
+    }
+  ],
+  "novel_gpu_algorithm": false,
+  "production_dispatch_auto_enabled": false,
+  "limits": [
+    "One physical Windows RX580 GPU, 7 timed rounds and one local CPU.",
+    "N=50 generations, two resident pingpong buffers of <=65536 bytes each.",
+    "Total GPU includes shader dispatch/transfer/readback, unlike purely resident kernel microbenchmark.",
+    "NumPy CPU uses a vectorized slicing reference, not tuned native C or AVX2.",
+    "These results do not authorize unsafe-buffer override, GPU production promotion or a universal speedup claim."
+  ]
+}

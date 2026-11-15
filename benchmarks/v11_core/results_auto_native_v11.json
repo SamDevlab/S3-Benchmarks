@@ -1,0 +1,268 @@
+{
+  "campaign": "S3_V11_CORE_AUTOMATIC_GF2_ALGORITHM_SELECTION",
+  "scientific_status": "EXPERIMENTAL_SOURCE_IR_CERTIFIED_AUTO_REPRESENTATION_CHOICE",
+  "novel_algorithm_claim": false,
+  "automatic_production_compiler_pass": false,
+  "gpu_benchmark_included": false,
+  "s3_backend": "S3 x86-64 assembly, GCC assembler/linker only",
+  "c_reference": "GCC -O3 independent cyclic polynomial and direct N-step Rule90",
+  "machine_session": "single Windows/WSL host; nine alternating rounds",
+  "cases": [
+    {
+      "width": 8,
+      "source_ir_sha256": "c2f0f550fcb39fc146b8fbe041e10e9a2afa3450ebf23490f3b6468db4e852b3",
+      "proof_cert_sha256": "3ada644bdcf682d1127d01aa58511d18a42a33274befc70a9aa0baca4dab5dab",
+      "selection": {
+        "selected": "GF2_CYCLIC_POLYNOMIAL",
+        "width": 8,
+        "certificate_sha256": "3ada644bdcf682d1127d01aa58511d18a42a33274befc70a9aa0baca4dab5dab",
+        "original_ir_sha256": "c2f0f550fcb39fc146b8fbe041e10e9a2afa3450ebf23490f3b6468db4e852b3",
+        "circulant_polynomial": 130,
+        "proof_basis": "For every bit i, proven output column[i] is rotate(column[0],i), so the GF(2) linear map is multiplication by p=column[0] modulo x^W-1.",
+        "confidence": "EXACT_SOURCE_IR_STRUCTURAL_PROOF",
+        "algorithmic_novelty": false,
+        "automatic_production_compiler_pass": false
+      },
+      "generic_native_build_ms": 205.8448,
+      "auto_native_build_ms": 199.0722,
+      "generic_native_smoke_checks": 108,
+      "auto_native_smoke_checks": 108,
+      "same_s3_binary_per_N_for_each_selected_algorithm": true,
+      "samples": [
+        {
+          "W": 8,
+          "N": 1,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 274.3333,
+            "s3_auto_selected": 275.1429,
+            "gcc_cyclic_specialist": 13.86
+          },
+          "auto_over_generic": 1.002951,
+          "auto_over_gcc_specialist": 19.851577,
+          "sink": 204
+        },
+        {
+          "W": 8,
+          "N": 16,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 862.6667,
+            "s3_auto_selected": 714.4286,
+            "gcc_cyclic_specialist": 18.38
+          },
+          "auto_over_generic": 0.828163,
+          "auto_over_gcc_specialist": 38.86989,
+          "sink": 0
+        },
+        {
+          "W": 8,
+          "N": 1000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 1664.3333,
+            "s3_auto_selected": 1369.0,
+            "gcc_cyclic_specialist": 19.66
+          },
+          "auto_over_generic": 0.822552,
+          "auto_over_gcc_specialist": 69.633774,
+          "sink": 0
+        },
+        {
+          "W": 8,
+          "N": 1000000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 3265.6667,
+            "s3_auto_selected": 2538.4286,
+            "gcc_cyclic_specialist": 29.61
+          },
+          "auto_over_generic": 0.777308,
+          "auto_over_gcc_specialist": 85.72876,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "width": 16,
+      "source_ir_sha256": "fb5c4065846576a163c34ecce790f1cb78f398b4c2eeb99dbabc4637bee7791f",
+      "proof_cert_sha256": "fda32431b569c8940a01599e8ee5e05adbfc1f8659de5be2143c16436705a8c1",
+      "selection": {
+        "selected": "GF2_CYCLIC_POLYNOMIAL",
+        "width": 16,
+        "certificate_sha256": "fda32431b569c8940a01599e8ee5e05adbfc1f8659de5be2143c16436705a8c1",
+        "original_ir_sha256": "fb5c4065846576a163c34ecce790f1cb78f398b4c2eeb99dbabc4637bee7791f",
+        "circulant_polynomial": 32770,
+        "proof_basis": "For every bit i, proven output column[i] is rotate(column[0],i), so the GF(2) linear map is multiplication by p=column[0] modulo x^W-1.",
+        "confidence": "EXACT_SOURCE_IR_STRUCTURAL_PROOF",
+        "algorithmic_novelty": false,
+        "automatic_production_compiler_pass": false
+      },
+      "generic_native_build_ms": 250.3721,
+      "auto_native_build_ms": 254.9935,
+      "generic_native_smoke_checks": 180,
+      "auto_native_smoke_checks": 180,
+      "same_s3_binary_per_N_for_each_selected_algorithm": true,
+      "samples": [
+        {
+          "W": 16,
+          "N": 1,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 892.6667,
+            "s3_auto_selected": 679.8571,
+            "gcc_cyclic_specialist": 13.93
+          },
+          "auto_over_generic": 0.761602,
+          "auto_over_gcc_specialist": 48.805251,
+          "sink": 40524
+        },
+        {
+          "W": 16,
+          "N": 16,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 2263.0,
+            "s3_auto_selected": 1384.2857,
+            "gcc_cyclic_specialist": 27.39
+          },
+          "auto_over_generic": 0.611704,
+          "auto_over_gcc_specialist": 50.539822,
+          "sink": 0
+        },
+        {
+          "W": 16,
+          "N": 1000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 4845.6667,
+            "s3_auto_selected": 2517.7143,
+            "gcc_cyclic_specialist": 27.62
+          },
+          "auto_over_generic": 0.519581,
+          "auto_over_gcc_specialist": 91.155477,
+          "sink": 0
+        },
+        {
+          "W": 16,
+          "N": 1000000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 9961.6667,
+            "s3_auto_selected": 5205.4286,
+            "gcc_cyclic_specialist": 48.08
+          },
+          "auto_over_generic": 0.522546,
+          "auto_over_gcc_specialist": 108.265985,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "width": 32,
+      "source_ir_sha256": "3e7bdeee66af55372894ba80e2abf70fffc44f7fb691e004beb66cd6413e3ae7",
+      "proof_cert_sha256": "ed33ecdf8339d1bfca99941066b3280d8c1f8278e37788595832a431c11a9731",
+      "selection": {
+        "selected": "GF2_CYCLIC_POLYNOMIAL",
+        "width": 32,
+        "certificate_sha256": "ed33ecdf8339d1bfca99941066b3280d8c1f8278e37788595832a431c11a9731",
+        "original_ir_sha256": "3e7bdeee66af55372894ba80e2abf70fffc44f7fb691e004beb66cd6413e3ae7",
+        "circulant_polynomial": 2147483650,
+        "proof_basis": "For every bit i, proven output column[i] is rotate(column[0],i), so the GF(2) linear map is multiplication by p=column[0] modulo x^W-1.",
+        "confidence": "EXACT_SOURCE_IR_STRUCTURAL_PROOF",
+        "algorithmic_novelty": false,
+        "automatic_production_compiler_pass": false
+      },
+      "generic_native_build_ms": 453.2892,
+      "auto_native_build_ms": 409.9757,
+      "generic_native_smoke_checks": 324,
+      "auto_native_smoke_checks": 324,
+      "same_s3_binary_per_N_for_each_selected_algorithm": true,
+      "samples": [
+        {
+          "W": 32,
+          "N": 1,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 1881.0,
+            "s3_auto_selected": 1079.2857,
+            "gcc_cyclic_specialist": 11.89
+          },
+          "auto_over_generic": 0.573783,
+          "auto_over_gcc_specialist": 90.772558,
+          "sink": 15277644
+        },
+        {
+          "W": 32,
+          "N": 16,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 12960.3333,
+            "s3_auto_selected": 4092.4286,
+            "gcc_cyclic_specialist": 42.98
+          },
+          "auto_over_generic": 0.315766,
+          "auto_over_gcc_specialist": 95.217044,
+          "sink": 0
+        },
+        {
+          "W": 32,
+          "N": 1000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 17745.0,
+            "s3_auto_selected": 6234.2857,
+            "gcc_cyclic_specialist": 52.21
+          },
+          "auto_over_generic": 0.351326,
+          "auto_over_gcc_specialist": 119.407886,
+          "sink": 0
+        },
+        {
+          "W": 32,
+          "N": 1000000,
+          "rounds": 9,
+          "differential_checks": 64,
+          "parity": true,
+          "median_ns": {
+            "s3_generic": 36093.6667,
+            "s3_auto_selected": 10367.8571,
+            "gcc_cyclic_specialist": 58.35
+          },
+          "auto_over_generic": 0.287249,
+          "auto_over_gcc_specialist": 177.683927,
+          "sink": 0
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Only a restricted, structurally certified GF2 family, not a general automatic S3 algorithm discoverer.",
+    "C cyclic specialist is known, not an S3 mathematical novelty.",
+    "Raw native timings exclude Python proof checks; cold builds recorded.",
+    "Submicrosecond references are susceptible to clock and optimizer noise.",
+    "No claim of asymptotically better algorithm vs specialist; check W-scaling separately."
+  ]
+}
