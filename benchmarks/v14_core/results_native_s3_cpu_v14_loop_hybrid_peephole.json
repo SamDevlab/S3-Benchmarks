@@ -1,0 +1,87 @@
+{
+  "campaign": "S3_V14_NATIVE_CPU_VS_S3_GPU_IDENTICAL_CONWAY",
+  "engine": "S3 source -> native ELF x86-64, Linux WSL host",
+  "status": "EXPERIMENTAL_HOSTED_FFI_NOT_SAME_OS_AS_WINDOWS_GPU",
+  "ffi_boundary": "one exported S3 native call per generation, no native C math",
+  "rounds": 7,
+  "warmups": 2,
+  "pmu_instructions_measured": false,
+  "cases": [
+    {
+      "width": 64,
+      "height": 64,
+      "steps": 50,
+      "fixture_from_physical_gpu": true,
+      "source_input_sha256": "5e2188c1495ef9e7297b43ef737e322f562d64103bb1e4ab0a05cd283e2ac886",
+      "final_output_sha256": "95fdbd2e93dc7f6daca7b8efd8105be3e04ca6c3443b80ba63b7db7049b444f8",
+      "native_s3_parity": true,
+      "gpu_digest_agrees": true,
+      "median_native_s3_cpu_ms": 6.2891,
+      "all_samples_native_s3_cpu_ms": [
+        4.951,
+        5.7998,
+        7.2505,
+        8.7782,
+        5.6004,
+        7.1161,
+        6.2891
+      ]
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 10,
+      "fixture_from_physical_gpu": true,
+      "source_input_sha256": "8d70d6b6aa9d4fc47a3613088b7780116a776cb5c3611ced0987521f91e8f1ea",
+      "final_output_sha256": "0caf3fff3c777d0346b10c177d7e6ca6765566325f194dcc31b15d149af141f6",
+      "native_s3_parity": true,
+      "gpu_digest_agrees": true,
+      "median_native_s3_cpu_ms": 12.9189,
+      "all_samples_native_s3_cpu_ms": [
+        9.1371,
+        10.5867,
+        9.5822,
+        13.1309,
+        12.9189,
+        18.5581,
+        14.4566
+      ]
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 50,
+      "fixture_from_physical_gpu": true,
+      "source_input_sha256": "f5fff0c6dbd33da659c7b6065ac0aa1143e5001e4d355af3493754d3679cfec0",
+      "final_output_sha256": "d41e0545e8fa2a1cd39eeb2f3a7568043339bf23316835ac408ace8e739617de",
+      "native_s3_parity": true,
+      "gpu_digest_agrees": true,
+      "median_native_s3_cpu_ms": 26.989,
+      "all_samples_native_s3_cpu_ms": [
+        22.2243,
+        29.2109,
+        29.7453,
+        25.107,
+        31.7234,
+        24.063,
+        26.989
+      ]
+    }
+  ],
+  "limitations": [
+    "Native S3 CPU runs inside WSL Linux; GPU S3 runs on physical Windows Vulkan; this is same physical host but different runtime OS.",
+    "CPU wall includes Python<->ctypes call per generation, but native per-step computation is from S3, not C.",
+    "GPU and native CPU both exclude cold compile time from step latency; compile separately recorded.",
+    "Per-run S3 CPU includes creating input/output i64 arrays; GPU operates i32 after explicit narrowing of 0/1.",
+    "Not production dispatch calibration and no cross-machine replication."
+  ],
+  "build": {
+    "experimental_peephole_v14": true,
+    "instruction_budget_mode": "loop-hybrid",
+    "s3_native_compiler_asm_ms": 119.473,
+    "s3_native_elf_link_ms": 211.803,
+    "s3_generated_assembly_sha256": "fdf3b71d640dc4fc2935b1eada49aaec12bf9b60429ec3def2bc763ce63078c6",
+    "s3_elf_file_bytes": 47256,
+    "s3_source_sha256": "bab6263474fd378887fba02ba962d798b80652e924c059113cfe15561787f6d5"
+  }
+}

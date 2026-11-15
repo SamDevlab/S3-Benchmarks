@@ -1,0 +1,33 @@
+export fn conway_step(grid_in: &[i64], grid_out: &mut [i64], w: i64, h: i64) -> i64:
+    mut y: i64 = 1
+    while y < h - 1:
+        mut x: i64 = 1
+        while x < w - 1:
+            mut idx: i64 = y * w + x
+            mut alive: i64 = grid_in[idx]
+            mut up_left: i64 = idx - w - 1
+            mut up: i64 = idx - w
+            mut up_right: i64 = idx - w + 1
+            mut left: i64 = idx - 1
+            mut right: i64 = idx + 1
+            mut down_left: i64 = idx + w - 1
+            mut down: i64 = idx + w
+            mut down_right: i64 = idx + w + 1
+            mut nbrs: i64 = grid_in[up_left] + grid_in[up] + grid_in[up_right] + grid_in[left] + grid_in[right] + grid_in[down_left] + grid_in[down] + grid_in[down_right]
+            mut next_state: i64 = 0
+            match (nbrs == 3):
+                -1:
+                    next_state = 1
+                else:
+                    match (nbrs == 2):
+                        -1:
+                            next_state = alive
+                        else:
+                            next_state = 0
+            grid_out[idx] = next_state
+            x = x + 1
+        y = y + 1
+    return 0
+
+fn main() -> i64:
+    return 0
