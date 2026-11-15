@@ -1,0 +1,132 @@
+{
+  "campaign": "S3_V15_LOCAL_SLICE_BOUNDS_PROOF_NATIVE_AB",
+  "status": "EXPERIMENTAL_NO_GLOBAL_PROMOTION",
+  "session_id": "s1",
+  "same_s3_assembly_program_ir": true,
+  "source_sha256": "d53626f06bb4dd679d493ecc4736725b681d32b6a0b4f24d5ac09a6f001c29aa",
+  "s3_compiler_level": "O1",
+  "gcc_role_for_s3": "ASSEMBLE_AND_LINK_ONLY",
+  "hp03_loop_versioning_enabled": true,
+  "hp02_scalar_promotion_enabled": true,
+  "native_budget_mode": "loop-hybrid",
+  "experimental_v15_default": false,
+  "optimization_stats": {
+    "loop_dup": {
+      "reused_checks": 1,
+      "original_checked_loads": 1,
+      "conservative_barriers": 0
+    },
+    "sum_three": {
+      "reused_checks": 2,
+      "original_checked_loads": 1,
+      "conservative_barriers": 0
+    }
+  },
+  "compile_to_assembly_ms": {
+    "source_compile_ms": 45.337,
+    "baseline_emitter_ms": 22.627,
+    "v15_emitter_ms": 28.451
+  },
+  "static_disassembly": {
+    "baseline": {
+      "shared_library_bytes": 43192,
+      "hot_functions": {
+        "loop_dup": {
+          "static_instructions": 150,
+          "static_conditional_jumps": 51,
+          "static_calls": 0
+        },
+        "sum_three": {
+          "static_instructions": 174,
+          "static_conditional_jumps": 61,
+          "static_calls": 0
+        }
+      },
+      "static_counts_not_dynamic_pmu": true
+    },
+    "v15": {
+      "shared_library_bytes": 43192,
+      "hot_functions": {
+        "loop_dup": {
+          "static_instructions": 146,
+          "static_conditional_jumps": 49,
+          "static_calls": 0
+        },
+        "sum_three": {
+          "static_instructions": 166,
+          "static_conditional_jumps": 57,
+          "static_calls": 0
+        }
+      },
+      "static_counts_not_dynamic_pmu": true
+    }
+  },
+  "results": {
+    "cases": [
+      {
+        "kernel": "loop_dup",
+        "length": 64,
+        "expected": 6126,
+        "parity": true,
+        "baseline_ns": 66.333,
+        "v15_ns": 68.167,
+        "speedup": 0.973105
+      },
+      {
+        "kernel": "loop_dup",
+        "length": 1024,
+        "expected": 98148,
+        "parity": true,
+        "baseline_ns": 765.333,
+        "v15_ns": 802.667,
+        "speedup": 0.953488
+      },
+      {
+        "kernel": "loop_dup",
+        "length": 8192,
+        "expected": 786434,
+        "parity": true,
+        "baseline_ns": 5733.333,
+        "v15_ns": 5730.0,
+        "speedup": 1.000582
+      },
+      {
+        "kernel": "sum_three",
+        "length": 64,
+        "expected": 9189,
+        "parity": true,
+        "baseline_ns": 81.833,
+        "v15_ns": 82.833,
+        "speedup": 0.987928
+      },
+      {
+        "kernel": "sum_three",
+        "length": 1024,
+        "expected": 147222,
+        "parity": true,
+        "baseline_ns": 1071.333,
+        "v15_ns": 1079.333,
+        "speedup": 0.992588
+      },
+      {
+        "kernel": "sum_three",
+        "length": 8192,
+        "expected": 1179651,
+        "parity": true,
+        "baseline_ns": 10720.0,
+        "v15_ns": 14033.333,
+        "speedup": 0.763895
+      }
+    ],
+    "rounds": 9,
+    "mode": 1,
+    "checksum": 0
+  },
+  "limits": [
+    "One host, 9 alternating rounds. Submicrosecond runtimes may be noisy.",
+    "The independent C code is a correctness oracle and timing harness only.",
+    "Resulting S3 machine code is not formally verified; native differential tests compare outputs and invalid bounds traps.",
+    "Preexisting HP03 fast-path checks are not used as a local proof witness.",
+    "No CPU PMU or production dispatch claims."
+  ]
+}
