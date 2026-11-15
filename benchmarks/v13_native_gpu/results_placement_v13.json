@@ -1,0 +1,59 @@
+{
+  "campaign": "S3_V13_ACTUAL_HARDWARE_CPU_GPU_SELECTION",
+  "status": "EXPERIMENTAL_CORRECT_CPU_PLACEMENT_NOT_PRODUCTION",
+  "physical_gpu": true,
+  "cpu_reference": "native Windows C -O3",
+  "same_host_distinct_process_sessions": 3,
+  "independent_machines": 1,
+  "gpu_kernel_hash": "5dc3aeff3d2aadf8ef56358ecd2a6d6ae3b4bc35e14a63034ef352c7eff402de",
+  "original_s3_source_hash": "a6d4f10b402a445390a88e62d8a302421d334b4eb68cdf37b7d25a86e6a6c0c6",
+  "precision_contract": "explicit_f64_to_f32_and_i64_to_i32_tol_1e-5",
+  "automatic_production_dispatch": false,
+  "cases": [
+    {
+      "width": 64,
+      "height": 64,
+      "iterations": 50,
+      "decision": "CPU",
+      "reason": "NO_CONSERVATIVE_GPU_GAIN",
+      "accepted_sessions": 3,
+      "worst_gpu_ms": 12.5952,
+      "best_cpu_ms": 0.5176,
+      "session_ratios_gpu_over_native_c": [
+        17.556607418856263,
+        17.037451507012833,
+        18.634709276520198
+      ]
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "iterations": 10,
+      "decision": "CPU",
+      "reason": "NO_CONSERVATIVE_GPU_GAIN",
+      "accepted_sessions": 3,
+      "worst_gpu_ms": 7.6467,
+      "best_cpu_ms": 0.4245,
+      "session_ratios_gpu_over_native_c": [
+        16.538751472320378,
+        9.055188316679477,
+        13.222721770707244
+      ]
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "iterations": 50,
+      "decision": "CPU",
+      "reason": "NO_CONSERVATIVE_GPU_GAIN",
+      "accepted_sessions": 3,
+      "worst_gpu_ms": 13.4937,
+      "best_cpu_ms": 1.7741,
+      "session_ratios_gpu_over_native_c": [
+        4.971794381807759,
+        5.341356180598614,
+        5.643302245828281
+      ]
+    }
+  ]
+}

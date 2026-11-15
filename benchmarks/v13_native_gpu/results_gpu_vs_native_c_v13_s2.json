@@ -1,0 +1,175 @@
+{
+  "campaign": "S3_V13_PHYSICAL_GPU_VS_NATIVE_WINDOWS_C",
+  "status": "EXPLORATORY_ONE_HOST_SESSION_NOT_DISPATCH_QUALIFIED",
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "adapter_type": "DiscreteGPU",
+    "is_physical": true,
+    "max_buffer_size": 268435456,
+    "max_compute_workgroup_size_x": 256,
+    "max_compute_workgroup_size_y": 256,
+    "max_compute_invocations_per_workgroup": 256,
+    "max_compute_workgroups_per_dimension": 65535
+  },
+  "native_c_compiler": "zig cc -O3 on Windows (independent C source)",
+  "s3_gpu_compiler": "S3 source to WGSL to physical Vulkan RX580",
+  "c_compile_cold_ms": null,
+  "native_c_dll_reused_after_cold_compilation_timeout": true,
+  "s3_wgsl_lowering_ms": 25.1898,
+  "gpu_to_s3_native_cpu_comparison": false,
+  "windows_cpu_native_c_comparison": true,
+  "sessions": 1,
+  "session_id": "s2",
+  "rounds_per_case": 7,
+  "automatic_production_gpu_dispatch": false,
+  "cases": [
+    {
+      "width": 64,
+      "height": 64,
+      "steps": 50,
+      "buffer_bytes": 16384,
+      "physical_gpu_parity": true,
+      "native_c_parity": true,
+      "gpu_total_ms": 11.4185,
+      "gpu_dispatch_ms": 6.5967,
+      "gpu_h2d_ms": 3.6521,
+      "gpu_d2h_ms": 1.0265,
+      "gpu_pipeline_ms": 0.0,
+      "native_c_total_ms": 0.6702,
+      "numpy_cpu_total_ms": 10.9736,
+      "gpu_over_native_c_total": 17.037451507012833,
+      "gpu_over_numpy_total": 1.0405427571626449,
+      "all_samples_ms": {
+        "gpu_total": [
+          11.891100002685562,
+          12.311600003158674,
+          11.418499998399056,
+          11.327799998980481,
+          11.387300000933465,
+          10.717899996961933,
+          11.729700003343169
+        ],
+        "native_c_total": [
+          0.6627,
+          0.8304,
+          0.9136,
+          0.7491,
+          0.6252,
+          0.3616,
+          0.6702
+        ],
+        "numpy_cpu_total": [
+          12.3028,
+          10.9736,
+          13.6568,
+          13.4947,
+          9.5411,
+          9.0462,
+          10.3724
+        ]
+      }
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 10,
+      "buffer_bytes": 65536,
+      "physical_gpu_parity": true,
+      "native_c_parity": true,
+      "gpu_total_ms": 5.8904,
+      "gpu_dispatch_ms": 1.8111,
+      "gpu_h2d_ms": 2.7506,
+      "gpu_d2h_ms": 1.0871,
+      "gpu_pipeline_ms": 0.0,
+      "native_c_total_ms": 0.6505,
+      "numpy_cpu_total_ms": 5.0219,
+      "gpu_over_native_c_total": 9.055188316679477,
+      "gpu_over_numpy_total": 1.1729425117983234,
+      "all_samples_ms": {
+        "gpu_total": [
+          6.918099999893457,
+          5.44120000267867,
+          7.791200005158316,
+          7.557700002507772,
+          5.678499997884501,
+          5.8903999961330555,
+          5.347199999960139
+        ],
+        "native_c_total": [
+          1.2227,
+          0.3532,
+          0.3237,
+          0.6505,
+          1.2641,
+          1.6312,
+          0.5846
+        ],
+        "numpy_cpu_total": [
+          5.62,
+          4.1981,
+          4.6478,
+          5.2632,
+          6.7485,
+          4.7966,
+          5.0219
+        ]
+      }
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 50,
+      "buffer_bytes": 65536,
+      "physical_gpu_parity": true,
+      "native_c_parity": true,
+      "gpu_total_ms": 9.4761,
+      "gpu_dispatch_ms": 5.3246,
+      "gpu_h2d_ms": 3.2051,
+      "gpu_d2h_ms": 0.9914,
+      "gpu_pipeline_ms": 0.0,
+      "native_c_total_ms": 1.7741,
+      "numpy_cpu_total_ms": 20.7265,
+      "gpu_over_native_c_total": 5.341356180598614,
+      "gpu_over_numpy_total": 0.4571973077943695,
+      "all_samples_ms": {
+        "gpu_total": [
+          9.476799998083152,
+          8.810700004687533,
+          11.081500000727829,
+          9.476100000028964,
+          10.751200003142003,
+          8.939500003180001,
+          8.891199999197852
+        ],
+        "native_c_total": [
+          2.2457,
+          1.7741,
+          2.3899,
+          2.4106,
+          1.6878,
+          1.1885,
+          1.7583
+        ],
+        "numpy_cpu_total": [
+          20.6524,
+          25.2626,
+          23.5785,
+          23.0095,
+          20.7265,
+          17.2025,
+          16.7547
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "GPU total includes upload/dispatch/readback while native C includes per-call host buffer allocations and copy; no CUDA/ROCm or cross-machine claims",
+    "S3 GPU uses i32 cell narrowing explicitly; C uses int32, cells are 0/1 and exact in this workload",
+    "GPU runtime pipeline cache and driver timing are implementation-specific",
+    "One GPU/CPU session is insufficient for automatic cost-model promotion",
+    "C is a separately compiled optimized CPU baseline, not S3 native CPU"
+  ]
+}

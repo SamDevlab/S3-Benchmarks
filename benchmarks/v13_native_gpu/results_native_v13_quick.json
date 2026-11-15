@@ -1,0 +1,507 @@
+{
+  "campaign": "S3_V13_CTZ_NATIVE_CODEGEN_AND_ASSEMBLY",
+  "status": "ONE_HOST_EXPERIMENTAL_NO_PRODUCTION",
+  "source_of_truth": "S3 source IR and certificate",
+  "s3_compiler": "O1, S3 native x86-64 assembly",
+  "s3_gcc_role": "assembler/linker only",
+  "c_references": "GCC O3 full scan and GCC O3 sparse C; not matched optimization level",
+  "measurements_include_compilation": false,
+  "cpu_pmu_available": false,
+  "rounds": 9,
+  "cases": [
+    {
+      "family": "rule90",
+      "width": 8,
+      "taps": [
+        1,
+        7
+      ],
+      "polynomial": 130,
+      "certificate_sha256": "4fd1ec0d3dc9517c28c865dd6a46c50b70b40c8308638a7c660a8529b3ee0130",
+      "source_ir_sha256": "3ba6a0e12480a7f3fa016ee95b4f27af37ae952a744f159a84517fd0caa6326d",
+      "assembly": {
+        "s3_generic": {
+          "hot_symbols": {
+            "s3_gf2_apply_cols@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_apply_cols@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cols@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_apply_cols": {
+              "instructions": 196,
+              "branches": 60,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 52
+            },
+            "s3_gf2_square_cols": {
+              "instructions": 218,
+              "branches": 59,
+              "calls": 4,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 96
+            },
+            "certified_step_dynamic": {
+              "instructions": 584,
+              "branches": 133,
+              "calls": 4,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 301
+            }
+          },
+          "hot_instructions_including_helpers": 1007,
+          "whole_shared_object_instructions": 3377,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 55632
+        },
+        "s3_v12": {
+          "hot_symbols": {
+            "s3_gf2_square_cyclic@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_mul_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w": {
+              "instructions": 99,
+              "branches": 21,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 43
+            },
+            "s3_gf2_mul_cyclic": {
+              "instructions": 157,
+              "branches": 61,
+              "calls": 1,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 32
+            },
+            "s3_gf2_square_cyclic": {
+              "instructions": 217,
+              "branches": 88,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 36
+            },
+            "certified_step_dynamic": {
+              "instructions": 209,
+              "branches": 77,
+              "calls": 3,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 53
+            }
+          },
+          "hot_instructions_including_helpers": 694,
+          "whole_shared_object_instructions": 3034,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 51584
+        },
+        "s3_v13": {
+          "hot_symbols": {
+            "s3_gf2_square_cyclic@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_mul_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w": {
+              "instructions": 99,
+              "branches": 21,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 43
+            },
+            "s3_gf2_mul_cyclic": {
+              "instructions": 127,
+              "branches": 37,
+              "calls": 2,
+              "bsf": 2,
+              "idiv": 0,
+              "mov": 42
+            },
+            "s3_gf2_square_cyclic": {
+              "instructions": 177,
+              "branches": 62,
+              "calls": 0,
+              "bsf": 2,
+              "idiv": 0,
+              "mov": 41
+            },
+            "certified_step_dynamic": {
+              "instructions": 209,
+              "branches": 77,
+              "calls": 3,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 53
+            }
+          },
+          "hot_instructions_including_helpers": 624,
+          "whole_shared_object_instructions": 2886,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 47488
+        }
+      },
+      "build_ms": {
+        "s3_generic": 350.5364,
+        "s3_v12": 390.8307,
+        "s3_v13": 331.8888
+      },
+      "nonzero_1m": false,
+      "samples": [
+        {
+          "N": 1,
+          "median_ns": {
+            "s3_generic": 258.333,
+            "s3_v12": 75.0,
+            "s3_v13": 60.4,
+            "gcc_fullscan": 98.067,
+            "gcc_sparse": 11.85
+          },
+          "v13_speedup_over_v12": 1.2417218543046358,
+          "v13_slowdown_vs_gcc_sparse": 5.09704641350211,
+          "parity": true
+        },
+        {
+          "N": 1000003,
+          "median_ns": {
+            "s3_generic": 6759.333,
+            "s3_v12": 719.6,
+            "s3_v13": 545.0,
+            "gcc_fullscan": 1630.067,
+            "gcc_sparse": 83.55
+          },
+          "v13_speedup_over_v12": 1.3203669724770644,
+          "v13_slowdown_vs_gcc_sparse": 6.523040095751048,
+          "parity": true
+        }
+      ]
+    },
+    {
+      "family": "rule90",
+      "width": 32,
+      "taps": [
+        1,
+        31
+      ],
+      "polynomial": 2147483650,
+      "certificate_sha256": "c8fb6088f280df710ed7688cf7ef130dae32bceb4f6ba0fb4fc9b794b83d2eb1",
+      "source_ir_sha256": "656a23cb28c90ade691461aad6e790408cf3866fac58b7f50564a238d584dac6",
+      "assembly": {
+        "s3_generic": {
+          "hot_symbols": {
+            "s3_gf2_apply_cols@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_apply_cols@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cols@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_apply_cols": {
+              "instructions": 196,
+              "branches": 60,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 52
+            },
+            "s3_gf2_square_cols": {
+              "instructions": 218,
+              "branches": 59,
+              "calls": 4,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 96
+            },
+            "certified_step_dynamic": {
+              "instructions": 1216,
+              "branches": 277,
+              "calls": 4,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 639
+            }
+          },
+          "hot_instructions_including_helpers": 1639,
+          "whole_shared_object_instructions": 4153,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 67920
+        },
+        "s3_v12": {
+          "hot_symbols": {
+            "s3_gf2_square_cyclic@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_mul_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w": {
+              "instructions": 104,
+              "branches": 21,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 48
+            },
+            "s3_gf2_mul_cyclic": {
+              "instructions": 161,
+              "branches": 61,
+              "calls": 1,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 36
+            },
+            "s3_gf2_square_cyclic": {
+              "instructions": 221,
+              "branches": 88,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 40
+            },
+            "certified_step_dynamic": {
+              "instructions": 210,
+              "branches": 77,
+              "calls": 3,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 54
+            }
+          },
+          "hot_instructions_including_helpers": 708,
+          "whole_shared_object_instructions": 3048,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 51584
+        },
+        "s3_v13": {
+          "hot_symbols": {
+            "s3_gf2_square_cyclic@plt-0x10": {
+              "instructions": 3,
+              "branches": 1,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_square_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_mul_cyclic@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w@plt": {
+              "instructions": 3,
+              "branches": 2,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 0
+            },
+            "s3_gf2_rotl_w": {
+              "instructions": 104,
+              "branches": 21,
+              "calls": 0,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 48
+            },
+            "s3_gf2_mul_cyclic": {
+              "instructions": 131,
+              "branches": 37,
+              "calls": 2,
+              "bsf": 2,
+              "idiv": 0,
+              "mov": 46
+            },
+            "s3_gf2_square_cyclic": {
+              "instructions": 181,
+              "branches": 62,
+              "calls": 0,
+              "bsf": 2,
+              "idiv": 0,
+              "mov": 45
+            },
+            "certified_step_dynamic": {
+              "instructions": 210,
+              "branches": 77,
+              "calls": 3,
+              "bsf": 0,
+              "idiv": 0,
+              "mov": 54
+            }
+          },
+          "hot_instructions_including_helpers": 638,
+          "whole_shared_object_instructions": 2900,
+          "scope": "static disassembly, not retired/dynamic PMU instructions",
+          "shared_object_bytes": 47488
+        }
+      },
+      "build_ms": {
+        "s3_generic": 693.6853,
+        "s3_v12": 594.7965,
+        "s3_v13": 536.2836
+      },
+      "nonzero_1m": false,
+      "samples": [
+        {
+          "N": 1,
+          "median_ns": {
+            "s3_generic": 3425.0,
+            "s3_v12": 227.4,
+            "s3_v13": 82.4,
+            "gcc_fullscan": 519.867,
+            "gcc_sparse": 15.675
+          },
+          "v13_speedup_over_v12": 2.7597087378640777,
+          "v13_slowdown_vs_gcc_sparse": 5.2567783094098885,
+          "parity": true
+        },
+        {
+          "N": 1000003,
+          "median_ns": {
+            "s3_generic": 40946.333,
+            "s3_v12": 1011.0,
+            "s3_v13": 488.6,
+            "gcc_fullscan": 5907.867,
+            "gcc_sparse": 79.3
+          },
+          "v13_speedup_over_v12": 2.069177241097012,
+          "v13_slowdown_vs_gcc_sparse": 6.16141235813367,
+          "parity": true
+        }
+      ]
+    }
+  ]
+}

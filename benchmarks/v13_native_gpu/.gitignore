@@ -1,0 +1,6 @@
+/conway_native_cpu_v13.dll
+/conway_native_cpu.lib
+/conway_native_cpu_v13.pdb
+/zig-cache/
+/__pycache__/
+/.pytest_cache/
