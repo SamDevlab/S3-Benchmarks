@@ -1,0 +1,625 @@
+{
+  "campaign": "S3_V10_3_GF2_DYNAMIC_N_NATIVE_VS_SPECIALIST",
+  "status": "EXPERIMENTAL_NATIVE_BENCHMARK_ONLY",
+  "source": "/mnt/c/Users/samue/Desktop/gemini/S3-Benchmarks/benchmarks/v10_algorithm_discovery/native_gf2_dynamic_harness.c",
+  "methods": {
+    "S3": "S3-generated x86-64 dynamic GF2 matrix powering (raw native symbol)",
+    "SPECIALIST": "Independent GCC -O3 cyclic polynomial repeated squaring",
+    "MATCHED_GENERIC_C": "Independent GCC -O3 same GF2 matrix column squaring algorithm as S3",
+    "ITERATIVE": "Independent GCC -O3 direct Rule 90 recurrence",
+    "CHECKED_API": "Python public S3 dynamic wrapper verifies original IR proof per call; measured separately"
+  },
+  "known_algorithm_novelty": "NONE_CLAIMED",
+  "s3_native_assembly": true,
+  "s3_compiler_default_changed": false,
+  "assumptions": "Fixed width W=8 or 16; runtime dynamic N>=0 i64; GF2 linear circulant Rule90",
+  "caveats": [
+    "One CPU/WSL host and one measurement session; nine alternating rounds, high sensitivity for short kernels.",
+    "Native kernel raw timing intentionally bypasses proof gate; public checked API has additional cost.",
+    "Warm kernel latency excludes compilation and discovery/proof overhead, reported separately.",
+    "C specialized cyclic polynomial algorithm is stronger than a naive direct loop reference.",
+    "IR checker proof and tested machine behavior are not a full formal verified compiler."
+  ],
+  "cases": [
+    {
+      "width": 8,
+      "same_s3_shared_object_for_all_N": true,
+      "certificate_method": "s3-v10.1-gf2-ir-structural-proof",
+      "certificate_ir_sha256": "c2f0f550fcb39fc146b8fbe041e10e9a2afa3450ebf23490f3b6468db4e852b3",
+      "source_ir_compilation_ms": 15.038,
+      "certificate_derivation_ms": 0.6911,
+      "dynamic_native_build_and_smoke_ms": 208.7047,
+      "native_smoke_checks": 108,
+      "native_generated_source_sha256": "914aad1e0cc9dec10b0cda9ab9c1da0a32204a41506ffbee6df30bd7854c4839",
+      "native_assembly_sha256": "3c507debd6e582a149a7f92c8d0ff40ce7f204c9aef1d4e30873daf796d2a3d2",
+      "native_binary_sha256": "eac0ee6c0b67ed59d5829d66e2a3db3bdb45e6b54234d26b7524b916e1280663",
+      "checked_python_public_api_ns": {
+        "0": 397900,
+        "100": 404700,
+        "1000000": 409000
+      },
+      "samples": [
+        {
+          "width": 8,
+          "N": 0,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 2.6667,
+            "s3_dynamic_native_raw": 47.3333,
+            "cyclic_specialist_c": 4.6083,
+            "generic_matrix_c": 16.6667
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              2.5833,
+              2.8333
+            ],
+            "s3_dynamic_native_raw": [
+              47.3333,
+              47.6667
+            ],
+            "cyclic_specialist_c": [
+              4.6083,
+              4.6167
+            ],
+            "generic_matrix_c": [
+              16.3333,
+              17.3333
+            ]
+          },
+          "checksum_sink": 192,
+          "s3_vs_c_specialist_ratio": 10.2713,
+          "s3_vs_c_direct_speedup": 0.0563,
+          "s3_vs_matched_generic_c_ratio": 2.84
+        },
+        {
+          "width": 8,
+          "N": 1,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 9.5,
+            "s3_dynamic_native_raw": 261.3333,
+            "cyclic_specialist_c": 14.1583,
+            "generic_matrix_c": 91.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              9.5,
+              11.25
+            ],
+            "s3_dynamic_native_raw": [
+              259.6667,
+              349.6667
+            ],
+            "cyclic_specialist_c": [
+              14.0667,
+              15.65
+            ],
+            "generic_matrix_c": [
+              90.6667,
+              132.3333
+            ]
+          },
+          "checksum_sink": 225,
+          "s3_vs_c_specialist_ratio": 18.458,
+          "s3_vs_c_direct_speedup": 0.0364,
+          "s3_vs_matched_generic_c_ratio": 2.8613
+        },
+        {
+          "width": 8,
+          "N": 10,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 18.0,
+            "s3_dynamic_native_raw": 869.3333,
+            "cyclic_specialist_c": 32.375,
+            "generic_matrix_c": 324.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              14.4167,
+              18.5833
+            ],
+            "s3_dynamic_native_raw": [
+              695.3333,
+              877.3333
+            ],
+            "cyclic_specialist_c": [
+              25.825,
+              32.6583
+            ],
+            "generic_matrix_c": [
+              259.3333,
+              333.6667
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 26.852,
+          "s3_vs_c_direct_speedup": 0.0207,
+          "s3_vs_matched_generic_c_ratio": 2.6831
+        },
+        {
+          "width": 8,
+          "N": 100,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 145.5833,
+            "s3_dynamic_native_raw": 1184.6667,
+            "cyclic_specialist_c": 18.8583,
+            "generic_matrix_c": 438.6667
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              143.0833,
+              180.0833
+            ],
+            "s3_dynamic_native_raw": [
+              1171.0,
+              1484.6667
+            ],
+            "cyclic_specialist_c": [
+              18.5167,
+              23.3167
+            ],
+            "generic_matrix_c": [
+              406.6667,
+              555.3333
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 62.8194,
+          "s3_vs_c_direct_speedup": 0.1229,
+          "s3_vs_matched_generic_c_ratio": 2.7006
+        },
+        {
+          "width": 8,
+          "N": 1000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 1362.4,
+            "s3_dynamic_native_raw": 1696.3333,
+            "cyclic_specialist_c": 20.45,
+            "generic_matrix_c": 620.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              1345.8,
+              1410.8
+            ],
+            "s3_dynamic_native_raw": [
+              1678.0,
+              1777.3333
+            ],
+            "cyclic_specialist_c": [
+              20.2917,
+              22.3917
+            ],
+            "generic_matrix_c": [
+              616.3333,
+              739.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 82.9503,
+          "s3_vs_c_direct_speedup": 0.8031,
+          "s3_vs_matched_generic_c_ratio": 2.7346
+        },
+        {
+          "width": 8,
+          "N": 10000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 13611.0,
+            "s3_dynamic_native_raw": 2322.6667,
+            "cyclic_specialist_c": 27.1417,
+            "generic_matrix_c": 867.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              13515.0,
+              16889.0
+            ],
+            "s3_dynamic_native_raw": [
+              2292.0,
+              2888.6667
+            ],
+            "cyclic_specialist_c": [
+              25.5417,
+              33.925
+            ],
+            "generic_matrix_c": [
+              862.6667,
+              1449.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 85.5756,
+          "s3_vs_c_direct_speedup": 5.8601,
+          "s3_vs_matched_generic_c_ratio": 2.679
+        },
+        {
+          "width": 8,
+          "N": 100000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 137612.5,
+            "s3_dynamic_native_raw": 2814.3333,
+            "cyclic_specialist_c": 30.6417,
+            "generic_matrix_c": 1047.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              134668.75,
+              162100.0
+            ],
+            "s3_dynamic_native_raw": [
+              2777.3333,
+              3546.6667
+            ],
+            "cyclic_specialist_c": [
+              29.5,
+              34.5833
+            ],
+            "generic_matrix_c": [
+              1044.3333,
+              1526.6667
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 91.8465,
+          "s3_vs_c_direct_speedup": 48.897,
+          "s3_vs_matched_generic_c_ratio": 2.6871
+        },
+        {
+          "width": 8,
+          "N": 1000000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 1361650.0,
+            "s3_dynamic_native_raw": 3315.0,
+            "cyclic_specialist_c": 35.3667,
+            "generic_matrix_c": 1227.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              1352200.0,
+              1576525.0
+            ],
+            "s3_dynamic_native_raw": [
+              3267.3333,
+              4165.3333
+            ],
+            "cyclic_specialist_c": [
+              33.9833,
+              45.1083
+            ],
+            "generic_matrix_c": [
+              1108.3333,
+              1532.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 93.7322,
+          "s3_vs_c_direct_speedup": 410.7541,
+          "s3_vs_matched_generic_c_ratio": 2.701
+        }
+      ]
+    },
+    {
+      "width": 16,
+      "same_s3_shared_object_for_all_N": true,
+      "certificate_method": "s3-v10.1-gf2-ir-structural-proof",
+      "certificate_ir_sha256": "fb5c4065846576a163c34ecce790f1cb78f398b4c2eeb99dbabc4637bee7791f",
+      "source_ir_compilation_ms": 5.7026,
+      "certificate_derivation_ms": 0.4992,
+      "dynamic_native_build_and_smoke_ms": 255.7654,
+      "native_smoke_checks": 180,
+      "native_generated_source_sha256": "fcfdf04ebbceef3dbc55a3a09d044f3b1e92c32db208455adee0e48abfef6331",
+      "native_assembly_sha256": "cc5522ff41dc371d0b327efeb9fc0a743c7ab4055aefb1c69e754c5ab387d17d",
+      "native_binary_sha256": "4e10093f86c8d6692d64a9a53019c026c182a721fe6d9778670567e2231268eb",
+      "checked_python_public_api_ns": {
+        "0": 461100,
+        "100": 433500,
+        "1000000": 453300
+      },
+      "samples": [
+        {
+          "width": 16,
+          "N": 0,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 2.6667,
+            "s3_dynamic_native_raw": 113.3333,
+            "cyclic_specialist_c": 4.6333,
+            "generic_matrix_c": 27.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              2.5833,
+              2.8333
+            ],
+            "s3_dynamic_native_raw": [
+              113.0,
+              113.3333
+            ],
+            "cyclic_specialist_c": [
+              4.6333,
+              4.6417
+            ],
+            "generic_matrix_c": [
+              27.0,
+              27.6667
+            ]
+          },
+          "checksum_sink": 2752,
+          "s3_vs_c_specialist_ratio": 24.4606,
+          "s3_vs_c_direct_speedup": 0.0235,
+          "s3_vs_matched_generic_c_ratio": 4.1975
+        },
+        {
+          "width": 16,
+          "N": 1,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 9.5833,
+            "s3_dynamic_native_raw": 670.0,
+            "cyclic_specialist_c": 14.1833,
+            "generic_matrix_c": 269.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              9.5,
+              9.75
+            ],
+            "s3_dynamic_native_raw": [
+              665.3333,
+              673.3333
+            ],
+            "cyclic_specialist_c": [
+              12.4917,
+              14.5583
+            ],
+            "generic_matrix_c": [
+              216.3333,
+              270.6667
+            ]
+          },
+          "checksum_sink": 4320,
+          "s3_vs_c_specialist_ratio": 47.2387,
+          "s3_vs_c_direct_speedup": 0.0143,
+          "s3_vs_matched_generic_c_ratio": 2.4907
+        },
+        {
+          "width": 16,
+          "N": 10,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 15.75,
+            "s3_dynamic_native_raw": 2101.0,
+            "cyclic_specialist_c": 34.5333,
+            "generic_matrix_c": 800.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              14.4167,
+              16.5
+            ],
+            "s3_dynamic_native_raw": [
+              1873.6667,
+              2130.3333
+            ],
+            "cyclic_specialist_c": [
+              33.2333,
+              36.5667
+            ],
+            "generic_matrix_c": [
+              792.0,
+              833.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 60.8398,
+          "s3_vs_c_direct_speedup": 0.0075,
+          "s3_vs_matched_generic_c_ratio": 2.6263
+        },
+        {
+          "width": 16,
+          "N": 100,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 145.0,
+            "s3_dynamic_native_raw": 3147.6667,
+            "cyclic_specialist_c": 35.525,
+            "generic_matrix_c": 1382.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              142.9167,
+              151.25
+            ],
+            "s3_dynamic_native_raw": [
+              3139.6667,
+              3166.3333
+            ],
+            "cyclic_specialist_c": [
+              35.3583,
+              40.6417
+            ],
+            "generic_matrix_c": [
+              1358.6667,
+              1412.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 88.6043,
+          "s3_vs_c_direct_speedup": 0.0461,
+          "s3_vs_matched_generic_c_ratio": 2.2771
+        },
+        {
+          "width": 16,
+          "N": 1000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 1372.2,
+            "s3_dynamic_native_raw": 4459.6667,
+            "cyclic_specialist_c": 27.5917,
+            "generic_matrix_c": 1954.6667
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              1354.6,
+              1404.0
+            ],
+            "s3_dynamic_native_raw": [
+              4416.6667,
+              4886.6667
+            ],
+            "cyclic_specialist_c": [
+              27.3333,
+              45.225
+            ],
+            "generic_matrix_c": [
+              1922.6667,
+              2093.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 161.6307,
+          "s3_vs_c_direct_speedup": 0.3077,
+          "s3_vs_matched_generic_c_ratio": 2.2815
+        },
+        {
+          "width": 16,
+          "N": 10000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 13665.0,
+            "s3_dynamic_native_raw": 6473.0,
+            "cyclic_specialist_c": 36.65,
+            "generic_matrix_c": 3022.0
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              13533.0,
+              14820.0
+            ],
+            "s3_dynamic_native_raw": [
+              6346.6667,
+              9598.0
+            ],
+            "cyclic_specialist_c": [
+              35.825,
+              42.3167
+            ],
+            "generic_matrix_c": [
+              2685.0,
+              3372.0
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 176.6166,
+          "s3_vs_c_direct_speedup": 2.1111,
+          "s3_vs_matched_generic_c_ratio": 2.142
+        },
+        {
+          "width": 16,
+          "N": 100000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 136250.0,
+            "s3_dynamic_native_raw": 7499.0,
+            "cyclic_specialist_c": 38.45,
+            "generic_matrix_c": 3318.6667
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              136075.0,
+              399256.25
+            ],
+            "s3_dynamic_native_raw": [
+              7465.3333,
+              24819.0
+            ],
+            "cyclic_specialist_c": [
+              38.1833,
+              168.2167
+            ],
+            "generic_matrix_c": [
+              3214.6667,
+              8000.3333
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 195.0325,
+          "s3_vs_c_direct_speedup": 18.1691,
+          "s3_vs_matched_generic_c_ratio": 2.2596
+        },
+        {
+          "width": 16,
+          "N": 1000000,
+          "rounds": 9,
+          "checked_states": 64,
+          "parity": true,
+          "median_ns": {
+            "iterative_c": 1403450.0,
+            "s3_dynamic_native_raw": 10759.6667,
+            "cyclic_specialist_c": 54.8833,
+            "generic_matrix_c": 3900.3333
+          },
+          "ranges_ns": {
+            "iterative_c": [
+              1370025.0,
+              1754125.0
+            ],
+            "s3_dynamic_native_raw": [
+              8790.6667,
+              17128.6667
+            ],
+            "cyclic_specialist_c": [
+              42.2333,
+              87.4667
+            ],
+            "generic_matrix_c": [
+              3823.6667,
+              6044.3333
+            ]
+          },
+          "checksum_sink": 0,
+          "s3_vs_c_specialist_ratio": 196.0463,
+          "s3_vs_c_direct_speedup": 130.4362,
+          "s3_vs_matched_generic_c_ratio": 2.7587
+        }
+      ]
+    }
+  ]
+}
