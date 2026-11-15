@@ -1,0 +1,366 @@
+{
+  "campaign": "S3_V16_2D_EIGHT_NEIGHBOR_INTERVAL_PROOF_NATIVE_AB",
+  "decision": "GO_EXPERIMENTAL_NOT_COMPILER_DEFAULT",
+  "session": "s2",
+  "platform": "Linux-x86_64",
+  "same_s3_assembly_program_ir": true,
+  "original_s3_source_sha256": "781c45f4eefc30bd2a81f4b974aba51d0dc1f383814e31da761023216f413601",
+  "hp03_enabled": false,
+  "hp02_enabled": true,
+  "native_budget_mode": "loop-hybrid",
+  "experimental_flag_default_off": true,
+  "c_role": "INDEPENDENT_ORACLE_AND_NATIVE_TIME_HARNESS_ONLY",
+  "gcc_role_for_s3": "ASSEMBLE_LINK",
+  "assembly_output_equal": false,
+  "proof": {
+    "stencil8_w8": {
+      "proven_interior_loads": 6,
+      "checked_endpoint_loads": 2,
+      "conservative_barriers": 4,
+      "skipped_due_to_hp03": false,
+      "max_span": 64,
+      "proof_witnesses": [
+        {
+          "block": "while_body_10",
+          "load_instruction": 29,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 1,
+          "upper_offset": 18
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 31,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 2,
+          "upper_offset": 18
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 33,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 8,
+          "upper_offset": 18
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 35,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 10,
+          "upper_offset": 18
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 37,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 16,
+          "upper_offset": 18
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 39,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 17,
+          "upper_offset": 18
+        }
+      ]
+    },
+    "stencil8_w16": {
+      "proven_interior_loads": 6,
+      "checked_endpoint_loads": 2,
+      "conservative_barriers": 4,
+      "skipped_due_to_hp03": false,
+      "max_span": 64,
+      "proof_witnesses": [
+        {
+          "block": "while_body_10",
+          "load_instruction": 29,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 1,
+          "upper_offset": 34
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 31,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 2,
+          "upper_offset": 34
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 33,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 16,
+          "upper_offset": 34
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 35,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 18,
+          "upper_offset": 34
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 37,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 32,
+          "upper_offset": 34
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 39,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 33,
+          "upper_offset": 34
+        }
+      ]
+    },
+    "stencil8_w24": {
+      "proven_interior_loads": 6,
+      "checked_endpoint_loads": 2,
+      "conservative_barriers": 4,
+      "skipped_due_to_hp03": false,
+      "max_span": 64,
+      "proof_witnesses": [
+        {
+          "block": "while_body_10",
+          "load_instruction": 29,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 1,
+          "upper_offset": 50
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 31,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 2,
+          "upper_offset": 50
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 33,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 24,
+          "upper_offset": 50
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 35,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 26,
+          "upper_offset": 50
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 37,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 48,
+          "upper_offset": 50
+        },
+        {
+          "block": "while_body_10",
+          "load_instruction": 39,
+          "lower_checked_instruction": 25,
+          "upper_checked_instruction": 27,
+          "lower_offset": 0,
+          "target_offset": 49,
+          "upper_offset": 50
+        }
+      ]
+    }
+  },
+  "slice_load_sites": {
+    "stencil8_w8": 8,
+    "stencil8_w16": 8,
+    "stencil8_w24": 8
+  },
+  "cold_compile_ms": {
+    "frontend": 67.51,
+    "baseline_native_codegen": 92.744,
+    "v16_native_codegen": 89.119,
+    "gcc_baseline": 95.542,
+    "gcc_v16": 91.698
+  },
+  "static_disassembly": {
+    "baseline": {
+      "shared_elf_bytes": 84192,
+      "hot_functions": {
+        "stencil8_w8": {
+          "static_instructions": 464,
+          "static_conditional_branches": 155,
+          "static_calls": 0
+        },
+        "stencil8_w16": {
+          "static_instructions": 464,
+          "static_conditional_branches": 155,
+          "static_calls": 0
+        },
+        "stencil8_w24": {
+          "static_instructions": 464,
+          "static_conditional_branches": 155,
+          "static_calls": 0
+        }
+      },
+      "not_dynamic_pmu": true
+    },
+    "v16": {
+      "shared_elf_bytes": 84192,
+      "hot_functions": {
+        "stencil8_w8": {
+          "static_instructions": 439,
+          "static_conditional_branches": 143,
+          "static_calls": 0
+        },
+        "stencil8_w16": {
+          "static_instructions": 439,
+          "static_conditional_branches": 143,
+          "static_calls": 0
+        },
+        "stencil8_w24": {
+          "static_instructions": 439,
+          "static_conditional_branches": 143,
+          "static_calls": 0
+        }
+      },
+      "not_dynamic_pmu": true
+    }
+  },
+  "benchmark": {
+    "cases": [
+      {
+        "width": 8,
+        "height": 64,
+        "neighbors": 8,
+        "exact_reference": 14885,
+        "parity": true,
+        "baseline_ns": 2356.0,
+        "v16_ns": 2076.0,
+        "speedup": 1.134875
+      },
+      {
+        "width": 8,
+        "height": 256,
+        "neighbors": 8,
+        "exact_reference": 60952,
+        "parity": true,
+        "baseline_ns": 9566.667,
+        "v16_ns": 8440.0,
+        "speedup": 1.133491
+      },
+      {
+        "width": 8,
+        "height": 1024,
+        "neighbors": 8,
+        "exact_reference": 245282,
+        "parity": true,
+        "baseline_ns": 38450.0,
+        "v16_ns": 33900.0,
+        "speedup": 1.134218
+      },
+      {
+        "width": 16,
+        "height": 64,
+        "neighbors": 8,
+        "exact_reference": 34694,
+        "parity": true,
+        "baseline_ns": 5260.0,
+        "v16_ns": 4594.0,
+        "speedup": 1.144972
+      },
+      {
+        "width": 16,
+        "height": 256,
+        "neighbors": 8,
+        "exact_reference": 142226,
+        "parity": true,
+        "baseline_ns": 22240.0,
+        "v16_ns": 18773.333,
+        "speedup": 1.184659
+      },
+      {
+        "width": 16,
+        "height": 1024,
+        "neighbors": 8,
+        "exact_reference": 572306,
+        "parity": true,
+        "baseline_ns": 86700.0,
+        "v16_ns": 76025.0,
+        "speedup": 1.140414
+      },
+      {
+        "width": 24,
+        "height": 64,
+        "neighbors": 8,
+        "exact_reference": 54560,
+        "parity": true,
+        "baseline_ns": 8672.0,
+        "v16_ns": 7724.0,
+        "speedup": 1.122734
+      },
+      {
+        "width": 24,
+        "height": 256,
+        "neighbors": 8,
+        "exact_reference": 223520,
+        "parity": true,
+        "baseline_ns": 35026.667,
+        "v16_ns": 30720.0,
+        "speedup": 1.140191
+      },
+      {
+        "width": 24,
+        "height": 1024,
+        "neighbors": 8,
+        "exact_reference": 899360,
+        "parity": true,
+        "baseline_ns": 144300.0,
+        "v16_ns": 136575.0,
+        "speedup": 1.056562
+      }
+    ],
+    "rounds": 9,
+    "sink": 0
+  },
+  "limitations": [
+    "One Linux WSL x86-64 machine, 9 rotating rounds per configuration.",
+    "The two source variants use the same S3 IR. Only V16 bounds proof is toggled.",
+    "Native arithmetic, i64 overflow traps, allocation and reads remain active.",
+    "C is a correctness oracle and timed caller, not a substitute native kernel.",
+    "Static disassembly is not a PMU retired instruction measurement.",
+    "HP03 compatibility is analyzed separately and no production defaults are changed."
+  ]
+}
