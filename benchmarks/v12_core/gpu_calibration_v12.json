@@ -1,0 +1,144 @@
+{
+  "campaign": "S3_V12_GPU_EXACT_WORKLOAD_COST_CALIBRATION",
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "adapter_type": "DiscreteGPU",
+    "is_physical": true,
+    "max_buffer_size": 268435456,
+    "max_compute_workgroup_size_x": 256,
+    "max_compute_workgroup_size_y": 256,
+    "max_compute_invocations_per_workgroup": 256,
+    "max_compute_workgroups_per_dimension": 65535
+  },
+  "production_dispatch_changed": false,
+  "samples_are_raw_not_synthesized": true,
+  "cases": [
+    {
+      "workload": "S3 Conway 64x64 x 50",
+      "evidence": {
+        "s3_kernel_sha256": "a6d4f10b402a445390a88e62d8a302421d334b4eb68cdf37b7d25a86e6a6c0c6",
+        "host_fingerprint": "samu|Windows|26.1.1 (AMD proprietary shader compiler)",
+        "device_name": "AMD Radeon RX 580 2048SP",
+        "workload_kind": "conway",
+        "width": 64,
+        "height": 64,
+        "steps": 50,
+        "element_bytes": 4,
+        "num_buffers": 2,
+        "precision": "i32_exact",
+        "resident_between_steps": true,
+        "cpu_total_ms_samples": [
+          3.4665,
+          3.2319,
+          3.0191,
+          3.0172,
+          3.0261,
+          3.0464,
+          3.0087
+        ],
+        "gpu_total_ms_samples": [
+          656.8875000011758,
+          5.536500000744127,
+          5.037899994931649,
+          4.94740000431193,
+          4.921700005070306,
+          4.900100000668317,
+          4.764999997860286
+        ],
+        "s3_gpu_result_parity": true,
+        "physical_gpu_used": true,
+        "readback_verified": true,
+        "source_kind": "S3_SOURCE_COMPILED_TO_WGSL"
+      },
+      "route": {
+        "target": "cpu",
+        "reason": "GPU_NOT_ENOUGH_FASTER_FOR_SAFETY_MARGIN",
+        "cpu_median_ms": 3.0261,
+        "gpu_median_ms": 4.94740000431193,
+        "gpu_over_cpu_ratio": 1.6349096210673575,
+        "safety_qualified": true,
+        "automatic_production_dispatch_enabled": false
+      },
+      "gpu_dispatch_samples_ms": [
+        105.20539999561151,
+        3.1996999969123863,
+        2.864600006432738,
+        2.8373000022838823,
+        2.8369999999995343,
+        2.839499997207895,
+        2.759499999228865
+      ],
+      "exact_cell_parity": true,
+      "gpu_real_physical": true,
+      "safe_per_buffer_bytes": 16384
+    },
+    {
+      "workload": "S3 Conway 128x128 x 50",
+      "evidence": {
+        "s3_kernel_sha256": "a6d4f10b402a445390a88e62d8a302421d334b4eb68cdf37b7d25a86e6a6c0c6",
+        "host_fingerprint": "samu|Windows|26.1.1 (AMD proprietary shader compiler)",
+        "device_name": "AMD Radeon RX 580 2048SP",
+        "workload_kind": "conway",
+        "width": 128,
+        "height": 128,
+        "steps": 50,
+        "element_bytes": 4,
+        "num_buffers": 2,
+        "precision": "i32_exact",
+        "resident_between_steps": true,
+        "cpu_total_ms_samples": [
+          7.1502,
+          7.7984,
+          8.7646,
+          7.2666,
+          7.2619,
+          8.2955,
+          7.1355
+        ],
+        "gpu_total_ms_samples": [
+          6.301199995505158,
+          7.885599996370729,
+          5.962200004432816,
+          4.869600001256913,
+          5.2204999956302345,
+          5.1334000017959625,
+          4.899200001091231
+        ],
+        "s3_gpu_result_parity": true,
+        "physical_gpu_used": true,
+        "readback_verified": true,
+        "source_kind": "S3_SOURCE_COMPILED_TO_WGSL"
+      },
+      "route": {
+        "target": "gpu",
+        "reason": "EXACT_WORKLOAD_PAIRED_MEASUREMENTS_AND_HARD_QUALIFICATION",
+        "cpu_median_ms": 7.2666,
+        "gpu_median_ms": 5.2204999956302345,
+        "gpu_over_cpu_ratio": 0.7184240216373867,
+        "safety_qualified": true,
+        "automatic_production_dispatch_enabled": false
+      },
+      "gpu_dispatch_samples_ms": [
+        3.357400004460942,
+        5.256599994027056,
+        3.2455000036861748,
+        2.8575000033015385,
+        3.1740999984322116,
+        2.9231000007712282,
+        2.889299998059869
+      ],
+      "exact_cell_parity": true,
+      "gpu_real_physical": true,
+      "safe_per_buffer_bytes": 65536
+    }
+  ],
+  "limitations": [
+    "Single physical RX580/Vulkan and single local session; repeat before calibrating other hardware.",
+    "These measurements qualify only the exact program, width, steps, precision, and host.",
+    "CPU reference is vectorized NumPy not a tuned native C implementation.",
+    "GPU total includes H2D/dispatch/D2H; no unsafe buffer override."
+  ]
+}
