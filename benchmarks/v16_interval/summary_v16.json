@@ -1,0 +1,228 @@
+{
+  "campaign": "S3_V16_2D_EIGHT_NEIGHBOR_INTERVAL_NATIVE_SUMMARY",
+  "sessions": 3,
+  "physical_machines": 1,
+  "rounds_per_session_per_case": 9,
+  "different_operating_systems_compared": false,
+  "same_s3_ir": true,
+  "experimental_flag_default_off": true,
+  "baseline_v15_branch": "exp/s3-v15-slice-bounds-reuse",
+  "observed_gain_rows": 27,
+  "observed_regression_rows": 0,
+  "observed_total_rows": 27,
+  "median_of_all_27_per_session_speedup_ratios": 1.137286,
+  "negative_rows": [],
+  "hp03_one_session": true,
+  "hp03_fast_versioned_candidates_verified": false,
+  "hp03_note": "This particular source did not produce an HP03 fast-versioned loop; no general coexistence qualification.",
+  "stencil_cases": [
+    {
+      "width": 8,
+      "height": 64,
+      "median_session_speedup": 1.134875,
+      "min_session_speedup": 1.132438,
+      "max_session_speedup": 1.139692,
+      "session_speedups": [
+        1.139692,
+        1.134875,
+        1.132438
+      ],
+      "session_baseline_ns": [
+        2366.0,
+        2356.0,
+        2360.0
+      ],
+      "session_v16_ns": [
+        2076.0,
+        2076.0,
+        2084.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 8,
+      "height": 256,
+      "median_session_speedup": 1.136651,
+      "min_session_speedup": 1.133491,
+      "max_session_speedup": 1.14297,
+      "session_speedups": [
+        1.14297,
+        1.133491,
+        1.136651
+      ],
+      "session_baseline_ns": [
+        9646.667,
+        9566.667,
+        9593.333
+      ],
+      "session_v16_ns": [
+        8440.0,
+        8440.0,
+        8440.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 8,
+      "height": 1024,
+      "median_session_speedup": 1.134218,
+      "min_session_speedup": 1.118644,
+      "max_session_speedup": 1.136896,
+      "session_speedups": [
+        1.136896,
+        1.134218,
+        1.118644
+      ],
+      "session_baseline_ns": [
+        38825.0,
+        38450.0,
+        37950.0
+      ],
+      "session_v16_ns": [
+        34150.0,
+        33900.0,
+        33925.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 16,
+      "height": 64,
+      "median_session_speedup": 1.144972,
+      "min_session_speedup": 1.039923,
+      "max_session_speedup": 1.158675,
+      "session_speedups": [
+        1.039923,
+        1.144972,
+        1.158675
+      ],
+      "session_baseline_ns": [
+        5418.0,
+        5260.0,
+        5316.0
+      ],
+      "session_v16_ns": [
+        5210.0,
+        4594.0,
+        4588.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 16,
+      "height": 256,
+      "median_session_speedup": 1.137207,
+      "min_session_speedup": 1.059968,
+      "max_session_speedup": 1.184659,
+      "session_speedups": [
+        1.059968,
+        1.184659,
+        1.137207
+      ],
+      "session_baseline_ns": [
+        22153.333,
+        22240.0,
+        21660.0
+      ],
+      "session_v16_ns": [
+        20900.0,
+        18773.333,
+        19046.667
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 16,
+      "height": 1024,
+      "median_session_speedup": 1.160356,
+      "min_session_speedup": 1.140414,
+      "max_session_speedup": 1.174282,
+      "session_speedups": [
+        1.174282,
+        1.140414,
+        1.160356
+      ],
+      "session_baseline_ns": [
+        89950.0,
+        86700.0,
+        88100.0
+      ],
+      "session_v16_ns": [
+        76600.0,
+        76025.0,
+        75925.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 24,
+      "height": 64,
+      "median_session_speedup": 1.137286,
+      "min_session_speedup": 1.122734,
+      "max_session_speedup": 1.162068,
+      "session_speedups": [
+        1.162068,
+        1.122734,
+        1.137286
+      ],
+      "session_baseline_ns": [
+        8676.0,
+        8672.0,
+        8632.0
+      ],
+      "session_v16_ns": [
+        7466.0,
+        7724.0,
+        7590.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 24,
+      "height": 256,
+      "median_session_speedup": 1.162244,
+      "min_session_speedup": 1.140191,
+      "max_session_speedup": 1.186153,
+      "session_speedups": [
+        1.162244,
+        1.140191,
+        1.186153
+      ],
+      "session_baseline_ns": [
+        35626.667,
+        35026.667,
+        36320.0
+      ],
+      "session_v16_ns": [
+        30653.333,
+        30720.0,
+        30620.0
+      ],
+      "all_independent_c_parity": true
+    },
+    {
+      "width": 24,
+      "height": 1024,
+      "median_session_speedup": 1.100312,
+      "min_session_speedup": 1.056562,
+      "max_session_speedup": 1.165304,
+      "session_speedups": [
+        1.100312,
+        1.056562,
+        1.165304
+      ],
+      "session_baseline_ns": [
+        140950.0,
+        144300.0,
+        142575.0
+      ],
+      "session_v16_ns": [
+        128100.0,
+        136575.0,
+        122350.0
+      ],
+      "all_independent_c_parity": true
+    }
+  ],
+  "interpretation": "Exploratory same-host evidence; ratios are not statistical confidence bounds and should not enable compiler defaults."
+}
