@@ -83,3 +83,24 @@ Read [V12_COEXISTENCE_REVIEW_20261115.md](V12_COEXISTENCE_REVIEW_20261115.md),
 `v12_coexistence_20261115.json`, the raw logs and the
 local overlay commit manifest. The integration decision
 remains **GO_EXPERIMENTAL**, not approval to merge.
+
+## P0 closure — KB-0029 and KB-0030 (15 Nov 2026)
+
+The finite V11–V18 triage classifies all **27 PRs**,
+and a selected local V18+V12-A suite passed **227**
+tests with the two known legacy selectors still
+explicitly deselected at that point. Refer to
+[PR_TRIAGE_V11_V18_20261115.md](PR_TRIAGE_V11_V18_20261115.md).
+
+The subsequent isolated quality fix repairs those
+two fixtures without changing compiler production code.
+Final local results (no exclusions) are **248 V18 tests**,
+**14 native SIMD tests**, and **229 V18+V12-A tests**.
+See [QUALITY_GATE_20261115.md](QUALITY_GATE_20261115.md).
+
+Source branch: `fix/s3-core-inherited-tests-20261115`
+at `356b323c`, separate from original V18.
+Raw logs, collected suite sizes and both pass/fail
+conditions are preserved, with no GitHub Actions.
+No PR merge or default optimization enablement
+has been performed.

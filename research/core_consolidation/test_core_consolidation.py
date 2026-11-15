@@ -116,3 +116,62 @@ def test_v12_local_review_branches_record_no_upstream_push():
         assert entry["overlay_head"]!=entry["base"]
     assert ref["S3-V12-Combined"]["base"].startswith("02f0a3f7")
     assert ref["S3-V18-Combined"]["base"].startswith("1a323a03")
+
+
+def test_release_triage_classifies_each_pr_without_claiming_release():
+    release=load("release_triage_matrix_20261115.json")
+    decisions=load("pr_decisions_20261115.json")
+    assert release["campaign"]=="S3_CORE_V11_V18_RELEASE_TRIAGE_WITH_V12A"
+    assert release["test_exit_code"]==release["collection_exit_code"]==0
+    assert release["observed_success"]
+    assert release["inherited_tests_still_open"]
+    assert release["no_actions_no_merge_no_deploy"]
+    assert decisions["outcome"]=="TRIAGE_COMPLETE_NO_RELEASE_APPROVAL"
+    assert decisions["all_still_draft"]
+    assert decisions["all_blocked_for_merge"]
+    assert decisions["merges"]==0 and decisions["deployments"]==0
+    assert decisions["github_actions_used"] is False
+    assert len(decisions["decisions"])==27
+    assert len({
+       (item["repo"],item["number"]) for item in decisions["decisions"]
+    })==27
+    assert set(x["decision"] for x in decisions["decisions"]) <= {
+       "GO_EXPERIMENTAL_ONLY","GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+       "NO_GO_GLOBAL_DEFAULT",
+    }
+    assert all(x["blocked_for_merge"] for x in decisions["decisions"])
+    assert sum(release["counts_by_stage"].values())+release["cross_family_tests"]==release["collected_total"]
+    assert release["collected_total"]==227
+    assert release["counts_by_stage"]["V18"]==13
+    assert release["counts_by_stage"]["V12-A"]==34
+
+
+def test_quality_fix_runs_formerly_excluded_tests_and_native_simd():
+    quality=load("quality_gate_20261115.json")
+    assert quality["campaign"]=="S3_CORE_QUALITY_V18_NO_LEGACY_DESELECTIONS_20261115"
+    assert quality["passed"]
+    assert quality["legacy_exclusions"]==[]
+    assert len(quality["legacy_tests_restored"])==2
+    assert quality["github_actions_used"] is False
+    assert quality["merge_or_deploy"] is False
+    assert quality["core_collection"]["tests_collected"]==248
+    assert quality["vector_collection"]["tests_collected"]==14
+    for key in ("core_test_result","core_collection",
+                "vector_test_result","vector_collection"):
+        result=quality[key]
+        assert result["exit_code"]==0 and (ROOT/result["log"]).exists()
+    assert "--deselect" not in quality["core_test_result"]["command"]
+
+
+def test_v12a_v18_local_post_quality_has_no_hidden_exclusions():
+    combined=load("post_quality_v18_v12a_20261115.json")
+    assert combined["campaign"]=="S3_CORE_POST_QUALITY_V12A_V18_SELECTED_FULL_LOCAL"
+    assert combined["all_selected_pass"]
+    assert combined["tests_collected"]==229
+    assert combined["test_exit_code"]==combined["collection_exit_code"]==0
+    assert combined["deselected_tests"]==[]
+    assert len(combined["previously_deselected_tests"])==2
+    assert not combined["github_actions_used"]
+    assert not combined["merged_to_main"]
+    assert not combined["production_changes"]
+    assert all((ROOT/path).exists() for path in combined["logs"])

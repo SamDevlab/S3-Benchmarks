@@ -1,0 +1,29 @@
+{
+  "campaign": "S3_CORE_POST_QUALITY_V12A_V18_SELECTED_FULL_LOCAL",
+  "utc": "2026-11-15T05:59:22.268558+00:00",
+  "source": "S3-V18-Combined local-only overlay",
+  "combined_head": "5340c39e96aa90d9fd1cc94592e6059107098893",
+  "v18_parent": "1a323a033c361d904aa6b9ce747364f7ee05255e",
+  "v12a_commit": "a271bbfdf8f9a4d2f1c1cff5fcb27fd973e0cfa0",
+  "quality_commit": "356b323c3677f46fee69f1c535bb7f349b2fe35c",
+  "runner": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+  "tests_collected": 229,
+  "test_exit_code": 0,
+  "collection_exit_code": 0,
+  "test_runtime_seconds": 38.58,
+  "collection_runtime_seconds": 1.0,
+  "logs": [
+    "post_quality_v18_v12a_tests.log",
+    "post_quality_v18_v12a_collect.log"
+  ],
+  "previously_deselected_tests": [
+    "tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode",
+    "tests/test_native_x86_64.py::test_native_backend_emits_every_current_opcode"
+  ],
+  "deselected_tests": [],
+  "all_selected_pass": true,
+  "github_actions_used": false,
+  "merged_to_main": false,
+  "production_changes": false,
+  "scope_limit": "Selected V11–V18 and foundation suite plus V12-A research; not entire repository or physical GPU."
+}

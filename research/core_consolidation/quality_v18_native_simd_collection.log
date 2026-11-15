@@ -1,0 +1,5 @@
+tests/test_s3_v3_compiler_and_simd.py: 4
+tests/test_s3_v4_8_licm_and_simd.py: 5
+tests/test_s3_v4_9_native_simd.py: 2
+tests/test_s3_v5_0_autovectorize.py: 3
+

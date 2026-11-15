@@ -1,0 +1,566 @@
+{
+  "campaign": "S3_CORE_V11_V18_FINITE_PR_TRIAGE",
+  "snapshot_date": "2026-11-15",
+  "outcome": "TRIAGE_COMPLETE_NO_RELEASE_APPROVAL",
+  "source": "PR snapshots on 2026-11-15 + WSL test and selected artifact logs",
+  "decisions": [
+    {
+      "repo": "S3",
+      "number": 408,
+      "url": "https://github.com/SamDevlab/S3/pull/408",
+      "title": "[S3 V11] Verified IR-driven Automatic Algorithm Selection + Native Cyclic GF(2) Backend",
+      "stage": "V11",
+      "head": "exp/s3-v11-core-auto-strategy",
+      "base": "exp/s3-v10-gf2-source-certificates",
+      "base_is_open_pr": 407,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Proven cyclic GF2 algorithm selection restricted to source IR; not a general automatic compiler optimization.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 11,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proof scope restricted to verified GF2 IR, default integration intentionally off",
+        "Select modern integration baseline from 663-commit stack"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 53,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/53",
+      "title": "[S3 V11] Real Native Auto-Algorithm Benchmarks + RX580 Vulkan GPU Workload Crossover",
+      "stage": "V11",
+      "head": "exp/s3-v11-core-gpu",
+      "base": "exp/s3-v10-algorithm-discovery",
+      "base_is_open_pr": 52,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Proven cyclic GF2 algorithm selection restricted to source IR; not a general automatic compiler optimization.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 11,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proof scope restricted to verified GF2 IR, default integration intentionally off",
+        "Select modern integration baseline from 663-commit stack"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 69,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/69",
+      "title": "[S3 V11] Core Language/Compiler Research ÔÇö Verified Algorithm Choice, Native Gap, Physical GPU",
+      "stage": "V11",
+      "head": "exp/s3-v11-core-research",
+      "base": "exp/s3-v10-algorithm-discovery-research",
+      "base_is_open_pr": 68,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Proven cyclic GF2 algorithm selection restricted to source IR; not a general automatic compiler optimization.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 11,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proof scope restricted to verified GF2 IR, default integration intentionally off",
+        "Select modern integration baseline from 663-commit stack"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 409,
+      "url": "https://github.com/SamDevlab/S3/pull/409",
+      "title": "[S3 V12] Verified IR Strategy Registry ÔÇö Checked-i64 Native Progressions and Cost-Gated GPU Planner",
+      "stage": "V12-A",
+      "head": "exp/s3-v12-verified-candidate-registry",
+      "base": "exp/s3-v11-core-auto-strategy",
+      "base_is_open_pr": 408,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Separate checked i64 progression and empirical strategy registry; source/IR proof and native tests, not in production pipeline.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 34,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Not connected to production compiler; preserve separate opt-in",
+        "Physical RX580 dispatch not validated here"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 54,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/54",
+      "title": "[S3 V12] Source-Certified i64 Native Benchmarks, Real RX580 Calibration and x86 Disassembly",
+      "stage": "V12-A",
+      "head": "exp/s3-v12-core-codegen-gpu",
+      "base": "exp/s3-v11-core-gpu",
+      "base_is_open_pr": 53,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Separate checked i64 progression and empirical strategy registry; source/IR proof and native tests, not in production pipeline.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 34,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Not connected to production compiler; preserve separate opt-in",
+        "Physical RX580 dispatch not validated here"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 70,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/70",
+      "title": "[S3 V12] Research ÔÇö General Verified IR Candidates, Signed-i64 Native Code and Physical GPU Cost Gate",
+      "stage": "V12-A",
+      "head": "exp/s3-v12-core-architecture",
+      "base": "exp/s3-v11-core-research",
+      "base_is_open_pr": 69,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Separate checked i64 progression and empirical strategy registry; source/IR proof and native tests, not in production pipeline.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 34,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Not connected to production compiler; preserve separate opt-in",
+        "Physical RX580 dispatch not validated here"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 410,
+      "url": "https://github.com/SamDevlab/S3/pull/410",
+      "title": "[S3 V12] Opt-in sparse GF2 codegen, verified IR candidate registry and GPU cost gate",
+      "stage": "V12-B",
+      "head": "exp/s3-v12-core-native",
+      "base": "exp/s3-v11-core-auto-strategy",
+      "base_is_open_pr": 408,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Independent GF2 and identity candidate registry; opt-in, source-bound proof, composes with V12-A in tested scenarios.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 26,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Keep distinct eligibility from V12-A",
+        "No default automatic registry promotion"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 55,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/55",
+      "title": "[S3 V12] Native compiler A/B, GCC references and nondegenerate holdout",
+      "stage": "V12-B",
+      "head": "exp/s3-v12-core-benchmarks",
+      "base": "exp/s3-v11-core-gpu",
+      "base_is_open_pr": 53,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Independent GF2 and identity candidate registry; opt-in, source-bound proof, composes with V12-A in tested scenarios.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 26,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Keep distinct eligibility from V12-A",
+        "No default automatic registry promotion"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 71,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/71",
+      "title": "[S3 V12] Native codegen gains, verified candidates, corrected baselines and GPU guardrails",
+      "stage": "V12-B",
+      "head": "exp/s3-v12-core-research",
+      "base": "exp/s3-v11-core-research",
+      "base_is_open_pr": 69,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_COMPATIBLE_SUBSET",
+      "meaning": "Independent GF2 and identity candidate registry; opt-in, source-bound proof, composes with V12-A in tested scenarios.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 26,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Keep distinct eligibility from V12-A",
+        "No default automatic registry promotion"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 411,
+      "url": "https://github.com/SamDevlab/S3/pull/411",
+      "title": "[S3 V13] Certified CTZ native x86 codegen and inline rotation optimization",
+      "stage": "V13",
+      "head": "exp/s3-v13-native-assembly",
+      "base": "exp/s3-v12-core-native",
+      "base_is_open_pr": 410,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Certified CTZ/inline GF2 native specializations, performance wins and known small workload regression; not default.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed benchmark observations and GPU hardware comparisons",
+        "No global CPU/GPU dispatch enablement"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 56,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/56",
+      "title": "[S3 V13] Physical RX580 vs native Windows C and x86 assembly A/B",
+      "stage": "V13",
+      "head": "exp/s3-v13-native-gpu-benchmarks",
+      "base": "exp/s3-v12-core-benchmarks",
+      "base_is_open_pr": 55,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Certified CTZ/inline GF2 native specializations, performance wins and known small workload regression; not default.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed benchmark observations and GPU hardware comparisons",
+        "No global CPU/GPU dispatch enablement"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 72,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/72",
+      "title": "[S3 V13] Native compiler results and verified real CPU/GPU placement",
+      "stage": "V13",
+      "head": "exp/s3-v13-native-gpu-research",
+      "base": "exp/s3-v12-core-research",
+      "base_is_open_pr": 71,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Certified CTZ/inline GF2 native specializations, performance wins and known small workload regression; not default.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed benchmark observations and GPU hardware comparisons",
+        "No global CPU/GPU dispatch enablement"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 412,
+      "url": "https://github.com/SamDevlab/S3/pull/412",
+      "title": "[S3 V14] Conservative general x86 peephole + real S3 CPU/GPU analysis",
+      "stage": "V14",
+      "head": "exp/s3-v14-core-x86-peephole",
+      "base": "exp/s3-v13-native-assembly",
+      "base_is_open_pr": 411,
+      "draft": true,
+      "decision": "NO_GO_GLOBAL_DEFAULT",
+      "meaning": "Selective x86 peephole optimization with mixed performance; needs cost gate and broader ABI/control checks.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 4,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed x86 codegen gains; global default NO-GO",
+        "Requires cost and instruction count rejection heuristics"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 57,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/57",
+      "title": "[S3 V14] Exact-fixture native S3 CPU vs physical S3 Vulkan GPU and non-GF2 A/B",
+      "stage": "V14",
+      "head": "exp/s3-v14-native-s3-vs-gpu",
+      "base": "exp/s3-v13-native-gpu-benchmarks",
+      "base_is_open_pr": 56,
+      "draft": true,
+      "decision": "NO_GO_GLOBAL_DEFAULT",
+      "meaning": "Selective x86 peephole optimization with mixed performance; needs cost gate and broader ABI/control checks.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 4,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed x86 codegen gains; global default NO-GO",
+        "Requires cost and instruction count rejection heuristics"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 73,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/73",
+      "title": "[S3 V14] Native backend safety, CPU/GPU parity and guarded performance conclusion",
+      "stage": "V14",
+      "head": "exp/s3-v14-core-research",
+      "base": "exp/s3-v13-native-gpu-research",
+      "base_is_open_pr": 72,
+      "draft": true,
+      "decision": "NO_GO_GLOBAL_DEFAULT",
+      "meaning": "Selective x86 peephole optimization with mixed performance; needs cost gate and broader ABI/control checks.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 4,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Mixed x86 codegen gains; global default NO-GO",
+        "Requires cost and instruction count rejection heuristics"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 413,
+      "url": "https://github.com/SamDevlab/S3/pull/413",
+      "title": "[S3 V15] Opt-in proof-backed local slice bounds reuse on native x86",
+      "stage": "V15",
+      "head": "exp/s3-v15-slice-bounds-reuse",
+      "base": "exp/s3-v14-core-x86-peephole",
+      "base_is_open_pr": 412,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Local slice bounds reuse proved under strict guards; no universal enablement.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 8,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Only marked TSLOAD bounds proof, limited structured cases",
+        "Do not make global default before compiler-wide suite"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 58,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/58",
+      "title": "[S3 V15] Native array bound A/B, HP03 interaction and negative control",
+      "stage": "V15",
+      "head": "exp/s3-v15-native-slice-bench",
+      "base": "exp/s3-v14-native-s3-vs-gpu",
+      "base_is_open_pr": 57,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Local slice bounds reuse proved under strict guards; no universal enablement.",
+      "verification_scope": "BENCH_ARTIFACT_VALIDATORS_PASS",
+      "source_tests_collected": 8,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Only marked TSLOAD bounds proof, limited structured cases",
+        "Do not make global default before compiler-wide suite"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 74,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/74",
+      "title": "[S3 V15] Proven slice bounds reuse, native gains and HP03 safeguards",
+      "stage": "V15",
+      "head": "exp/s3-v15-research",
+      "base": "exp/s3-v14-core-research",
+      "base_is_open_pr": 73,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Local slice bounds reuse proved under strict guards; no universal enablement.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 8,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Only marked TSLOAD bounds proof, limited structured cases",
+        "Do not make global default before compiler-wide suite"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 414,
+      "url": "https://github.com/SamDevlab/S3/pull/414",
+      "title": "[S3 V16] Auditable i64 stencil interval bounds proof and native traps",
+      "stage": "V16",
+      "head": "exp/s3-v16-interval-bounds",
+      "base": "exp/s3-v15-slice-bounds-reuse",
+      "base_is_open_pr": 413,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Static stencil interval proof, selected observed speedups only; preserve overflow and traps.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 15,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proven static neighbor offsets, not arbitrary dynamic induction",
+        "Must keep exact error/overflow parity"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 59,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/59",
+      "title": "[S3 V16] Native S3 eight-neighbor stencil interval A/B and proof manifests",
+      "stage": "V16",
+      "head": "exp/s3-v16-stencil-interval-bench",
+      "base": "exp/s3-v15-native-slice-bench",
+      "base_is_open_pr": 58,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Static stencil interval proof, selected observed speedups only; preserve overflow and traps.",
+      "verification_scope": "BENCH_ARTIFACT_VALIDATORS_PASS",
+      "source_tests_collected": 15,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proven static neighbor offsets, not arbitrary dynamic induction",
+        "Must keep exact error/overflow parity"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 75,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/75",
+      "title": "[S3 V16] Overflow-safe interval proof, eight-neighbor stencil gains and limits",
+      "stage": "V16",
+      "head": "exp/s3-v16-interval-research",
+      "base": "exp/s3-v15-research",
+      "base_is_open_pr": 74,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Static stencil interval proof, selected observed speedups only; preserve overflow and traps.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 15,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Proven static neighbor offsets, not arbitrary dynamic induction",
+        "Must keep exact error/overflow parity"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 415,
+      "url": "https://github.com/SamDevlab/S3/pull/415",
+      "title": "[S3 V17] Dominance-guarded dynamic-width i64 stencil bounds proofs",
+      "stage": "V17",
+      "head": "exp/s3-v17-dynamic-interval",
+      "base": "exp/s3-v16-interval-bounds",
+      "base_is_open_pr": 414,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Dynamic-width stencil intervals under preexisting guard, strict dominance and bounds; no general induction solver.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Source-authored width guard required, no automatic preheader",
+        "Keep dominance fail-closed"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 60,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/60",
+      "title": "[S3 V17] Real native dynamic-width stencil AB with guarded fallback",
+      "stage": "V17",
+      "head": "exp/s3-v17-dynamic-stencil",
+      "base": "exp/s3-v16-stencil-interval-bench",
+      "base_is_open_pr": 59,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Dynamic-width stencil intervals under preexisting guard, strict dominance and bounds; no general induction solver.",
+      "verification_scope": "BENCH_ARTIFACT_VALIDATORS_PASS",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Source-authored width guard required, no automatic preheader",
+        "Keep dominance fail-closed"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 76,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/76",
+      "title": "[S3 V17] Dynamic-width stencil proof, native evidence and safety limits",
+      "stage": "V17",
+      "head": "exp/s3-v17-dynamic-interval-research",
+      "base": "exp/s3-v16-interval-research",
+      "base_is_open_pr": 75,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Dynamic-width stencil intervals under preexisting guard, strict dominance and bounds; no general induction solver.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Source-authored width guard required, no automatic preheader",
+        "Keep dominance fail-closed"
+      ]
+    },
+    {
+      "repo": "S3",
+      "number": 416,
+      "url": "https://github.com/SamDevlab/S3/pull/416",
+      "title": "[S3 V18] Compiler-generated trusted fast/slow loop guards with exact native traps",
+      "stage": "V18",
+      "head": "exp/s3-v18-autoguard-loop-versioning",
+      "base": "exp/s3-v17-dynamic-interval",
+      "base_is_open_pr": 415,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Synthesized guarded cloned loop, exact native budget/trap tests, 57/63 wins but six regressions and code growth.",
+      "verification_scope": "SOURCE_IR_NATIVE_SELECTED_TESTS",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Code-size expansion and six native regressions",
+        "Only one WSL host; stronger I-cache/ABI analysis before default"
+      ]
+    },
+    {
+      "repo": "S3-Benchmarks",
+      "number": 61,
+      "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/61",
+      "title": "[S3 V18] Native auto-guard A/B, selective-loop clone and negative controls",
+      "stage": "V18",
+      "head": "exp/s3-v18-autoguard-benchmarks",
+      "base": "exp/s3-v17-dynamic-stencil",
+      "base_is_open_pr": 60,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Synthesized guarded cloned loop, exact native budget/trap tests, 57/63 wins but six regressions and code growth.",
+      "verification_scope": "BENCH_ARTIFACT_VALIDATORS_PASS",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Code-size expansion and six native regressions",
+        "Only one WSL host; stronger I-cache/ABI analysis before default"
+      ]
+    },
+    {
+      "repo": "Relat-rio",
+      "number": 77,
+      "url": "https://github.com/SamDevlab/Relat-rio/pull/77",
+      "title": "[S3 V18] Automatic loop versioning safety and native evidence",
+      "stage": "V18",
+      "head": "exp/s3-v18-autoguard-research",
+      "base": "exp/s3-v17-dynamic-interval-research",
+      "base_is_open_pr": 76,
+      "draft": true,
+      "decision": "GO_EXPERIMENTAL_ONLY",
+      "meaning": "Synthesized guarded cloned loop, exact native budget/trap tests, 57/63 wins but six regressions and code growth.",
+      "verification_scope": "LINKED_RESEARCH_ONLY_NOT_INDIVIDUALLY_VALIDATED",
+      "source_tests_collected": 13,
+      "blocked_for_merge": true,
+      "unmet_gates": [
+        "Code-size expansion and six native regressions",
+        "Only one WSL host; stronger I-cache/ABI analysis before default"
+      ]
+    }
+  ],
+  "counts": {
+    "GO_EXPERIMENTAL_ONLY": 18,
+    "GO_EXPERIMENTAL_COMPATIBLE_SUBSET": 6,
+    "NO_GO_GLOBAL_DEFAULT": 3
+  },
+  "all_still_draft": true,
+  "all_blocked_for_merge": true,
+  "source_selected_test_count": 227,
+  "source_regression_result": "PASS_WITH_EXPLICIT_HEREDITARY_DESELECTION",
+  "v12_separate_sibling_compatibility": "93 V12 and 159 V18 local test executions passed; overlap in tests allowed",
+  "v12_fork_disjoint_files": true,
+  "inherited_failures_not_repaired": true,
+  "main_to_v18_gap_commits": 663,
+  "next_action": "KB-0030 repair two inherited fixtures; repeat full local suite with no deselections; choose integration branch only after approval",
+  "merges": 0,
+  "deployments": 0,
+  "github_actions_used": false,
+  "gpu_or_compact_doom_modified": false
+}

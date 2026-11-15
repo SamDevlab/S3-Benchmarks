@@ -1,0 +1,37 @@
+{
+  "coverage_source": "/mnt/c/Users/samue/Downloads/S3/Core-Consolidation-20261115/S3-Quality/tests/test_native_x86_64.py",
+  "total_known_opcodes": 52,
+  "opcodes_emitted_from_existing_sources": 25,
+  "previously_unqualified_aggregate": [
+    "TAGGADDR",
+    "TAGGFIELDADDR",
+    "TAGGLOAD"
+  ],
+  "new_unseen": [
+    "TSLICE_NO_ALIAS",
+    "TVEC_ADD_F64X2",
+    "TVEC_ADD_F64X4",
+    "TVEC_CPU_HAS_AVX2",
+    "TVEC_CPU_HAS_FMA",
+    "TVEC_CPU_HAS_SSE2",
+    "TVEC_DIV_F64X2",
+    "TVEC_DIV_F64X4",
+    "TVEC_FMA_F64X4",
+    "TVEC_LOAD_F64X2",
+    "TVEC_LOAD_F64X4",
+    "TVEC_MUL_F64X2",
+    "TVEC_MUL_F64X4",
+    "TVEC_ORDERED_ADD_F64X2",
+    "TVEC_ORDERED_ADD_F64X4",
+    "TVEC_REDUCE_ADD_F64X2",
+    "TVEC_REDUCE_ADD_F64X4",
+    "TVEC_SPLAT_F64X2",
+    "TVEC_SPLAT_F64X4",
+    "TVEC_STORE_F64X2",
+    "TVEC_STORE_F64X4",
+    "TVEC_SUB_F64X2",
+    "TVEC_SUB_F64X4",
+    "TVEC_ZEROUPPER"
+  ],
+  "unseen_count": 24
+}
