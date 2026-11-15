@@ -1,0 +1,561 @@
+{
+  "campaign": "S3_V17_DYNAMIC_WIDTH_STENCIL_NATIVE_AB",
+  "decision": "GO_EXPERIMENTAL_NOT_PRODUCTION",
+  "session": "s1",
+  "host_os": "Linux",
+  "host_arch": "x86_64",
+  "same_assembly_ir": true,
+  "source_sha256": "0d438a57358ab45db54f4fc78817861204385b8aff7e059c9cbc2b6bd8c1ff8d",
+  "backend_baseline": "S3 x86 native O1 with V17 OFF",
+  "backend_candidate": "S3 x86 native O1 with V17 ON",
+  "experimental_v17_default": false,
+  "hp03_enabled": true,
+  "frontend_ms": 48.168,
+  "native_codegen_ms": {
+    "baseline": 38.439,
+    "v17": 39.528
+  },
+  "gcc_assemble_link_ms": {
+    "baseline": 92.048,
+    "v17": 93.966
+  },
+  "c_role": "INDEPENDENT_CORRECTNESS_ORACLE_AND_TIMING_DRIVER",
+  "provenance": "Same generated S3 source and IR; only opt-in V17 feature differs",
+  "proofs": {
+    "dynamic_neighbor": {
+      "proven_interior_loads": 6,
+      "candidate_checked_loads": 2,
+      "rejected_blocks_without_dominating_guard": 1,
+      "memory_barriers": 0,
+      "hp03_skip": false,
+      "witnesses": [
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 24,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 27,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 30,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 33,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 36,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "switch_negative_4",
+          "lower_site": 19,
+          "upper_site": 21,
+          "eliminated_site": 39,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        }
+      ]
+    },
+    "dynamic_stencil": {
+      "proven_interior_loads": 6,
+      "candidate_checked_loads": 2,
+      "rejected_blocks_without_dominating_guard": 0,
+      "memory_barriers": 8,
+      "hp03_skip": false,
+      "witnesses": [
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 28,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 30,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            0,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 32,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 34,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            1,
+            2
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 36,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            0
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        },
+        {
+          "block": "while_body_17",
+          "lower_site": 24,
+          "upper_site": 26,
+          "eliminated_site": 38,
+          "lower_dynamic": [
+            0,
+            0
+          ],
+          "upper_dynamic": [
+            2,
+            2
+          ],
+          "target_dynamic": [
+            2,
+            1
+          ],
+          "guarded_width_register": 2,
+          "guarded_true_edge": [
+            "entry",
+            "switch_negative_4"
+          ]
+        }
+      ]
+    }
+  },
+  "asm_hashes": {
+    "baseline": "04884ac97f51c2ec096d1c554db58712769e82f6a70aad50c359666481983d99",
+    "v17": "2364e5c58fd12529f7ae3cbd4d033d0357bbc31d4f7e99d393248ac20a999831"
+  },
+  "static_disassembly": {
+    "baseline": {
+      "library_bytes": 71880,
+      "hot": {
+        "dynamic_neighbor": {
+          "static_instructions": 363,
+          "static_conditional_branches": 139,
+          "static_calls": 0
+        },
+        "dynamic_stencil": {
+          "static_instructions": 544,
+          "static_conditional_branches": 169,
+          "static_calls": 0
+        }
+      },
+      "static_not_pmu": true
+    },
+    "v17": {
+      "library_bytes": 71880,
+      "hot": {
+        "dynamic_neighbor": {
+          "static_instructions": 351,
+          "static_conditional_branches": 133,
+          "static_calls": 0
+        },
+        "dynamic_stencil": {
+          "static_instructions": 519,
+          "static_conditional_branches": 157,
+          "static_calls": 0
+        }
+      },
+      "static_not_pmu": true
+    }
+  },
+  "benchmark": {
+    "cases": [
+      {
+        "width": 3,
+        "height": 64,
+        "expected": 2970,
+        "parity": true,
+        "baseline_ns": 622.0,
+        "v17_ns": 577.0,
+        "speedup": 1.07799
+      },
+      {
+        "width": 3,
+        "height": 256,
+        "expected": 12186,
+        "parity": true,
+        "baseline_ns": 2505.0,
+        "v17_ns": 3517.0,
+        "speedup": 0.712255
+      },
+      {
+        "width": 3,
+        "height": 1024,
+        "expected": 49058,
+        "parity": true,
+        "baseline_ns": 19500.0,
+        "v17_ns": 19440.0,
+        "speedup": 1.003086
+      },
+      {
+        "width": 5,
+        "height": 64,
+        "expected": 8912,
+        "parity": true,
+        "baseline_ns": 2806.0,
+        "v17_ns": 2598.0,
+        "speedup": 1.080062
+      },
+      {
+        "width": 5,
+        "height": 256,
+        "expected": 36561,
+        "parity": true,
+        "baseline_ns": 11984.0,
+        "v17_ns": 12116.0,
+        "speedup": 0.989105
+      },
+      {
+        "width": 5,
+        "height": 1024,
+        "expected": 147158,
+        "parity": true,
+        "baseline_ns": 45212.0,
+        "v17_ns": 42240.0,
+        "speedup": 1.07036
+      },
+      {
+        "width": 8,
+        "height": 64,
+        "expected": 17856,
+        "parity": true,
+        "baseline_ns": 2644.0,
+        "v17_ns": 2510.0,
+        "speedup": 1.053386
+      },
+      {
+        "width": 8,
+        "height": 256,
+        "expected": 73157,
+        "parity": true,
+        "baseline_ns": 10768.0,
+        "v17_ns": 10328.0,
+        "speedup": 1.042603
+      },
+      {
+        "width": 8,
+        "height": 1024,
+        "expected": 294346,
+        "parity": true,
+        "baseline_ns": 78760.0,
+        "v17_ns": 76030.0,
+        "speedup": 1.035907
+      },
+      {
+        "width": 16,
+        "height": 64,
+        "expected": 41658,
+        "parity": true,
+        "baseline_ns": 9776.0,
+        "v17_ns": 11512.0,
+        "speedup": 0.849201
+      },
+      {
+        "width": 16,
+        "height": 256,
+        "expected": 170682,
+        "parity": true,
+        "baseline_ns": 45676.0,
+        "v17_ns": 39940.0,
+        "speedup": 1.143615
+      },
+      {
+        "width": 16,
+        "height": 1024,
+        "expected": 686786,
+        "parity": true,
+        "baseline_ns": 186020.0,
+        "v17_ns": 167680.0,
+        "speedup": 1.109375
+      },
+      {
+        "width": 31,
+        "height": 64,
+        "expected": 86288,
+        "parity": true,
+        "baseline_ns": 17828.0,
+        "v17_ns": 15696.0,
+        "speedup": 1.135831
+      },
+      {
+        "width": 31,
+        "height": 256,
+        "expected": 353553,
+        "parity": true,
+        "baseline_ns": 86020.0,
+        "v17_ns": 94224.0,
+        "speedup": 0.912931
+      },
+      {
+        "width": 31,
+        "height": 1024,
+        "expected": 1422614,
+        "parity": true,
+        "baseline_ns": 290133.333,
+        "v17_ns": 188900.0,
+        "speedup": 1.53591
+      },
+      {
+        "width": 48,
+        "height": 64,
+        "expected": 136881,
+        "parity": true,
+        "baseline_ns": 37696.0,
+        "v17_ns": 36080.0,
+        "speedup": 1.044789
+      },
+      {
+        "width": 48,
+        "height": 256,
+        "expected": 560811,
+        "parity": true,
+        "baseline_ns": 139390.0,
+        "v17_ns": 152690.0,
+        "speedup": 0.912895
+      },
+      {
+        "width": 48,
+        "height": 1024,
+        "expected": 2256556,
+        "parity": true,
+        "baseline_ns": 446700.0,
+        "v17_ns": 421466.667,
+        "speedup": 1.05987
+      },
+      {
+        "width": 64,
+        "height": 64,
+        "expected": 184560,
+        "parity": true,
+        "baseline_ns": 50640.0,
+        "v17_ns": 44748.0,
+        "speedup": 1.131671
+      },
+      {
+        "width": 64,
+        "height": 256,
+        "expected": 755928,
+        "parity": true,
+        "baseline_ns": 164760.0,
+        "v17_ns": 149520.0,
+        "speedup": 1.101926
+      },
+      {
+        "width": 64,
+        "height": 1024,
+        "expected": 3041512,
+        "parity": true,
+        "baseline_ns": 711533.333,
+        "v17_ns": 639200.0,
+        "speedup": 1.113162
+      }
+    ],
+    "rounds": 9,
+    "sink": 0
+  },
+  "limits": [
+    "One physical host running WSL Linux x86-64; no PMU counters.",
+    "Source contains explicit width>=3 true-path guard and fallback.",
+    "No compiler-generated guard/versioned loop has been claimed.",
+    "All S3 index arithmetic and i64 overflow traps remain.",
+    "GCC assembles/links S3 assembly; it does not implement S3 math.",
+    "Short microbenchmarks and timing noise prohibit universal speed claims."
+  ]
+}

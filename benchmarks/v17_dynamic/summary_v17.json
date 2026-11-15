@@ -1,0 +1,330 @@
+{
+  "campaign": "S3_V17_DYNAMIC_WIDTH_NATIVE_AB_AGGREGATE",
+  "same_host_separate_process_sessions": 3,
+  "independent_physical_computers": 1,
+  "rounds_per_case_session": 9,
+  "total_case_session_ratios": 63,
+  "positive_ratio_observations": 58,
+  "regression_observations": 5,
+  "median_of_all_case_session_ratios": 1.119736,
+  "source_sha256": "0d438a57358ab45db54f4fc78817861204385b8aff7e059c9cbc2b6bd8c1ff8d",
+  "negative_observations": [
+    {
+      "session": "s2",
+      "width": 5,
+      "height": 64,
+      "speedup": 0.930789
+    },
+    {
+      "session": "s3",
+      "width": 5,
+      "height": 256,
+      "speedup": 0.976067
+    },
+    {
+      "session": "s3",
+      "width": 8,
+      "height": 256,
+      "speedup": 0.956691
+    },
+    {
+      "session": "s2",
+      "width": 31,
+      "height": 64,
+      "speedup": 0.893148
+    },
+    {
+      "session": "s2",
+      "width": 48,
+      "height": 256,
+      "speedup": 0.951237
+    }
+  ],
+  "cases": [
+    {
+      "width": 3,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.10978,
+      "min_session_speedup": 1.021448,
+      "max_session_speedup": 1.113095,
+      "by_session": [
+        1.10978,
+        1.113095,
+        1.021448
+      ]
+    },
+    {
+      "width": 3,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.113113,
+      "min_session_speedup": 1.102475,
+      "max_session_speedup": 1.116741,
+      "by_session": [
+        1.116741,
+        1.113113,
+        1.102475
+      ]
+    },
+    {
+      "width": 3,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.104322,
+      "min_session_speedup": 1.092382,
+      "max_session_speedup": 1.116314,
+      "by_session": [
+        1.104322,
+        1.116314,
+        1.092382
+      ]
+    },
+    {
+      "width": 5,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.078708,
+      "min_session_speedup": 0.930789,
+      "max_session_speedup": 1.192825,
+      "by_session": [
+        1.078708,
+        0.930789,
+        1.192825
+      ]
+    },
+    {
+      "width": 5,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.119736,
+      "min_session_speedup": 0.976067,
+      "max_session_speedup": 1.123754,
+      "by_session": [
+        1.119736,
+        1.123754,
+        0.976067
+      ]
+    },
+    {
+      "width": 5,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.12557,
+      "min_session_speedup": 1.046346,
+      "max_session_speedup": 1.412659,
+      "by_session": [
+        1.12557,
+        1.412659,
+        1.046346
+      ]
+    },
+    {
+      "width": 8,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.135342,
+      "min_session_speedup": 1.08308,
+      "max_session_speedup": 1.147869,
+      "by_session": [
+        1.147869,
+        1.135342,
+        1.08308
+      ]
+    },
+    {
+      "width": 8,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.124284,
+      "min_session_speedup": 0.956691,
+      "max_session_speedup": 1.142857,
+      "by_session": [
+        1.142857,
+        1.124284,
+        0.956691
+      ]
+    },
+    {
+      "width": 8,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.125446,
+      "min_session_speedup": 1.035311,
+      "max_session_speedup": 1.157353,
+      "by_session": [
+        1.157353,
+        1.125446,
+        1.035311
+      ]
+    },
+    {
+      "width": 16,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.127172,
+      "min_session_speedup": 1.039604,
+      "max_session_speedup": 1.148237,
+      "by_session": [
+        1.148237,
+        1.127172,
+        1.039604
+      ]
+    },
+    {
+      "width": 16,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.15233,
+      "min_session_speedup": 1.091001,
+      "max_session_speedup": 1.152916,
+      "by_session": [
+        1.15233,
+        1.152916,
+        1.091001
+      ]
+    },
+    {
+      "width": 16,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.086982,
+      "min_session_speedup": 1.033415,
+      "max_session_speedup": 1.152354,
+      "by_session": [
+        1.152354,
+        1.086982,
+        1.033415
+      ]
+    },
+    {
+      "width": 31,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.181418,
+      "min_session_speedup": 0.893148,
+      "max_session_speedup": 1.217565,
+      "by_session": [
+        1.217565,
+        0.893148,
+        1.181418
+      ]
+    },
+    {
+      "width": 31,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.154459,
+      "min_session_speedup": 1.018638,
+      "max_session_speedup": 1.160206,
+      "by_session": [
+        1.154459,
+        1.018638,
+        1.160206
+      ]
+    },
+    {
+      "width": 31,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.172627,
+      "min_session_speedup": 1.113978,
+      "max_session_speedup": 1.222222,
+      "by_session": [
+        1.172627,
+        1.113978,
+        1.222222
+      ]
+    },
+    {
+      "width": 48,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.171933,
+      "min_session_speedup": 1.088924,
+      "max_session_speedup": 1.234158,
+      "by_session": [
+        1.088924,
+        1.234158,
+        1.171933
+      ]
+    },
+    {
+      "width": 48,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.165686,
+      "min_session_speedup": 0.951237,
+      "max_session_speedup": 1.178414,
+      "by_session": [
+        1.165686,
+        0.951237,
+        1.178414
+      ]
+    },
+    {
+      "width": 48,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.115504,
+      "min_session_speedup": 1.096132,
+      "max_session_speedup": 1.161729,
+      "by_session": [
+        1.161729,
+        1.115504,
+        1.096132
+      ]
+    },
+    {
+      "width": 64,
+      "height": 64,
+      "all_correct": true,
+      "median_session_speedup": 1.092862,
+      "min_session_speedup": 1.081876,
+      "max_session_speedup": 1.123871,
+      "by_session": [
+        1.081876,
+        1.092862,
+        1.123871
+      ]
+    },
+    {
+      "width": 64,
+      "height": 256,
+      "all_correct": true,
+      "median_session_speedup": 1.150477,
+      "min_session_speedup": 1.085592,
+      "max_session_speedup": 1.371223,
+      "by_session": [
+        1.371223,
+        1.085592,
+        1.150477
+      ]
+    },
+    {
+      "width": 64,
+      "height": 1024,
+      "all_correct": true,
+      "median_session_speedup": 1.203724,
+      "min_session_speedup": 1.115309,
+      "max_session_speedup": 1.269007,
+      "by_session": [
+        1.203724,
+        1.269007,
+        1.115309
+      ]
+    }
+  ],
+  "hp03_one_session": {
+    "all_parity": true,
+    "observations": 21,
+    "note": "One same-host HP03-on A/B only; no generalized compatibility qualification."
+  },
+  "decision": "GO_EXPERIMENTAL_NOT_PRODUCTION",
+  "limitations": [
+    "Single physical machine and OS (WSL Linux), no CPU PMU.",
+    "A proof of legal optimization under explicit user-source guard, not automatic compiler guard synthesis.",
+    "Outlier/regression rows preserved, timing is not a CI correctness gate.",
+    "C implementation used solely as independent oracle and timer driver."
+  ]
+}
