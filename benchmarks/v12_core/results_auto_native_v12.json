@@ -1,0 +1,984 @@
+{
+  "campaign": "S3_V12_CORE_NATIVE_CODEGEN_QUALIFICATION",
+  "scientific_status": "EXPERIMENTAL_NOT_PRODUCTION",
+  "algorithmic_novelty": false,
+  "s3_native_assembly": true,
+  "gcc_role_for_s3": "ASSEMBLE_AND_LINK_ONLY",
+  "compiler_levels": {
+    "s3": "O1",
+    "c_reference": "GCC -O3"
+  },
+  "measurement_scope": "native execution only; certificate validation and cold build separately recorded",
+  "machine_session": "one Windows/WSL GCC x86-64 host",
+  "rounds": 9,
+  "cases": [
+    {
+      "family": "rule90",
+      "width": 8,
+      "polynomial": 130,
+      "source_ir_sha256": "3ba6a0e12480a7f3fa016ee95b4f27af37ae952a744f159a84517fd0caa6326d",
+      "certificate_sha256": "4fd1ec0d3dc9517c28c865dd6a46c50b70b40c8308638a7c660a8529b3ee0130",
+      "nonzero_output_at_large_horizon": false,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3398,
+          "static_branch_instructions": 295,
+          "static_call_instructions": 0,
+          "assembly_lines": 3739,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 306.0329,
+        "s3_v11": 276.953,
+        "s3_v12": 265.2775
+      },
+      "samples": [
+        {
+          "W": 8,
+          "P": 130,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 254.667,
+            "s3_v11": 248.8,
+            "s3_v12": 73.6,
+            "gcc_matched_scan": 93.6,
+            "gcc_sparse": 11.6
+          },
+          "v12_over_v11": 0.29582,
+          "v12_over_gcc_matched": 0.786325,
+          "v12_over_gcc_sparse": 6.344828,
+          "sink": 228
+        },
+        {
+          "W": 8,
+          "P": 130,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1465.333,
+            "s3_v11": 1082.2,
+            "s3_v12": 175.4,
+            "gcc_matched_scan": 464.533,
+            "gcc_sparse": 24.6
+          },
+          "v12_over_v11": 0.162077,
+          "v12_over_gcc_matched": 0.377583,
+          "v12_over_gcc_sparse": 7.130081,
+          "sink": 0
+        },
+        {
+          "W": 8,
+          "P": 130,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 2413.0,
+            "s3_v11": 2100.0,
+            "s3_v12": 323.8,
+            "gcc_matched_scan": 946.133,
+            "gcc_sparse": 31.95
+          },
+          "v12_over_v11": 0.15419,
+          "v12_over_gcc_matched": 0.342235,
+          "v12_over_gcc_sparse": 10.134585,
+          "sink": 0
+        },
+        {
+          "W": 8,
+          "P": 130,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 6023.0,
+            "s3_v11": 4294.8,
+            "s3_v12": 699.2,
+            "gcc_matched_scan": 1398.933,
+            "gcc_sparse": 64.8
+          },
+          "v12_over_v11": 0.162802,
+          "v12_over_gcc_matched": 0.499809,
+          "v12_over_gcc_sparse": 10.790123,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "family": "rule90",
+      "width": 16,
+      "polynomial": 32770,
+      "source_ir_sha256": "ac2c1774732cc086bb0b8f9ebca85a7735241d846842f5c8510875e71277c5fc",
+      "certificate_sha256": "dfd1807f40ad6596a9225671902a32637fd0e46c3a31a279cc8f995f2996e07d",
+      "nonzero_output_at_large_horizon": false,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3668,
+          "static_branch_instructions": 330,
+          "static_call_instructions": 0,
+          "assembly_lines": 4009,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 335.3887,
+        "s3_v11": 391.1112,
+        "s3_v12": 320.5112
+      },
+      "samples": [
+        {
+          "W": 16,
+          "P": 32770,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 557.333,
+            "s3_v11": 422.4,
+            "s3_v12": 87.8,
+            "gcc_matched_scan": 185.6,
+            "gcc_sparse": 11.525
+          },
+          "v12_over_v11": 0.20786,
+          "v12_over_gcc_matched": 0.47306,
+          "v12_over_gcc_sparse": 7.618221,
+          "sink": 10852
+        },
+        {
+          "W": 16,
+          "P": 32770,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 3625.0,
+            "s3_v11": 2027.6,
+            "s3_v12": 285.2,
+            "gcc_matched_scan": 935.667,
+            "gcc_sparse": 33.625
+          },
+          "v12_over_v11": 0.140659,
+          "v12_over_gcc_matched": 0.304809,
+          "v12_over_gcc_sparse": 8.481784,
+          "sink": 0
+        },
+        {
+          "W": 16,
+          "P": 32770,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 6053.0,
+            "s3_v11": 3558.2,
+            "s3_v12": 335.6,
+            "gcc_matched_scan": 1681.333,
+            "gcc_sparse": 33.575
+          },
+          "v12_over_v11": 0.094317,
+          "v12_over_gcc_matched": 0.199603,
+          "v12_over_gcc_sparse": 9.995532,
+          "sink": 0
+        },
+        {
+          "W": 16,
+          "P": 32770,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 8972.333,
+            "s3_v11": 5034.2,
+            "s3_v12": 651.4,
+            "gcc_matched_scan": 2519.867,
+            "gcc_sparse": 59.25
+          },
+          "v12_over_v11": 0.129395,
+          "v12_over_gcc_matched": 0.258506,
+          "v12_over_gcc_sparse": 10.994093,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "family": "rule90",
+      "width": 32,
+      "polynomial": 2147483650,
+      "source_ir_sha256": "656a23cb28c90ade691461aad6e790408cf3866fac58b7f50564a238d584dac6",
+      "certificate_sha256": "c8fb6088f280df710ed7688cf7ef130dae32bceb4f6ba0fb4fc9b794b83d2eb1",
+      "nonzero_output_at_large_horizon": false,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 4223,
+          "static_branch_instructions": 378,
+          "static_call_instructions": 0,
+          "assembly_lines": 4564,
+          "shared_library_bytes": 67920,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2851,
+          "static_branch_instructions": 259,
+          "static_call_instructions": 0,
+          "assembly_lines": 3196,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3064,
+          "static_branch_instructions": 297,
+          "static_call_instructions": 0,
+          "assembly_lines": 3409,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 602.7919,
+        "s3_v11": 376.0984,
+        "s3_v12": 389.5549
+      },
+      "samples": [
+        {
+          "W": 32,
+          "P": 2147483650,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1623.0,
+            "s3_v11": 794.0,
+            "s3_v12": 111.8,
+            "gcc_matched_scan": 373.267,
+            "gcc_sparse": 11.65
+          },
+          "v12_over_v11": 0.140806,
+          "v12_over_gcc_matched": 0.299518,
+          "v12_over_gcc_sparse": 9.596567,
+          "sink": 2566756
+        },
+        {
+          "W": 32,
+          "P": 2147483650,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 10973.667,
+            "s3_v11": 3716.8,
+            "s3_v12": 448.0,
+            "gcc_matched_scan": 1867.333,
+            "gcc_sparse": 43.925
+          },
+          "v12_over_v11": 0.120534,
+          "v12_over_gcc_matched": 0.239914,
+          "v12_over_gcc_sparse": 10.199203,
+          "sink": 0
+        },
+        {
+          "W": 32,
+          "P": 2147483650,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 18783.0,
+            "s3_v11": 6210.8,
+            "s3_v12": 477.0,
+            "gcc_matched_scan": 3400.2,
+            "gcc_sparse": 42.0
+          },
+          "v12_over_v11": 0.076802,
+          "v12_over_gcc_matched": 0.140286,
+          "v12_over_gcc_sparse": 11.357143,
+          "sink": 0
+        },
+        {
+          "W": 32,
+          "P": 2147483650,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 30792.667,
+            "s3_v11": 9521.6,
+            "s3_v12": 840.6,
+            "gcc_matched_scan": 5135.2,
+            "gcc_sparse": 68.25
+          },
+          "v12_over_v11": 0.088283,
+          "v12_over_gcc_matched": 0.163694,
+          "v12_over_gcc_sparse": 12.316484,
+          "sink": 0
+        }
+      ]
+    },
+    {
+      "family": "rotation",
+      "width": 8,
+      "polynomial": 2,
+      "source_ir_sha256": "43ce9795ea8158fc4cef54205cb170ed88a6ca6f291176b2496a7d525d5bdbf4",
+      "certificate_sha256": "ceb62a7472388e36544f774ff83a90c6b419182f1df15ec5a6d56575b6c77b41",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3398,
+          "static_branch_instructions": 295,
+          "static_call_instructions": 0,
+          "assembly_lines": 3739,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 226.9722,
+        "s3_v11": 251.1955,
+        "s3_v12": 291.1023
+      },
+      "samples": [
+        {
+          "W": 8,
+          "P": 2,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 316.0,
+            "s3_v11": 246.6,
+            "s3_v12": 48.4,
+            "gcc_matched_scan": 93.0,
+            "gcc_sparse": 7.725
+          },
+          "v12_over_v11": 0.196269,
+          "v12_over_gcc_matched": 0.52043,
+          "v12_over_gcc_sparse": 6.265372,
+          "sink": 208
+        },
+        {
+          "W": 8,
+          "P": 2,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1465.0,
+            "s3_v11": 1065.2,
+            "s3_v12": 194.8,
+            "gcc_matched_scan": 464.533,
+            "gcc_sparse": 35.2
+          },
+          "v12_over_v11": 0.182876,
+          "v12_over_gcc_matched": 0.419346,
+          "v12_over_gcc_sparse": 5.534091,
+          "sink": 104
+        },
+        {
+          "W": 8,
+          "P": 2,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 3367.0,
+            "s3_v11": 2334.2,
+            "s3_v12": 363.0,
+            "gcc_matched_scan": 852.533,
+            "gcc_sparse": 57.875
+          },
+          "v12_over_v11": 0.155514,
+          "v12_over_gcc_matched": 0.42579,
+          "v12_over_gcc_sparse": 6.272138,
+          "sink": 104
+        },
+        {
+          "W": 8,
+          "P": 2,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 4615.0,
+            "s3_v11": 3301.8,
+            "s3_v12": 836.8,
+            "gcc_matched_scan": 1305.6,
+            "gcc_sparse": 119.45
+          },
+          "v12_over_v11": 0.253438,
+          "v12_over_gcc_matched": 0.640931,
+          "v12_over_gcc_sparse": 7.005442,
+          "sink": 67
+        }
+      ]
+    },
+    {
+      "family": "rotation",
+      "width": 31,
+      "polynomial": 2,
+      "source_ir_sha256": "3f02e4d0c40d5c9c969d917edcb5e79aee1112c8982a335cb2dc4fd1092fcc10",
+      "certificate_sha256": "0d339d3bb9c29d55716ce0907457048f628eaa8ef97e0f151f26daad9357a005",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 4186,
+          "static_branch_instructions": 390,
+          "static_call_instructions": 0,
+          "assembly_lines": 4527,
+          "shared_library_bytes": 67920,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 388.8637,
+        "s3_v11": 324.6384,
+        "s3_v12": 393.6437
+      },
+      "samples": [
+        {
+          "W": 31,
+          "P": 2,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1672.667,
+            "s3_v11": 847.4,
+            "s3_v12": 53.8,
+            "gcc_matched_scan": 367.667,
+            "gcc_sparse": 7.85
+          },
+          "v12_over_v11": 0.063488,
+          "v12_over_gcc_matched": 0.146328,
+          "v12_over_gcc_sparse": 6.853503,
+          "sink": 2892496
+        },
+        {
+          "W": 31,
+          "P": 2,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 11078.667,
+            "s3_v11": 3750.8,
+            "s3_v12": 274.8,
+            "gcc_matched_scan": 1895.267,
+            "gcc_sparse": 39.55
+          },
+          "v12_over_v11": 0.073264,
+          "v12_over_gcc_matched": 0.144993,
+          "v12_over_gcc_sparse": 6.948167,
+          "sink": 5784992
+        },
+        {
+          "W": 31,
+          "P": 2,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 19683.667,
+            "s3_v11": 6285.0,
+            "s3_v12": 485.0,
+            "gcc_matched_scan": 3295.933,
+            "gcc_sparse": 72.25
+          },
+          "v12_over_v11": 0.077168,
+          "v12_over_gcc_matched": 0.147151,
+          "v12_over_gcc_sparse": 6.712803,
+          "sink": 23139968
+        },
+        {
+          "W": 31,
+          "P": 2,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 29656.667,
+            "s3_v11": 9863.8,
+            "s3_v12": 1178.0,
+            "gcc_matched_scan": 5016.533,
+            "gcc_sparse": 134.575
+          },
+          "v12_over_v11": 0.119427,
+          "v12_over_gcc_matched": 0.234824,
+          "v12_over_gcc_sparse": 8.753483,
+          "sink": 46279936
+        }
+      ]
+    },
+    {
+      "family": "invertible",
+      "width": 8,
+      "polynomial": 11,
+      "source_ir_sha256": "cebb9a06cab89da8d3d42a460c59da74cdf7ef8485404bb501232eb1a270974d",
+      "certificate_sha256": "115dfd2b2a52cc0f68e33662df24874a8914a50b5fe7e888e3eabfed5524722c",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3398,
+          "static_branch_instructions": 295,
+          "static_call_instructions": 0,
+          "assembly_lines": 3739,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 252.9048,
+        "s3_v11": 249.7386,
+        "s3_v12": 294.9682
+      },
+      "samples": [
+        {
+          "W": 8,
+          "P": 11,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 219.333,
+            "s3_v11": 228.0,
+            "s3_v12": 69.8,
+            "gcc_matched_scan": 92.733,
+            "gcc_sparse": 15.325
+          },
+          "v12_over_v11": 0.30614,
+          "v12_over_gcc_matched": 0.752696,
+          "v12_over_gcc_sparse": 4.554649,
+          "sink": 251
+        },
+        {
+          "W": 8,
+          "P": 11,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1219.667,
+            "s3_v11": 988.4,
+            "s3_v12": 201.2,
+            "gcc_matched_scan": 460.867,
+            "gcc_sparse": 48.75
+          },
+          "v12_over_v11": 0.203561,
+          "v12_over_gcc_matched": 0.436569,
+          "v12_over_gcc_sparse": 4.127179,
+          "sink": 104
+        },
+        {
+          "W": 8,
+          "P": 11,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 4029.333,
+            "s3_v11": 2350.0,
+            "s3_v12": 402.0,
+            "gcc_matched_scan": 837.267,
+            "gcc_sparse": 79.1
+          },
+          "v12_over_v11": 0.171064,
+          "v12_over_gcc_matched": 0.480134,
+          "v12_over_gcc_sparse": 5.082174,
+          "sink": 104
+        },
+        {
+          "W": 8,
+          "P": 11,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 4245.333,
+            "s3_v11": 3274.0,
+            "s3_v12": 1358.8,
+            "gcc_matched_scan": 1289.267,
+            "gcc_sparse": 263.475
+          },
+          "v12_over_v11": 0.415027,
+          "v12_over_gcc_matched": 1.053932,
+          "v12_over_gcc_sparse": 5.157226,
+          "sink": 234
+        }
+      ]
+    },
+    {
+      "family": "invertible",
+      "width": 16,
+      "polynomial": 11,
+      "source_ir_sha256": "be667a32cd25308027a29bc795cd514e80943d84450a220527a57c789b51dcb9",
+      "certificate_sha256": "5625cb88f9d8eaf4fe989209dac1b5c3ef18ab0e53ca678be1ae58c9ef5af1b4",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 3668,
+          "static_branch_instructions": 330,
+          "static_call_instructions": 0,
+          "assembly_lines": 4009,
+          "shared_library_bytes": 55632,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 338.6457,
+        "s3_v11": 300.8893,
+        "s3_v12": 339.3459
+      },
+      "samples": [
+        {
+          "W": 16,
+          "P": 11,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 630.667,
+            "s3_v11": 460.4,
+            "s3_v12": 75.6,
+            "gcc_matched_scan": 187.267,
+            "gcc_sparse": 15.425
+          },
+          "v12_over_v11": 0.164205,
+          "v12_over_gcc_matched": 0.403702,
+          "v12_over_gcc_sparse": 4.901135,
+          "sink": 47352
+        },
+        {
+          "W": 16,
+          "P": 11,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 4799.0,
+            "s3_v11": 2713.6,
+            "s3_v12": 346.0,
+            "gcc_matched_scan": 970.133,
+            "gcc_sparse": 60.45
+          },
+          "v12_over_v11": 0.127506,
+          "v12_over_gcc_matched": 0.356652,
+          "v12_over_gcc_sparse": 5.723739,
+          "sink": 4456
+        },
+        {
+          "W": 16,
+          "P": 11,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 7172.333,
+            "s3_v11": 4461.6,
+            "s3_v12": 463.8,
+            "gcc_matched_scan": 1800.267,
+            "gcc_sparse": 82.95
+          },
+          "v12_over_v11": 0.103954,
+          "v12_over_gcc_matched": 0.257628,
+          "v12_over_gcc_sparse": 5.59132,
+          "sink": 4456
+        },
+        {
+          "W": 16,
+          "P": 11,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 13316.0,
+            "s3_v11": 6326.0,
+            "s3_v12": 1764.8,
+            "gcc_matched_scan": 2601.733,
+            "gcc_sparse": 337.325
+          },
+          "v12_over_v11": 0.278976,
+          "v12_over_gcc_matched": 0.678317,
+          "v12_over_gcc_sparse": 5.23175,
+          "sink": 25908
+        }
+      ]
+    },
+    {
+      "family": "invertible",
+      "width": 31,
+      "polynomial": 11,
+      "source_ir_sha256": "66fbae27bef0bf22aca5acc01dbed0727f60111b009fcd204b18fd5677eabf02",
+      "certificate_sha256": "4578f9670a54d1b4ebbec84ae6fdd52502ea9ef9fa557dd4b2af8ade05e666a3",
+      "nonzero_output_at_large_horizon": true,
+      "assembly": {
+        "s3_generic": {
+          "total_disassembled_instructions_including_plt": 4186,
+          "static_branch_instructions": 390,
+          "static_call_instructions": 0,
+          "assembly_lines": 4527,
+          "shared_library_bytes": 67920,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v11": {
+          "total_disassembled_instructions_including_plt": 2833,
+          "static_branch_instructions": 278,
+          "static_call_instructions": 0,
+          "assembly_lines": 3178,
+          "shared_library_bytes": 43392,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        },
+        "s3_v12": {
+          "total_disassembled_instructions_including_plt": 3046,
+          "static_branch_instructions": 296,
+          "static_call_instructions": 0,
+          "assembly_lines": 3391,
+          "shared_library_bytes": 51584,
+          "instruction_count_is_dynamic": false,
+          "scope": "entire shared object (includes ELF scaffolding), not workload"
+        }
+      },
+      "cold_build_ms": {
+        "s3_generic": 471.1826,
+        "s3_v11": 465.0684,
+        "s3_v12": 466.6472
+      },
+      "samples": [
+        {
+          "W": 31,
+          "P": 11,
+          "N": 1,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1980.667,
+            "s3_v11": 906.4,
+            "s3_v12": 79.6,
+            "gcc_matched_scan": 364.933,
+            "gcc_sparse": 15.575
+          },
+          "v12_over_v11": 0.08782,
+          "v12_over_gcc_matched": 0.218122,
+          "v12_over_gcc_sparse": 5.110754,
+          "sink": 9091320
+        },
+        {
+          "W": 31,
+          "P": 11,
+          "N": 64,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 14931.333,
+            "s3_v11": 4156.0,
+            "s3_v12": 503.6,
+            "gcc_matched_scan": 1906.867,
+            "gcc_sparse": 93.5
+          },
+          "v12_over_v11": 0.121174,
+          "v12_over_gcc_matched": 0.264098,
+          "v12_over_gcc_sparse": 5.386096,
+          "sink": 97128136
+        },
+        {
+          "W": 31,
+          "P": 11,
+          "N": 4096,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 19831.0,
+            "s3_v11": 8527.0,
+            "s3_v12": 1135.8,
+            "gcc_matched_scan": 3288.8,
+            "gcc_sparse": 170.875
+          },
+          "v12_over_v11": 0.1332,
+          "v12_over_gcc_matched": 0.345354,
+          "v12_over_gcc_sparse": 6.646964,
+          "sink": 1617004522
+        },
+        {
+          "W": 31,
+          "P": 11,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 33853.667,
+            "s3_v11": 10143.2,
+            "s3_v12": 3265.6,
+            "gcc_matched_scan": 5213.333,
+            "gcc_sparse": 501.475
+          },
+          "v12_over_v11": 0.32195,
+          "v12_over_gcc_matched": 0.626394,
+          "v12_over_gcc_sparse": 6.51199,
+          "sink": 598652777
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "S3 O1 vs C GCC O3: comparison does not isolate only register allocation.",
+    "Instruction counts describe disassembled shared libraries, not dynamic PMU counts.",
+    "C algorithm-matched scan and C sparse reference separate algorithm/codegen factors.",
+    "Rule90 on power-of-two widths is nilpotent in W/2 steps.",
+    "Power-of-two cyclic GF2 operators have special periodicity; include W31 holdout.",
+    "Submicrosecond GCC timings may be noisy: no universal GPU/CPU or codegen speed claims."
+  ]
+}

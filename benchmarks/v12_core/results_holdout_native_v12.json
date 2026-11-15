@@ -1,0 +1,229 @@
+{
+  "campaign": "S3_V12_FIXED_SEED_HELD_OUT_NATIVE_CASES",
+  "seed": 2026111407,
+  "first_run_without_candidate_tuning": true,
+  "independent_blind_replication": false,
+  "scope": "three previously unused widths and five-tap cyclic GF2 maps",
+  "gcc_reference": "independent C sparse multiplication; real S3 native x86",
+  "cases": [
+    {
+      "width": 9,
+      "taps": [
+        0,
+        2,
+        3,
+        5,
+        7
+      ],
+      "polynomial": 173,
+      "source_ir_sha256": "e866e358fe09453a8d73e0e95768c316e9a560eaafeee914ac52b536fc569b90",
+      "certificate_sha256": "f82f2d5b4e274249915b55aba2b2d93fb4918473c7887c255d32038b67b74cdc",
+      "nonzero_at_n1m": true,
+      "samples": [
+        {
+          "W": 9,
+          "P": 173,
+          "N": 37,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 1868.667,
+            "s3_v11": 1066.6,
+            "s3_v12": 704.4,
+            "gcc_matched_scan": 474.933,
+            "gcc_sparse": 182.4
+          },
+          "v12_over_v11": 0.660416,
+          "v12_over_gcc_matched": 1.483156,
+          "v12_over_gcc_sparse": 3.861842,
+          "sink": 36
+        },
+        {
+          "W": 9,
+          "P": 173,
+          "N": 10001,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 3533.0,
+            "s3_v11": 3013.6,
+            "s3_v12": 1862.0,
+            "gcc_matched_scan": 1151.467,
+            "gcc_sparse": 449.225
+          },
+          "v12_over_v11": 0.617866,
+          "v12_over_gcc_matched": 1.617068,
+          "v12_over_gcc_sparse": 4.144916,
+          "sink": 166
+        },
+        {
+          "W": 9,
+          "P": 173,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 6544.333,
+            "s3_v11": 4066.2,
+            "s3_v12": 2668.2,
+            "gcc_matched_scan": 1584.6,
+            "gcc_sparse": 657.725
+          },
+          "v12_over_v11": 0.65619,
+          "v12_over_gcc_matched": 1.683832,
+          "v12_over_gcc_sparse": 4.056711,
+          "sink": 490
+        }
+      ]
+    },
+    {
+      "width": 23,
+      "taps": [
+        1,
+        11,
+        12,
+        16,
+        21
+      ],
+      "polynomial": 2168834,
+      "source_ir_sha256": "8f0b3b25abe510804f021e7058ebef16cd08b4ec949ced81a31ca17e9dfe74fa",
+      "certificate_sha256": "97ff614049e3ac27587f5efc88d588206cfa674d190a54d3b8698648254dfca0",
+      "nonzero_at_n1m": true,
+      "samples": [
+        {
+          "W": 23,
+          "P": 2168834,
+          "N": 37,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 8139.667,
+            "s3_v11": 3525.2,
+            "s3_v12": 1637.8,
+            "gcc_matched_scan": 1366.4,
+            "gcc_sparse": 295.9
+          },
+          "v12_over_v11": 0.464598,
+          "v12_over_gcc_matched": 1.198624,
+          "v12_over_gcc_sparse": 5.534978,
+          "sink": 8272528
+        },
+        {
+          "W": 23,
+          "P": 2168834,
+          "N": 10001,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 16302.0,
+            "s3_v11": 7513.2,
+            "s3_v12": 3794.2,
+            "gcc_matched_scan": 3156.133,
+            "gcc_sparse": 579.6
+          },
+          "v12_over_v11": 0.505005,
+          "v12_over_gcc_matched": 1.202167,
+          "v12_over_gcc_sparse": 6.546239,
+          "sink": 8131532
+        },
+        {
+          "W": 23,
+          "P": 2168834,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 29451.0,
+            "s3_v11": 10589.0,
+            "s3_v12": 6351.8,
+            "gcc_matched_scan": 4248.133,
+            "gcc_sparse": 914.625
+          },
+          "v12_over_v11": 0.599849,
+          "v12_over_gcc_matched": 1.495198,
+          "v12_over_gcc_sparse": 6.944704,
+          "sink": 2933602
+        }
+      ]
+    },
+    {
+      "width": 29,
+      "taps": [
+        11,
+        14,
+        19,
+        25,
+        27
+      ],
+      "polynomial": 168314880,
+      "source_ir_sha256": "f298060834518eeb6723557cc13781b6d002d5e2691fa958140e05d6d55ab6a7",
+      "certificate_sha256": "86a2fd7bce7e2f3a65dd9e8617b828df0d040769db4e1a85967f001026fbc606",
+      "nonzero_at_n1m": true,
+      "samples": [
+        {
+          "W": 29,
+          "P": 168314880,
+          "N": 37,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 10493.0,
+            "s3_v11": 3481.4,
+            "s3_v12": 1468.8,
+            "gcc_matched_scan": 1534.333,
+            "gcc_sparse": 247.175
+          },
+          "v12_over_v11": 0.421899,
+          "v12_over_gcc_matched": 0.957289,
+          "v12_over_gcc_sparse": 5.942349,
+          "sink": 65691118
+        },
+        {
+          "W": 29,
+          "P": 168314880,
+          "N": 10001,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 20240.667,
+            "s3_v11": 8497.8,
+            "s3_v12": 3681.2,
+            "gcc_matched_scan": 3552.667,
+            "gcc_sparse": 560.85
+          },
+          "v12_over_v11": 0.433194,
+          "v12_over_gcc_matched": 1.036179,
+          "v12_over_gcc_sparse": 6.563609,
+          "sink": 411642242
+        },
+        {
+          "W": 29,
+          "P": 168314880,
+          "N": 1000003,
+          "rounds": 9,
+          "parity": true,
+          "checks": 64,
+          "median_ns": {
+            "s3_generic": 32849.667,
+            "s3_v11": 11619.2,
+            "s3_v12": 5444.0,
+            "gcc_matched_scan": 5078.667,
+            "gcc_sparse": 1022.15
+          },
+          "v12_over_v11": 0.468535,
+          "v12_over_gcc_matched": 1.071935,
+          "v12_over_gcc_sparse": 5.326028,
+          "sink": 87846133
+        }
+      ]
+    }
+  ]
+}
