@@ -1,0 +1,87 @@
+{
+  "campaign": "S3_V14_GENERIC_X86_PEEPHOLE_NATIVE_AB",
+  "status": "EXPERIMENTAL_ONLY_NOT_PROMOTED",
+  "session_id": "s1",
+  "control": "same S3 IR, backend opt-in only, real x86 FFI, GCC as linker",
+  "native_s3_source_sha256": "b9c6c0a38e328451c52093403e1734dc5f6042e24d2fd8731da74a9faa7c4a09",
+  "source_compile_ms": 73.312,
+  "asm_peephole_stats": {
+    "dropped_self_moves": 0,
+    "dropped_identity_lea": 0,
+    "dropped_fallthrough_jumps": 10
+  },
+  "asm_source_bytes_baseline": 74458,
+  "asm_source_bytes_experimental": 74025,
+  "native_profiles": {
+    "baseline": {
+      "bytes": 35040,
+      "hot_static_instructions": {
+        "sum_squares": 85,
+        "factorial": 75,
+        "count_bits": 88
+      },
+      "scope": "static disassembly, not PMU retired instruction count"
+    },
+    "experimental": {
+      "bytes": 35040,
+      "hot_static_instructions": {
+        "sum_squares": 82,
+        "factorial": 72,
+        "count_bits": 85
+      },
+      "scope": "static disassembly, not PMU retired instruction count"
+    }
+  },
+  "bench": {
+    "cases": [
+      {
+        "name": "sum_squares_32",
+        "input": 32,
+        "parity": true,
+        "baseline_ns": 78.8,
+        "experimental_ns": 79.2,
+        "speedup": 0.994949
+      },
+      {
+        "name": "sum_squares_512",
+        "input": 512,
+        "parity": true,
+        "baseline_ns": 786.5,
+        "experimental_ns": 716.5,
+        "speedup": 1.097697
+      },
+      {
+        "name": "sum_squares_4096",
+        "input": 4096,
+        "parity": true,
+        "baseline_ns": 5386.0,
+        "experimental_ns": 4318.0,
+        "speedup": 1.247337
+      },
+      {
+        "name": "factorial_12",
+        "input": 12,
+        "parity": true,
+        "baseline_ns": 21.9333,
+        "experimental_ns": 20.3333,
+        "speedup": 1.078689
+      },
+      {
+        "name": "count_bits_2p31",
+        "input": 2147483647,
+        "parity": true,
+        "baseline_ns": 43.0,
+        "experimental_ns": 52.2,
+        "speedup": 0.823755
+      }
+    ],
+    "rounds": 9,
+    "checksum": 0
+  },
+  "limits": [
+    "S3 generic backend opt-in peephole is behavior-preserving but small.",
+    "This is one WSL host session with 9 alternating rounds.",
+    "No PMU counters; static disassembly is not dynamic instruction count.",
+    "Speed changes smaller than measurement noise are not a GO decision."
+  ]
+}

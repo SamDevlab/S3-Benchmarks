@@ -1,0 +1,217 @@
+{
+  "campaign": "S3_V14_S3_PHYSICAL_GPU_FIXTURES_FOR_NATIVE_CPU",
+  "status": "ACTUAL_PHYSICAL_GPU_SAME_HOST_DIFFERENT_OS_CPU",
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "adapter_type": "DiscreteGPU",
+    "is_physical": true,
+    "max_buffer_size": 268435456,
+    "max_compute_workgroup_size_x": 256,
+    "max_compute_workgroup_size_y": 256,
+    "max_compute_invocations_per_workgroup": 256,
+    "max_compute_workgroups_per_dimension": 65535
+  },
+  "gpu_source_hash": "a6d4f10b402a445390a88e62d8a302421d334b4eb68cdf37b7d25a86e6a6c0c6",
+  "gpu_wgsl_hash": "5dc3aeff3d2aadf8ef56358ecd2a6d6ae3b4bc35e14a63034ef352c7eff402de",
+  "precision": "explicit_f64_to_f32_and_i64_to_i32_tol_1e-5",
+  "lowering_ms": 23.6693,
+  "engine": "S3 source -> WGSL -> physical Vulkan RX580 on Windows",
+  "sessions": 1,
+  "rounds": 7,
+  "warmups": 2,
+  "production_dispatch_enabled": false,
+  "cases": [
+    {
+      "width": 64,
+      "height": 64,
+      "steps": 50,
+      "initial_input_sha256": "5e2188c1495ef9e7297b43ef737e322f562d64103bb1e4ab0a05cd283e2ac886",
+      "final_output_sha256": "95fdbd2e93dc7f6daca7b8efd8105be3e04ca6c3443b80ba63b7db7049b444f8",
+      "gpu_physical": true,
+      "readback_verified": true,
+      "numpy_reference_exact": true,
+      "samples": [
+        {
+          "total_ms": 7.882099998823833,
+          "h2d_ms": 2.557100000558421,
+          "dispatch_ms": 3.956699998525437,
+          "d2h_ms": 1.3376999995671213,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 8.520299998053815,
+          "h2d_ms": 2.1606000009342097,
+          "dispatch_ms": 5.496199999470264,
+          "d2h_ms": 0.8405000044149347,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 13.199299995903857,
+          "h2d_ms": 4.000900000391994,
+          "dispatch_ms": 7.261700004164595,
+          "d2h_ms": 1.7617999983485788,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 8.173800000804476,
+          "h2d_ms": 2.6578999968478456,
+          "dispatch_ms": 4.570500001136679,
+          "d2h_ms": 0.912600000447128,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 7.929899998998735,
+          "h2d_ms": 3.216700002667494,
+          "dispatch_ms": 3.9362000024993904,
+          "d2h_ms": 0.7590000022901222,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 9.376600006362423,
+          "h2d_ms": 4.154700000071898,
+          "dispatch_ms": 4.618499995558523,
+          "d2h_ms": 0.5861999961780384,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 6.723200000124052,
+          "h2d_ms": 2.5928999966708943,
+          "dispatch_ms": 3.3369999946444295,
+          "d2h_ms": 0.7753000027150847,
+          "pipeline_ms": 0.0
+        }
+      ],
+      "median_gpu_total_ms": 8.1738,
+      "median_gpu_dispatch_ms": 4.5705
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 10,
+      "initial_input_sha256": "8d70d6b6aa9d4fc47a3613088b7780116a776cb5c3611ced0987521f91e8f1ea",
+      "final_output_sha256": "0caf3fff3c777d0346b10c177d7e6ca6765566325f194dcc31b15d149af141f6",
+      "gpu_physical": true,
+      "readback_verified": true,
+      "numpy_reference_exact": true,
+      "samples": [
+        {
+          "total_ms": 4.8966999966069125,
+          "h2d_ms": 2.6786000016727485,
+          "dispatch_ms": 0.9090000021387823,
+          "d2h_ms": 1.2886999975307845,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 5.27929999952903,
+          "h2d_ms": 2.241800000774674,
+          "dispatch_ms": 2.2735999955330044,
+          "d2h_ms": 0.7365999990724958,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 6.605199996556621,
+          "h2d_ms": 3.398699998797383,
+          "dispatch_ms": 2.330499999516178,
+          "d2h_ms": 0.8501999982399866,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 4.5343000019784085,
+          "h2d_ms": 2.7638999963528477,
+          "dispatch_ms": 1.1939999967580661,
+          "d2h_ms": 0.5581000004895031,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 6.3704000058351085,
+          "h2d_ms": 3.763499997148756,
+          "dispatch_ms": 1.8669999990379438,
+          "d2h_ms": 0.7190999967860989,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 5.421499998192303,
+          "h2d_ms": 3.2558999955654144,
+          "dispatch_ms": 1.375799998641014,
+          "d2h_ms": 0.7676999957766384,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 4.4353999983286485,
+          "h2d_ms": 2.111299996613525,
+          "dispatch_ms": 1.7514000064693391,
+          "d2h_ms": 0.5546000029426068,
+          "pipeline_ms": 0.0
+        }
+      ],
+      "median_gpu_total_ms": 5.2793,
+      "median_gpu_dispatch_ms": 1.7514
+    },
+    {
+      "width": 128,
+      "height": 128,
+      "steps": 50,
+      "initial_input_sha256": "f5fff0c6dbd33da659c7b6065ac0aa1143e5001e4d355af3493754d3679cfec0",
+      "final_output_sha256": "d41e0545e8fa2a1cd39eeb2f3a7568043339bf23316835ac408ace8e739617de",
+      "gpu_physical": true,
+      "readback_verified": true,
+      "numpy_reference_exact": true,
+      "samples": [
+        {
+          "total_ms": 7.072599997627549,
+          "h2d_ms": 2.841399997123517,
+          "dispatch_ms": 3.4984000012627803,
+          "d2h_ms": 0.709700005245395,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 8.435700001427904,
+          "h2d_ms": 3.0636000010417774,
+          "dispatch_ms": 4.626800000551157,
+          "d2h_ms": 0.7213999997475185,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 5.769499999587424,
+          "h2d_ms": 1.9146999984513968,
+          "dispatch_ms": 3.190399998857174,
+          "d2h_ms": 0.6323999987216666,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 7.060299998556729,
+          "h2d_ms": 2.9066999995848164,
+          "dispatch_ms": 3.5110000026179478,
+          "d2h_ms": 0.6246000048122369,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 6.590700002561789,
+          "h2d_ms": 2.363400002650451,
+          "dispatch_ms": 3.493500000331551,
+          "d2h_ms": 0.7113000028766692,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 8.588499993493315,
+          "h2d_ms": 2.941099999588914,
+          "dispatch_ms": 4.837899999984074,
+          "d2h_ms": 0.7863999999244697,
+          "pipeline_ms": 0.0
+        },
+        {
+          "total_ms": 6.477400005678646,
+          "h2d_ms": 2.7996999997412786,
+          "dispatch_ms": 3.086199998506345,
+          "d2h_ms": 0.5695999934687279,
+          "pipeline_ms": 0.0
+        }
+      ],
+      "median_gpu_total_ms": 7.0603,
+      "median_gpu_dispatch_ms": 3.4984
+    }
+  ]
+}
