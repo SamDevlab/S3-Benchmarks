@@ -1,0 +1,42 @@
+{
+    "decision":  "REVIEW_REQUIRED_DO_NOT_MERGE_SIBLINGS_AUTOMATICALLY",
+    "read_only":  true,
+    "overlap_files":  [
+
+                      ],
+    "pr410":  {
+                  "files":  [
+                                "bootstrap/s3/gf2_dynamic_native.py",
+                                "bootstrap/s3/gf2_sparse_codegen_v12.py",
+                                "bootstrap/s3/gpu/cost_dispatch_v12.py",
+                                "bootstrap/s3/verified_candidates_v12.py",
+                                "docs/S3_V12_CORE_NATIVE_CANDIDATE_GPU.md",
+                                "tests/test_s3_v12_gpu_cost_dispatch.py",
+                                "tests/test_s3_v12_sparse_codegen.py",
+                                "tests/test_s3_v12_verified_candidates.py"
+                            ],
+                  "number":  410,
+                  "file_count":  8,
+                  "head":  "exp/s3-v12-core-native",
+                  "base":  "exp/s3-v11-core-auto-strategy"
+              },
+    "overlap_file_count":  0,
+    "pr409":  {
+                  "files":  [
+                                "bootstrap/s3/gpu/empirical_dispatch.py",
+                                "bootstrap/s3/verified_i64_native.py",
+                                "bootstrap/s3/verified_i64_progression.py",
+                                "bootstrap/s3/verified_strategy_registry.py",
+                                "docs/S3_V12_VERIFIED_STRATEGY_REGISTRY.md",
+                                "tests/test_s3_v12_empirical_gpu_dispatch.py",
+                                "tests/test_s3_v12_verified_i64_native.py",
+                                "tests/test_s3_v12_verified_i64_progression.py",
+                                "tests/test_s3_v12_verified_strategy_registry.py"
+                            ],
+                  "number":  409,
+                  "file_count":  9,
+                  "head":  "exp/s3-v12-verified-candidate-registry",
+                  "base":  "exp/s3-v11-core-auto-strategy"
+              },
+    "campaign":  "S3_CORE_V12_FORK_INSPECTION_20261115"
+}

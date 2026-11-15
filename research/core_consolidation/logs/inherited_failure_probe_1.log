@@ -1,0 +1,10 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___ test_shared_library_compiles_with_requested_optimization_and_syntax_mode ___
+tests/test_ffi_capability.py:89: in test_shared_library_compiles_with_requested_optimization_and_syntax_mode
+    assert build_shared_library(
+bootstrap/s3/ffi.py:333: in build_shared_library
+    result = _pipeline_mod.compile_source(
+E   TypeError: test_shared_library_compiles_with_requested_optimization_and_syntax_mode.<locals>.observed_compile_source() got an unexpected keyword argument 'predictive_exact'
+=========================== short test summary info ============================
+FAILED tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode

@@ -1,0 +1,551 @@
+{
+  "campaign": "S3_CORE_CONSOLIDATION_20261115",
+  "snapshot_date": "2026-11-15",
+  "source": "Authenticated GitHub CLI PR list; local git HEAD and branch",
+  "decision": "INVENTORY_ONLY_NO_MERGE_NO_DEFAULT_ENABLE",
+  "repos": {
+    "S3": {
+      "all_open_prs": 98,
+      "selected_prs": [
+        {
+          "baseRefName": "exp/s3-v10-gf2-source-certificates",
+          "headRefName": "exp/s3-v11-core-auto-strategy",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 408,
+          "state": "OPEN",
+          "title": "[S3 V11] Verified IR-driven Automatic Algorithm Selection + Native Cyclic GF(2) Backend",
+          "url": "https://github.com/SamDevlab/S3/pull/408",
+          "parent_open_pr": 407,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-auto-strategy",
+          "headRefName": "exp/s3-v12-verified-candidate-registry",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 409,
+          "state": "OPEN",
+          "title": "[S3 V12] Verified IR Strategy Registry ÔÇö Checked-i64 Native Progressions and Cost-Gated GPU Planner",
+          "url": "https://github.com/SamDevlab/S3/pull/409",
+          "parent_open_pr": 408,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-auto-strategy",
+          "headRefName": "exp/s3-v12-core-native",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 410,
+          "state": "OPEN",
+          "title": "[S3 V12] Opt-in sparse GF2 codegen, verified IR candidate registry and GPU cost gate",
+          "url": "https://github.com/SamDevlab/S3/pull/410",
+          "parent_open_pr": 408,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v12-core-native",
+          "headRefName": "exp/s3-v13-native-assembly",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 411,
+          "state": "OPEN",
+          "title": "[S3 V13] Certified CTZ native x86 codegen and inline rotation optimization",
+          "url": "https://github.com/SamDevlab/S3/pull/411",
+          "parent_open_pr": 410,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v13-native-assembly",
+          "headRefName": "exp/s3-v14-core-x86-peephole",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 412,
+          "state": "OPEN",
+          "title": "[S3 V14] Conservative general x86 peephole + real S3 CPU/GPU analysis",
+          "url": "https://github.com/SamDevlab/S3/pull/412",
+          "parent_open_pr": 411,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v14-core-x86-peephole",
+          "headRefName": "exp/s3-v15-slice-bounds-reuse",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 413,
+          "state": "OPEN",
+          "title": "[S3 V15] Opt-in proof-backed local slice bounds reuse on native x86",
+          "url": "https://github.com/SamDevlab/S3/pull/413",
+          "parent_open_pr": 412,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v15-slice-bounds-reuse",
+          "headRefName": "exp/s3-v16-interval-bounds",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 414,
+          "state": "OPEN",
+          "title": "[S3 V16] Auditable i64 stencil interval bounds proof and native traps",
+          "url": "https://github.com/SamDevlab/S3/pull/414",
+          "parent_open_pr": 413,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v16-interval-bounds",
+          "headRefName": "exp/s3-v17-dynamic-interval",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 415,
+          "state": "OPEN",
+          "title": "[S3 V17] Dominance-guarded dynamic-width i64 stencil bounds proofs",
+          "url": "https://github.com/SamDevlab/S3/pull/415",
+          "parent_open_pr": 414,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v17-dynamic-interval",
+          "headRefName": "exp/s3-v18-autoguard-loop-versioning",
+          "isDraft": true,
+          "mergeStateStatus": "UNSTABLE",
+          "number": 416,
+          "state": "OPEN",
+          "title": "[S3 V18] Compiler-generated trusted fast/slow loop guards with exact native traps",
+          "url": "https://github.com/SamDevlab/S3/pull/416",
+          "parent_open_pr": 415,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        }
+      ],
+      "not_open_from_expected_ids": [],
+      "branch_forks": [
+        {
+          "number": 409,
+          "base": "exp/s3-v11-core-auto-strategy"
+        },
+        {
+          "number": 410,
+          "base": "exp/s3-v11-core-auto-strategy"
+        }
+      ]
+    },
+    "S3-Benchmarks": {
+      "all_open_prs": 49,
+      "selected_prs": [
+        {
+          "baseRefName": "exp/s3-v10-algorithm-discovery",
+          "headRefName": "exp/s3-v11-core-gpu",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 53,
+          "state": "OPEN",
+          "title": "[S3 V11] Real Native Auto-Algorithm Benchmarks + RX580 Vulkan GPU Workload Crossover",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/53",
+          "parent_open_pr": 52,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-gpu",
+          "headRefName": "exp/s3-v12-core-codegen-gpu",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 54,
+          "state": "OPEN",
+          "title": "[S3 V12] Source-Certified i64 Native Benchmarks, Real RX580 Calibration and x86 Disassembly",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/54",
+          "parent_open_pr": 53,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-gpu",
+          "headRefName": "exp/s3-v12-core-benchmarks",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 55,
+          "state": "OPEN",
+          "title": "[S3 V12] Native compiler A/B, GCC references and nondegenerate holdout",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/55",
+          "parent_open_pr": 53,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v12-core-benchmarks",
+          "headRefName": "exp/s3-v13-native-gpu-benchmarks",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 56,
+          "state": "OPEN",
+          "title": "[S3 V13] Physical RX580 vs native Windows C and x86 assembly A/B",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/56",
+          "parent_open_pr": 55,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v13-native-gpu-benchmarks",
+          "headRefName": "exp/s3-v14-native-s3-vs-gpu",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 57,
+          "state": "OPEN",
+          "title": "[S3 V14] Exact-fixture native S3 CPU vs physical S3 Vulkan GPU and non-GF2 A/B",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/57",
+          "parent_open_pr": 56,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v14-native-s3-vs-gpu",
+          "headRefName": "exp/s3-v15-native-slice-bench",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 58,
+          "state": "OPEN",
+          "title": "[S3 V15] Native array bound A/B, HP03 interaction and negative control",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/58",
+          "parent_open_pr": 57,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v15-native-slice-bench",
+          "headRefName": "exp/s3-v16-stencil-interval-bench",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 59,
+          "state": "OPEN",
+          "title": "[S3 V16] Native S3 eight-neighbor stencil interval A/B and proof manifests",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/59",
+          "parent_open_pr": 58,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v16-stencil-interval-bench",
+          "headRefName": "exp/s3-v17-dynamic-stencil",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 60,
+          "state": "OPEN",
+          "title": "[S3 V17] Real native dynamic-width stencil AB with guarded fallback",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/60",
+          "parent_open_pr": 59,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v17-dynamic-stencil",
+          "headRefName": "exp/s3-v18-autoguard-benchmarks",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 61,
+          "state": "OPEN",
+          "title": "[S3 V18] Native auto-guard A/B, selective-loop clone and negative controls",
+          "url": "https://github.com/SamDevlab/S3-Benchmarks/pull/61",
+          "parent_open_pr": 60,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        }
+      ],
+      "not_open_from_expected_ids": [],
+      "branch_forks": []
+    },
+    "Relat-rio": {
+      "all_open_prs": 45,
+      "selected_prs": [
+        {
+          "baseRefName": "exp/s3-v10-algorithm-discovery-research",
+          "headRefName": "exp/s3-v11-core-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 69,
+          "state": "OPEN",
+          "title": "[S3 V11] Core Language/Compiler Research ÔÇö Verified Algorithm Choice, Native Gap, Physical GPU",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/69",
+          "parent_open_pr": 68,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-research",
+          "headRefName": "exp/s3-v12-core-architecture",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 70,
+          "state": "OPEN",
+          "title": "[S3 V12] Research ÔÇö General Verified IR Candidates, Signed-i64 Native Code and Physical GPU Cost Gate",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/70",
+          "parent_open_pr": 69,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v11-core-research",
+          "headRefName": "exp/s3-v12-core-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 71,
+          "state": "OPEN",
+          "title": "[S3 V12] Native codegen gains, verified candidates, corrected baselines and GPU guardrails",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/71",
+          "parent_open_pr": 69,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v12-core-research",
+          "headRefName": "exp/s3-v13-native-gpu-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 72,
+          "state": "OPEN",
+          "title": "[S3 V13] Native compiler results and verified real CPU/GPU placement",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/72",
+          "parent_open_pr": 71,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v13-native-gpu-research",
+          "headRefName": "exp/s3-v14-core-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 73,
+          "state": "OPEN",
+          "title": "[S3 V14] Native backend safety, CPU/GPU parity and guarded performance conclusion",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/73",
+          "parent_open_pr": 72,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v14-core-research",
+          "headRefName": "exp/s3-v15-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 74,
+          "state": "OPEN",
+          "title": "[S3 V15] Proven slice bounds reuse, native gains and HP03 safeguards",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/74",
+          "parent_open_pr": 73,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v15-research",
+          "headRefName": "exp/s3-v16-interval-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 75,
+          "state": "OPEN",
+          "title": "[S3 V16] Overflow-safe interval proof, eight-neighbor stencil gains and limits",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/75",
+          "parent_open_pr": 74,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v16-interval-research",
+          "headRefName": "exp/s3-v17-dynamic-interval-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 76,
+          "state": "OPEN",
+          "title": "[S3 V17] Dynamic-width stencil proof, native evidence and safety limits",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/76",
+          "parent_open_pr": 75,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        },
+        {
+          "baseRefName": "exp/s3-v17-dynamic-interval-research",
+          "headRefName": "exp/s3-v18-autoguard-research",
+          "isDraft": true,
+          "mergeStateStatus": "CLEAN",
+          "number": 77,
+          "state": "OPEN",
+          "title": "[S3 V18] Automatic loop versioning safety and native evidence",
+          "url": "https://github.com/SamDevlab/Relat-rio/pull/77",
+          "parent_open_pr": 76,
+          "stacked_on_open_pr": true,
+          "integration_status": "REVIEW_ONLY"
+        }
+      ],
+      "not_open_from_expected_ids": [],
+      "branch_forks": []
+    }
+  },
+  "studies": {
+    "V11": {
+      "S3": [
+        408
+      ],
+      "S3-Benchmarks": [
+        53
+      ],
+      "Relat-rio": [
+        69
+      ]
+    },
+    "V12": {
+      "S3": [
+        409,
+        410
+      ],
+      "S3-Benchmarks": [
+        54,
+        55
+      ],
+      "Relat-rio": [
+        70,
+        71
+      ]
+    },
+    "V13": {
+      "S3": [
+        411
+      ],
+      "S3-Benchmarks": [
+        56
+      ],
+      "Relat-rio": [
+        72
+      ]
+    },
+    "V14": {
+      "S3": [
+        412
+      ],
+      "S3-Benchmarks": [
+        57
+      ],
+      "Relat-rio": [
+        73
+      ]
+    },
+    "V15": {
+      "S3": [
+        413
+      ],
+      "S3-Benchmarks": [
+        58
+      ],
+      "Relat-rio": [
+        74
+      ]
+    },
+    "V16": {
+      "S3": [
+        414
+      ],
+      "S3-Benchmarks": [
+        59
+      ],
+      "Relat-rio": [
+        75
+      ]
+    },
+    "V17": {
+      "S3": [
+        415
+      ],
+      "S3-Benchmarks": [
+        60
+      ],
+      "Relat-rio": [
+        76
+      ]
+    },
+    "V18": {
+      "S3": [
+        416
+      ],
+      "S3-Benchmarks": [
+        61
+      ],
+      "Relat-rio": [
+        77
+      ]
+    }
+  },
+  "initial_screening": {
+    "V11": "REVIEW_EXPERIMENTAL",
+    "V12": "SPLIT_BRANCH_REVIEW_REQUIRED",
+    "V13": "REVIEW_EXPERIMENTAL",
+    "V14": "NO_GO_FOR_DEFAULT_GLOBAL_ENABLE",
+    "V15": "GO_EXPERIMENTAL_ONLY",
+    "V16": "GO_EXPERIMENTAL_ONLY",
+    "V17": "GO_EXPERIMENTAL_ONLY",
+    "V18": "GO_EXPERIMENTAL_WITH_CODE_SIZE_REGRESSIONS"
+  },
+  "baseline": {
+    "main_to_v18_commits": "0\t663",
+    "historical_main_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+    "candidate_branch": "exp/s3-v18-autoguard-loop-versioning",
+    "candidate_v18_sha": "1a323a033c361d904aa6b9ce747364f7ee05255e",
+    "historical_main_head": "Merge pull request #189 from SamDevlab/feature/m231-m240-release-candidate-20260822",
+    "main_is_not_a_modern_performance_reference": true,
+    "branch_is_not_production_release": true
+  },
+  "v12_fork": {
+    "decision": "REVIEW_REQUIRED_DO_NOT_MERGE_SIBLINGS_AUTOMATICALLY",
+    "read_only": true,
+    "overlap_files": [],
+    "pr410": {
+      "files": [
+        "bootstrap/s3/gf2_dynamic_native.py",
+        "bootstrap/s3/gf2_sparse_codegen_v12.py",
+        "bootstrap/s3/gpu/cost_dispatch_v12.py",
+        "bootstrap/s3/verified_candidates_v12.py",
+        "docs/S3_V12_CORE_NATIVE_CANDIDATE_GPU.md",
+        "tests/test_s3_v12_gpu_cost_dispatch.py",
+        "tests/test_s3_v12_sparse_codegen.py",
+        "tests/test_s3_v12_verified_candidates.py"
+      ],
+      "number": 410,
+      "file_count": 8,
+      "head": "exp/s3-v12-core-native",
+      "base": "exp/s3-v11-core-auto-strategy"
+    },
+    "overlap_file_count": 0,
+    "pr409": {
+      "files": [
+        "bootstrap/s3/gpu/empirical_dispatch.py",
+        "bootstrap/s3/verified_i64_native.py",
+        "bootstrap/s3/verified_i64_progression.py",
+        "bootstrap/s3/verified_strategy_registry.py",
+        "docs/S3_V12_VERIFIED_STRATEGY_REGISTRY.md",
+        "tests/test_s3_v12_empirical_gpu_dispatch.py",
+        "tests/test_s3_v12_verified_i64_native.py",
+        "tests/test_s3_v12_verified_i64_progression.py",
+        "tests/test_s3_v12_verified_strategy_registry.py"
+      ],
+      "number": 409,
+      "file_count": 9,
+      "head": "exp/s3-v12-verified-candidate-registry",
+      "base": "exp/s3-v11-core-auto-strategy"
+    },
+    "campaign": "S3_CORE_V12_FORK_INSPECTION_20261115"
+  },
+  "release_gate": [
+    "Do not merge a child while parent stack is unreviewed.",
+    "Pick a single V12 branch line; avoid double-applying sibling work.",
+    "Test semantics, signed i64 overflow, bounds/trap parity.",
+    "Preserve exact per-instruction logical budget and error output.",
+    "Measure compiler and native CPU performance on matched workloads.",
+    "Check machine-code growth; V18 is not default-ready.",
+    "All checks execute locally through WSL/Remote Desktop Commander.",
+    "No GitHub Actions runner dependency or paid CI."
+  ]
+}

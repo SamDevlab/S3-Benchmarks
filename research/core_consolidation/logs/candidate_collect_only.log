@@ -1,0 +1,22 @@
+tests/test_compute_runtime.py: 26
+tests/test_ffi_capability.py: 8
+tests/test_hp_v2_scalar_promotion.py: 4
+tests/test_native_x86_64.py: 26
+tests/test_optimizer.py: 22
+tests/test_s3_v10_gf2_dynamic_native.py: 6
+tests/test_s3_v10_gf2_independent_audit.py: 17
+tests/test_s3_v10_gf2_ir_certificate.py: 24
+tests/test_s3_v10_gf2_native_certificate.py: 2
+tests/test_s3_v10_gf2_native_specialization.py: 8
+tests/test_s3_v11_auto_algorithm_selection.py: 11
+tests/test_s3_v12_gpu_cost_dispatch.py: 7
+tests/test_s3_v12_sparse_codegen.py: 9
+tests/test_s3_v12_verified_candidates.py: 10
+tests/test_s3_v13_native_ctz.py: 13
+tests/test_s3_v14_x86_asm_peephole.py: 4
+tests/test_s3_v15_slice_bounds_reuse.py: 8
+tests/test_s3_v16_interval_bounds.py: 15
+tests/test_s3_v17_dynamic_intervals.py: 13
+tests/test_s3_v18_auto_guard.py: 13
+
+

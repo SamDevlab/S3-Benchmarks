@@ -1,0 +1,264 @@
+{
+  "campaign": "S3_CORE_CONSOLIDATION_LOCAL_BASELINE_20261115",
+  "recorded_utc": "2026-11-15T05:16:12.389595+00:00",
+  "runner": "Windows connected PC; WSL Linux x86-64; local Python",
+  "platform": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "cpu": "x86_64",
+  "github_actions": "NOT_USED_NO_REMOTE_CI_ASSERTIONS",
+  "source_shas": {
+    "main_to_v18_commits": "0\t663",
+    "historical_main_sha": "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+    "candidate_branch": "exp/s3-v18-autoguard-loop-versioning",
+    "candidate_v18_sha": "1a323a033c361d904aa6b9ce747364f7ee05255e",
+    "historical_main_head": "Merge pull request #189 from SamDevlab/feature/m231-m240-release-candidate-20260822"
+  },
+  "comparison_contract": "Historical main and V18 are different code bases. No direct speedup inferred.",
+  "inherited_deselected_selectors": [
+    "tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode",
+    "tests/test_native_x86_64.py::test_native_backend_emits_every_current_opcode"
+  ],
+  "results": [
+    {
+      "job": "candidate_compiler_import_bytecode",
+      "cwd": "candidate_v18",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "compileall",
+        "-q",
+        "bootstrap/s3/backends/x86_64"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.126,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/candidate_compiler_import_bytecode.log",
+      "output_tail": ""
+    },
+    {
+      "job": "candidate_v10_v18_regression",
+      "cwd": "candidate_v18",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "tests/test_s3_v18_auto_guard.py",
+        "tests/test_s3_v17_dynamic_intervals.py",
+        "tests/test_s3_v16_interval_bounds.py",
+        "tests/test_s3_v15_slice_bounds_reuse.py",
+        "tests/test_s3_v14_x86_asm_peephole.py",
+        "tests/test_s3_v13_native_ctz.py",
+        "tests/test_s3_v12_gpu_cost_dispatch.py",
+        "tests/test_s3_v12_sparse_codegen.py",
+        "tests/test_s3_v12_verified_candidates.py",
+        "tests/test_s3_v11_auto_algorithm_selection.py",
+        "tests/test_s3_v10_gf2_dynamic_native.py",
+        "tests/test_s3_v10_gf2_independent_audit.py",
+        "tests/test_s3_v10_gf2_ir_certificate.py",
+        "tests/test_s3_v10_gf2_native_certificate.py",
+        "tests/test_s3_v10_gf2_native_specialization.py",
+        "tests/test_optimizer.py",
+        "tests/test_hp_v2_scalar_promotion.py",
+        "tests/test_compute_runtime.py",
+        "tests/test_ffi_capability.py",
+        "tests/test_native_x86_64.py",
+        "--deselect",
+        "tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode",
+        "--deselect",
+        "tests/test_native_x86_64.py::test_native_backend_emits_every_current_opcode"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 51.76,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/candidate_v10_v18_regression.log",
+      "output_tail": "........................................................................ [ 29%]\n........................................................................ [ 58%]\n........................................................................ [ 87%]\n..............................                                           [100%]"
+    },
+    {
+      "job": "inherited_failure_probe_1",
+      "cwd": "candidate_v18",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 1.019,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/inherited_failure_probe_1.log",
+      "output_tail": "=================================== FAILURES ===================================\n___ test_shared_library_compiles_with_requested_optimization_and_syntax_mode ___\ntests/test_ffi_capability.py:89: in test_shared_library_compiles_with_requested_optimization_and_syntax_mode\n    assert build_shared_library(\nbootstrap/s3/ffi.py:333: in build_shared_library\n    result = _pipeline_mod.compile_source(\nE   TypeError: test_shared_library_compiles_with_requested_optimization_and_syntax_mode.<locals>.observed_compile_source() got an unexpected keyword argument 'predictive_exact'\n=========================== short test summary info ============================\nFAILED tests/test_ffi_capability.py::test_shared_library_compiles_with_requested_optimization_and_syntax_mode"
+    },
+    {
+      "job": "inherited_failure_probe_2",
+      "cwd": "candidate_v18",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "tests/test_native_x86_64.py::test_native_backend_emits_every_current_opcode"
+      ],
+      "exit_code": 1,
+      "duration_seconds": 1.02,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/inherited_failure_probe_2.log",
+      "output_tail": "E     <AssemblyOpcode.TVEC_CPU_HAS_FMA: 'TVEC_CPU_HAS_FMA'>\nE     <AssemblyOpcode.TSLICE_NO_ALIAS: 'TSLICE_NO_ALIAS'>\nE     <AssemblyOpcode.TVEC_DIV_F64X2: 'TVEC_DIV_F64X2'>\nE     <AssemblyOpcode.TVEC_CPU_HAS_SSE2: 'TVEC_CPU_HAS_SSE2'>\nE     <AssemblyOpcode.TVEC_CPU_HAS_AVX2: 'TVEC_CPU_HAS_AVX2'>...\nE     \nE     ...Full output truncated (19 lines hidden), use '-vv' to show\n=========================== short test summary info ============================\nFAILED tests/test_native_x86_64.py::test_native_backend_emits_every_current_opcode"
+    },
+    {
+      "job": "historic_main_shared_smoke",
+      "cwd": "historic_main",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "tests/test_optimizer.py",
+        "tests/test_compute_runtime.py",
+        "tests/test_native_x86_64.py"
+      ],
+      "exit_code": 4,
+      "duration_seconds": 0.363,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/historic_main_shared_smoke.log",
+      "output_tail": "ERROR: file or directory not found: tests/test_compute_runtime.py\n\n"
+    },
+    {
+      "job": "benchmark_artifacts_v18",
+      "cwd": "S3-Benchmarks",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "benchmarks/v18_autoguard/test_v18_artifacts.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.405,
+      "passed_reported": 6,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/benchmark_artifacts_v18.log",
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.07s"
+    },
+    {
+      "job": "benchmark_artifacts_v17",
+      "cwd": "S3-Benchmarks",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "benchmarks/v17_dynamic/test_v17_artifacts.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.392,
+      "passed_reported": 5,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/benchmark_artifacts_v17.log",
+      "output_tail": ".....                                                                    [100%]\n5 passed in 0.06s"
+    },
+    {
+      "job": "benchmark_artifacts_v16",
+      "cwd": "S3-Benchmarks",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "benchmarks/v16_interval/test_v16_artifacts.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.376,
+      "passed_reported": 6,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/benchmark_artifacts_v16.log",
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.06s"
+    },
+    {
+      "job": "benchmark_artifacts_v15",
+      "cwd": "S3-Benchmarks",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "benchmarks/v15_slice_bounds/test_v15_artifacts.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 0.432,
+      "passed_reported": 4,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/benchmark_artifacts_v15.log",
+      "output_tail": "....                                                                     [100%]\n4 passed in 0.05s"
+    },
+    {
+      "job": "historic_main_available_smoke",
+      "cwd": "historic_main",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "tests/test_compiler.py",
+        "tests/test_optimizer.py",
+        "tests/test_native_x86_64.py"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 1.505,
+      "passed_reported": 0,
+      "failed_reported": 0,
+      "timed_out": false,
+      "log": "logs/historic_main_available_smoke.log",
+      "output_tail": ".............................................................            [100%]"
+    }
+  ],
+  "mandatory_gates": {
+    "candidate_bytecode": true,
+    "candidate_core_regression": true,
+    "artifact_validators": true
+  },
+  "all_mandatory_gates_passed": true,
+  "known_inherited_failure_tests_are_not_counted_passed": true,
+  "release_approval": "NO_MERGE_NO_DEPLOY_EXPERIMENTAL_ONLY",
+  "historical_main_smoke_status": "DIAGNOSTIC_ONLY_NOT_EQUIVALENT_TO_V18",
+  "historical_main_smoke_repaired_selector": true,
+  "historical_main_smoke_exit_code": 0,
+  "candidate_collection": {
+    "exit_code": 0,
+    "number_in_summary": 246,
+    "log": "logs/candidate_collect_only.log",
+    "summary_tail": "tests/test_s3_v12_verified_candidates.py: 10\ntests/test_s3_v13_native_ctz.py: 13\ntests/test_s3_v14_x86_asm_peephole.py: 4\ntests/test_s3_v15_slice_bounds_reuse.py: 8\ntests/test_s3_v16_interval_bounds.py: 15\ntests/test_s3_v17_dynamic_intervals.py: 13\ntests/test_s3_v18_auto_guard.py: 13\n",
+    "collected_files": 20
+  },
+  "historical_correction_utc": "2026-11-15T05:18:50.151883+00:00",
+  "historical_collection": {
+    "exit_code": 0,
+    "number_collected": 61,
+    "files": 3,
+    "log": "logs/historical_main_collect_only.log"
+  }
+}

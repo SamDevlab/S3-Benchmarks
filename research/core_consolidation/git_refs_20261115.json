@@ -1,0 +1,7 @@
+{
+    "main_to_v18_commits":  "0\t663",
+    "historical_main_sha":  "9b39c7070d7bfa23d709c2128eb0b0bbef164177",
+    "candidate_branch":  "exp/s3-v18-autoguard-loop-versioning",
+    "candidate_v18_sha":  "1a323a033c361d904aa6b9ce747364f7ee05255e",
+    "historical_main_head":  "Merge pull request #189 from SamDevlab/feature/m231-m240-release-candidate-20260822"
+}
