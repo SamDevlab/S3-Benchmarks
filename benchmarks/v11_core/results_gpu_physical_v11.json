@@ -1,0 +1,220 @@
+{
+  "campaign": "S3_V11_PHYSICAL_GPU_DIAGNOSTIC",
+  "status": "REAL_GPU_COMPILE_DISPATCH_READBACK_PARITY_PASS",
+  "device": {
+    "name": "AMD Radeon RX 580 2048SP",
+    "vendor": "AMD proprietary driver",
+    "driver": "26.1.1 (AMD proprietary shader compiler)",
+    "backend": "Vulkan",
+    "adapter_type": "DiscreteGPU",
+    "is_physical": true,
+    "max_buffer_size": 268435456,
+    "max_compute_workgroup_size_x": 256,
+    "max_compute_workgroup_size_y": 256,
+    "max_compute_invocations_per_workgroup": 256,
+    "max_compute_workgroups_per_dimension": 65535
+  },
+  "all_discovered_gpu_devices": [
+    {
+      "name": "AMD Radeon RX 580 2048SP",
+      "vendor": "AMD proprietary driver",
+      "driver": "26.1.1 (AMD proprietary shader compiler)",
+      "backend": "Vulkan",
+      "adapter_type": "DiscreteGPU",
+      "is_physical": true,
+      "max_buffer_size": 268435456,
+      "max_compute_workgroup_size_x": 256,
+      "max_compute_workgroup_size_y": 256,
+      "max_compute_invocations_per_workgroup": 256,
+      "max_compute_workgroups_per_dimension": 65535
+    },
+    {
+      "name": "AMD Radeon RX 580 2048SP",
+      "vendor": "31.0.21924.61",
+      "driver": "31.0.21924.61",
+      "backend": "D3D12",
+      "adapter_type": "DiscreteGPU",
+      "is_physical": true,
+      "max_buffer_size": 268435456,
+      "max_compute_workgroup_size_x": 256,
+      "max_compute_workgroup_size_y": 256,
+      "max_compute_invocations_per_workgroup": 256,
+      "max_compute_workgroups_per_dimension": 65535
+    },
+    {
+      "name": "Microsoft Basic Render Driver",
+      "vendor": "10.0.26100.9818",
+      "driver": "10.0.26100.9818",
+      "backend": "D3D12",
+      "adapter_type": "CPU",
+      "is_physical": false,
+      "max_buffer_size": 268435456,
+      "max_compute_workgroup_size_x": 256,
+      "max_compute_workgroup_size_y": 256,
+      "max_compute_invocations_per_workgroup": 256,
+      "max_compute_workgroups_per_dimension": 65535
+    },
+    {
+      "name": "AMD Radeon RX 580 2048SP",
+      "vendor": "",
+      "driver": "4.6.0 Compatibility Profile Context 26.1.1.251211",
+      "backend": "OpenGL",
+      "adapter_type": "Unknown",
+      "is_physical": false,
+      "max_buffer_size": 268435456,
+      "max_compute_workgroup_size_x": 256,
+      "max_compute_workgroup_size_y": 256,
+      "max_compute_invocations_per_workgroup": 256,
+      "max_compute_workgroups_per_dimension": 65535
+    }
+  ],
+  "f64_to_f32_narrowing_explicit": true,
+  "s3_wgsl_lowering_ms": 4.9026,
+  "workload": "S3 AXPY f32, n<=16384, 64 threads per workgroup",
+  "reference": "NumPy vectorized CPU f32, same input arrays",
+  "cases": [
+    {
+      "N": 1024,
+      "gpu_total_us_median": 2634.6,
+      "gpu_total_us_min": 1890.1,
+      "cpu_numpy_us_median": 3.0,
+      "gpu_over_cpu_total_ratio": 878.2,
+      "wgsl_f32_compiled_from_s3": true,
+      "cpu_vs_gpu_f32_parity": true,
+      "gpu_physical": true,
+      "gpu_dispatch_success": true,
+      "gpu_readback_success": true,
+      "gpu_qualification": {
+        "GPU_DEVICE_AVAILABLE": true,
+        "GPU_DEVICE_QUALIFIED": true,
+        "GPU_WORKLOAD_QUALIFIED": false,
+        "GPU_BUFFER_INTEGRITY": true,
+        "GPU_RESULT_VALIDATED": false,
+        "GPU_FALLBACK_AVAILABLE": true,
+        "reason": "host_dispatch_transfer_overhead_exceeds_compute",
+        "device_name": "AMD Radeon RX 580 2048SP",
+        "backend": "Vulkan",
+        "op_kind": "axpy",
+        "num_elements": 1024,
+        "buffer_bytes": 4096
+      },
+      "rounds": 9,
+      "first_and_last_gpu_diagnostics": [
+        {
+          "pipeline_us": 267476.59999819007,
+          "h2d_us": 282052.5000061025,
+          "kernel_d2h_us": 103248.1000002008,
+          "total_us": 652841.6000001016,
+          "integrity": false,
+          "physical": true
+        },
+        {
+          "pipeline_us": 0.0,
+          "h2d_us": 1480.0999997532926,
+          "kernel_d2h_us": 1356.9000075221993,
+          "total_us": 2853.700003470294,
+          "integrity": false,
+          "physical": true
+        }
+      ]
+    },
+    {
+      "N": 4096,
+      "gpu_total_us_median": 2582.4,
+      "gpu_total_us_min": 2279.0,
+      "cpu_numpy_us_median": 5.9,
+      "gpu_over_cpu_total_ratio": 437.6949,
+      "wgsl_f32_compiled_from_s3": true,
+      "cpu_vs_gpu_f32_parity": true,
+      "gpu_physical": true,
+      "gpu_dispatch_success": true,
+      "gpu_readback_success": true,
+      "gpu_qualification": {
+        "GPU_DEVICE_AVAILABLE": true,
+        "GPU_DEVICE_QUALIFIED": true,
+        "GPU_WORKLOAD_QUALIFIED": false,
+        "GPU_BUFFER_INTEGRITY": true,
+        "GPU_RESULT_VALIDATED": false,
+        "GPU_FALLBACK_AVAILABLE": true,
+        "reason": "host_dispatch_transfer_overhead_exceeds_compute",
+        "device_name": "AMD Radeon RX 580 2048SP",
+        "backend": "Vulkan",
+        "op_kind": "axpy",
+        "num_elements": 4096,
+        "buffer_bytes": 16384
+      },
+      "rounds": 9,
+      "first_and_last_gpu_diagnostics": [
+        {
+          "pipeline_us": 0.0,
+          "h2d_us": 1778.9999983506277,
+          "kernel_d2h_us": 1452.6999948429875,
+          "total_us": 3246.100000978913,
+          "integrity": false,
+          "physical": true
+        },
+        {
+          "pipeline_us": 0.0,
+          "h2d_us": 1859.9000031827018,
+          "kernel_d2h_us": 1186.8000001413748,
+          "total_us": 3066.400000534486,
+          "integrity": false,
+          "physical": true
+        }
+      ]
+    },
+    {
+      "N": 16384,
+      "gpu_total_us_median": 2490.2,
+      "gpu_total_us_min": 2297.8,
+      "cpu_numpy_us_median": 6.7,
+      "gpu_over_cpu_total_ratio": 371.6716,
+      "wgsl_f32_compiled_from_s3": true,
+      "cpu_vs_gpu_f32_parity": true,
+      "gpu_physical": true,
+      "gpu_dispatch_success": true,
+      "gpu_readback_success": true,
+      "gpu_qualification": {
+        "GPU_DEVICE_AVAILABLE": true,
+        "GPU_DEVICE_QUALIFIED": true,
+        "GPU_WORKLOAD_QUALIFIED": false,
+        "GPU_BUFFER_INTEGRITY": true,
+        "GPU_RESULT_VALIDATED": false,
+        "GPU_FALLBACK_AVAILABLE": true,
+        "reason": "host_dispatch_transfer_overhead_exceeds_compute",
+        "device_name": "AMD Radeon RX 580 2048SP",
+        "backend": "Vulkan",
+        "op_kind": "axpy",
+        "num_elements": 16384,
+        "buffer_bytes": 65536
+      },
+      "rounds": 9,
+      "first_and_last_gpu_diagnostics": [
+        {
+          "pipeline_us": 0.0,
+          "h2d_us": 1876.7000001389533,
+          "kernel_d2h_us": 1085.4999927687459,
+          "total_us": 2976.499999931548,
+          "integrity": false,
+          "physical": true
+        },
+        {
+          "pipeline_us": 0.0,
+          "h2d_us": 1634.7999990102835,
+          "kernel_d2h_us": 982.7000030782074,
+          "total_us": 2630.2000042051077,
+          "integrity": false,
+          "physical": true
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Single Windows host and RX580, 9 GPU rounds; not a cross-hardware benchmark.",
+    "GPU total includes transfer, memory management and readback; CPU NumPy excludes corresponding copies.",
+    "This makes GPU path slower for small transfers; no large-batch speedup claim.",
+    "S3 f64 source lowered with allow_narrowing=True; GPU results validated at f32 precision.",
+    "No GPU workload beyond provisional S3 buffer safety limits.",
+    "This is not automatic GPU dispatch in S3 compiler; it exercises existing opt-in backend."
+  ]
+}
