@@ -1,0 +1,303 @@
+{
+  "benchmark": "stencil5point_verified_compute_paired",
+  "date": "2026-11-19",
+  "s3_commit": "54c08c0aba4758304aac0519e4bc38d8e7d7f154",
+  "s3_pr": "https://github.com/SamDevlab/S3/pull/434",
+  "s3_base_main_commit": "88f0e85c511e4519b366e11e2015513297c0fd51",
+  "host": {
+    "os": "Linux-4.4.0-26100-Microsoft-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+    "python": "3.12.3"
+  },
+  "methodology_notes": [
+    "Built libs3compute_host.so and stencil5point V3 package from installed s3-bootstrap wheel in an isolated venv outside checkout.",
+    "scientific_benchmark.c alternates s3-first and c-first on every paired sample and verifies memcmp parity on warmup and all samples.",
+    "kernel_ns in compute_host_api.inc includes per-generation output-value domain validation in addition to S3 kernel execution; performance diagnosis remains DIAGNOSTIC_CANDIDATE in S3#418."
+  ],
+  "command": "scientific_benchmark ./stencil5point <width> <height> 20 5 1",
+  "grids": [
+    {
+      "grid": "64x40",
+      "width": 64,
+      "height": 40,
+      "generations": 20,
+      "warmups": 1,
+      "samples": 5,
+      "parity": "PASS",
+      "session": {
+        "width": "64",
+        "height": "40",
+        "generations": "20",
+        "open_wall_ns": "1691700",
+        "open_ns": "1685400",
+        "package_verify_ns": "1291200",
+        "library_load_ns": "334900",
+        "buffer_bytes": "44352",
+        "resident_bytes": "827392"
+      },
+      "s3_wall_median_ns": 1222800,
+      "s3_kernel_median_ns": 1202100,
+      "c_wall_median_ns": 84700,
+      "s3_wall_over_c_ratio": 14.44,
+      "s3_kernel_over_c_ratio": 14.19,
+      "s3_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 1227200,
+          "kernel_ns": 1208400,
+          "input_copy_ns": 3300,
+          "output_copy_ns": 1100
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 1216000,
+          "kernel_ns": 1198100,
+          "input_copy_ns": 3300,
+          "output_copy_ns": 1000
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 1241900,
+          "kernel_ns": 1215000,
+          "input_copy_ns": 3200,
+          "output_copy_ns": 1100
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 1222800,
+          "kernel_ns": 1202100,
+          "input_copy_ns": 3300,
+          "output_copy_ns": 1100
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 1207600,
+          "kernel_ns": 1190000,
+          "input_copy_ns": 3300,
+          "output_copy_ns": 1000
+        }
+      ],
+      "c_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 85100
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 84800
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 84700
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 84300
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 84600
+        }
+      ]
+    },
+    {
+      "grid": "128x80",
+      "width": 128,
+      "height": 80,
+      "generations": 20,
+      "warmups": 1,
+      "samples": 5,
+      "parity": "PASS",
+      "session": {
+        "width": "128",
+        "height": "80",
+        "generations": "20",
+        "open_wall_ns": "1914300",
+        "open_ns": "1906000",
+        "package_verify_ns": "1241400",
+        "library_load_ns": "500900",
+        "buffer_bytes": "170560",
+        "resident_bytes": "987136"
+      },
+      "s3_wall_median_ns": 4816900,
+      "s3_kernel_median_ns": 4740800,
+      "c_wall_median_ns": 343200,
+      "s3_wall_over_c_ratio": 14.04,
+      "s3_kernel_over_c_ratio": 13.81,
+      "s3_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 4816900,
+          "kernel_ns": 4740800,
+          "input_copy_ns": 23300,
+          "output_copy_ns": 6800
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 4822800,
+          "kernel_ns": 4747900,
+          "input_copy_ns": 17900,
+          "output_copy_ns": 5800
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 4720800,
+          "kernel_ns": 4669800,
+          "input_copy_ns": 13100,
+          "output_copy_ns": 6000
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 4731400,
+          "kernel_ns": 4677000,
+          "input_copy_ns": 11600,
+          "output_copy_ns": 5400
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 5833800,
+          "kernel_ns": 5760100,
+          "input_copy_ns": 12800,
+          "output_copy_ns": 6300
+        }
+      ],
+      "c_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 346300
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 332200
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 343200
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 332200
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 346600
+        }
+      ]
+    },
+    {
+      "grid": "256x160",
+      "width": 256,
+      "height": 160,
+      "generations": 20,
+      "warmups": 1,
+      "samples": 5,
+      "parity": "PASS",
+      "session": {
+        "width": "256",
+        "height": "160",
+        "generations": "20",
+        "open_wall_ns": "1592800",
+        "open_ns": "1583700",
+        "package_verify_ns": "1206000",
+        "library_load_ns": "337500",
+        "buffer_bytes": "668736",
+        "resident_bytes": "1126400"
+      },
+      "s3_wall_median_ns": 19099800,
+      "s3_kernel_median_ns": 18942800,
+      "c_wall_median_ns": 1394100,
+      "s3_wall_over_c_ratio": 13.7,
+      "s3_kernel_over_c_ratio": 13.59,
+      "s3_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 18964300,
+          "kernel_ns": 18791800,
+          "input_copy_ns": 85000,
+          "output_copy_ns": 26100
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 19099800,
+          "kernel_ns": 18942800,
+          "input_copy_ns": 67100,
+          "output_copy_ns": 32900
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 18991700,
+          "kernel_ns": 18831800,
+          "input_copy_ns": 65000,
+          "output_copy_ns": 34100
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 21565300,
+          "kernel_ns": 21381000,
+          "input_copy_ns": 98900,
+          "output_copy_ns": 26700
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 21347000,
+          "kernel_ns": 21196300,
+          "input_copy_ns": 67100,
+          "output_copy_ns": 26100
+        }
+      ],
+      "c_samples": [
+        {
+          "index": 0,
+          "order": "s3-first",
+          "wall_ns": 1394100
+        },
+        {
+          "index": 1,
+          "order": "c-first",
+          "wall_ns": 1350100
+        },
+        {
+          "index": 2,
+          "order": "s3-first",
+          "wall_ns": 1416700
+        },
+        {
+          "index": 3,
+          "order": "c-first",
+          "wall_ns": 1375900
+        },
+        {
+          "index": 4,
+          "order": "s3-first",
+          "wall_ns": 1479000
+        }
+      ]
+    }
+  ]
+}
