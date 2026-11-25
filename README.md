@@ -78,7 +78,10 @@ At present these commands execute the **JSMN campaign**. Candidate campaigns are
 - **Environment:** Windows AMD64, Python 3.11.9; GCC unavailable.
 
 This requalification covers the standard JSMN differential correctness gate only. It does not test the Lorra ATLAS
-runtime or include timing measurements. The Lorra integration has its own focused IR requalification in `Lorra-S3`.
+runtime or include timing measurements. A separate [Lorra-S3 qualification](https://github.com/SamDevlab/Lorra-S3)
+now reports 8/8 pre-declared capability criteria across three seeds, with Linux native S3 FFI parity verification.
+The evaluation loop uses the NumPy mirror and the native FFI as its parity verifier; a separate S3 test passed direct
+native-versus-IR forward/backward parity. No speedup or performance comparison is claimed.
 The external run log is `S3-auditoria/evidence/t11-benchmarks-2026-11-25/verify-only-lorra-requal-v4.log`
 (SHA-256 `02CA2B46B8957C0E55FBE511AC4443DB2E2608508755DE381D6D1102FF599B15`); the artifact manifest SHA-256 is
 `67728FC3A1219E69814155AB171661E6B2234C19B6E1BA3E3BCA5CB999510851`.
