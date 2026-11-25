@@ -71,12 +71,17 @@ At present these commands execute the **JSMN campaign**. Candidate campaigns are
 ## Latest S3 requalification
 
 - **Last requalified:** 2026-11-25.
-- **S3 compiler revision:** `5c720157f453cdcbeff1d6d67a21a546de463e54`.
-- **S3-Benchmarks revision:** `043061928d583c5281f1ea1c534fb565e09c5549`.
+- **S3 compiler revision:** `b614975106e5e67febe070c2945b1c8430c95e05`.
+- **S3-Benchmarks harness revision:** `4eb606292d4d50110b8835a5318419a2943b8491`.
 - **Verification:** `tools/runner.py --verify-only` passed the JSMN differential correctness gate with 100% token and error parity.
-- **Run ID:** `s3-reorg-t11-requal-20261125-v2`.
+- **Run ID:** `s3-neural-atlas-lorra-requal-20261125-v4`.
+- **Environment:** Windows AMD64, Python 3.11.9; GCC unavailable.
 
-This requalification covers differential correctness. It does not include timing measurements.
+This requalification covers the standard JSMN differential correctness gate only. It does not test the Lorra ATLAS
+runtime or include timing measurements. The Lorra integration has its own focused IR requalification in `Lorra-S3`.
+The external run log is `S3-auditoria/evidence/t11-benchmarks-2026-11-25/verify-only-lorra-requal-v4.log`
+(SHA-256 `02CA2B46B8957C0E55FBE511AC4443DB2E2608508755DE381D6D1102FF599B15`); the artifact manifest SHA-256 is
+`67728FC3A1219E69814155AB171661E6B2234C19B6E1BA3E3BCA5CB999510851`.
 
 ## Pinned S3 candidate matrices
 
