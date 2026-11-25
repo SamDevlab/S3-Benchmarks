@@ -68,6 +68,16 @@ python tools/runner.py --full
 
 At present these commands execute the **JSMN campaign**. Candidate campaigns are not benchmark results until they have their own correctness and structural-equivalence harnesses.
 
+## Latest S3 requalification
+
+- **Last requalified:** 2026-11-25.
+- **S3 compiler revision:** `5c720157f453cdcbeff1d6d67a21a546de463e54`.
+- **S3-Benchmarks revision:** `043061928d583c5281f1ea1c534fb565e09c5549`.
+- **Verification:** `tools/runner.py --verify-only` passed the JSMN differential correctness gate with 100% token and error parity.
+- **Run ID:** `s3-reorg-t11-requal-20261125-v2`.
+
+This requalification covers differential correctness. It does not include timing measurements.
+
 ## Pinned S3 candidate matrices
 
 `tools/s3_112_candidate_matrix.py` accepts a JSON specification with an exact
